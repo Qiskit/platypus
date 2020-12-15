@@ -1,0 +1,40 @@
+# ==============================================================================
+# Tutor Hints
+# ==============================================================================
+
+
+welcome: "Welcome to Mathigon! I’m Archie, your personal tutor. :mortar_board:"
+account: You can [create a free account](->#login-btn) to save your progress.
+tutorial1: Our content is divided into small steps. You have to complete the activities to reveal what’s next.
+tutorial2: We will save all your progress, so you can come back later and continue right where you left off.
+
+correct:
+  - "Well done :relaxed:"
+  - "Great Work! :relieved:"
+  - "Awesome :grinning:"
+  - "Brilliant :thumbsup:"
+  - "Excellent! :ok_hand:"
+  - "Cool :sunglasses:"
+  - "Nice! :v:"
+  - "Way to go! :blush:"
+  - "Sweet :relaxed:"
+  - "Impressive! :trophy:"
+  - "Outstanding :grin:"
+  - "Superb! :star:"
+  - "Wonderful! :smiley:"
+
+incorrect:
+  - "That’s not quite right :white_frowning_face:"
+  - "Are you sure about that? :thinking_face:"
+  - "That doesn’t look right. :hushed:"
+  - "Try again! :confused:"
+
+welcomeMorning: Good morning!
+welcomeAfternoon: Good afternoon!
+welcomeEvening: Good evening!
+
+welcomeMorningNamed: Good morning, $name!
+welcomeAfternoonNamed: Good afternoon, $name!
+welcomeEveningNamed: Good evening, $name!
+
+serverError: "Sorry, I can’t help at the moment. Check your internet connection or try again later. :confused:"

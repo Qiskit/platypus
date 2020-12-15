@@ -32,7 +32,7 @@ class Course {
     this.locale = locale;
 
     const meta = (COURSES[id] || {});
-    this.color = '#' + (meta.color || '#242436');
+    this.color = '#' + (meta.color || '242436');
     this.icon = ('icon' in meta) ? meta.icon : `/resources/${id}/icon.png`;
   }
 
@@ -84,7 +84,12 @@ const app = express();
 app.set('port', port);
 app.set('env', 'development');
 
-app.set('views', __dirname);
+// allow specifying a `views` directory
+if (SETTINGS.directories && SETTINGS.directories.views) {
+  app.set('views', `${CWD}${SETTINGS.directories.views}`);
+} else {
+  app.set('views', __dirname);
+}
 app.set('view engine', 'pug');
 
 // Remove cache-bust suffixes.
@@ -99,6 +104,11 @@ app.use(express.static(CWD + '/assets'));
 app.use(express.static(__dirname + '/assets'));
 app.use('/resources', express.static(CWD + '/build'));
 app.use('/resources', express.static(CWD + '/content'));
+
+// allow specifying resources dir
+if (SETTINGS.directories && SETTINGS.directories.resources) {
+  app.use('/resources', express.static(`${CWD}${SETTINGS.directories.resources}`));
+}
 
 app.get('/', (req, res) => {
   const lang = req.query.hl || 'en';
@@ -121,7 +131,8 @@ app.get('/course/:course/:section', (req, res, next) => {
   const section = course.getSection(req.params.section);
   if (!section) return next();
 
-  res.render('course', {course, section, lang, dir, settings: SETTINGS});
+  // include courses data
+  res.render('course', {courses: COURSES, course, section, lang, dir, settings: SETTINGS, getCourse});
 });
 
 app.post('/course/:course/ask', (req, res) => {

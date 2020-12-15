@@ -1,0 +1,22 @@
+# ==============================================================================
+# Qiskit Settings
+# ==============================================================================
+
+
+title: Learn Quantum Computation using Qiskit
+description: A university quantum algorithms/computation course supplement based on Qiskit
+
+header:
+  logo: /logo.svg
+  logoWidth: 105
+  banner: /banner.jpg
+
+tutor:
+  enabled: false
+
+courses:
+  revealAll: true
+
+directories:
+  views: /../textbook-ui/views
+  resources: /../textbook-ui/build

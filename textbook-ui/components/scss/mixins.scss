@@ -1,0 +1,74 @@
+@mixin framed() {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/*
+ * Based on Carbon Grid breakpoints and grid margins and column paddings:
+ * https://www.carbondesignsystem.com/guidelines/2x-grid/basics/#breakpoints
+ */
+@mixin contained() {
+  box-sizing: border-box;
+  max-width: $large;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem; // 1rem for the grid margin + 1 rem for the column padding
+  padding-right: 1rem;
+
+  @include mq($from: max-size) {
+    padding-left: 2.5rem; // 1.5rem for the grid margin + 1 rem for the column padding
+    padding-right: 1.5rem;
+  }
+
+  @include mq($until: medium) {
+    padding-left: 1rem; // 0rem for the grid margin + 1 rem for the column padding
+  }
+}
+
+/*
+ * Adds an horizontal responsive grid background assuming 64x64 squares after
+ * sizing. The mixin uses responsive-grid-bg() and repeat it horizontally with
+ * a vertical offset equal to $top-offset.
+ */
+@mixin responsive-grid-bg-strip($url, $background-width, $background-height: auto, $top-offset: 0) {
+  @include responsive-grid-bg($url, $background-width, $background-height);
+  background-position: top $top-offset center;
+  background-repeat: repeat-x;
+}
+
+/*
+ * Adds the grid background at $url and size it to match
+ * $background-width x $background-height.
+ *
+ * The mixin assumes the grid is made of 64x64 after sizing and resize the
+ * background when in medium or small screens so the squares are 40x40. For the
+ * responsive mode to work, at least one of the sizes must be provided.
+ */
+@mixin responsive-grid-bg($url, $background-width, $background-height: auto) {
+  background-image: url($url);
+  background-size: $background-width $background-height;
+
+  @include mq($until: large) {
+    $grid-small-scale: 40 / 64;
+
+    $background-width-scaled: auto;
+    @if $background-width != auto {
+      $background-width-scaled: $background-width * $grid-small-scale;
+    }
+
+    $background-height-scaled: auto;
+    @if $background-height != auto {
+      $background-height-scaled: $background-height * $grid-small-scale;
+    }
+
+    background-size: $background-width-scaled $background-height-scaled;
+  }
+}
+
+@mixin elegant-title() {
+  text-align: center;
+  text-transform: uppercase;
+}

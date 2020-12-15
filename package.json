@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "init": "cd textbook/ && npm install && cd ../textbook-ui && npm install",
+    "start": "cd textbook-ui/ && npm run build && cd ../textbook/ && npm start"
+  },
+  "dependencies": {}
+}

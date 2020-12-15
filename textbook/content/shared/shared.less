@@ -1,0 +1,184 @@
+// =============================================================================
+// Shared Qiskit Styles
+// =============================================================================
+
+
+@import "./variables";
+
+
+svg.mathjax { display: inline-block; }
+
+.juniper-cell, code, pre, x-step code {
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.juniper-cell {
+  border: none;
+  font-size: 15px;
+  margin: 1.5em 0;
+  line-height: 1.5;
+  .CodeMirror { padding: 16px 14px; }
+  x-step & pre { margin: 0; }
+}
+
+.juniper-input {
+  background-color: #F2F4F8;
+  border: 1px solid #DDE1E6;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+
+.juniper-output {
+  background: white;
+  border: 1px solid #DDE1E6;
+  border-top: 0;
+  border-radius: 0 0 4px 4px;
+  padding: 16px;
+  color: inherit;
+}
+
+[dir] .juniper-button {
+  background: darken(#DDE1E6, 8%);
+  border-radius: 0 4px 0 0;
+  color: #222;
+  cursor: pointer;
+  display: block;
+  padding: 6px 12px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: background .2s;
+  z-index: 100;
+  &:hover, &:focus { background: darken(#DDE1E6, 22%); }
+}
+
+.target-body {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+  z-index: 900;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity .3s;
+}
+
+a.c-sidebar__entry:hover {
+  background: initial;
+}
+// x-step {
+//   height: initial;
+//   opacity: initial;
+//   overflow: initial;
+// }
+// x-progress {
+//   display: none;
+// }
+
+button.thebelab-button {
+  margin-right: 4px;
+  padding: 6px 16px;
+}
+div.qiskit__navbar {
+  position: fixed;
+}
+[dir] body > .body {
+  margin-top: 60px;
+}
+.reveal-banner {
+  top: 0px;
+}
+[dir="ltr"] .reveal-banner {
+  left: 0px;
+}
+[dir] nav ul.c-sidebar__sections {
+  margin-left: 12px;
+  margin-bottom: 12px;
+}
+.c-sidebar__section {
+  position: relative;
+}
+.progress-wrapper {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 5px;
+}
+.c-sidebar__section x-progress {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+}
+.progress-wrapper + a.c-sidebar__entry {
+  display: inline-block;
+  margin-left: 25px;
+  max-width: calc(100% - 35px);
+}
+.progress-wrapper.sidebar-row.on {
+  background: none;
+  color: initial;
+  font-weight: inherit;
+  line-height: inherit;
+  padding: 0;
+  transition: none;
+}
+.progress-wrapper.sidebar-row.on::before {
+  content: none;
+}
+.progress-wrapper.sidebar-row x-progress {
+  color: inherit;
+  position: initial;
+}
+.c-sidebar__section .connection {
+  // background: @qiskit-purple;
+  height: calc(100% - 12px);
+  left: 9px;
+  pointer-events: none;
+  position: absolute;
+  top: 24px;
+  border: 1px solid;
+}
+.c-sidebar__section:last-child .connection {
+  display: none;
+}
+x-step {
+  color: initial;
+}
+[dir] x-step h2 {
+  border-bottom: none;
+  color: initial;
+  margin: 2em 0 0.5em;
+  padding-bottom: initial;
+}
+[dir] x-step h3 {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 2em 0 0.5em;
+  text-align: initial;
+}
+x-course article.c-textbook__page {
+  max-width: initial;
+}
+x-step p a {
+  color: @qiskit-purple;
+}
+x-step p a::before {
+  background: none;
+}
+x-step p a:hover {
+  background-color: @qiskit-purple;
+  color: white;
+}
+x-step p a::after {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%228%22%20height%3D%2214%22%3E%3Cpath%20fill%3D%22none%22%20stroke%3D%22white%22%20stroke-width%3D%222px%22%20d%3D%22M2%202L6%207L2%2012%22/%3E%3C/svg%3E");
+}
+[dir] x-step .CodeMirror pre {
+  margin: 0;
+}
+[dir] mfenced {
+  display: none;
+}

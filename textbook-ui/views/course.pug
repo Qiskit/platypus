@@ -1,0 +1,70 @@
+mixin icon(name, size)
+  svg(viewBox=`0 0 ${size} ${size}` class="icon" width=size height=size)&attributes(attributes)
+    use(xlink:href=`/icons.svg#${name}`)
+
+doctype html
+html(lang=lang dir=dir)
+  head
+    include ../includes/head.html
+    link(href=`/resources/${course.id}/styles.css` rel="stylesheet")
+
+  body
+    div.qiskit__navbar#qiskit-navbar
+      the-menu
+
+    .body
+      x-course(id=course.id data-goals=section.goals class="js-show-sidebar")
+        include ../includes/sidebar.pug
+
+        article(class="c-textbook__page")
+          div.c-textbook__content#textbook_content
+            div.jupyter-page
+
+              #page-info
+                #page-title= section.title
+              .reveal-banner.off
+                | Reading time: ~#{section.duration} min
+                .complete Reveal all steps
+              if section.hero
+                .preface-top
+                  .preface-checker-pattern
+                  .preface-summary
+                    aside.preface-summary-image
+                      img(src=`/resources/${course.id}/${section.hero}`)
+              .steps!= course.getSectionHTML(section.id)
+
+              footer
+                p.skip-step
+                  | To reveal more content, you have to complete all the activities and exercises above.&nbsp;
+                  br
+                  strong Are you stuck? #[a.skip Skip to the next step] or #[a.show-all reveal all steps]
+                  svg(width=72 height=10): path(d="M1 1L36 9L71 1" fill="none" stroke="#aaa" stroke-width=2)
+
+                - var next = course.getNextLink(section.id)
+                if next
+                  a.next-section(href=`/course/${course.id}/${next.id}` title=next.title)
+                    .small Next up:
+                    .title= next.title
+
+        x-tutor(hidden=(!settings.tutor.enabled))
+          +icon('fox', 40)(slot="icon")
+          div(slot="header") #[+icon('fox', 32)] Archie
+
+        x-modal#glossary-modal.light: .modal-body
+
+        script(type="application/json")#glossary!= course.getJSON('glossary')
+        script(type="application/json")#bios!= course.getJSON('bios')
+        script(type="application/json")#hints!= course.getJSON('hints')
+        script(type="application/json")#userdata {}
+
+    script(src='/textbook.js')
+    script textbook.initUserData("#{course.id}", "#{section.id}")
+
+    script user = null;
+    script(src='/polyfill.js')
+    script(src='/resources/' + course.id + '/functions.js')
+    script(src='/course.js')
+    
+    include ../includes/thebe-config.html
+
+    script(src="/resources/bundle.js")
