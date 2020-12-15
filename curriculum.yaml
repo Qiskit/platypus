@@ -1,0 +1,14 @@
+# ==============================================================================
+# Mathigon Default Curriculum
+# (c) Mathigon
+# ==============================================================================
+
+
+course-a:
+  title: Course A
+  color: c00
+
+course-b:
+  title: Course B
+  color: 0c0
+  icon: false

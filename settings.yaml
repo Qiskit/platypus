@@ -1,0 +1,23 @@
+# ==============================================================================
+# Mathigon Default Settings
+# (c) Mathigon
+# ==============================================================================
+
+
+title: Mathigon
+description: A interactive textbook for secondary mathematics
+
+header:
+  logo: /logo.svg
+  logoWidth: 130
+  banner: /banner.jpg
+
+tutor:
+  enabled: true
+  # TODO Implement tutor customisation
+  name: Archie
+  icon: /tutor.png
+
+courses:
+  # TODO Implement reveal-all
+  revealAll: false
