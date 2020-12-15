@@ -7,7 +7,7 @@ const typescript = require('rollup-plugin-typescript');
 const replace = require('rollup-plugin-replace');
 const {nodeResolve} = require('@rollup/plugin-node-resolve');
 
-function build() {
+function ui() {
   return gulp.src(['components/components.js'])
       .pipe(rollup({plugins: [
         replace({
@@ -32,4 +32,8 @@ function build() {
       .pipe(gulp.dest('build'));
 }
 
-exports.default = gulp.parallel(build)
+exports.watch = () => {
+  gulp.watch('components/**/*.{js,ts,scss}', ui);
+};
+
+exports.default = gulp.parallel(ui);

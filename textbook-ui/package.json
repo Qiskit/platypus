@@ -23,6 +23,7 @@
     "vue-template-compiler": "^2.6.12"
   },
   "scripts": {
+    "watch": "gulp watch",
     "build": "gulp --max-old-space-size=8192"
   }
 }
