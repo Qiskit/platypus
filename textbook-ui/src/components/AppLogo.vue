@@ -112,16 +112,21 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Options, prop } from 'vue-class-component'
+
+class Props {
+  color = prop({
+    type: String, default: 'black'
+  })
+}
 
 let _uidCounter = 0
 function nextUniqueSuffix (): string {
   _uidCounter += 1
   return `_${_uidCounter}`
 }
-@Component
+
 export default class extends Vue {
-  @Prop({ type: String, default: 'black' }) color!: string
   uniqueSuffix: string = nextUniqueSuffix()
   scopeId (str: string): string {
     return `${str}${this.uniqueSuffix}`

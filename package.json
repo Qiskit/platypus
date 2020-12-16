@@ -1,12 +1,13 @@
 {
   "scripts": {
     "textbook-start": "cd textbook/ && npm run start",
-    "ui-watch": "cd textbook-ui/ && npm run build && npm run watch",
-    "init": "cd textbook/ && npm install && cd ../textbook-ui && npm install",
+    "ui-watch": "cd textbook-ui/ && npm run build",
+    "build": "cd textbook/ && npm install && cd ../textbook-ui && npm install",
     "start": "npm-run-all --parallel textbook-start ui-watch"
   },
   "dependencies": {},
   "devDependencies": {
+    "@vue/cli": "^4.5.9",
     "npm-run-all": "^4.1.5"
   }
 }

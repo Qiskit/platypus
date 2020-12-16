@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import { Component } from 'vue-property-decorator'
+import { Vue, Options } from 'vue-class-component'
+import VueRouter from 'vue-router';
 
 import {
   ORDERED_COMMUNITY_SUB_LINKS,
@@ -12,7 +12,6 @@ import {
   NavLink
 } from '../constants/menuLinks'
 
-@Component
 export default class extends Vue {
   homeLink: NavLink = HOME_LINK
 

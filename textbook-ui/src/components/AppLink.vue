@@ -10,13 +10,20 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
+import { Vue, Options, prop } from 'vue-class-component'
 
-@Component
-export default class AppLink extends Vue {
-  @Prop({ type: String, default: '' }) url!: string
-  @Prop({ type: Boolean, default: false }) isStatic!: boolean
+class Props {
+  url = prop({
+    type: String, default: ''
+  })
+  isStatic = prop({
+    type: Boolean, default: false
+  })
+}
+
+export default class AppLink extends Vue.with(Props) {
+  // @Prop({ type: String, default: '' }) url!: string
+  // @Prop({ type: Boolean, default: false }) isStatic!: boolean
   static isExternal (url: string): boolean {
     return url.startsWith('http')
   }

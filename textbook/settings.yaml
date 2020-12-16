@@ -19,4 +19,4 @@ courses:
 
 directories:
   views: /../textbook-ui/views
-  resources: /../textbook-ui/build
+  resources: /../textbook-ui/dist

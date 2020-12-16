@@ -1,0 +1,14 @@
+<script src="https://unpkg.com/vue@3.0.4/dist/vue.global.prod.js"></script>
+<script src="/resources/textbooklib.umd.min.js"></script>
+
+<script>
+  const TheMenu = textbooklib.TheMenu
+
+  const app = Vue.createApp({
+    components: {
+      TheMenu
+    }
+  });
+
+  app.mount("#qiskit-navbar");
+</script>

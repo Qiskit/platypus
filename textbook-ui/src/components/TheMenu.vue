@@ -27,22 +27,23 @@
 </template>
 
 // <script lang="ts">
-import { Watch, Component, Mixins } from 'vue-property-decorator'
+import { Options, mixins } from 'vue-class-component'
 import AppLogo from './AppLogo.vue'
 import AppLink from './AppLink.vue'
 import MenuMixin from '../mixins/menu'
 
-@Component({
+@Options({
   components: { AppLink, AppLogo }
 })
-
-export default class extends Mixins(MenuMixin) {
+export default class extends mixins(MenuMixin) {
 
 }
 </script>
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/typography';
+@import 'src/scss/mq.scss';
+@import 'src/scss/mixins.scss';
 
 .menu {
   background-color: white;
