@@ -1,14 +1,14 @@
 <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.prod.js"></script>
 <script src="/resources/textbooklib.umd.min.js"></script>
 
-<script>
-  const TheMenu = textbooklib.TheMenu
-
+<script type="module">
   const app = Vue.createApp({
     components: {
-      TheMenu
+      ...textbooklib
     }
-  });
-
-  app.mount("#qiskit-navbar");
+  })
+  app.config.isCustomElement = (tag) => {
+    return /^x-/.test(tag)
+  }
+  app.mount("#qiskit-navbar")
 </script>
