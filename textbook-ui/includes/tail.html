@@ -3,7 +3,7 @@
 
 <script>
   const initVueComponents = function () {
-    document.querySelectorAll("[data-vue-component]").forEach(component => {
+    document.querySelectorAll("[data-vue-mount]").forEach(component => {
       Vue.createApp({
         components: {
           ...textbooklib
