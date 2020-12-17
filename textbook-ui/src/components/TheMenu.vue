@@ -26,7 +26,7 @@
   </div>
 </template>
 
-// <script lang="ts">
+<script lang="ts">
 import { Options, mixins } from 'vue-class-component'
 import AppLogo from './AppLogo.vue'
 import AppLink from './AppLink.vue'

@@ -1,14 +1,16 @@
 <script src="https://unpkg.com/vue@3.0.4/dist/vue.global.prod.js"></script>
 <script src="/resources/textbooklib.umd.min.js"></script>
 
-<script type="module">
-  const app = Vue.createApp({
-    components: {
-      ...textbooklib
-    }
-  })
-  app.config.isCustomElement = (tag) => {
-    return /^x-/.test(tag)
+<script>
+  const initVueComponents = function () {
+    document.querySelectorAll("[data-vue-component]").forEach(component => {
+      Vue.createApp({
+        components: {
+          ...textbooklib
+        }
+      }).mount(component)
+    })
   }
-  app.mount("#qiskit-navbar")
+
+  initVueComponents()
 </script>
