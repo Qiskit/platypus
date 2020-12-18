@@ -28,64 +28,23 @@
         </g>
       </defs>
     </svg>
-    <div class="what-is-qv__diagram">
-      <SketchSquare class="what-is-qv__square" :width="405" :height="405" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv__square__content">
-          <span class="what-is-qv__square__text">QV32</span>
-        </div>
-      </SketchSquare>
-      <SketchSquare class="what-is-qv__square" :width="325" :height="325" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv__square__content">
-          <span class="what-is-qv__square__text">QV16</span>
-        </div>
-      </SketchSquare>
-      <SketchSquare class="what-is-qv__square" :width="245" :height="245" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv__square__content">
-          <span class="what-is-qv__square__text">QV8</span>
-        </div>
-      </SketchSquare>
-      <SketchSquare class="what-is-qv__square" :width="165" :height="165" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv__square__content">
-          <span class="what-is-qv__square__text">QV4</span>
-        </div>
-      </SketchSquare>
+    <div class="what-is-qv__chart">
+      <div class="what-is-qv__chart__axis">
+        <svg class="sketch-square__lines" :viewBox="`0 0 550 550`" :width="550" :height="550">
+          <SketchLine :line="axisQCount"/>
+          <SketchLine :line="axisReducedError"/>
+        </svg>
+      </div>
+      <WhatIsQVChart1 class="what-is-qv__chart-1"/>
     </div>
-    
-    <!--MarkerArea markerMaskId="marker" fillId="redGreenGrad" width="105" height="105"/>
-    <MarkerArea markerMaskId="marker" fillId="blueRedGrad" width="300" height="200"/>
-    <div class="what-is-qv__diagram"-->
-      <!--SketchSquare class="what-is-qv__square what-is-qv__square_qv16 what-is-qv__charm" uid="asd">
-        <span class="what-is-qv__square__text"> QV16 </span>
-      </SketchSquare-->
-
-      <!--SketchSquare class="what-is-qv__square what-is-qv__square_qv8">
-        <span class="what-is-qv__square__text"> QV8 </span>
-      </SketchSquare>
-      <SketchSquare class="what-is-qv__square what-is-qv__square_qv4">
-        <span class="what-is-qv__square__text"> QV4 </span>
-      </SketchSquare>
-      <SketchSquare class="what-is-qv__square what-is-qv__square_qv2">
-        <span class="what-is-qv__square__text"> QV2 </span>
-      </SketchSquare-->
-    <!--/div-->
-    <!--div class="what-is-qv__diagram">
-      <SketchLine 
-        v-bind="lineConfig"
-        direction="horizontal"
-        class="what-is-qv__guide"
-        />
-      
-      <SketchSquare class="what-is-qv__charm">
-        <span class="what-is-qv__square__text"> QV2 </span>
-      </SketchSquare>
-    </div>
-    <DotsSelector :count="5" name="WhatIsQV" class="what-is-qv__dots-selector" @onSelectedChange="v => selectedInt = v" /-->
   </section>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component"
+import { Line, Point } from "@mathigon/euclid"
 import DotsSelector from "./DotsSelector.vue"
+import WhatIsQVChart1 from "./WhatIsQVChart1.vue"
 import SketchSquare from "../Sketch/SketchSquare.vue"
 import SketchLine from "../Sketch/SketchLine.vue"
 import MarkerArea from "../Sketch/MarkerArea.vue"
@@ -98,46 +57,38 @@ import MarkerArea from "../Sketch/MarkerArea.vue"
     DotsSelector,
     SketchSquare,
     SketchLine,
-    MarkerArea
+    MarkerArea,
+    WhatIsQVChart1
   }
 })
 export default class WhatIsQuantumVolumeSVG extends Vue {
   msg!: string
   selectedInt = 0
+
+  axisQCount = new Line(new Point(50, 450), new Point(50, 50))
+  axisReducedError = new Line(new Point(100, 500), new Point(500, 500))
 }
 </script>
 <style scoped lang="scss">
 .what-is-qv {
-  &__diagram {
+  &__chart {
     position: relative;
-    width: 420px;
-    height: 420px;
-    //background-color: #DDE1E6;
-    margin: 20px;
-  }
-  &__square {
 
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-
-    &__content {
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(52.42% 51.35% at 36.98% 59.03%, #F6F2FF 0%, #FFFFFF 100%);
+    &-1 {
+      position: absolute;
+      top: 50px;
+      left: 100px;
+      width: 420px;
+      height: 420px;
     }
-
-    &__text {
-      display: block;
-      font-family: 'IBM Plex Sans';
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 26px;
-      margin: 5px 16px 5px 5px;
-      text-align: right;
+    &__axis {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 550px;
+      height: 550px;
+      margin: 20px;
     }
-    
   }
 }
 </style>
