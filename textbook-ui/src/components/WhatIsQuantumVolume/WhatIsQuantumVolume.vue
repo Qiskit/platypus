@@ -28,30 +28,26 @@
         </g>
       </defs>
     </svg>
-    <div what-is-qv__diagram>
-      <SketchSquare class="what-is-qv__square" :width="420" :height="420">
-        <template v-slot:svg-background>
-          <MarkerArea markerMaskId="marker" fillId="bluePurpleGrad" :width="420" :height="420"/>
-        </template>
-        <span>QV16</span>
+    <div class="what-is-qv__diagram">
+      <SketchSquare class="what-is-qv__square" :width="405" :height="405" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv__square__content">
+          <span class="what-is-qv__square__text">QV32</span>
+        </div>
       </SketchSquare>
-      <SketchSquare class="what-is-qv__square" :width="315" :height="315">
-        <template v-slot:svg-background>
-          <MarkerArea markerMaskId="marker" fillId="bluePurpleGrad" :width="315" :height="315"/>
-        </template>
-        <span>QV8</span>
+      <SketchSquare class="what-is-qv__square" :width="325" :height="325" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv__square__content">
+          <span class="what-is-qv__square__text">QV16</span>
+        </div>
       </SketchSquare>
-      <SketchSquare class="what-is-qv__square" :width="210" :height="210">
-        <template v-slot:svg-background>
-          <MarkerArea markerMaskId="marker" fillId="bluePurpleGrad" :width="210" :height="210"/>
-        </template>
-        <span>QV4</span>
+      <SketchSquare class="what-is-qv__square" :width="245" :height="245" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv__square__content">
+          <span class="what-is-qv__square__text">QV8</span>
+        </div>
       </SketchSquare>
-      <SketchSquare class="what-is-qv__square" :width="105" :height="105">
-        <template v-slot:svg-background>
-          <MarkerArea markerMaskId="marker" fillId="bluePurpleGrad" :width="105" :height="105"/>
-        </template>
-        <span>QV2</span>
+      <SketchSquare class="what-is-qv__square" :width="165" :height="165" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv__square__content">
+          <span class="what-is-qv__square__text">QV4</span>
+        </div>
       </SketchSquare>
     </div>
     
@@ -111,25 +107,7 @@ export default class WhatIsQuantumVolumeSVG extends Vue {
 }
 </script>
 <style scoped lang="scss">
-.marker-area {
-  display: inline-block;
-}
-
 .what-is-qv {
-  display: flex;
-  flex-direction: column;
-  
-  &__guide {
-    width: 200px;
-  }
-  &__charm {
-    width: 50px;
-    height: 400px;
-    //background-image: url("/MarkerBg.png"), linear-gradient(180deg, #78A9FF 0%, #8A3FFC 100%);
-  }
-  &__dots-selector {
-    flex: 1;
-  }
   &__diagram {
     position: relative;
     width: 420px;
@@ -143,14 +121,20 @@ export default class WhatIsQuantumVolumeSVG extends Vue {
     bottom: 0px;
     left: 0px;
 
+    &__content {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(52.42% 51.35% at 36.98% 59.03%, #F6F2FF 0%, #FFFFFF 100%);
+    }
+
     &__text {
       display: block;
       font-family: 'IBM Plex Sans';
       font-style: normal;
       font-weight: normal;
-      font-size: 20px;
+      font-size: 14px;
       line-height: 26px;
-      margin: 5px 30px 5px 5px;
+      margin: 5px 16px 5px 5px;
       text-align: right;
     }
     

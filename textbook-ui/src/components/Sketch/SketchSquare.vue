@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <svg class="sketch-square" :viewBox="`0 0 ${height} ${height}`" :width="width" :height="height">
-      <SketchLine :line="lines.top" />
-      <SketchLine :line="lines.left" />
-      <SketchLine :line="lines.bottom" />
-      <SketchLine :line="lines.right" />
-      <slot name="svg-background"></slot>
+  <div class="sketch-square">
+    <slot class="sketch-square__background" name="svg-background"></slot>
+    <div class="sketch-square__content"><slot/></div>
+    <svg class="sketch-square__lines" :viewBox="`0 0 ${height} ${height}`" :width="width" :height="height">
+      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="true" />
+      <SketchLine v-if="!hideLeft" :line="lines.left" :dashed="true"/>
+      <SketchLine v-if="!hideBottom" :line="lines.bottom" :dashed="true"/>
+      <SketchLine v-if="!hideRight" :line="lines.right" :dashed="true"/>
     </svg>
-    <div class="sketch-square__content"></div>
   </div>
 </template>
 
@@ -19,6 +19,11 @@ import SketchLine from "./SketchLine.vue"
 class Props {
   width = prop<Number>({ type: Number, default: 105 })
   height = prop<Number>({ type: Number, default: 105 })
+
+  hideTop = prop<boolean>({ default: false })
+  hideRight = prop<boolean>({ default: false })
+  hideBottom = prop<boolean>({ default: false })
+  hideLeft = prop<boolean>({ default: false })
 }
 
 @Options({
@@ -31,9 +36,9 @@ class Props {
       const h = parseInt(this.height)
       return {
         top: new Line(new Point(0, 0), new Point(w, 0)),
-        left: new Line(new Point(w, 0), new Point(w, h)),
-        bottom: new Line(new Point(w, h), new Point(0, h)),
-        right: new Line(new Point(0, h), new Point(0, 0))
+        left: new Line(new Point(0, 0), new Point(0, h)),
+        bottom: new Line(new Point(0, h), new Point(w, h)),
+        right: new Line(new Point(w, 0), new Point(w, h))
       }
     }
   }
@@ -43,14 +48,19 @@ export default class SketchSquare extends Vue.with(Props) {}
 
 <style scoped lang="scss">
 .sketch-square {
-  overflow: visible;
-
+  .sketch-square__lines {
+    overflow: visible;
+    position: relative;
+  }
   &__content {
+    display: flex;
     position: absolute;
+    width: 100%;
+    height: 100%;
     top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
+
+    box-shadow: 4px -4px 0 3px rgba(141, 155, 171, 0.3);
   }
 }
 </style>

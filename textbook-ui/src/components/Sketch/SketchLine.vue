@@ -1,6 +1,6 @@
 <template>
   <g>
-    <path :d="hardLinePathD" class="sketch-line sketch-line__hard" vector-effect="non-scaling-stroke"  />
+    <path :d="hardLinePathD" class="sketch-line sketch-line__hard" vector-effect="non-scaling-stroke" :stroke-dasharray="dashConfiguration" />
     <path v-if="drawSoftLines" :d="softLinePathD" class="sketch-line sketch-line__soft" vector-effect="non-scaling-stroke"  />
   </g>
 </template>
@@ -16,10 +16,24 @@ class Props {
   
   drawSoftLines = prop<boolean>({ default: true })
   softLineExtraLengthInterval = prop<Array<number>>({ default: [12, 20], validator: (val: Array<number>) => val.length == 2 })
+
+  dashed = prop<boolean>({ default: false })
+  dashLengthInterval = prop<Array<number>>({ default: [4, 12], validator: (val: Array<number>) => val.length == 2 })
 }
 
 @Options({
   computed: {
+    dashConfiguration(): string {
+      if (!this.dashed) return "none"
+      const min: number = this.dashLengthInterval[0]
+      const max: number = this.dashLengthInterval[1]
+      
+      return Math.round(this.randomRange(min, max)) + " " +
+             Math.round(this.randomRange(min, max)) + " " +
+             Math.round(this.randomRange(min, max)) + " " +
+             Math.round(this.randomRange(min, max)) + " " +
+             Math.round(this.randomRange(min, max)) 
+    },
     hardLinePathD(): string {
       const normalized: Point = this.line.unitVector
       const start: Point = this.line.p1.translate(normalized.scale(-this.randomLengthHardLine()))
