@@ -2,13 +2,11 @@
 <script src="/resources/textbooklib.umd.min.js"></script>
 
 <script>
-  const TheMenu = textbooklib.TheMenu
-
-  const app = Vue.createApp({
-    components: {
-      TheMenu
-    }
-  });
-
-  app.mount("#qiskit-navbar");
+  document.querySelectorAll("[data-vue-mount]").forEach(component => {
+    Vue.createApp({
+      components: {
+        ...textbooklib
+      }
+    }).mount(component)
+  })
 </script>

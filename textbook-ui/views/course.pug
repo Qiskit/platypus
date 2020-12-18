@@ -8,8 +8,8 @@ html(lang=lang dir=dir)
     include ../includes/head.html
     link(href=`/resources/${course.id}/styles.css` rel="stylesheet")
 
-  body
-    div.qiskit__navbar#qiskit-navbar
+  body#app
+    component(data-vue-mount)
       the-menu
 
     .body
@@ -64,7 +64,7 @@ html(lang=lang dir=dir)
     script(src='/polyfill.js')
     script(src='/resources/' + course.id + '/functions.js')
     script(src='/course.js')
-    
-    include ../includes/thebe-config.html
 
     include ../includes/tail.html
+    
+    include ../includes/thebe-config.html
