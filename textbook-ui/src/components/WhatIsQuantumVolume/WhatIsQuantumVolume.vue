@@ -31,8 +31,8 @@
     <div class="what-is-qv__chart">
       <div class="what-is-qv__chart__axis">
         <svg class="sketch-square__lines" :viewBox="`0 0 550 550`" :width="550" :height="550">
-          <SketchLine :line="axisQCount"/>
-          <SketchLine :line="axisReducedError"/>
+          <SketchArrow :line="axisQCount"/>
+          <SketchArrow :line="axisReducedError"/>
         </svg>
       </div>
       <WhatIsQVChart1 class="what-is-qv__chart-1"/>
@@ -47,6 +47,7 @@ import DotsSelector from "./DotsSelector.vue"
 import WhatIsQVChart1 from "./WhatIsQVChart1.vue"
 import SketchSquare from "../Sketch/SketchSquare.vue"
 import SketchLine from "../Sketch/SketchLine.vue"
+import SketchArrow from "../Sketch/SketchArrow.vue"
 import MarkerArea from "../Sketch/MarkerArea.vue"
 
 @Options({
@@ -57,6 +58,7 @@ import MarkerArea from "../Sketch/MarkerArea.vue"
     DotsSelector,
     SketchSquare,
     SketchLine,
+    SketchArrow,
     MarkerArea,
     WhatIsQVChart1
   }
