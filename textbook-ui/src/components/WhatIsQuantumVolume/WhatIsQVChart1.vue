@@ -1,53 +1,159 @@
 <template>
-  <div class="what-is-qv-chart">
-    <SketchSquare class="what-is-qv-chart__square" :width="405" :height="405" :hideLeft="true" :hideBottom="true">
-      <div class="what-is-qv-chart__square__content">
-        <span class="what-is-qv-chart__square__text">QV32</span>
-      </div>
-    </SketchSquare>
-    <SketchSquare class="what-is-qv-chart__square" :width="325" :height="325" :hideLeft="true" :hideBottom="true">
-      <div class="what-is-qv-chart__square__content">
-        <span class="what-is-qv-chart__square__text">QV16</span>
-      </div>
-    </SketchSquare>
-    <SketchSquare class="what-is-qv-chart__square" :width="245" :height="245" :hideLeft="true" :hideBottom="true">
-      <div class="what-is-qv-chart__square__content">
-        <span class="what-is-qv-chart__square__text">QV8</span>
-      </div>
-    </SketchSquare>
-    <SketchSquare class="what-is-qv-chart__square" :width="165" :height="165" :hideLeft="true" :hideBottom="true">
-      <div class="what-is-qv-chart__square__content">
-        <span class="what-is-qv-chart__square__text">QV4</span>
-      </div>
-    </SketchSquare>
+  <div class="what-is-qv-chart what-is-qv-chart_state" :class="`what-is-qv-chart_state-${state}`">
+    <svg width="1" height="1">
+      <defs>
+        <pattern id="graphite" patternUnits="userSpaceOnUse" width="512" height="512">
+          <image href="../../images/PencilTexture.png" x="0" y="0" width="512" height="512"></image>
+        </pattern>
+        <linearGradient id="bluePurpleGrad0" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+          <stop stop-color="#78A9FF"/>
+          <stop offset="1" stop-color="#8A3FFC"/>
+        </linearGradient>
+        <linearGradient id="bluePurpleGrad1" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+          <stop stop-color="#95AAFE"/>
+          <stop offset="1" stop-color="#A165FD"/>
+        </linearGradient>
+        <linearGradient id="bluePurpleGrad2" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+          <stop stop-color="#B3AEFE"/>
+          <stop offset="1" stop-color="#B98CFD"/>
+        </linearGradient>
+        <linearGradient id="bluePurpleGrad3" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+          <stop stop-color="#CEBDFE"/>
+          <stop offset="1" stop-color="#D0B2FE"/>
+        </linearGradient>
+        <mask id="marker">
+          <image href="../../images/MarkerBg.png" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"></image>
+        </mask>
+      </defs>
+    </svg>
+
+    <div class="what-is-qv-chart__axis">
+      <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_vertical" :label="`Qubits`"/>
+      <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_horizontal" :label="`Reduced Error`"/>
+    </div>
+    <div class="what-is-qv-chart__content">
+      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv32" :width="450" :height="450" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv-chart__square__content">
+          <span class="what-is-qv-chart__square__text">QV 32</span>
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_3" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_4" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_4" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+        </div>
+      </SketchSquare>
+
+      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv16" :width="365" :height="365" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv-chart__square__content">
+          <span class="what-is-qv-chart__square__text">QV 16</span>
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_3" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
+        </div>
+      </SketchSquare>
+
+      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv8" :width="280" :height="280" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv-chart__square__content">
+          <span class="what-is-qv-chart__square__text">QV 8</span>
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
+        </div>
+      </SketchSquare>
+
+      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv4" :width="195" :height="195" :hideLeft="true" :hideBottom="true">
+        <div class="what-is-qv-chart__square__content">
+          <span class="what-is-qv-chart__square__text">QV 4</span>
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
+          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad3" :width="50" :height="145"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad3" :width="50" :height="145"/>
+        </div>
+      </SketchSquare>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component"
+import { Options, prop, Vue } from "vue-class-component"
+import { Line, Point } from "@mathigon/euclid"
 import DotsSelector from "./DotsSelector.vue"
+import LabeledArrow from "./LabeledArrow.vue"
 import SketchSquare from "../Sketch/SketchSquare.vue"
 import SketchLine from "../Sketch/SketchLine.vue"
 import MarkerArea from "../Sketch/MarkerArea.vue"
 
+
+class Props {
+  state = prop<Number>({ default: 0 })
+}
+
 @Options({
-  props: {
-    msg: String
-  },
   components: {
     DotsSelector,
     SketchSquare,
     SketchLine,
-    MarkerArea
+    MarkerArea,
+    LabeledArrow
+  },
+  computed: {
+    horizontalLine(): Line {
+      return new Line(new Point(0, 0), new Point(405, 0));
+    }
   }
 })
-export default class WhatIsQuantumVolumeSVG extends Vue {
-  msg!: string
-  selectedInt = 0
+
+export default class WhatIsQuantumVolumeSVG extends Vue.with(Props) {
+  horizontalLineQV32 = new Line(new Point(0, 0), new Point(408, 0));
+  horizontalLineQV16 = new Line(new Point(0, 0), new Point(323, 0));
+  horizontalLineQV8 = new Line(new Point(0, 0), new Point(238, 0));
+  horizontalLineQV4 = new Line(new Point(0, 0), new Point(153, 0));
+
+
+  axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
+  axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
 }
 </script>
 <style scoped lang="scss">
 .what-is-qv-chart {
+
+  &__axis {
+    width: 550px;
+    height: 550px;
+
+    &__arrow {
+      position: absolute;
+      width: 500px;
+      bottom: 0;
+      left: 0;
+      padding-left: 70px;
+
+      &_vertical {
+        transform: translate(-50%, 0) translate(15px, 15px) rotate(270deg) translate(50%, 0);
+      }
+      &_horizontal {
+      
+      }
+    }
+  }
+  &__content {
+    position: absolute;
+    bottom: 45px;
+    left: 45px;
+  }
 
   &__square {
     position: absolute;
@@ -55,22 +161,276 @@ export default class WhatIsQuantumVolumeSVG extends Vue {
     left: 0px;
 
     &__content {
+      position: absolute;
       width: 100%;
       height: 100%;
       background: radial-gradient(52.42% 51.35% at 36.98% 59.03%, #F6F2FF 0%, #FFFFFF 100%);
     }
 
     &__text {
+      position: absolute;
+      top: 0px;
+      right: 5px;
+      
       display: block;
       font-family: 'IBM Plex Sans';
       font-style: normal;
       font-weight: normal;
-      font-size: 14px;
-      line-height: 26px;
-      margin: 5px 16px 5px 5px;
+      font-size: 10px;
+      line-height: 16px;
       text-align: right;
     }
+
+    $layer-width: 50px;
+    $layer-gap: 35px;
+    $layer-start: 20px;
+
+    &__layer {
+      position: absolute;
+      top: 15px;
+      right: $layer-start;
+
+      @for $i from 0 to 5 {
+        &_#{$i} {
+          right: $layer-start + ($layer-width + $layer-gap) * $i;
+        }
+      }
+    }
+
+    $line-gap: 85px;
+    $line-start: 55px;
+
+    &__qubit-line {
+      position: absolute;
+      top: $line-start;
+      left: 25px;
+
+      :deep() path {
+        stroke: url(#graphite);
+      }
+      @for $i from 0 to 5 {
+        &_#{$i} {
+          top: $line-start + $line-gap * $i;
+        }
+      }
+
+    }
     
+  }
+
+  $disabled-opacity: 0.3;
+
+  &_state {
+    :deep() .sketch-square__lines,
+    :deep() .sketch-square__content {
+      transition: all 0.5s ease-out;
+    }
+    :deep() .labeled-arrow__arrow {
+      transition: margin 1s ease-out;
+    }
+    :deep() .labeled-arrow__label {
+      transition: opacity 0.5s ease-out;
+    }
+    .what-is-qv-chart__square__text,
+    .what-is-qv-chart__square__qubit-line,
+    .what-is-qv-chart__square__layer,
+    .what-is-qv-chart__square {
+      transition: opacity 0.5s ease-out;
+    }
+
+    .what-is-qv-chart__square_qv {
+      &4,
+      &4 :deep() .sketch-square__lines,
+      &4 .what-is-qv-chart__square__text {
+        transition-delay: 0.5s;
+      }
+      &8,
+      &8 :deep() .sketch-square__lines,
+      &8 .what-is-qv-chart__square__text {
+        transition-delay: 1s;
+      }
+      &16,
+      &16 :deep() .sketch-square__lines,
+      &16 .what-is-qv-chart__square__text {
+        transition-delay: 1.5s;
+      }
+      &32,
+      &32 :deep() .sketch-square__lines,
+      &32 .what-is-qv-chart__square__text {
+        transition-delay: 2s;
+      }
+    }
+
+    &-0 {
+      :deep() .sketch-square__lines {
+        opacity: $disabled-opacity;
+      }
+      .what-is-qv-chart__axis__arrow_horizontal :deep() .labeled-arrow__arrow {
+        margin-right: 500px;
+      }
+      .what-is-qv-chart__axis__arrow_horizontal :deep() .labeled-arrow__label {
+        opacity: 0;
+      }
+      .what-is-qv-chart__square__text {
+        opacity: 0;
+      }
+      .what-is-qv-chart__square__qubit-line,
+      .what-is-qv-chart__square__layer {
+        opacity: $disabled-opacity;
+      }
+      .what-is-qv-chart__square_qv {
+        &4{
+          opacity: 1;
+        }
+        &8{
+          opacity: 1;
+        }
+        &16{
+          opacity: 1;
+        }
+        &32{
+          opacity: 1;
+        }
+      }
+    }
+
+    &-1 {
+      :deep() .sketch-square__lines {
+        opacity: $disabled-opacity;
+      }
+      .what-is-qv-chart__axis__arrow_horizontal :deep() .labeled-arrow__arrow {
+        margin-right: 0px;
+      }
+      .what-is-qv-chart__axis__arrow_horizontal :deep() .labeled-arrow__label {
+        opacity: 1;
+      }
+      .what-is-qv-chart__square__text {
+        opacity: 0;
+      }
+      .what-is-qv-chart__square__qubit-line,
+      .what-is-qv-chart__square__layer {
+        opacity: $disabled-opacity;
+      }
+      .what-is-qv-chart__square_qv {
+        &4{
+          opacity: 1;
+        }
+        &8{
+          opacity: 1;
+        }
+        &16{
+          opacity: 1;
+        }
+        &32{
+          opacity: 1;
+        }
+      }
+    }
+    &-2 {
+      :deep() .sketch-square__lines {
+        opacity: 1;
+      }
+      .what-is-qv-chart__square__text {
+        opacity: 1;
+      }
+      .what-is-qv-chart__square__qubit-line,
+      .what-is-qv-chart__square__layer {
+        opacity: $disabled-opacity;
+      }
+      .what-is-qv-chart__square_qv {
+        &4{
+          opacity: 1;
+        }
+        &8{
+          opacity: 1;
+        }
+        &16{
+          opacity: 1;
+        }
+        &32{
+          opacity: 1;
+        }
+      }
+    }
+    &-3 {
+      :deep() .sketch-square__lines {
+        opacity: 0;
+      }
+      :deep() .sketch-square__content {
+        box-shadow: 3px -3px 0 2px rgba(141, 155, 171, 0.0);
+      }
+      .what-is-qv-chart__square__text {
+        opacity: 0;
+      }
+      .what-is-qv-chart__square__qubit-line,
+      .what-is-qv-chart__square__layer {
+        opacity: 1;
+      }
+      .what-is-qv-chart__square_qv {
+        &4{
+          opacity: 0;
+        }
+        &8{
+          opacity: 0;
+        }
+        &16{
+          opacity: 0;
+        }
+        &32{
+          opacity: 1;
+        }
+      }
+    }
+
+    &-4 {
+      :deep() .sketch-square__lines {
+        opacity: 1;
+      }
+      :deep() .sketch-square__content {
+        box-shadow: 3px -3px 0 2px rgba(141, 155, 171, 0.0);
+      }
+      .what-is-qv-chart__square__text {
+        opacity: 1;
+      }
+      .what-is-qv-chart__square__qubit-line,
+      .what-is-qv-chart__square__layer {
+        opacity: 1;
+      }
+      .what-is-qv-chart__square_qv {
+        &4{
+          opacity: 1;
+        }
+        &8{
+          opacity: 1;
+        }
+        &16{
+          opacity: 1;
+        }
+        &32{
+          opacity: 1;
+        }
+        &4,
+        &4 :deep() .sketch-square__lines,
+        &4 .what-is-qv-chart__square__text {
+          transition-delay: 2s;
+        }
+        &8,
+        &8 :deep() .sketch-square__lines,
+        &8 .what-is-qv-chart__square__text {
+          transition-delay: 1.5s;
+        }
+        &16,
+        &16 :deep() .sketch-square__lines,
+        &16 .what-is-qv-chart__square__text {
+          transition-delay: 1s;
+        }
+        &32,
+        &32 :deep() .sketch-square__lines,
+        &32 .what-is-qv-chart__square__text {
+          transition-delay: 0.5s;
+        }
+      }
+    }
   }
 }
 </style>

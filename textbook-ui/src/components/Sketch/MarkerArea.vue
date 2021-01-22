@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Options, prop, Vue } from "vue-class-component"
 
+
 class Props {
   markerMaskId = prop<string>({ required: true })
   fillId = prop<string>({ default: "" })
@@ -20,6 +21,8 @@ class Props {
   computed: {
     viewBox(): string {
       const randomShift = this.randomize ? Math.random() : 0
+      const width = parseInt(this.width)
+      const height = parseInt(this.height)
       if (this.width <= this.height) {
         const aspectRatio = this.width/this.height
         return `${randomShift * (1 - aspectRatio)} 0 ${aspectRatio} 1`

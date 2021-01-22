@@ -1,8 +1,8 @@
 <template>
-  <g>
-    <path :d="hardLinePathD" class="sketch-line sketch-line__hard" vector-effect="non-scaling-stroke" :stroke-dasharray="dashConfiguration" />
-    <path v-if="drawSoftLines" :d="softLinePathD" class="sketch-line sketch-line__soft" vector-effect="non-scaling-stroke"  />
-  </g>
+  <svg class="sketch-line">
+    <path :d="hardLinePathD" class="sketch-line-path sketch-line-path__hard" vector-effect="non-scaling-stroke" :stroke-dasharray="dashConfiguration" />
+    <path v-if="drawSoftLines" :d="softLinePathD" class="sketch-line-path sketch-line-path__soft" vector-effect="non-scaling-stroke"  />
+  </svg>
 </template>
 
 <script lang="ts">
@@ -12,10 +12,10 @@ import { Line, Point } from "@mathigon/euclid"
 class Props {
   line = prop<Line>({ default: new Line(new Point(0, 0), new Point(400, 0)) })
 
-  hardLineExtraLengthInterval = prop<Array<number>>({ default: [5, 10], validator: (val: Array<number>) => val.length == 2 })
+  hardLineExtraLengthInterval = prop<Array<number>>({ default: [3, 5], validator: (val: Array<number>) => val.length == 2 })
   
   drawSoftLines = prop<boolean>({ default: true })
-  softLineExtraLengthInterval = prop<Array<number>>({ default: [12, 20], validator: (val: Array<number>) => val.length == 2 })
+  softLineExtraLengthInterval = prop<Array<number>>({ default: [7, 10], validator: (val: Array<number>) => val.length == 2 })
 
   dashed = prop<boolean>({ default: false })
   dashLengthInterval = prop<Array<number>>({ default: [4, 12], validator: (val: Array<number>) => val.length == 2 })
@@ -75,11 +75,14 @@ export default class SketchLine extends Vue.with(Props) {
 
 <style scoped lang="scss">
 .sketch-line {
-  stroke: #000000;
-  stroke-width: 2;
+  overflow: visible;
+  &-path {
+    stroke: #000000;
+    stroke-width: 1;
 
-  &__soft {
-    opacity: 0.3;
+    &__soft {
+      opacity: 0.3;
+    }
   }
 }
 </style>

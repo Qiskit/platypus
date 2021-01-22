@@ -2,8 +2,8 @@
   <div class="sketch-square">
     <slot class="sketch-square__background" name="svg-background"></slot>
     <div class="sketch-square__content"><slot/></div>
-    <svg class="sketch-square__lines" :viewBox="`0 0 ${height} ${height}`" :width="width" :height="height">
-      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="true" />
+    <svg class="sketch-square__lines" :viewBox="`0 0 ${width} ${height}`" :width="width" :height="height">
+      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="true"/>
       <SketchLine v-if="!hideLeft" :line="lines.left" :dashed="true"/>
       <SketchLine v-if="!hideBottom" :line="lines.bottom" :dashed="true"/>
       <SketchLine v-if="!hideRight" :line="lines.right" :dashed="true"/>
@@ -60,7 +60,7 @@ export default class SketchSquare extends Vue.with(Props) {}
     top: 0;
     left: 0;
 
-    box-shadow: 4px -4px 0 3px rgba(141, 155, 171, 0.3);
+    box-shadow: 3px -3px 0 2px rgba(141, 155, 171, 0.3);
   }
 }
 </style>
