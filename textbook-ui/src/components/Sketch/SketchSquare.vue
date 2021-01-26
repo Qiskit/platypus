@@ -48,9 +48,10 @@ export default class SketchSquare extends Vue.with(Props) {}
 
 <style scoped lang="scss">
 .sketch-square {
-  .sketch-square__lines {
+  &__lines {
     overflow: visible;
     position: relative;
+    pointer-events: none;
   }
   &__content {
     display: flex;

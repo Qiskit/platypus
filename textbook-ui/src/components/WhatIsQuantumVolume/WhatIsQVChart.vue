@@ -21,7 +21,7 @@
           <stop stop-color="#CEBDFE"/>
           <stop offset="1" stop-color="#D0B2FE"/>
         </linearGradient>
-        <mask id="marker">
+        <mask id="marker" style="mask-type: alpha">
           <image href="../../images/MarkerBg.png" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"></image>
         </mask>
       </defs>
@@ -50,6 +50,7 @@
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_4" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+          <span class="what-is-qv-chart__square__tooltip">{{tooltip[3]}}</span>
         </div>
       </SketchSquare>
 
@@ -68,6 +69,7 @@
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
+          <span class="what-is-qv-chart__square__tooltip">{{tooltip[2]}}</span>
         </div>
       </SketchSquare>
 
@@ -83,6 +85,7 @@
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
+          <span class="what-is-qv-chart__square__tooltip">{{tooltip[1]}}</span>
         </div>
       </SketchSquare>
 
@@ -95,6 +98,7 @@
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad3" :width="50" :height="145"/>
           <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad3" :width="50" :height="145"/>
+          <span class="what-is-qv-chart__square__tooltip">{{tooltip[0]}}</span>
         </div>
       </SketchSquare>
     </div>
@@ -114,6 +118,7 @@ import Ket0 from "../Sketch/Ket0.vue"
 
 class Props {
   state = prop<Number>({ default: 0 })
+  tooltip = prop<String[]>({ default:[] })
 }
 
 @Options({
@@ -149,15 +154,15 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
   position: relative;
   margin: 0 auto;
   width: 550px;
-  height: 550px;
+  height: 510px;
 
   &__axis {
     width: 550px;
-    height: 550px;
+    height: 510px;
 
     &__arrow {
       position: absolute;
-      width: 500px;
+      width: 510px;
       bottom: 0;
       left: 0;
       padding-left: 70px;
@@ -182,7 +187,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: radial-gradient(52.42% 51.35% at 36.98% 59.03%, #F6F2FF 0%, #FFFFFF 100%);
+      background-color: #F2F4F8;
     }
 
     &__text {
@@ -197,6 +202,45 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       font-size: 10px;
       line-height: 16px;
       text-align: right;
+    }
+
+    &__tooltip {
+      display: none;
+      position: absolute;
+      right: -10px;
+      top: -130px;
+      width: 200px;
+      height: 120px;
+
+      background: #343A3F;
+      border-radius: 2px;
+
+      padding: 10px;
+      color: #FFFFFF;
+
+      font-family: 'IBM Plex Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: -8px;
+        right: 20px;
+
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        
+        border-top: 9px solid #343A3F;
+      }
+    }
+
+    &__content:hover :deep() &__tooltip {
+      display: block;
     }
 
     $layer-width: 50px;
@@ -358,6 +402,10 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         }
       }
 
+      #{$root}__content {
+        pointer-events: none;
+      }
+      
       #{$root}__square {
         &__ket0 {
           transition: opacity 0.5s ease-out 0.5s;
@@ -397,7 +445,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         }
       }
     }
-    
+
   }
 }
 </style>
