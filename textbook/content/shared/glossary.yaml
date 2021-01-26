@@ -2,6 +2,10 @@
 # Glossary
 # ==============================================================================
 
+test:
+  title: randygravity
+  text: This is an annotation for gravity
+
 qubit:
   title: Qubit
   text: |

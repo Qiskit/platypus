@@ -89,12 +89,4 @@ TODO
 
 #### Introduction
 
-**Quantum Volume (QV)** is a single-number metric that can be measured using a concrete protocol on near-term quantum computers of modest size. The QV method quantifies the largest random circuit of equal width and depth that the computer successfully implements. Quantum computing systems with high-fidelity operations, high connectivity, large calibrated gate sets, and circuit rewriting toolchains are expected to have higher quantum volumes [gravity](gloss:gravity).
-
-
-
-    p(data-vue-mount)
-      This the start of a paragraph and this is a <Annotation content="highlight me" information="This is the tooltip content"/>
-
-    p(data-vue-mount)
-        Lorem ipsum test <Annotation content="annotated string" information="An annotated string is an interactive element that allows readers to see more information about a particular concept."/> within a sentence, as an inline element.
+**Quantum Volume (QV)** is a single-number metric that can be measured using a concrete protocol on near-term quantum computers of modest size. The QV method quantifies the largest random circuit of equal width and depth that the computer successfully implements. Quantum computing systems with high-fidelity operations, high connectivity, large calibrated gate sets, and circuit rewriting toolchains are expected to have higher quantum volumes [qubit](gloss:qubit) this is another [test](gloss:test).
