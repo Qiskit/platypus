@@ -1,34 +1,41 @@
 <template>
   <nav class="dot-selector">
     <button
-      class="dot-selector__arrow dot-selector__back-arrow"
+      class="dot-selector__arrow dot-selector__arrow--back"
       :class="{
         'dot-selector__arrow-disabled' : selected == 0
       }"
       @click="prevDot()"
       :disabled="selected == 0"
     >
-      &lt;
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 16L20 6L21.4 7.40002L12.8 16L21.4 24.6L20 26L10 16Z" fill="#6FDC8C"/>
+      </svg>
     </button>
     <ul class="dot-selector__dot-list">
       <li class="dot-selector__dot-item" v-for="n in count" :key="n - 1">
-        <input
-          class="dot-selector__dot-radio"
-          type="radio"
-          :value="n - 1"
-          v-model="selected"
-        />
+        <label class="dot-selector__dot-item__label">
+          <input
+            class="dot-selector__dot-item__input"
+            :class="{
+              'dot-selector__dot-item__input--visited' : (n - 1) < selected
+            }"
+            type="radio"
+            :value="n - 1"
+            v-model="selected"
+          />
+          <span class="dot-selector__dot-item__circle"></span>
+        </label>
       </li>
     </ul>
     <button
-      class="dot-selector__arrow dot-selector__forward-arrow"
-      :class="{
-        'dot-selector__arrow-disabled' : selected == count - 1
-      }"
+      class="dot-selector__arrow dot-selector__arrow--forward"
       @click="nextDot()"
       :disabled="selected == count - 1"
     >
-      &gt;
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.0001 16L12.0001 26L10.6001 24.6L19.2001 16L10.6001 7.40002L12.0001 6L22.0001 16Z" fill="#6FDC8C"/>
+      </svg>
     </button>
   </nav>
 </template>
@@ -37,7 +44,7 @@
 import { Options, prop, Vue } from "vue-class-component"
 
 class Props {
-  count = prop<number>({ default: 0 })
+  count = prop<number>({ default: 0, required: true })
   uid = prop<string>({ required: true })
 }
 
@@ -67,6 +74,7 @@ export default class DotsSelector extends Vue.with(Props) {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
   &__dot-list {
     display: flex;
@@ -78,6 +86,47 @@ export default class DotsSelector extends Vue.with(Props) {
 
   &__dot-item {
     margin: 0 2rem;
+
+    &__label {
+      position: relative;
+      width: 10px;
+    }
+
+    &__input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    &__circle {
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background-color: #FFFFFF;
+      border: 1px solid #000000;
+      cursor: pointer;
+    }
+
+    &__input--visited ~ #{&}__circle {
+      background-color: #78A9FF;
+    }
+
+    &__input:checked ~ #{&}__circle {
+      background-color: #8A3FFC;
+    }
+  }
+
+  &__arrow {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0;
+    }
   }
 }
 </style>

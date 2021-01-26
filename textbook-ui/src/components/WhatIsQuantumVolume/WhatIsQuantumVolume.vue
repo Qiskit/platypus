@@ -1,8 +1,7 @@
 <template>
   <section class="what-is-qv">
-    <button @click="() => selectedInt += 1" />
-    <WhatIsQVChart1 class="what-is-qv__chart" :state="selectedInt"/>
-    <DotsSelector/>
+    <WhatIsQVChart class="what-is-qv__chart" :state="selectedInt"/>
+    <DotsSelector :count="6" @onSelectedChange="value => selectedInt = value"/>
   </section>
 </template>
 
@@ -11,7 +10,7 @@
 import { Options, Vue } from "vue-class-component"
 import { Line, Point } from "@mathigon/euclid"
 import DotsSelector from "./DotsSelector.vue"
-import WhatIsQVChart1 from "./WhatIsQVChart1.vue"
+import WhatIsQVChart from "./WhatIsQVChart.vue"
 import SketchSquare from "../Sketch/SketchSquare.vue"
 import SketchLine from "../Sketch/SketchLine.vue"
 import SketchArrow from "../Sketch/SketchArrow.vue"
@@ -24,7 +23,7 @@ import MarkerArea from "../Sketch/MarkerArea.vue"
     SketchLine,
     SketchArrow,
     MarkerArea,
-    WhatIsQVChart1
+    WhatIsQVChart
   }
 })
 export default class WhatIsQuantumVolumeSVG extends Vue {

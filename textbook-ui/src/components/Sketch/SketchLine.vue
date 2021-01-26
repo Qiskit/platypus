@@ -76,6 +76,9 @@ export default class SketchLine extends Vue.with(Props) {
 <style scoped lang="scss">
 .sketch-line {
   overflow: visible;
+  height: 2px;
+  pointer-events: none;
+
   &-path {
     stroke: #000000;
     stroke-width: 1;
