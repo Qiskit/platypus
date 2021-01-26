@@ -232,7 +232,11 @@ x-gloss.on .target:before {
 [dir=ltr] x-bio.left.top .popup,
 [dir=ltr] x-gloss.left.top .popup,
 [dir=ltr] x-bio .popup,
-[dir=ltr] x-gloss .popup {
+[dir=ltr] x-gloss .popup,
+[dir] x-bio.on .target,
+[dir] x-bio:focus-within .target,
+[dir] x-gloss.on .target,
+[dir] x-gloss:focus-within .target {
   border-radius: 0;
 }
 
@@ -245,31 +249,31 @@ x-gloss.on .target:before {
   border-bottom: 2px solid @magenta-60;
 }
 
-x-bio.on .popup:after,
-x-gloss.on .popup:after {
+x-bio .popup:after,
+x-gloss .popup:after {
   content: " ";
+  bottom: calc(100% + 1px);
   border-radius: 0;
   position: absolute;
-  
   border-width: .25rem;
   border-style: solid;
   border-color: transparent transparent @magenta-60 transparent;
 }
 
-x-bio.on.top .popup:after,
-x-gloss.on.top .popup:after {
+x-bio.top .popup:after,
+x-gloss.top .popup:after {
   top: calc(100% + 1px);
   transform: rotate(180deg);
 }
 
-x-bio.on.left .popup:after,
-x-gloss.on.left .popup:after {
-  top: -10px;
+x-bio.left .popup:after,
+x-gloss.left .popup:after {
+  bottom: calc(100% + 1px);
   right: 1rem;
 }
 
-x-bio.on.left.top .popup:after,
-x-gloss.on.left.top .popup:after {
+x-bio.left.top .popup:after,
+x-gloss.left.top .popup:after {
   top: calc(100% + 1px);
   transform: rotate(180deg);
   right: 1rem;
