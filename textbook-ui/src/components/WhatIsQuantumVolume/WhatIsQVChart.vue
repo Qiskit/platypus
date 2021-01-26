@@ -358,6 +358,12 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
             animation-fill-mode: forwards;
           }
         }
+
+        &__square_qv {
+          &4, &8, &16, &32 {
+            opacity: 0;
+          }
+        }
       }
     }
     
@@ -368,23 +374,24 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         }
         &_qv {
           &4, &8, &16, &32 {
-            transition: opacity 0.2s ease-out;
+            transition: opacity 0.15s ease-out;
             opacity: 1;
-          }
-          &8, &16, &32 {
-            transition-delay: opacity 0.3s ease-out;
-            transform: translate(-50%, 50%) scale(0.4) translate(50%, -50%); 
-            animation: .7s ease-out 0.4s crescentQVAnimation;
+            transform: translate(-50%, 50%) scale(0) translate(50%, -50%); 
+            animation: .3s ease-out 0s crescentQVAnimation;
             animation-fill-mode: forwards;
           }
+          &8, &16, &32 {
+            transition-delay: 0.2s;
+            transform: translate(-50%, 50%) scale(0) translate(50%, -50%);
+          }
           &8 {
-            animation-delay: 1s;
+            animation-delay: 0.4s;
           }
           &16 {
-            animation-delay: 1.5s;
+            animation-delay: 0.7s;
           }
           &32 {
-            animation-delay: 2s;
+            animation-delay: 1s;
           }
         }
       }
@@ -405,7 +412,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       #{$root}__content {
         pointer-events: none;
       }
-      
+
       #{$root}__square {
         &__ket0 {
           transition: opacity 0.5s ease-out 0.5s;
