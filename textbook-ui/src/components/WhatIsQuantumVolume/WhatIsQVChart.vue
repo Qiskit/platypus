@@ -21,8 +21,8 @@
           <stop stop-color="#CEBDFE"/>
           <stop offset="1" stop-color="#D0B2FE"/>
         </linearGradient>
-        <mask :id="`marker-uid${uid}`" style="mask-type: alpha">
-          <image href="../../images/MarkerBg.png" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"></image>
+        <mask :id="`marker-uid${uid}`" style="mask-type: luminance">
+          <image href="../../images/MarkerBg.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"></image>
         </mask>
       </defs>
     </svg>
