@@ -187,14 +187,16 @@ x-step p a::after {
 // Glossary tooltip annotations
 [dir] x-bio .target,
 [dir] x-gloss .target {
+  border-radius: 0;
   line-height: initial;
   padding: 0 2px;
   margin: 0 -2px;
-  border-radius: 0;
   border-bottom: 2px solid @magenta-60;
 }
+
 x-bio .target:before, 
 x-gloss .target:before {
+  border-radius: 0;
   background: transparent;
   height: .15rem;
 }
@@ -211,28 +213,73 @@ x-gloss.on .target:before {
 [dir] x-gloss.on .target {
   background: @magenta-10;
   color: black;
-  border-radius: 0;
   border-bottom: 2px solid transparent;
+}
+
+[dir] x-bio.on.top .target,
+[dir] x-bio:focus-within.top .target,
+[dir] x-gloss.on.top .target,
+[dir] x-gloss:focus-within.top .target {
+  border-radius: 0;
+}
+
+
+// Glossary popup 
+[dir=ltr] x-bio.top .popup,
+[dir=ltr] x-gloss.top .popup,
+[dir=ltr] x-bio.left .popup,
+[dir=ltr] x-gloss.left .popup,
+[dir=ltr] x-bio.left.top .popup,
+[dir=ltr] x-gloss.left.top .popup,
+[dir=ltr] x-bio .popup,
+[dir=ltr] x-gloss .popup {
+  border-radius: 0;
 }
 
 [dir] x-bio .popup,
 [dir] x-gloss .popup {
   background: @magenta-10;
   box-shadow: initial;
-  border-radius: 0;
   left: -2px;
   border-top: 2px solid @magenta-60;
   border-bottom: 2px solid @magenta-60;
 }
 
-
-x-bio .popup:after,
-x-gloss .popup:after {
+x-bio.on .popup:after,
+x-gloss.on .popup:after {
   content: " ";
+  border-radius: 0;
   position: absolute;
-  // bottom: 100%;  /* At the top of the tooltip */
-  top: -10px;
+  
   border-width: .25rem;
   border-style: solid;
   border-color: transparent transparent @magenta-60 transparent;
+}
+
+x-bio.on.top .popup:after,
+x-gloss.on.top .popup:after {
+  top: calc(100% + 1px);
+  transform: rotate(180deg);
+}
+
+x-bio.on.left .popup:after,
+x-gloss.on.left .popup:after {
+  top: -10px;
+  right: 1rem;
+}
+
+x-bio.on.left.top .popup:after,
+x-gloss.on.left.top .popup:after {
+  top: calc(100% + 1px);
+  transform: rotate(180deg);
+  right: 1rem;
+}
+
+x-bio .popup p,
+x-gloss .popup p,
+x-bio .popup strong,
+x-gloss .popup strong {
+  font-size: 14px;
+  color: black;
+  line-height: 20px;
 }
