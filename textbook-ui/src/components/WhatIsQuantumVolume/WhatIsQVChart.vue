@@ -2,26 +2,26 @@
   <div class="what-is-qv-chart what-is-qv-chart_state" :class="`what-is-qv-chart_state-${state}`">
     <svg width="1" height="1">
       <defs>
-        <pattern id="graphite" patternUnits="userSpaceOnUse" width="512" height="512">
+        <pattern :id="`graphite-uid${uid}`" patternUnits="userSpaceOnUse" width="512" height="512">
           <image href="../../images/PencilTexture.png" x="0" y="0" width="512" height="512"></image>
         </pattern>
-        <linearGradient id="bluePurpleGrad0" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+        <linearGradient :id="`bluePurpleGrad0-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
           <stop stop-color="#78A9FF"/>
           <stop offset="1" stop-color="#8A3FFC"/>
         </linearGradient>
-        <linearGradient id="bluePurpleGrad1" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+        <linearGradient :id="`bluePurpleGrad1-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
           <stop stop-color="#95AAFE"/>
           <stop offset="1" stop-color="#A165FD"/>
         </linearGradient>
-        <linearGradient id="bluePurpleGrad2" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+        <linearGradient :id="`bluePurpleGrad2-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
           <stop stop-color="#B3AEFE"/>
           <stop offset="1" stop-color="#B98CFD"/>
         </linearGradient>
-        <linearGradient id="bluePurpleGrad3" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
+        <linearGradient :id="`bluePurpleGrad3-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
           <stop stop-color="#CEBDFE"/>
           <stop offset="1" stop-color="#D0B2FE"/>
         </linearGradient>
-        <mask id="marker" style="mask-type: alpha">
+        <mask :id="`marker-uid${uid}`" style="mask-type: alpha">
           <image href="../../images/MarkerBg.png" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none"></image>
         </mask>
       </defs>
@@ -45,11 +45,11 @@
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_3" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_4" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_4" markerMaskId="marker" fillId="bluePurpleGrad0" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_4" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
           <span class="what-is-qv-chart__square__tooltip">{{tooltip[3]}}</span>
         </div>
       </SketchSquare>
@@ -65,10 +65,10 @@
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_3" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" markerMaskId="marker" fillId="bluePurpleGrad1" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
           <span class="what-is-qv-chart__square__tooltip">{{tooltip[2]}}</span>
         </div>
       </SketchSquare>
@@ -82,9 +82,9 @@
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" markerMaskId="marker" fillId="bluePurpleGrad2" :width="50" :height="230"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad2-uid${uid}`" :width="50" :height="230"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad2-uid${uid}`" :width="50" :height="230"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad2-uid${uid}`" :width="50" :height="230"/>
           <span class="what-is-qv-chart__square__tooltip">{{tooltip[1]}}</span>
         </div>
       </SketchSquare>
@@ -96,8 +96,8 @@
           <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_1"/>
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
           <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" markerMaskId="marker" fillId="bluePurpleGrad3" :width="50" :height="145"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" markerMaskId="marker" fillId="bluePurpleGrad3" :width="50" :height="145"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad3-uid${uid}`" :width="50" :height="145"/>
+          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad3-uid${uid}`" :width="50" :height="145"/>
           <span class="what-is-qv-chart__square__tooltip">{{tooltip[0]}}</span>
         </div>
       </SketchSquare>
@@ -146,6 +146,8 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
 
   axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
   axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
+
+  uid = Math.random().toString().replace('.','')
 }
 </script>
 <style scoped lang="scss">
