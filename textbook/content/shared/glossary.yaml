@@ -2,9 +2,8 @@
 # Glossary
 # ==============================================================================
 
-test:
-  title: randygravity
-  text: This is an annotation for gravity
+sample:
+  text: This is an annotation for a sample glossary term. 
 
 qubit:
   title: Qubit
