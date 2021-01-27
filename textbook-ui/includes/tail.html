@@ -2,11 +2,15 @@
 <script src="/resources/textbooklib.umd.min.js"></script>
 
 <script>
-  document.querySelectorAll("[data-vue-mount]").forEach(component => {
-    Vue.createApp({
-      components: {
-        ...textbooklib
-      }
-    }).mount(component)
-  })
+  const initVueComponents = function () {
+    document.querySelectorAll("[data-vue-mount]").forEach(component => {
+      Vue.createApp({
+        components: {
+          ...textbooklib
+        }
+      }).mount(component)
+    })
+  }
+
+  initVueComponents()
 </script>

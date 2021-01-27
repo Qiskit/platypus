@@ -8,8 +8,8 @@ html(lang=lang dir=dir)
     include ../includes/head.html
     link(href=`/resources/${course.id}/styles.css` rel="stylesheet")
 
-  body#app
-    component(data-vue-mount)
+  body
+    div.qiskit__navbar#qiskit-navbar(data-vue-mount)
       the-menu
 
     .body

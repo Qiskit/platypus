@@ -45,7 +45,7 @@
 
       const userData = this.getUserData()
   
-      if (courseId) {
+      if (courseId && userData[courseId]) {
         const progress = userData[courseId].progress
         for (let k in progress) {
           const elt = document.querySelector(`[data-section-id="${k}"] x-progress`)
