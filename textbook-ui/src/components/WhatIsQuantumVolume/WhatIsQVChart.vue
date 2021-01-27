@@ -142,6 +142,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     position: absolute;
     bottom: 45px;
     left: 45px;
+    
+    width: 505px;
+    height: 465px;
   }
 
   &__square {
