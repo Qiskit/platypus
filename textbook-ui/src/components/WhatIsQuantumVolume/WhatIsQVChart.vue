@@ -32,73 +32,37 @@
       <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_horizontal" :label="`Reduced Error`"/>
     </div>
     <div class="what-is-qv-chart__content">
-      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv32" :width="450" :height="450" :hideLeft="true" :hideBottom="true">
+      <SketchSquare 
+        v-for="(n, i) in 4" :key="n"
+        :class="`what-is-qv-chart__square what-is-qv-chart__square_qv${Math.pow(2, 5 - i)}`" 
+        :width="450 - i * 85" 
+        :height="450 - i * 85" 
+        :hideLeft="true" 
+        :hideBottom="true"
+      >
         <div class="what-is-qv-chart__square__content">
-          <span class="what-is-qv-chart__square__text">QV 32</span>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_0"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_1"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_2"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_3"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_4"/>
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_3" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_4" :line="horizontalLineQV32" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_4" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad0-uid${uid}`" :width="50" :height="400"/>
-          <span class="what-is-qv-chart__square__tooltip">{{tooltip[3]}}</span>
-        </div>
-      </SketchSquare>
-
-      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv16" :width="365" :height="365" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv-chart__square__content">
-          <span class="what-is-qv-chart__square__text">QV 16</span>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_0"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_1"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_2"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_3"/>
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_3" :line="horizontalLineQV16" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_3" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad1-uid${uid}`" :width="50" :height="315"/>
-          <span class="what-is-qv-chart__square__tooltip">{{tooltip[2]}}</span>
-        </div>
-      </SketchSquare>
-
-      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv8" :width="280" :height="280" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv-chart__square__content">
-          <span class="what-is-qv-chart__square__text">QV 8</span>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_0"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_1"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_2"/>
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_2" :line="horizontalLineQV8" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad2-uid${uid}`" :width="50" :height="230"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad2-uid${uid}`" :width="50" :height="230"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_2" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad2-uid${uid}`" :width="50" :height="230"/>
-          <span class="what-is-qv-chart__square__tooltip">{{tooltip[1]}}</span>
-        </div>
-      </SketchSquare>
-
-      <SketchSquare class="what-is-qv-chart__square what-is-qv-chart__square_qv4" :width="195" :height="195" :hideLeft="true" :hideBottom="true">
-        <div class="what-is-qv-chart__square__content">
-          <span class="what-is-qv-chart__square__text">QV 4</span>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_0"/>
-          <Ket0 class="what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_1"/>
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_0" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
-          <SketchLine class="what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_1" :line="horizontalLineQV4" :dashed="false" :drawSoftLines="false" />
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_0" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad3-uid${uid}`" :width="50" :height="145"/>
-          <MarkerArea class="what-is-qv-chart__square__layer what-is-qv-chart__square__layer_1" :markerMaskId="`marker-uid${uid}`" :fillId="`bluePurpleGrad3-uid${uid}`" :width="50" :height="145"/>
-          <span class="what-is-qv-chart__square__tooltip">{{tooltip[0]}}</span>
+          <span class="what-is-qv-chart__square__text">QV {{Math.pow(2, 5 - i)}}</span>
+          <Ket0 
+            v-for="(m, j) in 5 - i" :key="m"
+            :class="`what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_${j}`"
+          />
+          <SketchLine 
+            v-for="(m, j) in 5 - i" :key="m"
+            :class="`what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_${j}`" 
+            :style="`--stroke-color: url(#graphite-uid${uid})`" 
+            :line="horizontalLineQV[i]" 
+            :dashed="false" 
+            :drawSoftLines="false"
+          />
+          <MarkerArea 
+            v-for="(m, j) in 5 - i" :key="m"
+            :class="`what-is-qv-chart__square__layer what-is-qv-chart__square__layer_${j}`" 
+            :markerMaskId="`marker-uid${uid}`" 
+            :fillId="`bluePurpleGrad0-uid${uid}`" 
+            :width="50" 
+            :height="400 - i * 85"
+          />
+          <span class="what-is-qv-chart__square__tooltip">{{tooltip[4 - n]}}</span>
         </div>
       </SketchSquare>
     </div>
@@ -108,7 +72,6 @@
 <script lang="ts">
 import { Options, prop, Vue } from "vue-class-component"
 import { Line, Point } from "@mathigon/euclid"
-import DotsSelector from "./DotsSelector.vue"
 import LabeledArrow from "./LabeledArrow.vue"
 import SketchSquare from "../Sketch/SketchSquare.vue"
 import SketchLine from "../Sketch/SketchLine.vue"
@@ -123,7 +86,6 @@ class Props {
 
 @Options({
   components: {
-    DotsSelector,
     SketchSquare,
     SketchLine,
     MarkerArea,
@@ -138,10 +100,12 @@ class Props {
 })
 
 export default class WhatIsQuantumChart extends Vue.with(Props) {
-  horizontalLineQV32 = new Line(new Point(0, 0), new Point(408, 0));
-  horizontalLineQV16 = new Line(new Point(0, 0), new Point(323, 0));
-  horizontalLineQV8 = new Line(new Point(0, 0), new Point(238, 0));
-  horizontalLineQV4 = new Line(new Point(0, 0), new Point(153, 0));
+  horizontalLineQV = [
+    new Line(new Point(0, 0), new Point(408, 0)),
+    new Line(new Point(0, 0), new Point(323, 0)),
+    new Line(new Point(0, 0), new Point(238, 0)),
+    new Line(new Point(0, 0), new Point(153, 0))
+  ]
 
 
   axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
@@ -269,8 +233,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       top: $line-start;
       left: 25px;
 
+      --stroke-color: #000000;
       :deep() path {
-        stroke: url(#graphite);
+        stroke: var(--stroke-color);
       }
       @for $i from 0 to 5 {
         &_#{$i} {
@@ -296,6 +261,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     
   }
 
+//////////////////
+/// ANIMATIONS ///
+//////////////////
 
   $disabled-opacity: 0.3;
   $root: &;
