@@ -182,3 +182,109 @@ x-step p a::after {
 [dir] mfenced {
   display: none;
 }
+
+
+// Glossary tooltip annotations
+[dir] x-bio .target,
+[dir] x-gloss .target {
+  border-radius: 0;
+  line-height: initial;
+  padding: 0 2px;
+  margin: 0 -2px;
+  border-bottom: 2px solid @magenta-60;
+}
+
+x-bio .target:before, 
+x-gloss .target:before {
+  border-radius: 0;
+  background: transparent;
+  height: .15rem;
+}
+
+x-bio.on .target:before, 
+x-gloss.on .target:before {
+  background: transparent;
+  border-bottom: none;
+  left: 0;
+  right: 0;
+}
+
+[dir] x-bio.on .target, 
+[dir] x-gloss.on .target {
+  background: @magenta-10;
+  color: black;
+  border-bottom: 2px solid transparent;
+}
+
+[dir] x-bio.on.top .target,
+[dir] x-bio:focus-within.top .target,
+[dir] x-gloss.on.top .target,
+[dir] x-gloss:focus-within.top .target {
+  border-radius: 0;
+}
+
+
+// Glossary popup 
+[dir=ltr] x-bio.top .popup,
+[dir=ltr] x-gloss.top .popup,
+[dir=ltr] x-bio.left .popup,
+[dir=ltr] x-gloss.left .popup,
+[dir=ltr] x-bio.left.top .popup,
+[dir=ltr] x-gloss.left.top .popup,
+[dir=ltr] x-bio .popup,
+[dir=ltr] x-gloss .popup,
+[dir] x-bio.on .target,
+[dir] x-bio:focus-within .target,
+[dir] x-gloss.on .target,
+[dir] x-gloss:focus-within .target {
+  border-radius: 0;
+}
+
+[dir] x-bio .popup,
+[dir] x-gloss .popup {
+  background: @magenta-10;
+  box-shadow: initial;
+  left: -2px;
+  border-top: 2px solid @magenta-60;
+  border-bottom: 2px solid @magenta-60;
+  max-width: 14rem;
+}
+
+x-bio .popup:after,
+x-gloss .popup:after {
+  content: " ";
+  bottom: calc(100% + 1px);
+  border-radius: 0;
+  position: absolute;
+  border-width: .25rem;
+  border-style: solid;
+  border-color: transparent transparent @magenta-60 transparent;
+}
+
+x-bio.top .popup:after,
+x-gloss.top .popup:after {
+  top: calc(100% + 1px);
+  transform: rotate(180deg);
+}
+
+x-bio.left .popup:after,
+x-gloss.left .popup:after {
+  bottom: calc(100% + 1px);
+  right: 1rem;
+}
+
+x-bio.left.top .popup:after,
+x-gloss.left.top .popup:after {
+  top: calc(100% + 1px);
+  transform: rotate(180deg);
+  right: 1rem;
+}
+
+x-bio .popup p,
+x-gloss .popup p,
+x-bio .popup strong,
+x-gloss .popup strong {
+  font-size: 14px;
+  color: black;
+  line-height: 20px;
+}
