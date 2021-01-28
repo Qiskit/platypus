@@ -133,7 +133,6 @@ div.qiskit__navbar {
   position: initial;
 }
 .c-sidebar__section .connection {
-  // background: @qiskit-purple;
   height: calc(100% - 12px);
   left: 9px;
   pointer-events: none;
@@ -167,13 +166,13 @@ x-course article.c-textbook__page {
   max-width: initial;
 }
 x-step p a {
-  color: @qiskit-purple;
+  color: @purple-70;
 }
 x-step p a::before {
   background: none;
 }
 x-step p a:hover {
-  background-color: @qiskit-purple;
+  background-color: @purple-70;
   color: white;
 }
 x-step p a::after {
@@ -305,7 +304,7 @@ x-gloss .popup strong {
 }
 x-step .tabset > h2 {
   color: white;
-  background: @qiskit-blue;
+  background: @blue-60;
   display: inline-block;
   font-style: normal;
   font-weight: 600;
@@ -319,9 +318,9 @@ x-step .tabset h2 + x-tabbox {
   margin-top: -2px;
 }
 .tabset x-tabbox {
-  border-bottom: 2px solid @qiskit-blue;
-  border-top: 2px solid @qiskit-blue;
-  background: @qiskit-blueish-gray;
+  border-bottom: 2px solid @blue-60;
+  border-top: 2px solid @blue-60;
+  background: @gray-10;
 }
 .tabset x-tabbox > .titles {
   margin: 0;
@@ -338,11 +337,11 @@ x-step .tabset h2 + x-tabbox {
   padding: 0;
 }
 .tabset x-tabbox > .titles h3:hover {
-  color: @qiskit-blue;
+  color: @blue-60;
 }
 .tabset x-tabbox > .titles h3.active {
-  border-bottom: 2px solid @qiskit-blue;
-  color: @qiskit-blue;
+  border-bottom: 2px solid @blue-60;
+  color: @blue-60;
 }
 .tabset .body {
   background: initial;
@@ -374,18 +373,35 @@ x-step .tabset h2 + x-tabbox {
 }
 
 // Visual demo container
-x-step .tabset.demo > h2 {
-  background: @green;
+x-step .demopanel > h2 {
+  background: @green-30;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0;
+  min-width: 40%;
+  padding: 0.25em 1em;
 }
-.tabset.demo x-tabbox {
-  border-bottom-color: @green;
-  border-top-color: @green;
+x-step .demopanel > h3 {
+  margin: 0;
 }
-.tabset.demo x-tabbox > .titles {
-  display: none;
+x-step .demopanel .demobody {
+  border-bottom: 2px solid @green-30;
+  border-top: 2px solid @green-30;
+  background: @gray-10;
+  padding: 0.25em 1em;
+  margin-top: -2px;
 }
-.tabset.demo x-tabbox > .body,
-.tabset.demo x-tabbox .tab {
-  padding-top: 0;
-  min-height: initial;
+x-step .demopanel .demobody x-img .wrap {
+  height: initial;
+}
+x-step .demopanel .demobody x-img img {
+  display: inline-block;
+}
+
+// QV Overview
+.qv-overview x-img .wrap {
+  height: initial;
 }
