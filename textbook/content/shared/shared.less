@@ -372,3 +372,19 @@ x-step .tabset h2 + x-tabbox {
   max-height: 175px;
   max-width: 300px;
 }
+
+// Visual demo container
+x-step .tabset.demo > h2 {
+  background: @green;
+}
+.tabset.demo x-tabbox {
+  border-bottom-color: @green;
+  border-top-color: @green;
+}
+.tabset.demo x-tabbox > .titles {
+  display: none;
+}
+.tabset.demo x-tabbox > .body,
+.tabset.demo x-tabbox .tab {
+  padding-top: 0;
+}
