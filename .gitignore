@@ -9,6 +9,7 @@
 *.zip
 *.vi
 *~
+.ipynb_checkpoints
 
 # OS or Editor folders
 .DS_Store
@@ -30,3 +31,6 @@ node_modules
 build
 ts_build
 dist
+__pycache__
+*.egg-info
+working
