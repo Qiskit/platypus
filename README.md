@@ -4,7 +4,7 @@ Qiskit Textbook edu exploration
 
 ## pre-requisites
 
-1. Python environment with `textbook_converter` requirements installed
+1. Python (3.6 or later) environment with `textbook_converter` requirements installed
 
     ```
     $ cd qiskit-textbook-edu/textbook-converter
