@@ -19,4 +19,7 @@ $ npm run build
 $ npm start
 ```
 
-http://localhost:5000/
+> _To watch changes and rebuild automatically run with `npm run watch`_
+
+After the appilcation has started access the site at: http://localhost:5000/
+

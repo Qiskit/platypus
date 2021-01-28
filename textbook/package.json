@@ -8,7 +8,8 @@
     "server": "mathigon-server",
     "watch": "gulp watch",
     "build": "gulp --max-old-space-size=8192",
-    "start": "npm run build && npm-run-all --parallel server watch",
+    "start": "npm run build && npm run server",
+    "dev": "npm run build && npm-run-all --parallel server watch",
     "lint": "eslint . --ext .ts --fix"
   },
   "engines": {
