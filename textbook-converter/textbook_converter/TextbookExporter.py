@@ -9,9 +9,35 @@ from nbconvert.exporters import Exporter
 
 
 HERO_IMAGE_START = '![hero:'
+hero_regex = re.compile(r'^!\[hero:.*]\((.*)\)')
+
 VUE_COMPONENT_START = '![vue:'
+vue_regex = re.compile(r'^!\[vue:(.*)]\(.*\)')
+
 IMAGE_START = '!['
+img_regex = re.compile(r'^!\[.*]\((.*)\)')
+
 HEADING_START = '#'
+
+COMMENT_START = '<!--'
+comment_regex = re.compile(r'^<!--\s+(:::.*)\s+-->')
+
+
+def handle_block_comment(comment_syntax):
+    """Convert syntax from:
+
+        <!-- ::: block content -->
+
+        to this:
+
+        ::: block content
+    """
+    match = comment_regex.search(comment_syntax.lstrip())
+    if match is not None:
+        return match.group(1)
+    else:
+        return comment_syntax
+    pass
 
 
 def handle_vue_component(vue_component_syntax):
@@ -19,20 +45,20 @@ def handle_vue_component(vue_component_syntax):
 
         ![vue:some-component]()
 
-        to this:
+        to this (the indentation is required):
 
             div(data-vue-mount)
                 some-component
 
     """
-    return ''.join([
-        '\n',
-        '    div(data-vue-mount)',
-        '\n',
-        '         ',
-        re.search(r':.*]', vue_component_syntax).group()[1:-1],
-        '\n'
-    ])
+    match = vue_regex.search(vue_component_syntax.lstrip())
+    if match is not None:
+        return f'''
+    div(data-vue-mount)
+        {match.group(1)}
+        '''
+    else:
+        return vue_component_syntax
 
 
 def handle_images(image_syntax):
@@ -40,18 +66,18 @@ def handle_images(image_syntax):
 
         ![alt text](path/image)
 
-        to this:
+        to this (the indentation is required):
 
             figure: x-img(src="path/image")
 
     """
-    return ''.join([
-        '\n',
-        '    figure: x-img(src="',
-        re.search(r'\(.*\)', image_syntax).group()[1:-1],
-        '")'
-        '\n'
-    ])
+    match = img_regex.search(image_syntax.lstrip())
+    if match is not None:
+        return f'''
+    figure: x-img(src="{match.group(1)}")
+        '''
+    else:
+        return image_syntax
 
 
 def handle_hero_image(hero_image_syntax):
@@ -63,18 +89,17 @@ def handle_hero_image(hero_image_syntax):
 
         > hero: path/image
     """
-    return ''.join([
-        '> hero: ', re.search(r'\(.*\)', hero_image_syntax).group()[1:-1]
-    ])
+    match = hero_regex.search(hero_image_syntax.lstrip())
+    if match is not None:
+        return f'> hero: {match.group(1)}'
+    else:
+        return hero_image_syntax
 
 
 def handle_heading(heading_syntax):
-    """Increase heading level by one
+    """Increase heading level
     """
-    return ''.join([
-        '#', heading_syntax,
-        '\n'
-    ])
+    return f'#{heading_syntax}\n'
 
 
 def handle_markdown_cell(cell):
@@ -84,7 +109,9 @@ def handle_markdown_cell(cell):
     lines = cell.source.splitlines()
 
     for line in lines:
-        if line.lstrip().startswith(HERO_IMAGE_START):
+        if line.lstrip().startswith(COMMENT_START):
+            markdown_lines.append(handle_block_comment(line))
+        elif line.lstrip().startswith(HERO_IMAGE_START):
             markdown_lines.append(handle_hero_image(line))
         elif line.lstrip().startswith(VUE_COMPONENT_START): 
             markdown_lines.append(handle_vue_component(line))
