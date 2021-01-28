@@ -1,10 +1,13 @@
 {
   "scripts": {
+    "textbook-install": "cd textbook/ && npm install",
     "textbook-start": "cd textbook/ && npm run start",
     "textbook-watch": "cd textbook/ && npm run dev",
-    "ui-watch": "cd textbook-ui/ && npm run build",
+    "ui-install": "cd textbook-ui/ && npm install",
+    "ui-build": "cd textbook-ui/ && npm run build",
+    "ui-watch": "cd textbook-ui/ && npm run watch",
     "build": "cd textbook/ && npm install && cd ../textbook-ui && npm install",
-    "start": "npm run textbook-start",
+    "start": "npm-run-all --parallel textbook-start ui-watch",
     "watch": "npm-run-all --parallel textbook-watch ui-watch"
   },
   "dependencies": {},

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "vue-cli-service build --watch --target lib --name textbooklib src/main.ts",
+    "build": "vue-cli-service build --target lib --name textbooklib src/main.ts",
+    "watch": "vue-cli-service build --watch --target lib --name textbooklib src/main.ts",
     "build-wc": "vue-cli-service build --target wc --name textbooklib 'src/components/*.vue'"
   },
   "dependencies": {
