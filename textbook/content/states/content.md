@@ -99,12 +99,16 @@ This is how all information is represented in computers. Whether numbers, letter
 
 Like our standard digital computers, quantum computers are based on this same basic idea. The main difference is that they use qubits, an extension of the bit to quantum mechanics. In the rest of this textbook, we will explore what qubits are, what they can do, and how they do it. In this section, however, we are not talking about quantum at all. So, we just use qubits as if they were bits.
 
-::: .box.f-blue
+::: .tabset
 
-#### Quick Exercises
+### Quick Exercises
+
+::: tab
 
 1. Think of a number and try to write it down in binary.
 2. If you have _n_ bits, how many different states can they be in?
+
+:::
 
 :::
 
