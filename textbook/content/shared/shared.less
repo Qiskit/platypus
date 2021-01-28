@@ -150,8 +150,11 @@ x-step {
 [dir] x-step h2 {
   border-bottom: none;
   color: initial;
-  margin: 2em 0 0.5em;
+  margin-top: 2em 0 1rem 0;
   padding-bottom: initial;
+}
+[dir] x-step:first-child h2 {
+  margin-top: 2em;
 }
 [dir] x-step h3 {
   font-size: 1em;
@@ -287,4 +290,85 @@ x-gloss .popup strong {
   font-size: 14px;
   color: black;
   line-height: 20px;
+}
+
+// hero image
+.preface-summary > aside.preface-summary-image {
+  margin: initial;
+  margin-bottom: 75px;
+  float: initial;
+}
+
+// Tab container
+.tabset {
+  margin: 3rem 0;
+}
+x-step .tabset > h2 {
+  color: white;
+  background: @qiskit-blue;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  margin: 0;
+  min-width: 40%;
+  padding: 0.25em 1em;
+}
+x-step .tabset h2 + x-tabbox {
+  margin-top: -2px;
+}
+.tabset x-tabbox {
+  border-bottom: 2px solid @qiskit-blue;
+  border-top: 2px solid @qiskit-blue;
+  background: @qiskit-blueish-gray;
+}
+.tabset x-tabbox > .titles {
+  margin: 0;
+}
+.tabset x-tabbox > .titles h3 {
+  background: none;
+  border: none;
+  border-radius: initial;
+  height: 1.3rem;
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: initial;
+  margin: 0.5em 0.5em 0 1em;
+  padding: 0;
+}
+.tabset x-tabbox > .titles h3:hover {
+  color: @qiskit-blue;
+}
+.tabset x-tabbox > .titles h3.active {
+  border-bottom: 2px solid @qiskit-blue;
+  color: @qiskit-blue;
+}
+.tabset .body {
+  background: initial;
+}
+.tabset .tab:visible {
+  display: grid !important;
+}
+.tabset x-tabbox .tab {
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  padding-left: 1em;
+  position: relative;
+  min-height: 200px;
+}
+.tabset .tab > p {
+  display: inline-block;
+  width: 51%;
+}
+.tabset .tab > figure {
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  right: 20%;
+  top: 0;
+}
+.tabset .tab > figure img {
+  max-height: 175px;
+  max-width: 300px;
 }
