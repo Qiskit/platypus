@@ -107,7 +107,9 @@ app.use('/resources', express.static(CWD + '/content'));
 
 // allow specifying resources dir
 if (SETTINGS.directories && SETTINGS.directories.resources) {
-  app.use('/resources', express.static(`${CWD}${SETTINGS.directories.resources}`));
+  for (let res in SETTINGS.directories.resources) {
+    app.use('/resources', express.static(`${CWD}${SETTINGS.directories.resources[res]}`));
+  }
 }
 
 app.get('/', (req, res) => {
@@ -131,6 +133,10 @@ app.get('/course/:course/:section', (req, res, next) => {
   const section = course.getSection(req.params.section);
   if (!section) return next();
 
+  const hero = course.steps.find(s => s.hero && (section.id === s.section))
+  if (hero) {
+    section.hero = hero.hero
+  }
   // include courses data
   res.render('course', {courses: COURSES, course, section, lang, dir, settings: SETTINGS, getCourse});
 });

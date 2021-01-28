@@ -19,4 +19,6 @@ courses:
 
 directories:
   views: /../textbook-ui/views
-  resources: /../textbook-ui/dist
+  resources: 
+    - /../textbook-ui/dist
+    - /../textbook/notebooks
