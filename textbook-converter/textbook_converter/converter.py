@@ -42,6 +42,8 @@ def convert_notebook_node(nb_node, file_name, output_dir):
 
 
 def append_to_glossary_yaml(nb_node, yaml_output_path):
+    """Append 'gloss' metadata into 'glossary.yaml'
+    """
     glossary = {}
 
     for cell in nb_node.cells:
