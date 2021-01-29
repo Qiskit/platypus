@@ -28,9 +28,9 @@
 
 <script lang="ts">
 import { Options, mixins } from 'vue-class-component'
+import MenuMixin from '../mixins/menu'
 import AppLogo from './AppLogo.vue'
 import AppLink from './AppLink.vue'
-import MenuMixin from '../mixins/menu'
 
 @Options({
   components: { AppLink, AppLogo }

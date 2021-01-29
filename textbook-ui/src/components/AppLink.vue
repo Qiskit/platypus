@@ -10,12 +10,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options, prop } from 'vue-class-component'
+import { Vue, prop } from 'vue-class-component'
 
 class Props {
   url = prop({
     type: String, default: ''
   })
+
   isStatic = prop({
     type: Boolean, default: false
   })
@@ -27,15 +28,19 @@ export default class AppLink extends Vue.with(Props) {
   static isExternal (url: string): boolean {
     return url.startsWith('http')
   }
+
   static isMail (url: string): boolean {
     return url.startsWith('mailto')
   }
+
   static isIdAnchor (url: string): boolean {
     return url.startsWith('#')
   }
+
   get hasLink (): boolean {
     return !!this.url
   }
+
   get isAnchor (): boolean {
     const url = this.url
     return AppLink.isExternal(url) ||
@@ -43,9 +48,11 @@ export default class AppLink extends Vue.with(Props) {
       AppLink.isIdAnchor(url) ||
       this.isStatic
   }
+
   get isExternal (): boolean {
     return AppLink.isExternal(this.url)
   }
+
   get isNuxtLink (): boolean {
     return !this.isAnchor
   }
