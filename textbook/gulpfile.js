@@ -59,32 +59,21 @@ function nbtomd() {
     .pipe(exec(file => {
       const output_dir = `${__dirname}/working/${path.basename(file.path)}`
       const shared_dir = `${__dirname}/working/shared`
-      const converter = `textbook_converter ${file.path} -o ${output_dir} -s ${shared_dir}`
+      const toc = `${CWD}/notebooks/toc.yml`
+      const converter = `textbook_converter ${file.path} -o ${output_dir} -s ${shared_dir} -t ${toc}`
       return `cd ../textbook-converter && python -m ${converter}`
     }, {maxBuffer: 2048 * 1000}))
 }
 
-function joinmd() {
+// TODO: move this into textbook-converter
+function nbtomdupdate() {
   const toc = yaml.load(fs.readFileSync(CWD + '/notebooks/toc.yml'), 'utf8');
 
   return gulp.src(['working/*/', '!working/shared/'])
     .pipe(function (opt) {
       return through2.obj(function (file, enc, cb) {
         const content = toc.find(t => file.path.endsWith(t.url));
-        sections = [];
-
-        const concat = new Concat(false, `${file.path}/content.md`, '\n\n');
-
         if (content) {
-          concat.add(null, `# ${content.title}`);
-
-          for (var i in content.sections) {
-            let sectionFile = `${path.dirname(file.path)}${content.sections[i].url}.md`
-            let fileContent = (i > 0 ? '\n\n---\n' : '') + String(fs.readFileSync(sectionFile));
-            concat.add(null, fileContent);
-          }
-
-          fs.writeFileSync(path.join(file.path, 'content.md'), concat.content);
           fs.writeFileSync(path.join(file.path, 'styles.less'), '\n@import "../shared/shared";\n');
           fs.writeFileSync(path.join(file.path, 'function.ts'), '\nimport "../shared/shared";\n');
         }
@@ -102,7 +91,7 @@ exports.watch = () => {
   gulp.watch('content/**/*.{md,yaml}', gulp.series(movecontent, markdown));
   gulp.watch('content/**/*.ts', gulp.series(movecontent, scripts));
   gulp.watch('content/**/*.less', gulp.series(movecontent, stylesheets));
-  gulp.watch('notebooks/**/*.ipynb', gulp.series(nbtomd, joinmd, markdown));
+  gulp.watch('notebooks/**/*.ipynb', gulp.series(nbtomd, nbtomdupdate, markdown));
 };
 
-exports.default = gulp.series(clean, movecontent, nbtomd, joinmd, markdown, scripts, stylesheets);
+exports.default = gulp.series(clean, movecontent, nbtomd, nbtomdupdate, markdown, scripts, stylesheets);
