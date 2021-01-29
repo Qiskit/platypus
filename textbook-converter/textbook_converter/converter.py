@@ -57,6 +57,30 @@ def append_to_glossary_yaml(nb_node, yaml_output_path):
             glossary_file.write(f'\n\n{yaml.dump(content)}')
 
 
+def append_to_styles(nb_node, output_path):
+    """Create 'styles.less'
+    """
+    styles_file_path = os.path.join(output_path, 'styles.less')
+    styles_path = Path(styles_file_path).resolve()
+
+    if not styles_path.exists():
+        with open(styles_path, 'w') as styles_file:
+            styles_file.write('\n@import "../shared/shared";\n')
+
+
+def append_to_ts(nb_node, output_path):
+    """Create 'functions.ts'
+    """
+    ts_file_path = os.path.join(output_path, 'functions.ts')
+    ts_path = Path(ts_file_path).resolve()
+
+    if not ts_path.exists():
+        with open(ts_path, 'w') as ts_file:
+            ts_file.write('\nimport "../shared/shared";\n')
+
+
+
+
 def convert_notebook_file(nb_file_path, output_dir=None, yaml_output_dir=None):
     """Convert notebook file to Mathigon markdown format
     """
@@ -82,6 +106,12 @@ def convert_notebook_file(nb_file_path, output_dir=None, yaml_output_dir=None):
 
         print(f'updating glossary -> {yaml_output_path}')
         append_to_glossary_yaml(nb_node, yaml_output_path)
+
+        print(f'creating styles.less -> {output_path}')
+        append_to_styles(nb_node, output_path)
+
+        print(f'creating functions.ts -> {output_path}')
+        append_to_ts(nb_node, output_path)
 
 
 def convert_notebook_directory(

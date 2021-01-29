@@ -15,12 +15,8 @@ const autoprefixer = require('autoprefixer');
 const textbooks = require('@mathigon/parser').gulp;
 
 const exec = require('gulp-exec');
-const yaml = require('js-yaml');
-const through2 = require('through2');
-const Concat = require('concat-with-sourcemaps');
 const del = require('del');
 
-const fs = require('fs');
 const path = require('path');
 
 const CWD = process.cwd();
@@ -65,24 +61,6 @@ function nbtomd() {
     }, {maxBuffer: 2048 * 1000}))
 }
 
-// TODO: move this into textbook-converter
-function nbtomdupdate() {
-  const toc = yaml.load(fs.readFileSync(CWD + '/notebooks/toc.yml'), 'utf8');
-
-  return gulp.src(['working/*/', '!working/shared/'])
-    .pipe(function (opt) {
-      return through2.obj(function (file, enc, cb) {
-        const content = toc.find(t => file.path.endsWith(t.url));
-        if (content) {
-          fs.writeFileSync(path.join(file.path, 'styles.less'), '\n@import "../shared/shared";\n');
-          fs.writeFileSync(path.join(file.path, 'function.ts'), '\nimport "../shared/shared";\n');
-        }
-
-        cb();
-      });
-    }({}));
-}
-
 function movecontent() {
   return gulp.src(['content/**/*']).pipe(gulp.dest('working'));
 }
@@ -91,7 +69,7 @@ exports.watch = () => {
   gulp.watch('content/**/*.{md,yaml}', gulp.series(movecontent, markdown));
   gulp.watch('content/**/*.ts', gulp.series(movecontent, scripts));
   gulp.watch('content/**/*.less', gulp.series(movecontent, stylesheets));
-  gulp.watch('notebooks/**/*.ipynb', gulp.series(nbtomd, nbtomdupdate, markdown));
+  gulp.watch('notebooks/**/*.ipynb', gulp.series(nbtomd, markdown));
 };
 
-exports.default = gulp.series(clean, movecontent, nbtomd, nbtomdupdate, markdown, scripts, stylesheets);
+exports.default = gulp.series(clean, movecontent, nbtomd, markdown, scripts, stylesheets);
