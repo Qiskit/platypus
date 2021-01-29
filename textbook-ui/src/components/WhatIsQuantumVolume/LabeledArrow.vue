@@ -1,16 +1,16 @@
 <template>
   <div class="labeled-arrow">
-    <span class="labeled-arrow__label">{{label}}</span>
+    <span class="labeled-arrow__label">{{ label }}</span>
     <div class="labeled-arrow__arrow-container">
-      <SketchArrow class="labeled-arrow__arrow" :line="line" :drawSoftLines="false"/>
+      <SketchArrow class="labeled-arrow__arrow" :line="line" :draw-soft-lines="false" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Line, Point } from "@mathigon/euclid"
-import { Options, prop, Vue } from "vue-class-component"
-import SketchArrow from "../Sketch/SketchArrow.vue"
+import { Line, Point } from '@mathigon/euclid'
+import { Options, prop, Vue } from 'vue-class-component'
+import SketchArrow from '../Sketch/SketchArrow.vue'
 
 class Props {
   label = prop<String>({ required: true })

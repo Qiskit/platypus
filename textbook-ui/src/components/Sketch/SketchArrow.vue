@@ -1,15 +1,15 @@
 <template>
   <svg class="sketch-arrow" :width="width" :height="height">
-    <SketchLine :line="line" :hardLineExtraLengthInterval="[0, 0]" :drawSoftLines="drawSoftLines" />
-    <SketchLine :line="leftEdgeLine" :hardLineExtraLengthInterval="[0, 0]" :softLineExtraLengthInterval="[3, 5]" :drawSoftLines="drawSoftLines" />
-    <SketchLine :line="rightEdgeLine" :hardLineExtraLengthInterval="[0, 0]" :softLineExtraLengthInterval="[3, 5]" :drawSoftLines="drawSoftLines" />
+    <SketchLine :line="line" :hard-line-extra-length-interval="[0, 0]" :draw-soft-lines="drawSoftLines" />
+    <SketchLine :line="leftEdgeLine" :hard-line-extra-length-interval="[0, 0]" :soft-line-extra-length-interval="[3, 5]" :draw-soft-lines="drawSoftLines" />
+    <SketchLine :line="rightEdgeLine" :hard-line-extra-length-interval="[0, 0]" :soft-line-extra-length-interval="[3, 5]" :draw-soft-lines="drawSoftLines" />
   </svg>
 </template>
 
 <script lang="ts">
-import { Line, Point } from "@mathigon/euclid"
-import { Options, prop, Vue } from "vue-class-component"
-import SketchLine from "./SketchLine.vue"
+import { Line, Point } from '@mathigon/euclid'
+import { Options, prop, Vue } from 'vue-class-component'
+import SketchLine from './SketchLine.vue'
 
 class Props {
   line = prop<Line>({ default: new Line(new Point(0, 0), new Point(400, 0)) })
@@ -21,19 +21,19 @@ class Props {
     SketchLine
   },
   computed: {
-    leftEdgeLine() {
-      const lineOppsiteVector: Point = this.line.unitVector.scale(-1);
-      const linePerpendicularVector: Point = this.line.perpendicularVector;
-      const arrowEdgeDirection: Point = lineOppsiteVector.add(linePerpendicularVector).unitVector;
-      const unitVector: Point = arrowEdgeDirection.scale(10);
+    leftEdgeLine () {
+      const lineOppsiteVector: Point = this.line.unitVector.scale(-1)
+      const linePerpendicularVector: Point = this.line.perpendicularVector
+      const arrowEdgeDirection: Point = lineOppsiteVector.add(linePerpendicularVector).unitVector
+      const unitVector: Point = arrowEdgeDirection.scale(10)
 
       return new Line(this.line.p2, this.line.p2.add(unitVector))
     },
-    rightEdgeLine() {
-      const lineOppsiteVector: Point = this.line.unitVector.scale(-1);
-      const linePerpendicularVector: Point = this.line.perpendicularVector.scale(-1);
-      const arrowEdgeDirection: Point = lineOppsiteVector.add(linePerpendicularVector).unitVector;
-      const unitVector: Point = arrowEdgeDirection.scale(10);
+    rightEdgeLine () {
+      const lineOppsiteVector: Point = this.line.unitVector.scale(-1)
+      const linePerpendicularVector: Point = this.line.perpendicularVector.scale(-1)
+      const arrowEdgeDirection: Point = lineOppsiteVector.add(linePerpendicularVector).unitVector
+      const unitVector: Point = arrowEdgeDirection.scale(10)
 
       return new Line(this.line.p2, this.line.p2.add(unitVector))
     }

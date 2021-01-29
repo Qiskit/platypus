@@ -1,20 +1,22 @@
 <template>
   <div class="sketch-square">
-    <slot class="sketch-square__background" name="svg-background"></slot>
-    <div class="sketch-square__content"><slot/></div>
+    <slot class="sketch-square__background" name="svg-background" />
+    <div class="sketch-square__content">
+      <slot />
+    </div>
     <svg class="sketch-square__lines" :viewBox="`0 0 ${width} ${height}`" :width="width" :height="height">
-      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="true"/>
-      <SketchLine v-if="!hideLeft" :line="lines.left" :dashed="true"/>
-      <SketchLine v-if="!hideBottom" :line="lines.bottom" :dashed="true"/>
-      <SketchLine v-if="!hideRight" :line="lines.right" :dashed="true"/>
+      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="true" />
+      <SketchLine v-if="!hideLeft" :line="lines.left" :dashed="true" />
+      <SketchLine v-if="!hideBottom" :line="lines.bottom" :dashed="true" />
+      <SketchLine v-if="!hideRight" :line="lines.right" :dashed="true" />
     </svg>
   </div>
 </template>
 
 <script lang="ts">
-import { Line, Point } from "@mathigon/euclid"
-import { Options, prop, Vue } from "vue-class-component"
-import SketchLine from "./SketchLine.vue"
+import { Line, Point } from '@mathigon/euclid'
+import { Options, prop, Vue } from 'vue-class-component'
+import SketchLine from './SketchLine.vue'
 
 class Props {
   width = prop<Number>({ type: Number, default: 105 })
@@ -31,7 +33,7 @@ class Props {
     SketchLine
   },
   computed: {
-    lines() {
+    lines () {
       const w = parseInt(this.width)
       const h = parseInt(this.height)
       return {
