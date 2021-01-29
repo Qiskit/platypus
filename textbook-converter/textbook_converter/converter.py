@@ -1,4 +1,6 @@
+import json
 import nbformat
+import yaml
 
 from pathlib import Path
 from nbconvert.writers import FilesWriter
@@ -18,14 +20,13 @@ def get_notebook_node(nb_file_path):
     return None
 
 
-def convert_notebook_node(nb_node, file_name, output_dir, yaml_output_dir=None):
+def convert_notebook_node(nb_node, file_name, output_dir):
     """Convert notebook node
     """
     try:
         exporter = TextbookExporter()
-        yaml_output_dir = yaml_output_dir if yaml_output_dir else output_dir
 
-        (body, resources) = exporter.from_notebook_node(nb_node, yaml_output_dir=yaml_output_dir)
+        (body, resources) = exporter.from_notebook_node(nb_node)
 
         writer = FilesWriter()
         writer.build_directory = output_dir
@@ -40,6 +41,19 @@ def convert_notebook_node(nb_node, file_name, output_dir, yaml_output_dir=None):
     return None
 
 
+def append_to_glossary_yaml(nb_node, yaml_output_path):
+    glossary = {}
+
+    for cell in nb_node.cells:
+        if cell.cell_type == 'markdown' and 'gloss' in cell.metadata:
+            gloss_data = cell.metadata['gloss']
+            glossary.update(gloss_data)
+
+    if glossary:
+        with open(f'{yaml_output_path}/glossary.yaml', 'a') as f:
+            f.write('\n' + yaml.dump(yaml.load(json.dumps(glossary), Loader=yaml.BaseLoader)))
+
+
 def convert_notebook(nb_file_path, output_dir='', output_file_name=None, yaml_output_dir=None):
     """Convert notebook to Mathigon markdown format
     """
@@ -50,15 +64,17 @@ def convert_notebook(nb_file_path, output_dir='', output_file_name=None, yaml_ou
         return None
 
     nb_path = nb_path.resolve()
-
-    file_name = output_file_name if output_file_name else nb_path.stem
-    output_path = output_dir if output_dir else str(nb_path.parent)
-    yaml_output_path = yaml_output_dir if yaml_output_dir else None
-
     nb_node = get_notebook_node(str(nb_path))
 
     if nb_node:
-        print('converting', file_name, output_path, yaml_output_path)
-        convert_notebook_node(nb_node, file_name, output_path, yaml_output_dir=yaml_output_path)
+        file_name = output_file_name if output_file_name else nb_path.stem
+        output_path = output_dir if output_dir else str(nb_path.parent)
+        yaml_output_path = yaml_output_dir if yaml_output_dir else output_path
+
+        print(f'converting {file_name} -> {output_path}')
+        convert_notebook_node(nb_node, file_name, output_path)
+
+        print(f'updating glossary -> {yaml_output_path}')
+        append_to_glossary_yaml(nb_node, yaml_output_path)
 
     return None
