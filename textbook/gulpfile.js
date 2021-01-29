@@ -55,10 +55,12 @@ function stylesheets() {
 }
 
 function nbtomd() {
-  return gulp.src(['notebooks/*/*.ipynb', '!notebooks/shared/'])
+  return gulp.src(['notebooks/*/', '!notebooks/shared'])
     .pipe(exec(file => {
-      const parent = path.basename(path.dirname(file.path))
-      return `cd ../textbook-converter && python -m textbook_converter ${file.path} ${__dirname}/working/${parent} ${__dirname}/working/shared`
+      const output_dir = `${__dirname}/working/${path.basename(file.path)}`
+      const shared_dir = `${__dirname}/working/shared`
+      const converter = `textbook_converter ${file.path} -o ${output_dir} -s ${shared_dir}`
+      return `cd ../textbook-converter && python -m ${converter}`
     }, {maxBuffer: 2048 * 1000}))
 }
 

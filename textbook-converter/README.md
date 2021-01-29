@@ -12,7 +12,7 @@ python setup.py install
 ## Usage
 
 ```
-python -m textbook_converter path/to/notebook.ipynb optional/output/path
+python -m textbook_converter path/to/notebook.ipynb -o optional/output/path
 ```
 
 or
