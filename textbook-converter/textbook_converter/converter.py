@@ -1,6 +1,6 @@
-import json
 import nbformat
 import os
+import shutil
 import yaml
 
 from pathlib import Path
@@ -26,8 +26,13 @@ def convert_notebook_node(nb_node, file_name, output_dir):
     """
     try:
         exporter = TextbookExporter()
+        resources = {
+            'textbook': {
+                'id': file_name
+            }
+        }
 
-        (body, resources) = exporter.from_notebook_node(nb_node)
+        (body, resources) = exporter.from_notebook_node(nb_node, resources=resources)
 
         writer = FilesWriter()
         writer.build_directory = output_dir
@@ -36,25 +41,20 @@ def convert_notebook_node(nb_node, file_name, output_dir):
             resources=resources, 
             notebook_name=file_name
         )
+
+        return (body, resources)
     except Exception as err:
         print(f'Error exporting notebook: {err}')
+        return None, None
 
 
-def append_to_glossary_yaml(nb_node, yaml_output_path):
+def append_to_glossary_yaml(resources, yaml_output_path):
     """Append 'gloss' metadata into 'glossary.yaml'
     """
-    glossary = {}
-
-    for cell in nb_node.cells:
-        if cell.cell_type == 'markdown' and 'gloss' in cell.metadata:
-            gloss_data = cell.metadata['gloss']
-            glossary.update(gloss_data)
-
-    if glossary:
+    if 'textbook' in resources and 'glossary' in resources['textbook']:
         glossary_file_path = os.path.join(yaml_output_path, 'glossary.yaml')
         with open(glossary_file_path, 'a') as glossary_file:
-            content = yaml.load(json.dumps(glossary), Loader=yaml.BaseLoader)
-            glossary_file.write(f'\n\n{yaml.dump(content)}')
+            glossary_file.write(f'\n\n{resources["textbook"]["glossary"]}')
 
 
 def append_to_styles(nb_node, output_path):
@@ -68,17 +68,23 @@ def append_to_styles(nb_node, output_path):
             styles_file.write('\n@import "../shared/shared";\n')
 
 
-def append_to_ts(nb_node, output_path):
-    """Create 'functions.ts'
+def append_to_ts(resources, source_path, output_path):
+    """Create and append to 'functions.ts'
     """
     ts_file_path = os.path.join(output_path, 'functions.ts')
     ts_path = Path(ts_file_path).resolve()
 
     if not ts_path.exists():
-        with open(ts_path, 'w') as ts_file:
-            ts_file.write('\nimport "../shared/shared";\n')
+        src_ts_file_path = Path(os.path.join(source_path, 'functions.ts')).resolve()
+        if not src_ts_file_path.exists():
+            with open(ts_path, 'w') as ts_file:
+                ts_file.write('import {qiskitScore} from "../shared/shared";\n')
+        else:
+            shutil.copy(str(src_ts_file_path), str(ts_path))
 
-
+    if 'textbook' in resources and 'functions' in resources['textbook']:
+        with open(ts_path, 'a') as ts_file:
+            ts_file.write(f'\n\n{resources["textbook"]["functions"]}')
 
 
 def convert_notebook_file(nb_file_path, output_dir=None, yaml_output_dir=None):
@@ -102,16 +108,17 @@ def convert_notebook_file(nb_file_path, output_dir=None, yaml_output_dir=None):
         yaml_output_path = yaml_output_dir if yaml_output_dir else output_path
 
         print(f'converting: {file_name} -> {output_path}')
-        convert_notebook_node(nb_node, file_name, output_path)
+        (body, resources) = convert_notebook_node(nb_node, file_name, output_path)
 
-        print(f'updating glossary -> {yaml_output_path}')
-        append_to_glossary_yaml(nb_node, yaml_output_path)
+        if body:
+            print(f'updating glossary -> {yaml_output_path}')
+            append_to_glossary_yaml(resources, yaml_output_path)
 
-        print(f'creating styles.less -> {output_path}')
-        append_to_styles(nb_node, output_path)
+            print(f'updating styles.less -> {output_path}')
+            append_to_styles(nb_node, output_path)
 
-        print(f'creating functions.ts -> {output_path}')
-        append_to_ts(nb_node, output_path)
+            print(f'updating functions.ts -> {output_path}')
+            append_to_ts(resources, str(nb_path.parent), output_path)
 
 
 def convert_notebook_directory(

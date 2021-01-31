@@ -1,4 +1,6 @@
+import json
 import re
+import yaml
 
 from nbconvert.exporters import Exporter
 
@@ -16,6 +18,29 @@ HEADING_START = '#'
 
 COMMENT_START = '<!--'
 comment_regex = re.compile(r'^<!--\s+(:::.*)\s+-->')
+
+
+JS_CLICK_GOAL = """
+  setTimeout(() => {{
+    const {elt} = $section.$("{selector}");
+    {elt}.on("click", () => {{
+        qiskitScore($section, ["{id}"]);
+    }});
+  }}, 250);
+"""
+
+JS_VALUE_GOAL = """
+  setTimeout(() => {{
+    const {elt} = $section.$("{selector}");
+    {elt}.on("change", () => {{
+        if ({elt}.value === "{value}") {{
+            qiskitScore($section, ["{id}"]);
+        }} else if ("{value}" === "checked" && {elt}.checked) {{
+            qiskitScore($section, ["{id}"]);
+        }}
+    }});
+  }}, 250);
+"""
 
 
 def handle_block_comment(comment_syntax):
@@ -139,6 +164,61 @@ def handle_code_cell(cell):
     ])
 
 
+def handle_cell_glossary(cell, resources={}):
+    """Convert 'gloss' dictionary to yaml (string)
+    """
+    if 'gloss' in cell.metadata and cell.metadata['gloss']:
+        glossary = cell.metadata['gloss']
+        content = yaml.load(json.dumps(glossary), Loader=yaml.BaseLoader)
+
+        if 'textbook' not in resources:
+            resources['textbook'] = {}
+        if 'glossary' not in resources['textbook']:
+            resources['textbook']['glossary'] = ''
+
+        resources['textbook']['glossary'] += f'{yaml.dump(content)}\n'
+
+    return resources
+
+
+def handle_cell_goals(id, cell, resources={}):
+    """Convert 'goals' dictionary to javascript function (string)
+    """
+    goals = set([])
+
+    if 'goals' in cell.metadata and cell.metadata['goals']:
+        goals_meta = cell.metadata['goals']
+        actions = [f'export function {id}($section: Step) {{ ']
+
+        for count, goal in enumerate(goals_meta):
+            if 'click' in goal:
+                actions.append(JS_CLICK_GOAL.format(
+                    elt='elt' + str(count),
+                    selector=goal['selector'],
+                    id=goal['id']
+                ))
+                goals.add(goal['id'])
+            if 'value' in goal:
+                actions.append(JS_VALUE_GOAL.format(
+                    elt='elt'+ str(count),
+                    selector=goal['selector'],
+                    id=goal['id'],
+                    value=goal['value']
+                ))
+                goals.add(goal['id'])
+
+        actions.append(' }\n')
+
+        if 'textbook' not in resources:
+            resources['textbook'] = {}
+        if 'functions' not in resources['textbook']:
+            resources['textbook']['functions'] = ''
+
+        resources['textbook']['functions'] += '\n'.join(actions)
+
+    return list(goals), resources
+
+
 class TextbookExporter(Exporter):
     output_mimetype = 'text/markdown'
 
@@ -151,10 +231,28 @@ class TextbookExporter(Exporter):
         nb_copy, resources = super().from_notebook_node(nb, resources)
 
         markdown_lines = []
+        prefix = ''
 
-        for cell in nb_copy.cells:
+        if 'textbook' not in resources:
+            resources['textbook'] = {}
+        if 'id' in resources['textbook']:
+            id = resources['textbook']['id']
+            prefix = re.compile('[^a-zA-Z]').sub('', id).lower()
+
+        for count, cell in enumerate(nb_copy.cells):
+            id = prefix + str(count)
             if cell.cell_type == 'markdown':
+                resources = handle_cell_glossary(cell, resources)
+                goals, resources = handle_cell_goals(id, cell, resources)
+
+                if goals:
+                    markdown_lines.append(f'\n---\n> id: {id}')
+                    markdown_lines.append(f'\n> goals: {" ".join(goals)}\n\n')
+
                 markdown_lines.append(handle_markdown_cell(cell))
+
+                if goals:
+                    markdown_lines.append(f'\n\n---\n')
             elif cell.cell_type == 'code' and cell.source.strip():
                 markdown_lines.append(handle_code_cell(cell))
 
