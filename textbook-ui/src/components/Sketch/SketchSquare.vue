@@ -5,10 +5,10 @@
       <slot />
     </div>
     <svg class="sketch-square__lines" :viewBox="`0 0 ${width} ${height}`" :width="width" :height="height">
-      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="true" />
-      <SketchLine v-if="!hideLeft" :line="lines.left" :dashed="true" />
-      <SketchLine v-if="!hideBottom" :line="lines.bottom" :dashed="true" />
-      <SketchLine v-if="!hideRight" :line="lines.right" :dashed="true" />
+      <SketchLine v-if="!hideTop" :line="lines.top" :dashed="dashed" />
+      <SketchLine v-if="!hideLeft" :line="lines.left" :dashed="dashed" />
+      <SketchLine v-if="!hideBottom" :line="lines.bottom" :dashed="dashed" />
+      <SketchLine v-if="!hideRight" :line="lines.right" :dashed="dashed" />
     </svg>
   </div>
 </template>
@@ -26,6 +26,8 @@ class Props {
   hideRight = prop<boolean>({ default: false })
   hideBottom = prop<boolean>({ default: false })
   hideLeft = prop<boolean>({ default: false })
+
+  dashed = prop<boolean>({ default: false })
 }
 
 @Options({

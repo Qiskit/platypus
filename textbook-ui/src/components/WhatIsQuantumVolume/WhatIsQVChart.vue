@@ -47,6 +47,7 @@
         :height="450 - i * 85"
         :hide-left="true"
         :hide-bottom="true"
+        :dashed="true"
       >
         <div class="what-is-qv-chart__square__content">
           <span class="what-is-qv-chart__square__text">QV {{ Math.pow(2, 5 - i) }}</span>
@@ -67,12 +68,38 @@
           <MarkerArea
             v-for="(m, j) in 5 - i"
             :key="m"
-            :class="`what-is-qv-chart__square__layer what-is-qv-chart__square__layer_${j}`"
+            :class="[
+              'what-is-qv-chart__square__layer',
+              `what-is-qv-chart__square__layer_${j}`,
+              {'what-is-qv-chart__square__layer_hovering': hovering }
+            ]"
             :marker-mask-id="`marker-uid${uid}`"
-            :fill-id="`bluePurpleGrad0-uid${uid}`"
+            :fill-id="`bluePurpleGrad${i}-uid${uid}`"
             :width="50"
             :height="400 - i * 85"
+            @mouseover="hover"
+            @mouseleave="leave"
           />
+          <SketchSquare
+            v-for="(m, j) in (i == 0 ? 5 : 0)"
+            :key="m"
+            :class="`what-is-qv-chart__square__unitary what-is-qv-chart__square__unitary_col-${j}`"
+            :width="100"
+            :height="45 + 85 * (gatesConfig[j][0].q2 - gatesConfig[j][0].q1)"
+            :style="`top: ${25 + 85 * gatesConfig[j][0].q1}px; visibility: ${j == 2? 'visible' : 'hidden'}`"
+          >
+            Unitary
+          </SketchSquare>
+          <SketchSquare
+            v-for="(m, j) in (i == 0 ? 5 : 0)"
+            :key="m"
+            :class="`what-is-qv-chart__square__unitary what-is-qv-chart__square__unitary_col-${j}`"
+            :width="100"
+            :height="45 + 85 * (gatesConfig[j][1].q2 - gatesConfig[j][1].q1)"
+            :style="`top: ${25 + 85 * gatesConfig[j][1].q1}px; visibility: ${j == 2? 'visible' : 'hidden'}`"
+          >
+            Unitary
+          </SketchSquare>
           <span class="what-is-qv-chart__square__tooltip">{{ tooltip[4 - n] }}</span>
         </div>
       </SketchSquare>
@@ -117,14 +144,45 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     new Line(new Point(0, 0), new Point(153, 0))
   ]
 
+  gatesConfig = [
+    [
+      { q1: 0, q2: 1 },
+      { q1: 2, q2: 3 }
+    ],
+    [
+      { q1: 0, q2: 1 },
+      { q1: 2, q2: 3 }
+    ],
+    [
+      { q1: 0, q2: 1 },
+      { q1: 2, q2: 3 }
+    ],
+    [
+      { q1: 0, q2: 1 },
+      { q1: 2, q2: 3 }
+    ],
+    [
+      { q1: 0, q2: 1 },
+      { q1: 2, q2: 3 }
+    ]
+  ]
+
   axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
   axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
 
   uid = Math.random().toString().replace('.', '')
+  hovering = false;
+
+  hover () {
+    this.hovering = true
+  }
+
+  leave () {
+    this.hovering = false
+  }
 }
 </script>
 <style scoped lang="scss">
-
 .what-is-qv-chart {
   position: relative;
   margin: 0 auto;
@@ -134,6 +192,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
   &__axis {
     width: 550px;
     height: 510px;
+    pointer-events: none;
 
     &__arrow {
       position: absolute;
@@ -229,11 +288,16 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       position: absolute;
       top: 15px;
       right: $layer-start;
+      transition: transform 0.3s ease-out;
 
       @for $i from 0 to 5 {
         &_#{$i} {
           right: $layer-start + ($layer-width + $layer-gap) * $i;
+          --layer-index: #{$i};
         }
+      }
+      &_hovering {
+        --layer-hovering: 1;
       }
     }
 
@@ -271,6 +335,25 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
 
+    &__unitary {
+      position: absolute;
+      right: $layer-start;
+      pointer-events: none;
+      opacity: 0;
+
+      & :deep() .sketch-square__content {
+        background-color: white;
+        padding: 50% 25px;
+        text-align: center;
+      }
+
+      @for $i from 0 to 5 {
+        &_col-#{$i} {
+          right: $layer-start + ($layer-width + $layer-gap) * $i;
+        }
+      }
+    }
+
   }
 
 //////////////////
@@ -293,6 +376,15 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     @keyframes crescentQVAnimation {
       from { transform: translate(-50%, 50%) scale(0.4) translate(50%, -50%); }
       to { transform: translate(-50%, 50%) scale(1) translate(50%, -50%); }
+    }
+
+    @keyframes linesDisplay {
+      from {
+        stroke-dashoffset: 500;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
     &-1 {
@@ -380,7 +472,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     }
 
     &-4 {
-      :deep() .sketch-square {
+      #{$root}__square :deep() > .sketch-square {
         &__lines {
           transition: opacity 0.5s ease-out;
           opacity: 0;
@@ -391,11 +483,10 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         }
       }
 
-      #{$root}__content {
-        pointer-events: none;
-      }
-
       #{$root}__square {
+        &__content:hover :deep() #{$root}__square__tooltip {
+          display: none;
+        }
         &__ket0 {
           transition: opacity 0.5s ease-out 0.5s;
           opacity: 1;
@@ -408,6 +499,38 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
           &4, &8, &16 {
             transition: opacity 0.5s ease-out;
             opacity: 0;
+            pointer-events: none;
+          }
+        }
+
+        &__layer {
+          --displacement_1: calc(var(--layer-index) * var(--layer-before, 1) * 100% + var(--layer-before, 1) * 25%);
+          --displacement_2: calc((4 - var(--layer-index)) * (1 - var(--layer-before, 1)) * -100% - (1 - var(--layer-before, 1)) * 25%);
+          --displacement: calc(var(--displacement_1) + var(--displacement_2));
+          transform: translateX(calc(var(--layer-hovering, 0) * var(--displacement))) scaleX(calc(calc(2 - var(--layer-hovering, 0))/2));
+        }
+
+        &__layer:hover {
+          transform: translateX(calc((2 - var(--layer-index)) * -100%)) scaleX(4);
+        }
+
+        &__layer:hover ~ #{$root}__square__layer {
+          --layer-before: 0;
+          //transform: scaleX(var(--layer-scale, 1));
+        }
+
+        &__layer:hover ~ #{$root}__square__unitary {
+          opacity: 1;
+
+          & :deep() .sketch-square__content {
+            opacity: 0;
+            animation: 0.2s ease-out 0.5s fadeIn;
+            animation-fill-mode: forwards;
+          }
+          & :deep() .sketch-line-path {
+            stroke-dasharray: 500;
+            animation: 3s ease-out 0s linesDisplay;
+            animation-fill-mode: forwards;
           }
         }
       }

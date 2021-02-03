@@ -1,5 +1,5 @@
 doctype html
-html(lang=lang dir=dir)
+html(lang=lang dir=dir).ready
   head
     include ../includes/head.html
     link(href=`/resources/getting-started/styles.css` rel="stylesheet")
@@ -14,6 +14,8 @@ html(lang=lang dir=dir)
         include ../includes/sidebar.pug
 
         main.c-textbook__page
+          div.qiskit__qv-visual#what-is-quantum-volume(data-vue-mount)
+            what-is-quantum-volume
           div.c-textbook__content#textbook_content
             main.jupyter-page
               #page-info
