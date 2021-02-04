@@ -24,7 +24,7 @@
     "@mathigon/hilbert": "^0.6.1"
   },
   "devDependencies": {
-    "@mathigon/parser": "^0.6.2",
+    "@mathigon/parser": "file:../parser",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
