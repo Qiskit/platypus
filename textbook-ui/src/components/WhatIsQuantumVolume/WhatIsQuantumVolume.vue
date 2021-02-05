@@ -3,7 +3,6 @@
     <p class="what-is-qv__text">
       {{ stepDescription[selectedInt] }}
     </p>
-    <!--LayersCircuit :lines="5" :layers="5" /-->
     <WhatIsQVChart class="what-is-qv__chart" :state="selectedInt" :tooltip="tooltipHoverTexts" />
     <DotsSelector class="what-is-qv__selector" :count="6" @onSelectedChange="value => selectedInt = value" />
   </section>

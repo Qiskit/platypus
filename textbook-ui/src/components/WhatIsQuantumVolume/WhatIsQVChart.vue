@@ -56,6 +56,7 @@
             :layers="5 - i"
             :gradient-color="gradientColors[i]"
             :enable-inspection="inspectable(i)"
+            :gates-config="gatesConfig"
           />
           <!--Ket0
             v-for="(m, j) in 5 - i"
@@ -152,53 +153,37 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     ['#CEBDFE', '#D0B2FE']
   ]
 
-  inspectable (idx: number) {
-    return idx === 0 && this.state === 4
-  }
-
-  horizontalLineQV = [
-    new Line(new Point(0, 0), new Point(408, 0)),
-    new Line(new Point(0, 0), new Point(323, 0)),
-    new Line(new Point(0, 0), new Point(238, 0)),
-    new Line(new Point(0, 0), new Point(153, 0))
-  ]
-
   gatesConfig = [
     [
       { q1: 0, q2: 1 },
       { q1: 2, q2: 3 }
     ],
     [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
+      { q1: 0, q2: 3 },
+      { q1: 3, q2: 4 }
     ],
     [
       { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
+      { q1: 3, q2: 4 }
     ],
     [
       { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
+      { q1: 2, q2: 4 }
     ],
     [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
+      { q1: 0, q2: 4 },
+      { q1: 3, q2: 4 }
     ]
   ]
+
+  inspectable (idx: number) {
+    return idx === 0 && this.state === 4
+  }
 
   axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
   axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
 
   uid = Math.random().toString().replace('.', '')
-  hovering = false;
-
-  hover () {
-    this.hovering = true
-  }
-
-  leave () {
-    this.hovering = false
-  }
 }
 </script>
 <!--style scoped lang="scss">

@@ -50,16 +50,13 @@
         class="layers-circuit__qv-layer"
         :class="{'layers-circuit__qv-layer_inspectable': enableInspection }"
       >
-        <div
-          class="layers-circuit__qv-layer-content"
+        <SketchSquare
+          class="layers-circuit__qv-layer-content-wrapper"
+          :width="inspectionWidth(j)"
+          :height="layersHeight"
           :style="`--center-distance: ${normalizedCenterDistance(j)}; --inspection-width: ${inspectionWidth(j)}px;`"
         >
-          <!--SketchSquare
-            class="layers-circuit__qv-layer__unitary"
-            :width="100"
-            :height="gateHeight(j, 1)"
-            :style="gatePositionStyle(j, 1)"
-          -->
+          <div class="layers-circuit__qv-layer-content">
             <MarkerArea
               class="layers-circuit__qv-layer__layer-square"
               :marker-mask-id="`marker-uid${uid}`"
@@ -67,7 +64,6 @@
               :width="inspectionWidth(j)"
               :height="layersHeight"
             />
-
             <SketchSquare
               class="layers-circuit__qv-layer__unitary"
               :width="100"
@@ -104,8 +100,8 @@
                 </div>
               </div>
             </SketchSquare>
-          <!--/SketchSquare-->
-        </div>
+          </div>
+        </SketchSquare>
       </div>
       <div class="layers-circuit__veil" />
     </div>
@@ -120,12 +116,17 @@ import SketchSquare from '../Sketch/SketchSquare.vue'
 import MarkerArea from '../Sketch/MarkerArea.vue'
 import Ket0 from '../Sketch/Ket0.vue'
 
+type LayerUnitary = {
+  q1: number;
+  q2: number;
+};
+
 class Props {
   lines = prop<Number>({ default: 5 })
   layers = prop<Number>({ default: 5 })
   gradientColor = prop<Array<string>>({ default: ['#78A9FF', '#8A3FFC'], validator: (val: Array<string>) => val.length === 2 })
   enableInspection = prop<boolean>({ default: true })
-  // gatesConfig = prop<Array<Array<Object>>>({ })
+  gatesConfig = prop<Array<Array<LayerUnitary>>>({ })
 }
 
 @Options({
@@ -141,11 +142,12 @@ class Props {
       return new Point(dim, dim)
     },
     layersHeight (): number {
-      return this.lines as number * 85 - 25
+      return this.lines as number * 85 - 10
     }
   }
 })
 export default class LayersCircuit extends Vue.with(Props) {
+  uid = Math.random().toString().replace('.', '')
   circuitLine = new Line(new Point(0, 0), new Point((this.layers as number - 1) * 85 + 68, 0))
 
   normalizedCenterDistance (idx: number) : number {
@@ -154,10 +156,16 @@ export default class LayersCircuit extends Vue.with(Props) {
   }
 
   gateHeight (configIdx: number, gateIdx: number) : number {
-    return 55 + 85 * (this.gatesConfig[configIdx][gateIdx].q2 - this.gatesConfig[configIdx][gateIdx].q1)
+    if (!this.gatesConfig) {
+      return 0
+    }
+    return 50 + 85 * (this.gatesConfig[configIdx][gateIdx].q2 - this.gatesConfig[configIdx][gateIdx].q1)
   }
 
   gatePositionStyle (configIdx: number, gateIdx: number) : string {
+    if (!this.gatesConfig) {
+      return ''
+    }
     let style = `top: ${15 + 85 * this.gatesConfig[configIdx][gateIdx].q1}px;`
     if (this.gatesOverlaping(configIdx)) {
       style += gateIdx === 0 ? 'transform: translateX(60px);' : 'transform: translateX(-60px)'
@@ -170,6 +178,9 @@ export default class LayersCircuit extends Vue.with(Props) {
   }
 
   gatesOverlaping (configIdx: number) : boolean {
+    if (!this.gatesConfig) {
+      return false
+    }
     const config = this.gatesConfig[configIdx]
     const u0 = config[0]
     const u1 = config[1]
@@ -179,52 +190,9 @@ export default class LayersCircuit extends Vue.with(Props) {
       u0.q1 === u1.q1 || u0.q1 === u1.q2 ||
       u0.q2 === u1.q1 || u0.q2 === u1.q2
   }
-
-  gatesConfig = [
-    [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
-    ],
-    [
-      { q1: 0, q2: 2 },
-      { q1: 2, q2: 3 }
-    ],
-    [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
-    ],
-    [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
-    ],
-    [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
-    ]
-  ]
-
-  axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
-  axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
-
-  uid = Math.random().toString().replace('.', '')
-  hovering = false;
-
-  hover () {
-    this.hovering = true
-  }
-
-  leave () {
-    this.hovering = false
-  }
 }
 </script>
 <style scoped lang="scss">
-/*
-@keyframes linesDisplay {
-  from { stroke-dashoffset: 500; }
-  to { stroke-dashoffset: 0; }
-}
-*/
 
 .layers-circuit {
   position: relative;
@@ -280,15 +248,39 @@ export default class LayersCircuit extends Vue.with(Props) {
       left: 0px;
       display: flex;
       justify-content: center;
-      //box-shadow: 0 0 5px 0 black;
+      z-index: 0;
+    }
+    &-content-wrapper {
+      position: relative;
+      transition: left 0.5s ease-out, z-index 0.5s ease-out;
+      width: 50px;
+      left: 0px;
+      display: flex;
+      justify-content: center;
       z-index: 0;
 
+      :deep() > .sketch-square__lines {
+        transition: opacity 0s ease-out 0s;
+        opacity: 0;
+      }
+      :deep() > .sketch-square__content {
+        box-shadow: none;
+        width: auto;
+      }
     }
-    &_inspectable:hover #{&}-content {
+
+    &_inspectable:hover #{&}-content-wrapper, &_inspectable:hover #{&}-content {
       width: var(--inspection-width, 150px);
       --semi-extra-width: calc((var(--inspection-width, 150px) - 50px) / 2);
+    }
+    &_inspectable:hover #{&}-content-wrapper {
       left: calc((var(--semi-extra-width) + var(--center-distance, 0) * (var(--semi-extra-width) - 20px)) * -1 );
       z-index: 10;
+
+      :deep() .sketch-square__lines {
+        transition: opacity 0.2s ease-out 0.5s;
+        opacity: 1;
+      }
     }
 
     &__layer-square {
