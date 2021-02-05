@@ -51,7 +51,13 @@
       >
         <div class="what-is-qv-chart__square__content">
           <span class="what-is-qv-chart__square__text">QV {{ Math.pow(2, 5 - i) }}</span>
-          <Ket0
+          <LayersCircuit
+            :lines="5 - i"
+            :layers="5 - i"
+            :gradient-color="gradientColors[i]"
+            :enable-inspection="inspectable(i)"
+          />
+          <!--Ket0
             v-for="(m, j) in 5 - i"
             :key="m"
             :class="`what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_${j}`"
@@ -99,7 +105,7 @@
             :style="`top: ${25 + 85 * gatesConfig[j][1].q1}px; visibility: ${j == 2? 'visible' : 'hidden'}`"
           >
             Unitary
-          </SketchSquare>
+          </SketchSquare-->
           <span class="what-is-qv-chart__square__tooltip">{{ tooltip[4 - n] }}</span>
         </div>
       </SketchSquare>
@@ -115,6 +121,7 @@ import SketchLine from '../Sketch/SketchLine.vue'
 import MarkerArea from '../Sketch/MarkerArea.vue'
 import Ket0 from '../Sketch/Ket0.vue'
 import LabeledArrow from './LabeledArrow.vue'
+import LayersCircuit from './LayersCircuit.vue'
 
 class Props {
   state = prop<Number>({ default: 0 })
@@ -127,6 +134,7 @@ class Props {
     SketchLine,
     MarkerArea,
     LabeledArrow,
+    LayersCircuit,
     Ket0
   },
   computed: {
@@ -137,6 +145,17 @@ class Props {
 })
 
 export default class WhatIsQuantumChart extends Vue.with(Props) {
+  gradientColors = [
+    ['#78A9FF', '#8A3FFC'],
+    ['#95AAFE', '#A165FD'],
+    ['#B3AEFE', '#B98CFD'],
+    ['#CEBDFE', '#D0B2FE']
+  ]
+
+  inspectable (idx: number) {
+    return idx === 0 && this.state === 4
+  }
+
   horizontalLineQV = [
     new Line(new Point(0, 0), new Point(408, 0)),
     new Line(new Point(0, 0), new Point(323, 0)),
@@ -182,6 +201,107 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
   }
 }
 </script>
+<!--style scoped lang="scss">
+.what-is-qv-chart {
+  position: relative;
+  margin: 0 auto;
+  width: 550px;
+  height: 510px;
+
+  &__axis {
+    width: 550px;
+    height: 510px;
+    pointer-events: none;
+
+    &__arrow {
+      position: absolute;
+      width: 510px;
+      bottom: 0;
+      left: 0;
+      padding-left: 70px;
+
+      &_vertical {
+        transform: translate(-50%, 0) translate(15px, 15px) rotate(270deg) translate(50%, 0);
+      }
+    }
+  }
+  &__content {
+    position: absolute;
+    bottom: 45px;
+    left: 45px;
+
+    width: 505px;
+    height: 465px;
+  }
+
+  &__square {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+
+    &__content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #F2F4F8;
+    }
+
+    &__text {
+      position: absolute;
+      top: 0px;
+      right: 5px;
+
+      display: block;
+      font-family: 'IBM Plex Sans';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 16px;
+      text-align: right;
+    }
+
+    &__tooltip {
+      display: none;
+      position: absolute;
+      right: -10px;
+      top: -130px;
+      width: 200px;
+      height: 120px;
+
+      background: #343A3F;
+      border-radius: 2px;
+
+      padding: 10px;
+      color: #FFFFFF;
+
+      font-family: 'IBM Plex Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: -8px;
+        right: 20px;
+
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+
+        border-top: 9px solid #343A3F;
+      }
+    }
+
+    &__content:hover :deep() &__tooltip {
+      display: block;
+    }
+  }
+}
+
+</style-->
 <style scoped lang="scss">
 .what-is-qv-chart {
   position: relative;
@@ -511,7 +631,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         }
 
         &__layer:hover {
-          transform: translateX(calc((2 - var(--layer-index)) * -100%)) scaleX(4);
+          transform: translateX(calc((2 - var(--layer-index)) * -100%)) scaleX(5);
         }
 
         &__layer:hover ~ #{$root}__square__layer {
