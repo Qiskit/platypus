@@ -89,6 +89,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
 }
 </script>
 <style scoped lang="scss">
+
 .what-is-qv-chart {
   position: relative;
   margin: 0 auto;
@@ -112,6 +113,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
   }
+
   &__content {
     position: absolute;
     bottom: 45px;
@@ -145,6 +147,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       font-size: 10px;
       line-height: 16px;
       text-align: right;
+      opacity: 0;
     }
 
     &__tooltip {
@@ -185,81 +188,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     &__content:hover :deep() &__tooltip {
       display: block;
     }
-
-    $layer-width: 50px;
-    $layer-gap: 35px;
-    $layer-start: 20px;
-
-    &__layer {
-      position: absolute;
-      top: 15px;
-      right: $layer-start;
-      transition: transform 0.3s ease-out;
-
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          right: $layer-start + ($layer-width + $layer-gap) * $i;
-          --layer-index: #{$i};
-        }
-      }
-      &_hovering {
-        --layer-hovering: 1;
-      }
-    }
-
-    $line-gap: 85px;
-    $line-start: 55px;
-
-    &__qubit-line {
-      position: absolute;
-      top: $line-start;
-      left: 25px;
-
-      --stroke-color: #000000;
-      :deep() path {
-        stroke: var(--stroke-color);
-      }
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          top: $line-start + $line-gap * $i;
-        }
-      }
-    }
-
-    $ket0-gap: 85px;
-    $ket0-start: $line-start - 7px;
-
-    &__ket0 {
-      position: absolute;
-      top: $ket0-start;
-      left: 0px;
-
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          top: $ket0-start + $ket0-gap * $i;
-        }
-      }
-    }
-
-    &__unitary {
-      position: absolute;
-      right: $layer-start;
-      pointer-events: none;
+    &__content :deep() .layers-circuit__circuit-line__ket0 {
       opacity: 0;
-
-      & :deep() .sketch-square__content {
-        background-color: white;
-        padding: 50% 25px;
-        text-align: center;
-      }
-
-      @for $i from 0 to 5 {
-        &_col-#{$i} {
-          right: $layer-start + ($layer-width + $layer-gap) * $i;
-        }
-      }
     }
-
   }
 
 //////////////////
@@ -282,15 +213,6 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     @keyframes crescentQVAnimation {
       from { transform: translate(-50%, 50%) scale(0.4) translate(50%, -50%); }
       to { transform: translate(-50%, 50%) scale(1) translate(50%, -50%); }
-    }
-
-    @keyframes linesDisplay {
-      from {
-        stroke-dashoffset: 500;
-      }
-      to {
-        stroke-dashoffset: 0;
-      }
     }
 
     &-1 {
@@ -349,8 +271,8 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
 
     &-3 {
       #{$root}__square {
-        &__ket0 {
-          opacity: 0;
+        &__text {
+          opacity: 1;
         }
         &_qv {
           &4, &8, &16, &32 {
@@ -393,8 +315,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         &__content:hover :deep() #{$root}__square__tooltip {
           display: none;
         }
-        &__ket0 {
-          transition: opacity 0.5s ease-out 0.5s;
+        &__content :deep() .layers-circuit__circuit-line__ket0 {
           opacity: 1;
         }
         &__text {
@@ -406,37 +327,6 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
             transition: opacity 0.5s ease-out;
             opacity: 0;
             pointer-events: none;
-          }
-        }
-
-        &__layer {
-          --displacement_1: calc(var(--layer-index) * var(--layer-before, 1) * 100% + var(--layer-before, 1) * 25%);
-          --displacement_2: calc((4 - var(--layer-index)) * (1 - var(--layer-before, 1)) * -100% - (1 - var(--layer-before, 1)) * 25%);
-          --displacement: calc(var(--displacement_1) + var(--displacement_2));
-          transform: translateX(calc(var(--layer-hovering, 0) * var(--displacement))) scaleX(calc(calc(2 - var(--layer-hovering, 0))/2));
-        }
-
-        &__layer:hover {
-          transform: translateX(calc((2 - var(--layer-index)) * -100%)) scaleX(5);
-        }
-
-        &__layer:hover ~ #{$root}__square__layer {
-          --layer-before: 0;
-          //transform: scaleX(var(--layer-scale, 1));
-        }
-
-        &__layer:hover ~ #{$root}__square__unitary {
-          opacity: 1;
-
-          & :deep() .sketch-square__content {
-            opacity: 0;
-            animation: 0.2s ease-out 0.5s fadeIn;
-            animation-fill-mode: forwards;
-          }
-          & :deep() .sketch-line-path {
-            stroke-dasharray: 500;
-            animation: 3s ease-out 0s linesDisplay;
-            animation-fill-mode: forwards;
           }
         }
       }
@@ -453,6 +343,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
 
       #{$root}__square {
+        &__content :deep() .layers-circuit__circuit-line__ket0 {
+          opacity: 1;
+        }
         &__text {
           transition: opacity 0.5s ease-out;
         }

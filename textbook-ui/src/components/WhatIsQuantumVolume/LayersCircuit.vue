@@ -1,5 +1,8 @@
 <template>
-  <div class="layers-circuit">
+  <div
+    class="layers-circuit"
+    :style="`--circuit-wrapper-width: ${wrappersDim.x}px; --circuit-wrapper-height: ${wrappersDim.y}px;`"
+  >
     <svg width="1" height="1" class="layers-circuit__svg-definitions">
       <defs>
         <pattern :id="`graphite-uid${uid}`" patternUnits="userSpaceOnUse" width="512" height="512">
@@ -21,12 +24,9 @@
         </mask>
       </defs>
     </svg>
-    <div
-      class="layers-circuit__circuit-lines-wrapper"
-      :style="`--circuit-wrapper-width: ${wrappersDim.x}px; --circuit-wrapper-height: ${wrappersDim.y}px;`"
-    >
+    <div class="layers-circuit__circuit-lines-wrapper">
       <div
-        v-for="m in lines"
+        v-for="m in parseInt(lines)"
         :key="m"
         class="layers-circuit__circuit-line"
       >
@@ -45,7 +45,7 @@
       :style="`--qv-layers-wrapper-width: ${wrappersDim.x}px; --qv-layers-wrapper-height: ${wrappersDim.y}px;`"
     >
       <div
-        v-for="(m, j) in layers"
+        v-for="(m, j) in parseInt(layers)"
         :key="m"
         class="layers-circuit__qv-layer"
         :class="{'layers-circuit__qv-layer_inspectable': enableInspection }"
@@ -72,13 +72,13 @@
             >
               <div class="layers-circuit__qv-layer__unitary__content">
                 <div class="layers-circuit__qv-layer__unitary__content__q0">
-                  0
+                  {{ unitaryQubitText(j, 0, 0) }}
                 </div>
                 <div class="layers-circuit__qv-layer__unitary__content__gate-name">
                   Unitary
                 </div>
                 <div class="layers-circuit__qv-layer__unitary__content__q1">
-                  1
+                  {{ unitaryQubitText(j, 0, 1) }}
                 </div>
               </div>
             </SketchSquare>
@@ -90,13 +90,13 @@
             >
               <div class="layers-circuit__qv-layer__unitary__content">
                 <div class="layers-circuit__qv-layer__unitary__content__q0">
-                  0
+                  {{ unitaryQubitText(j, 1, 0) }}
                 </div>
                 <div class="layers-circuit__qv-layer__unitary__content__gate-name">
                   Unitary
                 </div>
                 <div class="layers-circuit__qv-layer__unitary__content__q1">
-                  1
+                  {{ unitaryQubitText(j, 1, 1) }}
                 </div>
               </div>
             </SketchSquare>
@@ -126,7 +126,15 @@ class Props {
   layers = prop<Number>({ default: 5 })
   gradientColor = prop<Array<string>>({ default: ['#78A9FF', '#8A3FFC'], validator: (val: Array<string>) => val.length === 2 })
   enableInspection = prop<boolean>({ default: true })
-  gatesConfig = prop<Array<Array<LayerUnitary>>>({ })
+  gatesConfig = prop<Array<Array<LayerUnitary>>>({
+    default: [
+      [{ q1: 0, q2: 1 }, { q1: 2, q2: 3 }],
+      [{ q1: 0, q2: 3 }, { q1: 3, q2: 4 }],
+      [{ q1: 0, q2: 1 }, { q1: 3, q2: 4 }],
+      [{ q1: 0, q2: 1 }, { q1: 2, q2: 4 }],
+      [{ q1: 0, q2: 4 }, { q1: 3, q2: 4 }]
+    ]
+  })
 }
 
 @Options({
@@ -138,8 +146,9 @@ class Props {
   },
   computed: {
     wrappersDim (): Point {
-      const dim = this.layers as number * 85 + 25
-      return new Point(dim, dim)
+      const dimX = this.layers as number * 85 + 25
+      const dimY = this.lines as number * 85 + 25
+      return new Point(dimX, dimY)
     },
     layersHeight (): number {
       return this.lines as number * 85 - 10
@@ -150,6 +159,13 @@ export default class LayersCircuit extends Vue.with(Props) {
   uid = Math.random().toString().replace('.', '')
   circuitLine = new Line(new Point(0, 0), new Point((this.layers as number - 1) * 85 + 68, 0))
 
+  unitaryQubitText (configIdx: number, gateIdx: number, line: number) : string {
+    const config = this.gatesConfig[configIdx % this.gatesConfig.length]
+    const q1 = config[gateIdx].q1
+    const q2 = config[gateIdx].q2
+    return q1 < q2 ? `${line}` : `${1 - line}`
+  }
+
   normalizedCenterDistance (idx: number) : number {
     const semiLayersCount = (this.layers as number - 1) / 2
     return (-semiLayersCount + idx) / semiLayersCount
@@ -159,14 +175,18 @@ export default class LayersCircuit extends Vue.with(Props) {
     if (!this.gatesConfig) {
       return 0
     }
-    return 50 + 85 * (this.gatesConfig[configIdx][gateIdx].q2 - this.gatesConfig[configIdx][gateIdx].q1)
+    const config = this.gatesConfig[configIdx % this.gatesConfig.length]
+    const q1 = config[gateIdx].q1
+    const q2 = config[gateIdx].q2
+    return 50 + 85 * Math.abs(q2 - q1)
   }
 
   gatePositionStyle (configIdx: number, gateIdx: number) : string {
     if (!this.gatesConfig) {
       return ''
     }
-    let style = `top: ${15 + 85 * this.gatesConfig[configIdx][gateIdx].q1}px;`
+    const config = this.gatesConfig[configIdx % this.gatesConfig.length]
+    let style = `top: ${15 + 85 * Math.min(config[gateIdx].q1, config[gateIdx].q2)}px;`
     if (this.gatesOverlaping(configIdx)) {
       style += gateIdx === 0 ? 'transform: translateX(60px);' : 'transform: translateX(-60px);'
     }
@@ -181,7 +201,7 @@ export default class LayersCircuit extends Vue.with(Props) {
     if (!this.gatesConfig) {
       return false
     }
-    const config = this.gatesConfig[configIdx]
+    const config = this.gatesConfig[configIdx % this.gatesConfig.length]
     const u0 = config[0]
     const u1 = config[1]
     const between = (a: number, b: number, c: number) => (c < a && a < b) || (b < a && a < c)
@@ -196,10 +216,11 @@ export default class LayersCircuit extends Vue.with(Props) {
 
 .layers-circuit {
   position: relative;
-  height: 500px;
+  margin: 0 auto;
+  width: var(--circuit-wrapper-width, 400px);
+  min-width: var(--circuit-wrapper-width, 400px);
 
   &__circuit-lines-wrapper {
-    position: absolute;
     top: 0;
     left: 0;
     width: var(--circuit-wrapper-width, 400px);
@@ -357,179 +378,3 @@ export default class LayersCircuit extends Vue.with(Props) {
 }
 
 </style>
-<!--/style>
-.what-is-qv-chart {
-  position: relative;
-  margin: 0 auto;
-  width: 550px;
-  height: 510px;
-
-  &__axis {
-    width: 550px;
-    height: 510px;
-    pointer-events: none;
-
-    &__arrow {
-      position: absolute;
-      width: 510px;
-      bottom: 0;
-      left: 0;
-      padding-left: 70px;
-
-      &_vertical {
-        transform: translate(-50%, 0) translate(15px, 15px) rotate(270deg) translate(50%, 0);
-      }
-    }
-  }
-  &__content {
-    position: absolute;
-    bottom: 45px;
-    left: 45px;
-
-    width: 505px;
-    height: 465px;
-  }
-
-  &__square {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-
-    &__content {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: #F2F4F8;
-    }
-
-    &__text {
-      position: absolute;
-      top: 0px;
-      right: 5px;
-
-      display: block;
-      font-family: 'IBM Plex Sans';
-      font-style: normal;
-      font-weight: normal;
-      font-size: 10px;
-      line-height: 16px;
-      text-align: right;
-    }
-
-    &__tooltip {
-      display: none;
-      position: absolute;
-      right: -10px;
-      top: -130px;
-      width: 200px;
-      height: 120px;
-
-      background: #343A3F;
-      border-radius: 2px;
-
-      padding: 10px;
-      color: #FFFFFF;
-
-      font-family: 'IBM Plex Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
-
-      &::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 0;
-        bottom: -8px;
-        right: 20px;
-
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-
-        border-top: 9px solid #343A3F;
-      }
-    }
-
-    &__content:hover :deep() &__tooltip {
-      display: block;
-    }
-
-    $layer-width: 50px;
-    $layer-gap: 35px;
-    $layer-start: 20px;
-
-    &__layer {
-      position: absolute;
-      top: 15px;
-      right: $layer-start;
-      transition: transform 0.3s ease-out;
-
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          right: $layer-start + ($layer-width + $layer-gap) * $i;
-          --layer-index: #{$i};
-        }
-      }
-      &_hovering {
-        --layer-hovering: 1;
-      }
-    }
-
-    $line-gap: 85px;
-    $line-start: 55px;
-
-    &__qubit-line {
-      position: absolute;
-      top: $line-start;
-      left: 25px;
-
-      --stroke-color: #000000;
-      :deep() path {
-        stroke: var(--stroke-color);
-      }
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          top: $line-start + $line-gap * $i;
-        }
-      }
-    }
-
-    $ket0-gap: 85px;
-    $ket0-start: $line-start - 7px;
-
-    &__ket0 {
-      position: absolute;
-      top: $ket0-start;
-      left: 0px;
-
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          top: $ket0-start + $ket0-gap * $i;
-        }
-      }
-    }
-
-    &__unitary {
-      position: absolute;
-      right: $layer-start;
-      pointer-events: none;
-      opacity: 0;
-
-      & :deep() .sketch-square__content {
-        background-color: white;
-        padding: 50% 25px;
-        text-align: center;
-      }
-
-      @for $i from 0 to 5 {
-        &_col-#{$i} {
-          right: $layer-start + ($layer-width + $layer-gap) * $i;
-        }
-      }
-    }
-
-  }
-}
-
-</style-->
