@@ -51,7 +51,7 @@ class Props {
 @Options({
   watch: {
     selected (val: string) {
-      this.$emit('onSelectedChange', val)
+      this.$emit('onSelectedChange', parseInt(val))
     }
   }
 })
