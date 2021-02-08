@@ -33,7 +33,7 @@
         <Ket0 class="layers-circuit__circuit-line__ket0" />
         <SketchLine
           class="layers-circuit__circuit-line__line"
-          :style="`--stroke-color: url(#graphite-uid${uid})`"
+          :stroke-style="`url(#graphite-uid${uid})`"
           :line="circuitLine"
           :dashed="false"
           :draw-soft-lines="false"

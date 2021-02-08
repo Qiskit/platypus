@@ -1,39 +1,5 @@
 <template>
   <div class="what-is-qv-chart what-is-qv-chart_state" :class="`what-is-qv-chart_state-${state}`">
-    <svg width="1" height="1">
-      <defs>
-        <pattern :id="`graphite-uid${uid}`" patternUnits="userSpaceOnUse" width="512" height="512">
-          <image href="../../images/PencilTexture.png" x="0" y="0" width="512" height="512" />
-        </pattern>
-        <linearGradient :id="`bluePurpleGrad0-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#78A9FF" />
-          <stop offset="1" stop-color="#8A3FFC" />
-        </linearGradient>
-        <linearGradient :id="`bluePurpleGrad1-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#95AAFE" />
-          <stop offset="1" stop-color="#A165FD" />
-        </linearGradient>
-        <linearGradient :id="`bluePurpleGrad2-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#B3AEFE" />
-          <stop offset="1" stop-color="#B98CFD" />
-        </linearGradient>
-        <linearGradient :id="`bluePurpleGrad3-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#CEBDFE" />
-          <stop offset="1" stop-color="#D0B2FE" />
-        </linearGradient>
-        <mask :id="`marker-uid${uid}`" style="mask-type: luminance">
-          <image
-            href="../../images/MarkerBg.jpg"
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            preserveAspectRatio="none"
-          />
-        </mask>
-      </defs>
-    </svg>
-
     <div class="what-is-qv-chart__axis">
       <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_vertical" :label="`Qubits`" />
       <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_horizontal" :label="`Reduced Error`" />
@@ -58,55 +24,6 @@
             :enable-inspection="inspectable(i)"
             :gates-config="gatesConfig"
           />
-          <!--Ket0
-            v-for="(m, j) in 5 - i"
-            :key="m"
-            :class="`what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_${j}`"
-          />
-          <SketchLine
-            v-for="(m, j) in 5 - i"
-            :key="m"
-            :class="`what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_${j}`"
-            :style="`--stroke-color: url(#graphite-uid${uid})`"
-            :line="horizontalLineQV[i]"
-            :dashed="false"
-            :draw-soft-lines="false"
-          />
-          <MarkerArea
-            v-for="(m, j) in 5 - i"
-            :key="m"
-            :class="[
-              'what-is-qv-chart__square__layer',
-              `what-is-qv-chart__square__layer_${j}`,
-              {'what-is-qv-chart__square__layer_hovering': hovering }
-            ]"
-            :marker-mask-id="`marker-uid${uid}`"
-            :fill-id="`bluePurpleGrad${i}-uid${uid}`"
-            :width="50"
-            :height="400 - i * 85"
-            @mouseover="hover"
-            @mouseleave="leave"
-          />
-          <SketchSquare
-            v-for="(m, j) in (i == 0 ? 5 : 0)"
-            :key="m"
-            :class="`what-is-qv-chart__square__unitary what-is-qv-chart__square__unitary_col-${j}`"
-            :width="100"
-            :height="45 + 85 * (gatesConfig[j][0].q2 - gatesConfig[j][0].q1)"
-            :style="`top: ${25 + 85 * gatesConfig[j][0].q1}px; visibility: ${j == 2? 'visible' : 'hidden'}`"
-          >
-            Unitary
-          </SketchSquare>
-          <SketchSquare
-            v-for="(m, j) in (i == 0 ? 5 : 0)"
-            :key="m"
-            :class="`what-is-qv-chart__square__unitary what-is-qv-chart__square__unitary_col-${j}`"
-            :width="100"
-            :height="45 + 85 * (gatesConfig[j][1].q2 - gatesConfig[j][1].q1)"
-            :style="`top: ${25 + 85 * gatesConfig[j][1].q1}px; visibility: ${j == 2? 'visible' : 'hidden'}`"
-          >
-            Unitary
-          </SketchSquare-->
           <span class="what-is-qv-chart__square__tooltip">{{ tooltip[4 - n] }}</span>
         </div>
       </SketchSquare>
@@ -116,32 +33,20 @@
 
 <script lang="ts">
 import { Options, prop, Vue } from 'vue-class-component'
-import { Line, Point } from '@mathigon/euclid'
 import SketchSquare from '../Sketch/SketchSquare.vue'
-import SketchLine from '../Sketch/SketchLine.vue'
-import MarkerArea from '../Sketch/MarkerArea.vue'
-import Ket0 from '../Sketch/Ket0.vue'
 import LabeledArrow from './LabeledArrow.vue'
 import LayersCircuit from './LayersCircuit.vue'
 
 class Props {
   state = prop<Number>({ default: 0 })
-  tooltip = prop<String[]>({ default: [] })
+  tooltip = prop<String[]>({ required: true })
 }
 
 @Options({
   components: {
     SketchSquare,
-    SketchLine,
-    MarkerArea,
     LabeledArrow,
-    LayersCircuit,
-    Ket0
-  },
-  computed: {
-    horizontalLine (): Line {
-      return new Line(new Point(0, 0), new Point(405, 0))
-    }
+    LayersCircuit
   }
 })
 
@@ -180,113 +85,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     return idx === 0 && this.state === 4
   }
 
-  axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
-  axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
-
   uid = Math.random().toString().replace('.', '')
 }
 </script>
-<!--style scoped lang="scss">
-.what-is-qv-chart {
-  position: relative;
-  margin: 0 auto;
-  width: 550px;
-  height: 510px;
-
-  &__axis {
-    width: 550px;
-    height: 510px;
-    pointer-events: none;
-
-    &__arrow {
-      position: absolute;
-      width: 510px;
-      bottom: 0;
-      left: 0;
-      padding-left: 70px;
-
-      &_vertical {
-        transform: translate(-50%, 0) translate(15px, 15px) rotate(270deg) translate(50%, 0);
-      }
-    }
-  }
-  &__content {
-    position: absolute;
-    bottom: 45px;
-    left: 45px;
-
-    width: 505px;
-    height: 465px;
-  }
-
-  &__square {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-
-    &__content {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: #F2F4F8;
-    }
-
-    &__text {
-      position: absolute;
-      top: 0px;
-      right: 5px;
-
-      display: block;
-      font-family: 'IBM Plex Sans';
-      font-style: normal;
-      font-weight: normal;
-      font-size: 10px;
-      line-height: 16px;
-      text-align: right;
-    }
-
-    &__tooltip {
-      display: none;
-      position: absolute;
-      right: -10px;
-      top: -130px;
-      width: 200px;
-      height: 120px;
-
-      background: #343A3F;
-      border-radius: 2px;
-
-      padding: 10px;
-      color: #FFFFFF;
-
-      font-family: 'IBM Plex Sans';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 20px;
-
-      &::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 0;
-        bottom: -8px;
-        right: 20px;
-
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-
-        border-top: 9px solid #343A3F;
-      }
-    }
-
-    &__content:hover :deep() &__tooltip {
-      display: block;
-    }
-  }
-}
-
-</style-->
 <style scoped lang="scss">
 .what-is-qv-chart {
   position: relative;
