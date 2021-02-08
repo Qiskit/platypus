@@ -57,7 +57,7 @@ function nbtomd() {
       const shared_dir = `${__dirname}/working/shared`
       const toc = `${CWD}/notebooks/toc.yml`
       const converter = `textbook_converter ${file.path} -o ${output_dir} -s ${shared_dir} -t ${toc}`
-      return `cd ../textbook-converter && python3 -m ${converter}`
+      return `cd ../textbook-converter && python -m ${converter}`
     }, {maxBuffer: 2048 * 1000}))
 }
 
