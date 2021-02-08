@@ -68,7 +68,7 @@
               class="layers-circuit__qv-layer__unitary"
               :width="100"
               :height="gateHeight(j, 0)"
-              :style="gatePositionStyle(j, 0)"
+              :style="`${gatePositionStyle(j, 0)} --gate-height: ${gateHeight(j, 0) + 20};`"
             >
               <div class="layers-circuit__qv-layer__unitary__content">
                 <div class="layers-circuit__qv-layer__unitary__content__q0">
@@ -86,7 +86,7 @@
               class="layers-circuit__qv-layer__unitary"
               :width="100"
               :height="gateHeight(j, 1)"
-              :style="gatePositionStyle(j, 1)"
+              :style="`${gatePositionStyle(j, 1)} --gate-height: ${gateHeight(j, 1) + 20};`"
             >
               <div class="layers-circuit__qv-layer__unitary__content">
                 <div class="layers-circuit__qv-layer__unitary__content__q0">
@@ -168,7 +168,7 @@ export default class LayersCircuit extends Vue.with(Props) {
     }
     let style = `top: ${15 + 85 * this.gatesConfig[configIdx][gateIdx].q1}px;`
     if (this.gatesOverlaping(configIdx)) {
-      style += gateIdx === 0 ? 'transform: translateX(60px);' : 'transform: translateX(-60px)'
+      style += gateIdx === 0 ? 'transform: translateX(60px);' : 'transform: translateX(-60px);'
     }
     return style
   }
@@ -233,7 +233,7 @@ export default class LayersCircuit extends Vue.with(Props) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 15px 20px 35px 40px;
+    padding: 15px 20px 20px 40px;
   }
 
   &__qv-layer {
@@ -258,6 +258,7 @@ export default class LayersCircuit extends Vue.with(Props) {
       display: flex;
       justify-content: center;
       z-index: 0;
+      height: 100%;
 
       :deep() > .sketch-square__lines {
         transition: opacity 0s ease-out 0s;
@@ -285,15 +286,25 @@ export default class LayersCircuit extends Vue.with(Props) {
 
     &__layer-square {
       flex: 0 0 auto;
+
+      @at-root x-step svg#{&} {
+        max-width: none;
+      }
     }
     &__unitary {
       position: absolute;
 
       & :deep() .sketch-line-path {
-        stroke-dasharray: 500;
-        stroke-dashoffset: 500;
-        transition: stroke-dashoffset 0.5s ease-out 0s;
+        stroke-dasharray: var(--gate-height, 500);
+        stroke-dashoffset: var(--gate-height, 500);
+        transition: stroke-dashoffset 0.1s ease-out 0s;
       }
+
+      & :deep() .sketch-square__lines__horizontal .sketch-line-path {
+        stroke-dasharray: 120;
+        stroke-dashoffset: 120;
+      }
+
       & :deep() .sketch-square__content {
         box-shadow: none;
         background: rgb(255,255,255);
@@ -317,9 +328,10 @@ export default class LayersCircuit extends Vue.with(Props) {
         }
       }
     }
+
     &_inspectable:hover #{&}__unitary :deep() .sketch-line-path {
       stroke-dashoffset: 0;
-      transition: stroke-dashoffset 2s ease-out 0.3s;
+      transition: stroke-dashoffset 0.7s ease-out 0.3s;
     }
 
     &_inspectable:hover #{&}__unitary :deep() .sketch-square__content {
