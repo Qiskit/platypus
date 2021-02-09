@@ -1,8 +1,10 @@
 <template>
   <section class="what-is-qv">
-    <p class="what-is-qv__text">
-      {{ stepDescription[selectedInt] }}
-    </p>
+    <div class="what-is-qv__text-wrapper">
+      <p class="what-is-qv__text">
+        {{ stepDescription[selectedInt] }}
+      </p>
+    </div>
     <WhatIsQVChart class="what-is-qv__chart" :state="selectedInt" :tooltip="tooltipHoverTexts" />
     <DotsSelector class="what-is-qv__selector" :count="5" @onSelectedChange="value => selectedInt = value" />
   </section>
@@ -48,8 +50,14 @@ export default class WhatIsQuantumVolumeSVG extends Vue {
     margin-bottom: 50px;
   }
   &__text {
-    padding: 30px 15px 0 15px;
-    height: 180px;
+    flex: 1;
+
+    &-wrapper {
+      display: flex;
+      align-items: center;
+      padding: 15px 15px 0 15px;
+      min-height: 115px;
+    }
   }
 }
 </style>
