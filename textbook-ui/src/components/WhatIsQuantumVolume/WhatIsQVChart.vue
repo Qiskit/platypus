@@ -58,7 +58,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
   ]
 
   inspectable (idx: number) {
-    return idx === 0 && this.state === 4
+    return idx === 0 && this.state === 3
   }
 
   uid = Math.random().toString().replace('.', '')
@@ -198,41 +198,28 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
           opacity: 0;
         }
 
-        &__axis__arrow_horizontal {
-          transition: opacity 0.2s ease-out;
-          opacity: 0;
-        }
-
         &__axis__arrow_vertical :deep() .labeled-arrow {
           &__arrow {
             margin-right: 500px;
-            animation: 1s ease-out 1s arrowInAnimation;
+            animation: 1s ease-out 0.7s arrowInAnimation;
             animation-fill-mode: forwards;
           }
           &__label {
             opacity: 0;
-            animation: 0.5s ease-out 1s fadeIn;
+            animation: 0.5s ease-out 0.7s fadeIn;
             animation-fill-mode: forwards;
           }
-        }
-      }
-    }
-    &-2 {
-      #{$root} {
-        &__content {
-          transition: opacity 0.2s ease-out;
-          opacity: 0;
         }
 
         &__axis__arrow_horizontal :deep() .labeled-arrow {
           &__arrow {
             margin-right: 500px;
-            animation: 1s ease-out 0s arrowInAnimation;
+            animation: 1s ease-out 1.5s arrowInAnimation;
             animation-fill-mode: forwards;
           }
           &__label {
             opacity: 0;
-            animation: 0.5s ease-out 0s fadeIn;
+            animation: 0.5s ease-out 1.5s fadeIn;
             animation-fill-mode: forwards;
           }
         }
@@ -245,7 +232,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
 
-    &-3 {
+    &-2 {
       #{$root}__square {
         &__text {
           opacity: 1;
@@ -275,7 +262,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
 
-    &-4 {
+    &-3 {
       #{$root}__square :deep() > .sketch-square {
         &__lines {
           transition: opacity 0.5s ease-out;
@@ -308,7 +295,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
 
-    &-5 {
+    &-4 {
       :deep() .sketch-square {
         &__lines {
           transition: opacity 0.5s ease-out;
