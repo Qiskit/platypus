@@ -126,15 +126,7 @@ class Props {
   layers = prop<Number>({ default: 5 })
   gradientColor = prop<Array<string>>({ default: ['#78A9FF', '#8A3FFC'], validator: (val: Array<string>) => val.length === 2 })
   enableInspection = prop<boolean>({ default: true })
-  gatesConfig = prop<Array<Array<LayerUnitary>>>({
-    default: [
-      [{ q1: 0, q2: 1 }, { q1: 2, q2: 3 }],
-      [{ q1: 0, q2: 3 }, { q1: 3, q2: 4 }],
-      [{ q1: 0, q2: 1 }, { q1: 3, q2: 4 }],
-      [{ q1: 0, q2: 1 }, { q1: 2, q2: 4 }],
-      [{ q1: 0, q2: 4 }, { q1: 3, q2: 4 }]
-    ]
-  })
+  gatesInspection = prop<Array<Array<LayerUnitary>>>({})
 }
 
 @Options({
@@ -207,8 +199,27 @@ export default class LayersCircuit extends Vue.with(Props) {
     const between = (a: number, b: number, c: number) => (c < a && a < b) || (b < a && a < c)
 
     return between(u0.q2, u1.q1, u1.q2) || between(u0.q1, u1.q1, u1.q2) ||
+      between(u1.q1, u0.q1, u0.q2) ||
       u0.q1 === u1.q1 || u0.q1 === u1.q2 ||
       u0.q2 === u1.q1 || u0.q2 === u1.q2
+  }
+
+  randomUnitary () {
+    const a = Math.floor(Math.random() * 5)
+    let b = Math.floor(Math.random() * 5)
+    while (a === b) {
+      b = Math.floor(Math.random() * 5)
+    }
+    return { q1: a, q2: b }
+  }
+
+  gatesRandomConfig: LayerUnitary[][] = Array.from({ length: Math.floor(this.layers as number) }, (_v, _i) => [this.randomUnitary(), this.randomUnitary()])
+
+  get gatesConfig (): LayerUnitary[][] {
+    if (this.gatesInspection !== undefined) {
+      return this.gatesInspection
+    }
+    return this.gatesRandomConfig
   }
 }
 </script>

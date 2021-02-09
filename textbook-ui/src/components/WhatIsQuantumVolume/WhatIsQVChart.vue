@@ -22,7 +22,6 @@
             :layers="5 - i"
             :gradient-color="gradientColors[i]"
             :enable-inspection="inspectable(i)"
-            :gates-config="gatesConfig"
           />
           <span class="what-is-qv-chart__square__tooltip">{{ tooltip[4 - n] }}</span>
         </div>
@@ -56,29 +55,6 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     ['#95AAFE', '#A165FD'],
     ['#B3AEFE', '#B98CFD'],
     ['#CEBDFE', '#D0B2FE']
-  ]
-
-  gatesConfig = [
-    [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 3 }
-    ],
-    [
-      { q1: 0, q2: 3 },
-      { q1: 3, q2: 4 }
-    ],
-    [
-      { q1: 0, q2: 1 },
-      { q1: 3, q2: 4 }
-    ],
-    [
-      { q1: 0, q2: 1 },
-      { q1: 2, q2: 4 }
-    ],
-    [
-      { q1: 0, q2: 4 },
-      { q1: 3, q2: 4 }
-    ]
   ]
 
   inspectable (idx: number) {
