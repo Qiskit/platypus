@@ -312,7 +312,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
 
       #{$root}__square {
-        &__content:hover :deep() #{$root}__square__tooltip {
+        &__content:hover #{$root}__square__tooltip {
           display: none;
         }
         &__content :deep() .layers-circuit__circuit-line__ket0 {
