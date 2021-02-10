@@ -1,39 +1,5 @@
 <template>
   <div class="what-is-qv-chart what-is-qv-chart_state" :class="`what-is-qv-chart_state-${state}`">
-    <svg width="1" height="1">
-      <defs>
-        <pattern :id="`graphite-uid${uid}`" patternUnits="userSpaceOnUse" width="512" height="512">
-          <image href="../../images/PencilTexture.png" x="0" y="0" width="512" height="512" />
-        </pattern>
-        <linearGradient :id="`bluePurpleGrad0-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#78A9FF" />
-          <stop offset="1" stop-color="#8A3FFC" />
-        </linearGradient>
-        <linearGradient :id="`bluePurpleGrad1-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#95AAFE" />
-          <stop offset="1" stop-color="#A165FD" />
-        </linearGradient>
-        <linearGradient :id="`bluePurpleGrad2-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#B3AEFE" />
-          <stop offset="1" stop-color="#B98CFD" />
-        </linearGradient>
-        <linearGradient :id="`bluePurpleGrad3-uid${uid}`" gradientUnits="objectBoundingBox" gradientTransform="rotate(90)">
-          <stop stop-color="#CEBDFE" />
-          <stop offset="1" stop-color="#D0B2FE" />
-        </linearGradient>
-        <mask :id="`marker-uid${uid}`" style="mask-type: luminance">
-          <image
-            href="../../images/MarkerBg.jpg"
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            preserveAspectRatio="none"
-          />
-        </mask>
-      </defs>
-    </svg>
-
     <div class="what-is-qv-chart__axis">
       <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_vertical" :label="`Qubits`" />
       <LabeledArrow class="what-is-qv-chart__axis__arrow what-is-qv-chart__axis__arrow_horizontal" :label="`Reduced Error`" />
@@ -47,31 +13,15 @@
         :height="450 - i * 85"
         :hide-left="true"
         :hide-bottom="true"
+        :dashed="true"
       >
         <div class="what-is-qv-chart__square__content">
           <span class="what-is-qv-chart__square__text">QV {{ Math.pow(2, 5 - i) }}</span>
-          <Ket0
-            v-for="(m, j) in 5 - i"
-            :key="m"
-            :class="`what-is-qv-chart__square__ket0 what-is-qv-chart__square__ket0_${j}`"
-          />
-          <SketchLine
-            v-for="(m, j) in 5 - i"
-            :key="m"
-            :class="`what-is-qv-chart__square__qubit-line what-is-qv-chart__square__qubit-line_${j}`"
-            :style="`--stroke-color: url(#graphite-uid${uid})`"
-            :line="horizontalLineQV[i]"
-            :dashed="false"
-            :draw-soft-lines="false"
-          />
-          <MarkerArea
-            v-for="(m, j) in 5 - i"
-            :key="m"
-            :class="`what-is-qv-chart__square__layer what-is-qv-chart__square__layer_${j}`"
-            :marker-mask-id="`marker-uid${uid}`"
-            :fill-id="`bluePurpleGrad0-uid${uid}`"
-            :width="50"
-            :height="400 - i * 85"
+          <LayersCircuit
+            :lines="5 - i"
+            :layers="5 - i"
+            :gradient-color="gradientColors[i]"
+            :enable-inspection="inspectable(i)"
           />
           <span class="what-is-qv-chart__square__tooltip">{{ tooltip[4 - n] }}</span>
         </div>
@@ -82,43 +32,34 @@
 
 <script lang="ts">
 import { Options, prop, Vue } from 'vue-class-component'
-import { Line, Point } from '@mathigon/euclid'
 import SketchSquare from '../Sketch/SketchSquare.vue'
-import SketchLine from '../Sketch/SketchLine.vue'
-import MarkerArea from '../Sketch/MarkerArea.vue'
-import Ket0 from '../Sketch/Ket0.vue'
 import LabeledArrow from './LabeledArrow.vue'
+import LayersCircuit from './LayersCircuit.vue'
 
 class Props {
   state = prop<Number>({ default: 0 })
-  tooltip = prop<String[]>({ default: [] })
+  tooltip = prop<String[]>({ required: true })
 }
 
 @Options({
   components: {
     SketchSquare,
-    SketchLine,
-    MarkerArea,
     LabeledArrow,
-    Ket0
-  },
-  computed: {
-    horizontalLine (): Line {
-      return new Line(new Point(0, 0), new Point(405, 0))
-    }
+    LayersCircuit
   }
 })
 
 export default class WhatIsQuantumChart extends Vue.with(Props) {
-  horizontalLineQV = [
-    new Line(new Point(0, 0), new Point(408, 0)),
-    new Line(new Point(0, 0), new Point(323, 0)),
-    new Line(new Point(0, 0), new Point(238, 0)),
-    new Line(new Point(0, 0), new Point(153, 0))
+  gradientColors = [
+    ['#78A9FF', '#8A3FFC'],
+    ['#95AAFE', '#A165FD'],
+    ['#B3AEFE', '#B98CFD'],
+    ['#CEBDFE', '#D0B2FE']
   ]
 
-  axisQCountLine = new Line(new Point(50, 450), new Point(50, 50))
-  axisReducedErrorLine = new Line(new Point(100, 500), new Point(500, 500))
+  inspectable (idx: number) {
+    return idx === 0 && this.state === 3
+  }
 
   uid = Math.random().toString().replace('.', '')
 }
@@ -134,6 +75,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
   &__axis {
     width: 550px;
     height: 510px;
+    pointer-events: none;
 
     &__arrow {
       position: absolute;
@@ -147,6 +89,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
   }
+
   &__content {
     position: absolute;
     bottom: 45px;
@@ -180,6 +123,7 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       font-size: 10px;
       line-height: 16px;
       text-align: right;
+      opacity: 0;
     }
 
     &__tooltip {
@@ -220,57 +164,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
     &__content:hover :deep() &__tooltip {
       display: block;
     }
-
-    $layer-width: 50px;
-    $layer-gap: 35px;
-    $layer-start: 20px;
-
-    &__layer {
-      position: absolute;
-      top: 15px;
-      right: $layer-start;
-
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          right: $layer-start + ($layer-width + $layer-gap) * $i;
-        }
-      }
+    &__content :deep() .layers-circuit__circuit-line__ket0 {
+      opacity: 0;
     }
-
-    $line-gap: 85px;
-    $line-start: 55px;
-
-    &__qubit-line {
-      position: absolute;
-      top: $line-start;
-      left: 25px;
-
-      --stroke-color: #000000;
-      :deep() path {
-        stroke: var(--stroke-color);
-      }
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          top: $line-start + $line-gap * $i;
-        }
-      }
-    }
-
-    $ket0-gap: 85px;
-    $ket0-start: $line-start - 7px;
-
-    &__ket0 {
-      position: absolute;
-      top: $ket0-start;
-      left: 0px;
-
-      @for $i from 0 to 5 {
-        &_#{$i} {
-          top: $ket0-start + $ket0-gap * $i;
-        }
-      }
-    }
-
   }
 
 //////////////////
@@ -302,41 +198,28 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
           opacity: 0;
         }
 
-        &__axis__arrow_horizontal {
-          transition: opacity 0.2s ease-out;
-          opacity: 0;
-        }
-
         &__axis__arrow_vertical :deep() .labeled-arrow {
           &__arrow {
             margin-right: 500px;
-            animation: 1s ease-out 1s arrowInAnimation;
+            animation: 1s ease-out 0.7s arrowInAnimation;
             animation-fill-mode: forwards;
           }
           &__label {
             opacity: 0;
-            animation: 0.5s ease-out 1s fadeIn;
+            animation: 0.5s ease-out 0.7s fadeIn;
             animation-fill-mode: forwards;
           }
-        }
-      }
-    }
-    &-2 {
-      #{$root} {
-        &__content {
-          transition: opacity 0.2s ease-out;
-          opacity: 0;
         }
 
         &__axis__arrow_horizontal :deep() .labeled-arrow {
           &__arrow {
             margin-right: 500px;
-            animation: 1s ease-out 0s arrowInAnimation;
+            animation: 1s ease-out 1.5s arrowInAnimation;
             animation-fill-mode: forwards;
           }
           &__label {
             opacity: 0;
-            animation: 0.5s ease-out 0s fadeIn;
+            animation: 0.5s ease-out 1.5s fadeIn;
             animation-fill-mode: forwards;
           }
         }
@@ -349,10 +232,10 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
 
-    &-3 {
+    &-2 {
       #{$root}__square {
-        &__ket0 {
-          opacity: 0;
+        &__text {
+          opacity: 1;
         }
         &_qv {
           &4, &8, &16, &32 {
@@ -379,8 +262,8 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
     }
 
-    &-4 {
-      :deep() .sketch-square {
+    &-3 {
+      #{$root}__square :deep() > .sketch-square {
         &__lines {
           transition: opacity 0.5s ease-out;
           opacity: 0;
@@ -391,13 +274,11 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
         }
       }
 
-      #{$root}__content {
-        pointer-events: none;
-      }
-
       #{$root}__square {
-        &__ket0 {
-          transition: opacity 0.5s ease-out 0.5s;
+        &__content:hover #{$root}__square__tooltip {
+          display: none;
+        }
+        &__content :deep() .layers-circuit__circuit-line__ket0 {
           opacity: 1;
         }
         &__text {
@@ -408,12 +289,13 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
           &4, &8, &16 {
             transition: opacity 0.5s ease-out;
             opacity: 0;
+            pointer-events: none;
           }
         }
       }
     }
 
-    &-5 {
+    &-4 {
       :deep() .sketch-square {
         &__lines {
           transition: opacity 0.5s ease-out;
@@ -424,6 +306,9 @@ export default class WhatIsQuantumChart extends Vue.with(Props) {
       }
 
       #{$root}__square {
+        &__content :deep() .layers-circuit__circuit-line__ket0 {
+          opacity: 1;
+        }
         &__text {
           transition: opacity 0.5s ease-out;
         }

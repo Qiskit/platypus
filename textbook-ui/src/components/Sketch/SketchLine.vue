@@ -1,7 +1,19 @@
 <template>
   <svg class="sketch-line">
-    <path :d="hardLinePathD" class="sketch-line-path sketch-line-path__hard" vector-effect="non-scaling-stroke" :stroke-dasharray="dashConfiguration" />
-    <path v-if="drawSoftLines" :d="softLinePathD" class="sketch-line-path sketch-line-path__soft" vector-effect="non-scaling-stroke" />
+    <path
+      :d="hardLinePathD"
+      class="sketch-line-path sketch-line-path__hard"
+      vector-effect="non-scaling-stroke"
+      :stroke-dasharray="dashConfiguration"
+      :style="`--stroke-color: ${strokeStyle}`"
+    />
+    <path
+      v-if="drawSoftLines"
+      :d="softLinePathD"
+      class="sketch-line-path sketch-line-path__soft"
+      vector-effect="non-scaling-stroke"
+      :style="`--stroke-color: ${strokeStyle}`"
+    />
   </svg>
 </template>
 
@@ -19,6 +31,8 @@ class Props {
 
   dashed = prop<boolean>({ default: false })
   dashLengthInterval = prop<Array<number>>({ default: [4, 12], validator: (val: Array<number>) => val.length === 2 })
+
+  strokeStyle = prop<String>({ default: '#000000' })
 }
 
 @Options({
@@ -82,7 +96,7 @@ export default class SketchLine extends Vue.with(Props) {
   pointer-events: none;
 
   &-path {
-    stroke: #000000;
+    stroke: var(--stroke-color, #000000);
     stroke-width: 1;
 
     &__soft {
