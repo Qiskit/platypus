@@ -23,14 +23,14 @@ const CWD = process.cwd();
 
 
 function clean() {
-  return del(['working/*']).then((d) => {
+  return del(['build/', 'working/']).then((d) => {
     console.log('Deleted...', d)
   })
 }
 
 function markdown() {
   return gulp.src(['working/*/', '!working/shared/'])
-      .pipe(textbooks(['en'], __dirname + '/build/.cache.json'))
+      .pipe(textbooks(['en'], __dirname + '/build/.cache.json', true))
       .pipe(gulp.dest('build'));
 }
 

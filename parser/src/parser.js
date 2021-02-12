@@ -23,7 +23,7 @@ const minifyOptions = {
 };
 
 
-module.exports.parse = async function (id, content, directory, locale='en') {
+module.exports.parse = async function (id, content, directory, locale='en', outputCHTML=false) {
   // Replace relative image URLs
   content = content.replace(/(url\(|src=["`]|href=["`]|background=["`]|poster=["`])images\//g,
       `$1/resources/${id}/images/`);
@@ -57,12 +57,14 @@ module.exports.parse = async function (id, content, directory, locale='en') {
   const course = {bios: new Set(), gloss: new Set(), steps: [{}], title: ''};
   const renderer = getRenderer(course, directory, locale);
   let result = marked.Parser.parse(tokens, {renderer});
+  let mathjaxStyles = ''
 
   // Asynchronously replace all LaTeX Equation placeholders.
-  result = await fillTexPlaceholders(result);
+  result = await fillTexPlaceholders(result, outputCHTML);
 
-  const doc = (new JSDom('<x-step>' + result + '</x-step>')).window.document;
+  const doc = (new JSDom('<x-step>' + result[0] + '</x-step>')).window.document;
   const body = doc.body;
+  if (result.length > 1 && result[1]) mathjaxStyles = result[1];
 
   // Parse custom element attributess
   // TODO Parse attributes for <ul> and <table>
@@ -76,8 +78,9 @@ module.exports.parse = async function (id, content, directory, locale='en') {
   for (let i = 0; i < $md.length; ++i) {
     $md[i].classList.remove('md');
     let html = marked($md[i].innerHTML, {renderer}).replace(/^<p>|<\/p>$/g, '');
-    html = await fillTexPlaceholders(html);
-    $md[i].innerHTML = html;
+    html = await fillTexPlaceholders(html, outputCHTML);
+    $md[i].innerHTML = html[0];
+    if (!mathjaxStyes && html.length > 1 && html[1]) mathjaxStyles = html[1];
   }
 
   // Add the [parent] attribute as class to all elements parents
@@ -127,15 +130,15 @@ module.exports.parse = async function (id, content, directory, locale='en') {
   const goals = course.steps.map(s => s.goals.length).reduce((a, b) => a + b);
   const data = {sections, steps: course.steps, goals, title: course.title};
 
-  return {bios: course.bios, gloss: course.gloss, data};
+  return {bios: course.bios, gloss: course.gloss, data, mathjaxStyles};
 };
 
-module.exports.parseSimple = async function (text, locale='en') {
+module.exports.parseSimple = async function (text, locale='en', outputCHTML=false) {
   const course = {bios: new Set(), gloss: new Set(), steps: [{}], title: ''};
   const renderer = getRenderer(course, '', locale, false);
   let result = marked(blockIndentation(text), {renderer});
-  result = await fillTexPlaceholders(result);
-  const doc = (new JSDom(result)).window.document.body;
+  result = await fillTexPlaceholders(result, outputCHTML);
+  const doc = (new JSDom(result[0])).window.document.body;
   for (let n of nodes(doc)) blockAttributes(n);
   lineBreaks(doc);
   return minify(doc.innerHTML, minifyOptions);

@@ -33,8 +33,8 @@ async function combineData(name, parsed, dest, courseId, textField, locale) {
   return createFile(dest, `${courseId}/${name}_${locale}.json`, JSON.stringify(obj));
 }
 
-async function generate(content, base, id, locale) {
-  const {bios, gloss, data} = await parse(id, content, base, locale);
+async function generate(content, base, id, locale, outputCHTML) {
+  const {bios, gloss, data, mathjaxStyles} = await parse(id, content, base, locale, outputCHTML);
   const dest = path.join(base, '../');
 
   const biosFile = await combineData('bios', bios, dest, id, 'bio', locale);
@@ -49,10 +49,15 @@ async function generate(content, base, id, locale) {
   const hintsFile = createFile(dest, `${id}/hints_${locale}.json`, JSON.stringify(hintsObj));
 
   const dataFile = createFile(dest, `${id}/data_${locale}.json`, JSON.stringify(data));
-  return [dataFile, biosFile, glossFile, hintsFile, quizFile];
+  if (mathjaxStyles) {
+    const stylesFiles = createFile(dest, `${id}/mathjax_styles.css`, mathjaxStyles);
+    return [dataFile, biosFile, glossFile, hintsFile, quizFile, stylesFiles];
+  } else {
+    return [dataFile, biosFile, glossFile, hintsFile, quizFile];
+  }
 }
 
-module.exports.gulp = (languages = ['en'], cacheFile = '') => {
+module.exports.gulp = (languages = ['en'], cacheFile = '', outputCHTML = false) => {
   return through2.obj(async function (file, _, next) {
     const id = file.basename;
 
@@ -67,7 +72,7 @@ module.exports.gulp = (languages = ['en'], cacheFile = '') => {
       if (loadFromCache(cacheFile, id + '-' + locale) === hash) continue;
 
       locales.push(locale);
-      const promise = generate(content, file.path, id, locale)
+      const promise = generate(content, file.path, id, locale, outputCHTML)
           .catch((error) => {
             warning(`  Failed to parse ${id} [${locale}]:`, error.message);
             return [];
