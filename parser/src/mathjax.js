@@ -55,10 +55,7 @@ async function texToSvg(code, isInline) {
 async function texToHtml(code, isInline) {
   const id = entities.decode(code) + (isInline || false);
   if (mathJaxStore[id]) {
-    return {
-      html: mathJaxStore[id],
-      styles: mathJaxStore[`${id}-styles`]
-    };
+    return [mathJaxStore[id], mathJaxStore['chtml-stylesheet']];
   }
 
   if (!promise) promise = mathjax.init({
@@ -79,13 +76,15 @@ async function texToHtml(code, isInline) {
 
     const html = await MathJax.tex2chtml(code, {display: false});
     output = adaptor.outerHTML(html);
-    styles = adaptor.textContent(MathJax.chtmlStylesheet());
+    if (!mathJaxStore['chtml-stylesheet']) {
+      mathJaxStore['chtml-stylesheet'] = adaptor.textContent(MathJax.chtmlStylesheet());
+    }
+    styles = mathJaxStore['chtml-stylesheet']
   } catch(e) {
     warning(`  MathJax Error: ${e.message} at "${code}"`);
   }
 
   mathJaxStore[id] = output;
-  mathJaxStore[`${id}-styles`] = styles;
   safeWriteFile(cacheFile, JSON.stringify(mathJaxStore));
   return [output, styles];
 }
