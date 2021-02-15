@@ -76,10 +76,7 @@ async function texToHtml(code, isInline) {
 
     const html = await MathJax.tex2chtml(code, {display: false});
     output = adaptor.outerHTML(html);
-    if (!mathJaxStore['chtml-stylesheet']) {
-      mathJaxStore['chtml-stylesheet'] = adaptor.textContent(MathJax.chtmlStylesheet());
-    }
-    styles = mathJaxStore['chtml-stylesheet']
+    styles = adaptor.textContent(MathJax.chtmlStylesheet());
   } catch(e) {
     warning(`  MathJax Error: ${e.message} at "${code}"`);
   }
@@ -97,7 +94,7 @@ module.exports.fillTexPlaceholders = async function(doc, outputCHTML = false) {
     if (outputCHTML) {
       result = await texToHtml(...placeholders[placeholder]);
       code = result[0];
-      if (!styles) styles = result[1];
+      if (result[1] && result[1].length > styles.length) styles = result[1];
     } else {
       code = await texToSvg(...placeholders[placeholder]);
     }
