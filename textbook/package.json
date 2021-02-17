@@ -1,8 +1,8 @@
 {
-  "name": "qiskit-textbook-edu",
+  "name": "project-platypus",
   "version": "0.0.1",
-  "description": "Qiskit Textbook",
-  "repository": "qiskit-textbook-edu",
+  "description": "Project Platypus",
+  "repository": "project-platypus",
   "license": "Apache 2.0",
   "scripts": {
     "server": "mathigon-server",
