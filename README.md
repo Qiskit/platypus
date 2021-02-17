@@ -1,11 +1,11 @@
-# qiskit-textbook-edu
+# project-platypus
 
-Qiskit Textbook edu exploration
+Project Platypus exploration
 
 ## Docker setup
 
 ```
-$ cd qiskit-textbook-edu
+$ cd project-platypus
 $ docker build -t platypus .
 $ docker run -d -p 5000:5000 --name=platypus platypus
 ```
@@ -27,7 +27,7 @@ After the Docker container has started access the site at: http://localhost:5000
 1. Python (3.6 or later) environment with `textbook_converter` requirements installed
 
     ```
-    $ cd qiskit-textbook-edu/textbook-converter
+    $ cd project-platypus/textbook-converter
     $ pip install -r requirements.txt
     ```
 
@@ -36,7 +36,7 @@ After the Docker container has started access the site at: http://localhost:5000
 ### setup
 
 ```
-$ cd qiskit-textbook-edu
+$ cd project-platypus
 $ npm install
 $ npm run build
 $ npm start
