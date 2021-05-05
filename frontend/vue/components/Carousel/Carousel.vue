@@ -40,6 +40,7 @@ export default class Carousel extends Vue {
     if (selectedEl) {
       selectedEl.classList.add('active')
     }
+    this.$emit('onSelectedChange', value)
   }
 }
 </script>

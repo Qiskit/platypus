@@ -6,6 +6,7 @@ import WhatIsQuantumVolume from './components/WhatIsQuantumVolume/WhatIsQuantumV
 import LayersCircuit from './components/WhatIsQuantumVolume/LayersCircuit.vue'
 import DragAndDropCode from './components/DragAndDropCode/DragAndDropCode.vue'
 import Carousel from './components/Carousel/Carousel.vue'
+import MiniComposer from './components/MiniComposer/MiniComposer.vue'
 import Quiz from './components/Quiz/Quiz.vue'
 import AppCta from './components/common/AppCta.vue'
 import UtilityPanel from './components/UtilityPanel/UtilityPanel.vue'
@@ -39,7 +40,8 @@ const components: any = {
   UtilityPanelHeader,
   LessonNotes,
   UniversalGlossary,
-  EmptyPanel
+  EmptyPanel,
+  MiniComposer
 }
 
 Object.keys(components).forEach((c) => {
