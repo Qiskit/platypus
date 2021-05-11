@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
+import draggable from 'vuedraggable'
 import MeasureZ from './GatesSVG/MeasureZ.vue'
 
 export enum GateName {
@@ -19,7 +20,8 @@ class Props {
 
 @Options({
   components: {
-    MeasureZ
+    MeasureZ,
+    draggable
   }
 })
 export default class Gate extends Vue.with(Props) {

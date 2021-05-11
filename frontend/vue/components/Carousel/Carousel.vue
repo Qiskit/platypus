@@ -3,23 +3,29 @@
     <div ref="elementsWrapperRef" class="carousel__elements_wrapper">
       <slot />
     </div>
-    <DotsSelector class="carousel__selector" :count="count" @onSelectedChange="selectedIntChange" />
+    <DotsSelector ref="dotsSelectorRef" class="carousel__selector" :count="count" :disable-arrows="disableArrows" @onSelectedChange="selectedIntChange" />
   </section>
 </template>
 
 <script lang="ts">
 import { ref } from '@vue/reactivity'
-import { Options, Vue } from 'vue-class-component'
+import { Options, prop, Vue } from 'vue-class-component'
 import DotsSelector from '../common/DotsSelector.vue'
+
+class Props {
+  disableArrows = prop<boolean>({ default: false, required: true })
+}
 
 @Options({
   components: {
     DotsSelector
   }
 })
-export default class Carousel extends Vue {
+export default class Carousel extends Vue.with(Props) {
   elementsWrapperRef = ref<HTMLElement | null>(null)
   get elementsWrapper () { return (this.elementsWrapperRef as unknown as HTMLElement) }
+  dotsSelectorRef = ref<DotsSelector | null>(null)
+  get dotsSelector () { return (this.dotsSelectorRef as unknown as DotsSelector) }
   selectedInt = 0
   count = 0
 
@@ -41,6 +47,10 @@ export default class Carousel extends Vue {
       selectedEl.classList.add('active')
     }
     this.$emit('onSelectedChange', value)
+  }
+
+  nextSlide () {
+    this.dotsSelector.nextDot()
   }
 }
 </script>

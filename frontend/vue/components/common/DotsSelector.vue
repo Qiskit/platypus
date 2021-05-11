@@ -5,7 +5,7 @@
       :class="{
         'dot-selector__arrow-disabled' : selected == 0
       }"
-      :disabled="selected == 0"
+      :disabled="disableArrows || selected == 0"
       @click="prevDot()"
     >
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@
     </ul>
     <button
       class="dot-selector__arrow dot-selector__arrow--forward"
-      :disabled="selected == count - 1"
+      :disabled="disableArrows || selected == count - 1"
       @click="nextDot()"
     >
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,6 +46,7 @@ import { Options, prop, Vue } from 'vue-class-component'
 class Props {
   count = prop<number>({ default: 0, required: true })
   uid = prop<string>({ required: true })
+  disableArrows = prop<boolean>({ default: false, required: true })
 }
 
 @Options({
@@ -82,13 +83,16 @@ export default class DotsSelector extends Vue.with(Props) {
   &__dot-list {
     display: flex;
     flex-direction: row;
-    list-style: none;
+    justify-content: space-evenly;
+
     margin: 0;
     padding: 0;
+    min-width: 250px;
+
+    list-style: none;
   }
 
   &__dot-item {
-    margin: 0 2rem;
 
     &__label {
       position: relative;

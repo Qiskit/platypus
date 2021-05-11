@@ -2,14 +2,14 @@
   <svg class="circuit-line">
     <Ket0
       x="0"
-      y="32"
+      y="34"
       width="20"
       height="18"
       class="circuit-line__ket"
     />
     <SketchLine
       x="32"
-      y="41"
+      y="43"
       class="circuit-line__line"
       :stroke-style="strokeStyle"
       :line="circuitLine"
