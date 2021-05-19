@@ -1,0 +1,62 @@
+siteName: Learn Quantum Computation using Qiskit
+description: A university quantum algorithms/computation course supplement based on Qiskit
+domain: platypus.qiskit.org
+
+# privacyURL: /policies
+# googleAnalytics: UA-XXX-XXX
+# banner: (c) Mathigon Ltd
+locales: [en,]
+
+search:
+  enabled: false
+  popular: ['course:science:optics', 'course:geography:hydrology']
+
+# All custom (non-course) URLs to add to the sitemap
+sitemap: [/courses, /custom]
+
+header:
+  # File paths are relative to frontend/assets
+  logo: images/logo.svg
+  title: images/title.svg
+  links:
+    - title: Courses
+      icon: library
+      url: /courses
+
+footer:
+  rows:
+    - links:
+        - title: About
+          url: /about
+        - title: Courses
+          url: /courses
+  copyright: © Qiskit, 2021
+
+social:
+  facebook:
+    page: Mathigon
+    appId: 522356201246169
+  twitter:
+    handle: MathigonOrg
+  instagram:
+    handle: mathigon_org
+  youtube:
+    channel: Mathigon
+
+courses:
+  revealAll: false  # Reveal all steps at once, even if they have not all been completed
+  audio: false  # Generate audio narrations
+
+tutor:
+  enabled: false
+  name: Plat
+
+contentDir: working
+
+analytics:
+  production:
+    url: https://cloud.ibm.com/analytics/build/bluemix-analytics.min.js
+    key: ffdYLviQze3kzomaINXNk6NwpY9LlXcw
+  development:
+    url: https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js
+    key: zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H

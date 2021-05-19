@@ -1,0 +1,125 @@
+@import '../variables/colors.scss';
+@import '../variables/fonts.scss';
+
+/* in-cell thebelab buttons */
+.thebebtn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border: none;
+
+  i {
+    font-style: normal;
+    color: $text-color-lighter;
+  }
+  
+  button {
+    background-color: $background-color-light;
+    border: none;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color .2s linear, color .2s linear;
+    &:hover {
+      color: $text-color-white;
+      background-color: $background-color-darker;
+    }
+    &:active {
+      background-color: $background-color-white;
+      color: $text-color-dark;
+    }
+  }
+}
+  
+.input_area .highlight {
+  position: relative;
+}
+
+// Hide code buttons
+div.jb_input div.input {
+  position: relative;
+}
+
+
+.thebelab-cell {
+  // To ensure that thebelab cells are always the top of the Z-stack
+  position: relative;
+  z-index: 999;
+  border: 1px solid $border-color;
+  background-color: $background-color-lighter;
+  border-radius: 0px;
+  margin: 2em 0;
+
+  &:focus-within {
+    border-color: $active-color;
+  }
+}
+
+.thebelab-input {
+  padding: 14px 12px 6px 12px;
+}
+
+.thebelab-button {
+  font-family: $plex-sans;
+  font-size: 0.9em;
+  z-index: 999;
+  display: inline-block;
+  padding: 6px 16px; 
+  margin: 0;
+  margin-right: 4px;
+  box-sizing:  border-box;
+  text-decoration: none;
+  font-weight: 300;
+  text-align: center;
+  transition: all 0.2s;
+  border: none;
+
+  background-color: $background-color-darker;
+  color: $text-color-white;
+}
+
+.thebelab-button:hover{
+  background-color: $background-color-light;
+  color: $text-color-dark;
+  cursor: pointer;
+}
+
+.thebelab-button:active{
+  background-color: $background-color-white;
+  color: $text-color-dark;
+}
+
+.CodeMirror {
+  font-family: $plex-mono;
+  font-size: 0.9em;
+}
+
+x-step {
+  .jp-OutputArea-output {
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  }
+}
+
+div.jp-OutputArea-output {
+  padding: 18px;
+}
+
+div.jp-OutputArea > :first-child {
+  border-top: 1px solid $border-color !important;
+}
+
+.jp-OutputArea-child {
+  background-color: $background-color-white;
+  padding: 18px;
+}
+
+button.thebelab-button {
+  padding: 6px 16px;
+  position: relative;
+  left: calc(100% - 5rem);
+  width: 5rem;
+}

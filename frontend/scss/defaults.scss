@@ -1,0 +1,115 @@
+@import './variables/colors.scss';
+@import './variables/fonts.scss';
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+
+html,
+body {
+  font-family: $plex-sans;
+  font-size: 16px;
+  letter-spacing: 0.16px;
+  line-height: 20px;
+  min-height: 100%;
+  color: $text-color-light;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: $link-color-tertiary;
+}
+
+a:visited {
+  color: $link-color-tertiary;
+}
+
+pre {
+  overflow: auto;
+}
+
+code, pre {
+  font-family: $plex-mono;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  empty-cells: show !important;
+}
+
+tbody {
+  border-bottom: 1px solid $border-color-dark !important;
+}
+
+/* Fix strange table striping choice */
+tr:nth-child(even) {
+  background-color: $background-color-lighter !important;
+}
+
+td {
+  border: 0px !important;
+  border-left: 1px solid $border-color-dark !important;
+  border-right: 1px solid $border-color-dark !important;
+}
+
+thead td {
+  border-bottom: 1px solid $border-color-dark !important;
+}
+
+table th {
+  border: 1px solid $border-color-dark;
+}
+
+// Scrollbar width
+::-webkit-scrollbar {
+  width: 5px;
+  background: $background-color-lighter;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $background-color-light;
+}
+
+main, nav {
+  scrollbar-width: thin;
+}
+
+details {
+  background: $background-color-lighter;
+  border-bottom: 1px solid $border-color-light-2;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  padding: 1rem;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.15rem;
+    padding: 8px 0;
+
+    &::after {
+      content: url('/images/chevron-down.svg');
+      display: inline-block;
+      position: absolute;
+      right: 2rem;
+      width: 1rem;
+    }
+  }
+
+  &[open] {
+    summary {
+      &::after {
+        content: url('/images/chevron-up.svg');
+      }
+    }
+  }
+}

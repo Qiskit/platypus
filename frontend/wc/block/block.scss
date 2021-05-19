@@ -1,0 +1,164 @@
+// =============================================================================
+// q-block Styles
+// (c) Mathigon
+// =============================================================================
+
+
+@import '../../scss/variables/colors.scss';
+
+q-block {
+  display: block;
+  margin: 1rem 0;
+  padding: 0;
+  position: relative;
+
+  .qb-title {
+    > :first-child {
+      background-color: $block-background-color;
+      content: attr(title);
+      color: $block-color;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 18px;
+      margin: 0;
+      min-width: 25%;
+      padding: .5em 1em;
+    }
+  }
+
+  .qb-body {
+    border-bottom: 2px solid $block-border-color;
+    border-top: 2px solid $block-border-color;
+    background-color: $background-color-lighter;
+    padding: 1em;
+
+    > h3 {
+      margin: 1em 0;
+    }
+
+    > p {
+      margin: 0 0 1rem 0;
+      &:empty,
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    summary {
+      padding: 24px 0 8px 0;
+    }
+
+    details {
+      margin: 0 1rem;
+      padding: 0;
+
+      &:last-child {
+        margin-bottom: 1rem;
+      }
+
+      &[open] {
+        padding-bottom: 1rem;
+
+        summary {
+          padding-bottom: 16px;
+        }
+      }
+    }
+
+    x-img {
+      .wrap {
+        height: initial;
+      }
+
+      img {
+        display: inline-block;
+      }
+    }
+  }
+
+  &.exercise {
+    .qb-title {
+      > * {
+        background-color: $block-background-color-secondary;
+        color: $block-color-secondary;
+      }
+    }
+
+    .qb-body {
+      border-bottom-color: $block-border-color-secondary;
+      border-top-color: $block-border-color-secondary;
+    }
+  }
+
+  &.tabs {
+    margin: 3rem 0;
+
+    .qb-title {
+      > * {
+        background-color: $block-background-color-tertiary;
+        color: $block-color-tertiary;
+      }
+    }
+
+    .qb-body {
+      border-bottom-color: $block-border-color-tertiary;
+      border-top-color: $block-border-color-tertiary;
+
+      x-tabbox {
+        margin: 0;
+
+        > .titles {
+          margin: 0;
+    
+          h3 {
+            background: none;
+            border: none;
+            border-radius: initial;
+            height: 1.3rem;
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: initial;
+            margin: 0 1.25rem 0 0;
+            padding: 0;
+    
+            &:hover {
+              color: $block-link-color-tertiary;
+            }
+    
+            &.active {
+              border-bottom: 2px solid $block-border-color-tertiary;
+              color: $block-link-color-tertiary;
+            }
+          }
+        }
+    
+        .body {
+          background: initial;
+          padding-top: 12px;
+        }
+
+        .tab {
+          grid-template-columns: auto auto;
+          grid-gap: 10px;
+          padding: 0 0 1rem 0;  
+          position: relative;
+          min-height: 200px;
+
+          &:visible {
+            display: grid !important;
+          }
+
+          > figure img {
+            max-height: 175px;
+            max-width: 300px;
+          }
+
+          p {
+            margin-bottom: 14px;
+          }
+        }
+      }
+    }
+  }
+}

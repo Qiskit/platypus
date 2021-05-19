@@ -1,0 +1,27 @@
+@import '../variables/settings.scss';
+
+.MathJax_Display {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
+svg.mathjax { 
+  display: inline-block;
+}
+
+mfenced {
+  display: none;
+}
+
+p {
+  &.text-center {
+    .MJX-TEX {
+      font-size: 1.15rem;
+      white-space: pre-wrap;
+    }
+  }
+
+  .MJX-TEX {
+    font-size: 1rem;
+  }
+}

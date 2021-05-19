@@ -1,0 +1,34 @@
+include /_mixins
+
+doctype html
+html(lang=lang dir=dir)
+  head
+    include head
+
+  body#app
+    div.qiskit__navbar#qiskit-navbar(data-vue-mount)
+      the-menu
+
+    .body
+      div.c-textbook.js-show-sidebar
+        include sidebar
+
+        main.c-textbook__page
+          div.c-textbook__content#textbook_content
+            div.jupyter-page
+              #page-info
+                #page-title Learn Quantum Computation using Qiskit
+              .preface-top
+                .preface-checker-pattern
+                .preface-summary
+                  aside.preface-summary-image
+                    img(src="https://qiskit.org/textbook/images/preface_illustration_2.svg")
+                  .preface-summary-text
+                    p Greetings from the Qiskit Community team! This textbook is a university quantum algorithms/computation course supplement based on Qiskit to help learn:
+
+          div.c-textbook_footer#textbook_footer
+            footer
+              p.footer
+
+    script(src='/textbook.js')
+    include ../includes/tail.html

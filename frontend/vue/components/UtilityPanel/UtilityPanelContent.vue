@@ -1,0 +1,111 @@
+<template>
+  <div class="utility-panel-content">
+    <LessonNotes
+      v-if="showLessonNotes"
+      :notations="notationsData"
+      :glossaryTerms="vocabulary"
+      @handleEmptyStateRedirect="emptyStateRedirect" />
+    <UniversalGlossary v-if="showUniversalGlossary" :glossaryData="universalNotations" />
+  </div>
+</template>
+
+<script lang="ts">
+import { Vue, Options, prop } from 'vue-class-component'
+import 'carbon-web-components/es/components/data-table/table.js';
+import 'carbon-web-components/es/components/data-table/table-body.js';
+import 'carbon-web-components/es/components/data-table/table-head';
+import 'carbon-web-components/es/components/data-table/table-cell.js';
+import 'carbon-web-components/es/components/data-table/table-row.js';
+import 'carbon-web-components/es/components/data-table/table-header-row';
+import LessonNotes from './LessonNotes.vue'
+import UniversalGlossary from './UniversalGlossary.vue'
+
+class Props {
+  selection = prop<any>({})
+}
+
+@Options({
+  components: { LessonNotes, UniversalGlossary },
+  computed: {
+    notationsData: {
+      get() {
+        const data = document.getElementById('notations')
+        let localDefinitions = undefined
+
+        if(data) {
+          const notationsParsed = JSON.parse(data.innerHTML)
+          const notationsArr = Object.values(notationsParsed)
+          localDefinitions = notationsArr
+          }
+        return localDefinitions
+      }
+    },
+    vocabulary: {
+      get(){
+        const data = document.getElementById('glossary')
+        let localVocablulary = undefined
+
+        if(data) {
+          const vocabularyParsed = JSON.parse(data.innerHTML)
+          const vocabularyArr = Object.values(vocabularyParsed)
+
+          localVocablulary = vocabularyArr
+        }
+
+        return localVocablulary
+      }
+    },
+    universalNotations: {
+      get(){
+        const data = document.getElementById('universal-notes')
+        let universalNotes = undefined
+
+        if(data) {
+          universalNotes = JSON.parse(data.innerText)
+        }
+        return universalNotes
+      }
+    }
+  }
+})
+
+
+
+export default class UtilityPanelContent extends Vue.with(Props) {
+  showLessonNotes:boolean = false;
+  showUniversalGlossary:boolean = false;
+
+  chooseTitle(val: any){
+    this.showLessonNotes = val === 'Lesson Notes';
+    this.showUniversalGlossary = val === 'Glossary';
+  }
+
+  emptyStateRedirect(label:string) {
+    this.$emit('emptyStateRedirect', label)
+  }
+}
+</script>
+
+<style lang="scss">
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+@import '../../../scss/variables/colors.scss';
+@import 'carbon-components/scss/globals/scss/typography';
+
+.utility-panel-content {
+  background-color: $background-color-white;
+  padding: $spacing-06 $spacing-05;
+
+  bx-table-header-cell {
+    color: $text-color-black;
+    background-color: $background-color-light;
+  }
+
+  bx-table-cell,
+  bx-table-cell:hover {
+    color: $text-color-light;
+    background-color: $background-color-white;
+    border-top: none;
+    border-bottom: 1px solid $border-color;
+  }
+}
+</style>
