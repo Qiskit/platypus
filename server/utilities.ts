@@ -1,4 +1,3 @@
-import * as fs from 'fs'
 import * as path from 'path'
 
 import { Course, Section } from '@mathigon/studio/server/interfaces'
@@ -24,9 +23,24 @@ const toc: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml'))
 
 // const COURSES = fs.readdirSync(CONTENT_DIR)
 //   .filter(id => id !== 'shared' && !id.includes('.') && !id.startsWith('_'))
-const COURSES = toc.map((t: TocCourse) => {
-  return t.url.startsWith('/') ? t.url.substring(1) : t.url
+const learningPaths:string[] = []
+const textbookCourses:string[] = []
+const excludedCourses:string[] = []
+toc.forEach((t: TocCourse) => {
+  const url = t.url.startsWith('/') ? t.url.substring(1) : t.url
+  if (t['learning-path']) {
+    learningPaths.push(url)
+  } else if (t.exclude) {
+    excludedCourses.push(url)
+  } else {
+    textbookCourses.push(url)
+  }
 })
+const COURSES = {
+  textbookCourses,
+  learningPaths,
+  excludedCourses
+}
 
 const NOTATIONS: NotationsMap = (loadYAML(path.join(CONTENT_DIR, 'shared/notations.yaml')) || {}) as NotationsMap
 const GLOSSARY: {[x: string]: any} = (loadYAML(path.join(CONTENT_DIR, 'shared/glossary.yaml')) || {}) as object

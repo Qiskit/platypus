@@ -4,13 +4,40 @@ if !courses
         include ../../frontend/assets/images/chevron-down.svg
 nav.c-textbook__sidebar#js-sidebar
   ul.c-sidebar__chapters
-    if courses
-      for c in courses || []
-        - var c = getCourse(c, locale.id)
-        if c
-          li.c-sidebar__chapter
-            a.c-sidebar__entry(href=`/course/${c.id}`)
-              | #{c.title}
+    if learningPaths
+      if learningPaths
+        li.c-sidebar__chapter
+          span.c-sidebar__entry
+            | Courses
+        ul
+          for c in learningPaths
+            - var c = getCourse(c, locale.id)
+            if c
+              li.c-c-sidebar__section
+                a.c-sidebar__entry(href=`/course/${c.id}`)
+                  | #{c.title}
+      if courses
+        li.c-sidebar__chapter
+          span.c-sidebar__entry
+            | Textbook
+        ul
+          for c in courses
+            - var c = getCourse(c, locale.id)
+            if c
+              li.c-c-sidebar__section
+                a.c-sidebar__entry(href=`/course/${c.id}`)
+                  | #{c.title}
+      if excludedCourses
+        li.c-sidebar__chapter
+          span.c-sidebar__entry
+            | Misc
+        ul
+          for c in excludedCourses
+            - var c = getCourse(c, locale.id)
+            if c
+              li.c-c-sidebar__section
+                a.c-sidebar__entry(href=`/course/${c.id}`)
+                  | #{c.title}
     else
       - var c = course
       li.c-sidebar__chapter

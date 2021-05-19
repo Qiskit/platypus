@@ -162,6 +162,7 @@
 
 - title: Examples
   url: /examples
+  exclude: true
   sections:
     - title: Annotations
       url: /examples/annotations

@@ -23,6 +23,7 @@ export interface TocCourse {
   title: string,
   url: string,
   'learning-path'?: boolean,
+  exclude?: boolean,
   sections: [TocSection]
 }
 
