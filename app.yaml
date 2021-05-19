@@ -6,7 +6,7 @@ env: flex
 skip_files:
   - ^node_modules$
   - ^converter$
-  - ^notebooks$
+  - ^notebooks/(?!toc.yaml)$
   - ^venv$
   - ^test$
   - ^.git$
