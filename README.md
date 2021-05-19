@@ -1,6 +1,6 @@
 # project-platypus
 
-Project Platypus exploration
+Project Platypus
 
 ## Local setup
 
@@ -27,21 +27,3 @@ $ npm start
 > _To watch changes and rebuild automatically run with `npm run watch`_
 
 After the application has started access the site at: http://localhost:5000/
-
-
-## Docker setup
-
-```
-$ cd project-platypus
-$ docker build -t platypus .
-$ docker run -d -p 5000:5000 --name=platypus platypus
-```
-
-### start and stop container
-
-```
-$ docker start platypus
-$ docker stop platypus
-```
-
-After the Docker container has started access the site at: http://localhost:5000/
