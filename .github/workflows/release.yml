@@ -41,25 +41,24 @@ jobs:
           python3 -m venv venv
           source venv/bin/activate
       
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: pip install -r converter/textbook-converter/requirements.txt
 
       - name: Build
         # Change this if you need different/additional build scripts.
-        # Scripts starting with `npm run` are defined in package.json
         run: npm run build
 
-      # # https://github.com/google-github-actions/deploy-appengine
-      # - name: Deploy to AppEngine
-      #   uses: google-github-actions/deploy-appengine@main
-      #   with:
-      #     # The GCLOUD_SERVICE_ACCOUNT secret is defined in the GitHub repo.
-      #     # It needs the following permissions
-      #     #  - roles/appengine.appAdmin
-      #     #  - roles/iam.serviceAccountUser
-      #     #  - roles/compute.storageAdmin
-      #     #  - cloudbuild.builds.editor
-      #     credentials: ${{secrets.GCLOUD_SERVICE_ACCOUNT}}
-      #     deliverables: app.yaml
-      #     # qiskit-web is the Google Cloud App ID provided by Mathigon
-      #     project_id: qiskit-web
+      # https://github.com/google-github-actions/deploy-appengine
+      - name: Deploy to AppEngine
+        uses: google-github-actions/deploy-appengine@main
+        with:
+          # The GCLOUD_SERVICE_ACCOUNT secret is defined in the GitHub repo.
+          # It needs the following permissions
+          #  - roles/appengine.appAdmin
+          #  - roles/iam.serviceAccountUser
+          #  - roles/compute.storageAdmin
+          #  - cloudbuild.builds.editor
+          credentials: ${{secrets.GCLOUD_SERVICE_ACCOUNT}}
+          deliverables: app.yaml
+          # qiskit-web is the Google Cloud App ID provided by Mathigon
+          project_id: qiskit-web
