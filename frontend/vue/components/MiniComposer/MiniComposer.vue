@@ -145,7 +145,7 @@ export default class MiniComposer extends Vue.with(Props) {
     {
       autoMeasureGate: true,
       availableGates: [{ name: GateName.H, id: 2 }],
-      circuitState: [{ name: GateName.H, id: 2 }, { name: GateName.H, id: 2 }, { name: GateName.H, id: 2 }],
+      circuitState: [],
       circuitStateGoal: [{ name: GateName.H, id: 2 }],
       startProbabilities: [{ key: '0', value: 1 }, { key: '1', value: 0 }],
       endProbabilities: [{ key: '0', value: 0.5 }, { key: '1', value: 0.5 }],
