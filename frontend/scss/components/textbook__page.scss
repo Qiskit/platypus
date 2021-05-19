@@ -1,0 +1,166 @@
+@import '../variables/colors.scss';
+@import '../variables/settings.scss';
+@import '../variables/mq.scss';
+@import '../variables/fonts.scss';
+
+.c-textbook {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0 0 0 auto;
+  top: 0;
+}
+
+.c-textbook__page {
+  height: calc(100vh - #{$qiskit-navbar-height});
+  overflow: auto;
+  position: fixed;
+  top: $qiskit-navbar-height;
+  background-color: $background-color-white;
+}
+
+.c-textbook__page {
+  width: $textbook-page-width;
+  transition: transform 250ms ease;
+  left: 0;
+  padding: 0 $spacing-unit $spacing-unit-small $spacing-unit-small;
+  overflow-x: visible;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.js-show-sidebar {
+  .c-textbook__page {
+    transform: translate($left-sidebar-width, 0);
+  }
+}
+
+
+@media (min-width: 48em) {
+  .js-show-sidebar .c-textbook__page {
+    width: calc(100% - #{$left-sidebar-width});
+  }
+}
+
+.c-textbook__content {
+  clear: both;
+  padding-top: $qiskit-navbar-height;
+  width: 95%;
+}
+
+.c-textbook__content,
+.c-textbook__footer {
+  max-width: $page-max-width;
+}
+
+.c-textbook__footer {
+	padding-bottom: $qiskit-navbar-height;
+}
+
+img.textbook_logo {
+  margin-top: 20px;
+  max-height: 100px;
+  margin: 0px auto 20px auto;
+  display: block;
+}
+
+#page-info {
+  margin-bottom:20px;
+  max-width:70%
+}
+
+#page-title {
+  color: $text-color-dark;
+  font-size: 2.7rem;
+  font-family: $plex-sans-light;
+  line-height: 3.15rem;
+}
+
+.qv-layout.js-show-sidebar .c-textbook__page{
+  @include mq($until: large) {
+    width: calc(100% - 2em);
+    padding: 0 32px 12px 0;
+    transform: translate(4rem, 0);
+  }
+}
+
+.qv-layout.js-show-sidebar .c-textbook__page .jupyter-page{
+  max-width: $content-max-width;
+}
+
+// hidden panel styles
+.qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
+  transform: translate(4rem, 0);
+  width: calc(100% - 2rem);
+  padding: 0 32px 12px 0;
+}
+
+@media (max-width: $browser-medium) {
+  .qv-layout:not(.qv-layout__panel--hidden) .footer-nav {
+    flex-direction: column;
+  }
+
+  .qv-layout:not(.qv-layout__panel--hidden) .footer-nav__cta__container {
+    width: 100%;
+  }
+}
+
+@media (max-width: $browser-small) {
+  .qv-layout.js-show-sidebar .c-textbook__page {
+    right: 0;
+    width: 100%;
+    transform: initial;
+    padding: $spacing-unit-small;
+  }
+
+  .c-textbook__content {
+    width: 100%;
+  }
+}
+
+
+aside.preface-summary-image {
+  width: 50%;
+  float: right;
+}
+
+@media only screen and (max-width: 1350px){
+  aside.preface-summary-image {
+    width: 66%;
+    float: none;
+    margin: auto;
+    margin-bottom: -75px;
+  }
+}
+
+div.preface-summary-text {
+  padding-top: 3em;
+  color: $text-color-light;
+}
+
+div.preface-summary-text ol {
+  margin: 3em;
+}
+div.preface-summary-text ol li{
+  margin-top: 1em;
+}
+
+div.preface-checker-pattern {
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: 100%;
+  height: 70%;
+  background-size: $qiskit-navbar-height $qiskit-navbar-height;
+  background-image: linear-gradient(to right, $background-color-light 1px, transparent 1px), linear-gradient(to bottom, $background-color-light 1px, transparent 1px);
+  z-index: -1;
+}
+
+// hero image
+.preface-summary > aside.preface-summary-image {
+  margin: initial;
+  margin-bottom: 25px;
+  float: initial;
+}

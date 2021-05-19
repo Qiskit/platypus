@@ -28,9 +28,10 @@ nbproject
 # Folders to ignore
 .vscode
 node_modules
-build
 ts_build
 dist
 __pycache__
 *.egg-info
 working
+
+public/

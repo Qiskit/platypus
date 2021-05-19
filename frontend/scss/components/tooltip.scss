@@ -1,0 +1,88 @@
+@import '../variables/colors.scss';
+@import '../variables/fonts.scss';
+
+// QV Tooltip
+.qv-tooltip {
+  font-family: $plex-sans !important;
+  margin-top: 0.75rem;
+  color: $text-color-light;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  transition-timing-function: ease;
+  transition-property: visibility .25s, opacity 0.25s;
+}
+
+x-step {
+  h3 {
+    &.qv-tooltip__title {
+      margin: 0;
+      color: $text-color-black;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+}
+
+.q-math-notation {
+  position: relative;
+  border-bottom: 2px solid $border-color-quinary;
+
+  &:hover {
+    cursor: pointer;
+    border-bottom: 2px solid $border-color-tertiary;
+
+    .qv-tooltip {
+      transition-timing-function: ease;
+      transition-delay: 0.25s;
+      transition-property: visibility .25s, opacity 0.25s;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.qv-tooltip__content {
+  width: 16rem;
+  background-color: $background-color-lighter;
+  border-top: 2px solid $border-color-tertiary;
+  border-bottom: 2px solid $border-color-tertiary;
+  padding: 1rem;
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  white-space: initial;
+  box-shadow: 2px 2px .5rem $shadow-color-light;
+}
+
+.qv-tooltip__content--left {
+  .qv-tooltip__content {
+    right: -1rem;
+  }
+}
+
+.qv-tooltip__content:after {
+  content: " ";
+  position: absolute;
+  bottom: calc(100% + 1px); /* At the top of the tooltip */
+  left: 0.25rem;
+  width: 12px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent $border-color-tertiary transparent;
+}
+
+.qv-tooltip__content--left:after{
+  content: " ";
+  position: absolute;
+  bottom: calc(100% + 1px); /* At the top of the tooltip */
+  right: 0;
+  width: 12px;
+  margin-right: 2px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent $border-color-tertiary transparent;
+}

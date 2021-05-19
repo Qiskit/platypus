@@ -1,0 +1,323 @@
+@import '../variables/mq.scss';
+@import '../variables/settings.scss';
+@import '../variables/colors.scss';
+
+.c-textbook__sidebar {
+  direction: rtl;
+  overflow: auto;
+  position: fixed;
+  top: $qiskit-navbar-height;
+  left: 0;
+  height: calc(100vh - #{$qiskit-navbar-height});
+  width: $left-sidebar-width;
+
+  background-color: $background-color-lighter;
+  padding: $spacing-unit-small $spacing-unit;
+  scrollbar-color: $background-color-lighter $background-color-lighter;
+  transition: scrollbar-color 0.2s ease-in-out;
+
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.71429;
+
+  border-right: 1px solid $border-color;
+
+  &:hover {
+  	scrollbar-color: $text-color-lighter-3 $background-color-lighter;
+  }
+
+  @include mq($from: medium) {
+    z-index: 100;
+  }
+
+  @include mq($until: medium) {
+    max-width: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+.c-sidebar__chapters {
+  direction: ltr;
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+li.c-sidebar__chapter:first-child {
+  display: none;
+}
+
+li.c-sidebar__chapter > a {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.c-sidebar__sections,
+.c-sidebar__subsections {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+.c-sidebar__sections {
+  margin-left: 0;
+  margin-bottom: 12px;
+}
+
+.c-sidebar__subsections {
+  margin-left: 20px;
+}
+
+.c-sidebar__entry {
+  display: block;
+  color: $text-color-dark;
+  font-size: 0.875rem;
+  line-height: 20px;
+  letter-spacing: 0.16px;
+  padding: $spacing-unit-x-small/2;
+  text-decoration: none;
+
+  .c-sidebar__chapter & {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 22px;
+  }
+}
+
+a.c-sidebar__entry {
+  &:visited {
+    color: $text-color-dark;
+  }
+  &:hover {
+    background: initial;
+    color: $link-color-tertiary;
+  }
+}
+
+.c-sidebar__entry--active {
+  &.c-sidebar__entry--active {
+    color: $text-active-color;
+    font-weight: 600;
+  }
+}
+
+.c-sidebar__divider {
+  border-top: 1px solid $text-color-dark;
+  margin: $spacing-unit-x-small;
+}
+
+ul.c-sidebar__chapters {
+  > li.c-sidebar__chapter {
+    &:first-child {
+      display: initial;
+    }
+
+    + li.c-sidebar__chapter {
+      margin-top: 1rem;
+    }
+  }
+}
+
+nav ul.c-sidebar__sections {
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.c-sidebar__section {
+  margin: 0 0 .5em;
+  position: relative;
+  padding-bottom: 0.7rem;
+}
+
+// sidebar footer
+div.sidebar_footer {
+  bottom: 75px;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+#back-home > svg {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: text-top;
+  width: 20px;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+#app-panel-footer-toggle > svg {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: text-top;
+  width: 20px;
+}
+
+#back-home,
+#app-panel-footer-toggle {
+  > svg g {
+    stroke: currentColor;
+  }
+}
+
+#app-panel-header-toggle {
+  svg {
+    width: 20px;
+  }
+}
+
+.sidebar_header_menu {
+  display: none;
+}
+
+.sidebar_footer__menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sidebar_footer__menu_item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  padding: .5rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  color: $link-color-tertiary;
+}
+
+.sidebar_header_menu_toggle,
+.sidebar_footer__menu_item {
+  svg {
+    fill: $purple-70;
+  }
+}
+
+.sidebar_header_menu_toggle {
+  display: none;
+  text-align: right;
+  width: 100%;
+  padding: .5rem 1rem;
+}
+
+.sidebar_header__menu_item-label {
+  margin-left: 0.5rem;
+}
+
+.qv-layout__panel--hidden.js-show-sidebar .c-sidebar__entry {
+  display: none;
+}
+
+.qv-layout__panel--hidden .c-textbook__sidebar{
+  max-width: 3rem;
+  padding: 0.5rem;
+}
+
+.qv-layout__panel--hidden .c-sidebar__section{
+  height: 3rem;
+}
+
+.qv-layout__panel--hidden.js-show-sidebar .c-sidebar__sections{
+  margin-left: 0.5rem;
+  margin-bottom: 0;
+}
+
+.qv-layout__panel--hidden .sidebar_footer__menu_item {
+  padding: 0.5rem;
+  justify-content: center;
+}
+
+.qv-layout__panel--hidden #app-panel-footer-toggle > svg {
+  transform: scaleX(-1);
+  margin: 0;
+}
+
+.qv-layout__panel--hidden #back-home > svg {
+  margin: 0;
+}
+
+.qv-layout__panel--hidden .sidebar_footer__menu_item-label {
+  display: none;
+}
+
+@media (max-width: $browser-small) {
+  .qv-layout.qv-layout__panel--hidden .c-textbook__sidebar {
+    max-width: initial;
+    right: 0;
+    width: 100%;
+  }
+
+  .qv-layout__panel--hidden.js-show-sidebar .c-sidebar__entry{
+    display: inline-block;
+  }
+
+  .qv-layout__panel--hidden .sidebar_footer__menu_item {
+    padding: 0.5rem 2rem;
+    justify-content: flex-end;
+  }
+
+  .qv-layout .sidebar_header_menu svg {
+    transform: rotate(180deg);
+    transition: transform 70ms cubic-bezier(.2,0,.38,.9);
+  }
+
+  .qv-layout.qv-layout__panel--hidden .sidebar_header_menu svg {
+    transform: rotate(0deg);
+    transition: transform 70ms cubic-bezier(.2,0,.38,.9);
+  }
+
+  #app-panel-footer-toggle {
+    display: none;
+  }
+
+  div.sidebar_footer {
+    bottom: 120px;
+  }
+
+  #back-home .sidebar_footer__menu_item-label {
+    display: block;
+  }
+
+  .qv-layout__panel--hidden #back-home > svg {
+    margin-right: 10px;
+  }
+
+  .sidebar_header_menu_toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .sidebar_header_menu {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    background-color: $background-color-lighter;
+  }
+
+  .qv-layout .c-textbook__sidebar {
+    max-width: initial;
+    width: 100%;
+    z-index: 1;
+    top: 96px
+  }
+
+  .qv-layout.qv-layout__panel--hidden .c-textbook__sidebar {
+    z-index: 0;
+  }
+
+  .qv-layout.qv-layout__panel--hidden #app-panel-footer-toggle > svg {
+    transform: rotate(-180deg);
+  }
+
+  .qv-layout__panel--hidden .c-sidebar__section {
+    height: initial;
+  }
+}
