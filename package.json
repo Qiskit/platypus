@@ -1,6 +1,6 @@
 {
   "name": "@qiskit/platypus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Project Platypus",
   "repository": "https://github.ibm.com/IBM-Q-Software/project-platypus",
   "license": "Apache-2.0",
