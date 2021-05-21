@@ -1,5 +1,5 @@
 /* Override of Mathigon styles */
-
+@import '../../../node_modules/carbon-components/scss/globals/scss/typography';
 @import '../variables/colors.scss';
 @import '../variables/fonts.scss';
 
@@ -27,12 +27,35 @@ pre {
 }
 
 .reveal-banner {
+  @include type-style('productive-heading-01');
   background-color: $background-color-light;
+  border-radius: initial;
+  border-right: 1px solid $border-color-secondary;
   color: $text-color-light;
+  padding: $spacing-03 $spacing-07 $spacing-03 $spacing-05;
   top: 0px;
   left: 0px;
 
-  [data-learning-path="false"] & {
+  .complete {
+    color: $text-active-color;
+    font-weight: normal;
+    line-height: 1.25rem;
+
+    > span {
+      display: inline-block;
+      vertical-align: text-bottom;
+    }
+
+    > svg {
+      display: inline-block;
+      fill: $text-active-color;
+      margin-left: $spacing-05;
+      vertical-align: text-bottom;
+      width: 1.125rem;
+    }
+  }
+
+  [data-reveal="true"] & {
     .complete {
       display: none;
     }

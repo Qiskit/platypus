@@ -162,7 +162,7 @@
 
 - title: Examples
   url: /examples
-  exclude: true
+  type: docs
   sections:
     - title: Annotations
       url: /examples/annotations
@@ -174,7 +174,7 @@
 
 - title: Introduction to Quantum Computing
   url: /learning-states-and-qubits
-  learning-path: true
+  type: learning-path
   sections:
     - title: Introduction
       url: /ch-states/introduction
@@ -190,7 +190,7 @@
 
 - title: Quantum Machine Learning
   url: /learning-qml
-  learning-path: true
+  type: learning-path
   sections:
     - title: Introduction
       url: /quantum-machine-learning/introduction

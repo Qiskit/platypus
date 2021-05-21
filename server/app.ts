@@ -13,12 +13,8 @@ import * as storageApi from './storage'
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok'))  // Server Health Checks
   .setup({sessionSecret: 'project-platypus-beta'})
-  .redirects({ '/': 'https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo' })
-  .get('/textbook', (req, res) => res.render('index.pug', { 
-    courses: COURSES.textbookCourses,
-    learningPaths: COURSES.learningPaths,
-    excludedCourses: COURSES.excludedCourses
-  }))
+  .redirects({ '/': '/textbook' })
+  .get('/textbook', (req, res) => res.render('index.pug', { courses: COURSES }))
   .get('/course/:course/:section', async (req, res, next) => {
     const course = getCourse(req.params.course, req.locale.id)
     const section = course?.sections.find(s => s.id === req.params.section)

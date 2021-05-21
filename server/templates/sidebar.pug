@@ -1,96 +1,60 @@
-if !courses
-    div.sidebar_header_menu
-      a.sidebar_header_menu_toggle#app-panel-header-toggle(href='#')
-        include ../../frontend/assets/images/chevron-down.svg
+div.sidebar_header_menu
+  a.sidebar_header_menu_toggle#app-panel-header-toggle(href='#')
+    include ../../frontend/assets/images/chevron-down.svg
+
 nav.c-textbook__sidebar#js-sidebar
   ul.c-sidebar__chapters
-    if learningPaths
-      if learningPaths
-        li.c-sidebar__chapter
-          span.c-sidebar__entry
-            | Courses
-        ul
-          for c in learningPaths
-            - var c = getCourse(c, locale.id)
-            if c
-              li.c-c-sidebar__section
-                a.c-sidebar__entry(href=`/course/${c.id}`)
-                  | #{c.title}
-      if courses
-        li.c-sidebar__chapter
-          span.c-sidebar__entry
-            | Textbook
-        ul
-          for c in courses
-            - var c = getCourse(c, locale.id)
-            if c
-              li.c-c-sidebar__section
-                a.c-sidebar__entry(href=`/course/${c.id}`)
-                  | #{c.title}
-      if excludedCourses
-        li.c-sidebar__chapter
-          span.c-sidebar__entry
-            | Misc
-        ul
-          for c in excludedCourses
-            - var c = getCourse(c, locale.id)
-            if c
-              li.c-c-sidebar__section
-                a.c-sidebar__entry(href=`/course/${c.id}`)
-                  | #{c.title}
-    else
-      - var c = course
-      li.c-sidebar__chapter
-        span.c-sidebar__entry
-          | #{c.title}
+    - var c = course
+    li.c-sidebar__chapter
+      span.c-sidebar__entry
+        | #{c.title}
 
-      ul.c-sidebar__sections
-        for s in c.sections
-          li.c-sidebar__section(data-section-id=s.id)
-            if course && course.id === c.id
-              .connection
-              - var progclass = section && section.id === s.id ? "progress-wrapper sidebar-row active" : "progress-wrapper"
-              if section && section.id === s.id
-                div(class=progclass, title=s.title)
-                  x-progress(r=10 p=0)
-              else
-                a(
-                  href=`${s.url}`
-                  class=progclass
-                  onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}')`
-                  , title=s.title
-                )
-                  x-progress(r=10 p=0)
+    ul.c-sidebar__sections
+      for s in c.sections
+        li.c-sidebar__section(data-section-id=s.id)
+          if course && course.id === c.id
+            .connection
+            - var progclass = section && section.id === s.id ? "progress-wrapper sidebar-row active" : "progress-wrapper"
             if section && section.id === s.id
-              span(class="c-sidebar__entry c-sidebar__entry--active")
-                | #{s.title}
+              div(class=progclass, title=s.title)
+                x-progress(r=10 p=0)
             else
               a(
-                class="c-sidebar__entry"
                 href=`${s.url}`
+                class=progclass
                 onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}')`
+                , title=s.title
               )
-                | #{s.title}
+                x-progress(r=10 p=0)
+          if section && section.id === s.id
+            span(class="c-sidebar__entry c-sidebar__entry--active")
+              | #{s.title}
+          else
+            a(
+              class="c-sidebar__entry"
+              href=`${s.url}`
+              onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}')`
+            )
+              | #{s.title}
 
-  if !courses
-    div.sidebar_footer
-      nav.sidebar_footer__menu
-        a.sidebar_footer__menu_item#app-panel-footer-toggle(href='#', title='Show/hide side panel')
-          span.sidebar_footer__menu_item-label Hide side panel
-          include ../../frontend/assets/images/panel-arrow.svg
-        if course.isLearningPath
-          a.sidebar_footer__menu_item#back-home(
-            href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo/learning-paths/introduction-course'
-            onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Course overview')`
-            title='Back to course overview'
-          )
-            span.sidebar_footer__menu_item-label Back to course overview
-            include ../../frontend/assets/images/back-home.svg
-        else
-          a.sidebar_footer__menu_item#back-home(
-            href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo'
-            onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Textbook home')`
-            title='Back to textbook home'
-          )
-            span.sidebar_footer__menu_item-label Back to textbook home
-            include ../../frontend/assets/images/back-home.svg
+  div.sidebar_footer
+    nav.sidebar_footer__menu
+      a.sidebar_footer__menu_item#app-panel-footer-toggle(href='#', title='Show/hide side panel')
+        span.sidebar_footer__menu_item-label Hide side panel
+        include ../../frontend/assets/images/panel-arrow.svg
+      if course.isLearningPath
+        a.sidebar_footer__menu_item#back-home(
+          href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo/learning-paths/introduction-course'
+          onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Course overview')`
+          title='Back to course overview'
+        )
+          span.sidebar_footer__menu_item-label Back to course overview
+          include ../../frontend/assets/images/back-home.svg
+      else
+        a.sidebar_footer__menu_item#back-home(
+          href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo'
+          onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Textbook home')`
+          title='Back to textbook home'
+        )
+          span.sidebar_footer__menu_item-label Back to textbook home
+          include ../../frontend/assets/images/back-home.svg

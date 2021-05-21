@@ -17,7 +17,7 @@ html(lang=lang dir=dir)
       q-utility-panel
 
     .body
-      x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? undefined : 'true') class="qv-layout js-show-sidebar")
+      x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar")
         include sidebar
 
         article(class="c-textbook__page")
@@ -28,7 +28,9 @@ html(lang=lang dir=dir)
                 #page-title= section.title
               .reveal-banner
                 | Reading time: ~#{section.duration} min
-                .complete Reveal all steps
+                .complete 
+                  span Reveal all steps
+                  include ../../frontend/assets/images/arrow--down.svg
               if section.hero
                 .preface-top
                   .preface-checker-pattern

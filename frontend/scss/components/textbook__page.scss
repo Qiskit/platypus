@@ -1,3 +1,4 @@
+@import '../../../node_modules/carbon-components/scss/globals/scss/typography';
 @import '../variables/colors.scss';
 @import '../variables/settings.scss';
 @import '../variables/mq.scss';
@@ -88,6 +89,7 @@ img.textbook_logo {
 
 .qv-layout.js-show-sidebar .c-textbook__page .jupyter-page{
   max-width: $content-max-width;
+  margin-top: $spacing-05;
 }
 
 // hidden panel styles

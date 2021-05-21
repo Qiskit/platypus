@@ -22,7 +22,7 @@ export interface TocSection {
 export interface TocCourse {
   title: string,
   url: string,
-  'learning-path'?: boolean,
+  type?: string,
   exclude?: boolean,
   sections: [TocSection]
 }

@@ -25,21 +25,21 @@ const toc: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml'))
 //   .filter(id => id !== 'shared' && !id.includes('.') && !id.startsWith('_'))
 const learningPaths:string[] = []
 const textbookCourses:string[] = []
-const excludedCourses:string[] = []
+const miscCourses:string[] = []
 toc.forEach((t: TocCourse) => {
   const url = t.url.startsWith('/') ? t.url.substring(1) : t.url
-  if (t['learning-path']) {
+  if (t.type === 'learning-path') {
     learningPaths.push(url)
-  } else if (t.exclude) {
-    excludedCourses.push(url)
+  } else if (t.type === 'docs') {
+    miscCourses.push(url)
   } else {
     textbookCourses.push(url)
   }
 })
 const COURSES = {
-  textbookCourses,
-  learningPaths,
-  excludedCourses
+  uncategorized: textbookCourses,
+  learningPaths: learningPaths,
+  docs: miscCourses
 }
 
 const NOTATIONS: NotationsMap = (loadYAML(path.join(CONTENT_DIR, 'shared/notations.yaml')) || {}) as NotationsMap
@@ -63,7 +63,7 @@ const isLearningPath = function(course: Course) {
   const c = toc.find((t: { url: string; }) => {
     return t.url === `/${course.id}`
   })
-  return c ? !!c['learning-path'] : false
+  return c ? c.type === 'learning-path' : false
 }
 
 const findPrevSection = function(course: Course, section: Section) {
