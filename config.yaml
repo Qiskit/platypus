@@ -60,3 +60,6 @@ analytics:
   development:
     url: https://dev.console.test.cloud.ibm.com/analytics/build/bluemix-analytics.min.js
     key: zbHWEXPUfXm0K6C7HbegwB5ewDEC8o1H
+
+parser:
+  tex2html: true
