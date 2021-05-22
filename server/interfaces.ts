@@ -23,7 +23,6 @@ export interface TocCourse {
   title: string,
   url: string,
   type?: string,
-  exclude?: boolean,
   sections: [TocSection]
 }
 
@@ -35,4 +34,10 @@ export interface Notation {
 
 export interface NotationsMap {
   [x: string]: Notation
+}
+
+export interface Subsection {
+  title: string,
+  id: string,
+  subsections?: [Subsection]
 }

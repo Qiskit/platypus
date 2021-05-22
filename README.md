@@ -13,7 +13,7 @@ Project Platypus
     $ pip install -r requirements.txt
     ```
 
-1. Node.js
+1. Node.js (14.0 or later)
 
 ### setup
 

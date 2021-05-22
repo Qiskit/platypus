@@ -67,7 +67,7 @@ li.c-sidebar__chapter > a {
 }
 
 .c-sidebar__subsections {
-  margin-left: 20px;
+  margin-left: 24px;
 }
 
 .c-sidebar__entry {
@@ -122,7 +122,7 @@ ul.c-sidebar__chapters {
 
 nav ul.c-sidebar__sections {
   margin-top: 24px;
-  margin-bottom: 12px;
+  margin-bottom: 8rem;
 }
 
 .c-sidebar__section {
@@ -133,10 +133,13 @@ nav ul.c-sidebar__sections {
 
 // sidebar footer
 div.sidebar_footer {
-  bottom: 75px;
-  position: absolute;
+  bottom: 0;
+  position: fixed;
   left: 0;
   right: 0;
+  width: $left-sidebar-width;
+  background-color: $background-color-lighter;
+  padding-bottom: $spacing-unit;
 }
 
 #back-home > svg {
@@ -239,6 +242,10 @@ div.sidebar_footer {
 
 .qv-layout__panel--hidden #back-home > svg {
   margin: 0;
+}
+
+.qv-layout__panel--hidden .sidebar_footer{
+  max-width: 3rem;
 }
 
 .qv-layout__panel--hidden .sidebar_footer__menu_item-label {

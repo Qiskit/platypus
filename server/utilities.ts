@@ -8,6 +8,7 @@ import {
   AnalyticsEntry,
   AnalyticsConfig,
   NotationsMap,
+  Subsection,
   TocCourse
 } from './interfaces'
 
@@ -20,6 +21,8 @@ const analytics: AnalyticsEntry = process.env.NODE_ENV === 'production'
 CONFIG.analytics = analytics
 
 const toc: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
+
+const sectionIndexes: {[x: string]: Subsection[]} = {}
 
 // const COURSES = fs.readdirSync(CONTENT_DIR)
 //   .filter(id => id !== 'shared' && !id.includes('.') && !id.startsWith('_'))
@@ -81,6 +84,18 @@ const findNextSection = function (course: Course, section: Section) {
   }
 }
 
+const getSectionIndex = function (course: Course, section: Section) {
+  const sectionId = `${course.id}/${section.id}`
+  if (!sectionIndexes[sectionId]) {
+    const courseIndex = (
+      loadYAML(path.join(CONTENT_DIR, `${course.id}/index.yaml`)) || []
+    ) as {[x: string]: Subsection[]}
+    sectionIndexes[sectionId] = courseIndex[section.id]
+  }
+  return sectionIndexes[sectionId] || []
+}
+
+
 export {
   CONFIG,
   COURSES,
@@ -89,6 +104,7 @@ export {
   UNIVERSAL_NOTATIONS,
   findNextSection,
   findPrevSection,
+  getSectionIndex,
   isLearningPath,
   updateGlossary
 }

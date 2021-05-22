@@ -116,6 +116,21 @@ def append_to_ts(resources, source_path, output_path):
             ts_file.write(f'\n\n{resources["textbook"]["functions"]}')
 
 
+def append_to_index(resources, output_path):
+    """Create and append to 'index.yaml'
+    """
+    if 'textbook' in resources and 'index' in resources['textbook']:
+        index_file_path = os.path.join(output_path, 'index.yaml')
+
+        new_index = resources["textbook"]["index"]
+        existing_index = yml_to_dict(index_file_path) or {}
+        updated_index = { **existing_index, **new_index }
+
+        content = yaml.load(json.dumps(updated_index), Loader=yaml.BaseLoader)
+        with open(index_file_path, 'w') as index_file:
+            index_file.write(f'{yaml.dump(content)}')
+
+
 def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None):
     """Convert notebook file to Mathigon markdown format
     """
@@ -157,6 +172,9 @@ def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None):
 
             print('updating functions')
             append_to_ts(resources, str(nb_path.parent), output_path)
+
+            print('updating index')
+            append_to_index(resources, output_path)
 
 
 def convert_notebook_directory(

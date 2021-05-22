@@ -6,7 +6,7 @@ import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities'
 
 import {
-  CONFIG, COURSES, NOTATIONS, UNIVERSAL_NOTATIONS, findNextSection, findPrevSection, isLearningPath, updateGlossary
+  CONFIG, COURSES, NOTATIONS, UNIVERSAL_NOTATIONS, findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
 } from './utilities'
 import * as storageApi from './storage'
 
@@ -30,10 +30,13 @@ new MathigonStudioApp()
     const nextSection = findNextSection(course, section)
     const prevSection = findPrevSection(course, section)
 
+    const subsections = getSectionIndex(course, section)
+
     res.render('textbook', {
       course, section, config: CONFIG,
       progressJSON, notationsJSON, learningPath,
-      nextSection, prevSection, universalJSON
+      nextSection, prevSection, universalJSON,
+      subsections
     });
   })
   .course(storageApi)

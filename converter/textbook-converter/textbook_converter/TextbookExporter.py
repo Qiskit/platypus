@@ -15,6 +15,7 @@ IMAGE_START = '!['
 img_regex = re.compile(r'^!\[.*]\((.*)\)')
 
 HEADING_START = '#'
+tag_id_regex = re.compile(r'(<.*\sid=["\'])(.*)(["\'])')
 
 COMMENT_START = '<!--'
 comment_regex = re.compile(r'^<!--\s+(:::.*)\s+-->')
@@ -58,7 +59,6 @@ def handle_block_comment(comment_syntax):
         return match.group(1)
     else:
         return comment_syntax
-    pass
 
 
 def handle_vue_component(vue_component_syntax):
@@ -116,20 +116,37 @@ def handle_hero_image(hero_image_syntax):
         return hero_image_syntax
 
 
-def handle_heading(heading_syntax):
-    """Increase heading level
+def handle_heading(heading_syntax, in_block, suffix):
+    """Increase header level and compute level, title, and id
     """
-    return f'#{heading_syntax}\n'
+    if in_block:
+        title = heading_syntax.split(' ', 1)[-1].strip()
+        return None, None, title, f'#{heading_syntax}\n'
+    else:
+        match = tag_id_regex.search(heading_syntax)
+        level = len(heading_syntax.split()[0])
+        if match is None:
+            title = heading_syntax.split(' ', 1)[-1].strip()
+            id = re.sub(r'\s', '-', title.lower())
+            id = re.sub(r'^\w-', '', id) + (suffix if level > 1 else '')
+            text = f'#{heading_syntax}\n' if level == 1 else f'#{heading_syntax} <a id="{id}"></a>\n'
+            return id, level, title, text
+        else:
+            title = heading_syntax[0:match.start()].split(' ', 1)[-1].strip()
+            id = match.group(2)
+            return id, level, title, f'#{heading_syntax}\n'
 
 
-def handle_markdown_cell(cell, resources):
+def handle_markdown_cell(cell, resources, cell_number):
     """Reformat code markdown
     """
     markdown_lines = []
     lines = cell.source.splitlines()
     latex = False
+    in_block = False
+    headings = []
 
-    for line in lines:
+    for count, line in enumerate(lines):
         if latex:
             if line.rstrip().endswith('$$'):
                 l = line.replace('$$', '')
@@ -155,7 +172,12 @@ def handle_markdown_cell(cell, resources):
             continue
 
         if line.lstrip().startswith(COMMENT_START):
-            markdown_lines.append(handle_block_comment(line))
+            l = handle_block_comment(line)
+            if l.strip().endswith(':::'):
+                in_block = False
+            elif l.strip().startswith(':::'):
+                in_block = True
+            markdown_lines.append(l)
         elif line.lstrip().startswith(HERO_IMAGE_START):
             markdown_lines.append(handle_hero_image(line))
         elif line.lstrip().startswith(VUE_COMPONENT_START): 
@@ -164,14 +186,19 @@ def handle_markdown_cell(cell, resources):
             markdown_lines.append(handle_images(line))
 
         elif line.lstrip().startswith(HEADING_START):
-            markdown_lines.append(handle_heading(line))
+            id, level, title, heading_text = handle_heading(
+                line, in_block, f'-{cell_number}-{count}'
+            )
+            if not in_block:
+                headings.append((id, level, title))
+            markdown_lines.append(heading_text)
         else:
             markdown_lines.append(line)#.replace('$$', '$').replace('\\', '\\\\'))
             markdown_lines.append('\n')
 
     markdown_lines.append('\n')
     updated_lines = ''.join(markdown_lines)
-    return updated_lines, resources
+    return updated_lines, resources, headings
 
 
 def handle_code_cell_output(cell_output):
@@ -299,6 +326,42 @@ def handle_cell_goals(id, cell, resources={}):
     return list(goals), resources
 
 
+def handle_index(headers, resources={}):
+    """Create an index of the subsections (with max depth of 2)
+    """
+    top_section = ''
+    index = []
+    last_level = -1
+
+    for id, level, title in headers:
+        if level > 3:
+            continue
+        if not top_section:
+            top_section = id
+        elif level <= last_level or len(index) == 0:
+            index.append({
+                'id': id,
+                'title': title,
+                'subsections': []
+            })
+            last_level = level
+        else:
+            index[-1]['subsections'].append({
+                'id': id,
+                'title': title,
+                'subsections': []
+            })
+
+    index = { top_section: index }
+
+    if 'textbook' not in resources:
+        resources['textbook'] = {}
+    if 'index' not in resources['textbook']:
+        resources['textbook']['index'] = index
+
+    return index, resources
+
+
 class TextbookExporter(Exporter):
     output_mimetype = 'text/markdown'
 
@@ -319,6 +382,7 @@ class TextbookExporter(Exporter):
             id = resources['textbook']['id']
             prefix = re.compile('[^a-zA-Z]').sub('', id).lower()
 
+        nb_headings = []
         for count, cell in enumerate(nb_copy.cells):
             id = prefix + str(count)
             if cell.cell_type == 'markdown':
@@ -334,14 +398,20 @@ class TextbookExporter(Exporter):
                 else:
                     markdown_lines.append(f'\n---\n> id: {id}\n\n')
 
-                markdown_output, resources = handle_markdown_cell(cell, resources)
+                markdown_output, resources, headings = handle_markdown_cell(cell, resources, count)
                 markdown_lines.append(markdown_output)
 
                 if goals or len(blanks):
                     markdown_lines.append(f'\n\n---\n')
+                if headings:
+                    nb_headings += headings
+
             elif cell.cell_type == 'code' and cell.source.strip():
                 code_output, resources = handle_code_cell(cell, resources)
                 markdown_lines.append(code_output)
+
+        if nb_headings:
+            _, resources = handle_index(nb_headings, resources)
 
         markdown_lines.append('\n')
 
