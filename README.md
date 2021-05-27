@@ -9,7 +9,7 @@ Project Platypus
 1. Python (3.6 or later) environment with `textbook_converter` requirements installed
 
     ```
-    $ cd project-platypus/converter/textbook-converter
+    $ cd platypus/converter/textbook-converter
     $ pip install -r requirements.txt
     ```
 
@@ -18,7 +18,7 @@ Project Platypus
 ### setup
 
 ```
-$ cd project-platypus
+$ cd platypus
 $ npm install
 $ npm run build
 $ npm start
