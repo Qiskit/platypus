@@ -144,6 +144,17 @@ x-progress {
       visibility: initial;
     }
   }
+
+  &.connection--progress {
+    border-color: $border-color-secondary;
+    height: 0;
+    transition: height .2s ease-out;
+  }
+
+  + .connection {
+    border-color: $border-color-light-2;
+    z-index: -1;
+  }
 }
 
 .c-sidebar__section {

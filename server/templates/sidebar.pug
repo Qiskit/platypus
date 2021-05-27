@@ -13,6 +13,8 @@ nav.c-textbook__sidebar#js-sidebar
       for s in c.sections
         li.c-sidebar__section(data-section-id=s.id)
           if course && course.id === c.id
+            if section && section.id === s.id
+              .connection.connection--progress
             .connection
             - var progclass = section && section.id === s.id ? "progress-wrapper sidebar-row active" : "progress-wrapper"
             if section && section.id === s.id
