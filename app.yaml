@@ -25,3 +25,5 @@ liveness_check:
 
 readiness_check:
   path: "/health"
+
+secure: always
