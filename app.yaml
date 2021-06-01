@@ -15,6 +15,7 @@ skip_files:
 handlers:
   - url: /.*
     script: app.js
+    secure: always
 
 resources:
   cpu: 1
