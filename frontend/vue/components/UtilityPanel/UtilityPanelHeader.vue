@@ -41,17 +41,23 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     url: '/#'
   }
 
-  isPanelOpen = false;
+  isPanelOpen = true;
 
   togglePanel() {
     const showPanel = this.isPanelOpen
     this.isPanelOpen = !showPanel
-
     return this.isPanelOpen
+  }
+
+  detectSmallScreen() {
+    if(window.innerWidth <= 800){
+      this.isPanelOpen = false
+    }
   }
 
   mounted() {
     this.$emit('selectedPanelTitle', this.selectedPanel)
+    this.detectSmallScreen()
   }
 
   getUpdatedPanelSelection(val:any) {
