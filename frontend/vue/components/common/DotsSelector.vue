@@ -72,6 +72,8 @@ export default class DotsSelector extends Vue.with(Props) {
 </script>
 
 <style scoped lang="scss">
+@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/layout';
 @import '~/../scss/variables/colors.scss';
 
 .dot-selector {
@@ -87,12 +89,13 @@ export default class DotsSelector extends Vue.with(Props) {
 
     margin: 0;
     padding: 0;
-    min-width: 250px;
+    min-width: 70%;
 
     list-style: none;
   }
 
   &__dot-item {
+    margin: $spacing-02;
 
     &__label {
       position: relative;

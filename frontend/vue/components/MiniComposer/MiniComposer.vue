@@ -10,43 +10,13 @@
       <h1 class="mini-composer__gates__title">
         Gates
       </h1>
-      <draggable
-        class="mini-composer__gates__pool"
-        :list="currentStepData.availableGates"
-        :move="onMoveCallback"
-        group="people"
-        item-key="name"
-        @change="log"
-      >
-        <template #item="{ element }">
-          <Gate class="mini-composer__gates__pool__gate" :name="`${element.name}`" />
-        </template>
-      </draggable>
+      <GatesPool :available-gates="currentStepData.availableGates" />
     </div>
     <div class="mini-composer__circuit-section">
       <h1 class="mini-composer__circuit-section__title">
         Circuit
       </h1>
-      <div class="mini-composer__circuit-section__qubit-line">
-        <KetCircuitLine :line-lenght="230" />
-        <div class="mini-composer__circuit-section__qubit-line__slot-container">
-          <draggable
-            class="mini-composer__circuit-section__qubit-line__slot"
-            :list="currentStepData.circuitState"
-            group="people"
-            item-key="name"
-            @change="log"
-          >
-            <template #item="{ element }">
-              <Gate
-                class="mini-composer__circuit-section__qubit-line__slot__gate"
-                :name="`${element.name}`"
-              />
-            </template>
-          </draggable>
-          <Gate class="mini-composer__circuit-section__qubit-line__z-gate" :name="`${measureGate}`" />
-        </div>
-      </div>
+      <QubitLine :circuit-state="currentStepData.circuitState" />
     </div>
     <ProbablityChart
       class="mini-composer__probability-chart"
@@ -85,7 +55,9 @@ import draggable, { MoveEvent } from 'vuedraggable'
 import Carousel from '../Carousel/Carousel.vue'
 import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
 import AppCta from '../common/AppCta.vue'
-import Gate, { GateName } from './Gate.vue'
+import { GateName } from './Gate.vue'
+import GatesPool from './GatesPool.vue'
+import QubitLine from './QubitLine.vue'
 import ProbablityChart, { ProbabilityState } from './ProbablityChart.vue'
 
 class Props {
@@ -130,7 +102,8 @@ interface ExerciseStep {
   components: {
     Carousel,
     KetCircuitLine,
-    Gate,
+    QubitLine,
+    GatesPool,
     draggable,
     ProbablityChart,
     AppCta
@@ -203,7 +176,6 @@ export default class MiniComposer extends Vue.with(Props) {
   }
 
   log (evt: Added<ComposerGate> | Removed<ComposerGate> | Moved<ComposerGate>) {
-    /*
     if ('added' in evt) {
       console.log(`ADDED: ${evt.added.element.name}`)
     }
@@ -213,19 +185,9 @@ export default class MiniComposer extends Vue.with(Props) {
     if ('moved' in evt) {
       console.log(`MOVED: ${evt.moved.element.name}`)
     }
-    */
-    this.checkCurrentStepCompleteness()
+    // this.checkCurrentStepCompleteness()
 
     // console.log(evt)
-  }
-
-  onMoveCallback (evt: MoveEvent<ComposerGate>, dragEvent: DragEvent) {
-    /* const list = evt.relatedContext.component.realList
-    if (!list || list.length > 0) {
-      console.log(false)
-      return false
-    }
-    console.log(true) */
   }
 
   onNextButton () {
