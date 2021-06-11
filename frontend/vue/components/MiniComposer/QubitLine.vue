@@ -5,6 +5,7 @@
       <draggable
         class="qubit-line__slot"
         :list="circuitState"
+        :move="onMoveCallback"
         group="people"
         item-key="name"
         @change="log"
@@ -16,45 +17,23 @@
           />
         </template>
       </draggable>
-      <Gate class="qubit-line__z-gate" :name="`${measureGate}`" />
+      <Gate v-if="autoMeasureGate" class="qubit-line__z-gate" :name="`${measureGate}`" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
-import draggable from 'vuedraggable'
+import draggable, { MoveEvent } from 'vuedraggable'
 import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
 import Gate, { GateName } from './Gate.vue'
-
-interface ComposerGate {
-  name: GateName
-  id: number
-}
+import { ComposerGate } from './composerTypes'
+import { Added, Removed, Moved, isAddedEvent, isRemovedEvent, isMovedEvent } from './draggableUtils'
 
 class Props {
-  name = prop<String>({ default: GateName.H, required: true })
+  name = prop<GateName>({ default: GateName.H, required: true })
   circuitState = prop<ComposerGate[]>({ default: [], required: true })
-}
-
-interface Added<T> {
-  added: {
-    element: T
-    newIndex: number
-  }
-}
-interface Removed<T> {
-  removed: {
-    element: T
-    oldIndex: number
-  }
-}
-interface Moved<T> {
-  moved: {
-    element: T
-    oldIndex: number
-    newIndex: number
-  }
+  autoMeasureGate = prop<boolean>({ default: true, required: true })
 }
 
 @Options({
@@ -69,20 +48,37 @@ export default class QubitLine extends Vue.with(Props) {
   measureGate = GateName.MEASURE_Z
 
   log (evt: Added<ComposerGate> | Removed<ComposerGate> | Moved<ComposerGate>) {
-    if ('added' in evt) {
-      console.log(`ADDED: ${evt.added.element.name}`)
+    if (isAddedEvent(evt)) {
+      const addedEvt = evt as Added<ComposerGate>
+      console.log(`ADDED: ${addedEvt.added.element.name}`)
     }
-    if ('removed' in evt) {
-      console.log(`REMOVED: ${evt.removed.element.name}`)
+    if (isRemovedEvent(evt)) {
+      const removedEvt = evt as Removed<ComposerGate>
+      console.log(`REMOVED: ${removedEvt.removed.element.name}`)
     }
-    if ('moved' in evt) {
-      console.log(`MOVED: ${evt.moved.element.name}`)
+    if (isMovedEvent(evt)) {
+      const movedEvt = evt as Moved<ComposerGate>
+      console.log(`MOVED: ${movedEvt.moved.element.name}`)
     }
     console.log(this.circuitState)
     // console.log(evt)
+
+    this.$emit('onGatesChanged')
+  }
+
+  onMoveCallback (evt: MoveEvent<ComposerGate>, dragEvent: DragEvent) {
+    const list = evt.relatedContext.component.realList
+    console.log(evt.relatedContext.component.alterList[0])
+    if (!list || list.length > 0) {
+      console.log(`FALSE FROM CIRCUIT`)
+      return false
+    }
+    console.log(`TRUE FROM CIRCUIT`)
+    return true
   }
 }
 </script>
+
 <style scoped lang="scss">
 @import 'carbon-components/scss/globals/scss/typography';
 @import 'carbon-components/scss/globals/scss/layout';

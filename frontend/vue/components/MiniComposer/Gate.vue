@@ -12,6 +12,7 @@ import { Options, Vue, prop } from 'vue-class-component'
 import MeasureZ from './GatesSVG/MeasureZ.vue'
 
 export enum GateName {
+  UNKNOWN = 'UNKNOWN',
   H = 'H',
   MEASURE_Z = 'Measure'
 }

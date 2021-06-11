@@ -30,6 +30,10 @@ export default class Carousel extends Vue.with(Props) {
   count = 0
 
   mounted () {
+    this.updateSlides()
+  }
+
+  updateSlides () {
     this.selectedIntChange(0)
     this.count = this.elementsWrapper.childElementCount
   }
@@ -56,7 +60,7 @@ export default class Carousel extends Vue.with(Props) {
 </script>
 <style scoped lang="scss">
 .carousel {
-  &__elements_wrapper{
+  &__elements_wrapper {
     padding: 15px;
     font-size: 0.875rem;
     line-height: 1.7rem;

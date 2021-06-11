@@ -1,11 +1,17 @@
 <template>
   <section class="mini-composer">
-    <Carousel ref="carouselRef" class="mini-composer__exercise-text" :disable-arrows="true" @onSelectedChange="selectedExerciseChange">
-      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id elementum ligula, pulvinar viverra augue. Nunc nec varius sapien. </p>
-      <p> Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris porta volutpat turpis. </p>
-      <p> Curabitur id hendrerit augue, ac congue massa. Vivamus aliquet molestie purus. Nunc ante lectus, pharetra vel ex non, hendrerit ullamcorper justo. </p>
-      <p> Donec sodales, mauris in faucibus maximus, velit velit malesuada sem, a convallis ante risus volutpat ligula. </p>
-    </Carousel>
+    <div
+      ref="configRef"
+      class="mini-composer__config-container"
+    >
+      <slot />
+    </div>
+    <Carousel
+      ref="carouselRef"
+      class="mini-composer__exercise-text"
+      :disable-arrows="true"
+      @onSelectedChange="selectedExerciseChange"
+    />
     <div class="mini-composer__gates">
       <h1 class="mini-composer__gates__title">
         Gates
@@ -16,28 +22,27 @@
       <h1 class="mini-composer__circuit-section__title">
         Circuit
       </h1>
-      <QubitLine :circuit-state="currentStepData.circuitState" />
+      <Circuit
+        :circuit-state="currentStepData.circuitState"
+        :auto-measure-gate="currentStepData.autoMeasureGate"
+        @onCircuitChanged="checkCurrentStepCompleteness"
+      />
     </div>
     <ProbablityChart
       class="mini-composer__probability-chart"
       :probabilities="currentStepData.startProbabilities"
     />
-    <div class="mini-composer__results">
-      <p v-if="currentStepIdx === 0 && currentStepData.completed"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id elementum ligula, pulvinar viverra augue. Nunc nec varius sapien. </p>
-      <p v-if="currentStepIdx === 1 && currentStepData.completed"> Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris porta volutpat turpis. </p>
-      <p v-if="currentStepIdx === 2 && currentStepData.completed"> Curabitur id hendrerit augue, ac congue massa. Vivamus aliquet molestie purus. Nunc ante lectus, pharetra vel ex non, hendrerit ullamcorper justo. </p>
-      <p v-if="currentStepIdx === 3 && currentStepData.completed"> Donec sodales, mauris in faucibus maximus, velit velit malesuada sem, a convallis ante risus volutpat ligula. </p>
-    </div>
+    <div
+      ref="lessonRef"
+      class="mini-composer__lesson"
+      :class="{ 'mini-composer__lesson__hidden': !currentStepData.completed }"
+    />
     <div class="mini-composer__footer">
       <div
-        v-if="currentStepData.completed"
+        ref="footerInfoRef"
         class="mini-composer__footer__info"
-      >
-        <p v-if="currentStepIdx === 0 && currentStepData.completed"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-        <p v-if="currentStepIdx === 1 && currentStepData.completed"> Orci varius natoque penatibus et magnis  </p>
-        <p v-if="currentStepIdx === 2 && currentStepData.completed"> Curabitur id hendrerit augue, ac congue massa. </p>
-        <p v-if="currentStepIdx === 3 && currentStepData.completed"> Donec sodales, mauris in faucibus maximus. </p>
-      </div>
+        :class="{ 'mini-composer__footer__info__hidden': !currentStepData.completed }"
+      />
       <AppCta
         v-if="currentStepData.completed"
         class="mini-composer__footer__next-button"
@@ -51,58 +56,25 @@
 <script lang="ts">
 import { ref } from '@vue/reactivity'
 import { Options, Vue, prop } from 'vue-class-component'
-import draggable, { MoveEvent } from 'vuedraggable'
+import draggable from 'vuedraggable'
 import Carousel from '../Carousel/Carousel.vue'
 import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
 import AppCta from '../common/AppCta.vue'
-import { GateName } from './Gate.vue'
 import GatesPool from './GatesPool.vue'
-import QubitLine from './QubitLine.vue'
-import ProbablityChart, { ProbabilityState } from './ProbablityChart.vue'
+import Circuit from './Circuit.vue'
+import ProbablityChart from './ProbablityChart.vue'
+import { ExerciseStep, ComposerGate, emptyExerciseStep } from './composerTypes'
+import { GateName } from './Gate.vue'
 
 class Props {
   goal = prop<String>({ default: 'minicomposer', required: true });
-}
-
-interface Added<T> {
-  added: {
-    element: T
-    newIndex: number
-  }
-}
-interface Removed<T> {
-  removed: {
-    element: T
-    oldIndex: number
-  }
-}
-interface Moved<T> {
-  moved: {
-    element: T
-    oldIndex: number
-    newIndex: number
-  }
-}
-interface ComposerGate {
-  name: GateName
-  id: number
-}
-
-interface ExerciseStep {
-  autoMeasureGate: boolean
-  availableGates: ComposerGate[]
-  circuitState: ComposerGate[]
-  circuitStateGoal: ComposerGate[]
-  startProbabilities: ProbabilityState[]
-  endProbabilities: ProbabilityState[]
-  completed: boolean
 }
 
 @Options({
   components: {
     Carousel,
     KetCircuitLine,
-    QubitLine,
+    Circuit,
     GatesPool,
     draggable,
     ProbablityChart,
@@ -110,84 +82,140 @@ interface ExerciseStep {
   }
 })
 export default class MiniComposer extends Vue.with(Props) {
+  configRef = ref<HTMLDivElement | null>(null)
+  get configDiv () { return (this.configRef as unknown as HTMLDivElement) }
   carouselRef = ref<Carousel | null>(null)
   get carousel () { return (this.carouselRef as unknown as Carousel) }
-  measureGate = GateName.MEASURE_Z
+  footerInfoRef = ref<HTMLDivElement | null>(null)
+  get footerInfoDiv () { return (this.footerInfoRef as unknown as HTMLDivElement) }
+  lessonRef = ref<HTMLDivElement | null>(null)
+  get lessonDiv () { return (this.lessonRef as unknown as HTMLDivElement) }
 
-  exerciseSteps: ExerciseStep[] = [
-    {
-      autoMeasureGate: true,
-      availableGates: [{ name: GateName.H, id: 2 }],
-      circuitState: [],
-      circuitStateGoal: [{ name: GateName.H, id: 2 }],
-      startProbabilities: [{ key: '0', value: 1 }, { key: '1', value: 0 }],
-      endProbabilities: [{ key: '0', value: 0.5 }, { key: '1', value: 0.5 }],
-      completed: false
-    },
-    {
-      autoMeasureGate: true,
-      availableGates: [{ name: GateName.H, id: 2 }],
-      circuitState: [{ name: GateName.H, id: 2 }],
-      circuitStateGoal: [{ name: GateName.H, id: 2 }, { name: GateName.H, id: 2 }],
-      startProbabilities: [{ key: '0', value: 0.5 }, { key: '1', value: 0.5 }],
-      endProbabilities: [{ key: '0', value: 1 }, { key: '1', value: 0 }],
-      completed: false
-    }
-  ]
+  exerciseSteps: ExerciseStep[] = []
 
   currentStepIdx = 0
 
-  currentStepData: ExerciseStep = this.cloneCurrentStepData()
+  currentStepData: ExerciseStep = emptyExerciseStep()
 
   infoText = 'Lorem Ipsum dolor sit amet consectetur adispicing elit'
 
+  lastGateId = 0
+
+  mounted () {
+    const instructionsElements = Array.from<HTMLElement>(this.configDiv.querySelectorAll('.instructions'))
+    const lessonsElements = Array.from<HTMLElement>(this.configDiv.querySelectorAll('.lesson'))
+    const infoElements = Array.from<HTMLElement>(this.configDiv.querySelectorAll('.info'))
+    const circuitElements = Array.from<HTMLElement>(this.configDiv.querySelectorAll('.circuit'))
+
+    lessonsElements.forEach(element => this.lessonDiv.appendChild(element))
+    infoElements.forEach(element => this.footerInfoDiv.appendChild(element))
+
+    this.exerciseSteps = circuitElements.map<ExerciseStep>((stepConfigElement: HTMLElement) => {
+      const autoMeasureGate = !!stepConfigElement.querySelector('.autoMeasureGate')
+
+      const availableGatesElement = stepConfigElement.querySelector('.availableGates') as HTMLElement
+      let availableGates: ComposerGate[] = []
+      if (availableGatesElement.textContent !== null) {
+        availableGates = this.stringToGateNameArray(availableGatesElement.textContent)
+      }
+
+      const initialCircuitElement = Array.from<HTMLElement>(stepConfigElement.querySelectorAll('.initialCircuit .qubit'))
+      const circuitState: ComposerGate[][] = this.htmlElementsToCircuit(initialCircuitElement)
+
+      const goalCircuitElements = Array.from<HTMLElement>(stepConfigElement.querySelectorAll('.goalCircuit .qubit'))
+      const circuitStateGoal: ComposerGate[][] = this.htmlElementsToCircuit(goalCircuitElements)
+
+      return {
+        autoMeasureGate,
+
+        availableGates,
+        circuitState,
+        circuitStateGoal,
+
+        startProbabilities: [{ key: '0', value: 1 }, { key: '1', value: 0 }],
+        endProbabilities: [{ key: '0', value: 0.5 }, { key: '1', value: 0.5 }],
+        completed: false
+      }
+    })
+
+    instructionsElements.forEach(element => this.carousel.elementsWrapper.appendChild(element))
+    this.carousel.updateSlides()
+
+    this.currentStepData = this.cloneCurrentStepData()
+  }
+
+  stringToGateNameArray (text: string) : ComposerGate[] {
+    return text.split(' ')
+      .filter(text => text !== '')
+      .map<ComposerGate>((gateText: string) => {
+        if (Object.values(GateName).some(gate => gate === gateText)) {
+          return { name: gateText as GateName, id: this.lastGateId++ }
+        }
+        return { name: GateName.UNKNOWN, id: this.lastGateId++ }
+      })
+  }
+
+  htmlElementsToCircuit (elements: HTMLElement[]) : ComposerGate[][] {
+    return elements.map((qubitLine: HTMLElement) => {
+      if (qubitLine.textContent === null) {
+        return []
+      }
+      return this.stringToGateNameArray(qubitLine.textContent)
+    })
+  }
+
   cloneCurrentStepData () : ExerciseStep {
     const step = this.exerciseSteps[this.currentStepIdx]
+    if (!step) {
+      return emptyExerciseStep()
+    }
+
     if (step.completed) {
       step.availableGates = []
-      step.circuitState = Array.from(step.circuitStateGoal)
+      step.circuitState = Array.from(step.circuitStateGoal.map(line => Array.from(line)))
       step.startProbabilities = Array.from(step.endProbabilities)
     } else {
       step.availableGates = Array.from(step.availableGates)
-      step.circuitState = Array.from(step.circuitState)
+      step.circuitState = Array.from(step.circuitState.map(line => Array.from(line)))
       step.startProbabilities = Array.from(step.startProbabilities)
     }
     return step
   }
 
   selectedExerciseChange (value :number) {
+    this.lessonDiv.children[this.currentStepIdx]?.classList.remove('mini-composer__current-slide')
+    this.lessonDiv.children[value]?.classList.add('mini-composer__current-slide')
     this.currentStepIdx = value
     this.currentStepData = this.cloneCurrentStepData()
   }
 
   checkCurrentStepCompleteness () {
-    if (this.currentStepData.circuitState.length !== this.currentStepData.circuitStateGoal.length) {
+    const currentCircuitState = this.currentStepData.circuitState
+    const currentCircuitGoal = this.currentStepData.circuitStateGoal
+    const hasSameLinesCount = currentCircuitState.length === currentCircuitGoal.length
+    if (!hasSameLinesCount) {
       this.currentStepData.completed = false
+      console.log('check false 1')
       return
     }
-    for (let i = 0; i < this.currentStepData.circuitState.length; i++) {
-      if (this.currentStepData.circuitState[i].name !== this.currentStepData.circuitStateGoal[i].name) {
-        this.currentStepData.completed = false
-        return
-      }
+
+    const isCircuitCorrect = currentCircuitState.every((qubitLineState, lineIdx) => {
+      const qubitLineGoal = currentCircuitGoal[lineIdx]
+      const hasSameGatesCount = qubitLineState.length === qubitLineGoal.length
+
+      const isLineCorrect = hasSameGatesCount && qubitLineState.every((gate, gateIdx) => gate.name === qubitLineGoal[gateIdx]?.name)
+      return isLineCorrect
+    })
+
+    if (!isCircuitCorrect) {
+      this.currentStepData.completed = false
+      console.log('check false 2')
+      return
     }
+
+    console.log('check true')
     this.exerciseSteps[this.currentStepIdx].completed = true
     this.currentStepData = this.cloneCurrentStepData()
-  }
-
-  log (evt: Added<ComposerGate> | Removed<ComposerGate> | Moved<ComposerGate>) {
-    if ('added' in evt) {
-      console.log(`ADDED: ${evt.added.element.name}`)
-    }
-    if ('removed' in evt) {
-      console.log(`REMOVED: ${evt.removed.element.name}`)
-    }
-    if ('moved' in evt) {
-      console.log(`MOVED: ${evt.moved.element.name}`)
-    }
-    // this.checkCurrentStepCompleteness()
-
-    // console.log(evt)
   }
 
   onNextButton () {
@@ -207,10 +235,14 @@ export default class MiniComposer extends Vue.with(Props) {
   grid-template-rows: auto;
   grid-template-areas:
     "text text text"
-    "gates results results"
-    "circuit results results"
-    "chart results results"
+    "gates lesson lesson"
+    "circuit lesson lesson"
+    "chart lesson lesson"
     "footer footer footer";
+
+  &__config-container {
+    display: none;
+  }
 
   &__exercise-text {
     grid-area: text;
@@ -227,19 +259,6 @@ export default class MiniComposer extends Vue.with(Props) {
     &__title {
       margin: $spacing-03 0 $spacing-05 0;
       @include type-style('heading-01');
-    }
-    &__pool {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      min-height: 32px;
-      &__gate {
-        margin-right: $spacing-03;
-        &.sortable-ghost {
-          transition: opacity 0.2s ease-out;
-          opacity: 0.5;
-        }
-      }
     }
   }
   &__circuit-section {
@@ -286,10 +305,18 @@ export default class MiniComposer extends Vue.with(Props) {
     height: 250px;
     padding: $spacing-07 $spacing-09 $spacing-07 $spacing-05;
   }
-  &__results {
-    grid-area: results;
+  &__lesson {
+    grid-area: lesson;
     border-left: 1px solid $border-color;
     margin-bottom: $spacing-10;
+
+    > :not(.mini-composer__current-slide) {
+      display: none;
+    }
+
+    &__hidden > ::v-deep(.mini-composer__current-slide) {
+      display: none;
+    }
   }
   &__footer {
     grid-area: footer;
@@ -306,11 +333,23 @@ export default class MiniComposer extends Vue.with(Props) {
       padding: 0 $spacing-05;
 
       background-color: $background-color-light;
+
+      &__hidden {
+        display: none;
+      }
+
+      > :not(.mini-composer__current-slide) {
+        display: none;
+      }
     }
     &__next-button {
       flex: 0 0 auto;
       width: 10rem;
       cursor: pointer;
+
+      &__hidden {
+        display: none;
+      }
     }
   }
 }
