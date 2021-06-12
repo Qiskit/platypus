@@ -173,13 +173,13 @@
 
 
 - title: Introduction to Quantum Computing
-  url: /learning-states-and-qubits
+  url: /introduction
   type: learning-path
   sections:
-    - title: Introduction
-      url: /ch-states/introduction
-    - title: The Atoms of Computation
-      url: /ch-states/atoms-computation
+    - title: Why quantum computing?
+      url: /intro/why-quantum-computing
+    - title: The atoms of computation
+      url: /intro/atoms-of-computation
     - title: Representing Qubit States
       url: /ch-states/representing-qubit-states
     - title: Single Qubit Gates

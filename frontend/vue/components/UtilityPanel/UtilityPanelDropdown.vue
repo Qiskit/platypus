@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
-import BasicLink from '../common/BasicLink.vue'
 // using Carbon web-component from https://github.com/carbon-design-system/carbon-web-components#basic-usage
 import 'carbon-web-components/es/components/dropdown/dropdown.js';
 import 'carbon-web-components/es/components/dropdown/dropdown-item.js'
@@ -28,9 +27,7 @@ class Props {
   selectedPanel = prop<String>({})
 }
 
-@Options({
-  components: { BasicLink },
-})
+@Options({})
 
 export default class UtilityPanelHeader extends Vue.with(Props) {
   selectedPanel: string = 'Lesson Notes'
@@ -48,7 +45,12 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   }
 
   switchPanel(event: any) {
+    // Segment analytics tracking
+    const windowInstance = (window as any)
     const selectionTitle = event.detail.item.value
+
+    windowInstance.textbook.trackClickEvent(`Right panel dropdown selection > ${selectionTitle}`);
+
     this.$emit('updatedPanelSelection', selectionTitle)
     this.selectedPanel = selectionTitle
   }
@@ -61,7 +63,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 @import '~/../scss/variables/colors.scss';
 
 .utility-panel-dropdown {
-  width: 12.5rem;
+  width: 100%;
 
 &__item {
     @include type-style('body-short-01');

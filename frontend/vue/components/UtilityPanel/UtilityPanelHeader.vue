@@ -38,7 +38,10 @@ class Props {
 export default class UtilityPanelHeader extends Vue.with(Props) {
   selectedPanel:string = ''
   link = {
-    url: '/#'
+    url: '/#',
+    segment: {
+      action: 'Right side panel > Toggle panel'
+    }
   }
 
   isPanelOpen = true;
@@ -70,11 +73,15 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 <style lang="scss">
 @import 'carbon-components/scss/globals/scss/typography';
 @import '../../../scss/variables/colors.scss';
+@import '../../../scss/variables/mq.scss';
 
 .utility-panel-header {
   background-color: $background-color-lighter;
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   // override
   .app-cta {
@@ -83,6 +90,10 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     display: flex;
     background-color: $background-color-lighter;
     min-width: 9rem;
+
+    @include mq($until: medium) {
+      min-width: initial;
+    }
   }
 }
 </style>
