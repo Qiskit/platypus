@@ -12,6 +12,7 @@ import * as storageApi from './storage'
 
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok'))  // Server Health Checks
+  .secure()
   .setup({sessionSecret: 'project-platypus-beta'})
   .redirects({ '/': '/textbook' })
   .get('/textbook', (req, res) => res.render('index.pug', { courses: COURSES }))
