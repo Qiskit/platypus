@@ -67,15 +67,8 @@ export default class UtilityPanel extends Vue {
 
 .utility-panel {
   background-color: $background-color-white;
-  width: 0;
-  position: absolute;
-  top: $qiskit-navbar-height;
-  right: 0;
-  bottom: 0;
-  min-height: 100vh;
-  height: fit-content;
-  z-index: 1;
-  border-left: 1px solid $border-color;
+  width: 100%;
+  height: auto;
 
   @include mq($until: small) {
     top: 6rem;
@@ -83,19 +76,35 @@ export default class UtilityPanel extends Vue {
 
   &_open {
     width: 100%;
+    border-left: 1px solid $border-color;
     max-width: $right-sidebar-width;
-    z-index: 2;
+    min-height: 100vh;
 
-    @include mq($until: medium) {
-      max-width: initial;
+    @include mq($from: max-size) {
+      max-width: $right-sidebar-width;
     }
 
-    @include mq($from: medium, $until: large) {
-      max-width: 26rem; // avoid panel collision
+    @include mq($from: medium, $until: max-size) {
+      max-width: $right-sidebar-width - $spacing-13;
+    }
+
+    @include mq($from: small, $until: medium) {
+      max-width: $right-sidebar-width / 2;
+
+      .app-cta__content {
+        display: none;
+      }
+
+      .app-cta {
+        width: 3.25rem;
+      }
     }
   }
 
   &_closed {
+    width: 10rem;
+    background-color: transparent;
+
     .utility-panel-dropdown,
     .utility-panel-content {
       display: none;

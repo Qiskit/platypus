@@ -57,7 +57,11 @@ nav.c-textbook__sidebar#js-sidebar
 
   div.sidebar_footer
     nav.sidebar_footer__menu
-      a.sidebar_footer__menu_item#app-panel-footer-toggle(href='#', title='Show/hide side panel')
+      a.sidebar_footer__menu_item#app-panel-footer-toggle(
+        href='#'
+        title='Show/hide side panel'
+        onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Toggle side panel')`
+      )
         span.sidebar_footer__menu_item-label Hide side panel
         include ../../frontend/assets/images/panel-arrow.svg
       if course.isLearningPath

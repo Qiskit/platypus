@@ -17,13 +17,19 @@ import BasicLink from '../common/BasicLink.vue'
 export default class EmptyPanel extends Vue {
   glossaryLabel = 'Glossary'
   link = {
+    label: 'universal glossary',
     url: '#',
-    segment: '',
-    label: 'universal glossary'
+    segment: {
+      action: 'Empty panel > Universal glossary link'
+    }
   }
 
-  redirectAction(event:any, label: any) {
+  redirectAction(event: any, label: string) {
+    // Segment analytics tracking
     event.preventDefault()
+    const windowInstance = (window as any)
+
+    windowInstance.textbook.trackClickEvent(`Empty panel > ${label}`);
     this.$emit('handleRedirect', label)
   }
 }

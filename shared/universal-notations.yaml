@@ -35,7 +35,7 @@ dot_product:
   description: Dot product (otherwise known as inner product or scalar product). Vectors have both magnitude and direction; you can think of the dot product as multiplying the direction part of each vector together.
 
 hilbert_space:
-  notation: $ H $
+  notation: $ \mathcal{H} $
   description: This is the symbol for ‘Hilbert Space’, which is a complex vector space which is where all qubit vector states ‘live’, every possible vector within the Hilbert space can be represented using a combination of |0⟩ and |1⟩.
 
 set_membership:

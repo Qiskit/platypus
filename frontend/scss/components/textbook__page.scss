@@ -12,6 +12,15 @@
   top: 0;
 }
 
+.c-textbook__utility_panel {
+  position: fixed;
+  top: $qiskit-navbar-height;
+  right: 0;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: $spacing-09;
+}
+
 .c-textbook__page {
   height: calc(100vh - #{$qiskit-navbar-height});
   overflow: auto;
@@ -35,13 +44,6 @@
 .js-show-sidebar {
   .c-textbook__page {
     transform: translate($left-sidebar-width, 0);
-  }
-}
-
-
-@media (min-width: 48em) {
-  .js-show-sidebar .c-textbook__page {
-    width: calc(100% - #{$left-sidebar-width});
   }
 }
 
@@ -82,21 +84,41 @@ img.textbook_logo {
 .qv-layout.js-show-sidebar .c-textbook__page{
   @include mq($until: large) {
     width: calc(100% - 2em);
-    padding: 0 32px 12px 0;
+    padding: 0 32px 40px 0;
     transform: translate(4rem, 0);
   }
 }
 
 .qv-layout.js-show-sidebar .c-textbook__page .jupyter-page{
-  max-width: $content-max-width;
+  max-width: initial;
   margin-top: $spacing-05;
+
+  @include mq($from: max-size) {
+    max-width: $content-max-width;
+  }
+
+  @include mq($from: x-large, $until: max-size) {
+    max-width: $content-max-width - $spacing-09;
+  }
+
+  @include mq($from: large, $until: x-large) {
+    max-width: calc(100% - 32rem);
+  }
+
+  @include mq($from: medium, $until: large) {
+    max-width: calc(100% - 18rem);
+  }
+
+  @include mq($from: small, $until: medium) {
+    max-width: initial;
+  }
 }
 
 // hidden panel styles
 .qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
   transform: translate(4rem, 0);
   width: calc(100% - 2rem);
-  padding: 0 32px 12px 0;
+  padding: 0 32px 40px 0;
 }
 
 @media (max-width: $browser-medium) {

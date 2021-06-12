@@ -13,9 +13,6 @@ html(lang=lang dir=dir)
     div.qiskit__navbar#qiskit-navbar
       q-the-menu
 
-    div#utility-panel
-      q-utility-panel
-
     .body
       x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar")
         include sidebar
@@ -28,7 +25,7 @@ html(lang=lang dir=dir)
                 #page-title= section.title
               .reveal-banner
                 | Reading time: ~#{section.duration} min
-                .complete 
+                .complete
                   span Reveal all steps
                   include ../../frontend/assets/images/arrow--down.svg
               if section.hero
@@ -71,7 +68,8 @@ html(lang=lang dir=dir)
                         target="_self"
                         segment=`${section.id} > ${nextSection.section.id}`
                       )
-
+        div.c-textbook__utility_panel
+          q-utility-panel
         x-modal#glossary-modal.light: .modal-body
 
         script(type="application/json")#glossary!= course.glossJSON
