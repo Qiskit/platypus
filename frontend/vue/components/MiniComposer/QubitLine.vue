@@ -1,6 +1,6 @@
 <template>
   <div class="qubit-line">
-    <KetCircuitLine :line-lenght="230" />
+    <KetCircuitLine class="qubit-line__ket-circuit-line" :line-lenght="230" />
     <div class="qubit-line__slot-container">
       <draggable
         class="qubit-line__slot"
@@ -67,14 +67,7 @@ export default class QubitLine extends Vue.with(Props) {
   }
 
   onMoveCallback (evt: MoveEvent<ComposerGate>, dragEvent: DragEvent) {
-    const list = evt.relatedContext.component.realList
-    console.log(evt.relatedContext.component.alterList[0])
-    if (!list || list.length > 0) {
-      console.log(`FALSE FROM CIRCUIT`)
-      return false
-    }
-    console.log(`TRUE FROM CIRCUIT`)
-    return true
+    
   }
 }
 </script>
@@ -88,6 +81,10 @@ export default class QubitLine extends Vue.with(Props) {
 
 .qubit-line {
   position: relative;
+
+  &__ket-circuit-line {
+    margin: $spacing-05 0;
+  }
 
   &__slot-container {
     display: flex;

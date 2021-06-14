@@ -7,6 +7,15 @@
       :auto-measure-gate="autoMeasureGate"
       @onGatesChanged="OnGatesChanged"
     />
+    <button
+      v-if="circuitState.length < maxLines"
+      class="circuit__add-button"
+      @click="addLine()"
+    >
+      <svg width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.5 4.5V0.5H4.5V4.5H0.5V5.5H4.5V9.5H5.5V5.5H9.5V4.5H5.5Z" />
+      </svg>
+    </button>
   </div>
 </template>
 
@@ -20,6 +29,7 @@ class Props {
   name = prop<String>({ default: GateName.H, required: true })
   circuitState = prop<ComposerGate[][]>({ default: [[]], required: true })
   autoMeasureGate = prop<boolean>({ default: true, required: true })
+  maxLines = prop<Number>({ default: 1, required: true })
 }
 
 @Options({
@@ -31,6 +41,10 @@ export default class Circuit extends Vue.with(Props) {
   OnGatesChanged () {
     this.$emit('onCircuitChanged')
   }
+
+  addLine () {
+    this.circuitState.push([])
+  }
 }
 </script>
 <style scoped lang="scss">
@@ -39,36 +53,11 @@ export default class Circuit extends Vue.with(Props) {
 @import '../../../scss/variables/colors.scss';
 @import '~/../scss/variables/mq.scss';
 
-.circuit-line {
-  position: relative;
-  &__slot-container {
-    display: flex;
-    flex-flow: row;
-
-    position: absolute;
-    top: 0px;
-    height: 100%;
-    width: 100%;
-    align-items: center;
-    padding: 0 $spacing-07;
-  }
-  &__slot {
-    display: flex;
-    flex-flow: row;
-    flex: 1 1 auto;
-    max-width: 100%;
-
-    &__gate {
-      margin-right: $spacing-02;
-
-      &.sortable-ghost {
-        transition: opacity 0.2s ease-out;
-        opacity: 0.5;
-      }
-    }
-  }
-  &__z-gate {
-    flex: 0 0 auto;
+.circuit {
+  &__add-button {
+    cursor: pointer;
+    padding: $spacing-03;
+    fill: $text-color-dark;
   }
 }
 </style>

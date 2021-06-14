@@ -14,7 +14,8 @@ import MeasureZ from './GatesSVG/MeasureZ.vue'
 export enum GateName {
   UNKNOWN = 'UNKNOWN',
   H = 'H',
-  MEASURE_Z = 'Measure'
+  MEASURE_Z = 'Measure',
+  KEEP = 'KEEP'
 }
 
 class Props {
@@ -61,6 +62,9 @@ export default class Gate extends Vue.with(Props) {
   }
   &_measure {
     background-color: $cool-gray-40;
+  }
+  &_keep {
+    opacity: 0;
   }
 }
 </style>

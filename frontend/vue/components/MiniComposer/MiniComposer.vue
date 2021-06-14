@@ -25,6 +25,7 @@
       <Circuit
         :circuit-state="currentStepData.circuitState"
         :auto-measure-gate="currentStepData.autoMeasureGate"
+        :max-lines="maxLines"
         @onCircuitChanged="checkCurrentStepCompleteness"
       />
     </div>
@@ -35,19 +36,30 @@
     <div
       ref="lessonRef"
       class="mini-composer__lesson"
-      :class="{ 'mini-composer__lesson__hidden': !currentStepData.completed }"
+      :class="{ 'mini-composer__lesson__hidden': !currentStepData.isCompleted }"
     />
     <div class="mini-composer__footer">
+      <AppCta
+        v-if="areAllStepsCompleted()"
+        class="mini-composer__footer__restart-button"
+        label="Start over"
+        @click="onRestartButton()"
+      />
       <div
         ref="footerInfoRef"
         class="mini-composer__footer__info"
-        :class="{ 'mini-composer__footer__info__hidden': !currentStepData.completed }"
+        :class="{ 'mini-composer__footer__info__hidden': !currentStepData.isCompleted }"
       />
       <AppCta
-        v-if="currentStepData.completed"
+        v-if="currentStepData.isCompleted && !areAllStepsCompleted()"
         class="mini-composer__footer__next-button"
         label="Next"
         @click="onNextButton()"
+      />
+      <SolutionStateIndicator
+        v-if="areAllStepsCompleted()"
+        class="mini-composer__footer__solution-state"
+        :state="correctSolution"
       />
     </div>
   </section>
@@ -60,9 +72,10 @@ import draggable from 'vuedraggable'
 import Carousel from '../Carousel/Carousel.vue'
 import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
 import AppCta from '../common/AppCta.vue'
+import SolutionStateIndicator, { SolutionState } from '../common/SolutionStateIndicator.vue'
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
-import ProbablityChart from './ProbablityChart.vue'
+import ProbablityChart, { ProbabilityState } from './ProbablityChart.vue'
 import { ExerciseStep, ComposerGate, emptyExerciseStep } from './composerTypes'
 import { GateName } from './Gate.vue'
 
@@ -78,7 +91,8 @@ class Props {
     GatesPool,
     draggable,
     ProbablityChart,
-    AppCta
+    AppCta,
+    SolutionStateIndicator
   }
 })
 export default class MiniComposer extends Vue.with(Props) {
@@ -91,13 +105,23 @@ export default class MiniComposer extends Vue.with(Props) {
   lessonRef = ref<HTMLDivElement | null>(null)
   get lessonDiv () { return (this.lessonRef as unknown as HTMLDivElement) }
 
+  correctSolution = SolutionState.CORRECT
+
   exerciseSteps: ExerciseStep[] = []
 
   currentStepIdx = 0
-
   currentStepData: ExerciseStep = emptyExerciseStep()
 
-  infoText = 'Lorem Ipsum dolor sit amet consectetur adispicing elit'
+  get currentProbabilities () {
+    if (!this.currentStepData.isCompleted) {
+      return this.currentStepData.startProbabilities
+    }
+    return this.currentStepData.endProbabilities
+  }
+
+  get maxLines () {
+    return this.currentStepData.circuitStateGoal.length
+  }
 
   lastGateId = 0
 
@@ -115,7 +139,7 @@ export default class MiniComposer extends Vue.with(Props) {
 
       const availableGatesElement = stepConfigElement.querySelector('.availableGates') as HTMLElement
       let availableGates: ComposerGate[] = []
-      if (availableGatesElement.textContent !== null) {
+      if (availableGatesElement && availableGatesElement.textContent) {
         availableGates = this.stringToGateNameArray(availableGatesElement.textContent)
       }
 
@@ -125,6 +149,18 @@ export default class MiniComposer extends Vue.with(Props) {
       const goalCircuitElements = Array.from<HTMLElement>(stepConfigElement.querySelectorAll('.goalCircuit .qubit'))
       const circuitStateGoal: ComposerGate[][] = this.htmlElementsToCircuit(goalCircuitElements)
 
+      const startProbabilitiesElements = stepConfigElement.querySelector('.startProbabilities')
+      let startProbabilities: ProbabilityState[] = []
+      if (startProbabilitiesElements && startProbabilitiesElements.textContent) {
+        startProbabilities = this.stringToProbabilities(startProbabilitiesElements.textContent)
+      }
+
+      const endProbabilitiesElements = stepConfigElement.querySelector('.endProbabilities')
+      let endProbabilities: ProbabilityState[] = []
+      if (endProbabilitiesElements && endProbabilitiesElements.textContent) {
+        endProbabilities = this.stringToProbabilities(endProbabilitiesElements.textContent)
+      }
+
       return {
         autoMeasureGate,
 
@@ -132,9 +168,9 @@ export default class MiniComposer extends Vue.with(Props) {
         circuitState,
         circuitStateGoal,
 
-        startProbabilities: [{ key: '0', value: 1 }, { key: '1', value: 0 }],
-        endProbabilities: [{ key: '0', value: 0.5 }, { key: '1', value: 0.5 }],
-        completed: false
+        startProbabilities,
+        endProbabilities,
+        isCompleted: false
       }
     })
 
@@ -142,6 +178,15 @@ export default class MiniComposer extends Vue.with(Props) {
     this.carousel.updateSlides()
 
     this.currentStepData = this.cloneCurrentStepData()
+  }
+
+  stringToProbabilities (text: string) : ProbabilityState[] {
+    return text.split(',')
+      .filter(text => text !== '')
+      .map<ProbabilityState>((probabilityText: string) => {
+        const tuple = probabilityText.split(':').map(text => text.trim())
+        return { key: tuple[0], value: parseFloat(tuple[1]) }
+      })
   }
 
   stringToGateNameArray (text: string) : ComposerGate[] {
@@ -165,19 +210,27 @@ export default class MiniComposer extends Vue.with(Props) {
   }
 
   cloneCurrentStepData () : ExerciseStep {
-    const step = this.exerciseSteps[this.currentStepIdx]
-    if (!step) {
+    const currentStepReference = this.exerciseSteps[this.currentStepIdx]
+    if (!currentStepReference) {
       return emptyExerciseStep()
     }
 
-    if (step.completed) {
+    const step: ExerciseStep = {
+      autoMeasureGate: currentStepReference.autoMeasureGate,
+      availableGates: [],
+      circuitState: [[]],
+      circuitStateGoal: currentStepReference.circuitStateGoal,
+      startProbabilities: currentStepReference.startProbabilities,
+      endProbabilities: currentStepReference.endProbabilities,
+      isCompleted: currentStepReference.isCompleted
+    }
+
+    if (step.isCompleted) {
       step.availableGates = []
-      step.circuitState = Array.from(step.circuitStateGoal.map(line => Array.from(line)))
-      step.startProbabilities = Array.from(step.endProbabilities)
+      step.circuitState = currentStepReference.circuitStateGoal.map(line => Array.from(line))
     } else {
-      step.availableGates = Array.from(step.availableGates)
-      step.circuitState = Array.from(step.circuitState.map(line => Array.from(line)))
-      step.startProbabilities = Array.from(step.startProbabilities)
+      step.availableGates = Array.from(currentStepReference.availableGates)
+      step.circuitState = currentStepReference.circuitState.map(line => Array.from(line))
     }
     return step
   }
@@ -185,6 +238,8 @@ export default class MiniComposer extends Vue.with(Props) {
   selectedExerciseChange (value :number) {
     this.lessonDiv.children[this.currentStepIdx]?.classList.remove('mini-composer__current-slide')
     this.lessonDiv.children[value]?.classList.add('mini-composer__current-slide')
+    this.footerInfoDiv.children[this.currentStepIdx]?.classList.remove('mini-composer__current-slide')
+    this.footerInfoDiv.children[value]?.classList.add('mini-composer__current-slide')
     this.currentStepIdx = value
     this.currentStepData = this.cloneCurrentStepData()
   }
@@ -194,8 +249,7 @@ export default class MiniComposer extends Vue.with(Props) {
     const currentCircuitGoal = this.currentStepData.circuitStateGoal
     const hasSameLinesCount = currentCircuitState.length === currentCircuitGoal.length
     if (!hasSameLinesCount) {
-      this.currentStepData.completed = false
-      console.log('check false 1')
+      this.currentStepData.isCompleted = false
       return
     }
 
@@ -208,17 +262,24 @@ export default class MiniComposer extends Vue.with(Props) {
     })
 
     if (!isCircuitCorrect) {
-      this.currentStepData.completed = false
-      console.log('check false 2')
+      this.currentStepData.isCompleted = false
       return
     }
 
-    console.log('check true')
-    this.exerciseSteps[this.currentStepIdx].completed = true
+    this.exerciseSteps[this.currentStepIdx].isCompleted = true
     this.currentStepData = this.cloneCurrentStepData()
   }
 
+  areAllStepsCompleted () {
+    return this.exerciseSteps.every(step => step.isCompleted)
+  }
+
   onNextButton () {
+    this.carousel.nextSlide()
+  }
+
+  onRestartButton () {
+    this.exerciseSteps.forEach((step) => { step.isCompleted = false })
     this.carousel.nextSlide()
   }
 }
@@ -308,6 +369,7 @@ export default class MiniComposer extends Vue.with(Props) {
   &__lesson {
     grid-area: lesson;
     border-left: 1px solid $border-color;
+    padding: $spacing-06;
     margin-bottom: $spacing-10;
 
     > :not(.mini-composer__current-slide) {
@@ -324,6 +386,14 @@ export default class MiniComposer extends Vue.with(Props) {
     justify-content: flex-end;
     min-height: 52px;
 
+    &__restart-button {
+      flex: 0 0 auto;
+      width: 10rem;
+      cursor: pointer;
+      ::v-deep(.app-cta__icon) {
+        transform: rotate(180deg);
+      }
+    }
     &__info {
       @include type-style('body-long-01');
       flex: 1;
@@ -346,10 +416,10 @@ export default class MiniComposer extends Vue.with(Props) {
       flex: 0 0 auto;
       width: 10rem;
       cursor: pointer;
-
-      &__hidden {
-        display: none;
-      }
+    }
+    &__solution-state {
+      flex: 0 0 auto;
+      width: 11rem;
     }
   }
 }

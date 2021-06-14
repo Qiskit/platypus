@@ -13,7 +13,7 @@ export interface ExerciseStep {
   circuitStateGoal: ComposerGate[][]
   startProbabilities: ProbabilityState[]
   endProbabilities: ProbabilityState[]
-  completed: boolean
+  isCompleted: boolean
 }
 
 export function emptyExerciseStep (): ExerciseStep {
@@ -24,6 +24,6 @@ export function emptyExerciseStep (): ExerciseStep {
     circuitStateGoal: [[]],
     startProbabilities: [],
     endProbabilities: [],
-    completed: false
+    isCompleted: false
   }
 }
