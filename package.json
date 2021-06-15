@@ -25,7 +25,7 @@
     "postbuild:studio": "ts-node -s converter/postbuild.ts"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": "14.16.0"
   },
   "dependencies": {
     "@carbon/colors": "^10.22.0",
