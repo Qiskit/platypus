@@ -2,26 +2,32 @@
 @import '../variables/settings.scss';
 @import '../variables/colors.scss';
 
-.c-textbook__sidebar {
-  direction: rtl;
-  overflow: auto;
-  position: fixed;
-  top: $qiskit-navbar-height;
-  left: 0;
+.c-sidebar {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   height: calc(100vh - #{$qiskit-navbar-height});
   width: $left-sidebar-width;
 
+  @media (max-width: $browser-small) {
+    padding-top: 36px;
+    width: 100%;
+  }
+
+  .c-content-menu {
+    z-index: 150;
+  }
+}
+
+.c-textbook__sidebar {
+  overflow: auto;
   background-color: $background-color-lighter;
   padding: $spacing-unit-small $spacing-unit;
   scrollbar-color: $background-color-lighter $background-color-lighter;
   transition: scrollbar-color 0.2s ease-in-out;
-
-  font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.71429;
-
   border-right: 1px solid $border-color;
-
+  
   &:hover {
   	scrollbar-color: $text-color-lighter-3 $background-color-lighter;
   }
@@ -135,15 +141,15 @@ nav ul.c-sidebar__sections {
   padding-bottom: 0.7rem;
 }
 
-// sidebar footer
-div.sidebar_footer {
-  bottom: 0;
-  position: fixed;
-  left: 0;
-  right: 0;
+.sidebar_footer {
+  direction: rtl;
+  font-size: 14px;
+  line-height: 24px;
   width: $left-sidebar-width;
   background-color: $background-color-lighter;
   padding-bottom: $spacing-unit;
+  z-index: 100;
+
   @include mq($until: medium) {
     width: 100%;
   }
@@ -227,6 +233,16 @@ div.sidebar_footer {
 
 .sidebar_header__menu_item-label {
   margin-left: 0.5rem;
+}
+
+.qv-layout__panel--hidden {
+  .c-sidebar {
+    grid-template-rows: 1fr auto;
+
+    .c-content-menu {
+      display: none;
+    }
+  }
 }
 
 .qv-layout__panel--hidden.js-show-sidebar .c-sidebar__entry {
