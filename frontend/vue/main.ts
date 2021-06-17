@@ -8,7 +8,6 @@ import DragAndDropCode from './components/DragAndDropCode/DragAndDropCode.vue'
 import Carousel from './components/Carousel/Carousel.vue'
 import Quiz from './components/Quiz/Quiz.vue'
 import AppCta from './components/common/AppCta.vue'
-import AppMegaDropdownMenu from './components/common/AppMegaDropdownMenu.vue'
 import ContentMenu from './components/common/ContentMenu.vue'
 import UtilityPanel from './components/UtilityPanel/UtilityPanel.vue'
 import UtilityPanelHeader from './components/UtilityPanel/UtilityPanelHeader.vue'
@@ -28,7 +27,6 @@ const kebabize = (str:string) => {
 
 const components: any = {
   AppCta,
-  AppMegaDropdownMenu,
   ContentMenu,
   TheMenu,
   MobileMenu,

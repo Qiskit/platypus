@@ -27,7 +27,7 @@
   font-size: 0.875rem;
   line-height: 1.71429;
   border-right: 1px solid $border-color;
-  
+
   &:hover {
   	scrollbar-color: $text-color-lighter-3 $background-color-lighter;
   }
@@ -141,6 +141,7 @@ nav ul.c-sidebar__sections {
   padding-bottom: 0.7rem;
 }
 
+// sidebar footer
 .sidebar_footer {
   direction: rtl;
   font-size: 14px;
