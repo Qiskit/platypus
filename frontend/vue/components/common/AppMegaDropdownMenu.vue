@@ -54,10 +54,10 @@
           <p class="app-mega-dropdown__content-empty__text">
             Try broadening your search terms
           </p>
-          <div
-            lazy-background="/images/textbook-demo/empty-search.png"
+          <img
+            src="/images/empty-search.png"
             class="app-mega-dropdown__content-empty__image"
-          />
+          >
         </div>
       </nav>
     </div>
