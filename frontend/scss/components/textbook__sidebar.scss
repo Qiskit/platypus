@@ -145,9 +145,9 @@ nav ul.c-sidebar__sections {
   direction: rtl;
   font-size: 14px;
   line-height: 24px;
-  width: $left-sidebar-width;
   background-color: $background-color-lighter;
   padding-bottom: $spacing-unit;
+  width: 100%;
   z-index: 100;
 
   @include mq($until: medium) {
@@ -238,6 +238,10 @@ nav ul.c-sidebar__sections {
 .qv-layout__panel--hidden {
   .c-sidebar {
     grid-template-rows: 1fr auto;
+
+    @media (max-width: $browser-small) {
+      display: none;
+    }
 
     .c-content-menu {
       display: none;

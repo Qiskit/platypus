@@ -364,6 +364,7 @@ $column-size-large: 4rem;
     z-index: 200;
 
     @media (max-width: $browser-small) {
+      height: auto;
       width: 100%;
     }
 
