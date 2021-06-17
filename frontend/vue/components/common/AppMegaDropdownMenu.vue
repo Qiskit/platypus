@@ -289,6 +289,7 @@ export default class AppMegaDropdownMenu extends Vue.with(Props) {
 @import '~carbon-components/scss/globals/scss/typography';
 @import '../../../scss/variables/colors.scss';
 @import '../../../scss/variables/mq.scss';
+@import '../../../scss/variables/settings.scss';
 
 // Qiskit variables
 $background-color-highlight: $purple-20;
@@ -306,7 +307,7 @@ $column-size-large: 4rem;
     height: 2.5rem;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-03;
+    padding: $spacing-03 $spacing-03 $spacing-03 $spacing-unit;
     color: $text-color-light;
     fill: $text-color-light;
     border-bottom: 1px solid $border-color-secondary;
