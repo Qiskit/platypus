@@ -4,7 +4,7 @@
     <BasicLink
       class="utility-panel-header__toggle"
       :url="link.url"
-      :segment="link.segment"
+      :segment="link.segment.action"
       :is-static="true"
       @click="togglePanel($event)"
     >
@@ -42,7 +42,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   link = {
     url: '/#',
     segment: {
-      action: 'Right side panel > Toggle panel'
+      action: 'textbook-demo > chapter-details-panel > panel-toggle'
     }
   }
 

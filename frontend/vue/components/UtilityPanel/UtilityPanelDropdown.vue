@@ -49,7 +49,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     const windowInstance = (window as any)
     const selectionTitle = event.detail.item.value
 
-    windowInstance.textbook.trackClickEvent(`Right panel dropdown selection > ${selectionTitle}`);
+    windowInstance.textbook.trackClickEvent(`textbook-demo > chapter-details-panel > ${selectionTitle}`)
 
     this.$emit('updatedPanelSelection', selectionTitle)
     this.selectedPanel = selectionTitle
