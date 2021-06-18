@@ -180,6 +180,8 @@
       url: /intro/why-quantum-computing
     - title: The atoms of computation
       url: /intro/atoms-of-computation
+    - title: What is quantum?
+      url: /intro/what-is-quantum
     - title: Representing Qubit States
       url: /ch-states/representing-qubit-states
     - title: Single Qubit Gates
