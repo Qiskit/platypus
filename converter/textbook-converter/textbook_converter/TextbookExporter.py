@@ -127,7 +127,7 @@ def handle_heading(heading_syntax, in_block, suffix):
         level = len(heading_syntax.split()[0])
         if match is None:
             title = heading_syntax.split(' ', 1)[-1].strip()
-            id = re.sub(r'\s', '-', title.lower())
+            id = re.sub(r'[^0-9a-zA-Z]+', '-', title.lower())
             id = re.sub(r'^\w-', '', id) + (suffix if level > 1 else '')
             text = f'#{heading_syntax}\n' if level == 1 else f'#{heading_syntax} <a id="{id}"></a>\n'
             return id, level, title, text
