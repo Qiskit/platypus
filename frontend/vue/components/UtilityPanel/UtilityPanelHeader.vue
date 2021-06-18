@@ -1,19 +1,23 @@
 <template>
   <div class="utility-panel-header">
-    <UtilityPanelDropdown @updatedPanelSelection="getUpdatedPanelSelection" :value="selectedPanel"/>
-    <AppCta
+    <UtilityPanelDropdown :value="selectedPanel" @updatedPanelSelection="getUpdatedPanelSelection" />
+    <BasicLink
       class="utility-panel-header__toggle"
-      v-bind="link"
-      kind="ghost"
-      :label="label"
-      @click="togglePanel()"
-    />
+      :url="link.url"
+      :segment="link.segment"
+      :is-static="true"
+      @click="togglePanel($event)"
+    >
+      {{ ctaLabel }}
+      <OpenPanelRight16 class="utility-panel-header__icon" />
+    </BasicLink>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import AppCta from '../common/AppCta.vue'
+import OpenPanelRight16 from '@carbon/icons-vue/lib/open-panel--right/16'
+import BasicLink from '../common/BasicLink.vue'
 import UtilityPanelDropdown from './UtilityPanelDropdown.vue'
 
 class Props {
@@ -21,15 +25,13 @@ class Props {
   selectedPanel = prop({})
 }
 
-
-
 @Options({
-  components: { AppCta, UtilityPanelDropdown },
+  components: { BasicLink, UtilityPanelDropdown, OpenPanelRight16 },
   watch: {
-    isPanelOpen(val: boolean) {
+    isPanelOpen (val: boolean) {
       this.$emit('updatePanelStatus', val)
     },
-    selectedPanel(val: string) {
+    selectedPanel (val: string) {
       this.$emit('selectedPanelTitle', val)
     }
   }
@@ -44,31 +46,55 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     }
   }
 
+  ctaLabel = 'Hide details'
+
   isPanelOpen = true;
 
-  togglePanel() {
+  togglePanel (e:any) {
+    e.preventDefault()
     const showPanel = this.isPanelOpen
+    const panelDOMElement = document.getElementById('utility-panel')
+
+    panelDOMElement?.classList.toggle('c-textbook__utility_panel-open')
+
     this.isPanelOpen = !showPanel
+    if (!this.isPanelOpen) {
+      this.ctaLabel = 'Show details'
+    } else {
+      this.ctaLabel = 'Hide details'
+    }
     return this.isPanelOpen
   }
 
-  detectSmallScreen() {
-    if(window.innerWidth <= 800){
-      this.isPanelOpen = false
-    }
+  detectSmallScreen () {
+    const rootComponent = this
+    window.addEventListener('load', function () {
+      const HTMLFrame = document.getElementsByTagName('html')[0]
+      const mobileDetected = HTMLFrame.classList.contains('is-mobile')
+
+      if (window.innerWidth <= 672 || mobileDetected) {
+        rootComponent.isPanelOpen = false
+        rootComponent.ctaLabel = 'Show details'
+      }
+      // handling tablet use case
+      if (window.innerWidth >= 672 && window.innerWidth <= 1056) {
+        rootComponent.$emit('updatePanelStatus', true)
+        rootComponent.isPanelOpen = true
+        rootComponent.ctaLabel = 'Hide details'
+      }
+    })
   }
 
-  mounted() {
+  mounted () {
     this.$emit('selectedPanelTitle', this.selectedPanel)
     this.detectSmallScreen()
   }
 
-  getUpdatedPanelSelection(val:any) {
+  getUpdatedPanelSelection (val:any) {
     this.selectedPanel = val
   }
 }
 </script>
-
 
 <style lang="scss">
 @import 'carbon-components/scss/globals/scss/typography';
@@ -76,12 +102,33 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 @import '../../../scss/variables/mq.scss';
 
 .utility-panel-header {
-  background-color: $background-color-lighter;
   display: flex;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 1;
+
+  &__toggle {
+    @include type-style('body-short-01');
+    justify-content: space-between;
+    padding: $spacing-03 $spacing-05;
+    display: flex;
+    background-color: $background-color-lighter;
+    align-items: center;
+    min-width: 9rem;
+    height: 40px;
+    color: $purple-70;
+
+    @include mq($until: medium) {
+      width: 100%;
+      min-width: initial;
+      justify-content: space-between;
+    }
+  }
+
+  &__icon {
+    fill: $purple-70;
+  }
 
   // override
   .app-cta {
@@ -93,6 +140,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 
     @include mq($until: medium) {
       min-width: initial;
+      justify-content: space-between;
     }
   }
 }

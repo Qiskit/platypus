@@ -18,7 +18,18 @@
   right: 0;
   height: 100%;
   overflow-y: scroll;
-  padding-bottom: $spacing-09;
+  @include mq($until: medium) {
+    width: 50%;
+    height: 41px; // account for border bottom
+  }
+
+  &-open {
+    @include mq($until: medium) {
+      width: 100%;
+      z-index: 1;
+      height: 100%;
+    }
+  }
 }
 
 .c-textbook__page {
@@ -85,7 +96,7 @@ img.textbook_logo {
   @include mq($until: large) {
     width: calc(100% - 2em);
     padding: 0 32px 40px 0;
-    transform: translate(4rem, 0);
+    transform: translate($spacing-10, 0);
   }
 }
 
@@ -116,9 +127,15 @@ img.textbook_logo {
 
 // hidden panel styles
 .qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
-  transform: translate(4rem, 0);
-  width: calc(100% - 2rem);
+  transform: translate($spacing-10, 0);
+  width: calc(100% - #{$spacing-07});
   padding: 0 32px 40px 0;
+
+  @include mq($until: medium) {
+    transform: translate($spacing-05, 0);
+    width: 100%;
+    padding: $spacing-05 $spacing-07 $spacing-09 0;
+  }
 }
 
 @media (max-width: $browser-medium) {

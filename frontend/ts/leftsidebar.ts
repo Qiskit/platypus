@@ -1,5 +1,5 @@
 const hiddenPanelClass = 'qv-layout__panel--hidden'
-const mobileBreakpoint = 672;
+const mobileBreakpoint = 1056;
 let parentContainer = null
 
 const collapseMobileMenu = function () {
@@ -32,7 +32,7 @@ const initLeftSidebar = function () {
 
   // ensure mobile menus are collapsed
   const docClientWidth = document.documentElement.clientWidth
-  
+
   if(docClientWidth < mobileBreakpoint) {
     parentContainer.classList.add(hiddenPanelClass)
   }

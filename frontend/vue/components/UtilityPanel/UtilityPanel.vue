@@ -1,17 +1,17 @@
 <template>
   <section class="utility-panel" :class="{ 'utility-panel_open': isVisible, 'utility-panel_closed': !isVisible }">
-    <UtilityPanelHeader :label="getLabel()" @updatePanelStatus="togglePanel" ref="panelHeader" @selectedPanelTitle="getSelectedPanelTitle" />
-    <UtilityPanelContent :selection="selectedPanelTitle" ref="panelContent" @emptyStateRedirect="redirectToPanel" />
+    <UtilityPanelHeader ref="panelHeader" :label="getLabel()" @updatePanelStatus="togglePanel" @selectedPanelTitle="getSelectedPanelTitle" />
+    <UtilityPanelContent ref="panelContent" :selection="selectedPanelTitle" @emptyStateRedirect="redirectToPanel" />
   </section>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
-import UtilityPanelHeader from './UtilityPanelHeader.vue';
+import UtilityPanelHeader from './UtilityPanelHeader.vue'
 import UtilityPanelContent from './UtilityPanelContent.vue'
 
 @Options({
-  components: { UtilityPanelHeader, UtilityPanelContent},
+  components: { UtilityPanelHeader, UtilityPanelContent }
 })
 
 export default class UtilityPanel extends Vue {
@@ -19,36 +19,47 @@ export default class UtilityPanel extends Vue {
   selectedPanelTitle:string = ''
   isMobile = false;
 
-  mounted(){
+  mounted () {
     this.detectSmallScreen()
   }
 
-  detectSmallScreen() {
-    if(window.innerWidth <= 800){
-      this.isVisible = false
-      this.isMobile = true
-    }
+  detectSmallScreen () {
+    const rootComponent = this
+    window.addEventListener('load', function () {
+      const HTMLFrame = document.getElementsByTagName('html')[0]
+      const mobileDetected = HTMLFrame.classList.contains('is-mobile')
+
+      if (window.innerWidth <= 1056 || mobileDetected) {
+        rootComponent.isVisible = false
+        rootComponent.isMobile = true
+      }
+      // handling tablet use case
+      if (window.innerWidth >= 672 && window.innerWidth <= 1056) {
+        rootComponent.isVisible = true
+        rootComponent.isMobile = true
+      }
+    })
   }
 
-  togglePanel(val: boolean) {
-    this.isVisible = val;
+  togglePanel (val: boolean) {
+    this.isVisible = val
   }
 
-  getLabel() {
-    if(this.isVisible) {
-      return "Hide"
+  getLabel () {
+    if (this.isVisible) {
+      return 'Hide'
     } else {
-      return "Open panel"
+      return 'Show details'
     }
   }
 
-  getSelectedPanelTitle(val: any) {
+  getSelectedPanelTitle (val: any) {
     const refPanelContent: any = this.$refs.panelContent
     this.selectedPanelTitle = val
     refPanelContent.chooseTitle(val)
   }
 
-  redirectToPanel(e:string){
+  redirectToPanel (e:string) {
     const refPanelContent: any = this.$refs.panelContent
     const refPanelHeader: any = this.$refs.panelHeader
     this.selectedPanelTitle = e
@@ -57,7 +68,6 @@ export default class UtilityPanel extends Vue {
   }
 }
 </script>
-
 
 <style lang="scss">
 @import 'carbon-components/scss/globals/scss/typography';
@@ -84,12 +94,16 @@ export default class UtilityPanel extends Vue {
       max-width: $right-sidebar-width;
     }
 
-    @include mq($from: medium, $until: max-size) {
+    @include mq($from: large, $until: max-size) {
       max-width: $right-sidebar-width - $spacing-13;
     }
 
-    @include mq($from: small, $until: medium) {
-      max-width: $right-sidebar-width / 2;
+    @include mq($from: medium, $until: large) {
+      max-width: $right-sidebar-width / 1.5;
+    }
+
+    @include mq($until: medium) {
+      max-width: initial;
 
       .app-cta__content {
         display: none;
@@ -97,6 +111,10 @@ export default class UtilityPanel extends Vue {
 
       .app-cta {
         width: 3.25rem;
+      }
+
+      .utility-panel-header {
+        border-bottom: 1px solid $border-color;
       }
     }
   }
@@ -116,6 +134,14 @@ export default class UtilityPanel extends Vue {
 
     .app-cta__icon_arrow-right-16 {
       transform: rotate(-180deg);
+    }
+
+    @include mq($until: medium) {
+      width: 100%;
+
+      .utility-panel-header {
+        border-bottom: 1px solid $border-color;
+      }
     }
   }
 

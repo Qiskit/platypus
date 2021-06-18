@@ -1,6 +1,8 @@
 div.sidebar_header_menu
   a.sidebar_header_menu_toggle#app-panel-header-toggle(href='#')
-    include ../../frontend/assets/images/chevron-down.svg
+    span.sidebar_header_menu_toggle__label Chapter details
+    <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
+
 
 nav.c-textbook__sidebar#js-sidebar
   ul.c-sidebar__chapters
@@ -59,11 +61,10 @@ nav.c-textbook__sidebar#js-sidebar
     nav.sidebar_footer__menu
       a.sidebar_footer__menu_item#app-panel-footer-toggle(
         href='#'
-        title='Show/hide side panel'
-        onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Toggle side panel')`
+        onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Show index')`
       )
-        span.sidebar_footer__menu_item-label Hide side panel
-        include ../../frontend/assets/images/panel-arrow.svg
+        span.sidebar_footer__menu_item-label Hide index
+        <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
       if course.isLearningPath
         a.sidebar_footer__menu_item#back-home(
           href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo/learning-paths/introduction-course'
@@ -71,7 +72,7 @@ nav.c-textbook__sidebar#js-sidebar
           title='Back to course overview'
         )
           span.sidebar_footer__menu_item-label Back to course overview
-          include ../../frontend/assets/images/back-home.svg
+          include ../../frontend/assets/images/home.svg
       else
         a.sidebar_footer__menu_item#back-home(
           href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo'
@@ -79,4 +80,4 @@ nav.c-textbook__sidebar#js-sidebar
           title='Back to textbook home'
         )
           span.sidebar_footer__menu_item-label Back to textbook home
-          include ../../frontend/assets/images/back-home.svg
+          include ../../frontend/assets/images/home.svg

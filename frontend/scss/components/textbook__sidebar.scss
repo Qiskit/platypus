@@ -144,25 +144,23 @@ div.sidebar_footer {
   width: $left-sidebar-width;
   background-color: $background-color-lighter;
   padding-bottom: $spacing-unit;
+  @include mq($until: medium) {
+    width: 100%;
+  }
 }
 
 #back-home > svg {
   display: inline-block;
   margin-right: 10px;
   vertical-align: text-top;
-  width: 20px;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  transform: rotate(-90deg);
+  width: $icon-width;
 }
 
 #app-panel-footer-toggle > svg {
   display: inline-block;
   margin-right: 10px;
   vertical-align: text-top;
-  width: 20px;
+  width: $icon-width;
 }
 
 #back-home,
@@ -172,14 +170,20 @@ div.sidebar_footer {
   }
 }
 
-#app-panel-header-toggle {
-  svg {
-    width: 20px;
-  }
-}
-
 .sidebar_header_menu {
   display: none;
+
+  @include mq($until: medium) {
+    display: block;
+    position: fixed;
+    width: 50%;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    background-color: $background-color-lighter;
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+  }
 }
 
 .sidebar_footer__menu {
@@ -201,6 +205,7 @@ div.sidebar_footer {
 .sidebar_header_menu_toggle,
 .sidebar_footer__menu_item {
   svg {
+    width: $icon-width;
     fill: $purple-70;
   }
 }
@@ -208,8 +213,16 @@ div.sidebar_footer {
 .sidebar_header_menu_toggle {
   display: none;
   text-align: right;
-  width: 100%;
   padding: .5rem 1rem;
+
+  @include mq($until: medium) {
+    @include type-style('body-long-01');
+    color: $purple-70;
+    height: 40px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .sidebar_header__menu_item-label {
@@ -223,6 +236,12 @@ div.sidebar_footer {
 .qv-layout__panel--hidden .c-textbook__sidebar{
   max-width: 3rem;
   padding: 0.5rem;
+
+  @include mq($until: medium) {
+    max-width: 0;
+    padding: 0;
+  }
+
 }
 
 .qv-layout__panel--hidden .c-sidebar__section{
@@ -240,7 +259,6 @@ div.sidebar_footer {
 }
 
 .qv-layout__panel--hidden #app-panel-footer-toggle > svg {
-  transform: scaleX(-1);
   margin: 0;
 }
 
@@ -248,8 +266,12 @@ div.sidebar_footer {
   margin: 0;
 }
 
-.qv-layout__panel--hidden .sidebar_footer{
+.qv-layout__panel--hidden .sidebar_footer {
   max-width: 3rem;
+
+  @include mq($until: medium) {
+    display: none;
+  }
 }
 
 .qv-layout__panel--hidden .sidebar_footer__menu_item-label {
@@ -282,12 +304,8 @@ div.sidebar_footer {
     transition: transform 70ms cubic-bezier(.2,0,.38,.9);
   }
 
-  #app-panel-footer-toggle {
-    display: none;
-  }
-
   div.sidebar_footer {
-    bottom: 120px;
+    padding-bottom: $spacing-09;
   }
 
   #back-home .sidebar_footer__menu_item-label {
@@ -301,16 +319,6 @@ div.sidebar_footer {
   .sidebar_header_menu_toggle {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-  }
-
-  .sidebar_header_menu {
-    display: block;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    right: 0;
-    background-color: $background-color-lighter;
   }
 
   .qv-layout .c-textbook__sidebar {
