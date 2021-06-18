@@ -40,7 +40,7 @@ nav.c-textbook__sidebar#js-sidebar
                     href=`#${sub.id}`
                     class="c-sidebar__entry"
                     onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}#${sub.id}')`
-                  ) #{sub.title}
+                  ) !{sub.title}
                   ul.c-sidebar__subsections
                     for subsection in sub.subsections
                       li
