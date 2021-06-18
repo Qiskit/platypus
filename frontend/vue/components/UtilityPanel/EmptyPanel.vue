@@ -26,7 +26,7 @@ export default class EmptyPanel extends Vue {
     label: 'universal glossary',
     url: '#',
     segment: {
-      action: 'textbook-demo > chapter-details-panel > empty-panel-cta'
+      action: 'textbook > chapter-details-panel > empty-panel-cta'
     }
   }
 
@@ -35,7 +35,7 @@ export default class EmptyPanel extends Vue {
     event.preventDefault()
     const windowInstance = (window as any)
 
-    windowInstance.textbook.trackClickEvent('textbook-demo > chapter-details-panel > empty-panel-cta')
+    windowInstance.textbook.trackClickEvent('textbook > chapter-details-panel > empty-panel-cta')
     this.$emit('handleRedirect', label)
   }
 }

@@ -42,7 +42,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   link = {
     url: '/#',
     segment: {
-      action: 'textbook-demo > chapter-details-panel > panel-toggle'
+      action: 'textbook > chapter-details-panel > panel-toggle'
     }
   }
 

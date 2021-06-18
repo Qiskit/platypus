@@ -26,7 +26,7 @@ nav.c-textbook__sidebar#js-sidebar
               a(
                 href=`${s.url}`
                 class=progclass
-                onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > course-${c.id} > ${s.id}')`
+                onclick=`textbook.trackClickEvent('textbook > sidebar-nav > course-${c.id} > ${s.id}')`
                 , title=s.title
               )
                 x-progress(r=10 p=0)
@@ -39,7 +39,7 @@ nav.c-textbook__sidebar#js-sidebar
                   a(
                     href=`#${sub.id}`
                     class="c-sidebar__entry"
-                    onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > course-${c.id} > ${s.id} > ${sub.id}')`
+                    onclick=`textbook.trackClickEvent('textbook > sidebar-nav > course-${c.id} > ${s.id} > ${sub.id}')`
                   ) #{sub.title}
                   ul.c-sidebar__subsections
                     for subsection in sub.subsections
@@ -47,13 +47,13 @@ nav.c-textbook__sidebar#js-sidebar
                         a(
                           href=`#${subsection.id}`
                           class="c-sidebar__entry"
-                          onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > course-${c.id} > ${s.id} > ${subsection.id}')`
+                          onclick=`textbook.trackClickEvent('textbook > sidebar-nav > course-${c.id} > ${s.id} > ${subsection.id}')`
                         ) #{subsection.title}
           else
             a(
               class="c-sidebar__entry"
               href=`${s.url}`
-              onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > course-${c.id} > ${s.id}')`
+              onclick=`textbook.trackClickEvent('textbook > sidebar-nav > course-${c.id} > ${s.id}')`
             )
               | #{s.title}
 
@@ -61,14 +61,14 @@ nav.c-textbook__sidebar#js-sidebar
     nav.sidebar_footer__menu
       a.sidebar_footer__menu_item#app-panel-footer-toggle(
         href='#'
-        onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > ${section && section.id ? section.id : course.id} > chapter-index-toggle')`
+        onclick=`textbook.trackClickEvent('textbook > sidebar-nav > ${section && section.id ? section.id : course.id} > chapter-index-toggle')`
       )
         span.sidebar_footer__menu_item-label Hide index
         <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
       if course.isLearningPath
         a.sidebar_footer__menu_item#back-home(
           href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo/learning-paths/introduction-course'
-          onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > ${section && section.id ? section.id : course.id} > course-overview')`
+          onclick=`textbook.trackClickEvent('textbook > sidebar-nav > ${section && section.id ? section.id : course.id} > course-overview')`
           title='Back to course overview'
         )
           span.sidebar_footer__menu_item-label Back to course overview
@@ -76,7 +76,7 @@ nav.c-textbook__sidebar#js-sidebar
       else
         a.sidebar_footer__menu_item#back-home(
           href='https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-demo'
-          onclick=`textbook.trackClickEvent('textbook-demo > sidebar-nav > ${section && section.id ? section.id : course.id} > textbook-home')`
+          onclick=`textbook.trackClickEvent('textbook > sidebar-nav > ${section && section.id ? section.id : course.id} > textbook-home')`
           title='Back to textbook home'
         )
           span.sidebar_footer__menu_item-label Back to textbook home
