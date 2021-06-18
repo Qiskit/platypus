@@ -9,7 +9,7 @@ nav.c-textbook__sidebar#js-sidebar
     - var c = course
     li.c-sidebar__chapter
       span.c-sidebar__entry
-        | #{c.title}
+        | !{c.title}
 
     ul.c-sidebar__sections
       for s in c.sections
@@ -32,7 +32,7 @@ nav.c-textbook__sidebar#js-sidebar
                 x-progress(r=10 p=0)
           if section && section.id === s.id
             span(class="c-sidebar__entry c-sidebar__entry--active")
-              | #{s.title}
+              | !{s.title}
             ul.c-sidebar__subsections
               for sub in subsections
                 li
@@ -40,7 +40,7 @@ nav.c-textbook__sidebar#js-sidebar
                     href=`#${sub.id}`
                     class="c-sidebar__entry"
                     onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}#${sub.id}')`
-                  ) #{sub.title}
+                  ) !{sub.title}
                   ul.c-sidebar__subsections
                     for subsection in sub.subsections
                       li
@@ -48,14 +48,14 @@ nav.c-textbook__sidebar#js-sidebar
                           href=`#${subsection.id}`
                           class="c-sidebar__entry"
                           onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}#${subsection.id}')`
-                        ) #{subsection.title}
+                        ) !{subsection.title}
           else
             a(
               class="c-sidebar__entry"
               href=`${s.url}`
               onclick=`textbook.trackClickEvent('/course/${c.id}/${s.id}')`
             )
-              | #{s.title}
+              | !{s.title}
 
   div.sidebar_footer
     nav.sidebar_footer__menu
