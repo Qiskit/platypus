@@ -69,6 +69,19 @@
   max-width: $page-max-width;
 }
 
+.c-textbook__content .p-Widget {
+  circle,
+  g,
+  image,
+  line,
+  path,
+  polyline,
+  use {
+    transform-box: inherit;
+    transform-origin: revert;
+  }
+}
+
 .c-textbook__footer {
 	padding-bottom: $qiskit-navbar-height;
 }
