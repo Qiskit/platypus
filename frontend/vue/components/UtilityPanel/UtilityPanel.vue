@@ -79,6 +79,7 @@ export default class UtilityPanel extends Vue {
   background-color: $background-color-white;
   width: 100%;
   height: auto;
+  user-select: text;
 
   @include mq($until: small) {
     top: 6rem;
@@ -116,6 +117,10 @@ export default class UtilityPanel extends Vue {
       .utility-panel-header {
         border-bottom: 1px solid $border-color;
       }
+    }
+
+    p:hover {
+      cursor: text;
     }
   }
 

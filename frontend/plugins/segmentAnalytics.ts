@@ -127,6 +127,29 @@ function trackClickEvent (params: ClickEventParams|string) {
   bluemixAnalytics.trackEvent('CTA Clicked', cta)
 }
 
+/**
+ * Send the information of an entered search term to Segment.
+ * @param searchComponent Name of the search component
+ * @param searchTerm Search term
+ */
+function trackSearchTerm (searchComponent: string, searchTerm: string) {
+  const { bluemixAnalytics, digitalData } = window
+
+  if (!bluemixAnalytics || !digitalData) { return }
+
+  const productTitle = getOrFailProductTitle(digitalData)
+  const category = getOrFailCategory(digitalData)
+
+  const eventOptions = {
+    category,
+    location: searchComponent,
+    productTitle,
+    text: searchTerm
+  }
+
+  bluemixAnalytics.trackEvent('Searched Term', eventOptions)
+}
+
 function getOrFailProductTitle (digitalData: any): string {
   return assertCanGet(
     () => digitalData.page.pageInfo.productTitle,
@@ -161,6 +184,7 @@ function install (app: any, options: any = {}) {
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
   app.config.globalProperties.$trackClickEvent = trackClickEvent
   app.config.globalProperties.$trackPage = trackPage
+  app.config.globalProperties.$trackSearchTerm = trackSearchTerm
 }
 
 export {
@@ -168,6 +192,7 @@ export {
   install,
   trackClickEvent,
   trackPage,
+  trackSearchTerm,
   ClickEventParams,
   AnalyticsContext
 }
