@@ -118,6 +118,10 @@ export default class UtilityPanel extends Vue {
         border-bottom: 1px solid $border-color;
       }
     }
+
+    p:hover {
+      cursor: text;
+    }
   }
 
   &_closed {
