@@ -1,4 +1,4 @@
-import { NavLink } from './menuLinks'
+import { NavLink } from './../../../constants/menuLinks'
 
 const actionPrefix = 'mega-menu'
 const wholeSection = 'whole-section'
