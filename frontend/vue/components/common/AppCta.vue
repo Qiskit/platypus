@@ -22,7 +22,7 @@
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
 import ArrowRight16 from '@carbon/icons-vue/lib/arrow--right/16'
-import ArrowDownt16 from '@carbon/icons-vue/lib/arrow--down/16'
+import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
 import BasicLink from './BasicLink.vue'
 
@@ -36,7 +36,7 @@ class Props {
   components: {
     BasicLink,
     ArrowRight16,
-    ArrowDownt16,
+    ArrowDown16,
     Launch16
   }
 })

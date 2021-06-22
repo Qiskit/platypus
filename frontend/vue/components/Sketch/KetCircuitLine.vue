@@ -2,14 +2,14 @@
   <svg class="circuit-line">
     <Ket0
       x="0"
-      y="32"
+      y="2"
       width="20"
       height="18"
       class="circuit-line__ket"
     />
     <SketchLine
       x="32"
-      y="41"
+      y="11"
       class="circuit-line__line"
       :stroke-style="strokeStyle"
       :line="circuitLine"
@@ -41,12 +41,14 @@ export default class LayersCircuit extends Vue.with(Props) {
 }
 </script>
 <style scoped lang="scss">
+@import 'carbon-components/scss/globals/scss/layout';
 @import '~/../scss/variables/colors.scss';
 
 .circuit-line {
-  height: 85px;
+  height: 21px;
   display: flex;
   align-items: center;
+  margin: $spacing-07 0;
 
   &__ket {
     flex: 0 0 20px;
