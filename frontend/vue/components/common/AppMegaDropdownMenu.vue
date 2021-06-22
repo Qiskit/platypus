@@ -67,7 +67,7 @@
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
 import { MegaDropdownMenu, MegaDropdownMenuColumn, MegaDropdownMenuGroup } from '../constants/megaMenuLinks'
-import { NavLink } from '../constants/menuLinks'
+import { NavLink } from '../../../constants/menuLinks'
 import BasicLink from './BasicLink.vue'
 
 interface HighlightTextState {
