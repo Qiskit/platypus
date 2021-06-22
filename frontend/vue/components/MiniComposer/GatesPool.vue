@@ -15,10 +15,9 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
-import draggable, { MoveEvent } from 'vuedraggable'
+import draggable from 'vuedraggable'
 import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
 import Gate, { GateName } from './Gate.vue'
-import { Added, Removed, Moved, isAddedEvent, isRemovedEvent, isMovedEvent } from './draggableUtils'
 
 interface ComposerGate {
   name: GateName
@@ -37,27 +36,7 @@ class Props {
   }
 })
 export default class CircuitLine extends Vue.with(Props) {
-  log (evt: Added<ComposerGate> | Removed<ComposerGate> | Moved<ComposerGate>) {
-    if (isAddedEvent(evt)) {
-      const addedEvt = evt as Added<ComposerGate>
-      console.log(`ADDED: ${addedEvt.added.element.name}`)
-    }
-    if (isRemovedEvent(evt)) {
-      const removedEvt = evt as Removed<ComposerGate>
-      console.log(`REMOVED: ${removedEvt.removed.element.name}`)
-    }
-    if (isMovedEvent(evt)) {
-      const movedEvt = evt as Moved<ComposerGate>
-      console.log(`MOVED: ${movedEvt.moved.element.name}`)
-    }
-    console.log(this.availableGates)
-    // console.log(evt)
-  }
 
-  onMoveCallback (evt: MoveEvent<ComposerGate>, dragEvent: DragEvent) {
-    
-    
-  }
 }
 </script>
 <style scoped lang="scss">

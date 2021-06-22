@@ -14,8 +14,9 @@ import MeasureZ from './GatesSVG/MeasureZ.vue'
 export enum GateName {
   UNKNOWN = 'UNKNOWN',
   H = 'H',
-  MEASURE_Z = 'Measure',
-  KEEP = 'KEEP'
+  Z = 'Z',
+  X = 'X',
+  MEASURE_Z = 'Measure'
 }
 
 class Props {
