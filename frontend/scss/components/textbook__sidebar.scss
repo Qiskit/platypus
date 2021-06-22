@@ -26,7 +26,6 @@
   transition: scrollbar-color 0.2s ease-in-out;
   font-size: 0.875rem;
   line-height: 1.71429;
-  border-right: 1px solid $border-color;
 
   &:hover {
   	scrollbar-color: $text-color-lighter-3 $background-color-lighter;

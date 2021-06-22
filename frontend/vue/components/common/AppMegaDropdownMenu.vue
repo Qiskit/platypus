@@ -363,7 +363,7 @@ $column-size-large: 4rem;
     overflow-x: auto;
     z-index: 200;
 
-    @media (max-width: $browser-small) {
+    @media (max-width: $browser-medium) {
       height: auto;
       width: 100%;
     }
@@ -380,7 +380,7 @@ $column-size-large: 4rem;
     justify-content: space-between;
     gap: $spacing-09;
 
-    @media (max-width: $browser-small) {
+    @media (max-width: $browser-medium) {
       flex-direction: column;
     }
 
