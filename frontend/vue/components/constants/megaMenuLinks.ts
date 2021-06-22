@@ -12,7 +12,7 @@ const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
 
-const baseUrl = 'https://platypus.qiskit.org'
+const baseUrl = 'https://learn.qiskit.org'
 const pathPrerequisites = '/course/ch-prerequisites'
 const pathQuantumStatesAndQubits = '/course/ch-states'
 const pathMultipleQubitsAndEntanglement = '/course/ch-gates'
