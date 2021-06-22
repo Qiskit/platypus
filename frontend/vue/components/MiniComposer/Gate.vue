@@ -3,6 +3,12 @@
     <div v-if="name === gateName.H" class="gate__symbol gate__symbol_text">
       H
     </div>
+    <div v-if="name === gateName.X" class="gate__symbol gate__symbol_text">
+      X
+    </div>
+    <div v-if="name === gateName.Z" class="gate__symbol gate__symbol_text">
+      Z
+    </div>
     <MeasureZ v-if="name === gateName.MEASURE_Z" class="gate__symbol" />
   </div>
 </template>
@@ -60,6 +66,12 @@ export default class Gate extends Vue.with(Props) {
 
   &_h {
     background-color: $red-50;
+  }
+  &_z {
+    background-color: $teal-40;
+  }
+  &_x {
+    background-color: $teal-40;
   }
   &_measure {
     background-color: $cool-gray-40;
