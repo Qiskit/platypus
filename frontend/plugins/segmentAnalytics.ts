@@ -129,16 +129,11 @@ function trackClickEvent (params: ClickEventParams|string) {
 
 /**
  * Send the information of an entered search term to Segment.
- * @param context Bluemix Analytics configuration
  * @param searchComponent Name of the search component
  * @param searchTerm Search term
  */
-function trackSearchTerm (
-  context: AnalyticsContext,
-  searchComponent: string,
-  searchTerm: string
-) {
-  const { bluemixAnalytics, digitalData } = context
+function trackSearchTerm (searchComponent: string, searchTerm: string) {
+  const { bluemixAnalytics, digitalData } = window
 
   if (!bluemixAnalytics || !digitalData) { return }
 
