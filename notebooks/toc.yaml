@@ -180,18 +180,12 @@
       url: /intro/why-quantum-computing
     - title: The atoms of computation
       url: /intro/atoms-of-computation
+    - title: What is quantum?
+      url: /intro/what-is-quantum
     - title: Multiple qubits and entangled states
       url: /intro/multiple-qubits
     - title: Visualizing entanglement
       url: /intro/hello-qiskit-bell
-    - title: What is quantum?
-      url: /intro/what-is-quantum
-    - title: Representing Qubit States
-      url: /ch-states/representing-qubit-states
-    - title: Single Qubit Gates
-      url: /ch-states/single-qubit-gates
-    - title: The Case for Quantum
-      url: /ch-states/case-for-quantum
 
 
 - title: Quantum Machine Learning
