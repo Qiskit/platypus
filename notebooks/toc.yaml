@@ -186,6 +186,8 @@
       url: /intro/multiple-qubits
     - title: Visualizing entanglement
       url: /intro/hello-qiskit-bell
+    - title: Grover's Algorithm
+      url: /intro/grover-intro
 
 
 - title: Quantum Machine Learning
