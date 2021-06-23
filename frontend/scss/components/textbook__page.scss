@@ -69,18 +69,15 @@
   max-width: $page-max-width;
 }
 
-.c-textbook__content .p-Widget,
-.app-logo.menu__logo {
-  circle,
-  g,
-  image,
-  line,
-  path,
-  polyline,
-  use {
-    transform-box: inherit;
-    transform-origin: revert;
-  }
+circle,
+g,
+image,
+line,
+path,
+polyline,
+use {
+  transform-box: inherit;
+  transform-origin: revert;
 }
 
 .c-textbook__footer {
