@@ -10,7 +10,7 @@
           kind="secondary"
           v-bind="homeLink"
         >
-          <AppLogo
+          <QLogo
             class="menu__logo"
             :class="{ 'menu__logo_active': isActiveHome(homeLink) }"
           />
@@ -47,7 +47,7 @@
           v-bind="homeLink"
           is-static="true"
         >
-          <AppLogo
+          <QLogo
             class="menu__logo"
           />
         </AppLink>
@@ -95,8 +95,8 @@
 import { Options, mixins } from 'vue-class-component'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
 import Close20 from '@carbon/icons-vue/lib/close/20'
+import { QLogo } from '@qiskit-community/qiskit-vue'
 import MenuMixin from '../../mixins/menu'
-import AppLogo from '../common/AppLogo.vue'
 import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import MobileMenu from './MobileMenu.vue'
@@ -105,7 +105,7 @@ import MobileMenu from './MobileMenu.vue'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
 
 @Options({
-  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20 }
+  components: { AppLink, MobileMenu, BasicLink, Menu20, Close20, QLogo }
 })
 export default class TheMenu extends mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false

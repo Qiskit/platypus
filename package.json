@@ -36,6 +36,7 @@
     "@mathigon/boost": "^0.6.14",
     "@mathigon/euclid": "^0.6.7",
     "@mathigon/studio": "github:vabarbosa/studio#platypus",
+    "@qiskit-community/qiskit-vue": "^0.12.1",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "carbon-components": "^10.30.0",
     "carbon-web-components": "^1.12.0",
@@ -45,6 +46,7 @@
     "typescript": "4.2.3",
     "vue": "^3.0.0",
     "vue-class-component": "^8.0.0-0",
+    "vue-demi": "^0.9.1",
     "vue-router": "^4.0.1",
     "vuedraggable": "^4.0.1"
   },
