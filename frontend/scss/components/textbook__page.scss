@@ -69,7 +69,8 @@
   max-width: $page-max-width;
 }
 
-.c-textbook__content .p-Widget {
+.c-textbook__content .p-Widget,
+.app-logo.menu__logo {
   circle,
   g,
   image,
