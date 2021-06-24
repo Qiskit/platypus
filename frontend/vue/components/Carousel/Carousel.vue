@@ -1,7 +1,13 @@
 <template>
   <section class="carousel">
-    <div ref="elementsWrapperRef" class="carousel__elements_wrapper">
-      <slot />
+    <div class="carousel__elements-wrapper">
+      <div
+        ref="elementsWrapperRef"
+        class="carousel__elements"
+        :style="`transform: translateX(-${ 100 * selectedInt }%);`"
+      >
+        <slot />
+      </div>
     </div>
     <DotsSelector ref="dotsSelectorRef" class="carousel__selector" :count="count" :disable-arrows="disableArrows" @onSelectedChange="selectedIntChange" />
   </section>
@@ -60,13 +66,23 @@ export default class Carousel extends Vue.with(Props) {
 </script>
 <style scoped lang="scss">
 .carousel {
-  &__elements_wrapper {
+  &__elements-wrapper {
     padding: 15px;
+  }
+
+  &__elements {
+    display: flex;
+    flex-wrap: nowrap;
     font-size: 0.875rem;
     line-height: 1.7rem;
 
-    & > :not(.active) {
-      display: none;
+    & > ::v-deep(*) {
+      flex: none;
+      width: 100%;
+    }
+
+    & > ::v-deep(:not(.active)) {
+      visibility: hidden;
     }
   }
   &__selector {
