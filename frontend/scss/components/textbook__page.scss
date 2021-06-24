@@ -69,6 +69,17 @@
   max-width: $page-max-width;
 }
 
+circle,
+g,
+image,
+line,
+path,
+polyline,
+use {
+  transform-box: inherit;
+  transform-origin: revert;
+}
+
 .c-textbook__footer {
 	padding-bottom: $qiskit-navbar-height;
 }

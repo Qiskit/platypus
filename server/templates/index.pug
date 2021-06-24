@@ -6,12 +6,49 @@ html(lang=lang dir=dir)
     include head
 
   body#app
-    div.qiskit__navbar#qiskit-navbar(data-vue-mount)
-      the-menu
+    div.qiskit__navbar#qiskit-navbar
+      q-the-menu
 
     .body
       div.c-textbook.js-show-sidebar
-        include navbar
+        div.c-sidebar
+          nav.c-textbook__sidebar#js-sidebar(style="height:100vh")
+            ul.c-sidebar__chapters
+              if courses
+                if courses.learningPaths
+                  li.c-sidebar__chapter
+                    span.c-sidebar__entry
+                      | Courses
+                  ul
+                    for c in courses.learningPaths
+                      - var c = getCourse(c, locale.id)
+                      if c
+                        li.c-c-sidebar__section
+                          a.c-sidebar__entry(href=`/course/${c.id}`)
+                            | #{c.title}
+                if courses.uncategorized
+                  li.c-sidebar__chapter
+                    span.c-sidebar__entry
+                      | Textbook
+                  ul
+                    for c in courses.uncategorized
+                      - var c = getCourse(c, locale.id)
+                      if c
+                        li.c-c-sidebar__section
+                          a.c-sidebar__entry(href=`/course/${c.id}`)
+                            | #{c.title}
+                if courses.docs
+                  li.c-sidebar__chapter
+                    span.c-sidebar__entry
+                      | Misc
+                  ul
+                    for c in courses.docs
+                      - var c = getCourse(c, locale.id)
+                      if c
+                        li.c-c-sidebar__section
+                          a.c-sidebar__entry(href=`/course/${c.id}`)
+                            | #{c.title}
+
 
         main.c-textbook__page
           div.c-textbook__content#textbook_content
@@ -23,8 +60,6 @@ html(lang=lang dir=dir)
                 .preface-summary
                   aside.preface-summary-image
                     img(src="https://qiskit.org/textbook/images/preface_illustration_2.svg")
-                  .preface-summary-text
-                    p Greetings from the Qiskit Community team! This textbook is a university quantum algorithms/computation course supplement based on Qiskit to help learn:
 
           div.c-textbook_footer#textbook_footer
             footer

@@ -12,7 +12,7 @@
         <bx-table-body>
           <bx-table-row v-for="item in glossaryData" :key="item.index">
             <bx-table-cell class="universal-glossary__symbol" v-html="item.notation"></bx-table-cell>
-            <bx-table-cell>{{item.description}}</bx-table-cell>
+            <bx-table-cell class="universal-glossary__description">{{item.description}}</bx-table-cell>
           </bx-table-row>
         </bx-table-body>
       </bx-table>
@@ -50,6 +50,10 @@ export default class UniversalGlossary extends Vue.with(Props) {}
 
   .universal-glossary__symbol {
     @include type-style('body-short-01');
+  }
+
+  &__description:hover {
+    cursor: text;
   }
 }
 </style>
