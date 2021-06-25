@@ -12,6 +12,7 @@ from . import TextbookExporter
 
 
 figure_regex = re.compile(r'x-img\(src="(.*)"\)')
+image_regex = re.compile(r'<img(.+?)src="(.+?)"/?>')
 
 
 def get_notebook_node(nb_file_path):
@@ -224,9 +225,16 @@ def update_image_path(line, source_path):
     match = figure_regex.search(line)
     if match is not None:
         figure_path = match.group(1)
-        return line.replace(figure_path, f'/content/{source_path}/{figure_path}')
-    else:
-        return line
+        if figure_path and not figure_path.startswith('/') and not figure_path.startswith('http'):
+            return line.replace(figure_path, f'/content/{source_path}/{figure_path}')
+    
+    match = image_regex.search(line)
+    if match is not None:
+        img_path = match.group(2)
+        if img_path and not img_path.startswith('/') and not img_path.startswith('http'):
+            return line.replace(img_path, f'/content/{source_path}/{img_path}')
+
+    return line
 
 
 def get_order_from_toc(toc_file_path, md_dir_path):
