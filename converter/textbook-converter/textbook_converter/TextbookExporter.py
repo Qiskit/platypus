@@ -22,6 +22,10 @@ comment_regex = re.compile(r'^<!--\s+(:::.*)\s+-->')
 
 blank_regex = re.compile(r'\[\[(.+?)]]')
 
+inline_code_regex = re.compile(r'`(.+?)`')
+
+CODE_BLOCK_START = '```'
+
 
 JS_CLICK_GOAL = """
     const {elt} = $section.$("{selector}");
@@ -43,6 +47,21 @@ JS_VALUE_GOAL = """
       }});
     }}
 """
+
+
+def handle_inline_code(line):
+    """Convert inline code from:
+        
+        `some text`
+
+        to this:
+
+        `{code} some text`
+    """
+    for match in inline_code_regex.findall(line):
+        if not match.startswith('{'):
+            line = line.replace(f'`{match}`', f'`{{code}} {match}`')
+    return line
 
 
 def handle_block_comment(comment_syntax):
@@ -144,6 +163,7 @@ def handle_markdown_cell(cell, resources, cell_number):
     lines = cell.source.splitlines()
     latex = False
     in_block = False
+    in_code = False
     headings = []
 
     for count, line in enumerate(lines):
@@ -171,6 +191,21 @@ def handle_markdown_cell(cell, resources, cell_number):
                 latex = True
             continue
 
+        if in_code:
+            if line.lstrip().startswith(CODE_BLOCK_START):
+                in_code = False
+                markdown_lines.append(line + '\n')
+            else:
+                markdown_lines.append(line + '\n')
+            continue
+        elif line.lstrip().startswith(CODE_BLOCK_START):
+            in_code = True
+            if line.rstrip().endswith(CODE_BLOCK_START):
+                markdown_lines.append(line.rstrip() + 'code\n')
+            else:
+                markdown_lines.append(line + '\n')
+            continue
+
         if line.lstrip().startswith(COMMENT_START):
             l = handle_block_comment(line)
             if l.strip().endswith(':::'):
@@ -184,7 +219,6 @@ def handle_markdown_cell(cell, resources, cell_number):
             markdown_lines.append(handle_vue_component(line))
         elif line.lstrip().startswith(IMAGE_START):
             markdown_lines.append(handle_images(line))
-
         elif line.lstrip().startswith(HEADING_START):
             id, level, title, heading_text = handle_heading(
                 line, in_block, f'-{cell_number}-{count}'
@@ -193,6 +227,7 @@ def handle_markdown_cell(cell, resources, cell_number):
                 headings.append((id, level, title))
             markdown_lines.append(heading_text)
         else:
+            line = handle_inline_code(line)
             markdown_lines.append(line)#.replace('$$', '$').replace('\\', '\\\\'))
             markdown_lines.append('\n')
 
