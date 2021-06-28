@@ -4,7 +4,7 @@
       <div
         ref="elementsWrapperRef"
         class="carousel__elements"
-        :style="`transform: translateX(-${ 100 * selectedInt }%);`"
+        :style="`--translate-x-percentage: -${ 100 * selectedInt }%`"
       >
         <slot />
       </div>
@@ -75,6 +75,7 @@ export default class Carousel extends Vue.with(Props) {
     flex-wrap: nowrap;
     font-size: 0.875rem;
     line-height: 1.7rem;
+    transform: translateX(var(--translate-x-percentage));
 
     & > ::v-deep(*) {
       flex: 0 0 100%;
