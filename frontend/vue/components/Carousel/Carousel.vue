@@ -77,8 +77,7 @@ export default class Carousel extends Vue.with(Props) {
     line-height: 1.7rem;
 
     & > ::v-deep(*) {
-      flex: none;
-      width: 100%;
+      flex: 0 0 100%;
     }
 
     & > ::v-deep(:not(.active)) {
