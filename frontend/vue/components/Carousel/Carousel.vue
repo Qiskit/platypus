@@ -4,7 +4,7 @@
       <div
         ref="elementsWrapperRef"
         class="carousel__elements"
-        :style="`transform: translateX(-${ 100 * selectedInt }%);`"
+        :style="`--active-slide-index: ${selectedInt}`"
       >
         <slot />
       </div>
@@ -75,10 +75,10 @@ export default class Carousel extends Vue.with(Props) {
     flex-wrap: nowrap;
     font-size: 0.875rem;
     line-height: 1.7rem;
+    transform: translateX(calc(-100% *  var(--active-slide-index)));
 
     & > ::v-deep(*) {
-      flex: none;
-      width: 100%;
+      flex: 0 0 100%;
     }
 
     & > ::v-deep(:not(.active)) {
