@@ -1,18 +1,13 @@
 import json
 import nbformat
 import os
-import re
 import shutil
 import yaml
 
 from pathlib import Path
 from nbconvert.writers import FilesWriter
 
-from . import TextbookExporter
-
-
-figure_regex = re.compile(r'x-img\(src="(.*)"\)')
-image_regex = re.compile(r'<img(.+?)src="(.+?)"/?>')
+from . import TextbookExporter, figure_regex, html_img_regex
 
 
 def get_notebook_node(nb_file_path):
@@ -228,10 +223,10 @@ def update_image_path(line, source_path):
         if figure_path and not figure_path.startswith('/') and not figure_path.startswith('http'):
             return line.replace(figure_path, f'/content/{source_path}/{figure_path}')
     
-    match = image_regex.search(line)
+    match = html_img_regex.search(line)
     if match is not None:
         img_path = match.group(2)
-        if img_path and not img_path.startswith('/') and not img_path.startswith('http'):
+        if img_path and not img_path.startswith('/') and not img_path.startswith('http') and not img_path.startswith('data'):
             return line.replace(img_path, f'/content/{source_path}/{img_path}')
 
     return line
