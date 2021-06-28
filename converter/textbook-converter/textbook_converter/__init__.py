@@ -1,2 +1,2 @@
-from .TextbookExporter import TextbookExporter, figure_regex, html_img_regex
+from .TextbookExporter import TextbookExporter, mathigon_ximg_regex, html_img_regex
 from .converter import *

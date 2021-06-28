@@ -12,7 +12,7 @@ vue_regex = re.compile(r'^!\[vue:(.*)]\(.*\)')
 IMAGE_START = '!['
 markdown_img_regex = re.compile(r'^!\[.*]\((.*)\)')
 html_img_regex = re.compile(r'<img(.+?)src="(.+?)"(.*?)/?>')
-figure_regex = re.compile(r'x-img\(src="(.*)"\)')
+mathigon_ximg_regex = re.compile(r'x-img\(src="(.*)"\)')
 
 HEADING_START = '#'
 tag_id_regex = re.compile(r'(<.*\sid=["\'])(.*)(["\'])')

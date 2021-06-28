@@ -7,7 +7,7 @@ import yaml
 from pathlib import Path
 from nbconvert.writers import FilesWriter
 
-from . import TextbookExporter, figure_regex, html_img_regex
+from . import TextbookExporter, mathigon_ximg_regex, html_img_regex
 
 
 def get_notebook_node(nb_file_path):
@@ -215,21 +215,21 @@ def yml_to_dict(yml_file_path):
 
 
 def update_image_path(line, source_path):
-    """Update figure image src (if referenced) in line using source
+    """Update image src
     """
-    match = figure_regex.search(line)
+    img_src_path = None
+    match = mathigon_ximg_regex.search(line)
     if match is not None:
-        figure_path = match.group(1)
-        if figure_path and not figure_path.startswith('/') and not figure_path.startswith('http'):
-            return line.replace(figure_path, f'/content/{source_path}/{figure_path}')
-    
-    match = html_img_regex.search(line)
-    if match is not None:
-        img_path = match.group(2)
-        if img_path and not img_path.startswith('/') and not img_path.startswith('http') and not img_path.startswith('data'):
-            return line.replace(img_path, f'/content/{source_path}/{img_path}')
+        img_src_path = match.group(1)
+    else:
+        match = html_img_regex.search(line)
+        if match is not None:
+            img_src_path = match.group(2)
 
-    return line
+    if img_src_path and not img_src_path.startswith('/') and not img_src_path.startswith('http') and not img_src_path.startswith('data'):
+        return line.replace(img_src_path, f'/content/{source_path}/{img_src_path}')
+    else:
+        return line
 
 
 def get_order_from_toc(toc_file_path, md_dir_path):
