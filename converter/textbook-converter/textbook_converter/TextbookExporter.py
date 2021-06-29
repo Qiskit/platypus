@@ -152,22 +152,30 @@ def handle_hero_image(hero_image_syntax):
 def handle_heading(heading_syntax, in_block, suffix):
     """Increase header level and compute level, title, and id
     """
+    header, title = heading_syntax.split(' ', 1)
+    level = header.count('#')
     if in_block:
-        title = heading_syntax.split(' ', 1)[-1].strip()
         return None, None, title, f'#{heading_syntax}\n'
     else:
         match = tag_id_regex.search(heading_syntax)
-        level = len(heading_syntax.split()[0])
         if match is None:
-            title = heading_syntax.split(' ', 1)[-1].strip()
-            id = re.sub(r"\s", "-", title.lower())
+            id = re.sub(r"\s", "-", title.strip().lower())
             id = re.sub(r"[^\w-]", "", id) + (suffix if level > 1 else "")
-            text = f'#{heading_syntax}\n' if level == 1 else f'#{heading_syntax} <a id="{id}"></a>\n'
-            return id, level, title, text
+            if level == 1:
+                # Mathigon requires all sections to start with `##`
+                text = f'#{heading_syntax}\n'
+            else:
+                text = f'<h{level}>\n{title} <a id="{id}"></a>\n</h{level}>\n'
+            return id, level, title.strip(), text
         else:
             title = heading_syntax[0:match.start()].split(' ', 1)[-1].strip()
             id = match.group(2)
-            return id, level, title, f'#{heading_syntax}\n'
+            if level == 1:
+                # Mathigon requires all sections to start with `##`
+                text = f'#{heading_syntax}\n'
+            else:
+                text = f'<h{level}>\n{heading_syntax[level:]}\n</h{level}>\n'
+            return id, level, title, text
 
 
 def handle_markdown_cell(cell, resources, cell_number):
