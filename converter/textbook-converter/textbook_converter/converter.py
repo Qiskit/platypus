@@ -1,17 +1,13 @@
 import json
 import nbformat
 import os
-import re
 import shutil
 import yaml
 
 from pathlib import Path
 from nbconvert.writers import FilesWriter
 
-from . import TextbookExporter
-
-
-figure_regex = re.compile(r'x-img\(src="(.*)"\)')
+from . import TextbookExporter, mathigon_ximg_regex, html_img_regex
 
 
 def get_notebook_node(nb_file_path):
@@ -219,12 +215,19 @@ def yml_to_dict(yml_file_path):
 
 
 def update_image_path(line, source_path):
-    """Update figure image src (if referenced) in line using source
+    """Update image src
     """
-    match = figure_regex.search(line)
+    img_src_path = None
+    match = mathigon_ximg_regex.search(line)
     if match is not None:
-        figure_path = match.group(1)
-        return line.replace(figure_path, f'/content/{source_path}/{figure_path}')
+        img_src_path = match.group(1)
+    else:
+        match = html_img_regex.search(line)
+        if match is not None:
+            img_src_path = match.group(2)
+
+    if img_src_path and not img_src_path.startswith('/') and not img_src_path.startswith('http') and not img_src_path.startswith('data'):
+        return line.replace(img_src_path, f'/content/{source_path}/{img_src_path}')
     else:
         return line
 
