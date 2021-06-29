@@ -1,6 +1,4 @@
-import json
 import re
-import yaml
 
 from nbconvert.exporters import Exporter
 
@@ -12,7 +10,9 @@ VUE_COMPONENT_START = '![vue:'
 vue_regex = re.compile(r'^!\[vue:(.*)]\(.*\)')
 
 IMAGE_START = '!['
-img_regex = re.compile(r'^!\[.*]\((.*)\)')
+markdown_img_regex = re.compile(r'^!\[.*]\((.*)\)')
+html_img_regex = re.compile(r'<img(.+?)src="(.+?)"(.*?)/?>')
+mathigon_ximg_regex = re.compile(r'x-img\(src="(.*)"\)')
 
 HEADING_START = '#'
 tag_id_regex = re.compile(r'(<.*\sid=["\'])(.*)(["\'])')
@@ -81,7 +81,40 @@ def handle_vue_component(vue_component_syntax):
         return vue_component_syntax
 
 
-def handle_images(image_syntax):
+def get_attachment_data(image_source, cell=None):
+    """Returns the data URI for the given image attachment
+    """
+    if cell and image_source.startswith('attachment:'):
+        img_data = cell['attachments'][image_source[len('attachment:'):]] or []
+        for x in img_data.keys():
+            if x.startswith('image/'):
+                img_data = f'data:{x};base64,{img_data[x]}'
+                break
+        return img_data if len(img_data) else image_source
+    return image_source
+
+
+def handle_attachments(line, cell):
+    """Convert syntax from this:
+
+        <img src="attachment:file.png">
+
+        to this:
+
+         <img src="data:image/png;base64,ajdfjaclencQWInak...">
+
+    """
+    match = html_img_regex.search(line)
+    if match is not None:
+        img_src = match.group(2)
+        print(img_src)
+        img_data = get_attachment_data(img_src, cell)
+        return line.replace(img_src, img_data)
+    else:
+        return line
+
+
+def handle_images(line, cell):
     """Convert syntax from this:
 
         ![alt text](path/image)
@@ -91,13 +124,13 @@ def handle_images(image_syntax):
             figure: x-img(src="path/image")
 
     """
-    match = img_regex.search(image_syntax.lstrip())
+    match = markdown_img_regex.search(line.lstrip())
     if match is not None:
         return f'''
-    figure: x-img(src="{match.group(1)}")
+    figure: x-img(src="{get_attachment_data(match.group(1), cell)}")
         '''
     else:
-        return image_syntax
+        return line
 
 
 def handle_hero_image(hero_image_syntax):
@@ -171,6 +204,8 @@ def handle_markdown_cell(cell, resources, cell_number):
                 latex = True
             continue
 
+        line = handle_attachments(line, cell)
+
         if line.lstrip().startswith(COMMENT_START):
             l = handle_block_comment(line)
             if l.strip().endswith(':::'):
@@ -183,7 +218,7 @@ def handle_markdown_cell(cell, resources, cell_number):
         elif line.lstrip().startswith(VUE_COMPONENT_START): 
             markdown_lines.append(handle_vue_component(line))
         elif line.lstrip().startswith(IMAGE_START):
-            markdown_lines.append(handle_images(line))
+            markdown_lines.append(handle_images(line, cell))
 
         elif line.lstrip().startswith(HEADING_START):
             id, level, title, heading_text = handle_heading(
