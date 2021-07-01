@@ -55,10 +55,5 @@ export default class BasicLink extends Vue.with(Props) {
   get isNuxtLink (): boolean {
     return !this.isAnchor
   }
-
-  mounted() {
-    console.log(this.url, "URL")
-    console.log(this.segment, "SEGMENT")
-  }
 }
 </script>
