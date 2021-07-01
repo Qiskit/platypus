@@ -109,9 +109,6 @@ function trackClickEvent (
   context: AnalyticsContext,
   customProperties: CtaClickedEventProperties
 ) {
-  console.log(context, "?? context")
-  console.log(customProperties, "?? customProperties")
-
   const { bluemixAnalytics, digitalData } = context
   const { cta, location } = customProperties
 

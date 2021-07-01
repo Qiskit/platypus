@@ -108,17 +108,18 @@ export default class Quiz extends Vue.with(Props) {
     const quizTitle = this.goal
     const sectionElement = document.getElementsByTagName('x-course')[0]
     const sectionTitle = sectionElement.getAttribute('data-section')
+    const quizLocation = `${sectionTitle}-${quizTitle}`
     const windowInstance = (window as any)
 
     if (this.solved()) {
       // Segment tracking correct
-      windowInstance.textbook.trackClickEvent(`${sectionTitle} > ${quizTitle} > correct`)
+      windowInstance.textbook.trackClickEvent( quizLocation, { cta: 'correct', location: quizLocation })
       return SolutionState.CORRECT
     }
 
     // Segment tracking incorrect responses
     if (windowInstance?.textbook?.trackClickEvent) {
-      windowInstance.textbook.trackClickEvent(`${sectionTitle} > ${quizTitle} > incorrect`)
+      windowInstance.textbook.trackClickEvent( quizLocation, { cta: 'incorrect', location: quizLocation })
     }
 
     return SolutionState.WRONG
