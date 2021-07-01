@@ -30,7 +30,7 @@ export default class EmptyPanel extends Vue {
     event.preventDefault()
     const windowInstance = (window as any)
 
-    windowInstance.textbook.trackClickEvent(`Empty panel > ${label}`)
+    windowInstance.textbook.trackClickEvent('chapter-details-panel-empty', { cta: 'universal-glossary-link', location: 'chapter-details-panel-empty' })
     this.$emit('handleRedirect', label)
   }
 }
