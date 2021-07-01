@@ -29,7 +29,7 @@ div.c-sidebar
                 a(
                   href=`${s.url}`
                   class=progclass
-                  onclick=`textbook.trackClickEvent('course-${c.id}-${s.id}', { cta: '${s.url}', location: 'chapter-sidebar-nav' })`
+                  onclick=`textbook.trackClickEvent('${c.id}-${s.id}', { cta: '${s.url}', location: 'chapter-sidebar-nav' })`
                   , title=s.title
                 )
                   x-progress(r=10 p=0)
@@ -42,7 +42,7 @@ div.c-sidebar
                     a(
                       href=`#${sub.id}`
                       class="c-sidebar__entry"
-                      onclick=`textbook.trackClickEvent('course-${c.id}-${s.id}-${sub.id}', { cta: '${sub.id}', location: 'chapter-sidebar-nav' })`
+                      onclick=`textbook.trackClickEvent('${c.id}-${s.id}-${sub.id}', { cta: '${sub.id}', location: 'chapter-sidebar-nav' })`
                     ) !{sub.title}
                     ul.c-sidebar__subsections
                       for subsection in sub.subsections
@@ -50,14 +50,14 @@ div.c-sidebar
                           a(
                             href=`#${subsection.id}`
                             class="c-sidebar__entry"
-                            onclick=`textbook.trackClickEvent('course-${c.id}-${s.id}-${subsection.id}', { cta: '${subsection.id}', location: 'chapter-sidebar-nav' })`
+                            onclick=`textbook.trackClickEvent('${c.id}-${s.id}-${subsection.id}', { cta: '${subsection.id}', location: 'chapter-sidebar-nav' })`
 
                           ) !{subsection.title}
             else
               a(
                 class="c-sidebar__entry"
                 href=`${s.url}`
-                onclick=`textbook.trackClickEvent('course-${c.id}-${s.id}', { cta: '${s.url}', location: 'chapter-sidebar-nav' })`
+                onclick=`textbook.trackClickEvent('${c.id}-${s.id}', { cta: '#${s.url}', location: 'chapter-sidebar-nav' })`
               )
                 | !{s.title}
 
