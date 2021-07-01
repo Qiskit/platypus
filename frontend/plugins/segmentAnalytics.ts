@@ -1,3 +1,10 @@
+
+import {
+  CtaClickedEventProperties,
+  CtaClickedSegmentTrackProperties,
+  SearchedTermSegmentTrackProperties
+} from '../constants/segment'
+
 /**
  * Set of configuration objects and flags required by Bluemix Analytics.
  * Main configuration objects are `_analytics`, `bluemixAnalytics` and
@@ -20,12 +27,6 @@ interface AnalyticsContext {
 interface ClickEventParams {
   /** A description of the CTA. */
   action: string
-}
-
-interface CtaEvent {
-  CTA: string
-  productTitle: string
-  category: string
 }
 
 interface TextbookAnalytics {
@@ -79,16 +80,18 @@ function installAnalyticsOnce (analyticsScriptUrl: string = '') {
 
 /**
  * Send a page visitation event to segment.
+ * @param context the Bluemix Analytics object with the analytics configuration.
+ * This is usually `window`.
+ * @param routeName a unique name identifying the contents of the route.
  * @param title the title meta tag of the page
  */
-function trackPage (title: string) {
-  const { bluemixAnalytics, digitalData } = window
+function trackPage (context: AnalyticsContext, routeName: string, title: string) {
+  const { bluemixAnalytics, digitalData } = context
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const category = getOrFailCategory(digitalData)
   const productTitle = getOrFailProductTitle(digitalData)
-  const routeName = 'project-platypus'
 
   bluemixAnalytics.pageEvent(category, routeName, {
     navigationType: 'pushState',
@@ -98,49 +101,53 @@ function trackPage (title: string) {
 }
 
 /**
- * Send a CTA to segment.
- * @param params the parameters for the CTA.
+ * Send the information of a CTA click event to Segment.
+ * @param context Bluemix Analytics configuration
+ * @param properties Segment click event properties
  */
-function trackClickEvent (params: ClickEventParams|string) {
-  let action = params
-  if (typeof params === 'string') {
-    try {
-      action = JSON.parse(params).action
-    } catch(err){ }
-  } else {
-    action = params.action
-  }
-  // const { action } = typeof params === 'string' ? JSON.parse(params) : params
-  const { bluemixAnalytics, digitalData } = window
+function trackClickEvent (
+  context: AnalyticsContext,
+  customProperties: CtaClickedEventProperties
+) {
+  console.log(customProperties, "?? customProperties")
+
+  const { bluemixAnalytics, digitalData } = context
+  const { cta, location } = customProperties
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const cta: CtaEvent = {
-    productTitle,
+  const segmentOptions: CtaClickedSegmentTrackProperties = {
     category,
-    CTA: action as string
+    CTA: cta,
+    location,
+    productTitle
   }
 
-  bluemixAnalytics.trackEvent('CTA Clicked', cta)
+  bluemixAnalytics.trackEvent('CTA Clicked', segmentOptions)
 }
 
 /**
  * Send the information of an entered search term to Segment.
+ * @param context Bluemix Analytics configuration
  * @param searchComponent Name of the search component
  * @param searchTerm Search term
  */
-function trackSearchTerm (searchComponent: string, searchTerm: string) {
-  const { bluemixAnalytics, digitalData } = window
+function trackSearchTerm (
+  context: AnalyticsContext,
+  searchComponent: string,
+  searchTerm: string
+) {
+  const { bluemixAnalytics, digitalData } = context
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const eventOptions = {
+  const eventOptions: SearchedTermSegmentTrackProperties = {
     category,
     location: searchComponent,
     productTitle,
@@ -180,7 +187,7 @@ function initAnalytics (key: string, url: string) {
   installAnalyticsOnce(url)
 }
 
-function install (app: any, options: any = {}) {
+function install (app: any, _options: any = {}) {
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
   app.config.globalProperties.$trackClickEvent = trackClickEvent
   app.config.globalProperties.$trackPage = trackPage
@@ -192,7 +199,10 @@ export {
   install,
   trackClickEvent,
   trackPage,
-  trackSearchTerm,
+  trackSearchTerm
+}
+
+export type {
   ClickEventParams,
   AnalyticsContext
 }

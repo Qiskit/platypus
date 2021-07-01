@@ -46,10 +46,10 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 
   switchPanel(event: any) {
     // Segment analytics tracking
-    const windowInstance = (window as any)
+    // const windowInstance = (window as any)
     const selectionTitle = event.detail.item.value
 
-    windowInstance.textbook.trackClickEvent(`Right panel dropdown selection > ${selectionTitle}`);
+    // windowInstance.textbook.trackClickEvent(`Right panel dropdown selection > ${selectionTitle}`);
 
     this.$emit('updatedPanelSelection', selectionTitle)
     this.selectedPanel = selectionTitle

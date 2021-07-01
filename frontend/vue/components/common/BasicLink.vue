@@ -6,7 +6,7 @@
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
-    @click="segment && $trackClickEvent(segment)"
+    @click="segment && $trackClickEvent(url, segment)"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />
@@ -15,11 +15,11 @@
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
-import { SegmentData } from '../../../constants/appLinks'
+import { CtaClickedEventProperties } from '../../../constants/segment'
 
 class Props {
   url = prop({ type: String, default: '' })
-  segment = prop<SegmentData>({ type: Object, default: undefined })
+  segment = prop<CtaClickedEventProperties>({ type: Object, default: undefined })
   isStatic = prop({ type: Boolean, default: false })
 }
 
@@ -54,6 +54,11 @@ export default class BasicLink extends Vue.with(Props) {
 
   get isNuxtLink (): boolean {
     return !this.isAnchor
+  }
+
+  mounted() {
+    console.log(this.url, "URL")
+    console.log(this.segment, "SEGMENT")
   }
 }
 </script>

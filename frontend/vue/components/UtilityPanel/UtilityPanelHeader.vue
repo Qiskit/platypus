@@ -40,9 +40,10 @@ class Props {
 export default class UtilityPanelHeader extends Vue.with(Props) {
   selectedPanel:string = ''
   link = {
-    url: '/#',
+    url: '#',
     segment: {
-      action: 'Right side panel > Toggle panel'
+      cta: 'toggle-panel',
+      location: 'chapter-details-panel'
     }
   }
 
