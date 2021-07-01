@@ -20,7 +20,8 @@ export default class EmptyPanel extends Vue {
     label: 'universal glossary',
     url: '#',
     segment: {
-      action: 'Empty panel > Universal glossary link'
+      cta: 'empty-panel-link',
+      location: 'chapter-details-panel'
     }
   }
 
@@ -29,7 +30,7 @@ export default class EmptyPanel extends Vue {
     event.preventDefault()
     const windowInstance = (window as any)
 
-    windowInstance.textbook.trackClickEvent(`Empty panel > ${label}`);
+    windowInstance.textbook.trackClickEvent(`Empty panel > ${label}`)
     this.$emit('handleRedirect', label)
   }
 }
