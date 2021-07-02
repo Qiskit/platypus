@@ -225,7 +225,7 @@ div.preface-checker-pattern {
   right: 0;
 
   @include mq($until: medium) {
-    top: 40px; 
+    top: 20px; 
     height: initial;
   }
 }
