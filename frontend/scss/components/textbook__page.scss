@@ -219,30 +219,13 @@ div.preface-checker-pattern {
 
 // banner
 .page__banner {
-  background-color: $block-background-color;
-  color: $text-color-white;
   height: $textbook-page-banner-height;
-  font-size: 14px;
-  letter-spacing: 0.16px;
-  line-height: 20px;
-  padding: $spacing-03 $spacing-07 $spacing-03 $spacing-05;
   position: absolute;
   left: 0;
   right: 0;
 
-  a {
-    &:visited,
-    &:active,
-    &:hover {
-      color: $text-color-white;
-    }
-
-    color: $text-color-white;
-    text-decoration: underline;
-  }
-
   @include mq($until: medium) {
-    top: 40px; 
+    top: 20px; 
     height: initial;
   }
 }
