@@ -2,7 +2,7 @@
   "name": "@qiskit/platypus",
   "version": "0.1.1",
   "description": "Project Platypus",
-  "repository": "https://github.ibm.com/IBM-Q-Software/project-platypus",
+  "repository": "https://github.com/qiskit-community/platypus",
   "license": "Apache-2.0",
   "main": "server/app.ts",
   "scripts": {
