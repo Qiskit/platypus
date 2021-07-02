@@ -1,6 +1,7 @@
 /* Override of Mathigon styles */
 @import '../../../node_modules/carbon-components/scss/globals/scss/typography';
 @import '../variables/colors.scss';
+@import '../variables/mq.scss';
 @import '../variables/fonts.scss';
 
 x-step {
@@ -33,7 +34,7 @@ pre {
   border-right: 1px solid $border-color-secondary;
   color: $text-color-light;
   padding: $spacing-03 $spacing-07 $spacing-03 $spacing-05;
-  top: 0px;
+  top: 52px;
   left: 0px;
 
   .complete {
@@ -59,6 +60,10 @@ pre {
     .complete {
       display: none;
     }
+  }
+
+  @include mq($until: medium) {
+    top: 90px;
   }
 }
 
