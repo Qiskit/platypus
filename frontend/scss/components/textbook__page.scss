@@ -16,7 +16,8 @@
   position: fixed;
   top: $qiskit-navbar-height;
   right: 0;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   overflow-y: scroll;
   @include mq($until: medium) {
     width: 50%;
