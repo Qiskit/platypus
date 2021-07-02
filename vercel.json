@@ -1,8 +1,3 @@
 {
-  "functions": {
-    "api/main.ts": {
-      "includeFiles": "node_modules/*"
-    }
-  },
   "rewrites": [{ "source": "/((?!public/).*)", "destination": "/api/main.ts" }]
 }

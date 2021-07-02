@@ -2,6 +2,7 @@
 // Project Platypus
 // =============================================================================
 
+import { defineComponent } from 'vue'
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities'
 
@@ -9,6 +10,8 @@ import {
   CONFIG, COURSES, NOTATIONS, UNIVERSAL_NOTATIONS, findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
 } from './utilities'
 import * as storageApi from './storage'
+
+export { defineComponent }
 
 const app = new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
