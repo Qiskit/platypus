@@ -1,3 +1,8 @@
+# Python
+.venv
+__pycache__
+*.pyc
+
 # Always-ignore extensions
 *.diff
 *.err
@@ -35,3 +40,5 @@ __pycache__
 working
 
 public/
+
+.vercel
