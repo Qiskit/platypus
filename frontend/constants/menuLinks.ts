@@ -223,7 +223,7 @@ const SECONDARY_FOOTER_LINKS: Array<NavLink> = [
 
 const HOME_LINK: NavLink = {
   label: 'Qiskit',
-  url: '/'
+  url: 'https://qiskit.org/'
 }
 
 const GITHUB_REPOSITORY: NavLink = {
