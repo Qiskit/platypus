@@ -224,17 +224,6 @@ div.preface-checker-pattern {
   left: 0;
   right: 0;
 
-  a {
-    &:visited,
-    &:active,
-    &:hover {
-      color: $text-color-white;
-    }
-
-    color: $text-color-white;
-    text-decoration: underline;
-  }
-
   @include mq($until: medium) {
     top: 40px; 
     height: initial;
