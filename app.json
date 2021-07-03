@@ -1,0 +1,6 @@
+{
+  "buildpacks": [
+    { "url": "heroku/python" },
+    { "url": "heroku/nodejs" }
+  ]
+}
