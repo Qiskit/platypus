@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "main": "server/app.ts",
   "scripts": {
+    "heroku-prebuild": "ssh-keyscan github.com >> ~/.ssh/known_hosts",
     "clean:studio": "rm -rf node_modules/@mathigon/studio/public",
     "clean:public": "rm -rf public",
     "clean:work": "rm -rf working",
