@@ -7,6 +7,7 @@
   "main": "server/app.ts",
   "scripts": {
     "heroku-prebuild": "rm ./package-lock.json",
+    "heroku-postbuild": "npm run build && rm -rf ./notebooks",
     "clean:studio": "rm -rf node_modules/@mathigon/studio/public",
     "clean:public": "rm -rf public",
     "clean:work": "rm -rf working",
