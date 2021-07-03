@@ -42,4 +42,4 @@ new MathigonStudioApp()
   })
   .course(storageApi)
   .errors()
-  .listen(5000);
+  .listen();
