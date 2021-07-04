@@ -19,7 +19,7 @@ COPY converter converter/
 COPY frontend frontend/
 COPY notebooks notebooks/
 COPY shared shared/
-COPY config.yaml .
+COPY config.yaml ./
 RUN npm run build
 
 COPY public public/
@@ -31,10 +31,10 @@ WORKDIR /usr/app
 COPY --from=builder /usr/app/package*.json ./
 # npm ci --production is not working for some unknown reason
 RUN npm install --production
-COPY --from=builder /usr/app/config.yaml .
-COPY --from=builder /usr/app/public public
-COPY --from=builder /usr/app/server server
-COPY --from=builder /usr/app/frontend frontend
+COPY --from=builder /usr/app/config.yaml ./
+COPY --from=builder /usr/app/public public/
+COPY --from=builder /usr/app/server server/
+COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
 
 CMD ["npm", "start"]
