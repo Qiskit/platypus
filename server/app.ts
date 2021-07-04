@@ -9,7 +9,6 @@ import {
   CONFIG, COURSES, NOTATIONS, UNIVERSAL_NOTATIONS, findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
 } from './utilities'
 import * as storageApi from './storage'
-
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
