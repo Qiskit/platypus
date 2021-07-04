@@ -6,26 +6,26 @@ import * as yaml from 'js-yaml'
 
 import { Course } from '@mathigon/studio/server/interfaces'
 import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/utilities'
-import { parseYAML} from '@mathigon/studio/build/markdown'
+import { parseYAML } from '@mathigon/studio/build/markdown'
 
 const COURSES = fs.readdirSync(CONTENT)
   .filter(id => id !== 'shared' && !id.includes('.') && !id.startsWith('_'))
 
 const loadJSON = function (file: string) {
-  if (!fs.existsSync(file)) return undefined
+  if (!fs.existsSync(file)) { return undefined }
   return JSON.parse(fs.readFileSync(file, 'utf8')) as unknown
 }
 
 const findCourse = function (courseId: string, locale: string = 'en'): Course {
   const course = loadJSON(OUTPUT + `/content/${courseId}/data_${locale}.json`) as Course
-  if (!course) return undefined;
+  if (!course) { return undefined }
   return course
 }
 
 const insertSections = (content: object, document: HTMLDocument, includeHtml: boolean): object => {
   Object.keys(content).forEach((key) => {
     const valueObj = content[key]
-    let sectionIds = new Set()
+    const sectionIds = new Set()
     let node: any = document.getElementById(key)
 
     if (node) {
@@ -37,19 +37,19 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
       let nodes = document.querySelectorAll(`x-gloss[xid="${key}"]`)
       if (nodes.length) {
         node = nodes[0]
-        nodes.forEach(n => {
+        nodes.forEach((n) => {
           sectionIds.add(n.closest('q-section').getAttribute('data-id'))
         })
       } else {
         // search by class attribute
         nodes = document.querySelectorAll(`mjx-container .${key}`)
         node = nodes.length ? nodes[0] : null
-        nodes.forEach(n => {
+        nodes.forEach((n) => {
           sectionIds.add(n.closest('q-section').getAttribute('data-id'))
-        });
+        })
       }
     }
-    
+
     if (includeHtml) {
       valueObj.html = node ? node.outerHTML : ''
     }
@@ -57,7 +57,7 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
 
     if (sectionIds.size) {
       try {
-        sectionIds.forEach(sectionId => {
+        sectionIds.forEach((sectionId) => {
           if (sectionId) {
             valueObj.sections.push(sectionId)
           }
@@ -71,13 +71,13 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
   return content
 }
 
-const updateSharedYaml = async function(locale: string = 'en') {
+const updateSharedYaml = async function (locale: string = 'en') {
   let courseHtml = ''
-  COURSES.forEach(courseId => {
+  COURSES.forEach((courseId) => {
     const course = findCourse(courseId, locale)
     if (course) {
-      Object.keys(course.steps).forEach(stepId => {
-        const section = course?.sections.find(s => s.steps.indexOf(stepId) > -1)
+      Object.keys(course.steps).forEach((stepId) => {
+        const section = course?.sections.find(s => s.steps.includes(stepId))
         // insert a section id for easier retrieval later
         courseHtml += `<q-section data-id="${section.id}">${course.steps[stepId].html}</q-section>`
       })
@@ -90,13 +90,13 @@ const updateSharedYaml = async function(locale: string = 'en') {
   console.log('updating notations yaml')
   const notationsYaml = path.join(CONTENT, 'shared/notations.yaml')
   const notations = insertSections((loadYAML(notationsYaml) || {}) as object, document, true)
-  await writeFile(notationsYaml, yaml.dump(notations, {sortKeys: true}))
+  await writeFile(notationsYaml, yaml.dump(notations, { sortKeys: true }))
 
   // update glossary.yaml with section IDs
   console.log('updating glossary yaml')
   const glossaryYaml = path.join(CONTENT, 'shared/glossary.yaml')
   const glossary = insertSections((loadYAML(glossaryYaml) || {}) as object, document, false)
-  await writeFile(glossaryYaml, yaml.dump(glossary, {sortKeys: true}))
+  await writeFile(glossaryYaml, yaml.dump(glossary, { sortKeys: true }))
 
   // update universal notations
   console.log('updating universal-notations yaml')
@@ -104,7 +104,7 @@ const updateSharedYaml = async function(locale: string = 'en') {
   const startIndex = '<p>'.length
   const endIndex = '</p>'.length
 
-  for (let notes in universal) {
+  for (const notes in universal) {
     let n = universal[notes].notation
     if (n.startsWith('<p>')) {
       n = n.substring(startIndex)
@@ -119,7 +119,7 @@ const updateSharedYaml = async function(locale: string = 'en') {
   // await writeFile(universalJson, JSON.stringify(universal))
 
   const universalYaml = path.join(CONTENT, 'shared/universal.yaml')
-  await writeFile(universalYaml, yaml.dump(universal, {sortKeys: true}))
+  await writeFile(universalYaml, yaml.dump(universal, { sortKeys: true }))
 }
 
 updateSharedYaml()
