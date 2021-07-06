@@ -11,6 +11,7 @@ skip_files:
   - ^test$
   - ^.git$
   - ^.idea$
+  - ^Dockerfile
 
 handlers:
   - url: /.*
