@@ -2,7 +2,7 @@
   "name": "@qiskit/platypus",
   "version": "0.1.1",
   "description": "Project Platypus",
-  "repository": "https://github.ibm.com/IBM-Q-Software/project-platypus",
+  "repository": "https://github.com/qiskit-community/platypus",
   "license": "Apache-2.0",
   "main": "server/app.ts",
   "scripts": {
@@ -36,6 +36,7 @@
     "@mathigon/boost": "^0.6.14",
     "@mathigon/euclid": "^0.6.7",
     "@mathigon/studio": "github:vabarbosa/studio#platypus",
+    "@qiskit-community/qiskit-vue": "^0.20.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "carbon-components": "^10.30.0",
     "carbon-web-components": "^1.12.0",
