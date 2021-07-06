@@ -12,6 +12,8 @@ import {
   TocCourse
 } from './interfaces'
 
+const TEXTBOOK_HOME = 'https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-beta'
+
 const CONFIG: AnalyticsConfig = <AnalyticsConfig>mConfig
 
 const analytics: AnalyticsEntry = process.env.NODE_ENV === 'production'
@@ -101,6 +103,7 @@ export {
   COURSES,
   NOTATIONS,
   GLOSSARY,
+  TEXTBOOK_HOME,
   UNIVERSAL_NOTATIONS,
   findNextSection,
   findPrevSection,
