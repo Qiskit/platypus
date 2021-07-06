@@ -1,3 +1,4 @@
+import { QiskitBanner } from '@qiskit-community/qiskit-vue'
 import wrapper from './wc-wrapper/platypusWrapper'
 
 import TheMenu from './components/TheMenu/index.vue'
@@ -27,6 +28,7 @@ const kebabize = (str:string) => {
 }
 
 const components: any = {
+  QiskitBanner,
   AppCta,
   ContentMenu,
   TheMenu,

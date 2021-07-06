@@ -16,7 +16,8 @@
   position: fixed;
   top: $qiskit-navbar-height;
   right: 0;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   overflow-y: scroll;
   @include mq($until: medium) {
     width: 50%;
@@ -60,7 +61,7 @@
 
 .c-textbook__content {
   clear: both;
-  padding-top: $qiskit-navbar-height;
+  padding-top: calc(#{$qiskit-navbar-height} + #{$textbook-page-banner-height});
   width: 95%;
 }
 
@@ -138,14 +139,14 @@ img.textbook_logo {
 
 // hidden panel styles
 .qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
-  transform: translate($spacing-10, 0);
+  transform: translate($spacing-09, 0);
   width: calc(100% - #{$spacing-07});
-  padding: 0 32px 40px 0;
+  padding: 0 $spacing-07 $spacing-08 $spacing-04;
 
   @include mq($until: medium) {
-    transform: translate($spacing-05, 0);
+    transform: translate(0, 0);
     width: 100%;
-    padding: $spacing-05 $spacing-07 $spacing-09 0;
+    padding: $spacing-05 $spacing-07 $spacing-09 $spacing-unit-small;
   }
 }
 
@@ -215,4 +216,17 @@ div.preface-checker-pattern {
   margin: initial;
   margin-bottom: 25px;
   float: initial;
+}
+
+// banner
+.page__banner {
+  height: $textbook-page-banner-height;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  @include mq($until: medium) {
+    top: 20px; 
+    height: initial;
+  }
 }
