@@ -48,6 +48,10 @@ jobs:
         # Change this if you need different/additional build scripts.
         run: npm run build
 
+      - name: Remove Dockerfile
+        # AppEngine error with Dockerfile, remove before deploying
+        run: rm -f Dockerfile
+
       # https://github.com/google-github-actions/deploy-appengine
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main
