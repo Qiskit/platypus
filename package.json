@@ -35,7 +35,7 @@
     "@ibm/plex": "^5.1.3",
     "@mathigon/boost": "^0.6.14",
     "@mathigon/euclid": "^0.6.7",
-    "@mathigon/studio": "github:vabarbosa/studio#platypus",
+    "@mathigon/studio": "git+https://github.com/vabarbosa/studio.git#platypus",
     "@qiskit-community/qiskit-vue": "^0.20.0",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "carbon-components": "^10.30.0",

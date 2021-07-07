@@ -24,6 +24,8 @@ $ npm run build
 $ npm start
 ```
 
-> _To watch changes and rebuild automatically run with `npm run watch`_
+> _To watch changes and rebuild automatically run with `npm run watch` after installing the dependencies._
 
-After the application has started access the site at: http://localhost:5000/
+After the application has started, access the site at: http://localhost:8080/
+
+> _You can specify the port setting the env variable `PORT`. For instance `PORT=5000 npm start`._
