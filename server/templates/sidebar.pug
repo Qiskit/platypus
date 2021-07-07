@@ -64,6 +64,7 @@ div.c-sidebar
     nav.sidebar_footer__menu
       a.sidebar_footer__menu_item#app-panel-footer-toggle(
         href='#'
+        is-static=true
         onclick=`textbook.trackClickEvent('${section && section.id ? section.id : course.id} > Show index')`
       )
         span.sidebar_footer__menu_item-label Hide index

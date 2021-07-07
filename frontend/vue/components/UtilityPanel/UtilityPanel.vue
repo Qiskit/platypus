@@ -88,19 +88,19 @@ export default class UtilityPanel extends Vue {
   &_open {
     width: 100%;
     border-left: 1px solid $border-color;
-    max-width: $right-sidebar-width;
+    max-width: $right-sidebar-width-xl;
     min-height: 100vh;
 
     @include mq($from: max-size) {
-      max-width: $right-sidebar-width;
+      max-width: $right-sidebar-width-xl;
     }
 
     @include mq($from: large, $until: max-size) {
-      max-width: $right-sidebar-width - $spacing-13;
+      max-width: $right-sidebar-width-lg;
     }
 
     @include mq($from: medium, $until: large) {
-      max-width: $right-sidebar-width / 1.5;
+      max-width: $right-sidebar-width-xl / 1.5;
     }
 
     @include mq($until: medium) {
