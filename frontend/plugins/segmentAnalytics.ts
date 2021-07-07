@@ -80,18 +80,16 @@ function installAnalyticsOnce (analyticsScriptUrl: string = '') {
 
 /**
  * Send a page visitation event to segment.
- * @param context the Bluemix Analytics object with the analytics configuration.
- * This is usually `window`.
- * @param routeName a unique name identifying the contents of the route.
  * @param title the title meta tag of the page
  */
-function trackPage (context: AnalyticsContext, routeName: string, title: string) {
-  const { bluemixAnalytics, digitalData } = context
+ function trackPage (title: string) {
+  const { bluemixAnalytics, digitalData } = window
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const category = getOrFailCategory(digitalData)
   const productTitle = getOrFailProductTitle(digitalData)
+  const routeName = 'project-platypus'
 
   bluemixAnalytics.pageEvent(category, routeName, {
     navigationType: 'pushState',
@@ -102,14 +100,10 @@ function trackPage (context: AnalyticsContext, routeName: string, title: string)
 
 /**
  * Send the information of a CTA click event to Segment.
- * @param context Bluemix Analytics configuration
- * @param properties Segment click event properties
+ * @param customProperties Segment click event properties
  */
-function trackClickEvent (
-  context: AnalyticsContext,
-  customProperties: CtaClickedEventProperties
-) {
-  const { bluemixAnalytics, digitalData } = context
+function trackClickEvent (customProperties: CtaClickedEventProperties) {
+  const { bluemixAnalytics, digitalData } = window
   const { cta, location } = customProperties
 
   if (!bluemixAnalytics || !digitalData) { return }
@@ -129,16 +123,11 @@ function trackClickEvent (
 
 /**
  * Send the information of an entered search term to Segment.
- * @param context Bluemix Analytics configuration
  * @param searchComponent Name of the search component
  * @param searchTerm Search term
  */
-function trackSearchTerm (
-  context: AnalyticsContext,
-  searchComponent: string,
-  searchTerm: string
-) {
-  const { bluemixAnalytics, digitalData } = context
+function trackSearchTerm (searchComponent: string, searchTerm: string) {
+  const { bluemixAnalytics, digitalData } = window
 
   if (!bluemixAnalytics || !digitalData) { return }
 

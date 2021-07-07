@@ -1,7 +1,7 @@
 /**
  * Custom properties for the event "CTA Clicked".
  */
- export interface CtaClickedEventProperties {
+export interface CtaClickedEventProperties {
   cta: string
   location: string
 }

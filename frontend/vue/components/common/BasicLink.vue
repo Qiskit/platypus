@@ -6,7 +6,7 @@
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
-    @click="segment && $trackClickEvent(url, segment)"
+    @click="segment && $trackClickEvent(segment)"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />

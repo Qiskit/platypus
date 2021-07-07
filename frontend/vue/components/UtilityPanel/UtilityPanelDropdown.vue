@@ -51,7 +51,6 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     const formattedTitle = selectionTitle.toLowerCase().replace(' ', '-')
 
     windowInstance.textbook.trackClickEvent(
-      `chapter-details-dropdown-${formattedTitle}`,
       {
         cta: `chapter-details-dropdown-${formattedTitle}`,
         location: 'chapter-details-panel'
@@ -92,7 +91,3 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   }
 }
 </style>
-
-function segment(segment: any, arg1: { cta: string; location: string; }) {
-  throw new Error('Function not implemented.');
-}
