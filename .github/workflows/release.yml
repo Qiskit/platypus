@@ -46,7 +46,8 @@ jobs:
 
       - name: Build
         # Change this if you need different/additional build scripts.
-        run: npm run build
+        # AppEngine error with Dockerfile
+        run: rm -f Dockerfile && npm run build
 
       # https://github.com/google-github-actions/deploy-appengine
       - name: Deploy to AppEngine
