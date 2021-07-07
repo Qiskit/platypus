@@ -34,19 +34,23 @@
 }
 
 .c-textbook__page {
-  height: calc(100vh - #{$qiskit-navbar-height});
   overflow: auto;
-  position: fixed;
   top: $qiskit-navbar-height;
   background-color: $background-color-white;
-}
-
-.c-textbook__page {
   width: $textbook-page-width;
   transition: transform 250ms ease;
   left: 0;
   padding: 0 $spacing-unit $spacing-unit-small $spacing-unit-small;
-  overflow-x: visible;
+  margin: 0;
+  max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width});
+
+  @include mq($from: medium, $until: max-size) {
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width-sm});
+  }
+
+  @include mq($until: medium) {
+    max-width: initial;
+  }
 
   &:focus {
     outline: none;
@@ -106,7 +110,7 @@ img.textbook_logo {
 
 .qv-layout.js-show-sidebar .c-textbook__page{
   @include mq($until: large) {
-    width: calc(100% - 2em);
+    width: calc(100% - #{$spacing-10});
     padding: 0 32px 40px 0;
     transform: translate($spacing-10, 0);
   }
@@ -115,38 +119,19 @@ img.textbook_logo {
 .qv-layout.js-show-sidebar .c-textbook__page .jupyter-page{
   max-width: initial;
   margin-top: $spacing-05;
-
-  @include mq($from: max-size) {
-    max-width: $content-max-width;
-  }
-
-  @include mq($from: x-large, $until: max-size) {
-    max-width: $content-max-width - $spacing-09;
-  }
-
-  @include mq($from: large, $until: x-large) {
-    max-width: calc(100% - 32rem);
-  }
-
-  @include mq($from: medium, $until: large) {
-    max-width: calc(100% - 18rem);
-  }
-
-  @include mq($from: small, $until: medium) {
-    max-width: initial;
-  }
 }
 
 // hidden panel styles
 .qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
-  transform: translate($spacing-09, 0);
-  width: calc(100% - #{$spacing-07});
-  padding: 0 $spacing-07 $spacing-08 $spacing-04;
+  transform: translate($spacing-10, 0);
+  width: 100%;
+  padding: 0 $spacing-07 $spacing-08 0;
+  max-width: 100%;
 
   @include mq($until: medium) {
     transform: translate(0, 0);
     width: 100%;
-    padding: $spacing-05 $spacing-07 $spacing-09 $spacing-unit-small;
+    padding: $spacing-05 $spacing-07 $spacing-09 $spacing-05;
   }
 }
 
@@ -171,8 +156,19 @@ img.textbook_logo {
   .c-textbook__content {
     width: 100%;
   }
+
+
+  .qv-layout:not(.qv-layout__panel--hidden) .c-sidebar {
+    position: absolute;
+  }
 }
 
+.qv-layout:not(.qv-layout__panel--hidden) .c-sidebar {
+  @include mq($until: large) {
+    z-index: 1;
+    width: 100%;
+  }
+}
 
 aside.preface-summary-image {
   width: 50%;
@@ -226,7 +222,7 @@ div.preface-checker-pattern {
   right: 0;
 
   @include mq($until: medium) {
-    top: 20px; 
+    top: 20px;
     height: initial;
   }
 }
