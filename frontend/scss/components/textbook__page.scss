@@ -126,7 +126,7 @@ img.textbook_logo {
   transform: translate($spacing-10, 0);
   width: 100%;
   padding: 0 $spacing-07 $spacing-08 0;
-  max-width: 100%;
+  // max-width: 100%;
 
   @include mq($until: medium) {
     transform: translate(0, 0);

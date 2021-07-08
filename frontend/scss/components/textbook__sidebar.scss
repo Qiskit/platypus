@@ -17,6 +17,12 @@
   .c-content-menu {
     z-index: 150;
   }
+
+  @include mq($until: large) {
+    .app-mega-dropdown {
+      max-width: initial;
+    }
+  }
 }
 
 .c-textbook__sidebar {
