@@ -48,6 +48,10 @@
     max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width});
   }
 
+  @include mq($from: medium, $until: large) {
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-07});
+  }
+
   @include mq($until: medium) {
     max-width: initial;
   }
