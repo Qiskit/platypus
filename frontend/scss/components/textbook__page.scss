@@ -45,7 +45,7 @@
   max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width});
 
   @include mq($from: medium, $until: max-size) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width-sm});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width});
   }
 
   @include mq($until: medium) {
