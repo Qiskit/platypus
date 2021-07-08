@@ -7,6 +7,7 @@
   grid-template-rows: auto 1fr auto;
   height: calc(100vh - #{$qiskit-navbar-height});
   width: $left-sidebar-width;
+  position: fixed;
 
   @media (max-width: $browser-small) {
     padding-top: 36px;
