@@ -20,7 +20,7 @@ pre {
     font-size: 1rem;
     overflow: initial;
     text-align: center;
-  
+
     code {
       white-space: pre-wrap;
     }
@@ -253,12 +253,6 @@ x-step[goals] {
 }
 
 x-course {
-  article {
-    &.c-textbook__page {
-    max-width: initial;
-    }
-  }
-
   &.ready {
     .skip-step {
       position: relative;
