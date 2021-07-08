@@ -54,8 +54,10 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     e.preventDefault()
     const showPanel = this.isPanelOpen
     const panelDOMElement = document.getElementById('utility-panel')
+    const contentDOMElement = document.getElementsByTagName('x-course')[0]
 
     panelDOMElement?.classList.toggle('c-textbook__utility_panel-open')
+    contentDOMElement?.classList.toggle('qv-layout__utility_panel-closed')
 
     this.isPanelOpen = !showPanel
     if (!this.isPanelOpen) {

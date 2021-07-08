@@ -301,6 +301,12 @@ nav ul.c-sidebar__sections {
   }
 }
 
+.qv-layout__utility_panel-closed .c-textbook__page {
+  @include mq($until: large) {
+    max-width: calc(100% - 4rem);
+  }
+}
+
 .qv-layout__panel--hidden .sidebar_footer__menu_item-label {
   display: none;
 }
