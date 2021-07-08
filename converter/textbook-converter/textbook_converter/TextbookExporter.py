@@ -288,6 +288,8 @@ def handle_code_cell_output(cell_output):
                 return f'<img src="data:{k};base64,{v}"/>'
         if 'text/html' in cell_output['data']:
             return ''.join(cell_output['data']['text/html'])
+        if 'text/latex' in cell_output['data']:
+            return '\\[' + ''.join(cell_output['data']['text/latex']).strip('$$') + '\\]'
         elif 'text/plain' in cell_output['data']:
             return '<pre>' + ''.join(cell_output['data']['text/plain']) + '</pre>'
     elif 'text' in cell_output:
