@@ -3,6 +3,8 @@ import re
 from nbconvert.exporters import Exporter
 
 
+INDENT = '    '
+
 HERO_IMAGE_START = '![hero:'
 hero_regex = re.compile(r'^!\[hero:.*]\((.*)\)')
 
@@ -289,11 +291,11 @@ def handle_code_cell_output(cell_output):
         if 'text/html' in cell_output['data']:
             return ''.join(cell_output['data']['text/html'])
         if 'text/latex' in cell_output['data']:
-            return '\\[' + ''.join(cell_output['data']['text/latex']).strip('$$') + '\\]'
+            return ''.join(cell_output['data']['text/latex'])
         elif 'text/plain' in cell_output['data']:
-            return '<pre>' + ''.join(cell_output['data']['text/plain']) + '</pre>'
+            return f'pre \n{INDENT}| ' + ''.join(cell_output['data']['text/plain']).replace('\n', f'\n{INDENT}| ')
     elif 'text' in cell_output:
-        return '<pre>' + ''.join(cell_output['text']) + '</pre>'
+        return f'pre \n{INDENT}| ' + ''.join(cell_output['text']).replace('\n', f'\n{INDENT}| ')
     
     return None
 
@@ -320,12 +322,16 @@ def handle_code_cell(cell, resources):
     if include_output is None and 'include_output' in resources['textbook']:
         include_output = resources['textbook']['include_output']
 
-    if include_output is not False:
+    if include_output is not False and len(cell.outputs):
+        code_lines.append(f'\n{INDENT}div(data-executable-output="true")\n')
         for cell_output in cell.outputs:
-            output = handle_code_cell_output(cell_output)
-            if output is not None:
-                output = '    ' + output.replace('\n', '\n      ').replace('{', '\\{')
-                code_lines.append(f'\n    div(data-executable-output="true").\n    {output}\n\n')
+            output = handle_code_cell_output(cell_output) or ''
+            if output.startswith('pre'):
+                output = f'{INDENT * 2}' + output.replace('\n', f'\n{INDENT * 2}')
+                code_lines.append(f'{output}\n\n')
+            elif len(output):
+                output = f'{INDENT * 2}div.\n{INDENT * 3}' + output.replace('\n', f'\n{INDENT * 3}')
+                code_lines.append(f'{output}\n\n')
 
     joined_lines = ''.join(code_lines)
     return joined_lines, resources
