@@ -20,12 +20,24 @@ export interface Moved<T> {
   }
 }
 
-export function isAddedEvent<T> (evt: Added<T> | Removed<T> | Moved<T>) {
+export interface Hover<T> {
+  hover: {
+    element: T
+    newIndex: number
+  }
+}
+
+type EventType<T> = Added<T> | Removed<T> | Moved<T> | Hover<T>
+
+export function isAddedEvent<T> (evt: EventType<T>) {
   return 'added' in evt
 }
-export function isRemovedEvent<T> (evt: Added<T> | Removed<T> | Moved<T>) {
+export function isRemovedEvent<T> (evt: EventType<T>) {
   return 'removed' in evt
 }
-export function isMovedEvent<T> (evt: Added<T> | Removed<T> | Moved<T>) {
+export function isMovedEvent<T> (evt: EventType<T>) {
   return 'moved' in evt
+}
+export function isHoverEvent<T> (evt: EventType<T>) {
+  return 'hover' in evt
 }

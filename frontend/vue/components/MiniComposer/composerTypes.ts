@@ -1,6 +1,12 @@
 import { GateName } from './Gate.vue'
 import { ProbabilityState } from './ProbablityChart.vue'
 
+let lastGateId = 0
+
+export function generateGateId (): number {
+  return lastGateId++
+}
+
 export interface ComposerGate {
   name: GateName
   id: number

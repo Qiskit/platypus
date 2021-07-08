@@ -6,6 +6,7 @@
     group="people"
     item-key="name"
     @change="log"
+    @start="onStartCallback"
   >
     <template #item="{ element }">
       <Gate class="gates-pool__gate" :name="`${element.name}`" />
@@ -15,8 +16,7 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
-import draggable from 'vuedraggable'
-import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
+import draggable, { MoveEvent } from 'vuedraggable'
 import Gate, { GateName } from './Gate.vue'
 
 interface ComposerGate {
@@ -30,20 +30,33 @@ class Props {
 
 @Options({
   components: {
-    KetCircuitLine,
     Gate,
     draggable
   }
 })
-export default class CircuitLine extends Vue.with(Props) {
+export default class GatesPool extends Vue.with(Props) {
+  onMoveCallback (evt: MoveEvent<ComposerGate>) {
+    const insertAfterShift = (evt.willInsertAfter ? 1 : 0)
+    const hoverIndex = Number.isInteger(evt.relatedContext.index) ? evt.relatedContext.index + insertAfterShift : 0
 
+    evt.relatedContext.component.emitChanges({
+      hover: {
+        element: evt.draggedContext.element,
+        newIndex: hoverIndex
+      }
+    })
+  }
+
+  onStartCallback (evt: any) {
+    this.$emit('onStartDragging', this.availableGates[evt.oldIndex])
+  }
 }
 </script>
 <style scoped lang="scss">
 @import 'carbon-components/scss/globals/scss/typography';
 @import 'carbon-components/scss/globals/scss/layout';
-@import '../../../scss/variables/colors.scss';
-@import '../../../scss/variables/fonts.scss';
+@import '~/../scss/variables/colors.scss';
+@import '~/../scss/variables/fonts.scss';
 @import '~/../scss/variables/mq.scss';
 
 .gates-pool {

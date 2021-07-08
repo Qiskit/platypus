@@ -16,13 +16,17 @@
       <h1 class="mini-composer__gates__title">
         Gates
       </h1>
-      <GatesPool :available-gates="currentStepData.availableGates" />
+      <GatesPool
+        :available-gates="currentStepData.availableGates"
+        @onStartDragging="onStartDragging"
+      />
     </div>
     <div class="mini-composer__circuit-section">
       <h1 class="mini-composer__circuit-section__title">
         Circuit
       </h1>
       <Circuit
+        ref="circuitRef"
         :circuit-state="currentStepData.circuitState"
         :auto-measure-gate="currentStepData.autoMeasureGate"
         :max-lines="maxLines"
@@ -76,7 +80,7 @@ import SolutionStateIndicator, { SolutionState } from '../common/SolutionStateIn
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
 import ProbablityChart, { ProbabilityState } from './ProbablityChart.vue'
-import { ExerciseStep, ComposerGate, emptyExerciseStep } from './composerTypes'
+import { ExerciseStep, ComposerGate, emptyExerciseStep, generateGateId } from './composerTypes'
 import { GateName } from './Gate.vue'
 
 class Props {
@@ -104,6 +108,8 @@ export default class MiniComposer extends Vue.with(Props) {
   get footerInfoDiv () { return (this.footerInfoRef as unknown as HTMLDivElement) }
   lessonRef = ref<HTMLDivElement | null>(null)
   get lessonDiv () { return (this.lessonRef as unknown as HTMLDivElement) }
+  circuitRef = ref<Circuit | null>(null)
+  get circuit () { return (this.circuitRef as unknown as Circuit) }
 
   correctSolution = SolutionState.CORRECT
 
@@ -122,8 +128,6 @@ export default class MiniComposer extends Vue.with(Props) {
   get maxLines () {
     return this.currentStepData.circuitStateGoal.length
   }
-
-  lastGateId = 0
 
   mounted () {
     const instructionsElements = Array.from<HTMLElement>(this.configDiv.querySelectorAll('.instructions'))
@@ -194,9 +198,9 @@ export default class MiniComposer extends Vue.with(Props) {
       .filter(text => text !== '')
       .map<ComposerGate>((gateText: string) => {
         if (Object.values(GateName).some(gate => gate === gateText)) {
-          return { name: gateText as GateName, id: this.lastGateId++ }
+          return { name: gateText as GateName, id: generateGateId() }
         }
-        return { name: GateName.UNKNOWN, id: this.lastGateId++ }
+        return { name: GateName.UNKNOWN, id: generateGateId() }
       })
   }
 
@@ -281,6 +285,10 @@ export default class MiniComposer extends Vue.with(Props) {
   onRestartButton () {
     this.exerciseSteps.forEach((step) => { step.isCompleted = false })
     this.carousel.nextSlide()
+  }
+
+  onStartDragging (gate: ComposerGate) {
+    this.circuit.OnStartDragging(-1, -1, gate)
   }
 }
 </script>
