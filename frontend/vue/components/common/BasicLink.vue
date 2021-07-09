@@ -15,11 +15,11 @@
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
-import { SegmentData } from '../../../constants/appLinks'
+import { CtaClickedEventProperties } from '../../../constants/segment'
 
 class Props {
   url = prop({ type: String, default: '' })
-  segment = prop<SegmentData>({ type: Object, default: undefined })
+  segment = prop<CtaClickedEventProperties>({ type: Object, default: undefined })
   isStatic = prop({ type: Boolean, default: false })
 }
 
