@@ -17,7 +17,6 @@ div.c-sidebar
 
       ul.c-sidebar__sections
         for s in c.sections
-          - var sidebarItemTitle = s.title.toLowerCase().replace(' ', '-')
           li.c-sidebar__section(data-section-id=s.id)
             if course && course.id === c.id
               if section && section.id === s.id
@@ -31,7 +30,7 @@ div.c-sidebar
                 a(
                   href=`${s.url}`
                   class=progclass
-                  onclick=`textbook.trackClickEvent({ cta: '${sidebarItemTitle}', location: '${sidebarLocation}' })`
+                  onclick=`textbook.trackClickEvent({ cta: '${s.id}', location: '${sidebarLocation}' })`
                   , title=s.title
                 )
                   x-progress(r=10 p=0)
@@ -58,7 +57,7 @@ div.c-sidebar
               a(
                 class="c-sidebar__entry"
                 href=`${s.url}`
-                onclick=`textbook.trackClickEvent({ cta: '#${s.url}', location: '${sidebarLocation}' })`
+                onclick=`textbook.trackClickEvent({ cta: '${s.id}', location: '${sidebarLocation}' })`
               )
                 | !{s.title}
 
