@@ -45,7 +45,11 @@
   max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width});
 
   @include mq($from: medium, $until: max-size) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width-sm});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width});
+  }
+
+  @include mq($from: medium, $until: large) {
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-07});
   }
 
   @include mq($until: medium) {
@@ -121,12 +125,11 @@ img.textbook_logo {
   margin-top: $spacing-05;
 }
 
-// hidden panel styles
+// hidden sidenav styles
 .qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
   transform: translate($spacing-10, 0);
   width: 100%;
   padding: 0 $spacing-07 $spacing-08 0;
-  max-width: 100%;
 
   @include mq($until: medium) {
     transform: translate(0, 0);
