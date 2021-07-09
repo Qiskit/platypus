@@ -82,7 +82,7 @@ function installAnalyticsOnce (analyticsScriptUrl: string = '') {
  * Send a page visitation event to segment.
  * @param title the title meta tag of the page
  */
- function trackPage (title: string) {
+function trackPage (title: string) {
   const { bluemixAnalytics, digitalData } = window
 
   if (!bluemixAnalytics || !digitalData) { return }
