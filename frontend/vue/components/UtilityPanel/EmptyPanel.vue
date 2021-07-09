@@ -27,7 +27,7 @@ export default class EmptyPanel extends Vue {
     url: '#',
     segment: {
       cta: 'universal-glossary',
-      location: 'chapter-details-panel-empty'
+      location: 'chapter-details-panel'
     }
   }
 
