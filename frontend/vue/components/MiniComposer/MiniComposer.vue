@@ -31,7 +31,7 @@
     </div>
     <ProbablityChart
       class="mini-composer__probability-chart"
-      :probabilities="currentStepData.startProbabilities"
+      :probabilities="currentProbabilities"
     />
     <div
       ref="lessonRef"
