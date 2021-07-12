@@ -182,12 +182,16 @@
       url: /intro/atoms-of-computation
     - title: What is quantum?
       url: /intro/what-is-quantum
-    - title: Multiple qubits and entangled states
-      url: /intro/multiple-qubits
+    - title: Describing quantum computers
+      url: /intro/describing-quantum-computers
+    - title: Entangled states
+      url: /intro/entangled-states
     - title: Visualizing entanglement
-      url: /intro/hello-qiskit-bell
+      url: /intro/visualizing-entanglement
     - title: Grover's Algorithm
       url: /intro/grover-intro
+    - title: Project
+      url: /intro/project
 
 
 - title: Quantum Machine Learning
