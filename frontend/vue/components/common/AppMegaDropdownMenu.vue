@@ -26,6 +26,7 @@
             <BasicLink
               class="app-mega-dropdown__content-link app-mega-dropdown__content-link_title"
               :url="group.title.url"
+              target="_self"
             >
               <span
                 v-for="(part) in splitTextInHighlightParts(group.title.label)"
@@ -38,6 +39,7 @@
               :key="chapter.label"
               class="app-mega-dropdown__content-link"
               :url="chapter.url"
+              target="_self"
             >
               <span
                 v-for="(part) in splitTextInHighlightParts(chapter.label)"
