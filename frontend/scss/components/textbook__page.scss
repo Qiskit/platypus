@@ -170,6 +170,7 @@ img.textbook_logo {
   @include mq($until: large) {
     z-index: 2;
     width: 100%;
+    overflow-y: scroll;
   }
 }
 
