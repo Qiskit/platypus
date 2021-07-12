@@ -8,6 +8,7 @@
   height: calc(100vh - #{$qiskit-navbar-height});
   width: $left-sidebar-width;
   position: fixed;
+  z-index: 1;
 
   @media (max-width: $browser-small) {
     padding-top: 36px;
@@ -190,7 +191,7 @@ nav ul.c-sidebar__sections {
     display: block;
     position: fixed;
     width: 50%;
-    z-index: 1;
+    z-index: 2;
     left: 0;
     right: 0;
     background-color: $background-color-lighter;
