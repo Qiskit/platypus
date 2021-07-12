@@ -1,15 +1,15 @@
 <template>
   <bx-dropdown
+    v-model="selectedPanel"
     :value="selectedPanel"
     class="utility-panel-dropdown"
-    v-model="selectedPanel"
     trigger-content="Select resource"
     @bx-dropdown-selected="switchPanel($event)"
   >
     <bx-dropdown-item
-      class="utility-panel-dropdown__item"
       v-for="link in links"
       :key="link.label"
+      class="utility-panel-dropdown__item"
       :value="link.label"
     >
       {{ link.label }}
@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
 // using Carbon web-component from https://github.com/carbon-design-system/carbon-web-components#basic-usage
-import 'carbon-web-components/es/components/dropdown/dropdown.js';
+import 'carbon-web-components/es/components/dropdown/dropdown.js'
 import 'carbon-web-components/es/components/dropdown/dropdown-item.js'
 
 class Props {
@@ -33,30 +33,35 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   selectedPanel: string = 'Lesson Notes'
   links = [
     {
-      label: 'Lesson Notes',
+      label: 'Lesson Notes'
     },
     {
-      label: 'Glossary',
+      label: 'Glossary'
     }
   ]
 
-  mounted() {
+  mounted () {
     this.$emit('updatedPanelSelection', this.selectedPanel)
   }
 
-  switchPanel(event: any) {
+  switchPanel (event: any) {
     // Segment analytics tracking
     const windowInstance = (window as any)
     const selectionTitle = event.detail.item.value
+    const formattedTitle = selectionTitle.toLowerCase().replace(' ', '-')
 
-    windowInstance.textbook.trackClickEvent(`Right panel dropdown selection > ${selectionTitle}`);
+    windowInstance.textbook.trackClickEvent(
+      {
+        cta: `chapter-details-dropdown-${formattedTitle}`,
+        location: 'chapter-details-panel'
+      }
+    )
 
     this.$emit('updatedPanelSelection', selectionTitle)
     this.selectedPanel = selectionTitle
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/typography';

@@ -1,3 +1,10 @@
+
+import {
+  CtaClickedEventProperties,
+  CtaClickedSegmentTrackProperties,
+  SearchedTermSegmentTrackProperties
+} from '../constants/segment'
+
 /**
  * Set of configuration objects and flags required by Bluemix Analytics.
  * Main configuration objects are `_analytics`, `bluemixAnalytics` and
@@ -20,12 +27,6 @@ interface AnalyticsContext {
 interface ClickEventParams {
   /** A description of the CTA. */
   action: string
-}
-
-interface CtaEvent {
-  CTA: string
-  productTitle: string
-  category: string
 }
 
 interface TextbookAnalytics {
@@ -98,33 +99,26 @@ function trackPage (title: string) {
 }
 
 /**
- * Send a CTA to segment.
- * @param params the parameters for the CTA.
+ * Send the information of a CTA click event to Segment.
+ * @param customProperties Segment click event properties
  */
-function trackClickEvent (params: ClickEventParams|string) {
-  let action = params
-  if (typeof params === 'string') {
-    try {
-      action = JSON.parse(params).action
-    } catch(err){ }
-  } else {
-    action = params.action
-  }
-  // const { action } = typeof params === 'string' ? JSON.parse(params) : params
+function trackClickEvent (customProperties: CtaClickedEventProperties) {
   const { bluemixAnalytics, digitalData } = window
+  const { cta, location } = customProperties
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const cta: CtaEvent = {
-    productTitle,
+  const segmentOptions: CtaClickedSegmentTrackProperties = {
     category,
-    CTA: action as string
+    CTA: cta,
+    location,
+    productTitle
   }
 
-  bluemixAnalytics.trackEvent('CTA Clicked', cta)
+  bluemixAnalytics.trackEvent('CTA Clicked', segmentOptions)
 }
 
 /**
@@ -140,7 +134,7 @@ function trackSearchTerm (searchComponent: string, searchTerm: string) {
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const eventOptions = {
+  const eventOptions: SearchedTermSegmentTrackProperties = {
     category,
     location: searchComponent,
     productTitle,
@@ -180,7 +174,7 @@ function initAnalytics (key: string, url: string) {
   installAnalyticsOnce(url)
 }
 
-function install (app: any, options: any = {}) {
+function install (app: any, _options: any = {}) {
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
   app.config.globalProperties.$trackClickEvent = trackClickEvent
   app.config.globalProperties.$trackPage = trackPage
@@ -192,7 +186,10 @@ export {
   install,
   trackClickEvent,
   trackPage,
-  trackSearchTerm,
+  trackSearchTerm
+}
+
+export type {
   ClickEventParams,
   AnalyticsContext
 }
