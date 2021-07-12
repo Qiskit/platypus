@@ -12,7 +12,7 @@ import {
   TocCourse
 } from './interfaces'
 
-const TEXTBOOK_HOME = 'https://qiskitorg-git-feature-textbook-demo-qiskit.vercel.app/textbook-beta'
+const TEXTBOOK_HOME = 'https://qiskit.org/textbook-beta'
 
 const CONFIG: AnalyticsConfig = <AnalyticsConfig>mConfig
 
