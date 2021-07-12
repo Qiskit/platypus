@@ -1,4 +1,8 @@
 <svg width="576" height="336" viewBox="0 0 576 336" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="574" height="334" fill="white"/>
+<rect width="574" height="334" fill="white"/>
+<rect width="574" height="334" fill="white"/>
+<rect width="574" height="334" fill="white"/>
 <rect opacity="0.4" x="1" width="191" height="334" fill="#F2F4F8"/>
 <rect opacity="0.4" x="384" width="191" height="334" fill="#F2F4F8"/>
 <rect x="0.5" y="0.5" width="575" height="335" stroke="#DDE1E6"/>
@@ -38,10 +42,6 @@
 <path d="M333 290.5H320.746C317.985 290.5 315.746 288.261 315.746 285.5V228.5C315.746 225.739 313.508 223.5 310.746 223.5H299" stroke="#343A3F"/>
 <path d="M52 75L56 73.5L52 72V75Z" fill="#491D8B"/>
 <line x1="52" y1="73.5" x2="35" y2="73.5" stroke="#491D8B"/>
-<path d="M247 75L251 73.5L247 72V75Z" fill="#491D8B"/>
-<line x1="247" y1="73.5" x2="235" y2="73.5" stroke="#491D8B"/>
-<path d="M247 225L251 223.5L247 222V225Z" fill="#491D8B"/>
-<line x1="247" y1="223.5" x2="235" y2="223.5" stroke="#491D8B"/>
 <path d="M204 75L208 73.5L204 72V75Z" fill="#343A3F"/>
 <line x1="204" y1="73.5" x2="80" y2="73.5" stroke="#343A3F"/>
 <path d="M396 75L400 73.5L396 72V75Z" fill="#343A3F"/>
