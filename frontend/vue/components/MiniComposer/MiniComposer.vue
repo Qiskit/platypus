@@ -80,7 +80,7 @@ import { ExerciseStep, ComposerGate, emptyExerciseStep } from './composerTypes'
 import { GateName } from './Gate.vue'
 
 class Props {
-  goal = prop<String>({ default: 'minicomposer', required: true });
+  goal = prop<String>({ default: 'mini-composer-solved', required: true });
 }
 
 @Options({
@@ -271,7 +271,12 @@ export default class MiniComposer extends Vue.with(Props) {
   }
 
   areAllStepsCompleted () {
-    return this.exerciseSteps.every(step => step.isCompleted)
+    const isExerciseCompleted = this.exerciseSteps.every(step => step.isCompleted)
+    if (isExerciseCompleted) {
+      this.$step?.score(this.goal as string)
+    }
+
+    return isExerciseCompleted
   }
 
   onNextButton () {
