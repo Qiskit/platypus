@@ -227,7 +227,7 @@ div.preface-checker-pattern {
   height: $textbook-page-banner-height;
   position: absolute;
   left: 0;
-  right: 0;
+  right: -#{$spacing-03};
 
   @include mq($until: medium) {
     top: 20px;
