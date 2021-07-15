@@ -25,6 +25,8 @@
   }
 
   &-open {
+    z-index: 1;
+
     @include mq($until: medium) {
       width: 100%;
       z-index: 2;
