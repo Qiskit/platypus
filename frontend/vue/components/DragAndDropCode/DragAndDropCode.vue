@@ -66,6 +66,7 @@ type CodeLineGap = {
 
 class Props {
   state = prop<Number>({ default: 0 })
+  goal = prop<String>({ default: 'dnd-code-solved', required: true });
 }
 @Options({
   components: {
@@ -236,6 +237,7 @@ export default class DragAndDropCode extends Vue.with(Props) {
     }
 
     if (this.codeLineGapList.every(this.gapIsCorrect)) {
+      this.$step?.score(this.goal as string)
       return SolutionState.CORRECT
     }
 
