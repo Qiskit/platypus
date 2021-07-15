@@ -48,11 +48,11 @@
   z-index: 1;
 
   @include mq($from: medium, $until: max-size) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width} - #{$spacing-03});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width} - #{$spacing-05});
   }
 
   @include mq($from: medium, $until: large) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-10} - #{$spacing-03});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-10} - #{$spacing-05});
   }
 
   &:focus {
