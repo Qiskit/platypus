@@ -1,6 +1,8 @@
 <template>
   <div class="universal-glossary">
-    <p class="universal-glossary__title">Universal frequently used notation</p>
+    <p class="universal-glossary__title">
+      Universal frequently used notation
+    </p>
     <bx-data-table :theme="white">
       <bx-table>
         <bx-table-head>
@@ -11,8 +13,10 @@
         </bx-table-head>
         <bx-table-body>
           <bx-table-row v-for="item in glossaryData" :key="item.index">
-            <bx-table-cell class="universal-glossary__symbol" v-html="item.notation"></bx-table-cell>
-            <bx-table-cell class="universal-glossary__description">{{item.description}}</bx-table-cell>
+            <bx-table-cell class="universal-glossary__symbol" v-html="item.notation" />
+            <bx-table-cell class="universal-glossary__description">
+              {{ item.description }}
+            </bx-table-cell>
           </bx-table-row>
         </bx-table-body>
       </bx-table>
@@ -22,12 +26,12 @@
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
-import 'carbon-web-components/es/components/data-table/table.js';
-import 'carbon-web-components/es/components/data-table/table-body.js';
-import 'carbon-web-components/es/components/data-table/table-head';
-import 'carbon-web-components/es/components/data-table/table-cell.js';
-import 'carbon-web-components/es/components/data-table/table-row.js';
-import 'carbon-web-components/es/components/data-table/table-header-row';
+import 'carbon-web-components/es/components/data-table/table.js'
+import 'carbon-web-components/es/components/data-table/table-body.js'
+import 'carbon-web-components/es/components/data-table/table-head'
+import 'carbon-web-components/es/components/data-table/table-cell.js'
+import 'carbon-web-components/es/components/data-table/table-row.js'
+import 'carbon-web-components/es/components/data-table/table-header-row'
 
 class Props {
   glossaryData = prop<any>({})
