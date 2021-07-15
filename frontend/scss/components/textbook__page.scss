@@ -36,8 +36,6 @@
 }
 
 .c-textbook__page {
-  overflow: auto;
-  top: $qiskit-navbar-height;
   background-color: $background-color-white;
   width: $textbook-page-width;
   transition: transform 250ms ease;
@@ -48,7 +46,6 @@
   position: relative;
   top: 0;
   z-index: 1;
-  max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width} - #{$spacing-03});
 
   @include mq($from: medium, $until: max-size) {
     max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width} - #{$spacing-03});
