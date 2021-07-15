@@ -1,17 +1,21 @@
 <template>
   <div class="lesson-notes">
-    <section class="lesson-notes__section" v-if="filteredVocabulary.length == 0 && filteredNotations.length == 0">
+    <section v-if="filteredVocabulary.length == 0 && filteredNotations.length == 0" class="lesson-notes__section">
       <EmptyPanel @handleRedirect="handleEmptyStateRedirect($event)" />
     </section>
-    <section class="lesson-notes__section" v-if="filteredVocabulary.length > 0">
-      <p class="lesson-notes__section__title">{{ vocabSectionTitle }}</p>
-      <div class="lesson-notes__term" v-for="term in filteredVocabulary" :key="term.index">
+    <section v-if="filteredVocabulary.length > 0" class="lesson-notes__section">
+      <p class="lesson-notes__section__title">
+        {{ vocabSectionTitle }}
+      </p>
+      <div v-for="term in filteredVocabulary" :key="term.index" class="lesson-notes__term">
         <span class="lesson-notes__term__title">{{ term.title }}</span>
-          – <div class="lesson-notes__term__description" v-html="term.text" />
+        – <div class="lesson-notes__term__description" v-html="term.text" />
       </div>
     </section>
-    <section class="lesson-notes__section" v-if="filteredNotations.length > 0">
-      <p class="lesson-notes__section__title">{{ notationsSectionTitle }}</p>
+    <section v-if="filteredNotations.length > 0" class="lesson-notes__section">
+      <p class="lesson-notes__section__title">
+        {{ notationsSectionTitle }}
+      </p>
       <bx-data-table :theme="white">
         <bx-table>
           <bx-table-head>
@@ -22,8 +26,8 @@
           </bx-table-head>
           <bx-table-body>
             <bx-table-row v-for="item in filteredNotations" :key="item.index">
-              <bx-table-cell class="lesson-notes__symbol" v-html="item.html"/>
-              <bx-table-cell v-html="item.meaning"/>
+              <bx-table-cell class="lesson-notes__symbol" v-html="item.html" />
+              <bx-table-cell v-html="item.meaning" />
             </bx-table-row>
           </bx-table-body>
         </bx-table>
@@ -34,45 +38,45 @@
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import 'carbon-web-components/es/components/data-table/table.js';
-import 'carbon-web-components/es/components/data-table/table-body.js';
-import 'carbon-web-components/es/components/data-table/table-head';
-import 'carbon-web-components/es/components/data-table/table-cell.js';
-import 'carbon-web-components/es/components/data-table/table-row.js';
-import 'carbon-web-components/es/components/data-table/table-header-row';
+import 'carbon-web-components/es/components/data-table/table.js'
+import 'carbon-web-components/es/components/data-table/table-body.js'
+import 'carbon-web-components/es/components/data-table/table-head'
+import 'carbon-web-components/es/components/data-table/table-cell.js'
+import 'carbon-web-components/es/components/data-table/table-row.js'
+import 'carbon-web-components/es/components/data-table/table-header-row'
 import EmptyPanel from './EmptyPanel.vue'
 
-type notation = {
-  html: string;
-  say?: string;
-  meaning: string;
-  type?: string;
-  sections: any[];
+export interface Notation {
+  html: string
+  say?: string
+  meaning: string
+  type?: string
+  sections: any[]
 }
 
-type term = {
-  title: string;
-  text: string[];
-  sections: any[];
+export interface Term {
+  title: string
+  text: string[]
+  sections: any[]
 }
 
 class Props {
-  notations = prop<any>({})
-  glossaryTerms = prop<any>({})
+  notations = prop<Notation>({})
+  glossaryTerms = prop<Term>({})
 }
 
 @Options({
   components: { EmptyPanel },
   computed: {
-    filteredNotations(): notation[] {
+    filteredNotations (): Notation[] {
       const notationsData = this.notations
-      const sectionNode = document.querySelector("x-course")
-      const finalNotations: notation[] = []
+      const sectionNode = document.querySelector('x-course')
+      const finalNotations: Notation[] = []
 
-      if(sectionNode) {
+      if (sectionNode) {
         const sectionTitle = sectionNode.getAttribute('data-section')
-        notationsData.forEach((item: notation) => {
-          if (item.sections.indexOf(sectionTitle) != -1) {
+        notationsData.forEach((item: Notation) => {
+          if (item.sections.includes(sectionTitle)) {
             this.showLessonNotations = true
             finalNotations.push(item)
           }
@@ -80,15 +84,15 @@ class Props {
       }
       return finalNotations
     },
-    filteredVocabulary(): term[] {
+    filteredVocabulary (): Term[] {
       const glossaryTermsData = this.glossaryTerms
-      const sectionNode = document.querySelector("x-course")
-      const finalVocabulary: term[] = []
+      const sectionNode = document.querySelector('x-course')
+      const finalVocabulary: Term[] = []
 
-      if(sectionNode) {
+      if (sectionNode) {
         const sectionTitle = sectionNode.getAttribute('data-section')
-        glossaryTermsData.forEach((item: term) => {
-          if (item.sections.indexOf(sectionTitle) != -1) {
+        glossaryTermsData.forEach((item: Term) => {
+          if (item.sections.includes(sectionTitle)) {
             this.showLessonNotations = true
             finalVocabulary.push(item)
           }
@@ -104,7 +108,7 @@ export default class LessonNotes extends Vue.with(Props) {
   notationsSectionTitle = 'Math notations'
   vocabSectionTitle = 'Vocabulary'
 
-  handleEmptyStateRedirect(label:string) {
+  handleEmptyStateRedirect (label:string) {
     this.$emit('handleEmptyStateRedirect', label)
   }
 }

@@ -3,22 +3,27 @@
     <LessonNotes
       v-if="showLessonNotes"
       :notations="notationsData"
-      :glossaryTerms="vocabulary"
-      @handleEmptyStateRedirect="emptyStateRedirect" />
-    <UniversalGlossary v-if="showUniversalGlossary" :glossaryData="universalNotations" />
+      :glossary-terms="vocabulary"
+      @handleEmptyStateRedirect="emptyStateRedirect"
+    />
+    <UniversalGlossary v-if="showUniversalGlossary" :glossary-data="universalNotations" />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options, prop } from 'vue-class-component'
-import 'carbon-web-components/es/components/data-table/table.js';
-import 'carbon-web-components/es/components/data-table/table-body.js';
-import 'carbon-web-components/es/components/data-table/table-head';
-import 'carbon-web-components/es/components/data-table/table-cell.js';
-import 'carbon-web-components/es/components/data-table/table-row.js';
-import 'carbon-web-components/es/components/data-table/table-header-row';
-import LessonNotes from './LessonNotes.vue'
+import 'carbon-web-components/es/components/data-table/table.js'
+import 'carbon-web-components/es/components/data-table/table-body.js'
+import 'carbon-web-components/es/components/data-table/table-head'
+import 'carbon-web-components/es/components/data-table/table-cell.js'
+import 'carbon-web-components/es/components/data-table/table-row.js'
+import 'carbon-web-components/es/components/data-table/table-header-row'
+import LessonNotes, { Notation } from './LessonNotes.vue'
 import UniversalGlossary from './UniversalGlossary.vue'
+
+interface NotationsJson {
+  [key: string] : Notation
+}
 
 class Props {
   selection = prop<any>({})
@@ -28,24 +33,24 @@ class Props {
   components: { LessonNotes, UniversalGlossary },
   computed: {
     notationsData: {
-      get() {
+      get () {
         const data = document.getElementById('notations')
-        let localDefinitions = undefined
-
-        if(data) {
-          const notationsParsed = JSON.parse(data.innerHTML)
-          const notationsArr = Object.values(notationsParsed)
+        let localDefinitions: Notation[] = []
+        if (data) {
+          const notationsParsed = JSON.parse(data.innerHTML) as NotationsJson
+          const notationsKeys = Object.keys(notationsParsed).filter(key => !key.startsWith('_'))
+          const notationsArr = notationsKeys.map(key => notationsParsed[key])
           localDefinitions = notationsArr
-          }
+        }
         return localDefinitions
       }
     },
     vocabulary: {
-      get(){
+      get () {
         const data = document.getElementById('glossary')
-        let localVocablulary = undefined
+        let localVocablulary
 
-        if(data) {
+        if (data) {
           const vocabularyParsed = JSON.parse(data.innerHTML)
           const vocabularyArr = Object.values(vocabularyParsed)
 
@@ -56,12 +61,12 @@ class Props {
       }
     },
     universalNotations: {
-      get(){
+      get () {
         const data = document.getElementById('universal-notes')
-        let universalNotes = undefined
+        let universalNotes
 
-        if(data) {
-          universalNotes = JSON.parse(data.innerText)
+        if (data) {
+          universalNotes = JSON.parse(data.innerHTML)
         }
         return universalNotes
       }
@@ -69,18 +74,16 @@ class Props {
   }
 })
 
-
-
 export default class UtilityPanelContent extends Vue.with(Props) {
   showLessonNotes:boolean = false;
   showUniversalGlossary:boolean = false;
 
-  chooseTitle(val: any){
-    this.showLessonNotes = val === 'Lesson Notes';
-    this.showUniversalGlossary = val === 'Glossary';
+  chooseTitle (val: any) {
+    this.showLessonNotes = val === 'Lesson Notes'
+    this.showUniversalGlossary = val === 'Glossary'
   }
 
-  emptyStateRedirect(label:string) {
+  emptyStateRedirect (label:string) {
     this.$emit('emptyStateRedirect', label)
   }
 }

@@ -70,6 +70,8 @@ yourNewNotation:
 
 5) After reloading the app and viewing the Textbook through your browser, the notation will be visible and interactive.
 
+  > **Note**: To exclude the notation from the Lesson notes prefix the `cssId` or `class` with an underscore. For example, `_this-notation-is-hidden`.
+
   
 
 ###  Defining a notation in Jupyter Notebooks
@@ -77,6 +79,8 @@ yourNewNotation:
 1) In Jupyter Notebooks, find the Notebook with the formula you're targeting
 
 2) Add `yourNewNotation` to the math symbol/variable that it applies to, within the formula's code, by using either a `cssId` or `class` attribute. This code must follow the syntax patterns shown in [MathJax's HTML section](http://docs.mathjax.org/en/latest/input/tex/extensions/html.html#html)
+
+> **Note**: To exclude the notation from the Lesson notes prefix the `cssId` or `class` with an underscore. For example, `_this-notation-is-hidden`.
 
 3) Within the cell metadata, update the JSON object with valid notation information like so:
 
