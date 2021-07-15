@@ -70,6 +70,8 @@ yourNewNotation:
 
 5) After reloading the app and viewing the Textbook through your browser, the notation will be visible and interactive.
 
+If the notation interest is very local you can exclude it from the Lesson notes prefixing the `cssId` or `class` with an underscore: `_this-notation-is-hidden`.
+
   
 
 ###  Defining a notation in Jupyter Notebooks
