@@ -25,35 +25,34 @@
   }
 
   &-open {
+    z-index: 1;
+
     @include mq($until: medium) {
       width: 100%;
-      z-index: 1;
+      z-index: 2;
       height: 100%;
     }
   }
 }
 
 .c-textbook__page {
-  overflow: auto;
-  top: $qiskit-navbar-height;
   background-color: $background-color-white;
   width: $textbook-page-width;
   transition: transform 250ms ease;
   left: 0;
   padding: 0 $spacing-unit $spacing-unit-small $spacing-unit-small;
   margin: 0;
-  max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width});
+  overflow: visible;
+  position: relative;
+  top: 0;
+  z-index: 1;
 
   @include mq($from: medium, $until: max-size) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width} - #{$spacing-05});
   }
 
   @include mq($from: medium, $until: large) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-07});
-  }
-
-  @include mq($until: medium) {
-    max-width: initial;
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-10} - #{$spacing-05});
   }
 
   &:focus {
@@ -135,6 +134,11 @@ img.textbook_logo {
     transform: translate(0, 0);
     width: 100%;
     padding: $spacing-05 $spacing-07 $spacing-09 $spacing-05;
+    z-index: 0;
+    position: relative;
+    overflow: visible;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 }
 
@@ -223,7 +227,7 @@ div.preface-checker-pattern {
   height: $textbook-page-banner-height;
   position: absolute;
   left: 0;
-  right: 0;
+  right: -#{$spacing-03};
 
   @include mq($until: medium) {
     top: 20px;
