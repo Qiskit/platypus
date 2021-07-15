@@ -48,14 +48,14 @@
   position: relative;
   top: 0;
   z-index: 1;
-  max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width});
+  max-width: calc(100% - #{$right-sidebar-width-xl} - #{$left-sidebar-width} - #{$spacing-03});
 
   @include mq($from: medium, $until: max-size) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width} - #{$spacing-03});
   }
 
   @include mq($from: medium, $until: large) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-10});
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-10} - #{$spacing-03});
   }
 
   &:focus {
