@@ -251,6 +251,10 @@ nav ul.c-sidebar__sections {
       display: none;
     }
 
+    @include mq ($from: small, $until: large) {
+      max-width: $left-sidebar-width-sm;
+    }
+
     .c-content-menu,
     .connection--progress {
       display: none;
