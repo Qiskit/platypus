@@ -4,7 +4,7 @@ import { initIndexHighlight } from './ts/indexhighlighter'
 import { initNotations } from './ts/notations'
 import { initLeftSidebar } from './ts/leftsidebar'
 import { getProgressData, storeProgressLocally } from './ts/storage'
-import { initAnalytics, trackClickEvent, trackPage, trackSearchTerm } from './plugins/segmentAnalytics'
+import { initAnalytics, trackClickEvent, trackPage, trackPerformedSearch } from './plugins/segmentAnalytics'
 
 
 declare global {
@@ -17,7 +17,7 @@ declare global {
 interface Textbook {
   runAfterDOMLoaded: any,
   trackClickEvent?: any,
-  trackSearchTerm?: any,
+  trackPerformedSearch?: any,
   course?: XCourse
 }
 
@@ -56,6 +56,6 @@ textbook.runAfterDOMLoaded(() => {
   // set up & trigger segment
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
   textbook.trackClickEvent = trackClickEvent
-  textbook.trackSearchTerm = trackSearchTerm
+  textbook.trackPerformedSearch = trackPerformedSearch
   trackPage(window.location.pathname)
 })
