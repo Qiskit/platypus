@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "main": "server/app.ts",
   "scripts": {
+    "test:open": "cypress open",
     "clean:studio": "rm -rf node_modules/@mathigon/studio/public",
     "clean:public": "rm -rf public",
     "clean:work": "rm -rf working",
@@ -58,6 +59,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "cypress": "^8.0.0",
     "eslint": "^7.18.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
