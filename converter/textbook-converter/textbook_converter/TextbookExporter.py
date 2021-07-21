@@ -307,7 +307,7 @@ def handle_code_cell(cell, resources):
 
         and indent all lines. Include cell output if configured.
     """
-    formatted_source = cell.source.replace('\n', '\n      ').replace('<', ' < ')
+    formatted_source = cell.source.replace('\n', '\n      ').replace('<', '&lt;')
 
     code_lines = [
         '\n    pre(data-executable="true" data-language="python").\n      ',
