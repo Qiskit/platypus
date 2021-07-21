@@ -38,4 +38,10 @@ describe('Layout Macbook-15', () => {
     cy.get('.app-mega-dropdown').should('be.visible')
     cy.get('.app-mega-dropdown__content-container').should('be.visible')
   })
+
+  it('Navigate to atoms of computation', () => {
+    cy.url().should('include', '/introduction/why-quantum-computing')
+    cy.get('[data-section-id="the-atoms-of-computation"]').click()
+    cy.url().should('include', '/introduction/the-atoms-of-computation')
+  })
 })
