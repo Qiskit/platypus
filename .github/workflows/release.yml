@@ -47,6 +47,11 @@ jobs:
       - name: Build
         run: npm run build
 
+      # We remove the Dockerfile because when there is a Dockerfile in the
+      # current directory, Google App Engine try to use it.
+      - name: Remove Dockerfile
+        run: rm -f Dockerfile
+
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main
         with:
