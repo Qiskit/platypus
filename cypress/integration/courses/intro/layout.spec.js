@@ -29,7 +29,7 @@ describe('Layout Macbook-15', () => {
     cy.get('.utility-panel-content').should('not.be.visible')
   })
 
-  it('Browse all content', () => {
+  it('should open Browse all content', () => {
     cy.get('.app-mega-dropdown').should('be.visible')
     cy.get('.app-mega-dropdown__content-container').should('not.exist')
 
