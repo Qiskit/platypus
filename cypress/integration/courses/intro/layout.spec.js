@@ -21,7 +21,7 @@ describe('Layout Macbook-15', () => {
     cy.get('.c-sidebar__chapter').should('not.be.visible')
   })
 
-  it('Glossary side bar', () => {
+  it('should hide then show utility panel', () => {
     cy.get('.utility-panel-content').should('be.visible')
 
     cy.get('.utility-panel-header__toggle').click()
