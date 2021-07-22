@@ -5,24 +5,19 @@ on:
   workflow_dispatch:
   # run on pushes to release branch
   push:
-    branches:
-      - release
+    branches: [release]
   # run daily at 08:00am UTC (on the default or base branch)
   # https://crontab.guru/#0_8_*_*_*
   schedule:
-    - cron: '0 8 * * *'
+    - cron: "0 8 * * *"
 
 jobs:
-  build:
+  build-and-release:
     name: Build and Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Load npm cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: node-v1-${{ hashFiles('package-lock.json') }}
 
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Load pip cache
         uses: actions/cache@v2
         with:
@@ -35,28 +30,27 @@ jobs:
       - name: Install Node v14
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
+          cache: "npm"
 
       - name: Install npm dependencies
         run: npm ci
-      
+
       - name: Install Python 3.8
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-      
+
       - name: Install Python dependencies
         run: pip install -r converter/textbook-converter/requirements.txt
 
       - name: Build
-        # Change this if you need different/additional build scripts.
         run: npm run build
 
       - name: Remove Heroku files
         # AppEngine error with Dockerfile, remove Heroku files before deploying
         run: rm -f Dockerfile app.json heroku.yml
 
-      # https://github.com/google-github-actions/deploy-appengine
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main
         with:
