@@ -3,15 +3,6 @@
 runtime: nodejs
 env: flex
 
-skip_files:
-  - ^node_modules$
-  - ^converter$
-  - ^notebooks/(?!toc.yaml)$
-  - ^venv$
-  - ^test$
-  - ^.git$
-  - ^.idea$
-
 handlers:
   - url: /.*
     script: app.js

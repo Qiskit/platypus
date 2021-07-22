@@ -47,10 +47,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Remove Heroku files
-        # AppEngine error with Dockerfile, remove Heroku files before deploying
-        run: rm -f Dockerfile app.json heroku.yml
-
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main
         with:
