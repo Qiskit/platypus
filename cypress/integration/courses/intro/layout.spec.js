@@ -13,7 +13,7 @@ describe('Layout Macbook-15', () => {
       .reload()
   })
 
-  it('Navigation sidebar', () => {
+  it('should hide then show navigation sidebar', () => {
     cy.get('.c-sidebar__chapter').should('be.visible')
 
     cy.get('#app-panel-footer-toggle').click()
