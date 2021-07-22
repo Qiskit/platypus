@@ -3,8 +3,6 @@ name: Test
 on:
   # run when action is manually triggered
   workflow_dispatch:
-  # run on pushes
-  push:
   # run on pull requests
   pull_request:
 
@@ -13,7 +11,7 @@ jobs:
     name: Run tests
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
