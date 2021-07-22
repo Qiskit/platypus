@@ -6,7 +6,7 @@
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
     :target="isExternal && '_blank'"
-    @click="segment && $trackClickEvent(segment)"
+    @click="segment && $trackClickEvent(segment.cta, segment.location)"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />
@@ -15,11 +15,11 @@
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
-import { CtaClickedEventProperties } from '../../../constants/segment'
+import { CtaClickedEventProp } from '../../../constants/segment'
 
 class Props {
   url = prop({ type: String, default: '' })
-  segment = prop<CtaClickedEventProperties>({ type: Object, default: undefined })
+  segment = prop<CtaClickedEventProp>({ type: Object, default: undefined })
   isStatic = prop({ type: Boolean, default: false })
 }
 
