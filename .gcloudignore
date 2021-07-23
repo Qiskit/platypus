@@ -21,6 +21,7 @@ node_modules/
 .github/
 converter/
 cypress/
+scripts/
 docs/
 notebooks/
 !notebooks/**/*.toc
