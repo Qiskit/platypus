@@ -1,4 +1,4 @@
-name: Build and Release
+name: Build, Test, and Release
 
 on:
   # run when action is manually triggered
@@ -12,8 +12,8 @@ on:
     - cron: "0 8 * * *"
 
 jobs:
-  build-and-release:
-    name: Build and Release
+  build-test-release:
+    name: Build, Test, and Release
 
     runs-on: ubuntu-latest
 
@@ -46,6 +46,12 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Cypress tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:8080/health'
 
       # We remove the Dockerfile because when there is a Dockerfile in the
       # current directory, Google App Engine try to use it.
