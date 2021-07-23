@@ -3,3 +3,5 @@ nbformat>=4
 nbconvert>=5
 requests
 pyyaml
+nbqa
+pylint
