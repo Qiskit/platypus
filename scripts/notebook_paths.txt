@@ -2,4 +2,4 @@ quantum-hardware/measuring-quantum-volume
 intro/atoms-of-computation
 intro/entangled-states
 intro/visualizing-entanglement
-intro/grover-intro
+#intro/grover-intro
