@@ -51,10 +51,8 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     const formattedTitle = selectionTitle.toLowerCase().replace(' ', '-')
 
     windowInstance.textbook.trackClickEvent(
-      {
-        cta: `chapter-details-dropdown-${formattedTitle}`,
-        location: 'chapter-details-panel'
-      }
+      `chapter-details-dropdown-${formattedTitle}`,
+      'chapter-details-panel'
     )
 
     this.$emit('updatedPanelSelection', selectionTitle)

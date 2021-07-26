@@ -8,7 +8,7 @@ import wrapper from './index'
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $step: Step;
-    $trackClickEvent: (parms: segmentPlugin.ClickEventParams|string) => void;
+    $trackClickEvent: (cta: string, location: string) => void;
     $trackPage: (title: string) => void;
   }
 }

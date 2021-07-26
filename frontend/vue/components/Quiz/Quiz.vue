@@ -113,13 +113,13 @@ export default class Quiz extends Vue.with(Props) {
 
     if (this.solved()) {
       // Segment tracking correct
-      windowInstance.textbook.trackClickEvent({ cta: 'correct', location: quizLocation })
+      windowInstance.textbook.trackClickEvent('correct', quizLocation)
       return SolutionState.CORRECT
     }
 
     // Segment tracking incorrect responses
     if (windowInstance?.textbook?.trackClickEvent) {
-      windowInstance.textbook.trackClickEvent({ cta: 'incorrect', location: quizLocation })
+      windowInstance.textbook.trackClickEvent('incorrect', quizLocation)
     }
 
     return SolutionState.WRONG

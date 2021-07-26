@@ -30,7 +30,7 @@ div.c-sidebar
                 a(
                   href=`${s.url}`
                   class=progclass
-                  onclick=`textbook.trackClickEvent({ cta: '${s.id}', location: '${sidebarLocation}' })`
+                  onclick=`textbook.trackClickEvent('${s.id}', '${sidebarLocation}')`
                   , title=s.title
                 )
                   x-progress(r=10 p=0)
@@ -43,7 +43,7 @@ div.c-sidebar
                     a(
                       href=`#${sub.id}`
                       class="c-sidebar__entry"
-                      onclick=`textbook.trackClickEvent({ cta: '${sub.id}', location: '${sidebarLocation}' })`
+                      onclick=`textbook.trackClickEvent('${sub.id}', '${sidebarLocation}')`
                     ) !{sub.title}
                     ul.c-sidebar__subsections
                       for subsection in sub.subsections
@@ -51,13 +51,13 @@ div.c-sidebar
                           a(
                             href=`#${subsection.id}`
                             class="c-sidebar__entry"
-                            onclick=`textbook.trackClickEvent({ cta: '${subsection.id}', location: '${sidebarLocation}' })`
+                            onclick=`textbook.trackClickEvent('${subsection.id}','${sidebarLocation}')`
                           ) !{subsection.title}
             else
               a(
                 class="c-sidebar__entry"
                 href=`${s.url}`
-                onclick=`textbook.trackClickEvent({ cta: '${s.id}', location: '${sidebarLocation}' })`
+                onclick=`textbook.trackClickEvent('${s.id}','${sidebarLocation}')`
               )
                 | !{s.title}
 
@@ -65,14 +65,14 @@ div.c-sidebar
     nav.sidebar_footer__menu
       a.sidebar_footer__menu_item#app-panel-footer-toggle(
         href='javascript:void(0)'
-        onclick=`textbook.trackClickEvent({ cta: 'show-index', location: '${sidebarLocation}' })`
+        onclick=`textbook.trackClickEvent('show-index','${sidebarLocation}')`
       )
         span.sidebar_footer__menu_item-label Hide index
         <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
       if learningPath
         a.sidebar_footer__menu_item#back-home(
           href=`${textbookHome}/course/introduction-course`
-          onclick=`textbook.trackClickEvent({ cta: 'course-overview', location: '${sidebarLocation}' })`
+          onclick=`textbook.trackClickEvent('course-overview','${sidebarLocation}')`
           title='Back to course overview'
         )
           span.sidebar_footer__menu_item-label Back to course overview
@@ -80,7 +80,7 @@ div.c-sidebar
       else
         a.sidebar_footer__menu_item#back-home(
           href=textbookHome
-          onclick=`textbook.trackClickEvent({ cta: 'textbook-home', location: '${sidebarLocation}' })`
+          onclick=`textbook.trackClickEvent('textbook-home','${sidebarLocation}')`
           title='Back to textbook home'
         )
           span.sidebar_footer__menu_item-label Back to textbook home

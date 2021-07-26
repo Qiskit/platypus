@@ -1,8 +1,7 @@
 
 import {
-  CtaClickedEventProperties,
-  CtaClickedSegmentTrackProperties,
-  SearchedTermSegmentTrackProperties
+  CtaClickedEventSegmentSchema,
+  PerformedSearchEventSegmentSchema
 } from '../constants/segment'
 
 /**
@@ -19,14 +18,6 @@ interface AnalyticsContext {
   _analyticsReady?: Promise<Event>
   bluemixAnalytics?: any
   digitalData?: any
-}
-
-/**
- * The parameters needed to register a click event.
- */
-interface ClickEventParams {
-  /** A description of the CTA. */
-  action: string
 }
 
 interface TextbookAnalytics {
@@ -100,18 +91,18 @@ function trackPage (title: string) {
 
 /**
  * Send the information of a CTA click event to Segment.
- * @param customProperties Segment click event properties
+ * @param cta The call to action
+ * @param location Location in the UI
  */
-function trackClickEvent (customProperties: CtaClickedEventProperties) {
+function trackClickEvent (cta: string, location: string) {
   const { bluemixAnalytics, digitalData } = window
-  const { cta, location } = customProperties
 
   if (!bluemixAnalytics || !digitalData) { return }
 
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const segmentOptions: CtaClickedSegmentTrackProperties = {
+  const segmentOptions: CtaClickedEventSegmentSchema = {
     category,
     CTA: cta,
     location,
@@ -122,11 +113,12 @@ function trackClickEvent (customProperties: CtaClickedEventProperties) {
 }
 
 /**
- * Send the information of an entered search term to Segment.
- * @param searchComponent Name of the search component
- * @param searchTerm Search term
+ * Send the information of a "Performed Search" event to Segment.
+ * @param context Bluemix Analytics configuration
+ * @param uiElement The UI element that was used to trigger this event
+ * @param field Search input
  */
-function trackSearchTerm (searchComponent: string, searchTerm: string) {
+function trackPerformedSearch (uiElement: string, field: string) {
   const { bluemixAnalytics, digitalData } = window
 
   if (!bluemixAnalytics || !digitalData) { return }
@@ -134,14 +126,14 @@ function trackSearchTerm (searchComponent: string, searchTerm: string) {
   const productTitle = getOrFailProductTitle(digitalData)
   const category = getOrFailCategory(digitalData)
 
-  const eventOptions: SearchedTermSegmentTrackProperties = {
+  const eventOptions: PerformedSearchEventSegmentSchema = {
     category,
-    location: searchComponent,
     productTitle,
-    text: searchTerm
+    uiElement,
+    field
   }
 
-  bluemixAnalytics.trackEvent('Searched Term', eventOptions)
+  bluemixAnalytics.trackEvent('Performed Search', eventOptions)
 }
 
 function getOrFailProductTitle (digitalData: any): string {
@@ -178,7 +170,7 @@ function install (app: any, _options: any = {}) {
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
   app.config.globalProperties.$trackClickEvent = trackClickEvent
   app.config.globalProperties.$trackPage = trackPage
-  app.config.globalProperties.$trackSearchTerm = trackSearchTerm
+  app.config.globalProperties.$trackPerformedSearch = trackPerformedSearch
 }
 
 export {
@@ -186,10 +178,9 @@ export {
   install,
   trackClickEvent,
   trackPage,
-  trackSearchTerm
+  trackPerformedSearch
 }
 
 export type {
-  ClickEventParams,
   AnalyticsContext
 }

@@ -121,7 +121,7 @@ export default class AppMegaDropdownMenu extends Vue.with(Props) {
   trackSearchTerm () {
     if (this.segmentComponentName) {
       const windowInstance = (window as any)
-      windowInstance.textbook.trackSearchTerm(this.segmentComponentName, this.textOnTheFilter)
+      windowInstance.textbook.trackPerformedSearch(this.segmentComponentName, this.textOnTheFilter)
     }
   }
 
