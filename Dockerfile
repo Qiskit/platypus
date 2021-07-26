@@ -35,4 +35,3 @@ COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
 
 CMD ["npm", "start"]
-
