@@ -20,6 +20,9 @@ if __name__ == '__main__':
     with open(NB_PATHS) as f:
         f = f.readlines()
     for filename in f:
+        if not filename.strip():
+            # blank line
+            continue
         if filename.startswith('#'):
             print(f'Skipping: {filename}')
         else:

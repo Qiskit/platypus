@@ -5,7 +5,10 @@ NB_PATHS="./scripts/notebook_paths.txt"
 
 while read line
 do
-    if [[ $line = \#* ]] ; then
+    if [ -z "$line"  ] ; then
+        # blank line
+        continue
+    elif [[ $line = \#* ]] ; then
         echo "Skipping: ${line}"
     else
         echo "Lint check: ${line}.ipynb"
