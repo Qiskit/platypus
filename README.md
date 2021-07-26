@@ -10,7 +10,7 @@ Project Platypus
 
     ```
     $ cd platypus/converter/textbook-converter
-    $ pip install -r requirements.txt
+    $ pip install -r requirements.txt -r requirements-test.txt
     ```
 
 1. Node.js (14.0 or later)

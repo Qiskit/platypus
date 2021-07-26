@@ -1,0 +1,4 @@
+nbqa
+pylint
+qiskit
+matplotlib
