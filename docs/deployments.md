@@ -17,7 +17,9 @@ This `Build and Release` process includes the following steps:
 
 - checks out project repo
 - installs dependencies
+- runs Notebook tests
+- runs Cypress tests
 - generates the build
 - deploys to AppEngine
 
-Details for the `Deploy to AppEngine` step can be found by visiting the GitHub Action page [here](https://github.com/google-github-actions/deploy-appengine). (This AppEngine instance belongs to Mathigon). Additionally, the `secrets` used for deploying are maintained by a joint effort between infrastructure team (for qiskit.org) and Mathigon (for the Textbook beta project).
+Details for the `Deploy to AppEngine` step can be found by visiting the GitHub Action page [here](https://github.com/google-github-actions/deploy-appengine). (This AppEngine instance belongs to Mathigon). Additionally, `secrets` used for deploying are maintained through a joint effort between the Qiskit Textbook Beta and Mathigon.
