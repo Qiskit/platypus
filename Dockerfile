@@ -33,6 +33,7 @@ COPY --from=builder /usr/app/config.yaml ./
 COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
+COPY --from=builder /usr/app/working working/
 
 CMD ["npm", "start"]
 
