@@ -9,6 +9,6 @@ do
         echo "Skipping: ${line}"
     else
         echo "Lint check: ${line}.ipynb"
-        nbqa pylint --rcfile="${NB_ROOT}/.pylintrc" --fail-under=10 "${NB_ROOT}/${line}.ipynb" || {exit 1}
+        nbqa pylint --rcfile="${NB_ROOT}/.pylintrc" --fail-under=10 "${NB_ROOT}/${line}.ipynb" || exit 1
     fi
 done < "$NB_PATHS"
