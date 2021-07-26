@@ -26,4 +26,4 @@ Details for the `Deploy to AppEngine` step can be found by visiting the GitHub A
 
 
 ### Live branch previews
-As part of our continuous integration infrastructure, every pull request that passes the build process, receives a dedicated URL from [Heroku review apps](https://devcenter.heroku.com/articles/github-integration-review-apps). This allows the team to have a live, branch previews, making it easier for the team to share links and review changes as necessary. You can preview your working branch at `https://platypus-preview-pr-<pull-request-number>.herokuapp.com/`.
+As part of our continuous integration infrastructure, every pull request that passes the build process, receives a dedicated URL from [Heroku review apps](https://devcenter.heroku.com/articles/github-integration-review-apps). This allows the team to have live, branch previews, making it easier for the team to share links and review changes as necessary. You can preview your working branch at `https://platypus-preview-pr-<pull-request-number>.herokuapp.com/`.
