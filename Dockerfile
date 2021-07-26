@@ -36,4 +36,3 @@ COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
 COPY --from=builder /usr/app/working working/
 
 CMD ["npm", "start"]
-
