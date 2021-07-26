@@ -23,3 +23,7 @@ This `Build and Release` process includes the following steps:
 - deploys to AppEngine
 
 Details for the `Deploy to AppEngine` step can be found by visiting the GitHub Action page [here](https://github.com/google-github-actions/deploy-appengine). (This AppEngine instance belongs to Mathigon). Additionally, `secrets` used for deploying are maintained through a joint effort between the Qiskit Textbook Beta and Mathigon.
+
+
+### Live branch previews
+As part of our continuous integration infrastructure, every pull request that passes the build process, receives a dedicated URL from [Heroku review apps](https://devcenter.heroku.com/articles/github-integration-review-apps). This allows the team to have a live, branch previews, making it easier for the team to share links and review changes as necessary. You can preview your working branch at `https://platypus-preview-pr-<pull-request-number>.herokuapp.com/`.
