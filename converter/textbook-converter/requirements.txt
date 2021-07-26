@@ -6,3 +6,4 @@ pyyaml
 nbqa
 pylint
 qiskit
+matplotlib
