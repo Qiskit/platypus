@@ -34,10 +34,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: py-${{ hashFiles('converter/textbook-converter/requirements.txt') }}
+          key: py-${{ hashFiles('converter/textbook-converter/requirements.txt') }}-${{ hashFiles('converter/textbook-converter/requirements-test.txt') }}
 
       - name: Install Python dependencies
-        run: pip install -r converter/textbook-converter/requirements.txt
+        run: pip install -r converter/textbook-converter/requirements.txt -r converter/textbook-converter/requirements-test.txt
 
       - name: Notebook tests
         run: npm run test:nb
