@@ -246,6 +246,7 @@ nav ul.c-sidebar__sections {
 .qv-layout__panel--hidden {
   .c-sidebar {
     grid-template-rows: 1fr auto;
+    max-width: $left-sidebar-width-hidden;
 
     @media (max-width: $browser-small) {
       display: none;
@@ -267,7 +268,7 @@ nav ul.c-sidebar__sections {
 }
 
 .qv-layout__panel--hidden .c-textbook__sidebar{
-  max-width: 3rem;
+  max-width: $left-sidebar-width-hidden;
   padding: 0.5rem;
 
   @include mq($until: medium) {
@@ -300,7 +301,7 @@ nav ul.c-sidebar__sections {
 }
 
 .qv-layout__panel--hidden .sidebar_footer {
-  max-width: 3rem;
+  max-width: $left-sidebar-width-hidden;
 
   @include mq($until: medium) {
     display: none;
