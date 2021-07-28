@@ -23,6 +23,9 @@
 
 <script defer>
   const thebelabBootstrap = function () {
+    let codeMirrorInputIndex = 0
+    const codeMirrorUid = () => `code-mirror-element-${codeMirrorInputIndex}`
+
     thebelab.bootstrap()
     thebelab.on("status", function (evt, data) {
       console.log("Thebelab status changed:", data.status, data.message)
@@ -36,6 +39,18 @@
       .querySelectorAll('.thebelab-cell .thebelab-run-button')
       .forEach(btn => {
         btn.textContent = 'Run'
+      })
+    document
+      .querySelectorAll('.thebelab-cell')
+      .forEach(thebelabCell => {
+        const inputElement = thebelabCell.querySelector('.thebelab-input')
+        inputElement.id = codeMirrorUid()
+
+        const codeMirrorClipboardCopy = document.createElement('q-code-mirror-clipboard-copy')
+        codeMirrorClipboardCopy.setAttribute('target-id', codeMirrorUid())
+        thebelabCell.append(codeMirrorClipboardCopy)
+
+        codeMirrorInputIndex++
       })
   }
 
