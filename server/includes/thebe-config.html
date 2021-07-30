@@ -26,6 +26,26 @@
     thebelab.bootstrap()
     thebelab.on("status", function (evt, data) {
       console.log("Thebelab status changed:", data.status, data.message)
+      if (data.status ===  "ready") {
+        document.querySelectorAll('.thebelab-cell').forEach(cell => {
+          // based on: https://jcubic.wordpress.com/2017/09/22/how-get-jquery-data-without-jquery/
+          setTimeout(() => {
+            const jQueryData = Object.keys(cell).filter(key => key.match(/^jQuery/)).map(key => cell[key])[0]
+            const kernel = jQueryData.kernel;
+            const oldHandle = kernel._handleMessage
+            kernel._handleMessage = (e) => {
+              oldHandle(arguments);
+              if (e.msg_type && e.msg_type === "execute_input") {
+                cell.querySelector(".thebelab-run-button").textContent = 'Running...'
+              }
+              if (e.msg_type && e.msg_type === "execute_reply") {
+                cell.querySelector(".thebelab-run-button").textContent = 'Run'
+              }
+            }
+          }, 1000)
+          // execute_reply execute_input
+        })
+      }
     })
     document
       .querySelectorAll('.thebelab-cell')
