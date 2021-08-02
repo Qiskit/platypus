@@ -2,12 +2,16 @@
   <div class="language-selector">
     <bx-dropdown
       class=""
-      :trigger-content="`English`"
-      :open="true"
+      :trigger-content="defaultLanguage"
     >
-      <bx-dropdown-item class="language-selector__item" value="test">English</bx-dropdown-item>
-      <bx-dropdown-item class="language-selector__item" value="test">Japanese</bx-dropdown-item>
-      <bx-dropdown-item class="language-selector__item language-selector__item-disabled" value="test">Japanese disabled</bx-dropdown-item>
+      <bx-dropdown-item
+        v-for="language in translatedLanguagesList"
+        :key="language.index"
+        class="language-selector__item"
+        :value="language.countryCode"
+      >
+        {{ language.label }}
+      </bx-dropdown-item>
     </bx-dropdown>
   </div>
 </template>
@@ -17,7 +21,33 @@ import { Options, Vue } from 'vue-class-component'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
 
 @Options({})
-export default class LanguageSelector extends Vue {}
+export default class LanguageSelector extends Vue {
+  defaultLanguage = 'English'
+  translatedLanguagesList = [
+    {
+      label: 'English',
+      countryCode: 'en'
+    },
+    {
+      label: 'Japanese',
+      countryCode: 'ja'
+    }
+  ]
+
+  // details / data
+  // props
+  // array of options
+  // label / url / segment
+  // Trigger content
+  // link to subdomain or query param
+  // separate out links or language array
+
+  mounted () {
+    const currentUrl = window.location.pathname
+    const newUrl = currentUrl + '?hl=ja'
+  }
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -29,10 +59,14 @@ export default class LanguageSelector extends Vue {}
   &__item {
     text-align: left;
     padding-left: 1rem;
-    background-color: $border-color-light;
+    background-color: $background-color-lighter;
 
     &-disabled {
       color: $border-color;
+    }
+
+    &:hover {
+      background-color: $background-color-light;
     }
   }
 
@@ -58,6 +92,10 @@ q-language-selector {
     justify-content: flex-end;
     display: flex;
     padding-left: $spacing-07;
+
+    &:focus{
+      outline: 2px solid $border-color-secondary;
+    }
   }
 
   bx-dropdown::part(menu-body) {
