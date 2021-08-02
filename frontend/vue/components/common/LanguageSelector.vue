@@ -2,7 +2,7 @@
   <div class="language-selector">
     <bx-dropdown
       :trigger-content="selectedLanguage"
-      @bx-dropdown-selected="updateLanguage($event)"
+      @bx-dropdown-selected="useSelectedLanguage($event)"
     >
       <bx-dropdown-item
         v-for="language in translatedLanguagesList"
@@ -34,15 +34,31 @@ export default class LanguageSelector extends Vue {
     }
   ]
 
-  updateLanguage(event: any) {
+  updateUserLang (language: string) {
+    window.localStorage.setItem('qv-settings_language', language)
+    console.log(window.localStorage, "localStorage")
+  }
+
+  useSelectedLanguage (event: any) {
     const currentUrl = window.location.pathname
     const newLanguageCode = event.detail.item.value
     const newUrl = currentUrl + `?hl=${newLanguageCode}`
 
+    this.updateUserLang(newLanguageCode)
     // redirect
-    window.location = newUrl
+    window.location.pathname = newUrl
   }
 
+  mounted() {
+    // check if language is set
+    // if no language is set, do nothing
+    // if lang is set, set trigger-content
+    if(window.localStorage['qv-settings_language']) {
+      console.log(window.localStorage['qv-settings_language'], "~~~~~~~~~~")
+    }
+    //
+    console.log(window.localStorage['qv-settings_language'], "localStorage in mounted")
+  }
 }
 
 </script>
