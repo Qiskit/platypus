@@ -1,8 +1,8 @@
 <template>
   <div class="language-selector">
     <bx-dropdown
-      class=""
-      :trigger-content="defaultLanguage"
+      :trigger-content="selectedLanguage"
+      @bx-dropdown-selected="updateLanguage($event)"
     >
       <bx-dropdown-item
         v-for="language in translatedLanguagesList"
@@ -22,7 +22,7 @@ import 'carbon-web-components/es/components/dropdown/dropdown.js'
 
 @Options({})
 export default class LanguageSelector extends Vue {
-  defaultLanguage = 'English'
+  selectedLanguage = 'English'
   translatedLanguagesList = [
     {
       label: 'English',
@@ -34,18 +34,15 @@ export default class LanguageSelector extends Vue {
     }
   ]
 
-  // details / data
-  // props
-  // array of options
-  // label / url / segment
-  // Trigger content
-  // link to subdomain or query param
-  // separate out links or language array
-
-  mounted () {
+  updateLanguage(event: any) {
     const currentUrl = window.location.pathname
-    const newUrl = currentUrl + '?hl=ja'
+    const newLanguageCode = event.detail.item.value
+    const newUrl = currentUrl + `?hl=${newLanguageCode}`
+
+    // redirect
+    window.location = newUrl
   }
+
 }
 
 </script>
@@ -54,11 +51,9 @@ export default class LanguageSelector extends Vue {
 @import '../../../scss/variables/colors.scss';
 
 .language-selector {
-  border-top: 1px solid #dde1e6;
-  border-bottom:1px solid #dde1e6;
   &__item {
     text-align: left;
-    padding-left: 1rem;
+    // padding-left: 1rem;
     background-color: $background-color-lighter;
 
     &-disabled {
@@ -69,7 +64,6 @@ export default class LanguageSelector extends Vue {
       background-color: $background-color-light;
     }
   }
-
 }
 </style>
 
@@ -80,9 +74,9 @@ export default class LanguageSelector extends Vue {
 // @import '~/../scss/mixins/mixins.scss';
 // @import '~/../scss/variables/colors.scss';
 // overrides
-q-language-selector {
-  width: 100%;
-}
+// q-language-selector {
+//   width: 100%;
+// }
 
 .language-selector {
   // component overrides
@@ -92,6 +86,8 @@ q-language-selector {
     justify-content: flex-end;
     display: flex;
     padding-left: $spacing-07;
+    border-top: 2px solid $border-color-secondary;
+    border-bottom:1px solid $border-color;
 
     &:focus{
       outline: 2px solid $border-color-secondary;
