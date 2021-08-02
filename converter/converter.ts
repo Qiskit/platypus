@@ -8,8 +8,11 @@ const nbImagesDirName = 'images'
 
 const sharedContent = `${CWD}/shared`
 const nbDir = `${CWD}/notebooks`
+const nbDirJa = `${CWD}/notebooks/translations/ja`
 const tocPath = `${nbDir}/toc.yaml`
+const tocPathJa = `${nbDir}/toc-ja.yaml`
 const workingDir = `${CWD}/working`
+const workingDirTranslations = `${CWD}/translations`
 const sharedWorking = `${workingDir}/shared`
 const publicDir = `${CWD}/public`
 const publicContentDir = `${publicDir}/content`
@@ -22,6 +25,7 @@ const runConverter = function (
   console.log('textbook converter', arguments)
 
   // TODO: replace converter Python implementation with a Node.js implementation
+  // python3 -u -m textbook_converter /Users/yaiza/Documents/development/platypus/notebooks/toc-ja.yaml -n /Users/yaiza/Documents/development/platypus/notebooks/translations/ja -o /Users/yaiza/Documents/development/platypus/translations
   return spawn('python3', [
     '-u', '-m',
     'textbook_converter', tocPath,
@@ -63,6 +67,7 @@ copyNotebookAssets(nbDir, publicContentDir, (src: string, dest: string) => {
 })
 
 const subprocess = runConverter(tocPath, nbDir, workingDir)
+const subprocessTranslations = runConverter(tocPathJa, nbDirJa, workingDirTranslations)
 
 subprocess.stdout.on('data', (data) => {
   console.log(`${data}`)
