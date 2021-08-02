@@ -2,17 +2,31 @@ import { spawn } from 'child_process'
 import * as path from 'path'
 
 import * as fs from 'fs-extra'
+import { load as loadYAML } from 'js-yaml'
 
 const CWD = process.cwd()
+
+// Get the languages to translate from the mathigon config file or throw an error
+let translationsLanguages
+
+try {
+  const mathigonConfigFile: any = loadYAML(fs.readFileSync(`${CWD}/config.yaml`, 'utf8'))
+  const textbookLanguages = mathigonConfigFile.locales
+  translationsLanguages = textbookLanguages.filter(language => language !== 'en')
+} catch (e) {
+  console.log(e)
+}
+
 const nbImagesDirName = 'images'
 
 const sharedContent = `${CWD}/shared`
 const nbDir = `${CWD}/notebooks`
-const nbDirJa = `${CWD}/notebooks/translations/ja`
-const tocPath = `${nbDir}/toc.yaml`
-const tocPathJa = `${nbDir}/toc-ja.yaml`
+const nbDirTranslations = `${CWD}/notebooks/translations/`
+const getTOCPath = function (language?: string) {
+  return language ? `${nbDir}/toc-${language}.yaml` : `${nbDir}/toc.yaml`
+}
 const workingDir = `${CWD}/working`
-const workingDirTranslations = `${CWD}/translations`
+const translationsDir = `${CWD}/translations/`
 const sharedWorking = `${workingDir}/shared`
 const publicDir = `${CWD}/public`
 const publicContentDir = `${publicDir}/content`
@@ -66,8 +80,8 @@ copyNotebookAssets(nbDir, publicContentDir, (src: string, dest: string) => {
   return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
 })
 
-const subprocess = runConverter(tocPath, nbDir, workingDir)
-const subprocessTranslations = runConverter(tocPathJa, nbDirJa, workingDirTranslations)
+const subprocess = runConverter(getTOCPath(), nbDir, workingDir)
+translationsLanguages.forEach(language => runConverter(getTOCPath(language), `${nbDirTranslations}${language}`, `${translationsDir}${language}`))
 
 subprocess.stdout.on('data', (data) => {
   console.log(`${data}`)
@@ -75,6 +89,8 @@ subprocess.stdout.on('data', (data) => {
 subprocess.stderr.on('data', (data) => {
   console.error(`${data}`)
 });
+
 subprocess.on('close', async () => {
   console.log('textbook converter: Closed')
 })
+
