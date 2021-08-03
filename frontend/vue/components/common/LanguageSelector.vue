@@ -34,28 +34,12 @@ export default class LanguageSelector extends Vue {
     }
   ]
 
-  updateUserLang (language: string) {
-    window.localStorage.setItem('qv-settings_language', language)
-    console.log(window.localStorage, "localStorage")
-  }
-
   useSelectedLanguage (event: any) {
     const currentUrl = window.location.pathname
     const newLanguageCode = event.detail.item.value
     const newUrl = currentUrl + `?hl=${newLanguageCode}`
 
-    this.updateUserLang(newLanguageCode)
-    // redirect
     window.location.pathname = newUrl
-  }
-
-  mounted() {
-    // check if language is set
-    // if no language is set, do nothing
-    // if lang is set, set trigger-content
-    if(window.localStorage['qv-settings_language']) {
-    }
-    //
   }
 }
 
@@ -63,7 +47,6 @@ export default class LanguageSelector extends Vue {
 
 <style lang="scss" scoped>
 @import '../../../scss/variables/colors.scss';
-
 .language-selector {
   &__item {
     text-align: left;
@@ -84,17 +67,8 @@ export default class LanguageSelector extends Vue {
 <style lang="scss">
 @import '../../../scss/variables/colors.scss';
 @import 'carbon-components/scss/globals/scss/typography';
-// @import '~/../scss/variables/mq.scss';
-// @import '~/../scss/mixins/mixins.scss';
-// @import '~/../scss/variables/colors.scss';
-// overrides
-// q-language-selector {
-//   width: 100%;
-// }
-
 .language-selector {
   // component overrides
-  // selecting within the shadow
   bx-dropdown::part(trigger-button) {
     background-color: $background-color-lighter;
     justify-content: flex-end;
