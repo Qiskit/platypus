@@ -54,10 +54,8 @@ export default class LanguageSelector extends Vue {
     // if no language is set, do nothing
     // if lang is set, set trigger-content
     if(window.localStorage['qv-settings_language']) {
-      console.log(window.localStorage['qv-settings_language'], "~~~~~~~~~~")
     }
     //
-    console.log(window.localStorage['qv-settings_language'], "localStorage in mounted")
   }
 }
 

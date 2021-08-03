@@ -14,7 +14,7 @@ html(lang=lang dir=dir)
       q-the-menu
 
     .body
-      x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar")
+      x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar" lang=course.locale)
         include sidebar
 
         article(class="c-textbook__page")
