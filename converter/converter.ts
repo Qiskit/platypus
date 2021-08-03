@@ -67,15 +67,13 @@ const copyNotebookAssets = function (
   })
 }
 
-// const convertNotations = async function() {
-//   console.log('textbook converter: Parsing notations')
-//   const notations = await parseYAML(sharedWorking, 'notations.yaml', 'en', 'meaning')
-//   return fs.outputJson(`${publicDir}/notations.json`, notations)
-// }
-
+// Ensure that the directories containing the md files are empty
 fs.emptyDirSync(workingDir)
+fs.emptyDirSync(translationsDir)
+
 // copy existing markdown & shared content
 fs.copySync(sharedContent, sharedWorking)
+
 // copy notebook images
 copyNotebookAssets(nbDir, publicContentDir, (src: string, dest: string) => {
   return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
@@ -93,7 +91,6 @@ subprocess.stderr.on('data', (data) => {
   console.error(`${data}`)
 });
 
-subprocess.on('close', async () => {
+subprocess.on('close', () => {
   console.log('textbook converter: Closed')
 })
-
