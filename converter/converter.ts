@@ -20,12 +20,12 @@ try {
 const nbImagesDirName = 'images'
 const sharedContent = `${CWD}/shared`
 const nbDir = `${CWD}/notebooks`
-const nbDirTranslations = `${CWD}/notebooks/translations/`
+const nbDirTranslations = `${CWD}/translations/`
 const getTOCPath = function (language?: string) {
-  return language ? `${nbDir}/toc-${language}.yaml` : `${nbDir}/toc.yaml`
+  return language ? `${nbDirTranslations}/${language}/toc.yaml` : `${nbDir}/toc.yaml`
 }
-const workingDir = `${CWD}/working`
-const translationsDir = `${CWD}/translations/`
+const workingDir = `${CWD}/working/content`
+const translationsDir = `${CWD}/working/translations/`
 const sharedWorking = `${workingDir}/shared`
 const publicDir = `${CWD}/public`
 const publicContentDir = `${publicDir}/content`

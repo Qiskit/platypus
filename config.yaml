@@ -51,7 +51,7 @@ tutor:
   enabled: false
   name: Plat
 
-contentDir: working
+contentDir: working/content
 
 analytics:
   production:
