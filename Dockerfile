@@ -18,7 +18,6 @@ RUN python3 -m pip install -U pip \
 COPY converter converter/
 COPY frontend frontend/
 COPY notebooks notebooks/
-COPY shared shared/
 COPY config.yaml ./
 RUN npm run build
 
