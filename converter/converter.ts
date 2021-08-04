@@ -18,7 +18,7 @@ try {
 }
 
 const nbImagesDirName = 'images'
-const sharedContent = `${CWD}/shared`
+const sharedContent = `${CWD}/notebooks/shared`
 const nbDir = `${CWD}/notebooks`
 const nbDirTranslations = `${CWD}/translations/`
 const getTOCPath = function (language?: string) {
