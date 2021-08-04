@@ -2,8 +2,10 @@
   url: /ch-prerequisites
   sections:
     - title: Setting Up Your Environment
+      id: environment-setup-guide-to-work-with-qiskit-textbook
       url: /ch-prerequisites/setting-the-environment
     - title: Python and Jupyter Notebooks
+      id: introduction-to-python-and-jupyter-notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
 
 
@@ -11,14 +13,19 @@
   url: /ch-states
   sections:
     - title: Introduction
+      id: introduction
       url: /ch-states/introduction
     - title: The Atoms of Computation
+      id: the-atoms-of-computation
       url: /ch-states/atoms-computation
     - title: Representing Qubit States
+      id: representing-qubit-states
       url: /ch-states/representing-qubit-states
     - title: Single Qubit Gates
+      id: single-qubit-gates
       url: /ch-states/single-qubit-gates
     - title: The Case for Quantum
+      id: the-case-for-quantum-computers
       url: /ch-states/case-for-quantum
 
 
@@ -26,16 +33,22 @@
   url: /ch-gates
   sections:
     - title: Introduction
+      id: introduction
       url: /ch-gates/introduction
     - title: Multiple Qubits and Entangled States
+      id: multiple-qubits-and-entangled-states
       url: /ch-gates/multiple-qubits-entangled-states
     - title: Phase Kickback
+      id: phase-kickback
       url: /ch-gates/phase-kickback
     - title: More Circuit Identities
+      id: basic-circuit-identities
       url: /ch-gates/more-circuit-identities
     - title: Proving Universality
+      id: proving-universality
       url: /ch-gates/proving-universality
     - title: Classical Computation on a Quantum Computer
+      id: classical-computation-on-a-quantum-computer
       url: /ch-gates/oracles
 
 
@@ -43,28 +56,40 @@
   url: /ch-algorithms
   sections:
     - title: Defining Quantum Circuits
+      id: quantum-circuits
       url: /ch-algorithms/defining-quantum-circuits
     - title: Deutsch-Jozsa Algorithm
+      id: deutsch-jozsa-algorithm
       url: /ch-algorithms/deutsch-jozsa
     - title: Bernstein-Vazirani Algorithm
+      id: bernstein-vazirani-algorithm
       url: /ch-algorithms/bernstein-vazirani
     - title: Simon's Algorithm
+      id: simons-algorithm
       url: /ch-algorithms/simon
     - title: Quantum Fourier Transform
+      id: quantum-fourier-transform
       url: /ch-algorithms/quantum-fourier-transform
     - title: Quantum Phase Estimation
+      id: quantum-phase-estimation
       url: /ch-algorithms/quantum-phase-estimation
     - title: Shor's Algorithm
+      id: shors-algorithm
       url: /ch-algorithms/shor
     - title: Grover's Algorithm
+      id: grovers-algorithm
       url: /ch-algorithms/grover
     - title: Quantum Counting
+      id: quantum-counting
       url: /ch-algorithms/quantum-counting
     - title: Quantum Teleportation
+      id: quantum-teleportation
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
+      id: superdense-coding
       url: /ch-algorithms/superdense-coding
     - title: Quantum Key Distribution
+      id: quantum-key-distribution
       url: /ch-algorithms/quantum-key-distribution
 
 
@@ -72,18 +97,25 @@
   url: /ch-applications
   sections:
     - title: Solving Linear Systems of Equations using HHL
+      id: solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation
       url: /ch-applications/hhl_tutorial
     - title: Simulating Molecules using VQE
+      id: simulating-molecules-using-vqe
       url: /ch-applications/vqe-molecules
     - title: Solving combinatorial optimization problems using QAOA
+      id: solving-combinatorial-optimization-problems-using-qaoa
       url: /ch-applications/qaoa
     - title: Solving Satisfiability Problems using Grover's Algorithm
+      id: solving-satisfiability-problems-using-grovers-algorithm
       url: /ch-applications/satisfiability-grover
     - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
+      id: hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit
       url: /ch-machine-learning/machine-learning-qiskit-pytorch
     - title: Variational Quantum Linear Solver
+      id: the-variational-quantum-linear-solver
       url: /ch-paper-implementations/vqls
     - title: Quantum Image Processing - FRQI and NEQR Image Representations
+      id: flexible-representation-of-quantum-images-frqi
       url: /ch-applications/image-processing-frqi-neqr
 
 
@@ -91,12 +123,16 @@
   url: /quantum-hardware
   sections:
     - title: Introduction to Quantum Error Correction using Repetition Codes
+      id: introduction-to-quantum-error-correction-via-the-repetition-code
       url: /quantum-hardware/error-correction-repetition-code
     - title: Measurement Error Mitigation
+      id: measurement-error-mitigation
       url: /quantum-hardware/measurement-error-mitigation
     - title: Randomized Benchmarking
+      id: randomized-benchmarking
       url: /quantum-hardware/randomized-benchmarking
     - title: Measuring Quantum Volume
+      id: measuring-quantum-volume
       url: /quantum-hardware/measuring-quantum-volume
 
 
@@ -104,18 +140,25 @@
   url: /quantum-hardware-pulses
   sections:
     - title: Calibrating Qubits with Qiskit Pulse
+      id: calibrating-qubits-using-qiskit-pulse
       url: /ch-quantum-hardware/calibrating-qubits-pulse
     - title: Accessing Higher Energy States
+      id: accessing-higher-energy-states-with-qiskit-pulse
       url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Transmon Physics
+      id: introduction-to-transmon-physics
       url: /ch-quantum-hardware/transmon-physics
     - title: Circuit Quantum Electrodynamics
+      id: circuit-quantum-electrodynamics
       url: /ch-quantum-hardware/cQED-JC-SW
     - title: Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse
+      id: exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse
       url: /ch-quantum-hardware/Jaynes-Cummings-model
     - title: Measuring the Qubit ac-Stark Shift
+      id: measuring-the-qubit-ac-stark-shift
       url: /ch-quantum-hardware/ac-Stark-shift
     - title: Hamiltonian Tomography
+      id: hamiltonian-tomography
       url: /ch-quantum-hardware/hamiltonian-tomography
 
 
@@ -123,18 +166,25 @@
   url: /ch-labs
   sections:
     - title: Lab 1. Quantum Circuits
+      id: lab-1-quantum-circuits
       url: /ch-labs/Lab01_QuantumCircuits
     - title: Lab 2. Quantum Measurement
+      id: lab-2-quantum-measurements
       url: /ch-labs/Lab02_QuantumMeasurement
     - title: Lab 3. Accuracy of Quantum Phase Estimation
+      id: lab-3-accuracy-of-quantum-phase-estimation
       url: /ch-labs/Lab03_AccuracyQPE
     - title: Lab 4. Iterative Quantum Phase Estimation
+      id: lab-4-iterative-phase-estimation-algorithm
       url: /ch-labs/Lab04_IterativePhaseEstimation
     - title: Lab 5. Scalable Shor’s Algorithm
+      id: lab-5-scalable-shors-algorithm
       url: /ch-labs/Lab05_Scalable_Shor_Algorithm
     - title: Lab 6. Grover's search with an unknown number of solutions
+      id: lab-6-grovers-search-with-an-unknown-number-of-solutions
       url: /ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions
     - title: Lab 7. Quantum Simulation as a Search Algorithm
+      id: lab-7-quantum-simulation-as-a-search-algorithm
       url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
 
 
@@ -142,8 +192,10 @@
   url: /ch-appendix
   sections:
     - title: Linear Algebra
+      id: an-introduction-to-linear-algebra-for-quantum-computing
       url: /ch-appendix/linear_algebra
     - title: Qiskit
+      id: basic-qiskit-syntax
       url: /ch-appendix/qiskit
 
 
@@ -151,12 +203,16 @@
   url: /ch-demos
   sections:
     - title: Hello Qiskit Game
+      id: bonus-level-sandbox
       url: /ch-ex/hello-qiskit
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
+      id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
       url: /ch-demos/piday-code
     - title: Local Reality and the CHSH Inequality
+      id: local-reality-and-the-chsh-inequality
       url: /ch-demos/chsh
     - title: Interactivity Index
+      id: widgets-demonstration
       url: /ch-demos/widgets-index
 
 
@@ -165,10 +221,13 @@
   type: docs
   sections:
     - title: Annotations
+      id: annotations
       url: /examples/annotations
     - title: Blocks
+      id: blocks
       url: /examples/blocks
     - title: Widgets
+      id: widgets
       url: /examples/widgets
 
 
@@ -177,20 +236,28 @@
   type: learning-path
   sections:
     - title: Why quantum computing?
+      id: why-quantum-computing
       url: /intro/why-quantum-computing
     - title: The atoms of computation
+      id: the-atoms-of-computation
       url: /intro/atoms-of-computation
     - title: What is quantum?
+      id: what-is-quantum
       url: /intro/what-is-quantum
     - title: Describing quantum computers
+      id: describing-quantum-computers
       url: /intro/describing-quantum-computers
     - title: Entangled states
+      id: entangled-states
       url: /intro/entangled-states
     - title: Visualizing entanglement
+      id: visualizing-entanglement
       url: /intro/visualizing-entanglement
     - title: Grovers algorithm
+      id: grovers-search-algorithm
       url: /intro/grover-intro
     - title: Project
+      id: project
       url: /intro/project
 
 
@@ -199,12 +266,17 @@
   type: learning-path
   sections:
     - title: Introduction
+      id: introduction
       url: /quantum-machine-learning/introduction
     - title: Parameterized Quantum Circuits
+      id: parametrized-quantum-circuits
       url: /quantum-machine-learning/pqc
     - title: Data Encoding
+      id: data-encoding
       url: /quantum-machine-learning/encoding
     - title: Quantum Kernels
+      id: quantum-feature-maps-and-kernels
       url: /quantum-machine-learning/kernel
     - title: Variational Classification
+      id: variational-classification
       url: /quantum-machine-learning/vqc

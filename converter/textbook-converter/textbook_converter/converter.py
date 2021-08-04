@@ -22,14 +22,15 @@ def get_notebook_node(nb_file_path):
     return None
 
 
-def convert_notebook_node(nb_node, file_name, output_dir):
+def convert_notebook_node(nb_node, file_name, output_dir, section_id=''):
     """Convert notebook node
     """
     try:
         exporter = TextbookExporter()
         resources = {
             'textbook': {
-                'id': file_name
+                'id': file_name,
+                'section': section_id
             }
         }
 
@@ -127,7 +128,7 @@ def append_to_index(resources, output_path):
             index_file.write(f'{yaml.dump(content)}')
 
 
-def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None):
+def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None, section_id=None):
     """Convert notebook file to Mathigon markdown format
     """
     nb_path = Path(nb_file_path).resolve()
@@ -154,7 +155,12 @@ def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None):
         print('output path:', output_path)
         print('shared path:', shared_path)
 
-        (body, resources) = convert_notebook_node(nb_node, file_name, output_path)
+        (body, resources) = convert_notebook_node(
+            nb_node,
+            file_name,
+            output_path,
+            section_id
+        )
 
         if body:
             print('updating glossary')
@@ -239,10 +245,10 @@ def get_order_from_toc(toc_file_path, md_dir_path):
 
     chapter = next((ch for ch in chapters if md_dir_path.endswith(ch['url'])), [])
 
-    def get_section_url(s):
-        return s['url'][1:] if s['url'].startswith('/') else s['url']
+    def get_sections(s):
+        return (s['id'], s['url'][1:] if s['url'].startswith('/') else s['url'])
 
-    return chapter['title'], list(map(get_section_url, chapter['sections']))
+    return chapter['title'], list(map(get_sections, chapter['sections']))
 
 
 def merge(md_dir, toc_file_path, output_dir=None):
@@ -266,7 +272,7 @@ def merge(md_dir, toc_file_path, output_dir=None):
     # Assumes section urls in toc corresponds to nb/md file names
     title, sections = get_order_from_toc(toc_file_path, str(md_dir_path))
     if sections:
-        md_files_path = [f'{os.path.join(str(md_dir_path), x.split("/")[-1])}.md' for x in sections if x != merged_file_name]
+        md_files_path = [f'{os.path.join(str(md_dir_path), x[1].split("/")[-1])}.md' for x in sections if x[1] != merged_file_name]
     else:
         md_files_path = [x for x in md_dir_path.glob('*.md') if x.name != merged_file_name]
 
@@ -275,11 +281,12 @@ def merge(md_dir, toc_file_path, output_dir=None):
             out_file.write(f'# {title}\n\n')
         for count, md_path in enumerate(md_files_path):
             if count > 0:
-                out_file.write(f'\n\n---\n')
+                out_file.write('\n\n---\n')
+            out_file.write(f'\n> section: {sections[count][0]}\n\n')
             with open(md_path) as in_file:
                 for line in in_file:
                     if sections:
-                        line = update_image_path(line, sections[count].split('/')[0])
+                        line = update_image_path(line, sections[count][1].split('/')[0])
                     out_file.write(line)
 
 
@@ -287,6 +294,7 @@ def convert(
     nb_file_or_dir_path,
     output_dir='',
     shared_dir='shared',
+    section_id=None
 ):
     """Convert notebook file or files in directory to Mathigon markdown
     """
@@ -300,7 +308,8 @@ def convert(
         convert_notebook_file(
             nb_file_or_dir_path,
             output_dir=output_dir,
-            shared_dir=shared_dir
+            shared_dir=shared_dir,
+            section_id=section_id
         )
     else:
         convert_notebook_directory(

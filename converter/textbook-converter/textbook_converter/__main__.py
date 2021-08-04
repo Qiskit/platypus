@@ -37,7 +37,8 @@ for chapter in toc_chapters:
             convert(
                 os.path.join(nb_dir_path, section_url) + '.ipynb',
                 output_dir=chapter_output,
-                shared_dir=shared_dir
+                shared_dir=shared_dir,
+                section_id=section['id']
             )
 
         merge(chapter_output, toc_file_path)
