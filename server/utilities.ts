@@ -8,6 +8,7 @@ import {
   AnalyticsEntry,
   AnalyticsConfig,
   NotationsMap,
+  NotationsLocales,
   Subsection,
   TocCourse
 } from './interfaces'
@@ -53,16 +54,25 @@ const resolvePath = (directory: string, file: string, locale = 'en') => {
   return path.join(directory, '../../translations', locale, courseId, file);
 }
 
-const NOTATIONS: NotationsMap = (loadYAML(path.join(CONTENT_DIR, 'shared/notations.yaml')) || {}) as NotationsMap
-const GLOSSARY: {[x: string]: any} = (loadYAML(path.join(CONTENT_DIR, 'shared/glossary.yaml')) || {}) as object
-const UNIVERSAL_NOTATIONS: Array<any> = Object.values((loadYAML(path.join(CONTENT_DIR, 'shared/universal.yaml')) || {}) as object)
+const NOTATIONS: NotationsLocales = {}
+const GLOSSARY: {[x: string]: any} = {}
+const UNIVERSAL_NOTATIONS: {[x: string]: Array<any>} = {}
 
-const updateGlossary = function(glossJson: string): string {
+CONFIG.locales.forEach(language => {
+  const defaultShared = path.join(CONTENT_DIR, 'shared')
+  NOTATIONS[language] = (loadYAML(resolvePath(defaultShared, 'notations.yaml', language)) || {}) as NotationsMap
+  GLOSSARY[language] = (loadYAML(resolvePath(defaultShared, 'glossary.yaml')) || {}) as object
+  UNIVERSAL_NOTATIONS[language] = Object.values((loadYAML(resolvePath(defaultShared, 'universal.yaml')) || {}) as object)
+})
+
+const updateGlossary = function(course: Course): string {
+  let glossJson = course.glossJSON
   if (glossJson) {
     const glossary = JSON.parse(glossJson)
-    Object.keys(GLOSSARY).forEach((key: string) => {
+    const languageGloss = GLOSSARY[course.locale || 'en']
+    Object.keys(languageGloss).forEach((key: string) => {
       if (glossary[key]) {
-        glossary[key]['sections'] = GLOSSARY[key]['sections']
+        glossary[key]['sections'] = languageGloss[key]['sections']
       }
     })
     glossJson = JSON.stringify(glossary)

@@ -24,12 +24,13 @@ new MathigonStudioApp()
     const section = course?.sections.find(s => s.id === req.params.section)
     if (!course || !section) return next()
 
+    const lang = course.locale || 'en'
     const learningPath = isLearningPath(course)
     const response = await storageApi.getProgressData?.(req, course, section)
     const progressJSON = JSON.stringify(response?.data || {})
-    const notationsJSON = JSON.stringify(NOTATIONS || {})
-    const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS || {})
-    course.glossJSON = updateGlossary(course.glossJSON)
+    const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
+    const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
+    course.glossJSON = updateGlossary(course)
 
     const nextSection = findNextSection(course, section)
     const prevSection = findPrevSection(course, section)
