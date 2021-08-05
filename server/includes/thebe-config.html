@@ -43,7 +43,7 @@
     document
       .querySelectorAll('.thebelab-cell')
       .forEach(thebelabCell => {
-        const inputElement = thebelabCell.querySelector('.thebelab-input')
+        const inputElement = thebelabCell.querySelector('.CodeMirror-code')
         inputElement.id = codeMirrorUid()
 
         const codeMirrorClipboardCopy = document.createElement('q-code-mirror-clipboard-copy')
