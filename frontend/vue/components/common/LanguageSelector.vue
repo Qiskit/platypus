@@ -38,7 +38,7 @@ export default class LanguageSelector extends Vue {
   // get lang value from DOM
   // set language in LanguageSelector
   setLanguage (lang: string) {
-    const result = this.translatedLanguagesList.filter(item => {
+    const result = this.translatedLanguagesList.filter((item) => {
       return item.countryCode === lang
     })
 
@@ -46,8 +46,8 @@ export default class LanguageSelector extends Vue {
     this.currentCountryLabel = result[0].label
   }
 
-  mounted (){
-    const courseLang = document.getElementsByTagName("html")[0].getAttribute("lang") || ""
+  mounted () {
+    const courseLang = document.getElementsByTagName('html')[0].getAttribute('lang') || ''
     this.setLanguage(courseLang)
   }
 
@@ -59,21 +59,19 @@ export default class LanguageSelector extends Vue {
 
     let newUrl = ''
 
-
-
     // detect if URL has subdomain already
-    if(!currentHostname.startsWith('localhost') && !currentHostname.startsWith('learn.qiskit.org') && !currentHostname.startsWith('platypus-review')) {
+    if (!currentHostname.startsWith('localhost') && !currentHostname.startsWith('learn.qiskit.org') && !currentHostname.startsWith('platypus-review')) {
       // subdomain exists
       const originalHostName = currentHostname.slice(3)
-      if(newLanguageCode == 'en') {
+      if (newLanguageCode == 'en') {
         newUrl = `${currentProtocol}//${originalHostName}${currentPathname}`
       } else {
         newUrl = `${currentProtocol}//${newLanguageCode}.${originalHostName}${currentPathname}`
       }
-
     } else {
       // subdomains don't exist
-      if(newLanguageCode == 'en') {
+      // eslint-disable-next-line no-lonely-if
+      if (newLanguageCode == 'en') {
         newUrl = `${currentProtocol}//${currentHostname}${currentPathname}`
       } else {
         newUrl = `${currentProtocol}//${newLanguageCode}.${currentHostname}${currentPathname}`
@@ -129,6 +127,3 @@ export default class LanguageSelector extends Vue {
 
 }
 </style>
-
-
-
