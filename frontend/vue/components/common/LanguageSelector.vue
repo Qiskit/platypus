@@ -63,20 +63,17 @@ export default class LanguageSelector extends Vue {
     if (!currentHostname.startsWith('localhost') && !currentHostname.startsWith('learn.qiskit.org') && !currentHostname.startsWith('platypus-review')) {
       // subdomain exists
       const originalHostName = currentHostname.slice(3)
-      if (newLanguageCode == 'en') {
+      if (newLanguageCode === 'en') {
         newUrl = `${currentProtocol}//${originalHostName}${currentPathname}`
       } else {
         newUrl = `${currentProtocol}//${newLanguageCode}.${originalHostName}${currentPathname}`
       }
+    } else if (newLanguageCode === 'en') {
+      newUrl = `${currentProtocol}//${currentHostname}${currentPathname}`
     } else {
-      // subdomains don't exist
-      // eslint-disable-next-line no-lonely-if
-      if (newLanguageCode == 'en') {
-        newUrl = `${currentProtocol}//${currentHostname}${currentPathname}`
-      } else {
-        newUrl = `${currentProtocol}//${newLanguageCode}.${currentHostname}${currentPathname}`
-      }
+      newUrl = `${currentProtocol}//${newLanguageCode}.${currentHostname}${currentPathname}`
     }
+
     window.location.href = newUrl
   }
 }
