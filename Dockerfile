@@ -14,11 +14,10 @@ RUN python3 -m venv .venv && source .venv/bin/activate
 RUN python3 -m pip install -U pip \
   && python3 -m pip install -r converter/textbook-converter/requirements.txt
 
-
 COPY converter converter/
 COPY frontend frontend/
 COPY notebooks notebooks/
-COPY shared shared/
+COPY translations translations/
 COPY config.yaml ./
 RUN npm run build
 

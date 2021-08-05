@@ -1,0 +1,7 @@
+- title: Prerequisites
+  url: /ch-prerequisites
+  sections:
+    - id: environment-setup-guide-to-work-with-qiskit-textbook
+      url: /ch-prerequisites/setting-the-environment
+    - id: introduction-to-python-and-jupyter-notebooks
+      url: /ch-prerequisites/python-and-jupyter-notebooks

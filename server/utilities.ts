@@ -24,7 +24,7 @@ CONFIG.analytics = analytics
 
 const toc: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
 
-const sectionIndexes: {[x: string]: Subsection[]} = {}
+const sectionIndexes: {[l: string]: {[x: string]: Subsection[]}} = {}
 
 // const COURSES = fs.readdirSync(CONTENT_DIR)
 //   .filter(id => id !== 'shared' && !id.includes('.') && !id.startsWith('_'))
@@ -45,6 +45,12 @@ const COURSES = {
   uncategorized: textbookCourses,
   learningPaths: learningPaths,
   docs: miscCourses
+}
+
+const resolvePath = (directory: string, file: string, locale = 'en') => {
+  if (locale === 'en') return path.join(directory, file);
+  const courseId = path.basename(directory);
+  return path.join(directory, '../../translations', locale, courseId, file);
 }
 
 const NOTATIONS: NotationsMap = (loadYAML(path.join(CONTENT_DIR, 'shared/notations.yaml')) || {}) as NotationsMap
@@ -88,13 +94,17 @@ const findNextSection = function (course: Course, section: Section) {
 
 const getSectionIndex = function (course: Course, section: Section) {
   const sectionId = `${course.id}/${section.id}`
-  if (!sectionIndexes[sectionId]) {
+  const loc = course.locale || 'en'
+  if (!sectionIndexes[loc] || !sectionIndexes[loc][sectionId]) {
     const courseIndex = (
-      loadYAML(path.join(CONTENT_DIR, `${course.id}/index.yaml`)) || []
+      loadYAML(resolvePath(`${CONTENT_DIR}/${course.id}`, 'index.yaml', course.locale)) || []
     ) as {[x: string]: Subsection[]}
-    sectionIndexes[sectionId] = courseIndex[section.id]
+    if (!sectionIndexes[loc]) {
+      sectionIndexes[loc] = {}
+    }
+    sectionIndexes[loc][sectionId] = courseIndex[section.id]
   }
-  return sectionIndexes[sectionId] || []
+  return sectionIndexes[loc][sectionId] || []
 }
 
 
