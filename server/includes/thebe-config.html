@@ -23,9 +23,6 @@
 
 <script defer>
   const thebelabBootstrap = function () {
-    let codeMirrorInputIndex = 0
-    const codeMirrorUid = () => `code-mirror-element-${codeMirrorInputIndex}`
-
     thebelab.bootstrap()
     thebelab.on("status", function (evt, data) {
       console.log("Thebelab status changed:", data.status, data.message)
@@ -40,18 +37,34 @@
       .forEach(btn => {
         btn.textContent = 'Run'
       })
-    document
-      .querySelectorAll('.thebelab-cell')
-      .forEach(thebelabCell => {
-        const inputElement = thebelabCell.querySelector('.CodeMirror-code')
-        inputElement.id = codeMirrorUid()
 
-        const codeMirrorClipboardCopy = document.createElement('q-code-mirror-clipboard-copy')
-        codeMirrorClipboardCopy.setAttribute('target-id', codeMirrorUid())
-        thebelabCell.append(codeMirrorClipboardCopy)
+    /**
+     * Copy to clipboard functionality.
+     */
+    let codeMirrorInputIndex = 0
+    const codeMirrorUid = () => `code-mirror-element-${codeMirrorInputIndex}`
+    
+    document.querySelectorAll('.thebelab-cell').forEach(thebelabCell => {
+      const clipboardCopyComponent = document.createElement(
+        'q-code-mirror-clipboard-copy'
+      )
+      clipboardCopyComponent.setAttribute('target-id', codeMirrorUid())
+      thebelabCell.append(clipboardCopyComponent)
 
-        codeMirrorInputIndex++
-      })
+      const codeInput = document.createElement('input')
+      codeInput.id = codeMirrorUid()
+      thebelabCell.append(codeInput)
+
+      const codeElement = thebelabCell.querySelector('.CodeMirror-code')
+      const codeLines = Array.from(
+        codeElement.querySelectorAll('.CodeMirror-line')
+      ).map(codeLine => codeLine.textContent)
+      const formattedCode = codeLines.join('\n')
+      codeInput.setAttribute('type', 'hidden')
+      codeInput.setAttribute('value', formattedCode)
+
+      codeMirrorInputIndex++
+    })
   }
 
   // check if Thebelab needs to be loaded
