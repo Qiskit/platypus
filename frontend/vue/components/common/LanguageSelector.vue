@@ -62,7 +62,7 @@ export default class LanguageSelector extends Vue {
 
 
     // detect if URL has subdomain already
-    if(!currentHostname.startsWith('localhost') && !currentHostname.startsWith('learn.qiskit.org')) {
+    if(!currentHostname.startsWith('localhost') && !currentHostname.startsWith('learn.qiskit.org') && !currentHostname.startsWith('platypus-review')) {
       // subdomain exists
       const originalHostName = currentHostname.slice(3)
       if(newLanguageCode == 'en') {
