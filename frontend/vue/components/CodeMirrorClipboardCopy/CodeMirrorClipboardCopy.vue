@@ -2,7 +2,7 @@
   <clipboard-copy
     :for="targetId"
     class="code-mirror-clipboard-copy"
-    @click="handleClick"
+    @clipboard-copy="handleClick"
   >
     <div class="label" v-text="label" />
     <Copy32 class="copy-icon" />
@@ -57,6 +57,7 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
   top: 0;
   z-index: 100;
 
+  &:focus,
   &:hover {
     color: $active-color;
     cursor: pointer;
