@@ -5,79 +5,54 @@
       @bx-dropdown-selected="useSelectedLanguage($event)"
     >
       <bx-dropdown-item
-        v-for="language in translatedLanguagesList"
-        :key="language.index"
+        v-for="language in availableLocales"
+        :key="language.key"
         class="language-selector__item"
-        :value="language.countryCode"
+        :value="language.id"
       >
-        {{ language.label }}
+        {{ language.key }}
       </bx-dropdown-item>
     </bx-dropdown>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { Options, Vue, prop } from 'vue-class-component'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
 
-@Options({})
-export default class LanguageSelector extends Vue {
+class Props {
+  localesData = prop({})
+}
+
+@Options({
+  computed: {
+    availableLocales () {
+      return JSON.parse(this.localesData)
+    }
+  }
+})
+
+export default class LanguageSelector extends Vue.with(Props) {
   currentCountryCode = ''
   currentCountryLabel = 'English'
-  translatedLanguagesList = [
-    {
-      label: 'English',
-      countryCode: 'en'
-    },
-    {
-      label: 'Japanese',
-      countryCode: 'ja'
-    }
-  ]
 
-  // get lang value from DOM
-  // set language in LanguageSelector
-  setLanguage (lang: string) {
-    const result = this.translatedLanguagesList.filter((item) => {
-      return item.countryCode === lang
-    })
-
-    this.currentCountryCode = result[0].countryCode
-    this.currentCountryLabel = result[0].label
-  }
-
-  mounted () {
-    const courseLang = document.getElementsByTagName('html')[0].getAttribute('lang') || ''
-    this.setLanguage(courseLang)
-  }
 
   useSelectedLanguage (event: any) {
     const currentHostname = window.location.host
-    const currentPathname = window.location.pathname
-    const currentProtocol = window.location.protocol
     const newLanguageCode = event.detail.item.value
 
-    let newUrl = ''
+    // remove subdomain
+    const originalHostName = currentHostname.split('.')[0].length === 2 && isNaN(+currentHostname.split('.')[0])
+      ? currentHostname.slice(3)
+      : currentHostname
 
-    // detect if URL has subdomain already
-    if (!currentHostname.startsWith('localhost') && !currentHostname.startsWith('learn.qiskit.org') && !currentHostname.startsWith('platypus-review')) {
-      // subdomain exists
-      const originalHostName = currentHostname.slice(3)
-      if (newLanguageCode === 'en') {
-        newUrl = `${currentProtocol}//${originalHostName}${currentPathname}`
-      } else {
-        newUrl = `${currentProtocol}//${newLanguageCode}.${originalHostName}${currentPathname}`
-      }
-    } else if (newLanguageCode === 'en') {
-      newUrl = `${currentProtocol}//${currentHostname}${currentPathname}`
+    if (originalHostName === 'learn.qiskit.org') {
+      window.location.host = `${newLanguageCode === 'en' ? '' : newLanguageCode + '.'}${originalHostName}`
     } else {
-      newUrl = `${currentProtocol}//${newLanguageCode}.${currentHostname}${currentPathname}`
+      window.location.search = newLanguageCode === 'en' ? '' : '?hl=' + newLanguageCode
     }
-
-    window.location.href = newUrl
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
