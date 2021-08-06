@@ -98,7 +98,7 @@ const findNextSection = function (course: Course, section: Section) {
     return {section: nextSection}
   } else if (!isLearningPath(course)) {
     const nextCourse = getCourse(course.nextCourse, course.locale)!
-    return {course: nextCourse, section: nextCourse.sections[0]}
+    if (nextCourse) return {course: nextCourse, section: nextCourse.sections[0]}
   }
 }
 
