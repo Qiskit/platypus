@@ -37,6 +37,38 @@
       .forEach(btn => {
         btn.textContent = 'Run'
       })
+
+    /**
+     * Copy to clipboard functionality.
+     */
+    document
+      .querySelectorAll('.thebelab-cell')
+      .forEach((thebelabCell, index) => {
+        const codeCellId = `code-mirror-element-${index}`
+
+        const clipboardCopyComponent = document.createElement(
+          'q-code-mirror-clipboard-copy'
+        )
+        clipboardCopyComponent.setAttribute('target-id', codeCellId)
+        thebelabCell.append(clipboardCopyComponent)
+
+        const codeInput = document.createElement('input')
+        codeInput.id = codeCellId
+        thebelabCell.append(codeInput)
+
+        /**
+         * Create a copy of the CodeMirror cell's content adding line breaks.
+         * The "copy to clipboard" functionality will copy the content from this
+         * copy.
+         */
+        const codeElement = thebelabCell.querySelector('.CodeMirror-code')
+        const codeLines = Array.from(
+          codeElement.querySelectorAll('.CodeMirror-line')
+        ).map(codeLine => codeLine.textContent)
+        const formattedCode = codeLines.join('\n')
+        codeInput.setAttribute('type', 'hidden')
+        codeInput.setAttribute('value', formattedCode)
+      })
   }
 
   // check if Thebelab needs to be loaded
