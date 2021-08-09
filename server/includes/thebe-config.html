@@ -29,26 +29,26 @@
     })
     document
       .querySelectorAll('.thebelab-cell')
-      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell'))
-    document
-      .querySelectorAll('.thebelab-cell .thebelab-input')
-      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell-input'))
-    document
-      .querySelectorAll('.thebelab-cell .jp-OutputArea')
-      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell-output'))
-    document
-      .querySelectorAll('.thebelab-cell .CodeMirror-code')
-      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell-code'))
-    document
-      .querySelectorAll('.thebelab-cell .thebelab-restart-button')
-      .forEach(btn => {
-        btn.remove()
-      })
-    document
-      .querySelectorAll('.thebelab-cell .thebelab-run-button')
-      .forEach(btn => {
-        btn.textContent = 'Run'
-        btn.setAttribute('data-cy', 'code-cell-button-run')
+      .forEach(codeCell => {
+        codeCell.querySelector('.thebelab-restart-button').remove()
+
+        const codeCellRunButton = codeCell.querySelector('.thebelab-run-button')
+        codeCellRunButton.setAttribute('data-cy', 'code-cell-button-run')
+        codeCellRunButton.textContent = 'Run'
+
+        codeCell.setAttribute('data-cy', 'code-cell')
+
+        codeCell
+          .querySelector('.thebelab-input')
+          .setAttribute('data-cy', 'code-cell-input')
+
+        codeCell
+          .querySelector('.jp-OutputArea')
+          .setAttribute('data-cy', 'code-cell-output')
+          
+        codeCell
+          .querySelector('.CodeMirror-code')
+          .setAttribute('data-cy', 'code-cell-code')
       })
 
     /**
