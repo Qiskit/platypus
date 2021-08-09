@@ -118,7 +118,7 @@ describe('Every page', () => {
         .setCookie('notice_preferences', '2:')
 
         .viewport('macbook-15')
-        .request('GET', pageUrl, { responseTimeout: 1000 })
+        .request('GET', pageUrl, { responseTimeout: 3000 })
         .then((response) => {
           expect(response.status).to.eq(200)
         })
