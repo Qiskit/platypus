@@ -14,8 +14,19 @@ describe('Language Selector Macbook-15', () => {
       .reload()
   })
 
-  it('Select different language ', () => {
-    // initial url
+  it('Select different language', () => {
+    // navigate to page w/ translations
     cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
+    // select Japanese
+    cy.get('.language-selector__dropdown').shadow().find('.bx--list-box__field').click()
+    cy.get('.language-selector__dropdown > .language-selector__item').next().click()
+
+    cy.url().should('include', '?hl=ja')
+
+    // select English
+    cy.get('.language-selector__dropdown').shadow().find('.bx--list-box__field').click()
+    cy.get('.language-selector__dropdown > .language-selector__item').first().click()
+
+    cy.url().should('not.include', '?hl')
   })
 })
