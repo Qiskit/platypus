@@ -5,3 +5,12 @@
       url: /ch-prerequisites/setting-the-environment
     - id: introduction-to-python-and-jupyter-notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
+
+
+- title: の例
+  url: /examples
+  type: docs
+  sections:
+    - title: Locale
+      id: locale
+      url: /examples/locale

@@ -151,9 +151,7 @@ def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None, sectio
         if not os.path.exists(shared_path):
             os.makedirs(shared_path, exist_ok=True)
 
-        print('converting:', file_name)
-        print('output path:', output_path)
-        print('shared path:', shared_path)
+        print('converting', nb_path)
 
         (body, resources) = convert_notebook_node(
             nb_node,
@@ -163,19 +161,9 @@ def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None, sectio
         )
 
         if body:
-            print('updating glossary')
             append_to_glossary_yaml(resources, shared_path)
-
-            print('updating notations')
             append_to_notations_yaml(resources, shared_path)
-
-            # print('updating styles.less')
-            # append_to_styles(nb_node, output_path)
-
-            print('updating functions')
             append_to_ts(resources, str(nb_path.parent), output_path)
-
-            print('updating index')
             append_to_index(resources, output_path)
 
 

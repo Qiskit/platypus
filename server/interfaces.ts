@@ -36,6 +36,10 @@ export interface NotationsMap {
   [x: string]: Notation
 }
 
+export interface NotationsLocales {
+  [x: string]: NotationsMap
+}
+
 export interface Subsection {
   title: string,
   id: string,
