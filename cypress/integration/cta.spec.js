@@ -13,18 +13,21 @@ describe('CTA', () => {
   it('next and previous section links work', () => {
     cy
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=footer-nav-next-section]').click()
+      .get('[data-cy=footer-nav-next-section]')
+      .click()
+      .url()
+      .should(
+        'include',
+        '/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
+      )
 
-    cy.url().should(
-      'include',
-      '/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
-    )
-    cy.get('[data-cy=footer-nav-previous-section]').click()
-
-    cy.url().should(
-      'include',
-      '/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
-    )
+      .get('[data-cy=footer-nav-previous-section]')
+      .click()
+      .url()
+      .should(
+        'include',
+        '/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
+      )
   })
 
   it('back to home link linked corretly', () => {
