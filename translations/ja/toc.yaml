@@ -1,4 +1,4 @@
-- title: Prerequisites
+- title: 前提条件
   url: /ch-prerequisites
   sections:
     - id: environment-setup-guide-to-work-with-qiskit-textbook
