@@ -56,6 +56,11 @@
         codeInput.id = codeCellId
         thebelabCell.append(codeInput)
 
+        /**
+         * Create a copy of the CodeMirror cell's content adding line breaks.
+         * The "copy to clipboard" functionality will copy the content from this
+         * copy.
+         */
         const codeElement = thebelabCell.querySelector('.CodeMirror-code')
         const codeLines = Array.from(
           codeElement.querySelectorAll('.CodeMirror-line')
