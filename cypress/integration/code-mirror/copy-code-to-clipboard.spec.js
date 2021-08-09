@@ -29,6 +29,8 @@ describe('Copy code to clipboard', () => {
     cy.get('.code-mirror-clipboard-copy').click()
     cy.get('.code-mirror-clipboard-copy .label').contains('Copied!')
 
-    // TODO: Check the clipboard's content (for single and multiple lines of code copied).
+    // TODO: Check the clipboard's content (for single and multiple lines of
+    // code copied).
+    // https://github.com/qiskit-community/platypus/issues/96
   })
 })
