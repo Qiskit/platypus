@@ -128,7 +128,6 @@ def handle_attachments(line, cell):
     match = html_img_regex.search(line)
     if match is not None:
         img_src = match.group(2)
-        print(img_src)
         img_data = get_attachment_data(img_src, cell)
         return line.replace(img_src, img_data)
     else:

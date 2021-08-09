@@ -1,7 +1,16 @@
-- title: Prerequisites
+- title: 前提条件
   url: /ch-prerequisites
   sections:
     - id: environment-setup-guide-to-work-with-qiskit-textbook
       url: /ch-prerequisites/setting-the-environment
     - id: introduction-to-python-and-jupyter-notebooks
       url: /ch-prerequisites/python-and-jupyter-notebooks
+
+
+- title: の例
+  url: /examples
+  type: docs
+  sections:
+    - title: Locale
+      id: locale
+      url: /examples/locale

@@ -229,6 +229,9 @@
     - title: Widgets
       id: widgets
       url: /examples/widgets
+    - title: Locale
+      id: locale
+      url: /examples/locale
 
 
 - title: Introduction to Quantum Computing
