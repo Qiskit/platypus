@@ -26,4 +26,12 @@ describe('CTA', () => {
       '/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
     )
   })
+
+  it('old textbook version link has expected properties', () => {
+    cy
+      .visit('/course/ch-prerequisites')
+      .get('[data-cy=qiskit-banner-old-textbook-version] a')
+      .should('have.attr', 'target', '_blank')
+      .should('have.attr', 'href', 'https://qiskit.org/textbook')
+  })
 })
