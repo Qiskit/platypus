@@ -27,6 +27,13 @@ describe('CTA', () => {
     )
   })
 
+  it('back to home link linked corretly', () => {
+    cy
+      .visit('/course/ch-prerequisites')
+      .get('[data-cy=back-to-home-link]')
+      .should('have.attr', 'href', 'https://qiskit.org/textbook-beta')
+  })
+
   it('old textbook version link has expected properties', () => {
     cy
       .visit('/course/ch-prerequisites')
