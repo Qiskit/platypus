@@ -49,6 +49,23 @@ describe('CTA', () => {
       .click()
       .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
       .should('be.visible')
+
+    // Mobile
+
+      .viewport('iphone-x')
+      .visit('/course/ch-prerequisites')
+      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.hidden')
+
+      .get('[data-cy=sidebar-button-toggle-mobile]')
+      .click()
+      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.visible')
+
+      .get('[data-cy=sidebar-button-toggle]')
+      .click()
+      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.hidden')
   })
 
   it('old textbook version link has expected properties', () => {
