@@ -15,15 +15,18 @@ describe('Code cell', () => {
   })
 
   it('is displayed', () => {
-    cy.get('.thebelab-cell').should('be.visible')
-    cy.get('.CodeMirror-code').contains('1 + 1')
-    cy.get('.thebelab-run-button').contains('Run')
-    cy.get('.jp-OutputArea').contains('2')
+    cy.get('[data-cy=code-cell]').should('be.visible')
+    cy.get('[data-cy=code-cell-input]').contains('1 + 1')
+    cy.get('[data-cy=code-cell-output]').contains('2')
+    cy.get('[data-cy=code-cell-button-run]').contains('Run')
   })
 
   it('runs', () => {
-    cy.get('.CodeMirror-line').click().type('{backspace}{backspace}{backspace}{backspace}{backspace}2+3')
-    cy.get('.thebelab-run-button').click()
-    cy.get('.jp-OutputArea').contains('Waiting for kernel...')
+    cy.get('[data-cy=code-cell-code]')
+      .click()
+      .type('{backspace}{backspace}{backspace}{backspace}{backspace}2+3')
+    cy.get('[data-cy=code-cell-input]').contains('2+3')
+    cy.get('[data-cy=code-cell-button-run]').click()
+    cy.get('[data-cy=code-cell-output]').contains('Waiting for kernel...')
   })
 })

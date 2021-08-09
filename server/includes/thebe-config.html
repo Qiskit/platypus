@@ -28,6 +28,18 @@
       console.log("Thebelab status changed:", data.status, data.message)
     })
     document
+      .querySelectorAll('.thebelab-cell')
+      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell'))
+    document
+      .querySelectorAll('.thebelab-cell .thebelab-input')
+      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell-input'))
+    document
+      .querySelectorAll('.thebelab-cell .jp-OutputArea')
+      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell-output'))
+    document
+      .querySelectorAll('.thebelab-cell .CodeMirror-code')
+      .forEach(codeCell => codeCell.setAttribute('data-cy', 'code-cell-code'))
+    document
       .querySelectorAll('.thebelab-cell .thebelab-restart-button')
       .forEach(btn => {
         btn.remove()
@@ -36,6 +48,7 @@
       .querySelectorAll('.thebelab-cell .thebelab-run-button')
       .forEach(btn => {
         btn.textContent = 'Run'
+        btn.setAttribute('data-cy', 'code-cell-button-run')
       })
 
     /**
