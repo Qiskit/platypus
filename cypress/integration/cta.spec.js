@@ -34,6 +34,23 @@ describe('CTA', () => {
       .should('have.attr', 'href', 'https://qiskit.org/textbook-beta')
   })
 
+  it('hide and display index button works', () => {
+    cy
+      .visit('/course/ch-prerequisites')
+      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.visible')
+
+      .get('[data-cy=sidebar-button-toggle]')
+      .click()
+      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.hidden')
+
+      .get('[data-cy=sidebar-button-toggle]')
+      .click()
+      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.visible')
+  })
+
   it('old textbook version link has expected properties', () => {
     cy
       .visit('/course/ch-prerequisites')
