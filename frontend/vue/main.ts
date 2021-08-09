@@ -1,6 +1,7 @@
 import { QiskitBanner } from '@qiskit-community/qiskit-vue'
 import wrapper from './wc-wrapper/platypusWrapper'
 
+import CodeMirrorClipboardCopy from './components/CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
 import TheMenu from './components/TheMenu/index.vue'
 import MobileMenu from './components/TheMenu/MobileMenu.vue'
 import WhatIsQuantumVolume from './components/WhatIsQuantumVolume/WhatIsQuantumVolume.vue'
@@ -31,6 +32,7 @@ const kebabize = (str:string) => {
 const components: any = {
   QiskitBanner,
   AppCta,
+  CodeMirrorClipboardCopy,
   ContentMenu,
   LanguageSelector,
   TheMenu,
