@@ -34,7 +34,7 @@ describe('CTA', () => {
       .should('have.attr', 'href', 'https://qiskit.org/textbook-beta')
   })
 
-  it('hide and display index button works', () => {
+  it('toggle sidebar button works', () => {
     cy
       .visit('/course/ch-prerequisites')
       .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
@@ -65,6 +65,24 @@ describe('CTA', () => {
       .get('[data-cy=sidebar-button-toggle]')
       .click()
       .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .should('be.hidden')
+  })
+
+  it('toggle mobile menu button works', () => {
+    cy
+      .viewport('iphone-x')
+      .visit('/course/ch-prerequisites')
+      .get('[data-cy=mobile-menu]')
+      .should('be.hidden')
+
+      .get('[data-cy=mobile-menu-toggle]')
+      .click()
+      .get('[data-cy=mobile-menu]')
+      .should('be.visible')
+
+      .get('[data-cy=mobile-menu-toggle]')
+      .click()
+      .get('[data-cy=mobile-menu]')
       .should('be.hidden')
   })
 
