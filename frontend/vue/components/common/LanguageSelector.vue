@@ -36,7 +36,7 @@ class Props {
 export default class LanguageSelector extends Vue.with(Props) {
   currentCountryCode = ''
   currentCountryLabel = 'English'
-
+  availableLocales: any
 
   useSelectedLanguage (event: any) {
     const currentHostname = window.location.host
@@ -52,6 +52,21 @@ export default class LanguageSelector extends Vue.with(Props) {
     } else {
       window.location.search = newLanguageCode === 'en' ? '' : '?hl=' + newLanguageCode
     }
+  }
+
+  setLanguage (lang: string) {
+    const result = this.availableLocales.filter((item: { id: string }) => {
+      return item.id === lang
+    })
+
+    this.currentCountryCode = result[0].id
+    this.currentCountryLabel = result[0].key
+  }
+
+  mounted () {
+    const courseLang = document.getElementsByTagName('html')[0].getAttribute('lang') || ''
+    this.availableLocales = this.localesData
+    this.setLanguage(courseLang)
   }
 }
 </script>
