@@ -33,22 +33,22 @@
         codeCell.querySelector('.thebelab-restart-button').remove()
 
         const codeCellRunButton = codeCell.querySelector('.thebelab-run-button')
-        codeCellRunButton.setAttribute('data-cy', 'code-cell-button-run')
+        codeCellRunButton.setAttribute('data-test', 'code-cell-button-run')
         codeCellRunButton.textContent = 'Run'
 
-        codeCell.setAttribute('data-cy', 'code-cell')
+        codeCell.setAttribute('data-test', 'code-cell')
 
         codeCell
           .querySelector('.thebelab-input')
-          .setAttribute('data-cy', 'code-cell-input')
+          .setAttribute('data-test', 'code-cell-input')
 
         codeCell
           .querySelector('.jp-OutputArea')
-          .setAttribute('data-cy', 'code-cell-output')
+          .setAttribute('data-test', 'code-cell-output')
           
         codeCell
           .querySelector('.CodeMirror-code')
-          .setAttribute('data-cy', 'code-cell-code')
+          .setAttribute('data-test', 'code-cell-code')
       })
 
     /**

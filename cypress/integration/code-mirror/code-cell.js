@@ -15,18 +15,18 @@ describe('Code cell', () => {
   })
 
   it('is displayed', () => {
-    cy.get('[data-cy=code-cell]').should('be.visible')
-    cy.get('[data-cy=code-cell-input]').contains('1 + 1')
-    cy.get('[data-cy=code-cell-output]').contains('2')
-    cy.get('[data-cy=code-cell-button-run]').contains('Run')
+    cy.get('[data-test=code-cell]').should('be.visible')
+    cy.get('[data-test=code-cell-input]').contains('1 + 1')
+    cy.get('[data-test=code-cell-output]').contains('2')
+    cy.get('[data-test=code-cell-button-run]').contains('Run')
   })
 
   it('runs', () => {
-    cy.get('[data-cy=code-cell-code]')
+    cy.get('[data-test=code-cell-code]')
       .click()
       .type('{backspace}{backspace}{backspace}{backspace}{backspace}2+3')
-    cy.get('[data-cy=code-cell-input]').contains('2+3')
-    cy.get('[data-cy=code-cell-button-run]').click()
-    cy.get('[data-cy=code-cell-output]').contains('Waiting for kernel...')
+    cy.get('[data-test=code-cell-input]').contains('2+3')
+    cy.get('[data-test=code-cell-button-run]').click()
+    cy.get('[data-test=code-cell-output]').contains('Waiting for kernel...')
   })
 })
