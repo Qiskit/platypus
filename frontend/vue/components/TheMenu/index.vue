@@ -21,7 +21,7 @@
             menu__hamburger-toggle_menu-hidden
           "
           for="mobile-menu-toggle"
-          data-cy="mobile-menu-toggle"
+          data-test="mobile-menu-toggle"
         >
           <component :is="isMobileMenuVisible ? 'Close20' : 'Menu20'" />
         </label>
@@ -36,7 +36,7 @@
         class="menu__mobile-menu"
         :class="{ 'menu__mobile-menu_visible': isMobileMenuVisible }"
         :is-visible="isMobileMenuVisible"
-        data-cy="mobile-menu"
+        data-test="mobile-menu"
       />
     </section>
     <section class="menu__main-level">

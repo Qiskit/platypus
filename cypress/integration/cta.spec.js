@@ -4,7 +4,7 @@ describe('CTA', () => {
   it('next and previous section links work', () => {
     cy
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=footer-nav-next-section]')
+      .get('[data-test=footer-nav-next-section]')
       .click()
       .url()
       .should(
@@ -12,7 +12,7 @@ describe('CTA', () => {
         '/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
       )
 
-      .get('[data-cy=footer-nav-previous-section]')
+      .get('[data-test=footer-nav-previous-section]')
       .click()
       .url()
       .should(
@@ -24,41 +24,41 @@ describe('CTA', () => {
   it('back to home link linked correctly', () => {
     cy
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=back-to-home-link]')
+      .get('[data-test=back-to-home-link]')
       .should('have.attr', 'href', 'https://qiskit.org/textbook-beta')
   })
 
   it('toggle sidebar button works', () => {
     cy
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.visible')
 
-      .get('[data-cy=sidebar-button-toggle]')
+      .get('[data-test=sidebar-button-toggle]')
       .click()
-      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.hidden')
 
-      .get('[data-cy=sidebar-button-toggle]')
+      .get('[data-test=sidebar-button-toggle]')
       .click()
-      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.visible')
 
     // Mobile
 
       .viewport('iphone-x')
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.hidden')
 
-      .get('[data-cy=sidebar-button-toggle-mobile]')
+      .get('[data-test=sidebar-button-toggle-mobile]')
       .click()
-      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.visible')
 
-      .get('[data-cy=sidebar-button-toggle]')
+      .get('[data-test=sidebar-button-toggle]')
       .click()
-      .get('[data-cy=sidebar] [data-cy=sidebar-entry]')
+      .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.hidden')
   })
 
@@ -66,24 +66,24 @@ describe('CTA', () => {
     cy
       .viewport('iphone-x')
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=mobile-menu]')
+      .get('[data-test=mobile-menu]')
       .should('be.hidden')
 
-      .get('[data-cy=mobile-menu-toggle]')
+      .get('[data-test=mobile-menu-toggle]')
       .click()
-      .get('[data-cy=mobile-menu]')
+      .get('[data-test=mobile-menu]')
       .should('be.visible')
 
-      .get('[data-cy=mobile-menu-toggle]')
+      .get('[data-test=mobile-menu-toggle]')
       .click()
-      .get('[data-cy=mobile-menu]')
+      .get('[data-test=mobile-menu]')
       .should('be.hidden')
   })
 
   it('old textbook version link has expected properties', () => {
     cy
       .visit('/course/ch-prerequisites')
-      .get('[data-cy=qiskit-banner-old-textbook-version] a')
+      .get('[data-test=qiskit-banner-old-textbook-version] a')
       .should('have.attr', 'target', '_blank')
       .should('have.attr', 'href', 'https://qiskit.org/textbook')
   })

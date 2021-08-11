@@ -58,7 +58,7 @@ html(lang=lang dir=dir)
                         target="_self"
                         kind="secondary"
                         segment=`${section.id} > ${prevSection.section.id}`
-                        data-cy="footer-nav-previous-section"
+                        data-test="footer-nav-previous-section"
                       )
 
                   div.footer-nav__cta__container(data-vue-mount)
@@ -69,7 +69,7 @@ html(lang=lang dir=dir)
                         is-static=true
                         target="_self"
                         segment=`${section.id} > ${nextSection.section.id}`
-                        data-cy="footer-nav-next-section"
+                        data-test="footer-nav-next-section"
                       )
         div#utility-panel.c-textbook__utility_panel
           q-utility-panel
