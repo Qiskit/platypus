@@ -31,7 +31,7 @@ describe('Language Selector Macbook-15', () => {
     cy.get('html').should('have.attr', 'lang', 'ja')
   })
 
-  it('Can select English version', () => {
+  it('Can select the English version', () => {
     // navigate to page w/ translations
     cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
     // // select English
@@ -58,7 +58,7 @@ describe('Language Selector Macbook-15', () => {
     cy.get('#app-panel-language-toggle').should('be.visible')
   })
 
-  it('Can toggle language selector visibility when translate button clicked', () => {
+  it('Can show LanguageSelector options when translate toggle button is clicked', () => {
     // navigate to page w/ translations
     cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
 
@@ -68,5 +68,8 @@ describe('Language Selector Macbook-15', () => {
     // show index
     cy.get('#app-panel-language-toggle').click()
     cy.get('.language-selector').should('be.visible')
+
+    cy.get('.language-selector__dropdown > .language-selector__item').contains('English').should('be.visible')
+    cy.get('.language-selector__dropdown > .language-selector__item').contains('Japanese').should('be.visible')
   })
 })

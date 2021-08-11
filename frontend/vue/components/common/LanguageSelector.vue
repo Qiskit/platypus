@@ -1,16 +1,16 @@
 <template>
   <div class="language-selector">
     <bx-dropdown
-      :value="currentCountryLabel"
       class="language-selector__dropdown"
       :trigger-content="currentCountryLabel"
+      :value="currentCountryCode"
       @bx-dropdown-selected="useSelectedLanguage($event)"
     >
       <bx-dropdown-item
         v-for="language in availableLocales"
         :key="language.key"
         class="language-selector__item"
-        :value="language.key"
+        :value="language.id"
       >
         {{ language.key }}
       </bx-dropdown-item>
@@ -21,6 +21,7 @@
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
+import 'carbon-web-components/es/components/dropdown/dropdown-item.js'
 
 class Props {
   localesData = prop({})
