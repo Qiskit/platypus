@@ -260,6 +260,14 @@ nav ul.c-sidebar__sections {
       display: none;
     }
   }
+
+  .language-selector {
+    display: none;
+  }
+}
+
+.qv-layout:not(.qv-layout__panel--hidden) #app-panel-language-toggle {
+  display: none;
 }
 
 .qv-layout__panel--hidden.js-show-sidebar .c-sidebar__entry {

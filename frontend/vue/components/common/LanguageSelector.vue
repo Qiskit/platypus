@@ -1,6 +1,7 @@
 <template>
   <div class="language-selector">
     <bx-dropdown
+      :value="currentCountryLabel"
       class="language-selector__dropdown"
       :trigger-content="currentCountryLabel"
       @bx-dropdown-selected="useSelectedLanguage($event)"

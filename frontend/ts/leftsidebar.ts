@@ -16,7 +16,8 @@ const initLeftSidebar = function () {
   // toggle left-side menu
   const headerToggle = document.getElementById('app-panel-header-toggle')
   const footerToggle = document.getElementById('app-panel-footer-toggle')
-  const menuToggles = [headerToggle, footerToggle]
+  const languageToggle = document.getElementById('app-panel-language-toggle')
+  const menuToggles = [headerToggle, footerToggle, languageToggle]
   parentContainer = document.getElementsByClassName('qv-layout')[0]
 
   menuToggles.filter(item => !!item).forEach(item => {
