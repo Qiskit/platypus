@@ -59,12 +59,4 @@ describe('CTA', () => {
       .get('[data-test=mobile-menu]')
       .should('be.hidden')
   })
-
-  it('old textbook version link has expected properties', () => {
-    cy
-      .visit('/course/ch-prerequisites')
-      .get('[data-test=qiskit-banner-old-textbook-version] a')
-      .should('have.attr', 'target', '_blank')
-      .should('have.attr', 'href', 'https://qiskit.org/textbook')
-  })
 })
