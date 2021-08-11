@@ -30,7 +30,7 @@ describe('CTA', () => {
       )
   })
 
-  it('back to home link linked corretly', () => {
+  it('back to home link linked correctly', () => {
     cy
       .visit('/course/ch-prerequisites')
       .get('[data-cy=back-to-home-link]')
