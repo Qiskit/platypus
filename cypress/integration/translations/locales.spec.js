@@ -33,7 +33,6 @@ describe('Language Selector Macbook-15', () => {
 
   it('Can select English version', () => {
     // navigate to page w/ translations
-    // navigate to page w/ translations
     cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
     // // select English
     cy.get('.language-selector__dropdown').shadow().find('.bx--list-box__field').click()
@@ -47,5 +46,27 @@ describe('Language Selector Macbook-15', () => {
 
     // lang attribute
     cy.get('html').should('have.attr', 'lang', 'en')
+  })
+
+  it('Can render translate toggle button properly', () => {
+    // navigate to page w/ translations
+    cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
+
+    // hide index
+    cy.get('#app-panel-footer-toggle').click()
+    cy.get('.language-selector').should('not.be.visible')
+    cy.get('#app-panel-language-toggle').should('be.visible')
+  })
+
+  it('Can toggle language selector visibility when translate button clicked', () => {
+    // navigate to page w/ translations
+    cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
+
+    // hide index
+    cy.get('#app-panel-footer-toggle').click()
+    cy.get('#app-panel-language-toggle').should('be.visible')
+    // show index
+    cy.get('#app-panel-language-toggle').click()
+    cy.get('.language-selector').should('be.visible')
   })
 })
