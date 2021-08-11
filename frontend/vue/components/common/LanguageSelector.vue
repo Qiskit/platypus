@@ -10,7 +10,7 @@
         v-for="language in availableLocales"
         :key="language.key"
         class="language-selector__item"
-        :value="language.id"
+        :value="language.key"
       >
         {{ language.key }}
       </bx-dropdown-item>
