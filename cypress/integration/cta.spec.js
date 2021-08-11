@@ -1,26 +1,6 @@
 /// <reference types="cypress" />
 
 describe('CTA', () => {
-  it('next and previous section links work', () => {
-    cy
-      .visit('/course/ch-prerequisites')
-      .get('[data-test=footer-nav-next-section]')
-      .click()
-      .url()
-      .should(
-        'include',
-        '/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
-      )
-
-      .get('[data-test=footer-nav-previous-section]')
-      .click()
-      .url()
-      .should(
-        'include',
-        '/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook'
-      )
-  })
-
   it('back to home link linked correctly', () => {
     cy
       .visit('/course/ch-prerequisites')
