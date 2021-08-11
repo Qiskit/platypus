@@ -1,14 +1,5 @@
 /// <reference types="cypress" />
 
-beforeEach(() => {
-  cy
-    .viewport('macbook-15')
-    .setCookie('cmapi_cookie_privacy', 'permit_1|2|3')
-    .setCookie('cmapi_gtm_bl', '')
-    .setCookie('notice_gdpr_prefs', '0|1|2:')
-    .setCookie('notice_preferences', '2:')
-})
-
 describe('CTA', () => {
   it('next and previous section links work', () => {
     cy
