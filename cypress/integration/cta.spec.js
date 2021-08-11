@@ -41,22 +41,4 @@ describe('CTA', () => {
       .get('[data-test=sidebar] [data-test=sidebar-entry]')
       .should('be.hidden')
   })
-
-  it('toggle mobile menu button works', () => {
-    cy
-      .viewport('iphone-x')
-      .visit('/course/ch-prerequisites')
-      .get('[data-test=mobile-menu]')
-      .should('be.hidden')
-
-      .get('[data-test=mobile-menu-toggle]')
-      .click()
-      .get('[data-test=mobile-menu]')
-      .should('be.visible')
-
-      .get('[data-test=mobile-menu-toggle]')
-      .click()
-      .get('[data-test=mobile-menu]')
-      .should('be.hidden')
-  })
 })
