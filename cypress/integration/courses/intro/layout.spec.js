@@ -6,19 +6,6 @@ describe('Layout Macbook-15', () => {
       .visit('/course/introduction/why-quantum-computing')
   })
 
-  it('Should hide then show utility panel', () => {
-    // initial state
-    cy.get('.utility-panel-content').should('be.visible')
-
-    // hide
-    cy.get('.utility-panel-header__toggle').click()
-    cy.get('.utility-panel-content').should('not.be.visible')
-
-    // restore initial state
-    cy.get('.utility-panel-header__toggle').click()
-    cy.get('.utility-panel-content').should('be.visible')
-  })
-
   it('Should open Browse all content', () => {
     // initial state
     cy.get('.app-mega-dropdown').should('be.visible')
