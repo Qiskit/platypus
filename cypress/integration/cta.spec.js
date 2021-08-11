@@ -1,13 +1,6 @@
 /// <reference types="cypress" />
 
 describe('CTA', () => {
-  it('back to home link linked correctly', () => {
-    cy
-      .visit('/course/ch-prerequisites')
-      .get('[data-test=back-to-home-link]')
-      .should('have.attr', 'href', 'https://qiskit.org/textbook-beta')
-  })
-
   it('toggle sidebar button works', () => {
     cy
       .visit('/course/ch-prerequisites')
