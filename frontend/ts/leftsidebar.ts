@@ -1,8 +1,10 @@
 const hiddenPanelClass = 'qv-layout__panel--hidden'
 const mobileBreakpoint = 1056
+let parentContainer = null
+let bxDropdown = null
 
 const collapseMobileMenu = function () {
-  const parentContainer = document.getElementsByClassName('qv-layout')[0]
+  parentContainer = document.getElementsByClassName('qv-layout')[0]
   if (parentContainer) {
     const w = document.documentElement.clientWidth
     const h = document.documentElement.clientHeight
@@ -17,8 +19,8 @@ const initLeftSidebar = function () {
   const headerToggle = document.getElementById('app-panel-header-toggle')
   const footerToggle = document.getElementById('app-panel-footer-toggle')
   const menuToggles = [headerToggle, footerToggle]
-  const bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
-  const parentContainer = document.getElementsByClassName('qv-layout')[0]
+  bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
+  parentContainer = document.getElementsByClassName('qv-layout')[0]
 
   menuToggles.filter(item => !!item).forEach((item) => {
     item.addEventListener('click', () => {
@@ -43,12 +45,12 @@ const initLeftSidebar = function () {
 
 const toggleLanguagePicker = function () {
   const languageToggle = document.getElementById('app-panel-language-toggle')
-  const parentEl = document.getElementsByClassName('qv-layout')[0]
-  const bxDropdownEl = document.getElementsByClassName('language-selector__dropdown')[0]
+  bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
+  parentContainer = document.getElementsByClassName('qv-layout')[0]
 
   languageToggle?.addEventListener('click', () => {
-    parentEl.classList.remove(hiddenPanelClass)
-    bxDropdownEl.open = true
+    parentContainer.classList.remove(hiddenPanelClass)
+    bxDropdown.open = true
   })
 }
 
