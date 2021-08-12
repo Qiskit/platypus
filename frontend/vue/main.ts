@@ -19,6 +19,7 @@ import UtilityPanelContent from './components/UtilityPanel/UtilityPanelContent.v
 import LessonNotes from './components/UtilityPanel/LessonNotes.vue'
 import UniversalGlossary from './components/UtilityPanel/UniversalGlossary.vue'
 import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
+import Binary from './components/Binary/Binary.vue'
 
 const kebabize = (str:string) => {
   return str.split('').map((letter:string, idx:number) => {
@@ -47,7 +48,8 @@ const components: any = {
   LessonNotes,
   UniversalGlossary,
   EmptyPanel,
-  MiniComposer
+  MiniComposer,
+  Binary
 }
 
 Object.keys(components).forEach((c) => {
