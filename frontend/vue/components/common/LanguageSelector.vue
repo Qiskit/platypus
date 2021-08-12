@@ -3,6 +3,7 @@
     <bx-dropdown
       class="language-selector__dropdown"
       :trigger-content="currentCountryLabel"
+      :value="currentCountryCode"
       @bx-dropdown-selected="useSelectedLanguage($event)"
     >
       <bx-dropdown-item
@@ -20,6 +21,7 @@
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
+import 'carbon-web-components/es/components/dropdown/dropdown-item.js'
 
 class Props {
   localesData = prop({})
