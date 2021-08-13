@@ -27,6 +27,10 @@ describe('Accessibility', () => {
     viewports.forEach((viewport) => {
       cy.viewport(viewport)
       cy.visit('/course/ch-prerequisites')
+
+      // Ensure the DOM is fully loaded
+      cy.get('[data-test=textbook-page]')
+
       cy.injectAxe()
       cy.checkA11y(null, null, terminalLog)
     })
