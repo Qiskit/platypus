@@ -1,7 +1,8 @@
 <template>
   <div
     class="binary-tile"
-    :class="{ 'binary-tile_active' : initialTileState }"
+    :data-tile-active="initialTileState"
+    :data-val="val"
   >
     <button class="binary-tile__num" @click="test">
       {{ dynamicValue }}
@@ -37,6 +38,7 @@ export default class BinaryTile extends Vue.with(Props) {
   initialTileState = this.active
   test () {
     this.initialTileState = !this.initialTileState
+    this.$emit('handleToggle', this.initialTileState)
   }
 }
 </script>
@@ -55,9 +57,9 @@ export default class BinaryTile extends Vue.with(Props) {
 
   &__num {
     @include type-style('expressive-heading-05');
-    background-color: $cool-gray-20;
+    background-color: $purple-90;
     display: flex;
-    color: $black-100;
+    color: $white-0;
     height: 3.125rem;
     width: 3.25rem;
     margin-bottom: $spacing-03;
@@ -66,14 +68,15 @@ export default class BinaryTile extends Vue.with(Props) {
   }
 
   &__val {
+    @include type-style('body-short-01');
     color: $black-100;
     opacity: .3;
   }
 
-  &_active {
+  &[data-tile-active="true"] {
     .binary-tile__num {
-      background-color: $purple-90;
-      color: $white-0;
+      background-color: $cool-gray-20;
+      color: $black-100;
     }
 
     .binary-tile__val {
