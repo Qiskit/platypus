@@ -1,24 +1,36 @@
 <template>
   <div class="binary-demo">
-    <div class="binary-demo__header">
-      <h4 class="binary-demo__label">
+    <section class="binary-demo__section">
+      <h4 class="binary-demo__input__title">
         Binary
       </h4>
-      <h4 class="binary-demo__label">
+      <div class="binary-demo__container">
+        <div class="binary-demo__input">
+          <BinaryTile
+            v-for="tile in initialTileData"
+            :key="tile.index"
+            :num="0"
+            :val="tile.value"
+            :active="tile.isActive"
+            @click="calculateTotal"
+          />
+          <div class="binary-demo__block">
+            =
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="binary-demo__section">
+      <h4 class="binary-demo__output__title">
         Decimal
       </h4>
-    </div>
-    <div class="binary-demo__container">
-      <div v-for="tile in initialTileData" :key="tile.index" class="binary-demo__block">
-        <BinaryTile :num="0" :val="tile.value" :active="tile.isActive" @click="calculateTotal" />
+      <div class="binary-demo__output">
+        <div class="binary-demo__block">
+          {{ displayTotal }}
+        </div>
       </div>
-      <div class="binary-demo__block">
-        =
-      </div>
-      <div class="binary-demo__block">
-        {{ displayTotal }}
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -50,7 +62,7 @@ export default class Binary extends Vue {
 
     binaryTitlesList.forEach((item) => {
       const val = item.getAttribute('data-val')
-      if(val) {
+      if (val) {
         dynamicTotal += parseInt(val)
       }
     })
@@ -72,25 +84,71 @@ export default class Binary extends Vue {
 
 .binary-demo {
   margin: 8rem 0;
+  display: flex;
 
-  &__header {
+  @include mq($until: large) {
+    flex-direction: column;
+  }
+
+  &__section {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 32rem;
+    flex-direction: column;
   }
 
   &__block {
     @include type-style('expressive-heading-05');
+    min-width: 3.25rem;
     color: $black-100;
+    text-align: center;
+    display: flex;
+    height: 100%;
 
-    &:not(:last-child) {
-      margin-right: $spacing-05;
+    @include mq($until: x-large) {
+      min-width: 2rem;
+      display: flex;
+      height: 100%;
     }
   }
 
   &__container {
     display: flex;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__title {
+      margin-bottom: $spacing-02;
+
+      @include mq($until: large) {
+        margin-bottom: $spacing-05;
+      }
+    }
+  }
+
+  &__output {
+    display: flex;
+
+    &__title {
+      margin-bottom: $spacing-02;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+@import 'carbon-components/scss/globals/scss/typography';
+@import '~/../scss/variables/settings.scss';
+@import '~/../scss/variables/mq.scss';
+
+.binary-demo {
+  & .binary-tile {
+    padding-right: $spacing-05;
+
+    @include mq($until: x-large) {
+      padding-right: $spacing-03;
+    }
   }
 }
 </style>

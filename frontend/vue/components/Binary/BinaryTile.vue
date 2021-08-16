@@ -53,7 +53,6 @@ export default class BinaryTile extends Vue.with(Props) {
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-width: 3.25rem;
 
   &__num {
     @include type-style('expressive-heading-05');
@@ -65,6 +64,10 @@ export default class BinaryTile extends Vue.with(Props) {
     margin-bottom: $spacing-03;
     align-items: center;
     justify-content: center;
+
+    @include mq($until: x-large) {
+      width: 2rem;
+    }
   }
 
   &__val {
