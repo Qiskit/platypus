@@ -21,7 +21,7 @@
       </div>
     </section>
 
-    <section class="binary-demo__section">
+    <section class="binary-demo__section" data-test="binary-demo-total">
       <h4 class="binary-demo__output__title">
         Decimal
       </h4>

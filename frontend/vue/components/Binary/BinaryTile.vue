@@ -4,10 +4,10 @@
     :data-tile-active="initialTileState"
     :data-val="val"
   >
-    <button class="binary-tile__num" @click="test">
+    <button class="binary-tile__num" @click="updateTile">
       {{ dynamicValue }}
     </button>
-    <div class="binary-tile__val">
+    <div class="binary-tile__val" data>
       {{ val }}
     </div>
   </div>
@@ -36,7 +36,7 @@ class Props {
 
 export default class BinaryTile extends Vue.with(Props) {
   initialTileState = this.active
-  test () {
+  updateTile () {
     this.initialTileState = !this.initialTileState
     this.$emit('handleToggle', this.initialTileState)
   }
