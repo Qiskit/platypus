@@ -193,6 +193,17 @@
     - title: Project
       url: /intro/project
 
+- title: How not to blow up your lab
+  url: /lab-handbook
+  type: learning-path
+  sections:
+    - title: Nanofabrication
+      url: /hardware/nanofabrication
+    - title: Basic lab equipment
+      url: /hardware/basic-lab-equipment
+    - title: Dispersive readout
+      url: /hardware/dispersive-readout
+ 
 
 - title: Quantum Machine Learning
   url: /learning-qml
