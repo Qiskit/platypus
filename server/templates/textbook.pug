@@ -96,3 +96,6 @@ html(lang=course.locale dir=dir)
     script(src='/course.js')
 
     include ../includes/thebe-config.html
+    script(defer)
+      | var run = "#{__('Run')}"
+      include ../includes/thebe-init.js
