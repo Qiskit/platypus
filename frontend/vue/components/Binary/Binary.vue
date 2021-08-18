@@ -85,7 +85,7 @@ export default class Binary extends Vue {
 .binary-demo {
   display: flex;
 
-  @include mq($until: large) {
+  @include mq($until: x-large) {
     flex-direction: column;
   }
 
@@ -122,7 +122,7 @@ export default class Binary extends Vue {
       margin-bottom: $spacing-02;
       margin-top: 0;
 
-      @include mq($until: large) {
+      @include mq($until: x-large) {
         margin-bottom: $spacing-05;
       }
     }
@@ -135,6 +135,9 @@ export default class Binary extends Vue {
       @include type-style('expressive-heading-01');
       margin-bottom: $spacing-02;
       margin-top: 0;
+      @include mq($until: x-large) {
+        margin-top: $spacing-07;
+      }
     }
   }
 }
@@ -149,7 +152,7 @@ export default class Binary extends Vue {
   & .binary-tile {
     padding-right: $spacing-05;
 
-    @include mq($until: x-large) {
+    @include mq($until: large) {
       padding-right: $spacing-03;
     }
   }

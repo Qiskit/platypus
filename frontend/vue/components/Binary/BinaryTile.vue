@@ -67,7 +67,7 @@ export default class BinaryTile extends Vue.with(Props) {
     align-items: center;
     justify-content: center;
 
-    @include mq($until: x-large) {
+    @include mq($until: medium) {
       width: 2rem;
     }
   }
@@ -82,6 +82,7 @@ export default class BinaryTile extends Vue.with(Props) {
     position: absolute;
     bottom: 0;
     right: 0;
+    line-height: 1;
   }
 
   &[data-tile-active="true"] {
