@@ -12,7 +12,7 @@ search:
   popular: ['course:science:optics', 'course:geography:hydrology']
 
 # All custom (non-course) URLs to add to the sitemap
-sitemap: [/courses, /custom]
+# sitemap: [/courses, /custom]
 
 header:
   # File paths are relative to frontend/assets

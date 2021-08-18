@@ -13,6 +13,7 @@ import {
   workingContentPath,
   workingTranslationsPath
 } from './common'
+import generateJsonSitemap from './sitemap-to-json'
 
 const COURSES = fs.readdirSync(CONTENT)
   .filter(id => id !== 'shared' && !id.includes('.') && !id.startsWith('_'))
@@ -135,3 +136,8 @@ const updateSharedYaml = async function(language: string = 'en') {
 translationsLanguages.forEach(async(language) => {
   updateSharedYaml(language)
 })
+
+generateJsonSitemap(
+  path.join(__dirname, '../public/sitemap.xml'),
+  path.join(__dirname, '../public/sitemap.json')
+)
