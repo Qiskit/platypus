@@ -1,7 +1,15 @@
 import * as path from 'path'
 
+import { AVAILABLE_LOCALES } from '@mathigon/studio/server/i18n'
 import { Course, Section } from '@mathigon/studio/server/interfaces'
-import { CONFIG as mConfig, CONTENT_DIR, PROJECT_DIR, getCourse, loadYAML } from '@mathigon/studio/server/utilities'
+import {
+  CONFIG as mConfig,
+  CONTENT_DIR,
+  PROJECT_DIR,
+  getCourse,
+  loadYAML,
+  loadCombinedYAML
+} from '@mathigon/studio/server/utilities'
 
 import {
   Analytics,
@@ -117,6 +125,11 @@ const getSectionIndex = function (course: Course, section: Section) {
   return sectionIndexes[loc][sectionId] || []
 }
 
+const TRANSLATIONS: Record<string, Record<string, string>> = {};
+for (const locale of AVAILABLE_LOCALES) {
+  if (locale.id === 'en') continue;
+  TRANSLATIONS[locale.id] = loadCombinedYAML(`translations/${locale.id}/strings.yaml`) as Record<string, string>;
+}
 
 export {
   CONFIG,
@@ -124,6 +137,7 @@ export {
   NOTATIONS,
   GLOSSARY,
   TEXTBOOK_HOME,
+  TRANSLATIONS,
   UNIVERSAL_NOTATIONS,
   findNextSection,
   findPrevSection,

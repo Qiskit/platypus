@@ -89,7 +89,10 @@ html(lang=course.locale dir=dir)
       }
     script(src='/textbook.js')
 
-    script user = null;
+    script. 
+      user = null;
+      textbook.locale = "#{req.locale.id}";
+
     include ../includes/tail.html
     script(src='/polyfill.js')
     script(src='/content/' + course.id + '/functions.js')
@@ -97,5 +100,6 @@ html(lang=course.locale dir=dir)
 
     include ../includes/thebe-config.html
     script(defer)
-      | var run = "#{__('Run')}"
+      | (function () { const run = "#{__('Run')}";
       include ../includes/thebe-init.js
+      | })();

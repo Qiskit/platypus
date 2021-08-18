@@ -14,12 +14,18 @@ const collapseMobileMenu = function () {
   }
 }
 
+const languageDropDown = function () {
+  if (!bxDropdown) {
+    bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
+  }
+  return bxDropdown
+}
+
 const initLeftSidebar = function () {
   // toggle left-side menu
   const headerToggle = document.getElementById('app-panel-header-toggle')
   const footerToggle = document.getElementById('app-panel-footer-toggle')
   const menuToggles = [headerToggle, footerToggle]
-  bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
   parentContainer = document.getElementsByClassName('qv-layout')[0]
 
   menuToggles.filter(item => !!item).forEach((item) => {
@@ -27,7 +33,7 @@ const initLeftSidebar = function () {
       if (parentContainer.classList.contains(hiddenPanelClass)) {
         parentContainer.classList.remove(hiddenPanelClass)
       } else {
-        bxDropdown.open = false
+        languageDropDown().open = false
         parentContainer.classList.add(hiddenPanelClass)
       }
     })
@@ -45,12 +51,11 @@ const initLeftSidebar = function () {
 
 const toggleLanguagePicker = function () {
   const languageToggle = document.getElementById('app-panel-language-toggle')
-  bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
   parentContainer = document.getElementsByClassName('qv-layout')[0]
 
   languageToggle?.addEventListener('click', () => {
     parentContainer.classList.remove(hiddenPanelClass)
-    bxDropdown.open = true
+    languageDropDown().open = true
   })
 }
 

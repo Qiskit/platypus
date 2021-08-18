@@ -7,7 +7,7 @@ import { getCourse } from '@mathigon/studio/server/utilities'
 
 import { LOCALES } from '@mathigon/studio/server/i18n'
 import {
-  CONFIG, COURSES, NOTATIONS, TEXTBOOK_HOME, UNIVERSAL_NOTATIONS,
+  CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
 } from './utilities'
 import * as storageApi from './storage'
@@ -19,6 +19,10 @@ new MathigonStudioApp()
   .redirects({
     '/': TEXTBOOK_HOME,
     '/textbook': TEXTBOOK_HOME
+  })
+  .get('/locales/:locale', async (req, res) => {
+    const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
+    res.json(translations)
   })
   .get('/course/:course/:section', async (req, res, next) => {
     const course = getCourse(req.params.course, req.locale.id)

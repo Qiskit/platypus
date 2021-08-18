@@ -1,5 +1,6 @@
 import { QiskitBanner } from '@qiskit-community/qiskit-vue'
 import wrapper from './wc-wrapper/platypusWrapper'
+import { getTranslations } from '../ts/translations'
 
 import CodeMirrorClipboardCopy from './components/CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
 import TheMenu from './components/TheMenu/index.vue'
@@ -20,6 +21,12 @@ import UtilityPanelContent from './components/UtilityPanel/UtilityPanelContent.v
 import LessonNotes from './components/UtilityPanel/LessonNotes.vue'
 import UniversalGlossary from './components/UtilityPanel/UniversalGlossary.vue'
 import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
+
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
 
 const kebabize = (str:string) => {
   return str.split('').map((letter:string, idx:number) => {
@@ -52,7 +59,9 @@ const components: any = {
   MiniComposer
 }
 
-Object.keys(components).forEach((c) => {
-  const CustomElement = wrapper(components[c])
-  window.customElements.define(`q-${kebabize(c)}`, CustomElement)
+getTranslations(window.textbook?.locale || 'en').then((translations) => {
+  Object.keys(components).forEach((c) => {
+    const CustomElement = wrapper(components[c], { translations })
+    window.customElements.define(`q-${kebabize(c)}`, CustomElement)
+  })
 })
