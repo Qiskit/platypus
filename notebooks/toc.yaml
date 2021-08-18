@@ -193,6 +193,15 @@
     - title: Project
       url: /intro/project
 
+- title: Summer school
+  url: /qgss
+  type: learning-path
+  sections:
+    - title: Qubits, quantum states, quantum circuits and measurements
+      url: /summer-school/2020/lec1
+    - title: Writing and running quantum programs
+      url: /summer-school/2020/lec2
+
 
 - title: Quantum Machine Learning
   url: /learning-qml
