@@ -83,7 +83,6 @@ export default class Binary extends Vue {
 @import '~/../scss/variables/mq.scss';
 
 .binary-demo {
-  margin: 8rem 0;
   display: flex;
 
   @include mq($until: large) {
@@ -119,7 +118,9 @@ export default class Binary extends Vue {
     align-items: center;
     justify-content: space-between;
     &__title {
+      @include type-style('expressive-heading-01');
       margin-bottom: $spacing-02;
+      margin-top: 0;
 
       @include mq($until: large) {
         margin-bottom: $spacing-05;
@@ -131,6 +132,7 @@ export default class Binary extends Vue {
     display: flex;
 
     &__title {
+      @include type-style('expressive-heading-01');
       margin-bottom: $spacing-02;
     }
   }
