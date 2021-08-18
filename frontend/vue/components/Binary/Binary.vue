@@ -134,6 +134,7 @@ export default class Binary extends Vue {
     &__title {
       @include type-style('expressive-heading-01');
       margin-bottom: $spacing-02;
+      margin-top: 0;
     }
   }
 }
