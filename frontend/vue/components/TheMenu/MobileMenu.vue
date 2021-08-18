@@ -16,7 +16,7 @@
           kind="secondary"
         >
           <p class="mobile-menu__entry-label">
-            {{ link.label }}
+            {{ $translate(link.label) }}
           </p>
         </AppLink>
         <bx-dropdown
@@ -39,7 +39,7 @@
               target="_self"
             >
               <p class="mobile-menu__entry-label">
-                {{ sublink.label }}
+                {{ $translate(sublink.label) }}
               </p>
             </AppLink>
           </bx-dropdown-item>
@@ -87,6 +87,10 @@ export default class MobileMenu extends mixins(MenuMixin) {
   stayConnectedElements = STAY_CONNECTED_LINKS
   theme = 'light'
   selectedMenuItem = 'Community'
+
+  created () {
+    this.selectedMenuItem = this.$translate('Community', [])
+  }
 
   switchPanel(event: any) {
     const selectionTitle = event.detail.item.value

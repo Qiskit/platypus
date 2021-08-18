@@ -60,7 +60,7 @@
             class="menu__link"
             v-bind="link"
           >
-            {{ link.label }}
+            {{ $translate(link.label) }}
           </AppLink>
           <bx-dropdown
             v-else
@@ -82,7 +82,7 @@
                 target="_self"
               >
                 <p class="menu__entry-label">
-                  {{ sublink.label }}
+                  {{ $translate(sublink.label) }}
                 </p>
               </AppLink>
             </bx-dropdown-item>
@@ -112,6 +112,10 @@ import 'carbon-web-components/es/components/dropdown/dropdown.js'
 export default class TheMenu extends mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
   selectedMenuItem: string = 'Community'
+
+  created () {
+    this.selectedMenuItem = this.$translate('Community', [])
+  }
 
   switchPanel(event: any) {
     const selectionTitle = event.detail.item.value
