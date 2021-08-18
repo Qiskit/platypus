@@ -10,6 +10,7 @@
     <div class="binary-tile__val" data>
       {{ val }}
     </div>
+    <div v-if="val !== 1" class="binary-tile__operator">&plus;</div>
   </div>
 </template>
 
@@ -53,6 +54,7 @@ export default class BinaryTile extends Vue.with(Props) {
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
 
   &__num {
     @include type-style('expressive-heading-05');
@@ -74,6 +76,12 @@ export default class BinaryTile extends Vue.with(Props) {
     @include type-style('body-short-01');
     color: $black-100;
     opacity: .3;
+  }
+
+  &__operator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
   &[data-tile-active="true"] {
