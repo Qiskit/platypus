@@ -4,8 +4,8 @@ describe('Binary demo', () => {
   it('Should render on page', () => {
     const binaryDemo = '.binary-demo'
 
-    cy.visit('/course/ch-prerequisites')
-    cy.url().should('include', 'ch-prerequisites')
+    cy.visit('/course/introduction/the-atoms-of-computation')
+    cy.url().should('include', 'introduction/the-atoms-of-computation')
 
     cy.get(binaryDemo).should('be.visible')
   })
