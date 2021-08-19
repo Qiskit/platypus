@@ -58,9 +58,8 @@ export default class BinaryTile extends Vue.with(Props) {
 
   &__num {
     @include type-style('expressive-heading-05');
-    background-color: $purple-90;
+    background-color: $cool-gray-20;
     display: flex;
-    color: $white-0;
     height: 3.125rem;
     width: 3.25rem;
     margin-bottom: $spacing-03;
@@ -87,8 +86,8 @@ export default class BinaryTile extends Vue.with(Props) {
 
   &[data-tile-active="true"] {
     .binary-tile__num {
-      background-color: $cool-gray-20;
-      color: $black-100;
+      background-color: $purple-90;
+      color: $white-0;
     }
 
     .binary-tile__val {
