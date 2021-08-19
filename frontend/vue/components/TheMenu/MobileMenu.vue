@@ -89,7 +89,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
   selectedMenuItem = 'Community'
 
   created () {
-    this.selectedMenuItem = this.$translate('Community', [])
+    this.selectedMenuItem = this.$translate('Community')
   }
 
   switchPanel(event: any) {

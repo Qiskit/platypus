@@ -1,20 +1,8 @@
-let translations:{[x:string]: string} = {}
+import { translate } from '../ts/translations'
 
-function translate (str: string, args: string[] = []): string {
-  let translated = translations?.[str] || str
-
-  for (const [i, a] of args.entries()) {
-    translated = translated.replace('$' + i, a)
-  }
-
-  return translated
-}
-
-function install (app: any, options: any = {}) {
-  translations = options?.translations || {}
-
-  app.config.globalProperties.$translate = (str: string, args: string[] = []) => {
-    return translate(str, args)
+const install = function (app: any, options?: any) {
+  app.config.globalProperties.$translate = (str: string, args?: string[]) => {
+    return translate(str, args, options?.translations)
   }
 }
 

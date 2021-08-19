@@ -114,7 +114,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   selectedMenuItem: string = 'Community'
 
   created () {
-    this.selectedMenuItem = this.$translate('Community', [])
+    this.selectedMenuItem = this.$translate('Community')
   }
 
   switchPanel(event: any) {

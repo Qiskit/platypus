@@ -1,5 +1,5 @@
 
-const thebelabBootstrap = function () {
+const initializeCodeCells = function () {
   thebelab.bootstrap()
   thebelab.on("status", function (evt, data) {
     console.log("Thebelab status changed:", data.status, data.message)
@@ -79,7 +79,7 @@ if (document.querySelector("[data-executable]")) {
       )
     })
 
-    window.textbook.runAfterDOMLoaded(thebelabBootstrap)
+    window.textbook.runAfterDOMLoaded(initializeCodeCells)
   }
   document.head.append(thebelabScript);
 }

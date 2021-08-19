@@ -1,36 +1,28 @@
-let translations: {[x:string]: string} = {}
-
-export async function fetchTranslations (locale: string): Promise<{[x:string]: string}> {
-  if (!Object.keys(translations).length) {
-    translations = await fetch(`/locales/${locale}`)
-      .then(res => {
-        if (res && res.json) {
-          return res.json()
-        } else {
-          return {}
-        }
-      })
-  }
-  return translations
+const fetchTranslations = function (locale: string): Promise<{[x:string]: string}> {
+  return fetch(`/locales/${locale}`)
+    .then(res => {
+      return res?.json ? res.json() : {}
+    })
 }
 
-export function loadTranslations () {
-  if (!Object.keys(translations).length) {
-    const elt = document.getElementById('translations')
-    if (elt && elt.textContent) {
-      translations = JSON.parse(elt.textContent)
-    }
-  }
-
-  return translations
+const loadTranslations = function () {
+  const elt = document.getElementById('translations')
+  return elt?.textContent ? JSON.parse(elt.textContent) : {}
 }
 
-export function translate (str: string, args: string[] = []): string {
-  let translated = translations?.[str] || str
+const translate = function (str: string, args: string[] = [], translations?: any): string {
+  const translator = translations || window.textbook.translations
+  let translated = translator?.[str] || str
 
-  for (const [i, a] of args.entries()) {
-    translated = translated.replace('$' + i, a)
-  }
+  args.forEach((newValue, index) => {
+    translated = translated.replace('$' + index, newValue)
+  })
 
   return translated
+}
+
+export {
+  fetchTranslations,
+  loadTranslations,
+  translate
 }

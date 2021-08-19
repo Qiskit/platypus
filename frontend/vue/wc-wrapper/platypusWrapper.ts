@@ -11,7 +11,7 @@ declare module '@vue/runtime-core' {
     $step: Step;
     $trackClickEvent: (cta: string, location: string) => void;
     $trackPage: (title: string) => void;
-    $translate: (str: string, args: string[]) => string
+    $translate: (str: string, args?: string[]) => string
   }
 }
 
@@ -19,12 +19,10 @@ interface ICustomElement extends HTMLElement {
   _wrapper: App;
 }
 
-const translations = window.textbook.translations
-
 const createAppWithPlugins: CreateAppFunction<Element> = (rootComponent: Component, rootProps?: Record<string, unknown> | null) => {
   return createApp(rootComponent, rootProps)
     .use(segmentPlugin)
-    .use(i18nPlugin, { translations })
+    .use(i18nPlugin)
 }
 
 class VueWidgetView extends HTMLBaseView<ICustomElement> implements StepComponent {
