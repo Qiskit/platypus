@@ -12,6 +12,8 @@ import {
 } from './utilities'
 import * as storageApi from './storage'
 
+import { translate } from '@mathigon/studio/server/i18n'
+
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
@@ -36,6 +38,7 @@ new MathigonStudioApp()
     const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
     const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
     course.glossJSON = updateGlossary(course)
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
     const nextSection = findNextSection(course, section)
     const prevSection = findPrevSection(course, section)
@@ -55,8 +58,11 @@ new MathigonStudioApp()
       nextSection,
       prevSection,
       universalJSON,
+      translationsJSON,
       subsections,
-      textbookHome: TEXTBOOK_HOME
+      textbookHome: TEXTBOOK_HOME,
+      // override `__()`  to pass in the course locale instead of default req locale
+      __: (str: string, ...args: string[]) => translate(lang, str, args)
     })
   })
   .course(storageApi)

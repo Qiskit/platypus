@@ -19,7 +19,7 @@ interface ICustomElement extends HTMLElement {
   _wrapper: App;
 }
 
-let translations = {}
+const translations = window.textbook.translations
 
 const createAppWithPlugins: CreateAppFunction<Element> = (rootComponent: Component, rootProps?: Record<string, unknown> | null) => {
   return createApp(rootComponent, rootProps)
@@ -42,7 +42,6 @@ function connectedCallback (): void {
   new VueWidgetView(self)
 }
 
-export default function wrap (component: Component, options: any = {}) {
-  translations = options?.translations || {}
+export default function wrap (component: Component) {
   return wrapper(component, createAppWithPlugins, h, { connectedCallback })
 }

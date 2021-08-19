@@ -1,6 +1,5 @@
 import { QiskitBanner } from '@qiskit-community/qiskit-vue'
 import wrapper from './wc-wrapper/platypusWrapper'
-import { getTranslations } from '../ts/translations'
 
 import CodeMirrorClipboardCopy from './components/CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
 import TheMenu from './components/TheMenu/index.vue'
@@ -59,9 +58,7 @@ const components: any = {
   MiniComposer
 }
 
-getTranslations(window.textbook?.locale || 'en').then((translations) => {
-  Object.keys(components).forEach((c) => {
-    const CustomElement = wrapper(components[c], { translations })
-    window.customElements.define(`q-${kebabize(c)}`, CustomElement)
-  })
+Object.keys(components).forEach((c) => {
+  const CustomElement = wrapper(components[c])
+  window.customElements.define(`q-${kebabize(c)}`, CustomElement)
 })

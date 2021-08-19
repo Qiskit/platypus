@@ -81,17 +81,19 @@ html(lang=course.locale dir=dir)
         script(type="application/json")#userdata!= progressJSON
         script(type="application/json")#notations!= notationsJSON
         script(type="application/json")#universal-notes!= universalJSON
+        script(type="application/json")#translations!= translationsJSON
 
     script.
+      var user = null;
       var textbookAnalytics = {
         url: "#{config.analytics.url || ''}",
         key: "#{config.analytics.key || ''}"
-      }
-    script(src='/textbook.js')
+      };
+      var textbook = {
+        locale: "#{req.locale.id}"
+      };
 
-    script. 
-      user = null;
-      textbook.locale = "#{req.locale.id}";
+    script(src='/textbook.js')
 
     include ../includes/tail.html
     script(src='/polyfill.js')
