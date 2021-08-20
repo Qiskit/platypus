@@ -25,83 +25,65 @@
   const thebelabBootstrap = function () {
     thebelab.bootstrap()
     thebelab.on("status", function (evt, data) {
+      const runningCells = []
       console.log("Thebelab status changed:", data.status, data.message)
+
       if (data.status ===  "ready") {
-        document.querySelectorAll('.thebelab-cell').forEach(cell => {
-          // based on: https://jcubic.wordpress.com/2017/09/22/how-get-jquery-data-without-jquery/
-          setTimeout(() => {
-            const jQueryData = Object.keys(cell).filter(key => key.match(/^jQuery/)).map(key => cell[key])[0]
-            const kernel = jQueryData.kernel;
+        const cells = document.querySelectorAll('.thebelab-cell')
+        let setup = undefined
+
+        if (cells.length > 0) {
+          setup = () => {
+            const firstCell = cells[0]
+            // based on: https://jcubic.wordpress.com/2017/09/22/how-get-jquery-data-without-jquery/
+            const jQueryData = Object.keys(firstCell).filter(key => key.match(/^jQuery/)).map(key => firstCell[key])[0]
+            const kernel = jQueryData.kernel
             const oldHandle = kernel._handleMessage
-            kernel._handleMessage = (e) => {
-              oldHandle(arguments);
-              if (e.msg_type && e.msg_type === "execute_input") {
-                cell.querySelector(".thebelab-run-button").textContent = 'Running...'
-              }
+            
+            kernel._handleMessage = (e, args) => {
+              oldHandle(e, args)
+              console.log(`Thebelab kernel message: ${e.msg_type}`)
+
               if (e.msg_type && e.msg_type === "execute_reply") {
-                cell.querySelector(".thebelab-run-button").textContent = 'Run'
+                const theCell = runningCells.splice(0, 1)[0]
+                theCell.querySelector(".thebelab-run-button").textContent = 'Run'
               }
             }
-          }, 1000)
-          // execute_reply execute_input
+            
+            setup = undefined
+          }
+        }
+
+
+        cells.forEach(cell => {
+          const btn = cell.querySelector('.thebelab-run-button')
+          btn.textContent = 'Run'
+
+          btn.addEventListener('click', () => {
+            if (runningCells.some(c => c === cell)) {
+              return;
+            }
+
+            setup?.()
+
+            runningCells.push(cell)
+            btn.textContent = 'Running...'
+          })
         })
       }
     })
     document
-      .querySelectorAll('.thebelab-cell')
-      .forEach(codeCell => {
-        codeCell.querySelector('.thebelab-restart-button').remove()
-
-        const codeCellRunButton = codeCell.querySelector('.thebelab-run-button')
-        codeCellRunButton.setAttribute('data-test', 'code-cell-button-run')
-        codeCellRunButton.textContent = 'Run'
-
-        codeCell.setAttribute('data-test', 'code-cell')
-
-        codeCell
-          .querySelector('.thebelab-input')
-          .setAttribute('data-test', 'code-cell-input')
-
-        codeCell
-          .querySelector('.jp-OutputArea')
-          .setAttribute('data-test', 'code-cell-output')
-          
-        codeCell
-          .querySelector('.CodeMirror-code')
-          .setAttribute('data-test', 'code-cell-code')
+      .querySelectorAll('.thebelab-cell .thebelab-restart-button')
+      .forEach(btn => {
+        btn.remove()
       })
-
-    /**
-     * Copy to clipboard functionality.
-     */
+    
     document
-      .querySelectorAll('.thebelab-cell')
-      .forEach((thebelabCell, index) => {
-        const codeCellId = `code-mirror-element-${index}`
-
-        const clipboardCopyComponent = document.createElement(
-          'q-code-mirror-clipboard-copy'
-        )
-        clipboardCopyComponent.setAttribute('target-id', codeCellId)
-        thebelabCell.append(clipboardCopyComponent)
-
-        const codeInput = document.createElement('input')
-        codeInput.id = codeCellId
-        thebelabCell.append(codeInput)
-
-        /**
-         * Create a copy of the CodeMirror cell's content adding line breaks.
-         * The "copy to clipboard" functionality will copy the content from this
-         * copy.
-         */
-        const codeElement = thebelabCell.querySelector('.CodeMirror-code')
-        const codeLines = Array.from(
-          codeElement.querySelectorAll('.CodeMirror-line')
-        ).map(codeLine => codeLine.textContent)
-        const formattedCode = codeLines.join('\n')
-        codeInput.setAttribute('type', 'hidden')
-        codeInput.setAttribute('value', formattedCode)
+      .querySelectorAll('.thebelab-cell .thebelab-run-button')
+      .forEach(btn => {
+        btn.textContent = 'Loading Kernel...'
       })
+    
   }
 
   // check if Thebelab needs to be loaded
