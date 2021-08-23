@@ -10,7 +10,9 @@
     <div class="binary-tile__val" data>
       {{ val }}
     </div>
-    <div v-if="val !== 1" class="binary-tile__operator">&plus;</div>
+    <div v-if="val !== 1" class="binary-tile__operator">
+      &plus;
+    </div>
   </div>
 </template>
 
@@ -39,7 +41,10 @@ export default class BinaryTile extends Vue.with(Props) {
   initialTileState = this.active
   updateTile () {
     this.initialTileState = !this.initialTileState
-    this.$emit('handleToggle', this.initialTileState)
+    this.$emit('handleToggle', {
+      newTileState: this.initialTileState,
+      tileVal: this.val
+    })
   }
 }
 </script>
