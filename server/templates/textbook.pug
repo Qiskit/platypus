@@ -17,11 +17,10 @@ html(lang=lang dir=dir)
       x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar")
         include sidebar
 
-        article(class="c-textbook__page")
+        article(class="c-textbook__page", data-test="textbook-page")
           include banner
           div.c-textbook__content#textbook_content
             div.jupyter-page
-
               #page-info
                 #page-title= section.title
               .reveal-banner
