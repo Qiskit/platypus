@@ -38,9 +38,9 @@ describe('Binary demo', () => {
 
     cy.get(binaryDemo).scrollIntoView()
     cy.get(decimalTotal).should('have.text', initialTotal)
-    cy.get(binaryDemoBtns).first().click() // add 38
+    cy.get(binaryDemoBtns).first().click() // add 32
     cy.get(updatedTotalEl).should('have.text', expectedUpdatedTotal)
-    cy.get(binaryDemoBtns).first().click() // remove 38
+    cy.get(binaryDemoBtns).first().click() // remove 32
     cy.get(updatedTotalEl).should('have.text', initialTotal)
   })
 })
