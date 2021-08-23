@@ -23,6 +23,12 @@ import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
 
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
+
 const kebabize = (str:string) => {
   return str.split('').map((letter:string, idx:number) => {
     return letter.toUpperCase() === letter

@@ -24,9 +24,9 @@ html(lang=course.locale dir=dir)
               #page-info
                 #page-title= section.title
               .reveal-banner
-                | Reading time: ~#{section.duration} min
+                | #{__('Reading time')}: ~#{section.duration} min
                 .complete
-                  span Reveal all steps
+                  span= __('Reveal all steps')
                   include ../../frontend/assets/images/arrow--down.svg
               if section.hero
                 .preface-top
@@ -40,9 +40,9 @@ html(lang=course.locale dir=dir)
 
               footer
                 div.skip-step
-                  | To reveal more content, you have to complete all the activities and exercises above.&nbsp;
+                  | #{__('To reveal more content, you have to complete all the activities and exercises above.')}&nbsp;
                   br
-                  strong Are you stuck? #[a.skip Skip to the next step] or #[a.show-all reveal all steps]
+                  strong #{__('Are you stuck?')} #[a.skip(tabindex=0) #{__('Skip to the next step')}] #{__('or')} #[a.show-all(tabindex=0) #{__('reveal all steps')}]
                   svg(width=72 height=10): path(d="M1 1L36 9L71 1" fill="none" stroke="#aaa" stroke-width=2)
 
                 //- - var next = nextSection
@@ -80,18 +80,27 @@ html(lang=course.locale dir=dir)
         script(type="application/json")#userdata!= progressJSON
         script(type="application/json")#notations!= notationsJSON
         script(type="application/json")#universal-notes!= universalJSON
+        script(type="application/json")#translations!= translationsJSON
 
     script.
+      var user = null;
       var textbookAnalytics = {
         url: "#{config.analytics.url || ''}",
         key: "#{config.analytics.key || ''}"
-      }
+      };
+      var textbook = {
+        locale: "#{req.locale.id}"
+      };
+
     script(src='/textbook.js')
 
-    script user = null;
     include ../includes/tail.html
     script(src='/polyfill.js')
     script(src='/content/' + course.id + '/functions.js')
     script(src='/course.js')
 
     include ../includes/thebe-config.html
+    script(defer)
+      | (function () { const run = "#{__('Run')}";
+      include ../includes/thebe-init.js
+      | })();

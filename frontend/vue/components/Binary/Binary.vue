@@ -2,7 +2,7 @@
   <div class="binary-demo">
     <section class="binary-demo__section">
       <h4 class="binary-demo__input__title">
-        Binary
+        {{ $translate('Binary') }}
       </h4>
       <div class="binary-demo__container">
         <div class="binary-demo__input">
@@ -23,7 +23,7 @@
 
     <section class="binary-demo__section" data-test="binary-demo-total">
       <h4 class="binary-demo__output__title">
-        Decimal
+        {{ $translate('Decimal') }}
       </h4>
       <div class="binary-demo__output">
         <div class="binary-demo__block">

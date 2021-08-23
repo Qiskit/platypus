@@ -11,6 +11,11 @@
   url: /examples
   type: docs
   sections:
-    - title: Locale
-      id: locale
+    - id: annotations
+      url: /examples/annotations
+    - id: blocks
+      url: /examples/blocks
+    - id: widgets
+      url: /examples/widgets
+    - id: locale
       url: /examples/locale

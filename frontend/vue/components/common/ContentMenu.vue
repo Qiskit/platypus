@@ -5,6 +5,7 @@
       :content="dropdownMenuContent"
       segment-component-name="Textbook mega menu"
       :track-performed-search="trackPerformedSearch"
+      :placeholder="$translate('Browse all content')"
     />
   </div>
 </template>

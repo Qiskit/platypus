@@ -20,6 +20,8 @@ COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
 RUN npm run build
+# only need to keep all the strings.yaml
+RUN find ./translations -type f ! -iname "*.yaml" -delete
 
 FROM base
 WORKDIR /usr/app
@@ -33,5 +35,6 @@ COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
 COPY --from=builder /usr/app/working working/
+COPY --from=builder /usr/app/translations translations/
 
 CMD ["npm", "start"]
