@@ -13,6 +13,7 @@
             :val="tile.value"
             :active="tile.isActive"
             @click="calculateTotal"
+            @handleToggle="updateTileStatus($event)"
           />
           <div class="binary-demo__block">
             =
@@ -27,7 +28,7 @@
       </h4>
       <div class="binary-demo__output">
         <div class="binary-demo__block">
-          {{ displayTotal }}
+          {{ decimalTotal }}
         </div>
       </div>
     </section>
@@ -41,6 +42,21 @@ import BinaryTile from './BinaryTile.vue'
 @Options({
   components: {
     BinaryTile
+  },
+  computed: {
+    decimalTotal ():number {
+      let updatedTotal = 0
+
+      this.initialTileData.forEach((item: { value: number, isActive: boolean }) => {
+        const val = item.value
+        const isActive = item.isActive
+        if (val && isActive) {
+          updatedTotal += val
+        }
+      })
+      this.displayTotal = updatedTotal
+      return updatedTotal
+    }
   }
 })
 
@@ -54,6 +70,14 @@ export default class Binary extends Vue {
     { value: 2, isActive: false },
     { value: 1, isActive: true }
   ]
+
+  updateTileStatus (e:any) {
+    this.initialTileData.forEach((tile) => {
+      if (tile.value === e.tileVal) {
+        tile.isActive = e.newTileState
+      }
+    })
+  }
 
   calculateTotal () {
     const binaryTiles = document.querySelectorAll('[data-tile-active="true"]')
