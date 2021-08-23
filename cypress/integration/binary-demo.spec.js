@@ -25,5 +25,22 @@ describe('Binary demo', () => {
     cy.get(decimalTotal).should('have.text', expectedDecimalTotal)
   })
 
-  // it('Should update Decimal total', () => {})
+  it('Should update Decimal total', () => {
+    const binaryDemo = '.binary'
+    const binaryDemoBtns = '.binary-tile'
+    const decimalTotal = '[data-test="binary-demo-total"] .binary-demo__block'
+    const initialTotal = 25
+    const updatedTotalEl = '[data-test="binary-demo-total"] .binary-demo__block'
+    const expectedUpdatedTotal = 57
+
+    cy.visit('/course/introduction/the-atoms-of-computation')
+    cy.url().should('include', 'introduction/the-atoms-of-computation')
+
+    cy.get(binaryDemo).scrollIntoView()
+    cy.get(decimalTotal).should('have.text', initialTotal)
+    cy.get(binaryDemoBtns).first().click() // add 32
+    cy.get(updatedTotalEl).should('have.text', expectedUpdatedTotal)
+    cy.get(binaryDemoBtns).first().click() // remove 32
+    cy.get(updatedTotalEl).should('have.text', initialTotal)
+  })
 })
