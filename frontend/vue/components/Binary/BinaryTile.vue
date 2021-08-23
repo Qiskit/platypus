@@ -39,7 +39,9 @@ export default class BinaryTile extends Vue.with(Props) {
   initialTileState = this.active
   updateTile () {
     this.initialTileState = !this.initialTileState
-    this.$emit('handleToggle', this.initialTileState)
+    this.$emit('handleToggle', {
+      newTileState: this.initialTileState,
+      tileVal: this.val })
   }
 }
 </script>
