@@ -253,6 +253,7 @@ nav ul.c-sidebar__sections {
 
     @include mq ($from: small, $until: large) {
       max-width: $left-sidebar-width-sm;
+      z-index: 0;
     }
 
     .c-content-menu,
