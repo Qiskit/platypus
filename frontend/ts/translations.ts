@@ -1,8 +1,6 @@
 const fetchTranslations = function (locale: string): Promise<{[x:string]: string}> {
   return fetch(`/locales/${locale}`)
-    .then(res => {
-      return res?.json ? res.json() : {}
-    })
+    .then(res => res?.json ? res.json() : {})
 }
 
 const loadTranslations = function () {
