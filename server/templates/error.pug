@@ -1,0 +1,46 @@
+mixin icon(name, size)
+  svg(viewBox=`0 0 ${size} ${size}` class="icon" width=size height=size)&attributes(attributes)
+    use(xlink:href=`/icons.svg#${name}`)
+
+doctype html
+html(lang=lang dir=dir)
+  head
+    include head
+    link(href=`/css/mathjax_styles.css` rel="stylesheet")
+    include ../includes/hotjar.html
+
+  body(data-learning-path=`${learningPath}`)
+    div.qiskit__navbar#qiskit-navbar
+      q-the-menu
+
+    .body
+      article.c-textbook__page.c-textbook__page__error
+        h1.c-textbook__page__error-code #{code}
+        p.c-textbook__page__error-message Well, this isn’t exactly a <em>superposition</em> to be in...
+        q-app-cta(
+          label=`Go home`
+          url=`/`
+          is-static=true
+          target="_self"
+          kind="primary"
+          segment=`error-page > error page cta`
+          data-test="error-page-cta"
+        )
+      <div class="c-textbook__page__error-img">
+        <img src="../images/large_group.png" alt="Sketch of group standing around a quantum computer"/>
+        <p>Figure: example image on the page</p>
+      </div>
+
+    script.
+      var textbookAnalytics = {
+        url: "#{config.analytics.url || ''}",
+        key: "#{config.analytics.key || ''}"
+      }
+    script(src='/textbook.js')
+
+    script user = null;
+    include ../includes/tail.html
+    script(src='/polyfill.js')
+    script(src='/course.js')
+
+    include ../includes/thebe-config.html

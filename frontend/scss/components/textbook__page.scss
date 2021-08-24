@@ -58,6 +58,25 @@
   &:focus {
     outline: none;
   }
+
+  &__error {
+    transform: translate(16rem);
+    top: $spacing-10;
+
+    &-code {
+      margin-bottom: $spacing-04;
+    }
+
+    &-message {
+      margin-bottom: $spacing-06;
+    }
+
+    &-img {
+      max-width: 768px;
+      margin: $spacing-08 auto;
+      text-align: center;
+    }
+  }
 }
 
 .js-show-sidebar {
