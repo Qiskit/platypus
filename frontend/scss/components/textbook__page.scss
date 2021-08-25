@@ -60,8 +60,19 @@
   }
 
   &__error {
-    transform: translate(16rem);
+    transform: translate(0);
     top: $spacing-10;
+    position: relative;
+    transform: initial;
+    padding-left: 16rem;
+    max-width: initial;
+    padding-top: 4rem;
+    top: 0;
+
+
+    @include mq($until: large) {
+      padding-left: $spacing-07;
+    }
 
     &-code {
       margin-bottom: $spacing-04;
@@ -72,9 +83,11 @@
     }
 
     &-img {
-      max-width: 768px;
-      margin: $spacing-08 auto;
       text-align: center;
+
+      @include mq($until: large) {
+        text-align: left;
+      }
     }
   }
 }
