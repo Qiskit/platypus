@@ -88,10 +88,15 @@ div.c-sidebar(data-test="sidebar")
         )
           span.sidebar_footer__menu_item-label #{__('Back to textbook home')}
           include ../../frontend/assets/images/home.svg
+
       a.sidebar_footer__menu_item#app-panel-language-toggle(
-          href='javascript:void(0)'
-          onclick=`textbook.trackClickEvent('language-selector','${sidebarLocation}')`
-          title='Language selector'
-        )
-          include ../../frontend/assets/images/translate.svg
-    q-language-selector(locales-data=availableLocales)
+        href='javascript:void(0)'
+        onclick=`textbook.trackClickEvent('language-selector','${sidebarLocation}')`
+        title='Language selector'
+      )
+        include ../../frontend/assets/images/translate.svg
+
+    q-language-selector(
+      locales-all=availableLocales,
+      locales-available=course.availableLocales
+    )

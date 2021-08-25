@@ -26,27 +26,32 @@ new MathigonStudioApp()
     const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
     res.json(translations)
   })
+  .use(async (req, res, next) => {
+    res.locals.availableLocales = CONFIG.locales.map((l) => {
+      return LOCALES[l]
+    })
+    next()
+  })
   .get('/course/:course/:section', async (req, res, next) => {
     const course = getCourse(req.params.course, req.locale.id)
     const section = course?.sections.find(s => s.id === req.params.section)
+
     if (!course || !section) { return next() }
 
     const lang = course.locale || 'en'
     const learningPath = isLearningPath(course)
+
     const response = await storageApi.getProgressData?.(req, course, section)
     const progressJSON = JSON.stringify(response?.data || {})
     const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
     const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
-    course.glossJSON = updateGlossary(course)
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+    course.glossJSON = updateGlossary(course)
 
     const nextSection = findNextSection(course, section)
     const prevSection = findPrevSection(course, section)
-
     const subsections = getSectionIndex(course, section)
-    res.locals.availableLocales = CONFIG.locales.map((l) => {
-      return LOCALES[l]
-    })
 
     res.render('textbook', {
       course,
