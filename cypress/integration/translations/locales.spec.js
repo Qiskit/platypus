@@ -78,4 +78,46 @@ describe('Language Selector Macbook-15', () => {
     cy.get('.language-selector__dropdown > .language-selector__item').contains('English').should('be.visible')
     cy.get('.language-selector__dropdown > .language-selector__item').contains('Japanese').should('be.visible')
   })
+
+  it('Should not show the unavailable language indicator', () => {
+    // navigate to page w/ translations
+    cy.url().should('include', '/ch-prerequisites/introduction-to-python-and-jupyter-notebooks')
+
+    // click on the language selector drop down
+    cy.get('[data-test=language-selector]')
+      .shadow()
+      .find('[part=trigger-button]')
+      .click()
+
+    // check the language option does not have an indicator
+    cy.get('[data-test=language-select-ja]')
+      .find('[data-test=language-select-tooltip]')
+      .should('not.exist')
+  })
+
+  it('Should show the unavailable language indicator', () => {
+    // navigate to page w/o translations
+    cy.visit('/course/ch-labs')
+    cy.url().should('include', '/course/ch-labs')
+
+    // click on the language selector drop down
+    cy.get('[data-test=language-selector]')
+      .shadow()
+      .find('[part=trigger-button]')
+      .click()
+
+    // check the language option does have an indicator and no message visible
+    cy.get('[data-test=language-select-ja]')
+      .find('[data-test=language-select-tooltip]')
+      .should('exist')
+      .find('span')
+      .should('not.be.visible')
+    
+    // check message can be made visible
+    cy.get('[data-test=language-select-ja]')
+      .find('[data-test=language-select-tooltip]')
+      .click()
+      .find('span')
+      .should('be.visible')
+  })
 })

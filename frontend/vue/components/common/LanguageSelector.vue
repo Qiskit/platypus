@@ -5,18 +5,21 @@
       :trigger-content="currentCountryLabel"
       :value="currentCountryCode"
       @bx-dropdown-beingselected="useSelectedLanguage($event)"
+      data-test="language-selector"
     >
       <bx-dropdown-item
         v-for="language in allLocales"
         :key="language.key"
         class="language-selector__item"
         :class="{ 'language-selector__item-disabled': !isAvailable(language.id) }"
+        :data-test="`language-select-${language.id}`"
         :value="language.id"
       >
         <CvTooltip v-if="!isAvailable(language.id)"
           class="language-selector__item-tooltip"
           alignment="center" direction="left"
           :tip="$translate('Language not yet available')"
+          data-test="language-select-tooltip"
         >
           <InformationFilled16 />
         </CvTooltip> 
