@@ -15,28 +15,55 @@ html(lang=lang dir=dir)
 
     .body
       article.c-textbook__page.c-textbook__page__error
-        h1.c-textbook__page__error-code #{code}
-        p.c-textbook__page__error-message Well, this isn’t exactly a <em>superposition</em> to be in...
-        q-app-cta(
-          label=`Go home`
-          url=`/`
-          is-static=true
-          target="_self"
-          kind="primary"
-          segment=`error-page > error page cta`
-          data-test="error-page-cta"
-        )
+        div.c-textbook__page__error-container
+          h1.c-textbook__page__error-code #{code}
+          p.c-textbook__page__error-message#description
+          q-app-cta(
+            label=`Back to Textbook home`
+            url=`/`
+            is-static=true
+            target="_self"
+            kind="primary"
+            segment=`error-page > back to textbook`
+            data-test="error-page-cta"
+          )
+          q-app-cta(
+            class="c-textbook__page__error-cta"
+            label=`Go to Qiskit.org homepage`
+            url=`https://qiskit.org`
+            is-static=true
+            target="_self"
+            kind="ghost"
+            segment=`error-page > go to qiskit.org`
+            data-test="error-page-cta"
+          )
         <div class="c-textbook__page__error-img">
-          <img src="/images/large_group.png" alt="Sketch of group standing around a quantum computer"/>
-          <p>Figure: example image on the page</p>
+          <img id="img" src="https://source.unsplash.com/random/800×400/?cat" alt="A cat in a box"/>
+          <p>Did you know that Schrodinger’s cat paradox was a joke to ridicule the quantum interpretation.</p>
         </div>
+    script.
+      var descriptions = [
+        'Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in...',
+        'We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist',
+        'You’ve reached the edge of the multi-verse.',
+        'Quantum error correction happening now',
+        'Okay, that wasn’t supposed to happen',
+        'There is content on this page in another dimension, but not this dimension.'
+      ]
 
+      var imgList = [
+        'huffmans_cat.png'
+      ]
+
+      var description = descriptions[Math.floor(Math.random() * descriptions.length)] // select random
+      var img = imgList[Math.floor(Math.random() * imgList.length)] // select random
+      document.getElementById('description').innerHTML = description
+      document.getElementById('img').src = `/images/${img}`
     script.
       var textbookAnalytics = {
         url: "#{config.analytics.url || ''}",
         key: "#{config.analytics.key || ''}"
       }
-    script(src='/textbook.js')
 
     script user = null;
     include ../includes/tail.html

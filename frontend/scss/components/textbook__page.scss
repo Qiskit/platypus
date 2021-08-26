@@ -61,17 +61,22 @@
 
   &__error {
     transform: translate(0);
-    top: $spacing-10;
+    top: 0;
     position: relative;
     transform: initial;
-    padding-left: 16rem;
+    padding-left: 8rem;
     max-width: initial;
     padding-top: 4rem;
-    top: 0;
-
+    padding-bottom: 10rem;
+    display: flex;
 
     @include mq($until: large) {
-      padding-left: $spacing-07;
+      padding-left: $spacing-05;
+      flex-direction: column;
+    }
+
+    &-container {
+      max-width: $browser-small;
     }
 
     &-code {
@@ -84,10 +89,20 @@
 
     &-img {
       text-align: center;
+      max-width: $browser-medium;
 
       @include mq($until: large) {
         text-align: left;
       }
+    }
+
+    &-cta .app-cta_ghost[datatest="error-page-cta"]{
+      padding: 1rem;
+      justify-content: space-between;
+    }
+
+    &-cta .app-cta_ghost .app-cta__icon {
+      margin-right: .25rem;
     }
   }
 }
