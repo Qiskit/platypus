@@ -1,5 +1,5 @@
+// hide while loading
 html.loading {
-  // hiding various elements
   .c-sidebar__entry,
   .progress-wrapper,
   .reveal-banner,
@@ -10,6 +10,9 @@ html.loading {
   .footer-nav,
   .lesson-notes__section__title,
   .lesson-notes__term,
+  .empty-panel__title,
+  .empty-panel__description,
+  .empty-panel__img,
   x-step {
     display: none;
   }
@@ -22,7 +25,8 @@ html.loading {
 
 html:not(.loading) {
   .skeleton-placeholder,
-  .lesson-notes__skeleton-placeholder {
+  .lesson-notes__skeleton-placeholder,
+  .empty-panel__skeleton-placeholder {
     display: none;
   }
 }

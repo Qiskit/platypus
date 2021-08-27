@@ -1,5 +1,7 @@
 <template>
   <div class="empty-panel">
+    <CvSkeletonText class="empty-panel__skeleton-placeholder" :heading="true" />
+    <CvSkeletonText class="empty-panel__skeleton-placeholder" :paragraph="true" :line-count="3" />
     <p class="empty-panel__title">
       Nothing here yet
     </p>
@@ -15,9 +17,10 @@
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
 import BasicLink from '../common/BasicLink.vue'
+import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text.vue'
 
 @Options({
-  components: { BasicLink }
+  components: { BasicLink, CvSkeletonText }
 })
 
 export default class EmptyPanel extends Vue {
