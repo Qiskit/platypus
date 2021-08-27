@@ -1,0 +1,28 @@
+html.loading {
+  // hiding various elements
+  .c-sidebar__entry,
+  .progress-wrapper,
+  .reveal-banner,
+  .connection,
+  .c-sidebar__chapter,
+  #page-title,
+  .page__banner,
+  .footer-nav,
+  .lesson-notes__section__title,
+  .lesson-notes__term,
+  x-step {
+    display: none;
+  }
+
+  .c-textbook__content {
+    padding-top: 1rem;
+  }
+}
+
+
+html:not(.loading) {
+  .skeleton-placeholder,
+  .lesson-notes__skeleton-placeholder {
+    display: none;
+  }
+}

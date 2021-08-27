@@ -1,8 +1,8 @@
 import './wc/block/block'
-
 import { initIndexHighlight } from './ts/indexhighlighter'
 import { initNotations } from './ts/notations'
 import { initLeftSidebar } from './ts/leftsidebar'
+import { initLoader } from './ts/loader'
 import { getProgressData, storeProgressLocally } from './ts/storage'
 import { initAnalytics, trackClickEvent, trackPage, trackPerformedSearch } from './plugins/segmentAnalytics'
 
@@ -36,6 +36,7 @@ const textbook: Textbook = {
 window.progressData = getProgressData()
 window.textbook = textbook
 
+
 textbook.runAfterDOMLoaded(() => {
   // hold courseId & sectionId
   const xcourse = document.getElementsByTagName('x-course')[0]
@@ -45,13 +46,14 @@ textbook.runAfterDOMLoaded(() => {
       section: xcourse.getAttribute('data-section') || '',
       goals: +xcourse.getAttribute('data-goals')! || 0
     }
-  
+
     storeProgressLocally(textbook.course)
   }
 
   initLeftSidebar()
   initNotations()
   initIndexHighlight()
+  initLoader()
 
   // set up & trigger segment
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)

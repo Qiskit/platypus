@@ -1,7 +1,7 @@
 include /_mixins
 
 doctype html
-html(lang=lang dir=dir)
+html(lang=lang dir=dir data-loading=`true`)
   head
     include head
 
@@ -64,6 +64,6 @@ html(lang=lang dir=dir)
           div.c-textbook_footer#textbook_footer
             footer
               p.footer
-
+,f
     script(src='/textbook.js')
     include ../includes/tail.html

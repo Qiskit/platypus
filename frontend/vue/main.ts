@@ -21,6 +21,7 @@ import UniversalGlossary from './components/UtilityPanel/UniversalGlossary.vue'
 import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
+import SkeletonText from './components/Skeleton/SkeletonText.vue'
 
 const kebabize = (str:string) => {
   return str.split('').map((letter:string, idx:number) => {
@@ -51,7 +52,8 @@ const components: any = {
   EmptyPanel,
   MiniComposer,
   Binary,
-  BinaryTile
+  BinaryTile,
+  SkeletonText
 }
 
 Object.keys(components).forEach((c) => {

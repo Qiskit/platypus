@@ -4,6 +4,8 @@
       <EmptyPanel @handleRedirect="handleEmptyStateRedirect($event)" />
     </section>
     <section v-if="filteredVocabulary.length > 0" class="lesson-notes__section">
+      <CvSkeletonText class="lesson-notes__skeleton-placeholder" :heading="true" />
+      <CvSkeletonText class="lesson-notes__skeleton-placeholder" :paragraph="true" :line-count="3" />
       <p class="lesson-notes__section__title">
         {{ vocabSectionTitle }}
       </p>
@@ -44,6 +46,7 @@ import 'carbon-web-components/es/components/data-table/table-head'
 import 'carbon-web-components/es/components/data-table/table-cell.js'
 import 'carbon-web-components/es/components/data-table/table-row.js'
 import 'carbon-web-components/es/components/data-table/table-header-row'
+import CvSkeletonText from '@carbon/vue/src/components/cv-skeleton-text/cv-skeleton-text.vue'
 import EmptyPanel from './EmptyPanel.vue'
 
 export interface Notation {
@@ -66,7 +69,7 @@ class Props {
 }
 
 @Options({
-  components: { EmptyPanel },
+  components: { EmptyPanel, CvSkeletonText },
   computed: {
     filteredNotations (): Notation[] {
       const notationsData = this.notations

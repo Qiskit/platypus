@@ -3,7 +3,7 @@ mixin icon(name, size)
     use(xlink:href=`/icons.svg#${name}`)
 
 doctype html
-html(lang=lang dir=dir)
+html(lang=lang dir=dir class="loading")
   head
     include head
     link(href=`/css/mathjax_styles.css` rel="stylesheet")
@@ -22,6 +22,9 @@ html(lang=lang dir=dir)
           div.c-textbook__content#textbook_content
             div.jupyter-page
               #page-info
+                q-skeleton-text(class="skeleton-placeholder__heading" heading)
+                q-skeleton-text(heading)
+                q-skeleton-text(paragraph line-count=3)
                 #page-title= section.title
               .reveal-banner
                 | Reading time: ~#{section.duration} min
