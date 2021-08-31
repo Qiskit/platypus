@@ -17,11 +17,10 @@ html(lang=lang dir=dir)
       x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar")
         include sidebar
 
-        article(class="c-textbook__page")
+        article(class="c-textbook__page", data-test="textbook-page")
           include banner
           div.c-textbook__content#textbook_content
             div.jupyter-page
-
               #page-info
                 #page-title= section.title
               .reveal-banner
@@ -58,6 +57,7 @@ html(lang=lang dir=dir)
                         target="_self"
                         kind="secondary"
                         segment=`${section.id} > ${prevSection.section.id}`
+                        data-test="footer-nav-previous-section"
                       )
 
                   div.footer-nav__cta__container(data-vue-mount)
@@ -68,6 +68,7 @@ html(lang=lang dir=dir)
                         is-static=true
                         target="_self"
                         segment=`${section.id} > ${nextSection.section.id}`
+                        data-test="footer-nav-next-section"
                       )
         div#utility-panel.c-textbook__utility_panel
           q-utility-panel

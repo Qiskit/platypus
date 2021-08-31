@@ -1,9 +1,9 @@
 div.sidebar_header_menu
-  a.sidebar_header_menu_toggle#app-panel-header-toggle(href='#')
+  a.sidebar_header_menu_toggle#app-panel-header-toggle(href='#' data-test="sidebar-button-toggle-mobile")
     span.sidebar_header_menu_toggle__label Show index
-    <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
 
-div.c-sidebar
+div.c-sidebar(data-test="sidebar")
   div.c-content-menu
     q-content-menu
 
@@ -12,7 +12,7 @@ div.c-sidebar
       - var c = course
       - var sidebarLocation = "chapter-sidebar-nav"
       li.c-sidebar__chapter
-        span.c-sidebar__entry
+        span.c-sidebar__entry(data-test="sidebar-entry")
           | !{c.title}
 
       ul.c-sidebar__sections
@@ -66,9 +66,10 @@ div.c-sidebar
       a.sidebar_footer__menu_item#app-panel-footer-toggle(
         href='javascript:void(0)'
         onclick=`textbook.trackClickEvent('show-index','${sidebarLocation}')`
+        data-test="sidebar-button-toggle"
       )
         span.sidebar_footer__menu_item-label Hide index
-        <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
       if learningPath
         a.sidebar_footer__menu_item#back-home(
           href=`${textbookHome}/course/introduction-course`
@@ -82,6 +83,7 @@ div.c-sidebar
           href=textbookHome
           onclick=`textbook.trackClickEvent('textbook-home','${sidebarLocation}')`
           title='Back to textbook home'
+          data-test="back-to-home-link"
         )
           span.sidebar_footer__menu_item-label Back to textbook home
           include ../../frontend/assets/images/home.svg
