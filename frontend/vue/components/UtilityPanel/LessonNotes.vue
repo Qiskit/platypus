@@ -4,8 +4,7 @@
       <EmptyPanel @handleRedirect="handleEmptyStateRedirect($event)" />
     </section>
     <section v-if="filteredVocabulary.length > 0" class="lesson-notes__section">
-      <CvSkeletonText class="lesson-notes__skeleton-placeholder" :heading="true" />
-      <CvSkeletonText class="lesson-notes__skeleton-placeholder" :paragraph="true" :line-count="3" />
+      <CvSkeletonText class="panel__skeleton-placeholder" :paragraph="true" :line-count="4" :width="`100%`" />
       <p class="lesson-notes__section__title">
         {{ vocabSectionTitle }}
       </p>

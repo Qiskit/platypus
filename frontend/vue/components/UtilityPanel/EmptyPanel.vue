@@ -1,7 +1,6 @@
 <template>
   <div class="empty-panel">
-    <CvSkeletonText class="empty-panel__skeleton-placeholder" :heading="true" />
-    <CvSkeletonText class="empty-panel__skeleton-placeholder" :paragraph="true" :line-count="3" />
+    <CvSkeletonText class="panel__skeleton-placeholder" :paragraph="true" :line-count="4" :width="`100%`" />
     <p class="empty-panel__title">
       Nothing here yet
     </p>

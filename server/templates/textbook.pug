@@ -22,8 +22,8 @@ html(lang=lang dir=dir class="loading")
           div.c-textbook__content#textbook_content
             div.jupyter-page
               #page-info
+                q-skeleton-text(class="skeleton-placeholder__title" heading)
                 q-skeleton-text(class="skeleton-placeholder__heading" heading)
-                q-skeleton-text(heading)
                 q-skeleton-text(paragraph line-count=3)
                 #page-title= section.title
               .reveal-banner

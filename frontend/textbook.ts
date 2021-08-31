@@ -36,6 +36,7 @@ const textbook: Textbook = {
 window.progressData = getProgressData()
 window.textbook = textbook
 
+initLoader()
 
 textbook.runAfterDOMLoaded(() => {
   // hold courseId & sectionId
@@ -53,7 +54,6 @@ textbook.runAfterDOMLoaded(() => {
   initLeftSidebar()
   initNotations()
   initIndexHighlight()
-  initLoader()
 
   // set up & trigger segment
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)

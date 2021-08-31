@@ -1,6 +1,6 @@
 <template>
   <div class="skeleton-placeholder">
-    <CvSkeletonText :heading="heading" :paragraph="paragraph" :line-count="lineCount"/>
+    <CvSkeletonText class="skeleton-placeholder__text" :heading="heading" :paragraph="paragraph" :line-count="lineCount" :width="`100%`" />
   </div>
 </template>
 

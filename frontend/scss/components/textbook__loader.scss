@@ -1,4 +1,8 @@
-// hide while loading
+@import '../variables/mq.scss';
+@import '../variables/settings.scss';
+@import '../variables/colors.scss';
+
+// hide during loading
 html.loading {
   .c-sidebar__entry,
   .progress-wrapper,
@@ -19,14 +23,24 @@ html.loading {
 
   .c-textbook__content {
     padding-top: 1rem;
+    max-width: initial;
+  }
+
+  .js-show-sidebar .c-textbook__page {
+    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width}  - 10rem);
+    z-index: 0;
+    padding-right: 0;
+  }
+
+  .c-textbook__utility_panel{
+    min-width: 30rem;
   }
 }
 
 
 html:not(.loading) {
   .skeleton-placeholder,
-  .lesson-notes__skeleton-placeholder,
-  .empty-panel__skeleton-placeholder {
+  .panel__skeleton-placeholder {
     display: none;
   }
 }

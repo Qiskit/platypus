@@ -8,18 +8,26 @@ div.c-sidebar(data-test="sidebar")
     q-content-menu
 
   nav.c-textbook__sidebar#js-sidebar
+    ul.c-sidebar__loading
+      li.c-sidebar__item
+        q-skeleton-text
+      li.c-sidebar__item
+        q-skeleton-text
+      li.c-sidebar__item
+        q-skeleton-text
+      li.c-sidebar__item
+        q-skeleton-text
+
     ul.c-sidebar__chapters
       - var c = course
       - var sidebarLocation = "chapter-sidebar-nav"
       li.c-sidebar__chapter
-        q-skeleton-text
         span.c-sidebar__entry(data-test="sidebar-entry")
           | !{c.title}
 
       ul.c-sidebar__sections
         for s in c.sections
           li.c-sidebar__section(data-section-id=s.id)
-            q-skeleton-text
             if course && course.id === c.id
               if section && section.id === s.id
                 .connection.connection--progress

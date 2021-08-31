@@ -58,6 +58,13 @@
   padding-left: 0;
 }
 
+.c-sidebar__loading {
+  margin: 2rem 0 0 0;
+  & .c-sidebar__item {
+    margin-bottom: 1rem;
+  }
+}
+
 li.c-sidebar__chapter:first-child {
   display: none;
 }
