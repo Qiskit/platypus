@@ -59,9 +59,9 @@
 }
 
 .c-sidebar__loading {
-  margin: 2rem 0 0 0;
+  margin: $spacing-07 0 0 0;
   & .c-sidebar__item {
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-07;
   }
 }
 

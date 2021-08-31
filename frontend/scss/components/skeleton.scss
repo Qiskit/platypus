@@ -9,12 +9,15 @@
     max-width: 320px;
     margin-bottom: 1rem;
   }
+
+  &__body p {
+    margin-bottom: 1rem;
+  }
 }
 
 // customize color
 .bx--skeleton__text {
   background: $background-color-light;
-  margin-bottom: 1rem;
   width: 100% !important;
 
   &::before {

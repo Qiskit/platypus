@@ -61,5 +61,9 @@ export default class EmptyPanel extends Vue {
     margin-bottom: $spacing-05;
     width: 100%;
   }
+
+  & .panel__skeleton-placeholder p {
+    margin-bottom: $spacing-06;
+  }
 }
 </style>
