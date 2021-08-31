@@ -4,15 +4,26 @@
       class="language-selector__dropdown"
       :trigger-content="currentCountryLabel"
       :value="currentCountryCode"
-      @bx-dropdown-selected="useSelectedLanguage($event)"
+      @bx-dropdown-beingselected="useSelectedLanguage($event)"
+      data-test="language-selector"
     >
       <bx-dropdown-item
-        v-for="language in availableLocales"
+        v-for="language in allLocales"
         :key="language.key"
         class="language-selector__item"
+        :class="{ 'language-selector__item-disabled': !isAvailable(language.id) }"
+        :data-test="`language-select-${language.id}`"
         :value="language.id"
       >
-        {{ language.key }}
+        <CvTooltip v-if="!isAvailable(language.id)"
+          class="language-selector__item-tooltip"
+          alignment="center" direction="left"
+          :tip="$translate('Language not yet available')"
+          data-test="language-select-tooltip"
+        >
+          <InformationFilled16 />
+        </CvTooltip> 
+        <span>{{ language.key }}</span>
       </bx-dropdown-item>
     </bx-dropdown>
   </div>
@@ -22,15 +33,25 @@
 import { Options, Vue, prop } from 'vue-class-component'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
 import 'carbon-web-components/es/components/dropdown/dropdown-item.js'
+import InformationFilled16 from '@carbon/icons-vue/lib/information--filled/16'
+import CvTooltip from '@carbon/vue/src/components/cv-tooltip/cv-tooltip.vue'
 
 class Props {
-  localesData = prop({})
+  localesAll = prop({})
+  localesAvailable = prop({})
 }
 
 @Options({
+  components: {
+    InformationFilled16,
+    CvTooltip
+  },
   computed: {
+    allLocales () {
+      return JSON.parse(this.localesAll)
+    },
     availableLocales () {
-      return JSON.parse(this.localesData)
+      return JSON.parse(this.localesAvailable)
     }
   }
 })
@@ -38,26 +59,35 @@ class Props {
 export default class LanguageSelector extends Vue.with(Props) {
   currentCountryCode = ''
   currentCountryLabel = 'English'
+  allLocales: any
   availableLocales: any
+
+  isAvailable (locale: string) {
+    return this.availableLocales.indexOf(locale) > -1
+  }
 
   useSelectedLanguage (event: any) {
     const currentHostname = window.location.host
     const newLanguageCode = event.detail.item.value
 
-    // remove subdomain
-    const originalHostName = currentHostname.split('.')[0].length === 2 && isNaN(+currentHostname.split('.')[0])
-      ? currentHostname.slice(3)
-      : currentHostname
-
-    if (originalHostName === 'learn.qiskit.org') {
-      window.location.host = `${newLanguageCode === 'en' ? '' : newLanguageCode + '.'}${originalHostName}`
+    if (!this.isAvailable(newLanguageCode)) {
+      event.preventDefault()
     } else {
-      window.location.search = newLanguageCode === 'en' ? '' : '?hl=' + newLanguageCode
+      // remove subdomain
+      const originalHostName = currentHostname.split('.')[0].length === 2 && isNaN(+currentHostname.split('.')[0])
+        ? currentHostname.slice(3)
+        : currentHostname
+
+      if (originalHostName === 'learn.qiskit.org') {
+        window.location.host = `${newLanguageCode === 'en' ? '' : newLanguageCode + '.'}${originalHostName}`
+      } else {
+        window.location.search = newLanguageCode === 'en' ? '' : '?hl=' + newLanguageCode
+      }
     }
   }
 
   setLanguage (lang: string) {
-    const result = this.availableLocales.filter((item: { id: string }) => {
+    const result = this.allLocales.filter((item: { id: string }) => {
       return item.id === lang
     })
 
@@ -67,7 +97,7 @@ export default class LanguageSelector extends Vue.with(Props) {
 
   mounted () {
     const courseLang = document.getElementsByTagName('html')[0].getAttribute('lang') || ''
-    this.availableLocales = this.localesData
+    this.allLocales = this.localesAll
     this.setLanguage(courseLang)
   }
 }
@@ -75,18 +105,31 @@ export default class LanguageSelector extends Vue.with(Props) {
 
 <style lang="scss" scoped>
 @import '../../../scss/variables/colors.scss';
+@import 'carbon-components/scss/globals/scss/layout';
 .language-selector {
   &__item {
     text-align: left;
     // padding-left: 1rem;
     background-color: $background-color-lighter;
 
-    &-disabled {
-      color: $border-color;
-    }
-
     &:hover {
       background-color: $background-color-light;
+    }
+
+    &-disabled {
+      color: $text-color-lighter-3;
+      background-color: $background-color-lighter;
+
+      &:hover {
+        background-color: $background-color-lighter;
+        color: $text-color-lighter-3;
+        cursor: not-allowed;
+      }
+    }
+
+    .language-selector__item-tooltip {
+      position: absolute;
+      right: $spacing-05;
     }
   }
 }
@@ -114,6 +157,5 @@ export default class LanguageSelector extends Vue.with(Props) {
     bottom: 2.5rem;
     top: initial;
   }
-
 }
 </style>
