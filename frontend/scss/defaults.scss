@@ -1,6 +1,45 @@
 @import './variables/colors.scss';
 @import './variables/fonts.scss';
 
+// Variables values for the light theme.
+@mixin theme-variables-light {
+  --background-color: #{$background-color-white};
+  --text-color: #{$text-color-light};
+  --text-color-title: #{$text-color-dark};
+
+  --q-block--background-color: #{$background-color-lighter};
+  --q-block--tabbox--color: #{$text-color-light};
+  --q-block--tabbox--color--active: #{$block-link-color-tertiary};
+}
+
+// Variables values for the dark theme.
+@mixin theme-variables-dark {
+  --background-color: #{$background-color-dark-2};
+  --text-color: #{$text-color-lighter-3};
+  --text-color-title: #{$text-color-lighter-3};
+  
+  --q-block--background-color: #{$background-color-darker};
+  --q-block--tabbox--color: #{$text-color-lighter-4};
+  --q-block--tabbox--color--active: #{$block-link-color-tertiary-2};
+}
+
+// Themes setup.
+body {
+  @include theme-variables-light;
+  
+  &.theme-light {
+    @include theme-variables-light;
+  }
+
+  &.theme-dark {
+    @include theme-variables-dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @include theme-variables-dark;
+  }
+}
+
 html {
   box-sizing: border-box;
 }
@@ -15,6 +54,7 @@ html {
 
 html,
 body {
+  background-color: var(--background-color);
   font-family: $plex-sans;
   font-size: 16px;
   letter-spacing: 0.16px;

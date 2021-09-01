@@ -36,7 +36,6 @@
 }
 
 .c-textbook__page {
-  background-color: $background-color-white;
   width: $textbook-page-width;
   transition: transform 250ms ease;
   left: 0;
@@ -160,7 +159,7 @@ img.textbook_logo {
 }
 
 #page-title {
-  color: $text-color-dark;
+  color: var(--text-color-title);
   font-size: 2.7rem;
   font-family: $plex-sans-light;
   line-height: 3.15rem;

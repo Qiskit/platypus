@@ -171,7 +171,7 @@ x-progress {
 }
 
 x-step {
-  color: $text-color-light;
+  color: var(--text-color);
 
   ul, ol {
     font-size: 0.875rem;
@@ -187,6 +187,7 @@ x-step {
   }
 
   h3 {
+    color: var(--text-color);
     font-size: 1em;
     font-weight: 600;
     line-height: 1.375rem;
@@ -196,7 +197,7 @@ x-step {
 
   h2 {
     border-bottom: none;
-    color: $text-color-light;
+    color: var(--text-color);
     font-size: 1.75rem;
     font-weight: normal;
     line-height: 2.25rem;
@@ -241,6 +242,12 @@ x-step {
     .wrap {
       height: initial;
     }
+  }
+
+  p strong,
+  x-step table strong,
+  x-step li strong {
+    color: var(--text-color);
   }
 }
 
