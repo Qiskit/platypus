@@ -71,7 +71,8 @@ html.loading {
 
 html:not(.loading) {
   q-skeleton-text,
-  .loading-panel {
+  .loading-panel,
+  .c-textbook__page__loading {
     display: none;
   }
 }
