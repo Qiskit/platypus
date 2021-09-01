@@ -3,7 +3,7 @@
 
 div.qiskit__navbar {
   height: $qiskit-navbar-height;
-  background-color: $background-color-white;
+  background-color: var(--background-color);
   border-bottom: 1px solid $border-color;
   font-size: 1em;
 

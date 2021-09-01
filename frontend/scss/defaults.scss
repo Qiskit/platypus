@@ -4,8 +4,11 @@
 // Variables values for the light theme.
 @mixin theme-variables-light {
   --background-color: #{$background-color-white};
+  --logo-color: #{$text-color-lighter};
   --text-color: #{$text-color-light};
   --text-color-title: #{$text-color-dark};
+
+  --navbar--link-color: #{$link-color-secondary};
 
   --q-block--background-color: #{$background-color-lighter};
   --q-block--tabbox--color: #{$text-color-light};
@@ -15,8 +18,11 @@
 // Variables values for the dark theme.
 @mixin theme-variables-dark {
   --background-color: #{$background-color-dark-2};
+  --logo-color: #{$text-color-lighter-3};
   --text-color: #{$text-color-lighter-3};
   --text-color-title: #{$text-color-lighter-3};
+
+  --navbar--link-color: #{$text-color-lighter-3};
   
   --q-block--background-color: #{$background-color-darker};
   --q-block--tabbox--color: #{$text-color-lighter-4};

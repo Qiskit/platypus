@@ -132,16 +132,6 @@ export default class TheMenu extends mixins(MenuMixin) {
 @import '~/../scss/variables/colors.scss';
 
 .menu {
-  &__logo {
-    height: 1.5rem;
-    width: auto;
-    color: $text-color-lighter;
-
-    &_active {
-      color: $text-active-color;
-    }
-  }
-
   &__link {
     @include type-style('body-long-02');
     display: inline-flex;
@@ -180,7 +170,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   &__main-level {
-    --link-color: #{$link-color-secondary};
+    --link-color: var(--navbar--link-color);
   }
 
   &__mobile {
@@ -245,7 +235,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
-    color: $text-color-lighter;
+    color: var(--logo-color);
 
     &_active {
       color: $active-color;
@@ -326,7 +316,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   // select a child within the shadow
   bx-dropdown::part(trigger-button) {
     --cds-body-short-01-font-size: 1rem;
-    background-color: $background-color-white;
+    background-color: var(--background-color);
 
     &:focus {
       outline: none;
