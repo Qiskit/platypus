@@ -56,6 +56,19 @@
   margin-left: 0;
   margin-bottom: 0;
   padding-left: 0;
+
+  // skeleton
+  &__loading {
+    margin: $spacing-07 0 0 0;
+    .bx--skeleton__text {
+      margin-bottom: $spacing-06;
+      width: 100% !important; // needed to override inline styles
+    }
+
+    & .c-sidebar__chapter:first-child {
+      display: block;
+    }
+  }
 }
 
 li.c-sidebar__chapter:first-child {

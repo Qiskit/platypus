@@ -8,6 +8,15 @@ div.c-sidebar(data-test="sidebar")
     q-content-menu
 
   nav.c-textbook__sidebar#js-sidebar
+    ul.c-sidebar__chapters__loading
+      li.c-sidebar__chapter
+        q-skeleton-text
+      li.c-sidebar__chapter
+        q-skeleton-text
+      li.c-sidebar__chapter
+        q-skeleton-text
+      li.c-sidebar__chapter
+        q-skeleton-text
     ul.c-sidebar__chapters
       - var c = course
       - var sidebarLocation = "chapter-sidebar-nav"

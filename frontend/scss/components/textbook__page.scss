@@ -58,6 +58,30 @@
   &:focus {
     outline: none;
   }
+
+  // skeleton text
+  &__loading {
+    padding-top: 4rem;
+    &-title p {
+      height: 2.5rem;
+      margin-bottom: $spacing-08;
+      max-width: 200px;
+    }
+
+    &-heading p {
+      max-width: 320px;
+      margin-bottom: $spacing-05;
+    }
+
+    &-copy p {
+      margin-bottom: $spacing-05;
+      &:not(:last-child) {
+        width: 100% !important;
+      }
+    }
+
+
+  }
 }
 
 .js-show-sidebar {

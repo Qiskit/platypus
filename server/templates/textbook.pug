@@ -3,7 +3,7 @@ mixin icon(name, size)
     use(xlink:href=`/icons.svg#${name}`)
 
 doctype html
-html(lang=lang dir=dir)
+html.loading(lang=lang dir=dir)
   head
     include head
     link(href=`/css/mathjax_styles.css` rel="stylesheet")
@@ -19,6 +19,10 @@ html(lang=lang dir=dir)
 
         article(class="c-textbook__page", data-test="textbook-page")
           include banner
+          div.c-textbook__page__loading
+            q-skeleton-text.c-textbook__page__loading-title(heading)
+            q-skeleton-text.c-textbook__page__loading-heading(heading)
+            q-skeleton-text.c-textbook__page__loading-copy(line-count="6")
           div.c-textbook__content#textbook_content
             div.jupyter-page
               #page-info

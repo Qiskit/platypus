@@ -1,5 +1,6 @@
 <template>
   <div class="utility-panel-content">
+    <LoadingPanel />
     <LessonNotes
       v-if="showLessonNotes"
       :notations="notationsData"
@@ -20,6 +21,7 @@ import 'carbon-web-components/es/components/data-table/table-row.js'
 import 'carbon-web-components/es/components/data-table/table-header-row'
 import LessonNotes, { Notation } from './LessonNotes.vue'
 import UniversalGlossary from './UniversalGlossary.vue'
+import LoadingPanel from './LoadingPanel.vue'
 
 interface NotationsJson {
   [key: string] : Notation
@@ -30,7 +32,7 @@ class Props {
 }
 
 @Options({
-  components: { LessonNotes, UniversalGlossary },
+  components: { LessonNotes, UniversalGlossary, LoadingPanel },
   computed: {
     notationsData: {
       get () {

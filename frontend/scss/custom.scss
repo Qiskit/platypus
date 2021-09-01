@@ -50,3 +50,23 @@ button span.rangle {
     position: relative;
   }
 }
+
+
+
+// loading state
+// html:not(.ready) {
+  .c-sidebar__chapters,
+  .page__banner,
+  .reveal-banner,
+  .c-textbook__content,
+  .lesson-notes {
+    display: none;
+  }
+// }
+
+html.ready {
+  q-skeleton-text,
+  .loading-panel {
+    // display: none;
+  }
+}
