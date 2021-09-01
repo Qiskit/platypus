@@ -58,8 +58,12 @@ html.loading {
   .c-sidebar__chapters,
   .page__banner,
   .reveal-banner,
-  .c-textbook__content,
-  .lesson-notes {
+  #page-title,
+  .footer-nav,
+  .lesson-notes,
+  x-step p,
+  x-step h2,
+  x-img {
     display: none;
   }
 }
