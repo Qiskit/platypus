@@ -24,6 +24,10 @@ export default class EmptyPanel extends Vue {}
   p {
     margin-bottom: $spacing-05;
     width: 100% !important;
+    background-color: $background-color-light;
+    &::before {
+      background-color: $background-color-light-2;
+    }
   }
 }
 </style>

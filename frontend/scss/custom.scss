@@ -53,8 +53,8 @@ button span.rangle {
 
 
 
-// loading state
-// html:not(.ready) {
+// skeleton text loading
+html.loading {
   .c-sidebar__chapters,
   .page__banner,
   .reveal-banner,
@@ -62,11 +62,11 @@ button span.rangle {
   .lesson-notes {
     display: none;
   }
-// }
+}
 
-html.ready {
+html:not(.loading) {
   q-skeleton-text,
   .loading-panel {
-    // display: none;
+    display: none;
   }
 }

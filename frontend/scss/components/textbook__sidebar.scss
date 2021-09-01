@@ -63,6 +63,11 @@
     .bx--skeleton__text {
       margin-bottom: $spacing-06;
       width: 100% !important; // needed to override inline styles
+      background-color: $background-color-light;
+
+      &::before {
+        background-color: $background-color-light-2;
+      }
     }
 
     & .c-sidebar__chapter:first-child {
