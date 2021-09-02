@@ -38,33 +38,33 @@ html(lang=lang dir=dir)
             data-test="error-page-cta"
           )
         <div class="c-textbook__page__error-img">
-          <img id="img" src="https://source.unsplash.com/random/800×400/?cat" alt="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."/>
+          <img id="img" src="/images/error_page/cat1.png" alt="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."/>
         </div>
     script.
       var descriptions = [
         'Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in.',
-        'Looks like that URL is an <em><strong>entangled</strong></em> mess',
-        'We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist',
+        'Looks like that URL is an <em><strong>entangled</strong></em> mess.',
+        'We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist.',
         'You’ve reached the edge of the multi-verse.',
         'There is content on this page in another dimension, but not this dimension.'
       ]
 
       var imgList = [
-        'error_imgs/cat1.png',
-        'error_imgs/cat2.png',
-        'error_imgs/cat3.png',
-        'error_imgs/cat4.png',
-        'error_imgs/cat5.png',
-        'error_imgs/cat6.png',
-        'error_imgs/cat7.png',
-        'error_imgs/cat8.png',
-        'error_imgs/cat9.png',
+        '/images/error_page/cat1.png',
+        '/images/error_page/cat2.png',
+        '/images/error_page/cat3.png',
+        '/images/error_page/cat4.png',
+        '/images/error_page/cat5.png',
+        '/images/error_page/cat6.png',
+        '/images/error_page/cat7.png',
+        '/images/error_page/cat8.png',
+        '/images/error_page/cat9.png',
       ]
 
       var description = descriptions[Math.floor(Math.random() * descriptions.length)] // select random
       var img = imgList[Math.floor(Math.random() * imgList.length)] // select random
       document.getElementById('description').innerHTML = description
-      document.getElementById('img').src = `/images/${img}`
+      document.getElementById('img').src = `${img}`
     script.
       var textbookAnalytics = {
         url: "#{config.analytics.url || ''}",

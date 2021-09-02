@@ -102,15 +102,8 @@
       margin-bottom: $spacing-06;
     }
 
-    &-img {
-      // max-width: 48rem;
-      // @include mq($until: large) {
-      //   max-width: 28rem;
-      // }
-    }
-
     &-cta .app-cta_ghost[datatest="error-page-cta"]{
-      padding: 1rem;
+      padding: $spacing-05;
       justify-content: space-between;
     }
 
