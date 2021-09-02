@@ -119,13 +119,15 @@ pre {
 }
 
 x-progress {
+  color: var(--sidebar--x-progress-color);
+
   svg {
     z-index: -1;
     position: relative;
   }
 
   path.pie {
-    color: $background-color-tertiary;
+    color: var(--sidebar--link-color--active);
   }
 
   .c-sidebar__section & {

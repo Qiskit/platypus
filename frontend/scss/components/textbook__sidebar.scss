@@ -28,9 +28,9 @@
 
 .c-textbook__sidebar {
   overflow: auto;
-  background-color: $background-color-lighter;
+  background-color: var(--sidebar--background-color);
   padding: $spacing-unit-small $spacing-unit;
-  scrollbar-color: $background-color-lighter $background-color-lighter;
+  scrollbar-color: var(--sidebar--background-color) var(--sidebar--background-color);
   transition: scrollbar-color 0.2s ease-in-out;
   font-size: 0.875rem;
   line-height: 1.71429;
@@ -85,7 +85,7 @@ li.c-sidebar__chapter > a {
 
 .c-sidebar__entry {
   display: block;
-  color: $text-color-dark;
+  color: var(--text-color-title);
   font-size: 0.875rem;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -101,21 +101,21 @@ li.c-sidebar__chapter > a {
 
 a.c-sidebar__entry {
   &:visited {
-    color: $text-color-dark;
+    color: var(--text-color-title);
   }
   &:hover {
     background: initial;
-    color: $link-color-tertiary;
+    color: var(--sidebar--link-color--active);
   }
 }
 
 .c-sidebar__entry--active {
   &.c-sidebar__entry--active {
-    color: $text-active-color;
+    color: var(--sidebar--link-color--active);
     font-weight: 600;
 
     &:visited {
-      color: $text-active-color;
+      color: var(--sidebar--link-color--active);
     }
   }
 }
@@ -153,7 +153,7 @@ nav ul.c-sidebar__sections {
   direction: rtl;
   font-size: 14px;
   line-height: 24px;
-  background-color: $background-color-lighter;
+  background-color: var(--sidebar--background-color);
   width: 100%;
   z-index: 100;
 
@@ -192,7 +192,7 @@ nav ul.c-sidebar__sections {
     z-index: 2;
     left: 0;
     right: 0;
-    background-color: $background-color-lighter;
+    background-color: var(--utility-panel--toggle--background-color);
     border-bottom: 1px solid $border-color;
     border-right: 1px solid $border-color;
   }
@@ -211,15 +211,15 @@ nav ul.c-sidebar__sections {
   align-items: center;
   justify-content: flex-end;
   padding: .5rem 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
-  color: $link-color-tertiary;
+  border-top: 1px solid var(--sidebar--menu-item--border-color);
+  color: var(--sidebar--menu-item--text-color);
 }
 
 .sidebar_header_menu_toggle,
 .sidebar_footer__menu_item {
   svg {
     width: $spacing-05;
-    fill: $purple-70;
+    fill: var(--sidebar--menu-item--text-color);
   }
 }
 
@@ -230,7 +230,7 @@ nav ul.c-sidebar__sections {
 
   @include mq($until: medium) {
     @include type-style('body-long-01');
-    color: $purple-70;
+    color: var(--utility-panel--toggle--text-color);
     height: 40px;
     justify-content: space-between;
     display: flex;
