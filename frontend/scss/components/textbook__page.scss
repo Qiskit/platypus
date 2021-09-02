@@ -70,13 +70,28 @@
     padding-bottom: 10rem;
     display: flex;
 
-    @include mq($until: large) {
+    @include mq($until: medium) {
       padding-left: $spacing-05;
       flex-direction: column;
     }
 
+    @include mq($from: medium) {
+      padding-left: 3rem;
+      justify-content: space-between;
+    }
+
+    @include mq($from: large) {
+      padding-left: 7rem;
+      justify-content: flex-start;
+    }
+
     &-container {
+      width: 100%;
       max-width: $browser-small;
+
+      @include mq($until: medium) {
+        max-width: 100%;
+      }
     }
 
     &-code {
@@ -88,12 +103,10 @@
     }
 
     &-img {
-      text-align: center;
-      max-width: $browser-medium;
-
-      @include mq($until: large) {
-        text-align: left;
-      }
+      // max-width: 48rem;
+      // @include mq($until: large) {
+      //   max-width: 28rem;
+      // }
     }
 
     &-cta .app-cta_ghost[datatest="error-page-cta"]{

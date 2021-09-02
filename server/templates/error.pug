@@ -38,21 +38,27 @@ html(lang=lang dir=dir)
             data-test="error-page-cta"
           )
         <div class="c-textbook__page__error-img">
-          <img id="img" src="https://source.unsplash.com/random/800×400/?cat" alt="A cat in a box"/>
-          <p>Did you know that Schrodinger’s cat paradox was a joke to ridicule the quantum interpretation.</p>
+          <img id="img" src="https://source.unsplash.com/random/800×400/?cat" alt="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."/>
         </div>
     script.
       var descriptions = [
-        'Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in...',
+        'Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in.',
+        'Looks like that URL is an <em><strong>entangled</strong></em> mess',
         'We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist',
         'You’ve reached the edge of the multi-verse.',
-        'Quantum error correction happening now',
-        'Okay, that wasn’t supposed to happen',
         'There is content on this page in another dimension, but not this dimension.'
       ]
 
       var imgList = [
-        'huffmans_cat.png'
+        'error_imgs/cat1.png',
+        'error_imgs/cat2.png',
+        'error_imgs/cat3.png',
+        'error_imgs/cat4.png',
+        'error_imgs/cat5.png',
+        'error_imgs/cat6.png',
+        'error_imgs/cat7.png',
+        'error_imgs/cat8.png',
+        'error_imgs/cat9.png',
       ]
 
       var description = descriptions[Math.floor(Math.random() * descriptions.length)] // select random
