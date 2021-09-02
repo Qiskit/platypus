@@ -324,25 +324,26 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   bx-dropdown[open]::part(trigger-button) {
-    background-color: $background-color-lighter;
+    background-color: var(--bx-dropdown--items--background-color);
   }
 
   bx-dropdown::part(menu-body) {
     top: calc(100% + 10px);
-    background-color: $background-color-lighter;
+    background-color: var(--bx-dropdown--items--background-color);
   }
 
   bx-dropdown.menu__entry {
     padding: .5rem 0;
 
     &[open] {
-      background-color: $background-color-lighter;
+      background-color: var(--bx-dropdown--items--background-color);
       border-bottom: 1px solid $border-color;
       margin-bottom: -1px;
     }
   }
 
   bx-dropdown-item {
+    background-color: var(--bx-dropdown--items--background-color);
     display: flex;
     height: 100%;
 

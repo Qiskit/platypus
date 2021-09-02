@@ -71,9 +71,8 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 &__item {
     @include type-style('body-short-01');
     display: block;
-    color: $link-color-secondary;
     text-decoration: none;
-    background-color: $background-color-lighter;
+    background-color: var(--bx-dropdown--items--background-color);
   }
 
   // component overrides

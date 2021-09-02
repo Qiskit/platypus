@@ -8,6 +8,12 @@
   --text-color: #{$text-color-light};
   --text-color-title: #{$text-color-dark};
 
+  --bx-dropdown--items--background-color: #{$background-color-lighter};
+
+  --cds-icon-01: var(--cds-text-01);
+  --cds-text-01: var(--navbar--link-color);
+  --cds-text-02: var(--navbar--link-color);
+
   --navbar--link-color: #{$link-color-secondary};
 
   --q-block--background-color: #{$background-color-lighter};
@@ -34,6 +40,12 @@
   --logo-color: #{$text-color-lighter-3};
   --text-color: #{$text-color-lighter-3};
   --text-color-title: #{$text-color-lighter-3};
+
+  --bx-dropdown--items--background-color: #{$background-color-darker};
+
+  --cds-icon-01: var(--cds-text-01);
+  --cds-text-01: var(--navbar--link-color);
+  --cds-text-02: var(--navbar--link-color);
 
   --navbar--link-color: #{$text-color-lighter-3};
   
