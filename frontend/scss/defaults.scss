@@ -19,6 +19,13 @@
   --sidebar--menu-item--border-color: rgba(0, 0, 0, 0.07);
   --sidebar--menu-item--text-color: #{$link-color-tertiary};
   --sidebar--x-progress-color: #{$text-color-light};
+
+  --table--header--background-color: #{$background-color-light};
+  --table--header--text-color: #{$text-color-black};
+
+  --utility-panel--menu-dropdown--background-color: #{$background-color-light};
+  --utility-panel--toggle--background-color: #{$background-color-lighter};
+  --utility-panel--toggle--text-color: #{$link-color-tertiary};
 }
 
 // Variables values for the dark theme.
@@ -39,6 +46,13 @@
   --sidebar--menu-item--border-color: #{$border-color-light-3};
   --sidebar--menu-item--text-color: #{$link-color-tertiary-2};
   --sidebar--x-progress-color: #{$text-color-lighter-3};
+
+  --table--header--background-color: #{$background-color-darker};
+  --table--header--text-color: #{$text-color-lighter-3};
+
+  --utility-panel--menu-dropdown--background-color: #{$background-color-dark};
+  --utility-panel--toggle--background-color: #{$background-color-darker};
+  --utility-panel--toggle--text-color: #{$link-color-tertiary-2};
 }
 
 // Themes setup.
@@ -78,7 +92,7 @@ body {
   letter-spacing: 0.16px;
   line-height: 20px;
   min-height: 100%;
-  color: $text-color-light;
+  color: var(--text-color);
 }
 
 a:hover {

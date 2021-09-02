@@ -81,7 +81,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   &::part(trigger-button) {
     @include type-style('body-short-01');
     --cds-body-short-01-font-size: 1rem;
-    background-color: $cool-gray-20;
+    background-color: var(--utility-panel--menu-dropdown--background-color);
 
     &:focus {
       outline: none;
