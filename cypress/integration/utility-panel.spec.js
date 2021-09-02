@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
 describe('Utility panel', () => {
-  utilityPanelSelector = '[data-test=utility-panel-content]'
-  toggleUtilityPanelSelector = '[data-test=utility-panel-header-toggle]'
+  const utilityPanelSelector = '[data-test=utility-panel-content]'
+  const toggleUtilityPanelSelector = '[data-test=utility-panel-header-toggle]'
 
   it('can be toggled on a laptop or tablet', () => {
-    viewports = ['ipad-2', 'macbook-15']
+    const viewports = ['ipad-2', 'macbook-15']
 
     viewports.forEach((viewport) => {
       cy.viewport(viewport)
