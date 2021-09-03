@@ -19,7 +19,7 @@ html.loading(lang=lang dir=dir)
 
         article(class="c-textbook__page", data-test="textbook-page")
           include banner
-          div.c-textbook__page__loading
+          div.c-textbook__page__loading(data-test="textbook-page-loading")
             q-skeleton-text.c-textbook__page__loading-title(heading)
             q-skeleton-text.c-textbook__page__loading-heading(heading)
             q-skeleton-text.c-textbook__page__loading-copy(line-count="6")

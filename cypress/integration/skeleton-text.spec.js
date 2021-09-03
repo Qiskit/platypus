@@ -3,8 +3,8 @@
 describe('SkeletonText', () => {
   it('Can render while page is loading', () => {
     const viewports = ['ipad-2', 'macbook-15']
-    const sidebarSkeletonText = '.c-sidebar__chapters__loading'
-    const pageSkeletonText = '.c-textbook__page__loading'
+    const sidebarSkeletonText = '[data-test=sidebar-chapters-loading]'
+    const pageSkeletonText = '[data-test=textbook-page-loading]'
 
     viewports.forEach((viewport) => {
       cy.viewport(viewport)
