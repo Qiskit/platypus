@@ -11,7 +11,6 @@ describe('Utility panel', () => {
       cy.viewport(viewport)
       cy.visit('/course/ch-prerequisites')
       cy.get(utilityPanelSelector).should('be.visible')
-      cy.get(toggleUtilityPanelSelector).should('be.visible')
       cy.get(toggleUtilityPanelSelector).click()
       cy.get(utilityPanelSelector).should('be.not.visible')
       cy.get(toggleUtilityPanelSelector).click()
