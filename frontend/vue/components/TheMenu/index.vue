@@ -164,6 +164,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   &__hamburger-toggle {
+    color: var(--link-color);
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
