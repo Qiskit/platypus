@@ -47,7 +47,7 @@ div.jb_input div.input {
   position: relative;
   z-index: 999;
   border: 1px solid $border-color;
-  background-color: $background-color-lighter;
+  background-color: var(--code-block--background-color);
   border-radius: 0px;
   margin: 2em 0;
   display: flex;
@@ -78,8 +78,8 @@ div.jb_input div.input {
   transition: all 0.2s;
   border: none;
 
-  background-color: $background-color-darker;
-  color: $text-color-white;
+  background-color: var(--code-block--button--background-color);
+  color: var(--code-block--button--text-color);
 }
 
 .thebelab-button:hover{
@@ -132,6 +132,36 @@ div.jp-OutputArea > :first-child {
 }
 
 .jp-OutputArea-child {
-  background-color: $background-color-white;
+  background-color: var(--code-block--output-background-color);
   padding: 18px;
+}
+
+.CodeMirror {
+  pre {
+    color: var(--text-color);
+  }
+
+  .cm-builtin {
+    color: var(--code-block--cm-builtin);
+  }
+
+  .cm-comment {
+    color: var(--code-block--cm-comment);
+  }
+  
+  .cm-def {
+    color: var(--code-block--cm-def);
+  }
+
+  .cm-keyword {
+    color: var(--code-block--cm-keyword);
+  }
+
+  .cm-number {
+    color: var(--code-block--cm-number);
+  }
+
+  .cm-string {
+    color: var(--code-block--cm-string);
+  }
 }

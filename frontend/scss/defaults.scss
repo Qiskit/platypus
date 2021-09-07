@@ -14,6 +14,17 @@
   --cds-text-01: var(--navbar--link-color);
   --cds-text-02: var(--navbar--link-color);
 
+  --code-block--background-color: #{$background-color-lighter};
+  --code-block--button--background-color: #{$background-color-darker};
+  --code-block--button--text-color: #{$text-color-white};
+  --code-block--output-background-color: #{$background-color-white};
+  --code-block--cm-builtin: #30a;
+  --code-block--cm-comment: #a50;
+  --code-block--cm-def: #00f;
+  --code-block--cm-keyword: #708;
+  --code-block--cm-number: #164;
+  --code-block--cm-string: #a11;
+
   --navbar--link-color: #{$link-color-secondary};
 
   --q-block--background-color: #{$background-color-lighter};
@@ -46,6 +57,17 @@
   --cds-icon-01: var(--cds-text-01);
   --cds-text-01: var(--navbar--link-color);
   --cds-text-02: var(--navbar--link-color);
+
+  --code-block--background-color: #{$background-color-darker};
+  --code-block--button--background-color: #{$background-color-light};
+  --code-block--button--text-color: #{$text-color-dark};
+  --code-block--output-background-color: #{$background-color-dark-2};
+  --code-block--cm-builtin: #{$purple-40};
+  --code-block--cm-comment: #{$orange-40};
+  --code-block--cm-def: #{$blue-40};
+  --code-block--cm-keyword: #{$magenta-40};
+  --code-block--cm-number: #{$green-30};
+  --code-block--cm-string: #{$red-40};
 
   --navbar--link-color: #{$text-color-lighter-3};
   
