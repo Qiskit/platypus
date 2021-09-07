@@ -5,7 +5,7 @@
     :ondrop="ev => dropToCodePool(ev)"
   >
     <div class="drag-and-drop-code__code-pool-title">
-      Drag from here
+      {{ $translate('Drag from here') }}
     </div>
     <div
       ref="codePoolRef"
@@ -14,7 +14,7 @@
       <slot />
     </div>
     <div class="drag-and-drop-code__gaps-title">
-      Drop blocks here
+      {{ $translate('Drop blocks here') }}
     </div>
     <div
       class="drag-and-drop-code__gaps-container"

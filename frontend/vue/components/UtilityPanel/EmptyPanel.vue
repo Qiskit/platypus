@@ -1,11 +1,12 @@
 <template>
   <div class="empty-panel">
     <p class="empty-panel__title">
-      Nothing here yet
+      {{ $translate('Nothing here yet') }}
     </p>
     <p class="empty-panel__description">
-      Eventually, all the vocabulary and mathematics from this section will be shown here. Until then, you can visit the <BasicLink v-bind="link" @click="redirectAction($event, link)">
-        {{ link.label }}
+      {{ $translate('Eventually, all the vocabulary and mathematics from this section will be shown here. Until then, you can visit the') }}
+      <BasicLink v-bind="link" @click="redirectAction($event, link)">
+        {{ $translate(link.label) }}
       </BasicLink>
     </p>
     <img class="empty-panel__img" src="/images/work-in-progress.png" alt="Illustration of hands working with tools">

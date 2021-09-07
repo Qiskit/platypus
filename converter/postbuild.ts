@@ -8,6 +8,11 @@ import { Course } from '@mathigon/studio/server/interfaces'
 import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/utilities'
 import { parseYAML} from '@mathigon/studio/build/markdown'
 
+import {
+  translationsLanguages,
+  workingContentPath,
+  workingTranslationsPath
+} from './common'
 import generateJsonSitemap from './sitemap-to-json'
 
 const COURSES = fs.readdirSync(CONTENT)
@@ -16,6 +21,12 @@ const COURSES = fs.readdirSync(CONTENT)
 const loadJSON = function (file: string) {
   if (!fs.existsSync(file)) return undefined
   return JSON.parse(fs.readFileSync(file, 'utf8')) as unknown
+}
+
+const getSharedPath = function (language: string = 'en') {
+  return language == 'en'
+    ? path.join(workingContentPath, 'shared')
+    : path.join(workingTranslationsPath, language, 'shared')
 }
 
 const findCourse = function (courseId: string, locale: string = 'en'): Course {
@@ -73,10 +84,10 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
   return content
 }
 
-const updateSharedYaml = async function(locale: string = 'en') {
+const updateSharedYaml = async function(language: string = 'en') {
   let courseHtml = ''
   COURSES.forEach(courseId => {
-    const course = findCourse(courseId, locale)
+    const course = findCourse(courseId, language)
     if (course) {
       Object.keys(course.steps).forEach(stepId => {
         const section = course?.sections.find(s => s.steps.indexOf(stepId) > -1)
@@ -87,22 +98,23 @@ const updateSharedYaml = async function(locale: string = 'en') {
   })
 
   const document = new JSDom(`<!DOCTYPE html><body>${courseHtml}</body>`).window.document
+  const sharedPath = getSharedPath(language)
 
   // update notations.yaml with section IDs and html fragment
-  console.log('updating notations yaml')
-  const notationsYaml = path.join(CONTENT, 'shared/notations.yaml')
+  console.log(`updating notations yaml [${language}]`)
+  const notationsYaml = path.join(sharedPath, 'notations.yaml')
   const notations = insertSections((loadYAML(notationsYaml) || {}) as object, document, true)
   await writeFile(notationsYaml, yaml.dump(notations, {sortKeys: true}))
 
   // update glossary.yaml with section IDs
-  console.log('updating glossary yaml')
-  const glossaryYaml = path.join(CONTENT, 'shared/glossary.yaml')
+  console.log(`updating glossary yaml [${language}]`)
+  const glossaryYaml = path.join(sharedPath, 'glossary.yaml')
   const glossary = insertSections((loadYAML(glossaryYaml) || {}) as object, document, false)
   await writeFile(glossaryYaml, yaml.dump(glossary, {sortKeys: true}))
 
   // update universal notations
-  console.log('updating universal-notations yaml')
-  const universal = await parseYAML(path.join(CONTENT, 'shared'), 'universal-notations.yaml', 'en', 'notation')
+  console.log(`updating universal-notations yaml [${language}]`)
+  const universal = await parseYAML(sharedPath, 'universal-notations.yaml', language, 'notation')
   const startIndex = '<p>'.length
   const endIndex = '</p>'.length
 
@@ -117,14 +129,13 @@ const updateSharedYaml = async function(locale: string = 'en') {
     universal[notes].notation = n
   }
 
-  // const universalJson = path.join(CONTENT, 'shared/universal.json')
-  // await writeFile(universalJson, JSON.stringify(universal))
-
-  const universalYaml = path.join(CONTENT, 'shared/universal.yaml')
+  const universalYaml = path.join(sharedPath, 'universal.yaml')
   await writeFile(universalYaml, yaml.dump(universal, {sortKeys: true}))
 }
 
-updateSharedYaml()
+translationsLanguages.forEach(async(language) => {
+  updateSharedYaml(language)
+})
 
 generateJsonSitemap(
   path.join(__dirname, '../public/sitemap.xml'),

@@ -128,7 +128,6 @@ def handle_attachments(line, cell):
     match = html_img_regex.search(line)
     if match is not None:
         img_src = match.group(2)
-        print(img_src)
         img_data = get_attachment_data(img_src, cell)
         return line.replace(img_src, img_data)
     else:
@@ -170,7 +169,7 @@ def handle_hero_image(hero_image_syntax):
         return hero_image_syntax
 
 
-def handle_heading(heading_syntax, in_block, suffix):
+def handle_heading(heading_syntax, in_block, suffix, section):
     """Increase header level and compute level, title, and id
     """
     header, title = heading_syntax.split(' ', 1)
@@ -180,12 +179,16 @@ def handle_heading(heading_syntax, in_block, suffix):
     else:
         match = tag_id_regex.search(heading_syntax)
         if match is None:
-            id = re.sub(r"\s", "-", title.strip().lower())
-            id = re.sub(r"[^\w-]", "", id) + (suffix if level > 1 else "")
+            id = section if section else re.sub(r"\s", "-", title.strip().lower())
+            id = re.sub(r"[^\w-]", "", id)
             if level == 1:
                 # Mathigon requires all sections to start with `##`
                 text = f'#{heading_syntax}\n'
+            elif '-0-0' in suffix:
+                # Mathigon requires all sections to start with `##`
+                text = f'## {heading_syntax.split(" ", 1)[-1]}\n'
             else:
+                id = id.split('-', 1)[0][:25] + suffix
                 text = f'<h{level}>\n{title} <a id="{id}"></a>\n</h{level}>\n'
             return id, level, title.strip(), text
         else:
@@ -194,6 +197,9 @@ def handle_heading(heading_syntax, in_block, suffix):
             if level == 1:
                 # Mathigon requires all sections to start with `##`
                 text = f'#{heading_syntax}\n'
+            elif '-0-0' in suffix:
+                # Mathigon requires all sections to start with `##`
+                text = f'## {heading_syntax.split(" ", 1)[-1]}\n'
             else:
                 text = f'<h{level}>\n{heading_syntax[level:]}\n</h{level}>\n'
             return id, level, title, text
@@ -265,8 +271,9 @@ def handle_markdown_cell(cell, resources, cell_number):
         elif line.lstrip().startswith(IMAGE_START):
             markdown_lines.append(handle_images(line, cell))
         elif line.lstrip().startswith(HEADING_START):
+            section = resources['textbook']['section'] if 'section' in resources['textbook'] else None
             id, level, title, heading_text = handle_heading(
-                line, in_block, f'-{cell_number}-{count}'
+                line, in_block, f'-{cell_number}-{count}', section
             )
             if not in_block:
                 headings.append((id, level, title))
