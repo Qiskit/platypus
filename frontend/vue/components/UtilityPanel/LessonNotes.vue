@@ -5,7 +5,7 @@
     </section>
     <section v-if="filteredVocabulary.length > 0" class="lesson-notes__section">
       <p class="lesson-notes__section__title">
-        {{ vocabSectionTitle }}
+        {{ $translate('Vocabulary') }}
       </p>
       <div v-for="term in filteredVocabulary" :key="term.index" class="lesson-notes__term">
         <span class="lesson-notes__term__title">{{ term.title }}</span>
@@ -14,14 +14,14 @@
     </section>
     <section v-if="filteredNotations.length > 0" class="lesson-notes__section">
       <p class="lesson-notes__section__title">
-        {{ notationsSectionTitle }}
+        {{ $translate('Math notations') }}
       </p>
       <bx-data-table :theme="white">
         <bx-table>
           <bx-table-head>
             <bx-table-header-row>
-              <bx-table-header-cell>Notation</bx-table-header-cell>
-              <bx-table-header-cell>Description</bx-table-header-cell>
+              <bx-table-header-cell>{{ $translate('Notation') }}</bx-table-header-cell>
+              <bx-table-header-cell>{{ $translate('Description') }}</bx-table-header-cell>
             </bx-table-header-row>
           </bx-table-head>
           <bx-table-body>
@@ -105,8 +105,6 @@ class Props {
 
 export default class LessonNotes extends Vue.with(Props) {
   showLessonNotations = false;
-  notationsSectionTitle = 'Math notations'
-  vocabSectionTitle = 'Vocabulary'
 
   handleEmptyStateRedirect (label:string) {
     this.$emit('handleEmptyStateRedirect', label)

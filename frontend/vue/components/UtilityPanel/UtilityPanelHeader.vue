@@ -8,7 +8,7 @@
       :is-static="true"
       @click="togglePanel($event)"
     >
-      {{ ctaLabel }}
+      {{ $translate(ctaLabel) }}
       <OpenPanelRight16 class="utility-panel-header__icon" />
     </BasicLink>
   </div>

@@ -10,7 +10,7 @@
     <CheckmarkFilled v-if="state === 1" class="solution-state-indicator__icon" />
     <ErrorFilled v-else-if="state === 2" class="solution-state-indicator__icon" />
     <PendingFilled v-else class="solution-state-indicator__icon" />
-    <span class="solution-state-indicator__text"> {{ texts[state] }} </span>
+    <span class="solution-state-indicator__text"> {{ $translate(texts[state]) }} </span>
   </div>
 </template>
 
