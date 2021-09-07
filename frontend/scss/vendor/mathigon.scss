@@ -355,7 +355,7 @@ x-bio, x-gloss {
     }
   }
   .popup {
-    background: $background-color-lighter;
+    background: var(--mathigon--popup--background-color);
     box-shadow: initial;
     left: -2px;
     border-top: 2px solid $glossary-border-color;
@@ -376,7 +376,7 @@ x-bio, x-gloss {
 
     p, strong {
       font-size: 14px;
-      color: $text-color-black;
+      color: var(--mathigon--popup--text-color);
       line-height: 20px;
     }
   }

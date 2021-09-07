@@ -25,6 +25,9 @@
   --code-block--cm-number: #164;
   --code-block--cm-string: #a11;
 
+  --mathigon--popup--background-color: #{$background-color-lighter};
+  --mathigon--popup--text-color: #{$text-color-light};
+
   --navbar--link-color: #{$link-color-secondary};
 
   --q-block--background-color: #{$background-color-lighter};
@@ -71,6 +74,9 @@
   --code-block--cm-keyword: #{$magenta-40};
   --code-block--cm-number: #{$green-30};
   --code-block--cm-string: #{$red-40};
+
+  --mathigon--popup--background-color: #{$background-color-dark};
+  --mathigon--popup--text-color: #{$text-color-lighter-3};
 
   --navbar--link-color: #{$text-color-lighter-3};
   
