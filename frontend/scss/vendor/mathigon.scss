@@ -29,10 +29,10 @@ pre {
 
 .reveal-banner {
   @include type-style('productive-heading-01');
-  background-color: $background-color-light;
+  background-color: var(--reveal-banner--background-color);
   border-radius: initial;
   border-right: 1px solid $border-color-secondary;
-  color: $text-color-light;
+  color: var(--reveal-banner--text-color);
   padding: $spacing-03 $spacing-07 $spacing-03 $spacing-05;
   top: 52px;
   left: 0px;

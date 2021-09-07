@@ -31,6 +31,9 @@
   --q-block--tabbox--color: #{$text-color-light};
   --q-block--tabbox--color--active: #{$block-link-color-tertiary};
 
+  --reveal-banner--background-color: #{$background-color-light};
+  --reveal-banner--text-color: #{$text-color-black};
+
   --sidebar--background-color: #{$background-color-lighter};
   --sidebar--link-color--active: #{$link-color-tertiary};
   --sidebar--menu-item--border-color: rgba(0, 0, 0, 0.07);
@@ -74,6 +77,9 @@
   --q-block--background-color: #{$background-color-darker};
   --q-block--tabbox--color: #{$text-color-lighter-4};
   --q-block--tabbox--color--active: #{$block-link-color-tertiary-2};
+
+  --reveal-banner--background-color: #{$background-color-darker};
+  --reveal-banner--text-color: #{$text-color-lighter-3};
 
   --sidebar--background-color: #{$background-color-darker};
   --sidebar--link-color--active: #{$link-color-tertiary-2};
