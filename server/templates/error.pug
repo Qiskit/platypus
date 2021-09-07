@@ -38,7 +38,11 @@ html(lang=lang dir=dir)
             data-test="error-page-cta"
           )
         <div class="c-textbook__page__error-img">
-          <img id="img" src="/images/error_page/cat1.png" alt="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."/>
+          img(
+            id="img"
+            src="/images/error_page/cat1.png"
+            alt="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."
+          )
         </div>
     script.
       var descriptions = [
@@ -74,5 +78,3 @@ html(lang=lang dir=dir)
     script user = null;
     include ../includes/tail.html
     script(src='/polyfill.js')
-
-    include ../includes/thebe-config.html

@@ -67,7 +67,6 @@
     padding-left: 8rem;
     max-width: initial;
     padding-top: 4rem;
-    padding-bottom: 10rem;
     display: flex;
 
     @include mq($until: medium) {
@@ -109,6 +108,9 @@
 
     &-cta .app-cta_ghost .app-cta__icon {
       margin-right: .25rem;
+    }
+    &-img {
+      max-width: 52rem;
     }
   }
 }
