@@ -5,6 +5,7 @@
 @mixin theme-variables-light {
   --background-color: #{$background-color-white};
   --logo-color: #{$text-color-lighter};
+  --link-color: #{$link-color-tertiary};
   --text-color: #{$text-color-light};
   --text-color-title: #{$text-color-dark};
 
@@ -55,6 +56,7 @@
 @mixin theme-variables-dark {
   --background-color: #{$background-color-dark-2};
   --logo-color: #{$text-color-lighter-3};
+  --link-color: #{$link-color-tertiary-2};
   --text-color: #{$text-color-lighter-3};
   --text-color-title: #{$text-color-lighter-3};
 

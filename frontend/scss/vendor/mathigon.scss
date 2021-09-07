@@ -224,7 +224,7 @@ x-step {
     margin: 0 0 1em;
 
     a {
-      color: $link-color-tertiary;
+      color: var(--link-color);
 
       &::before {
         background: none;
