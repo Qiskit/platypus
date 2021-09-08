@@ -3,13 +3,13 @@ mixin icon(name, size)
     use(xlink:href=`/icons.svg#${name}`)
 
 doctype html
-html(lang=lang dir=dir)
+html(lang=`${req.locale.id}` dir=dir)
   head
     include head
     link(href=`/css/mathjax_styles.css` rel="stylesheet")
     include ../includes/hotjar.html
 
-  body(data-learning-path=`${learningPath}`)
+  body
     div.qiskit__navbar#qiskit-navbar
       q-the-menu
 
@@ -75,6 +75,7 @@ html(lang=lang dir=dir)
         url: "#{config.analytics.url || ''}",
         key: "#{config.analytics.key || ''}"
       }
+      var textbook = {}
 
     script user = null;
     include ../includes/tail.html
