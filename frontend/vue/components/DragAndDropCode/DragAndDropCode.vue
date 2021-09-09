@@ -301,7 +301,7 @@ $XS_WIDTH: 160px;
 
     font-family: $plex-mono;
 
-    background-color: var(--color-background-primary);
+    background-color: var(--qiskit--color-background-primary);
     border: 1px solid $border-color;
 
     &_xs { min-width: $XS_WIDTH; }
@@ -312,7 +312,7 @@ $XS_WIDTH: 160px;
   }
   &__gaps-container {
     padding: 20px 15px;
-    background: var(--color-background-primary);
+    background: var(--qiskit--color-background-primary);
     border: 1px solid $border-color;
   }
   &__code-gap {
@@ -344,7 +344,7 @@ $XS_WIDTH: 160px;
     align-items: center;
     justify-content: space-between;
 
-    background: var(--color-background-primary);
+    background: var(--qiskit--color-background-primary);
     border: 1px solid $border-color;
 
     &__text {

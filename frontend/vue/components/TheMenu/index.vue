@@ -166,14 +166,14 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   &__hamburger-toggle {
-    color: var(--navbar-item-color);
+    color: var(--qiskit--navbar-item-color);
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
   }
 
   &__main-level {
-    --link-color: var(--navbar-item-color);
+    --link-color: var(--qiskit--navbar-item-color);
   }
 
   &__mobile {
@@ -238,7 +238,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
-    color: var(--navbar-logo-color);
+    color: var(--qiskit--navbar-logo-color);
 
     &_active {
       color: $active-color;
@@ -319,7 +319,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   // select a child within the shadow
   bx-dropdown::part(trigger-button) {
     --cds-body-short-01-font-size: 1rem;
-    background-color: var(--color-background-primary);
+    background-color: var(--qiskit--color-background-primary);
 
     &:focus {
       outline: none;

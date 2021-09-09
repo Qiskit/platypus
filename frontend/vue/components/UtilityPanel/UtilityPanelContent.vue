@@ -95,7 +95,7 @@ export default class UtilityPanelContent extends Vue.with(Props) {
 @import 'carbon-components/scss/globals/scss/typography';
 
 .utility-panel-content {
-  background-color: var(--color-background-primary);
+  background-color: var(--qiskit--color-background-primary);
   padding: $spacing-06 $spacing-05;
 
   bx-table-header-cell {
@@ -105,8 +105,8 @@ export default class UtilityPanelContent extends Vue.with(Props) {
 
   bx-table-cell,
   bx-table-cell:hover {
-    color: var(--color-text-primary);
-    background-color: var(--color-background-primary);
+    color: var(--qiskit--color-text-primary);
+    background-color: var(--qiskit--color-background-primary);
     border-top: none;
     border-bottom: 1px solid $border-color;
   }

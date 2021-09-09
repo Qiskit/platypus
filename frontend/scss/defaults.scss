@@ -8,8 +8,8 @@
   --bx-dropdown--items--background-color: #{$background-color-lighter};
 
   --cds-icon-01: var(--cds-text-01);
-  --cds-text-01: var(--navbar-item-color);
-  --cds-text-02: var(--navbar-item-color);
+  --cds-text-01: var(--qiskit--navbar-item-color);
+  --cds-text-02: var(--qiskit--navbar-item-color);
 
   --code-block--background-color: #{$background-color-lighter};
   --code-block--button--background-color: #{$background-color-darker};
@@ -51,8 +51,8 @@ html.dark-theme {
   --bx-dropdown--items--background-color: #{$background-color-darker};
 
   --cds-icon-01: var(--cds-text-01);
-  --cds-text-01: var(--navbar-item-color);
-  --cds-text-02: var(--navbar-item-color);
+  --cds-text-01: var(--qiskit--navbar-item-color);
+  --cds-text-02: var(--qiskit--navbar-item-color);
 
   --code-block--background-color: #{$background-color-darker};
   --code-block--button--background-color: #{$background-color-light};
@@ -103,13 +103,13 @@ html {
 
 html,
 body {
-  background-color: var(--color-background-primary);
+  background-color: var(--qiskit--color-background-primary);
   font-family: $plex-sans;
   font-size: 16px;
   letter-spacing: 0.16px;
   line-height: 20px;
   min-height: 100%;
-  color: var(--color-text-primary);
+  color: var(--qiskit--color-text-primary);
 }
 
 a:hover {
