@@ -1,4 +1,4 @@
-name: Check Textbook notebooks
+name: Check for Textbook notebooks
 
 on:
   # run when action is manually triggered
