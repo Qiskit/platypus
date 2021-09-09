@@ -202,3 +202,7 @@ details {
     }
   }
 }
+
+html.dark-theme img {
+  filter: invert(1) hue-rotate(180deg);
+}

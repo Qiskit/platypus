@@ -127,6 +127,10 @@ div.jp-OutputArea-output {
   padding: 18px;
 }
 
+html.dark-theme .jp-OutputArea-output svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 div.jp-OutputArea > :first-child {
   border-top: 1px solid $border-color !important;
 }
