@@ -85,7 +85,7 @@ li.c-sidebar__chapter > a {
 
 .c-sidebar__entry {
   display: block;
-  color: var(--text-color-title);
+  color: var(--color-text-title);
   font-size: 0.875rem;
   line-height: 20px;
   letter-spacing: 0.16px;
@@ -101,7 +101,7 @@ li.c-sidebar__chapter > a {
 
 a.c-sidebar__entry {
   &:visited {
-    color: var(--text-color-title);
+    color: var(--color-text-title);
   }
   &:hover {
     background: initial;

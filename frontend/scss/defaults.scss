@@ -1,19 +1,15 @@
+@use '../../node_modules/@qiskit-community/qiskit-vue/dist/styles/index.css';
+
 @import './variables/colors.scss';
 @import './variables/fonts.scss';
 
 // Variables values for the light theme.
-@mixin theme-variables-light {
-  --background-color: #{$background-color-white};
-  --logo-color: #{$text-color-lighter};
-  --link-color: #{$link-color-tertiary};
-  --text-color: #{$text-color-light};
-  --text-color-title: #{$text-color-dark};
-
+:root {
   --bx-dropdown--items--background-color: #{$background-color-lighter};
 
   --cds-icon-01: var(--cds-text-01);
-  --cds-text-01: var(--navbar--link-color);
-  --cds-text-02: var(--navbar--link-color);
+  --cds-text-01: var(--navbar-item-color);
+  --cds-text-02: var(--navbar-item-color);
 
   --code-block--background-color: #{$background-color-lighter};
   --code-block--button--background-color: #{$background-color-darker};
@@ -28,8 +24,6 @@
 
   --mathigon--popup--background-color: #{$background-color-lighter};
   --mathigon--popup--text-color: #{$text-color-light};
-
-  --navbar--link-color: #{$link-color-secondary};
 
   --q-block--background-color: #{$background-color-lighter};
   --q-block--tabbox--color: #{$text-color-light};
@@ -53,18 +47,12 @@
 }
 
 // Variables values for the dark theme.
-@mixin theme-variables-dark {
-  --background-color: #{$background-color-dark-2};
-  --logo-color: #{$text-color-lighter-3};
-  --link-color: #{$link-color-tertiary-2};
-  --text-color: #{$text-color-lighter-3};
-  --text-color-title: #{$text-color-lighter-3};
-
+html.dark-theme {
   --bx-dropdown--items--background-color: #{$background-color-darker};
 
   --cds-icon-01: var(--cds-text-01);
-  --cds-text-01: var(--navbar--link-color);
-  --cds-text-02: var(--navbar--link-color);
+  --cds-text-01: var(--navbar-item-color);
+  --cds-text-02: var(--navbar-item-color);
 
   --code-block--background-color: #{$background-color-darker};
   --code-block--button--background-color: #{$background-color-light};
@@ -79,8 +67,6 @@
 
   --mathigon--popup--background-color: #{$background-color-dark};
   --mathigon--popup--text-color: #{$text-color-lighter-3};
-
-  --navbar--link-color: #{$text-color-lighter-3};
   
   --q-block--background-color: #{$background-color-darker};
   --q-block--tabbox--color: #{$text-color-lighter-4};
@@ -103,23 +89,6 @@
   --utility-panel--toggle--text-color: #{$link-color-tertiary-2};
 }
 
-// Themes setup.
-body {
-  @include theme-variables-light;
-  
-  &.theme-light {
-    @include theme-variables-light;
-  }
-
-  &.theme-dark {
-    @include theme-variables-dark;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    @include theme-variables-dark;
-  }
-}
-
 html {
   box-sizing: border-box;
 }
@@ -134,13 +103,13 @@ html {
 
 html,
 body {
-  background-color: var(--background-color);
+  background-color: var(--color-background-primary);
   font-family: $plex-sans;
   font-size: 16px;
   letter-spacing: 0.16px;
   line-height: 20px;
   min-height: 100%;
-  color: var(--text-color);
+  color: var(--color-text-primary);
 }
 
 a:hover {

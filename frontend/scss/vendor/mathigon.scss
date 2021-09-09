@@ -8,7 +8,7 @@ x-step {
   code {
     background: none;
     border: none;
-    color: var(--text-color);
+    color: var(--color-text-primary);
     font-family: $plex-mono;
     padding-left: 0;
     padding-right: 0;
@@ -174,7 +174,7 @@ x-progress {
 }
 
 x-step {
-  color: var(--text-color);
+  color: var(--color-text-primary);
 
   ul, ol {
     font-size: 0.875rem;
@@ -190,7 +190,7 @@ x-step {
   }
 
   h3 {
-    color: var(--text-color);
+    color: var(--color-text-primary);
     font-size: 1em;
     font-weight: 600;
     line-height: 1.375rem;
@@ -200,7 +200,7 @@ x-step {
 
   h2 {
     border-bottom: none;
-    color: var(--text-color);
+    color: var(--color-text-primary);
     font-size: 1.75rem;
     font-weight: normal;
     line-height: 2.25rem;
@@ -224,7 +224,7 @@ x-step {
     margin: 0 0 1em;
 
     a {
-      color: var(--link-color);
+      color: var(--color-text-link);
 
       &::before {
         background: none;
@@ -250,7 +250,7 @@ x-step {
   p strong,
   x-step table strong,
   x-step li strong {
-    color: var(--text-color);
+    color: var(--color-text-primary);
   }
 }
 

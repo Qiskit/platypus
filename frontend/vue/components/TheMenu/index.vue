@@ -88,6 +88,7 @@
             </bx-dropdown-item>
           </bx-dropdown>
         </template>
+        <QiskitThemeToggle />
       </nav>
     </section>
   </div>
@@ -97,6 +98,7 @@
 import { Options, mixins } from 'vue-class-component'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
 import Close20 from '@carbon/icons-vue/lib/close/20'
+import { ThemeToggle as QiskitThemeToggle } from '@qiskit-community/qiskit-vue'
 import MenuMixin from '../../mixins/menu'
 import AppLogo from '../common/AppLogo.vue'
 import AppLink from '../common/AppLink.vue'
@@ -107,7 +109,7 @@ import MobileMenu from './MobileMenu.vue'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
 
 @Options({
-  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20 }
+  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20, QiskitThemeToggle }
 })
 export default class TheMenu extends mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
@@ -164,14 +166,14 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   &__hamburger-toggle {
-    color: var(--link-color);
+    color: var(--navbar-item-color);
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
   }
 
   &__main-level {
-    --link-color: var(--navbar--link-color);
+    --link-color: var(--navbar-item-color);
   }
 
   &__mobile {
@@ -236,7 +238,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
-    color: var(--logo-color);
+    color: var(--navbar-logo-color);
 
     &_active {
       color: $active-color;
@@ -317,7 +319,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   // select a child within the shadow
   bx-dropdown::part(trigger-button) {
     --cds-body-short-01-font-size: 1rem;
-    background-color: var(--background-color);
+    background-color: var(--color-background-primary);
 
     &:focus {
       outline: none;
