@@ -51,7 +51,11 @@ button span.rangle {
   }
 }
 
-
+@media (min-width: $browser-medium) {
+  body > .body {
+    overflow-x: hidden;
+  }
+}
 
 // skeleton text loading
 html.loading {

@@ -12,6 +12,7 @@ import MiniComposer from './components/MiniComposer/MiniComposer.vue'
 import Quiz from './components/Quiz/Quiz.vue'
 import AppCta from './components/common/AppCta.vue'
 import ContentMenu from './components/common/ContentMenu.vue'
+import LanguageSelector from './components/common/LanguageSelector.vue'
 import UtilityPanel from './components/UtilityPanel/UtilityPanel.vue'
 import UtilityPanelHeader from './components/UtilityPanel/UtilityPanelHeader.vue'
 import UtilityPanelDropdown from './components/UtilityPanel/UtilityPanelDropdown.vue'
@@ -23,6 +24,12 @@ import LoadingPanel from './components/UtilityPanel/LoadingPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
 import SkeletonText from './components/common/SkeletonText.vue'
+
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
 
 const kebabize = (str:string) => {
   return str.split('').map((letter:string, idx:number) => {
@@ -37,6 +44,7 @@ const components: any = {
   AppCta,
   CodeMirrorClipboardCopy,
   ContentMenu,
+  LanguageSelector,
   TheMenu,
   MobileMenu,
   LayersCircuit,

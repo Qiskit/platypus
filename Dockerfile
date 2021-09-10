@@ -14,13 +14,14 @@ RUN python3 -m venv .venv && source .venv/bin/activate
 RUN python3 -m pip install -U pip \
   && python3 -m pip install -r converter/textbook-converter/requirements.txt
 
-
 COPY converter converter/
 COPY frontend frontend/
 COPY notebooks notebooks/
-COPY shared shared/
+COPY translations translations/
 COPY config.yaml ./
 RUN npm run build
+# only need to keep all the strings.yaml
+RUN find ./translations -type f ! -iname "*.yaml" -delete
 
 FROM base
 WORKDIR /usr/app
@@ -34,5 +35,6 @@ COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
 COPY --from=builder /usr/app/working working/
+COPY --from=builder /usr/app/translations translations/
 
 CMD ["npm", "start"]

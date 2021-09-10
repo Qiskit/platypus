@@ -3,73 +3,122 @@ import * as path from 'path'
 
 import * as fs from 'fs-extra'
 
+import {
+  translationsLanguages,
+  workingContentPath,
+  workingTranslationsPath
+} from './common'
+
 const CWD = process.cwd()
 const nbImagesDirName = 'images'
+const nbDir = path.join(CWD, 'notebooks')
+const nbDirTranslations = path.join(CWD, 'translations')
 
-const sharedContent = `${CWD}/shared`
-const nbDir = `${CWD}/notebooks`
-const tocPath = `${nbDir}/toc.yaml`
-const workingDir = `${CWD}/working`
-const sharedWorking = `${workingDir}/shared`
-const publicDir = `${CWD}/public`
-const publicContentDir = `${publicDir}/content`
+const getNotebookPath = function (language: string = 'en') {
+  return language == 'en' ? nbDir : path.join(nbDirTranslations, language)
+}
+
+const getTOCPath = function (language: string = 'en') {
+  return path.join(getNotebookPath(language), 'toc.yaml')
+}
+
+const getWorkingPath = function (language: string = 'en') {
+  return language == 'en' ? workingContentPath : path.join(workingTranslationsPath, language)
+}
+
+const copyNotebookAssets = function (
+  srcDir: string, destDir: string, filterFunc: CallableFunction
+) {
+  console.log(`textbook converter: Copying assets from ${srcDir}`)
+
+  fs.copySync(srcDir, destDir, {
+    filter: (src: string, dest: string) => {
+      const name = path.basename(src)
+      if (name.startsWith('.')) {
+        return false
+      } else if (fs.statSync(src).isDirectory()) {
+        return true
+      } else {
+        return filterFunc(src, dest)
+      }
+    }
+  })
+}
 
 const runConverter = function (
   tocPath: string,
-  nbDir: string,
-  outDir: string
+  nbPath: string,
+  outPath: string
 ) {
   console.log('textbook converter', arguments)
+
+  const converterPath = path.join(CWD, 'converter', 'textbook-converter')
 
   // TODO: replace converter Python implementation with a Node.js implementation
   return spawn('python3', [
     '-u', '-m',
     'textbook_converter', tocPath,
-    '-n', nbDir,
-    '-o', outDir
+    '-n', nbPath,
+    '-o', outPath
   ], {
-    cwd: `${CWD}/converter/textbook-converter`
+    cwd: converterPath
   })
 }
 
-const copyNotebookAssets = function(
-  srcDir: string, destDir: string, filterFunc: CallableFunction
-) {
-  console.log(`textbook converter: Copying assets from ${srcDir}`)
-  fs.copySync(srcDir, destDir, { filter: (src: string, dest: string) => {
-    const name = path.basename(src)
-    if (name.startsWith('.')) {
-      return false
-    } else if (fs.statSync(src).isDirectory()) {
-      return true
-    } else {
-      return filterFunc(src, dest)
-    }
-  }})
+const clean = function () {
+  // Ensure that the directories containing the md files are empty
+  fs.emptyDirSync(workingContentPath)
+  fs.emptyDirSync(workingTranslationsPath)
 }
 
-// const convertNotations = async function() {
-//   console.log('textbook converter: Parsing notations')
-//   const notations = await parseYAML(sharedWorking, 'notations.yaml', 'en', 'meaning')
-//   return fs.outputJson(`${publicDir}/notations.json`, notations)
-// }
+const prepare = function (language: string) {
+  const notebooks = getNotebookPath(language)
+  const working = getWorkingPath(language)
 
-fs.emptyDirSync(workingDir)
-// copy existing markdown & shared content
-fs.copySync(sharedContent, sharedWorking)
-// copy notebook images
-copyNotebookAssets(nbDir, publicContentDir, (src: string, dest: string) => {
-  return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
-})
+  const notebooksShared = path.join(notebooks, 'shared')
+  const workingShared = path.join(working, 'shared')
 
-const subprocess = runConverter(tocPath, nbDir, workingDir)
+  // copy over `shared/`
+  if (fs.existsSync(notebooksShared)) {
+    fs.copySync(notebooksShared, workingShared)
+  } else {
+    // default to English if doesn't exist
+    const shared = path.join(getNotebookPath('en'), 'shared')
+    fs.copySync(shared, workingShared)
+  }
 
-subprocess.stdout.on('data', (data) => {
-  console.log(`${data}`)
-});
-subprocess.stderr.on('data', (data) => {
-  console.error(`${data}`)
-});
-subprocess.on('close', async () => {
-  console.log('textbook converter: Closed')
-})
+  // copy over notebook `images/`
+  copyNotebookAssets(notebooks, working, (src: string, dest: string) => {
+    return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
+  })
+}
+
+const convert = function (language: string) {
+  // run Python converter package
+  const subprocess = runConverter(
+    getTOCPath(language),
+    getNotebookPath(language),
+    getWorkingPath(language)
+  )
+
+  subprocess.stdout.on('data', (data) => {
+    console.log(`textbook converter [${language}]: ${data}`)
+  });
+  subprocess.stderr.on('data', (data) => {
+    console.error(`textbook converter [${language}]: ${data}`)
+  });
+  subprocess.on('close', () => {
+    console.log(`textbook converter [${language}]: completed`)
+  })
+}
+
+const run = function () {
+  // run conversion for each available language
+  translationsLanguages.forEach(language => {
+    prepare(language)
+    convert(language)
+  })
+}
+
+clean()
+run()

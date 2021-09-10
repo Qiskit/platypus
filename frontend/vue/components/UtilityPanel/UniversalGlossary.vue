@@ -1,14 +1,14 @@
 <template>
   <div class="universal-glossary">
     <p class="universal-glossary__title">
-      Universal frequently used notation
+      {{ $translate('Universal frequently used notation') }}
     </p>
     <bx-data-table :theme="white">
       <bx-table>
         <bx-table-head>
           <bx-table-header-row>
-            <bx-table-header-cell>Notation</bx-table-header-cell>
-            <bx-table-header-cell>Description</bx-table-header-cell>
+            <bx-table-header-cell>{{ $translate('Notation') }}</bx-table-header-cell>
+            <bx-table-header-cell>{{ $translate('Description') }}</bx-table-header-cell>
           </bx-table-header-row>
         </bx-table-head>
         <bx-table-body>

@@ -3,9 +3,10 @@ import './wc/block/block'
 import { initIndexHighlight } from './ts/indexhighlighter'
 import { initNotations } from './ts/notations'
 import { initLoader } from './ts/loader'
-import { initLeftSidebar } from './ts/leftsidebar'
+import { initLeftSidebar, toggleLanguagePicker } from './ts/leftsidebar'
 import { getProgressData, storeProgressLocally } from './ts/storage'
 import { initAnalytics, trackClickEvent, trackPage, trackPerformedSearch } from './plugins/segmentAnalytics'
+import { loadTranslations } from './ts/translations'
 
 
 declare global {
@@ -19,7 +20,9 @@ interface Textbook {
   runAfterDOMLoaded: any,
   trackClickEvent?: any,
   trackPerformedSearch?: any,
-  course?: XCourse
+  course?: XCourse,
+  locale: string,
+  translations?: {[x:string]: string}
 }
 
 // loading state
@@ -33,12 +36,12 @@ const runAfterDOMLoaded = function (cb: EventListenerOrEventListenerObject|Calla
   }
 }
 
-const textbook: Textbook = {
-  runAfterDOMLoaded
-}
-
 window.progressData = getProgressData()
-window.textbook = textbook
+window.textbook = Object.assign(window.textbook, {
+  runAfterDOMLoaded,
+  translations: loadTranslations()
+})
+const textbook = window.textbook
 
 textbook.runAfterDOMLoaded(() => {
   // hold courseId & sectionId
@@ -54,6 +57,7 @@ textbook.runAfterDOMLoaded(() => {
   }
 
   initLeftSidebar()
+  toggleLanguagePicker()
   initNotations()
   initIndexHighlight()
 
