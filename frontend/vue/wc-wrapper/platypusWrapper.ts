@@ -2,6 +2,7 @@ import { createApp, h, Component, CreateAppFunction, App } from 'vue'
 
 import { Step, StepComponent } from '@mathigon/studio'
 import { HTMLBaseView } from '@mathigon/boost'
+import * as i18nPlugin from '../../plugins/i18nStrings'
 import * as segmentPlugin from '../../plugins/segmentAnalytics'
 import wrapper from './index'
 
@@ -10,6 +11,7 @@ declare module '@vue/runtime-core' {
     $step: Step;
     $trackClickEvent: (cta: string, location: string) => void;
     $trackPage: (title: string) => void;
+    $translate: (str: string, args?: string[]) => string
   }
 }
 
@@ -20,6 +22,7 @@ interface ICustomElement extends HTMLElement {
 const createAppWithPlugins: CreateAppFunction<Element> = (rootComponent: Component, rootProps?: Record<string, unknown> | null) => {
   return createApp(rootComponent, rootProps)
     .use(segmentPlugin)
+    .use(i18nPlugin)
 }
 
 class VueWidgetView extends HTMLBaseView<ICustomElement> implements StepComponent {

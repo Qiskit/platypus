@@ -1,7 +1,2 @@
-q-qiskit-banner.page__banner(data-test="qiskit-banner-old-textbook-version")
-  | Miss the old version of the textbook? Access it&nbsp;
-  a(
-    href="https://qiskit.org/textbook"
-    onclick="textbook.trackClickEvent('old-textbook-version', 'banner')"
-    target="_blank"
-  ) here
+- var msg = __('Miss the old version of the textbook? Access it <a href="https://qiskit.org/textbook" onclick="textbook.trackClickEvent(\'old-textbook-version\', \'banner\'\)" target="_blank">here</a>')
+q-qiskit-banner.page__banner(data-test="qiskit-banner-old-textbook-version") !{msg}

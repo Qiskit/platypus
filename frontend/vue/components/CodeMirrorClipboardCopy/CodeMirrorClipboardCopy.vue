@@ -4,7 +4,7 @@
     class="code-mirror-clipboard-copy"
     @clipboard-copy="handleClick"
   >
-    <div class="label" v-text="label" />
+    <div class="label" v-text="$translate(label)" />
     <Copy32 class="copy-icon" />
   </clipboard-copy>
 </template>

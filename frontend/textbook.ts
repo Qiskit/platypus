@@ -2,9 +2,10 @@ import './wc/block/block'
 
 import { initIndexHighlight } from './ts/indexhighlighter'
 import { initNotations } from './ts/notations'
-import { initLeftSidebar } from './ts/leftsidebar'
+import { initLeftSidebar, toggleLanguagePicker } from './ts/leftsidebar'
 import { getProgressData, storeProgressLocally } from './ts/storage'
 import { initAnalytics, trackClickEvent, trackPage, trackPerformedSearch } from './plugins/segmentAnalytics'
+import { loadTranslations } from './ts/translations'
 
 
 declare global {
@@ -18,7 +19,9 @@ interface Textbook {
   runAfterDOMLoaded: any,
   trackClickEvent?: any,
   trackPerformedSearch?: any,
-  course?: XCourse
+  course?: XCourse,
+  locale: string,
+  translations?: {[x:string]: string}
 }
 
 const runAfterDOMLoaded = function (cb: EventListenerOrEventListenerObject|CallableFunction) {
@@ -29,12 +32,12 @@ const runAfterDOMLoaded = function (cb: EventListenerOrEventListenerObject|Calla
   }
 }
 
-const textbook: Textbook = {
-  runAfterDOMLoaded
-}
-
 window.progressData = getProgressData()
-window.textbook = textbook
+window.textbook = Object.assign(window.textbook, {
+  runAfterDOMLoaded,
+  translations: loadTranslations()
+})
+const textbook = window.textbook
 
 textbook.runAfterDOMLoaded(() => {
   // hold courseId & sectionId
@@ -45,11 +48,12 @@ textbook.runAfterDOMLoaded(() => {
       section: xcourse.getAttribute('data-section') || '',
       goals: +xcourse.getAttribute('data-goals')! || 0
     }
-  
+
     storeProgressLocally(textbook.course)
   }
 
   initLeftSidebar()
+  toggleLanguagePicker()
   initNotations()
   initIndexHighlight()
 

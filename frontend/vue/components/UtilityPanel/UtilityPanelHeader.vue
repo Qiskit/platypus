@@ -7,8 +7,9 @@
       :segment="link.segment"
       :is-static="true"
       @click="togglePanel($event)"
+      data-test="utility-panel-header-toggle"
     >
-      {{ ctaLabel }}
+      {{ $translate(ctaLabel) }}
       <OpenPanelRight16 class="utility-panel-header__icon" />
     </BasicLink>
   </div>

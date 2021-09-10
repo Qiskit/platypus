@@ -12,7 +12,7 @@
       class="utility-panel-dropdown__item"
       :value="link.label"
     >
-      {{ link.label }}
+      {{ $translate(link.label) }}
     </bx-dropdown-item>
   </bx-dropdown>
 </template>

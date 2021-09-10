@@ -154,11 +154,11 @@ nav ul.c-sidebar__sections {
   font-size: 14px;
   line-height: 24px;
   background-color: $background-color-lighter;
-  padding-bottom: $spacing-unit;
   width: 100%;
   z-index: 100;
 
   @include mq($until: medium) {
+    padding-bottom: $spacing-unit;
     width: 100%;
   }
 }
@@ -167,14 +167,12 @@ nav ul.c-sidebar__sections {
   display: inline-block;
   margin-right: 10px;
   vertical-align: text-top;
-  width: $icon-width;
 }
 
 #app-panel-footer-toggle > svg {
   display: inline-block;
   margin-right: 10px;
   vertical-align: text-top;
-  width: $icon-width;
 }
 
 #back-home,
@@ -209,6 +207,7 @@ nav ul.c-sidebar__sections {
 .sidebar_footer__menu_item {
   display: flex;
   width: 100%;
+  height: $spacing-08;
   align-items: center;
   justify-content: flex-end;
   padding: .5rem 2rem;
@@ -219,7 +218,7 @@ nav ul.c-sidebar__sections {
 .sidebar_header_menu_toggle,
 .sidebar_footer__menu_item {
   svg {
-    width: $icon-width;
+    width: $spacing-05;
     fill: $purple-70;
   }
 }
@@ -262,6 +261,14 @@ nav ul.c-sidebar__sections {
       display: none;
     }
   }
+
+  .language-selector {
+    display: none;
+  }
+}
+
+.qv-layout:not(.qv-layout__panel--hidden) #app-panel-language-toggle {
+  display: none;
 }
 
 .qv-layout__panel--hidden.js-show-sidebar .c-sidebar__entry {

@@ -50,3 +50,9 @@ button span.rangle {
     position: relative;
   }
 }
+
+@media (min-width: $browser-medium) {
+  body > .body {
+    overflow-x: hidden;
+  }
+}
