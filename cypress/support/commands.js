@@ -1,3 +1,5 @@
+import 'cypress-wait-until'
+
 Cypress.Commands.add('setCookies', () => {
   cy.setCookie('cmapi_cookie_privacy', 'permit_1|2|3')
     .setCookie('cmapi_gtm_bl', '')
@@ -6,6 +8,6 @@ Cypress.Commands.add('setCookies', () => {
 })
 
 Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
-  cy.setCookies()
-  originalFn(url, options)
+  cy.waitUntil(() => cy.setCookies())
+  cy.waitUntil(() => originalFn(url, options))
 })

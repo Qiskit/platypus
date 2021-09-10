@@ -2,9 +2,9 @@
 
 describe('Error page', () => {
   it('Can render the content correctly', () => {
-    const errorPageTitle = '.c-textbook__page__error-code'
-    const errorPageDescription = '.c-textbook__page__error-message'
-    const errorPageImg = '#img'
+    const errorPageTitle = '[data-test=error-page-title]'
+    const errorPageDescription = '[data-test=error-page-message]'
+    const errorPageImg = '[data-test=error-page-img]'
 
     cy.visit('/error_test_page', { failOnStatusCode: false })
 
