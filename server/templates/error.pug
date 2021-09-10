@@ -16,8 +16,8 @@ html(lang=`${req.locale.id}` dir=dir)
     .body
       article.c-textbook__page.c-textbook__page__error
         div.c-textbook__page__error-container
-          h1.c-textbook__page__error-code #{code}
-          p.c-textbook__page__error-message#description
+          h1(class="c-textbook__page__error-code" data-test="error-page-title") #{code}
+          p(class="c-textbook__page__error-message" data-test="error-page-message" id="message")
           q-app-cta(
             label=`Back to Textbook home`
             url=`/`
@@ -43,10 +43,11 @@ html(lang=`${req.locale.id}` dir=dir)
             src="/images/error_page/cat1.png"
             alt="Sketched vector illustration of a cat in a box"
             title="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."
+            data-test="error-page-img"
           )
 
     script.
-      var descriptions = [
+      var messages = [
         'Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in.',
         'Looks like that URL is an <em><strong>entangled</strong></em> mess.',
         'We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist.',
@@ -66,9 +67,9 @@ html(lang=`${req.locale.id}` dir=dir)
         '/images/error_page/cat9.png',
       ]
 
-      var description = descriptions[Math.floor(Math.random() * descriptions.length)] // select random
+      var message = messages[Math.floor(Math.random() * messages.length)] // select random
       var img = imgList[Math.floor(Math.random() * imgList.length)] // select random
-      document.getElementById('description').innerHTML = description
+      document.getElementById('message').innerHTML = message
       document.getElementById('img').src = `${img}`
     script.
       var textbookAnalytics = {
