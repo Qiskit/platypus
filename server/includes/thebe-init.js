@@ -1,17 +1,25 @@
 
 const initializeCodeCells = function () {
   thebelab.bootstrap()
-  thebelab.on("status", function (evt, data) {
-    console.log("Thebelab status changed:", data.status, data.message)
+  thebelab.on('status', function (evt, data) {
+    console.log('Thebelab status changed:', data.status, data.message)
   })
   document
     .querySelectorAll('.thebelab-cell')
-    .forEach(codeCell => {
+    .forEach((codeCell) => {
       codeCell.querySelector('.thebelab-restart-button').remove()
+      codeCell.querySelector('.thebelab-restartall-button').remove()
 
       const codeCellRunButton = codeCell.querySelector('.thebelab-run-button')
       codeCellRunButton.setAttribute('data-test', 'code-cell-button-run')
-      codeCellRunButton.textContent = run
+      codeCellRunButton.textContent = 'Run'
+
+      const codeCellBusyIndicator = codeCell.querySelector('.thebelab-busy')
+      const busySpan = document.createElement('span')
+      busySpan.classList.add('thebelab-busy-text')
+      busySpan.textContent = 'Running'
+      codeCellBusyIndicator.append(busySpan)
+      codeCellRunButton.append(codeCellBusyIndicator)
 
       codeCell.setAttribute('data-test', 'code-cell')
 
@@ -22,7 +30,7 @@ const initializeCodeCells = function () {
       codeCell
         .querySelector('.jp-OutputArea')
         .setAttribute('data-test', 'code-cell-output')
-        
+
       codeCell
         .querySelector('.CodeMirror-code')
         .setAttribute('data-test', 'code-cell-code')
@@ -62,15 +70,15 @@ const initializeCodeCells = function () {
 }
 
 // check if Thebelab needs to be loaded
-if (document.querySelector("[data-executable]")) {
+if (document.querySelector('[data-executable]')) {
   /**
    * Thebelab loads "reset CSS" after the theme styles load and so,
    * it invalidates part of the theme rules. To make the theme CSS to take
    * the correct precedence, we listen for Thebelab to finish loading, then
    * relocate the theme CSS and start Thebelab.
    */
-  const thebelabScript = document.createElement('script');
-  thebelabScript.src = "https://unpkg.com/thebelab@latest/lib/index.js"
+  const thebelabScript = document.createElement('script')
+  thebelabScript.src = 'https://unpkg.com/thebe@latest/lib/index.js'
   thebelabScript.async = true
   thebelabScript.onload = () => {
     setTimeout(() => {
@@ -81,5 +89,5 @@ if (document.querySelector("[data-executable]")) {
 
     window.textbook.runAfterDOMLoaded(initializeCodeCells)
   }
-  document.head.append(thebelabScript);
+  document.head.append(thebelabScript)
 }
