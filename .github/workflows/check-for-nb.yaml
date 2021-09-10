@@ -3,10 +3,10 @@ name: Check for Textbook notebooks
 on:
   # run when action is manually triggered
   workflow_dispatch:
-  # run every 1st and 15th of each month at 10:00am UTC
-  # https://crontab.guru/#0_10_1,15_*_*
+  # run every 1st of each month at 10:00am UTC
+  # https://crontab.guru/#0_10_1_*_*
   schedule:
-    - cron: "0 10 1,15 * *"
+    - cron: "0 10 1 * *"
 
 jobs:
   check-notebooks:
@@ -28,24 +28,15 @@ jobs:
 
       - name: Diff notebook directories
         id: diff
-        run: |
-          diff -r platypus/notebooks qiskit-textbook/content -qr | \
-          sort | \
-          grep 'Only in qiskit-textbook' | \
-          grep -E '\.ipynb$' > notebooks.txt && \
-          NUM_NB=$(cat notebooks.txt | wc -l) && \
-          echo "::set-output name=NUM_NB::$NUM_NB"
+        shell: bash
+        run: platypus/scripts/nb_check.sh
 
       - name: Create issue using REST API
-        if: steps.diff.outputs.NUM_NB > 0
+        if: steps.diff.outputs.NUM_NB != '0'
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/issues \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
-          --data '{
-            "title": "Missing notebooks",
-            "assignees": ["vabarbosa", "frankharkins"]
-            "body": "$(sed -e :a -e '$!N;s/\n/\\\\n/;ta' notebooks.txt)\"}"
-            }' \
+          --data-binary @issue.txt \
           --fail
