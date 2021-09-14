@@ -120,6 +120,10 @@
   }
 }
 
+html.dark-theme .c-textbook__content img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 .c-textbook__content {
   clear: both;
   padding-top: calc(#{$qiskit-navbar-height} + #{$textbook-page-banner-height});
