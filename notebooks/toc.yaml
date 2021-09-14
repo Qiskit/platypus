@@ -264,21 +264,25 @@
       url: /intro/project
 
 - title: Summer school 2020
-  url: /qgss/2020
+  url: /qgss2020
   type: learning-path
   sections:
     - title: Qubits, quantum states, quantum circuits and measurements
+      id: 2020lec1
       url: /summer-school/2020/lec1
     - title: Writing and running quantum programs
+      id: 2020lec2
       url: /summer-school/2020/lec2
 
 - title: Summer school 2021
-  url: /qgss/2021
+  url: /qgss2021
   type: learning-path
   sections:
     - title: Vector Spaces, Tensor Products, and Qubits 
+      id: lec1-1
       url: /summer-school/2021/lec1.1
     - title: Introduction to Quantum Circuits 
+      id: lec1-2
       url: /summer-school/2021/lec1.2
 
 
