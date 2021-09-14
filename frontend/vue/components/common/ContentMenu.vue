@@ -2,9 +2,11 @@
   <div>
     <QiskitMegaMenuDropdown
       class="content-menu__mega-menu-dropdown"
+      data-test="content-menu-dropdown"
       :content="dropdownMenuContent"
       segment-component-name="Textbook mega menu"
       :track-performed-search="trackPerformedSearch"
+      :placeholder="$translate('Browse all content')"
     />
   </div>
 </template>

@@ -1,3 +1,4 @@
+import { translate } from './translations'
 
 let notations = {}
 
@@ -16,19 +17,19 @@ const injectTooltip = function (eq, target) {
     tooltipContent.innerHTML = ''
     if (eq.say) {
       tooltipContent.innerHTML += `
-        <h3 class="qv-tooltip__title">How to read this:</h3>
+        <h3 class="qv-tooltip__title">${translate('How to read this')}:</h3>
         <p>${eq.say}</p>
       `
     }
     if (eq.meaning) {
       tooltipContent.innerHTML += `
-        <h3 class="qv-tooltip__title">What it means:</h3><p>
+        <h3 class="qv-tooltip__title">${translate('What it means')}:</h3><p>
           ${eq.meaning}</p>
         `
     }
     if (eq.type) {
       tooltipContent.innerHTML += `
-        <h3 class="qv-tooltip__title">Type:</h3><p>
+        <h3 class="qv-tooltip__title">${translate('Type')}:</h3><p>
           ${eq.type}</p>
         `
     }

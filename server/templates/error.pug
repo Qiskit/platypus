@@ -1,0 +1,83 @@
+mixin icon(name, size)
+  svg(viewBox=`0 0 ${size} ${size}` class="icon" width=size height=size)&attributes(attributes)
+    use(xlink:href=`/icons.svg#${name}`)
+
+doctype html
+html(lang=`${req.locale.id}` dir=dir)
+  head
+    include head
+    link(href=`/css/mathjax_styles.css` rel="stylesheet")
+    include ../includes/hotjar.html
+
+  body
+    div.qiskit__navbar#qiskit-navbar
+      q-the-menu
+
+    .body
+      article.c-textbook__page.c-textbook__page__error
+        div.c-textbook__page__error-container
+          h1(class="c-textbook__page__error-code" data-test="error-page-title") #{code}
+          p(class="c-textbook__page__error-message" data-test="error-page-message" id="message")
+          q-app-cta(
+            label=`Back to Textbook home`
+            url=`/`
+            is-static=true
+            target="_self"
+            kind="primary"
+            segment=`error-page > back to textbook`
+            data-test="error-page-cta"
+          )
+          q-app-cta(
+            class="c-textbook__page__error-cta"
+            label=`Go to Qiskit.org homepage`
+            url=`https://qiskit.org`
+            is-static=true
+            target="_self"
+            kind="ghost"
+            segment=`error-page > go to qiskit.org`
+            data-test="error-page-cta"
+          )
+        div.c-textbook__page__error-img
+          img(
+            id="img"
+            src="/images/error_page/cat1.png"
+            alt="Sketched vector illustration of a cat in a box"
+            title="Schrodinger’s cat must have been just a thought experiment, because here at IBM Quantum, all our cats love boxes."
+            data-test="error-page-img"
+          )
+
+    script.
+      var messages = [
+        'Well, this isn’t exactly a <em><strong>superposition</strong></em> to be in.',
+        'Looks like that URL is an <em><strong>entangled</strong></em> mess.',
+        'We apologies for the <em><strong>interference</strong></em>, but this page doesn’t exist.',
+        'You’ve reached the edge of the multi-verse.',
+        'There is content on this page in another dimension, but not this dimension.'
+      ]
+
+      var imgList = [
+        '/images/error_page/cat1.png',
+        '/images/error_page/cat2.png',
+        '/images/error_page/cat3.png',
+        '/images/error_page/cat4.png',
+        '/images/error_page/cat5.png',
+        '/images/error_page/cat6.png',
+        '/images/error_page/cat7.png',
+        '/images/error_page/cat8.png',
+        '/images/error_page/cat9.png',
+      ]
+
+      var message = messages[Math.floor(Math.random() * messages.length)] // select random
+      var img = imgList[Math.floor(Math.random() * imgList.length)] // select random
+      document.getElementById('message').innerHTML = message
+      document.getElementById('img').src = `${img}`
+    script.
+      var textbookAnalytics = {
+        url: "#{config.analytics.url || ''}",
+        key: "#{config.analytics.key || ''}"
+      }
+      var textbook = {}
+
+    script user = null;
+    include ../includes/tail.html
+    script(src='/polyfill.js')

@@ -1,3 +1,4 @@
+@import '../../../node_modules/carbon-components/scss/globals/scss/layout';
 @import '../variables/colors.scss';
 @import '../variables/fonts.scss';
 
@@ -49,6 +50,8 @@ div.jb_input div.input {
   background-color: $background-color-lighter;
   border-radius: 0px;
   margin: 2em 0;
+  display: flex;
+  flex-direction: column;
 
   &:focus-within {
     border-color: $active-color;
@@ -56,7 +59,7 @@ div.jb_input div.input {
 }
 
 .thebelab-input {
-  padding: 14px 12px 6px 12px;
+  padding: $spacing-05 $spacing-04 $spacing-03 $spacing-04;
 }
 
 .thebelab-button {
@@ -64,9 +67,10 @@ div.jb_input div.input {
   font-size: 0.9em;
   z-index: 999;
   display: inline-block;
-  padding: 6px 16px; 
-  margin: 0;
-  margin-right: 4px;
+  padding: $spacing-03 $spacing-05;
+  position: relative;
+  align-self: flex-end;
+  width: 6rem;
   box-sizing:  border-box;
   text-decoration: none;
   font-weight: 300;
@@ -87,6 +91,21 @@ div.jb_input div.input {
 .thebelab-button:active{
   background-color: $background-color-white;
   color: $text-color-dark;
+}
+
+.thebelab-busy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: $background-color-darker;
+  color: $text-color-white;
 }
 
 .CodeMirror {
@@ -115,11 +134,4 @@ div.jp-OutputArea > :first-child {
 .jp-OutputArea-child {
   background-color: $background-color-white;
   padding: 18px;
-}
-
-button.thebelab-button {
-  padding: 6px 16px;
-  position: relative;
-  left: calc(100% - 5rem);
-  width: 5rem;
 }
