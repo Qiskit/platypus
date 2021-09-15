@@ -42,7 +42,7 @@ const initializeCodeCells = function () {
   document
     .querySelectorAll('.thebelab-cell')
     .forEach((thebelabCell) => {
-      thebelabCell.classList.add('notranslate')
+      thebelabCell.setAttribute('translate', 'no')
     })
 
   /**
