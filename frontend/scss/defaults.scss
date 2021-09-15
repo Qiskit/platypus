@@ -39,8 +39,10 @@
   --sidebar--menu-item--text-color: #{$link-color-tertiary};
   --sidebar--x-progress-color: #{$text-color-light};
 
+  --table--border-color: #{$cool-gray-100};
   --table--header--background-color: #{$background-color-light};
   --table--header--text-color: #{$text-color-black};
+  --table--striped--background-color: #{$cool-gray-10};
 
   --utility-panel--menu-dropdown--background-color: #{$background-color-light};
   --utility-panel--toggle--background-color: #{$background-color-lighter};
@@ -83,8 +85,10 @@ html.dark-theme {
   --sidebar--menu-item--text-color: #{$link-color-tertiary-2};
   --sidebar--x-progress-color: #{$text-color-lighter-3};
 
+  --table--border-color: #{$cool-gray-20};
   --table--header--background-color: #{$background-color-darker};
   --table--header--text-color: #{$text-color-lighter-3};
+  --table--striped--background-color: #{$cool-gray-90};
 
   --utility-panel--menu-dropdown--background-color: #{$background-color-dark};
   --utility-panel--toggle--background-color: #{$background-color-darker};
@@ -138,26 +142,26 @@ table {
 }
 
 tbody {
-  border-bottom: 1px solid $border-color-dark !important;
+  border-bottom: 1px solid var(--table--border-color) !important;
 }
 
 /* Fix strange table striping choice */
 tr:nth-child(even) {
-  background-color: $background-color-lighter !important;
+  background-color: var(--table--striped--background-color) !important;
 }
 
 td {
   border: 0px !important;
-  border-left: 1px solid $border-color-dark !important;
-  border-right: 1px solid $border-color-dark !important;
+  border-left: 1px solid var(--table--border-color) !important;
+  border-right: 1px solid var(--table--border-color) !important;
 }
 
 thead td {
-  border-bottom: 1px solid $border-color-dark !important;
+  border-bottom: 1px solid var(--table--border-color) !important;
 }
 
 table th {
-  border: 1px solid $border-color-dark;
+  border: 1px solid var(--table--border-color);
 }
 
 // Scrollbar width
