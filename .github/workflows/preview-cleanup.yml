@@ -45,7 +45,7 @@ jobs:
 
       - name: Remove Docker image
         env:
-          DOCKER_IMAGE_TAG: us.icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
         run: |
           ibmcloud cr image-rm "$DOCKER_IMAGE_TAG"
 

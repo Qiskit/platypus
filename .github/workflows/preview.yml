@@ -44,7 +44,7 @@ jobs:
       - name: Log-in into IBM Container Registry
         uses: docker/login-action@v1
         with:
-          registry: us.icr.io
+          registry: icr.io
           username: iamapikey
           password: ${{ env.IBMCLOUD_API_KEY }}
 
@@ -56,7 +56,7 @@ jobs:
           cache-from: type=registry,ref=${{ env.DOCKER_IMAGE_TAG }}
           cache-to: type=inline
         env:
-          DOCKER_IMAGE_TAG: us.icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
 
       - name: Setup IBM Cloud CLI
         run: |
@@ -86,7 +86,7 @@ jobs:
         id: ce_app_creation
         env:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
-          DOCKER_IMAGE_TAG: us.icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
         run: |
           ibmcloud ce app ${{ steps.ce_command_choice.outputs.command }} \
             --name "$APP_NAME" \
