@@ -37,6 +37,15 @@ const initializeCodeCells = function () {
     })
 
   /**
+   * Avoid translating code.
+   */
+  document
+    .querySelectorAll('.thebelab-cell')
+    .forEach((thebelabCell) => {
+      thebelabCell.setAttribute('translate', 'no')
+    })
+
+  /**
    * Copy to clipboard functionality.
    */
   document
