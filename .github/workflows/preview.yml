@@ -22,6 +22,17 @@ jobs:
       - name: Fetch content of the PR
         uses: actions/checkout@v2
 
+      - name: GH deployment status (start)
+        uses: bobheadxi/deployments@v0.4.3
+        id: gh_deployment
+        env:
+          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
+        with:
+          step: start
+          token: ${{ github.token }}
+          env: ${{ env.APP_NAME }}
+          no_override: false
+
       - name: Add comment to PR (preview)
         uses: marocchino/sticky-pull-request-comment@v2
         with:
@@ -89,16 +100,15 @@ jobs:
             ibmcloud ce app get --name "$APP_NAME" --output url
           )"
 
-      - name: Create GitHub deployment
-        uses: chrnorm/deployment-action@releases/v1
+      - name: GH deployment status (finish)
+        uses: bobheadxi/deployments@v0.4.3
         if: always()
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
-          token: "${{ github.token }}"
-          environment_url: ${{ steps.ce_app_creation.outputs.preview_url }}
-          environment: ${{ env.APP_NAME }}
-          initial_status: ${{ job.status }}
+          step: finish
+          token: ${{ github.token }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
+          env_url: "${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction"
 
       - name: Add comment to PR (success)
         uses: marocchino/sticky-pull-request-comment@v2

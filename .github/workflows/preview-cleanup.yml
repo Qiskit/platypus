@@ -22,6 +22,15 @@ jobs:
       - name: Fetch content of the PR
         uses: actions/checkout@v2
 
+      - name: GH deployment status (deactivate)
+        uses: bobheadxi/deployments@v0.4.3
+        env:
+          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
+        with:
+          step: deactivate-env
+          token: ${{ github.token }}
+          env: ${{ env.APP_NAME }}
+
       - name: Setup IBM Cloud CLI
         run: |
           curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
