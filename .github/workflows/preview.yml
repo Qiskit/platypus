@@ -31,7 +31,7 @@ jobs:
           step: start
           token: ${{ github.token }}
           env: ${{ env.APP_NAME }}
-          no_override: false
+          auto_inactive: true
 
       - name: Add comment to PR (preview)
         uses: marocchino/sticky-pull-request-comment@v2
