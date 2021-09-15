@@ -137,6 +137,18 @@ div.jp-OutputArea > :first-child {
   border-top: 1px solid $border-color !important;
 }
 
+.jp-OutputArea {
+  &.lm-Widget {
+    .jupyter-button {
+      background-color: var(--code-block--background-color);
+    }
+
+    .jupyter-widgets, .widget-label {
+      color: var(--qiskit--color-text-primary);
+    }
+  }
+}
+
 .jp-OutputArea-child {
   background-color: var(--code-block--output-background-color);
   padding: 18px;

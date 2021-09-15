@@ -174,8 +174,12 @@ main, nav {
   scrollbar-width: thin;
 }
 
+html.dark-theme details summary::after{
+  filter: invert(1);
+}
+
 details {
-  background: $background-color-lighter;
+  background: var(--qiskit--color-background-primary);
   border-bottom: 1px solid $border-color-light-2;
   font-size: 0.9rem;
   margin: 1rem 0;
