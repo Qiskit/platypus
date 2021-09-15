@@ -43,6 +43,8 @@ div.jb_input div.input {
 
 
 .thebelab-cell {
+  --jp-content-font-color1: var(--qiskit--color-text-primary);
+
   // To ensure that thebelab cells are always the top of the Z-stack
   position: relative;
   z-index: 999;
@@ -140,6 +142,16 @@ div.jp-OutputArea > :first-child {
   padding: 18px;
 }
 
+.jp-RenderedText{
+  &[data-mime-type='application/vnd.jupyter.stderr'] {
+    background-color: var(--code-block--output-background-color-error);
+  }
+
+  pre a:link {
+    color: var(--qiskit--color-text-link);
+  }
+}
+
 .CodeMirror {
   pre {
     color: var(--qiskit--color-text-primary);
@@ -168,4 +180,8 @@ div.jp-OutputArea > :first-child {
   .cm-string {
     color: var(--code-block--cm-string);
   }
+}
+
+.CodeMirror {
+  color: var(--qiskit--color-text-primary);
 }

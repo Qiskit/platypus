@@ -151,9 +151,9 @@ export default class LessonNotes extends Vue.with(Props) {
 @import '../../../scss/variables/colors.scss';
 @import 'carbon-components/scss/globals/scss/typography';
 // overrides
-.lesson-notes {
+.utility-panel .lesson-notes {
   a {
-    color: $link-color-tertiary;
+    color: var(--qiskit--color-text-link);
   }
 
   bx-table-header-cell {

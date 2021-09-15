@@ -15,6 +15,7 @@
   --code-block--button--background-color: #{$background-color-darker};
   --code-block--button--text-color: #{$text-color-white};
   --code-block--output-background-color: #{$background-color-white};
+  --code-block--output-background-color-error: var(--jp-rendermime-error-background);
   --code-block--cm-builtin: #30a;
   --code-block--cm-comment: #a50;
   --code-block--cm-def: #00f;
@@ -58,6 +59,7 @@ html.dark-theme {
   --code-block--button--background-color: #{$background-color-light};
   --code-block--button--text-color: #{$text-color-dark};
   --code-block--output-background-color: #{$background-color-dark-2};
+  --code-block--output-background-color-error: #{$red-80};
   --code-block--cm-builtin: #{$purple-40};
   --code-block--cm-comment: #{$orange-40};
   --code-block--cm-def: #{$blue-40};
