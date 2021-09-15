@@ -96,7 +96,7 @@ jobs:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           token: "${{ github.token }}"
-          target_url: ${{ steps.ce_app_creation.outputs.preview_url }}
+          environment_url: ${{ steps.ce_app_creation.outputs.preview_url }}
           environment: ${{ env.APP_NAME }}
           initial_status: ${{ job.status }}
 
@@ -108,7 +108,7 @@ jobs:
           GITHUB_TOKEN: "${{ github.token }}"
           message: |
             Deployment successful!
-            Preview available at ${{ steps.ce_app_creation.outputs.preview_url }}
+            Preview available at ${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction
 
       - name: Add comment to PR (failure)
         uses: marocchino/sticky-pull-request-comment@v2
