@@ -13,10 +13,6 @@ describe('Code cell', () => {
   })
 
   it('runs', () => {
-    cy.get('[data-test=code-cell-code]')
-      .click()
-      .type('{backspace}{backspace}{backspace}{backspace}{backspace}2+3')
-    cy.get('[data-test=code-cell-input]').contains('2+3')
     cy.get('[data-test=code-cell-button-run]').click()
     cy.get('[data-test=code-cell-output]').contains('Waiting for kernel...')
   })

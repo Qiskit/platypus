@@ -317,7 +317,7 @@ def handle_code_cell(cell, resources):
     formatted_source = cell.source.replace('\n', '\n      ').replace('<', '&lt;')
 
     code_lines = [
-        '\n    pre(data-executable="true" data-language="python").\n      ',
+        '\n    pre(data-executable="true" data-language="python" data-readonly).\n      ',
         formatted_source,
         '\n\n'
     ]
