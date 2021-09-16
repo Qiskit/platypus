@@ -1,4 +1,24 @@
 /**
+ * Set up Segment tracking when the code in a code cell is modified for the
+ * first time.
+ *
+ * @param {CodeMirror} codeMirrorInstance
+ * @param {number} codeCellIndex
+ */
+function setupCodeModifiedTracking (codeMirrorInstance, codeCellIndex) {
+  const codeCellId = codeCellIndex + 1
+
+  codeMirrorInstance.on('beforeChange', () => {
+    if (codeMirrorInstance.isClean()) {
+      window.textbook.trackUpdatedObject(
+        'Code cell',
+        `Code cell #${codeCellId}`
+      )
+    }
+  })
+}
+
+/**
  * Set up Segment tracking when running the code in a code cell.
  *
  * @param {Element} runButtonElement
@@ -15,14 +35,20 @@ function setupCodeRunningTracking (runButtonElement, codeCellIndex) {
 const initializeCodeCells = function () {
   thebelab.bootstrap()
 
-  document.querySelectorAll('.thebelab-cell').forEach((codeCell, index) => {
-    const runButtonElement = codeCell.querySelector('.thebelab-run-button')
-
-    setupCodeRunningTracking(runButtonElement, index)
-  })
+  const codeCellSelector = '.thebelab-cell'
 
   document
-    .querySelectorAll('.thebelab-cell')
+    .querySelectorAll(codeCellSelector)
+    .forEach((codeCell, codeCellIndex) => {
+      const codeMirrorInstance = codeCell.querySelector('.CodeMirror').CodeMirror
+      const runButtonElement = codeCell.querySelector('.thebelab-run-button')
+
+      setupCodeModifiedTracking(codeMirrorInstance, codeCellIndex)
+      setupCodeRunningTracking(runButtonElement, codeCellIndex)
+    })
+
+  document
+    .querySelectorAll(codeCellSelector)
     .forEach((codeCell) => {
       codeCell.querySelector('.thebelab-restart-button').remove()
       codeCell.querySelector('.thebelab-restartall-button').remove()
@@ -57,7 +83,7 @@ const initializeCodeCells = function () {
    * Avoid translating code.
    */
   document
-    .querySelectorAll('.thebelab-cell')
+    .querySelectorAll(codeCellSelector)
     .forEach((thebelabCell) => {
       thebelabCell.setAttribute('translate', 'no')
     })
@@ -66,7 +92,7 @@ const initializeCodeCells = function () {
    * Copy to clipboard functionality.
    */
   document
-    .querySelectorAll('.thebelab-cell')
+    .querySelectorAll(codeCellSelector)
     .forEach((thebelabCell, index) => {
       const codeCellId = `code-mirror-element-${index}`
 

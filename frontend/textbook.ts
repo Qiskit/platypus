@@ -4,7 +4,13 @@ import { initIndexHighlight } from './ts/indexhighlighter'
 import { initNotations } from './ts/notations'
 import { initLeftSidebar, toggleLanguagePicker } from './ts/leftsidebar'
 import { getProgressData, storeProgressLocally } from './ts/storage'
-import { initAnalytics, trackClickEvent, trackPage, trackPerformedSearch } from './plugins/segmentAnalytics'
+import {
+  initAnalytics,
+  trackClickEvent,
+  trackPage,
+  trackPerformedSearch,
+  trackUpdatedObject
+} from './plugins/segmentAnalytics'
 import { loadTranslations } from './ts/translations'
 
 
@@ -19,6 +25,7 @@ interface Textbook {
   runAfterDOMLoaded: any,
   trackClickEvent?: any,
   trackPerformedSearch?: any,
+  trackUpdatedObject?: any,
   course?: XCourse,
   locale: string,
   translations?: {[x:string]: string}
@@ -61,5 +68,6 @@ textbook.runAfterDOMLoaded(() => {
   initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
   textbook.trackClickEvent = trackClickEvent
   textbook.trackPerformedSearch = trackPerformedSearch
+  textbook.trackUpdatedObject = trackUpdatedObject
   trackPage(window.location.pathname)
 })
