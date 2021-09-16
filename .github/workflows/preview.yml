@@ -32,6 +32,7 @@ jobs:
           token: ${{ github.token }}
           env: ${{ env.APP_NAME }}
           auto_inactive: true
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Add comment to PR (preview)
         uses: marocchino/sticky-pull-request-comment@v2
