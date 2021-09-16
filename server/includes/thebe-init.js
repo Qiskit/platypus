@@ -1,9 +1,7 @@
 
 const initializeCodeCells = function () {
   thebelab.bootstrap()
-  thebelab.on('status', function (evt, data) {
-    console.log('Thebelab status changed:', data.status, data.message)
-  })
+
   document
     .querySelectorAll('.thebelab-cell')
     .forEach((codeCell) => {
