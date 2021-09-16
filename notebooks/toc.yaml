@@ -263,6 +263,70 @@
       id: project
       url: /intro/project
 
+- title: Summer school 2021
+  url: /qgss2021
+  type: learning-path
+  sections:
+    - title: Vector Spaces, Tensor Products, and Qubits
+      id: lec1-1
+      url: /summer-school/2021/lec1.1
+    - title: Introduction to Quantum Circuits
+      id: lec1-2
+      url: /summer-school/2021/lec1.2
+    - title: Simple Quantum Algorithms I
+      id: lec2-1
+      url: /summer-school/2021/lec2.1
+    - title: Simple Quantum Algorithms II
+      id: lec2-2
+      url: /summer-school/2021/lec2.2
+    - title: Noise in Quantum Computers pt 1
+      id: lec3-1
+      url: /summer-school/2021/lec3.1
+    - title: Noise in Quantum Computers pt 2
+      id: lec3-2
+      url: /summer-school/2021/lec3.2
+    - title: Lecture Exploratory Session
+      id: lec3-3
+      url: /summer-school/2021/lec3.3
+    - title: Introduction to Classical Machine Learning
+      id: lec4-1
+      url: /summer-school/2021/lec4.1
+    - title: Advanced Classical Machine Learning
+      id: lec4-2
+      url: /summer-school/2021/lec4.2
+    - title: Building a Quantum Classifier
+      id: lec5-1
+      url: /summer-school/2021/lec5.1
+    - title: Introduction to the Quantum Approximate Optimization Algorithm and Applications
+      id: lec5-2
+      url: /summer-school/2021/lec5.2
+    - title: From Variational Classifiers to Linear Classifiers
+      id: lec6-1
+      url: /summer-school/2021/lec6.1
+    - title: Quantum Feature Spaces and Kernels
+      id: lec6-2
+      url: /summer-school/2021/lec6.2
+    - title: Quantum Kernels in Practice
+      id: lec7-1
+      url: /summer-school/2021/lec7.1
+    - title: Introduction and Applications of Quantum Models
+      id: lec8-1
+      url: /summer-school/2021/lec8.1
+    - title: Barren Plateaus, Trainability Issues, and How to Avoid Them
+      id: lec8-2
+      url: /summer-school/2021/lec8.2
+    - title: Introduction to Quantum Hardware
+      id: lec9-1
+      url: /summer-school/2021/lec9.1
+    - title: Hardware Efficient Ansatze for Quantum Machine Learning
+      id: lec9-2
+      url: /summer-school/2021/lec9.2
+    - title: Advanced QML Algorithms
+      id: lec10-1
+      url: /summer-school/2021/lec10.1
+    - title: The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning
+      id: lec10-2
+      url: /summer-school/2021/lec10.2
 
 - title: Quantum Machine Learning
   url: /learning-qml
