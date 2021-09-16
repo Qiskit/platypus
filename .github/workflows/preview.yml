@@ -34,14 +34,6 @@ jobs:
           auto_inactive: true
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Add comment to PR (preview)
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          recreate: true
-          GITHUB_TOKEN: "${{ github.token }}"
-          message: |
-            Attempting to deploy PR for preview
-
       - name: Log-in into IBM Container Registry
         uses: docker/login-action@v1
         with:
@@ -110,22 +102,3 @@ jobs:
           status: ${{ job.status }}
           deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
           env_url: "${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction"
-
-      - name: Add comment to PR (success)
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: success()
-        with:
-          recreate: true
-          GITHUB_TOKEN: "${{ github.token }}"
-          message: |
-            Deployment successful!
-            Preview available at ${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction
-
-      - name: Add comment to PR (failure)
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: failure()
-        with:
-          recreate: true
-          GITHUB_TOKEN: "${{ github.token }}"
-          message: |
-            Failed to deploy PR for preview

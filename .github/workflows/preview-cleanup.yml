@@ -43,12 +43,6 @@ jobs:
         run: |
           ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
 
-      - name: Remove Docker image
-        env:
-          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
-        run: |
-          ibmcloud cr image-rm "$DOCKER_IMAGE_TAG"
-
       - name: Remove Code Engine preview application
         env:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
@@ -59,3 +53,9 @@ jobs:
             --wait \
             --ignore-not-found \
             --force
+
+      - name: Remove Docker image
+        env:
+          DOCKER_IMAGE_TAG: us.icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+        run: |
+          ibmcloud cr image-rm "$DOCKER_IMAGE_TAG"
