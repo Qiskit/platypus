@@ -1,6 +1,25 @@
+/**
+ * Set up Segment tracking when running the code in a code cell.
+ *
+ * @param {Element} runButtonElement
+ * @param {number} codeCellIndex
+ */
+function setupCodeRunningTracking (runButtonElement, codeCellIndex) {
+  const codeCellId = codeCellIndex + 1
+
+  runButtonElement.addEventListener('click', () => {
+    window.textbook.trackClickEvent('Run', `Code cell #${codeCellId}`)
+  })
+}
 
 const initializeCodeCells = function () {
   thebelab.bootstrap()
+
+  document.querySelectorAll('.thebelab-cell').forEach((codeCell, index) => {
+    const runButtonElement = codeCell.querySelector('.thebelab-run-button')
+
+    setupCodeRunningTracking(runButtonElement, index)
+  })
 
   document
     .querySelectorAll('.thebelab-cell')
