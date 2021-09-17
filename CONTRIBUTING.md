@@ -26,7 +26,6 @@ contributors and maintainers of this site and so, thank you!
   - [Code review](#code-review)
   - [Merging](#merging)
 - [Code style](#code-style)
-  - [Solving linting issues](#solving-linting-issues)
   - [Type annotations](#type-annotations)
 
 ## Start contributing
