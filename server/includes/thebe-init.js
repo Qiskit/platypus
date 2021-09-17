@@ -1,4 +1,29 @@
 /**
+ * Prevents the automatic translation of a given element.
+ *
+ * @param {Element} element
+ */
+function preventTranslation (element) {
+  element.setAttribute('translate', 'no')
+}
+
+/**
+ * Setup up the indicator that shows the code cell is running.
+ *
+ * @param {Element} runButton
+ * @param {Element} busyStateIndicator
+ */
+function setupCodeRunningIndicator (runButton, busyStateIndicator) {
+  const busySpan = document.createElement('span')
+
+  busySpan.classList.add('thebelab-busy-text')
+  busySpan.textContent = 'Running'
+
+  busyStateIndicator.append(busySpan)
+  runButton.append(busyStateIndicator)
+}
+
+/**
  * Set up Segment tracking when the code in a code cell is modified for the
  * first time.
  *
@@ -21,15 +46,48 @@ function setupCodeModifiedTracking (codeMirrorInstance, codeCellIndex) {
 /**
  * Set up Segment tracking when running the code in a code cell.
  *
- * @param {Element} runButtonElement
+ * @param {Element} runButton
  * @param {number} codeCellIndex
  */
-function setupCodeRunningTracking (runButtonElement, codeCellIndex) {
+function setupCodeRunningTracking (runButton, codeCellIndex) {
   const codeCellId = codeCellIndex + 1
 
-  runButtonElement.addEventListener('click', () => {
+  runButton.addEventListener('click', () => {
     window.textbook.trackClickEvent('Run', `Code cell #${codeCellId}`)
   })
+}
+
+/**
+ * Set up the "copy to clipboard" functionality for a code cell.
+ *
+ * @param {Element} codeCell
+ * @param {number} codeCellIndex
+ * @param {NodeListOf<Element>} cellCodeLines
+ */
+function setupCopyToClipboard (codeCell, codeCellIndex, cellCodeLines) {
+  const codeCellId = `code-mirror-element-${codeCellIndex}`
+
+  const clipboardCopyComponent = document.createElement(
+    'q-code-mirror-clipboard-copy'
+  )
+  clipboardCopyComponent.setAttribute('target-id', codeCellId)
+  codeCell.append(clipboardCopyComponent)
+
+  const codeInput = document.createElement('input')
+  codeInput.id = codeCellId
+  codeCell.append(codeInput)
+
+  /**
+   * Create a copy of the CodeMirror cell's content adding line breaks.
+   * The "copy to clipboard" functionality will copy the content from this
+   * copy.
+   */
+  const codeLines = Array.from(cellCodeLines).map(
+    codeLine => codeLine.textContent
+  )
+  const formattedCode = codeLines.join('\n')
+  codeInput.setAttribute('type', 'hidden')
+  codeInput.setAttribute('value', formattedCode)
 }
 
 const initializeCodeCells = function () {
@@ -40,84 +98,32 @@ const initializeCodeCells = function () {
   document
     .querySelectorAll(codeCellSelector)
     .forEach((codeCell, codeCellIndex) => {
+      const busyStateIndicator = codeCell.querySelector('.thebelab-busy')
+      const cellCode = codeCell.querySelector('.CodeMirror-code')
+      const cellCodeLines = cellCode.querySelectorAll('.CodeMirror-line')
+      const cellInput = codeCell.querySelector('.thebelab-input')
+      const cellOutput = codeCell.querySelector('.jp-OutputArea')
       const codeMirrorInstance = codeCell.querySelector('.CodeMirror').CodeMirror
-      const runButtonElement = codeCell.querySelector('.thebelab-run-button')
+      const restartButton = codeCell.querySelector('.thebelab-restart-button')
+      const restartAllButton = codeCell.querySelector('.thebelab-restartall-button')
+      const runButton = codeCell.querySelector('.thebelab-run-button')
 
-      setupCodeModifiedTracking(codeMirrorInstance, codeCellIndex)
-      setupCodeRunningTracking(runButtonElement, codeCellIndex)
-    })
+      restartButton.remove()
+      restartAllButton.remove()
 
-  document
-    .querySelectorAll(codeCellSelector)
-    .forEach((codeCell) => {
-      codeCell.querySelector('.thebelab-restart-button').remove()
-      codeCell.querySelector('.thebelab-restartall-button').remove()
-
-      const codeCellRunButton = codeCell.querySelector('.thebelab-run-button')
-      codeCellRunButton.setAttribute('data-test', 'code-cell-button-run')
-      codeCellRunButton.textContent = 'Run'
-
-      const codeCellBusyIndicator = codeCell.querySelector('.thebelab-busy')
-      const busySpan = document.createElement('span')
-      busySpan.classList.add('thebelab-busy-text')
-      busySpan.textContent = 'Running'
-      codeCellBusyIndicator.append(busySpan)
-      codeCellRunButton.append(codeCellBusyIndicator)
+      runButton.textContent = 'Run'
 
       codeCell.setAttribute('data-test', 'code-cell')
+      cellCode.setAttribute('data-test', 'code-cell-code')
+      cellInput.setAttribute('data-test', 'code-cell-input')
+      cellOutput.setAttribute('data-test', 'code-cell-output')
+      runButton.setAttribute('data-test', 'code-cell-button-run')
 
-      codeCell
-        .querySelector('.thebelab-input')
-        .setAttribute('data-test', 'code-cell-input')
-
-      codeCell
-        .querySelector('.jp-OutputArea')
-        .setAttribute('data-test', 'code-cell-output')
-
-      codeCell
-        .querySelector('.CodeMirror-code')
-        .setAttribute('data-test', 'code-cell-code')
-    })
-
-  /**
-   * Avoid translating code.
-   */
-  document
-    .querySelectorAll(codeCellSelector)
-    .forEach((thebelabCell) => {
-      thebelabCell.setAttribute('translate', 'no')
-    })
-
-  /**
-   * Copy to clipboard functionality.
-   */
-  document
-    .querySelectorAll(codeCellSelector)
-    .forEach((thebelabCell, index) => {
-      const codeCellId = `code-mirror-element-${index}`
-
-      const clipboardCopyComponent = document.createElement(
-        'q-code-mirror-clipboard-copy'
-      )
-      clipboardCopyComponent.setAttribute('target-id', codeCellId)
-      thebelabCell.append(clipboardCopyComponent)
-
-      const codeInput = document.createElement('input')
-      codeInput.id = codeCellId
-      thebelabCell.append(codeInput)
-
-      /**
-       * Create a copy of the CodeMirror cell's content adding line breaks.
-       * The "copy to clipboard" functionality will copy the content from this
-       * copy.
-       */
-      const codeElement = thebelabCell.querySelector('.CodeMirror-code')
-      const codeLines = Array.from(
-        codeElement.querySelectorAll('.CodeMirror-line')
-      ).map(codeLine => codeLine.textContent)
-      const formattedCode = codeLines.join('\n')
-      codeInput.setAttribute('type', 'hidden')
-      codeInput.setAttribute('value', formattedCode)
+      preventTranslation(codeCell)
+      setupCodeRunningIndicator(runButton, busyStateIndicator)
+      setupCodeModifiedTracking(codeMirrorInstance, codeCellIndex)
+      setupCodeRunningTracking(runButton, codeCellIndex)
+      setupCopyToClipboard(codeCell, codeCellIndex, cellCodeLines)
     })
 }
 
