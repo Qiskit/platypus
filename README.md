@@ -1,8 +1,6 @@
 # platypus
 
-This repsoitory is the home of the content for the [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/).
-
-It builds upon the current [Qiskit Textbook](https://qiskit.org/textbook/preface.html), updating the overall user experience.
+This repsoitory is the home of the [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/) content pages.
 
 ## Tools & technologies
 
