@@ -56,3 +56,18 @@ button span.rangle {
     overflow-x: hidden;
   }
 }
+
+/* Make youtube full width */
+.youtube-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56%;
+  margin-bottom: $spacing-unit;
+}
+
+.youtube-wrapper iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
