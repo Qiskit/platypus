@@ -147,26 +147,10 @@ export default class LessonNotes extends Vue.with(Props) {
 </style>
 
 <style lang="scss">
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
-@import '../../../scss/variables/colors.scss';
-@import 'carbon-components/scss/globals/scss/typography';
 // overrides
-.lesson-notes {
+.utility-panel .lesson-notes {
   a {
-    color: $link-color-tertiary;
-  }
-
-  bx-table-header-cell {
-    color: $text-color-black;
-    background-color: $background-color-light;
-  }
-
-  bx-table-cell,
-  bx-table-cell:hover {
-    color: $text-color-light;
-    background-color: $background-color-white;
-    border-top: none;
-    border-bottom: 1px solid $border-color;
+    color: var(--qiskit--color-text-link);
   }
 }
 </style>

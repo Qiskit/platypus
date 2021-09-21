@@ -121,7 +121,7 @@ export default class Binary extends Vue {
   &__block {
     @include type-style('expressive-heading-05');
     min-width: 3.25rem;
-    color: $black-100;
+    color: var(--qiskit--color-text-primary);
     text-align: center;
     display: flex;
     height: 100%;

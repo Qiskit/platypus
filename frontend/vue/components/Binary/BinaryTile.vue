@@ -64,6 +64,7 @@ export default class BinaryTile extends Vue.with(Props) {
   &__num {
     @include type-style('expressive-heading-05');
     background-color: $cool-gray-20;
+    color: $text-color-light;
     display: flex;
     height: 3.125rem;
     width: 3.25rem;
@@ -78,7 +79,7 @@ export default class BinaryTile extends Vue.with(Props) {
 
   &__val {
     @include type-style('body-short-01');
-    color: $black-100;
+    color: var(--qiskit--color-text-primary);
     opacity: .3;
   }
 

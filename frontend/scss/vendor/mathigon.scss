@@ -8,6 +8,7 @@ x-step {
   code {
     background: none;
     border: none;
+    color: var(--qiskit--color-text-primary);
     font-family: $plex-mono;
     padding-left: 0;
     padding-right: 0;
@@ -29,10 +30,10 @@ pre {
 
 .reveal-banner {
   @include type-style('productive-heading-01');
-  background-color: $background-color-light;
+  background-color: var(--reveal-banner--background-color);
   border-radius: initial;
   border-right: 1px solid $border-color-secondary;
-  color: $text-color-light;
+  color: var(--reveal-banner--text-color);
   padding: $spacing-03 $spacing-07 $spacing-03 $spacing-05;
   top: 52px;
   left: 0px;
@@ -119,13 +120,15 @@ pre {
 }
 
 x-progress {
+  color: var(--sidebar--x-progress-color);
+
   svg {
     z-index: -1;
     position: relative;
   }
 
   path.pie {
-    color: $background-color-tertiary;
+    color: var(--sidebar--link-color--active);
   }
 
   .c-sidebar__section & {
@@ -170,8 +173,8 @@ x-progress {
   }
 }
 
-x-step {
-  color: $text-color-light;
+.jupyter-page x-step {
+  color: var(--qiskit--color-text-primary);
 
   ul, ol {
     font-size: 0.875rem;
@@ -187,6 +190,7 @@ x-step {
   }
 
   h3 {
+    color: var(--qiskit--color-text-primary);
     font-size: 1em;
     font-weight: 600;
     line-height: 1.375rem;
@@ -196,7 +200,7 @@ x-step {
 
   h2 {
     border-bottom: none;
-    color: $text-color-light;
+    color: var(--qiskit--color-text-primary);
     font-size: 1.75rem;
     font-weight: normal;
     line-height: 2.25rem;
@@ -220,7 +224,7 @@ x-step {
     margin: 0 0 1em;
 
     a {
-      color: $link-color-tertiary;
+      color: var(--qiskit--color-text-link);
 
       &::before {
         background: none;
@@ -241,6 +245,12 @@ x-step {
     .wrap {
       height: initial;
     }
+  }
+
+  p strong,
+  x-step table strong,
+  x-step li strong {
+    color: var(--qiskit--color-text-primary);
   }
 }
 
@@ -346,7 +356,7 @@ x-bio, x-gloss {
     }
   }
   .popup {
-    background: $background-color-lighter;
+    background: var(--mathigon--popup--background-color);
     box-shadow: initial;
     left: -2px;
     border-top: 2px solid $glossary-border-color;
@@ -367,7 +377,7 @@ x-bio, x-gloss {
 
     p, strong {
       font-size: 14px;
-      color: $text-color-black;
+      color: var(--mathigon--popup--text-color);
       line-height: 20px;
     }
   }

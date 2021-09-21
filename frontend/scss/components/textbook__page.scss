@@ -36,7 +36,6 @@
 }
 
 .c-textbook__page {
-  background-color: $background-color-white;
   width: $textbook-page-width;
   transition: transform 250ms ease;
   left: 0;
@@ -121,6 +120,10 @@
   }
 }
 
+html.dark-theme .c-textbook__content img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 .c-textbook__content {
   clear: both;
   padding-top: calc(#{$qiskit-navbar-height} + #{$textbook-page-banner-height});
@@ -160,7 +163,7 @@ img.textbook_logo {
 }
 
 #page-title {
-  color: $text-color-dark;
+  color: var(--qiskit--color-text-title);
   font-size: 2.7rem;
   font-family: $plex-sans-light;
   line-height: 3.15rem;

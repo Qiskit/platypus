@@ -31,12 +31,21 @@ export default class ContentMenu extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~@carbon/colors/scss/colors';
+:root {
+  --content-menu--color-background: #{$cool-gray-10};
+}
 
+html.dark-theme {
+  --content-menu--color-background: #{$cool-gray-90};
+}
+</style>
+
+<style lang="scss" scoped>
 .content-menu {
   &__mega-menu-dropdown {
-    background: $cool-gray-10;
+    background: var(--content-menu--color-background);
   }
 }
 

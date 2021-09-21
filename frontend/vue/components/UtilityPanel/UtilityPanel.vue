@@ -76,7 +76,6 @@ export default class UtilityPanel extends Vue {
 @import '../../../scss/variables/mq.scss';
 
 .utility-panel {
-  background-color: $background-color-white;
   width: 100%;
   height: auto;
   user-select: text;
