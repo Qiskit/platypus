@@ -183,7 +183,7 @@ html.dark-theme details summary::after{
 }
 
 details {
-  background: var(--qiskit--color-background-primary);
+  background: var(--q-block--background-color);
   border-bottom: 1px solid $border-color-light-2;
   font-size: 0.9rem;
   margin: 1rem 0;
