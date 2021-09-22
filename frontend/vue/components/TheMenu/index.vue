@@ -88,6 +88,7 @@
             </bx-dropdown-item>
           </bx-dropdown>
         </template>
+        <QiskitThemeToggle />
       </nav>
     </section>
   </div>
@@ -97,6 +98,7 @@
 import { Options, mixins } from 'vue-class-component'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
 import Close20 from '@carbon/icons-vue/lib/close/20'
+import { ThemeToggle as QiskitThemeToggle } from '@qiskit-community/qiskit-vue'
 import MenuMixin from '../../mixins/menu'
 import AppLogo from '../common/AppLogo.vue'
 import AppLink from '../common/AppLink.vue'
@@ -107,7 +109,7 @@ import MobileMenu from './MobileMenu.vue'
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
 
 @Options({
-  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20 }
+  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20, QiskitThemeToggle }
 })
 export default class TheMenu extends mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
@@ -132,16 +134,6 @@ export default class TheMenu extends mixins(MenuMixin) {
 @import '~/../scss/variables/colors.scss';
 
 .menu {
-  &__logo {
-    height: 1.5rem;
-    width: auto;
-    color: $text-color-lighter;
-
-    &_active {
-      color: $text-active-color;
-    }
-  }
-
   &__link {
     @include type-style('body-long-02');
     display: inline-flex;
@@ -174,13 +166,14 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   &__hamburger-toggle {
+    color: var(--qiskit--navbar-item-color);
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
   }
 
   &__main-level {
-    --link-color: #{$link-color-secondary};
+    --link-color: var(--qiskit--navbar-item-color);
   }
 
   &__mobile {
@@ -245,7 +238,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   &__logo {
     height: 1.5rem;
     width: auto;
-    color: $text-color-lighter;
+    color: var(--qiskit--navbar-logo-color);
 
     &_active {
       color: $active-color;
@@ -326,7 +319,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   // select a child within the shadow
   bx-dropdown::part(trigger-button) {
     --cds-body-short-01-font-size: 1rem;
-    background-color: $background-color-white;
+    background-color: var(--qiskit--color-background-primary);
 
     &:focus {
       outline: none;
@@ -334,25 +327,26 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   bx-dropdown[open]::part(trigger-button) {
-    background-color: $background-color-lighter;
+    background-color: var(--bx-dropdown--items--background-color);
   }
 
   bx-dropdown::part(menu-body) {
     top: calc(100% + 10px);
-    background-color: $background-color-lighter;
+    background-color: var(--bx-dropdown--items--background-color);
   }
 
   bx-dropdown.menu__entry {
     padding: .5rem 0;
 
     &[open] {
-      background-color: $background-color-lighter;
+      background-color: var(--bx-dropdown--items--background-color);
       border-bottom: 1px solid $border-color;
       margin-bottom: -1px;
     }
   }
 
   bx-dropdown-item {
+    background-color: var(--bx-dropdown--items--background-color);
     display: flex;
     height: 100%;
 

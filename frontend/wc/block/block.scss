@@ -30,7 +30,7 @@ q-block {
   .qb-body {
     border-bottom: 2px solid $block-border-color;
     border-top: 2px solid $block-border-color;
-    background-color: $background-color-lighter;
+    background-color: var(--q-block--background-color);
     padding: 1em;
 
     > h3 {
@@ -108,6 +108,10 @@ q-block {
       x-tabbox {
         margin: 0;
 
+        h3 {
+          color: var(--q-block--tabbox--color);
+        }
+
         > .titles {
           margin: 0;
     
@@ -123,12 +127,12 @@ q-block {
             padding: 0;
     
             &:hover {
-              color: $block-link-color-tertiary;
+              color: var(--q-block--tabbox--color--active);
             }
     
             &.active {
-              border-bottom: 2px solid $block-border-color-tertiary;
-              color: $block-link-color-tertiary;
+              border-bottom: 2px solid var(--q-block--tabbox--color--active);
+              color: var(--q-block--tabbox--color--active);
             }
           }
         }

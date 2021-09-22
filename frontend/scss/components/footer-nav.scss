@@ -24,3 +24,12 @@
     min-height: 6rem;
   }
 }
+
+html.dark-theme {
+  .footer-nav {
+    .app-cta_secondary {
+      color: var(--qiskit--color-text-primary);
+      background-image: linear-gradient(90deg, #6929c4 0%, #6929c4 50%, var(--q-block--background-color) 50%, var(--q-block--background-color) 100%);
+    }
+  }
+}

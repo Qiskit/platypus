@@ -9,7 +9,11 @@
         {{ $translate(link.label) }}
       </BasicLink>
     </p>
-    <img class="empty-panel__img" src="/images/work-in-progress.png" alt="Illustration of hands working with tools">
+    <img
+      alt="Illustration of hands working with tools"
+      class="empty-panel__img"
+      :src="emptyPanelImage"
+    >
   </div>
 </template>
 
@@ -30,6 +34,22 @@ export default class EmptyPanel extends Vue {
       cta: 'universal-glossary',
       location: 'chapter-details-panel'
     }
+  }
+
+  get isDarkMode () {
+    const htmlDom = document.getElementsByTagName('html')[0]
+
+    return htmlDom.classList.contains('dark-theme')
+  }
+
+  get emptyPanelImage () {
+    let url = 'work-in-progress.png'
+
+    if (this.isDarkMode) {
+      url = 'work-in-progress-dark.png'
+    }
+
+    return `/images/${url}`
   }
 
   redirectAction (event: any, link: any) {

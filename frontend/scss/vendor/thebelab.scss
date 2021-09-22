@@ -43,11 +43,13 @@ div.jb_input div.input {
 
 
 .thebelab-cell {
+  --jp-content-font-color1: var(--qiskit--color-text-primary);
+
   // To ensure that thebelab cells are always the top of the Z-stack
   position: relative;
   z-index: 999;
   border: 1px solid $border-color;
-  background-color: $background-color-lighter;
+  background-color: var(--code-block--background-color);
   border-radius: 0px;
   margin: 2em 0;
   display: flex;
@@ -78,8 +80,8 @@ div.jb_input div.input {
   transition: all 0.2s;
   border: none;
 
-  background-color: $background-color-darker;
-  color: $text-color-white;
+  background-color: var(--code-block--button--background-color);
+  color: var(--code-block--button--text-color);
 }
 
 .thebelab-button:hover{
@@ -131,11 +133,77 @@ div.jp-OutputArea-output {
   padding: 18px;
 }
 
+html.dark-theme .jp-OutputArea-output svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 div.jp-OutputArea > :first-child {
   border-top: 1px solid $border-color !important;
 }
 
+.jp-OutputArea {
+  &.lm-Widget {
+    .jupyter-button {
+      background-color: var(--code-block--background-color);
+    }
+
+    .jupyter-widgets, .widget-label {
+      color: var(--qiskit--color-text-primary);
+    }
+  }
+}
+
 .jp-OutputArea-child {
-  background-color: $background-color-white;
+  background-color: var(--code-block--output-background-color);
   padding: 18px;
+}
+
+.jp-RenderedHTMLCommon {
+  code, pre {
+    background-color: var(--code-block--output-background-color);
+  }
+}
+
+.jp-RenderedText{
+  &[data-mime-type='application/vnd.jupyter.stderr'] {
+    background-color: var(--code-block--output-background-color-error);
+  }
+
+  pre a:link {
+    color: var(--qiskit--color-text-link);
+  }
+}
+
+.CodeMirror {
+  pre {
+    color: var(--qiskit--color-text-primary);
+  }
+
+  .cm-builtin {
+    color: var(--code-block--cm-builtin);
+  }
+
+  .cm-comment {
+    color: var(--code-block--cm-comment);
+  }
+  
+  .cm-def {
+    color: var(--code-block--cm-def);
+  }
+
+  .cm-keyword {
+    color: var(--code-block--cm-keyword);
+  }
+
+  .cm-number {
+    color: var(--code-block--cm-number);
+  }
+
+  .cm-string {
+    color: var(--code-block--cm-string);
+  }
+}
+
+.CodeMirror {
+  color: var(--qiskit--color-text-primary);
 }
