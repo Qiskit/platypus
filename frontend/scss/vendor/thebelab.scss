@@ -110,6 +110,10 @@ div.jb_input div.input {
   color: $text-color-white;
 }
 
+.thebelab-busy-spinner {
+  border-top-color: $border-color-tertiary;
+}
+
 .CodeMirror {
   font-family: $plex-mono;
   font-size: 0.9em;
