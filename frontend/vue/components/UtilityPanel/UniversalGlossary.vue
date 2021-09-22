@@ -45,6 +45,7 @@ export default class UniversalGlossary extends Vue.with(Props) {}
 @import 'carbon-components/scss/globals/scss/typography';
 
 .universal-glossary {
+  background-color: $background-color-white;
   margin-bottom: $layout-05;
 
   &__title {

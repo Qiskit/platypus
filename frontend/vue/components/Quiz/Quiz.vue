@@ -184,7 +184,7 @@ export default class Quiz extends Vue.with(Props) {
         @include type-style('body-long-01');
         flex: 1;
         border: 1px solid transparent;
-        background-color: var(--qiskit--color-background-primary);
+        background-color: $background-color-white;
         padding: $spacing-02 $spacing-03;
         display: flex;
         flex-direction: row;

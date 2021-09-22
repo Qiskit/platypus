@@ -71,8 +71,9 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 &__item {
     @include type-style('body-short-01');
     display: block;
+    color: $link-color-secondary;
     text-decoration: none;
-    background-color: var(--bx-dropdown--items--background-color);
+    background-color: $background-color-lighter;
   }
 
   // component overrides
@@ -80,7 +81,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   &::part(trigger-button) {
     @include type-style('body-short-01');
     --cds-body-short-01-font-size: 1rem;
-    background-color: var(--utility-panel--menu-dropdown--background-color);
+    background-color: $cool-gray-20;
 
     &:focus {
       outline: none;

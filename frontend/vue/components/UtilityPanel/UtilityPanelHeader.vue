@@ -100,7 +100,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import 'carbon-components/scss/globals/scss/typography';
 @import '../../../scss/variables/colors.scss';
 @import '../../../scss/variables/mq.scss';
@@ -117,11 +117,11 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
     justify-content: space-between;
     padding: $spacing-03 $spacing-05;
     display: flex;
-    background-color: var(--utility-panel--toggle--background-color);
+    background-color: $background-color-lighter;
     align-items: center;
     min-width: 9rem;
     height: 40px;
-    color: var(--utility-panel--toggle--text-color);
+    color: $purple-70;
 
     @include mq($until: medium) {
       width: 100%;
@@ -131,7 +131,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   }
 
   &__icon {
-    fill: var(--utility-panel--toggle--text-color);
+    fill: $purple-70;
   }
 
   // override

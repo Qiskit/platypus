@@ -193,20 +193,10 @@ export default class LayersCircuit extends Vue.with(Props) {
   }
 }
 </script>
-
-<style lang="scss">
-html.dark-theme {
-  .layers-circuit {
-    filter: invert(1) hue-rotate(180deg);
-  }
-}
-</style>
-
 <style scoped lang="scss">
 @import '~/../scss/variables/colors.scss';
 
 .layers-circuit {
-  color: $text-color-light;
   position: relative;
   margin: 0 auto;
   width: var(--circuit-wrapper-width, 400px);
