@@ -55,22 +55,11 @@ export default class WhatIsQuantumVolume extends Vue.with(Props) {
   }
 }
 </script>
-
-<style lang="scss">
-html.dark-theme {
-  .what-is-qv {
-    background: transparent;
-    filter: invert(1) hue-rotate(180deg);
-  }
-}
-</style>
-
 <style scoped lang="scss">
 @import '~/../scss/variables/colors.scss';
 
 .what-is-qv {
   background-color: $background-color-lighter;
-  color: $text-color-light;
 
   &__chart {
     position: relative;

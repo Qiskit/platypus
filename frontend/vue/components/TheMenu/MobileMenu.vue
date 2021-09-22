@@ -108,7 +108,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
 .mobile-menu {
   display: flex;
   flex-direction: column;
-  background-color: var(--qiskit--color-background-primary);
+  background-color: $background-color-white;
   overflow-y: auto;
   justify-content: space-between;
 
@@ -139,7 +139,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
     flex-direction: column;
     justify-content: center;
     text-decoration: none;
-    color: var(--qiskit--navbar-item-color);
+    color: $text-color-light;
     height: 4rem;
     border-bottom: 1px solid $border-color-light;
 
@@ -150,7 +150,6 @@ export default class MobileMenu extends mixins(MenuMixin) {
 
     &_second-level {
       @include type-style('body-long-02');
-      border: 0;
       display: flex;
       padding: 0;
       margin: 0;
@@ -186,7 +185,8 @@ export default class MobileMenu extends mixins(MenuMixin) {
   // selecting within the shadow
   bx-dropdown::part(trigger-button) {
     --cds-body-short-01-font-size: 1rem;
-    background-color: var(--qiskit--color-background-primary);
+
+    background-color: $background-color-white;
     padding-left: 2rem;
 
     &:focus {
@@ -196,13 +196,11 @@ export default class MobileMenu extends mixins(MenuMixin) {
 
   bx-dropdown[open]::part(trigger-button) {
     height: 4rem;
-    background-color: var(--bx-dropdown--items--background-color);
     border-bottom: 1px solid $border-color;
   }
 
   bx-dropdown::part(menu-body) {
     top: calc(100% + 24px);
-    background-color: var(--bx-dropdown--items--background-color);
     box-shadow: initial;
   }
 }
@@ -211,7 +209,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
   bx-dropdown-item {
     display: flex;
     height: 4rem;
-    background-color: var(--bx-dropdown--items--background-color);
+    background-color: $background-color-lighter;
 
     &:not(:last-child) .menu__entry-label {
       border-bottom: none;

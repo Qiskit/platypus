@@ -110,18 +110,18 @@ export default class LanguageSelector extends Vue.with(Props) {
   &__item {
     text-align: left;
     // padding-left: 1rem;
-    background-color: var(--bx-dropdown--items--background-color);
+    background-color: $background-color-lighter;
 
     &:hover {
-      background-color: var(--bx-dropdown--items--background-color);
+      background-color: $background-color-light;
     }
 
     &-disabled {
       color: $text-color-lighter-3;
-      background-color: var(--bx-dropdown--items--background-color);
+      background-color: $background-color-lighter;
 
       &:hover {
-        background-color: var(--bx-dropdown--items--background-color);
+        background-color: $background-color-lighter;
         color: $text-color-lighter-3;
         cursor: not-allowed;
       }
@@ -141,12 +141,12 @@ export default class LanguageSelector extends Vue.with(Props) {
 .language-selector {
   // component overrides
   bx-dropdown::part(trigger-button) {
-    background-color: var(--sidebar--background-color);
+    background-color: $background-color-lighter;
     justify-content: flex-end;
     display: flex;
     padding-left: $spacing-07;
-    border-top: 2px solid var(--sidebar--menu-item--border-color);
-    border-bottom:1px solid var(--sidebar--menu-item--border-color);
+    border-top: 2px solid $border-color-secondary;
+    border-bottom:1px solid $border-color;
 
     &:focus{
       outline: 2px solid $border-color-secondary;

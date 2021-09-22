@@ -1,99 +1,5 @@
-@use '../../node_modules/@qiskit-community/qiskit-vue/dist/styles/index.css';
-
 @import './variables/colors.scss';
 @import './variables/fonts.scss';
-
-// Variables values for the light theme.
-:root {
-  --bx-dropdown--items--background-color: #{$background-color-lighter};
-
-  --cds-icon-01: var(--cds-text-01);
-  --cds-text-01: var(--qiskit--navbar-item-color);
-  --cds-text-02: var(--qiskit--navbar-item-color);
-
-  --code-block--background-color: #{$background-color-lighter};
-  --code-block--button--background-color: #{$background-color-darker};
-  --code-block--button--text-color: #{$text-color-white};
-  --code-block--output-background-color: #{$background-color-white};
-  --code-block--output-background-color-error: var(--jp-rendermime-error-background);
-  --code-block--cm-builtin: #30a;
-  --code-block--cm-comment: #a50;
-  --code-block--cm-def: #00f;
-  --code-block--cm-keyword: #708;
-  --code-block--cm-number: #164;
-  --code-block--cm-string: #a11;
-
-  --mathigon--popup--background-color: #{$background-color-lighter};
-  --mathigon--popup--text-color: #{$text-color-light};
-
-  --q-block--background-color: #{$background-color-lighter};
-  --q-block--tabbox--color: #{$text-color-light};
-  --q-block--tabbox--color--active: #{$block-link-color-tertiary};
-
-  --reveal-banner--background-color: #{$background-color-light};
-  --reveal-banner--text-color: #{$text-color-black};
-
-  --sidebar--background-color: #{$background-color-lighter};
-  --sidebar--link-color--active: #{$link-color-tertiary};
-  --sidebar--menu-item--border-color: rgba(0, 0, 0, 0.07);
-  --sidebar--menu-item--text-color: #{$link-color-tertiary};
-  --sidebar--x-progress-color: #{$text-color-light};
-
-  --table--border-color: #{$cool-gray-100};
-  --table--header--background-color: #{$background-color-light};
-  --table--header--text-color: #{$text-color-black};
-  --table--striped--background-color: #{$cool-gray-10};
-
-  --utility-panel--menu-dropdown--background-color: #{$background-color-light};
-  --utility-panel--toggle--background-color: #{$background-color-lighter};
-  --utility-panel--toggle--text-color: #{$link-color-tertiary};
-}
-
-// Variables values for the dark theme.
-html.dark-theme {
-  --bx-dropdown--items--background-color: #{$background-color-darker};
-
-  --cds-icon-01: var(--cds-text-01);
-  --cds-text-01: var(--qiskit--navbar-item-color);
-  --cds-text-02: var(--qiskit--navbar-item-color);
-
-  --code-block--background-color: #{$background-color-darker};
-  --code-block--button--background-color: #{$background-color-light};
-  --code-block--button--text-color: #{$text-color-dark};
-  --code-block--output-background-color: #{$background-color-dark-2};
-  --code-block--output-background-color-error: #{$red-80};
-  --code-block--cm-builtin: #{$purple-40};
-  --code-block--cm-comment: #{$orange-40};
-  --code-block--cm-def: #{$blue-40};
-  --code-block--cm-keyword: #{$magenta-40};
-  --code-block--cm-number: #{$green-30};
-  --code-block--cm-string: #{$red-40};
-
-  --mathigon--popup--background-color: #{$background-color-dark};
-  --mathigon--popup--text-color: #{$text-color-lighter-3};
-  
-  --q-block--background-color: #{$background-color-darker};
-  --q-block--tabbox--color: #{$text-color-lighter-4};
-  --q-block--tabbox--color--active: #{$block-link-color-tertiary-2};
-
-  --reveal-banner--background-color: #{$background-color-darker};
-  --reveal-banner--text-color: #{$text-color-lighter-3};
-
-  --sidebar--background-color: #{$background-color-darker};
-  --sidebar--link-color--active: #{$link-color-tertiary-2};
-  --sidebar--menu-item--border-color: #{$border-color-light-3};
-  --sidebar--menu-item--text-color: #{$link-color-tertiary-2};
-  --sidebar--x-progress-color: #{$text-color-lighter-3};
-
-  --table--border-color: #{$cool-gray-20};
-  --table--header--background-color: #{$background-color-darker};
-  --table--header--text-color: #{$text-color-lighter-3};
-  --table--striped--background-color: #{$cool-gray-90};
-
-  --utility-panel--menu-dropdown--background-color: #{$background-color-dark};
-  --utility-panel--toggle--background-color: #{$background-color-darker};
-  --utility-panel--toggle--text-color: #{$link-color-tertiary-2};
-}
 
 html {
   box-sizing: border-box;
@@ -109,13 +15,12 @@ html {
 
 html,
 body {
-  background-color: var(--qiskit--color-background-primary);
   font-family: $plex-sans;
   font-size: 16px;
   letter-spacing: 0.16px;
   line-height: 20px;
   min-height: 100%;
-  color: var(--qiskit--color-text-primary);
+  color: $text-color-light;
 }
 
 a:hover {
@@ -142,26 +47,26 @@ table {
 }
 
 tbody {
-  border-bottom: 1px solid var(--table--border-color) !important;
+  border-bottom: 1px solid $border-color-dark !important;
 }
 
 /* Fix strange table striping choice */
 tr:nth-child(even) {
-  background-color: var(--table--striped--background-color) !important;
+  background-color: $background-color-lighter !important;
 }
 
 td {
   border: 0px !important;
-  border-left: 1px solid var(--table--border-color) !important;
-  border-right: 1px solid var(--table--border-color) !important;
+  border-left: 1px solid $border-color-dark !important;
+  border-right: 1px solid $border-color-dark !important;
 }
 
 thead td {
-  border-bottom: 1px solid var(--table--border-color) !important;
+  border-bottom: 1px solid $border-color-dark !important;
 }
 
 table th {
-  border: 1px solid var(--table--border-color);
+  border: 1px solid $border-color-dark;
 }
 
 // Scrollbar width
@@ -178,12 +83,8 @@ main, nav {
   scrollbar-width: thin;
 }
 
-html.dark-theme details summary::after{
-  filter: invert(1);
-}
-
 details {
-  background: var(--q-block--background-color);
+  background: $background-color-lighter;
   border-bottom: 1px solid $border-color-light-2;
   font-size: 0.9rem;
   margin: 1rem 0;

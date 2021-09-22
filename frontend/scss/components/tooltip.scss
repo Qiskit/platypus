@@ -20,7 +20,7 @@ x-step {
   h3 {
     &.qv-tooltip__title {
       margin: 0;
-      color: var(--qiskit--color-text-primary);
+      color: $text-color-black;
       margin: 0;
       font-weight: 600;
     }
@@ -47,10 +47,9 @@ x-step {
 
 .qv-tooltip__content {
   width: 16rem;
-  background: var(--mathigon--popup--background-color);
+  background-color: $background-color-lighter;
   border-top: 2px solid $border-color-tertiary;
   border-bottom: 2px solid $border-color-tertiary;
-  color: var(--qiskit--color-text-primary);
   padding: 1rem;
   position: absolute;
   top: 100%;
