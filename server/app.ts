@@ -73,6 +73,12 @@ new MathigonStudioApp()
     })
     next()
   })
+  .get('/account', async (req, res) => {
+    res.render('userAccount', {
+      textbookHome: TEXTBOOK_HOME,
+      config: CONFIG
+    })
+  })
   .get('/summer-school/:course', (req, res, next) => {
     // redirect to first lecture when no lecture specified
     const course = getCourse(req.params.course, req.locale.id)

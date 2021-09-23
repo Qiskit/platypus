@@ -1,0 +1,16 @@
+include /_mixins
+
+doctype html
+html(lang=lang dir=dir)
+  head
+    include head
+
+  body#app
+    div.qiskit__navbar#qiskit-navbar
+      q-the-menu
+
+    .body
+      div hello world!
+
+    script(src='/textbook.js')
+    include ../includes/tail.html
