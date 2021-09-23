@@ -10,7 +10,17 @@ html(lang=lang dir=dir)
       q-the-menu
 
     .body
-      div hello world!
+      q-user-account-layout(user-name=userData.name user-role=userData.role)
 
+    script.
+      var user = null;
+      var textbookAnalytics = {
+        url: "#{config.analytics.url || ''}",
+        key: "#{config.analytics.key || ''}"
+      };
+      var textbook = {
+        locale: "#{req.locale.id}"
+      };
+    
     script(src='/textbook.js')
     include ../includes/tail.html

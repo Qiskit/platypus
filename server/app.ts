@@ -7,7 +7,7 @@ import { Request } from 'express';
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities'
 
-import { LOCALES } from '@mathigon/studio/server/i18n'
+import { LOCALES, translate } from '@mathigon/studio/server/i18n'
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
@@ -74,9 +74,15 @@ new MathigonStudioApp()
     next()
   })
   .get('/account', async (req, res) => {
+    const userMockData = {
+      name: 'Russell Huffman',
+      role: 'Administrator'
+    }
+
     res.render('userAccount', {
       textbookHome: TEXTBOOK_HOME,
-      config: CONFIG
+      config: CONFIG,
+      userData: userMockData
     })
   })
   .get('/summer-school/:course', (req, res, next) => {
