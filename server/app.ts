@@ -84,6 +84,11 @@ new MathigonStudioApp()
     // :section - refers to the lecture id
     const courseData = await getCourseData(req)
 
+    courseData?.course.sections.forEach(section => {
+      // Mathigon by default set url as 'course/'
+      section.url = section.url.replace('course/', 'summer-school/')
+    })
+
     if (!courseData) {
       return next()
     } else {
