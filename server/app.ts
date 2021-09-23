@@ -73,6 +73,11 @@ new MathigonStudioApp()
     })
     next()
   })
+  .get('/summer-school/:course', (req, res, next) => {
+    // redirect to first lecture when no lecture specified
+    const course = getCourse(req.params.course, req.locale.id)
+    return course ? res.redirect(`/summer-school/${course.id}/${course.sections[0].id}`) : next();
+  })
   .get('/summer-school/:course/:section', async(req, res, next) => {
     // example URL: /summer-school/2021/lec1-2
     // :course - refers to the summer school year
