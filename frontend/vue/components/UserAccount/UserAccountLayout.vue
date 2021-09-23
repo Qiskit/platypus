@@ -7,32 +7,13 @@
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
+          v-for="{displayName, hash} in sectionList"
+          :key="hash"
           class="user-account__section-nav__link-list__link"
-          :class="{'user-account__section-nav__link-list__link_active': activeSection === '#MyLearning'}"
-          url="#MyLearning"
+          :class="{'user-account__section-nav__link-list__link_active': activeSection === hash}"
+          :url="hash"
         >
-          My Learning
-        </AppLink>
-        <AppLink
-          class="user-account__section-nav__link-list__link"
-          :class="{'user-account__section-nav__link-list__link_active': activeSection === '#Groups'}"
-          url="#Groups"
-        >
-          Groups
-        </AppLink>
-        <AppLink
-          class="user-account__section-nav__link-list__link"
-          :class="{'user-account__section-nav__link-list__link_active': activeSection === '#Badges'}"
-          url="#Badges"
-        >
-          Badges
-        </AppLink>
-        <AppLink
-          class="user-account__section-nav__link-list__link"
-          :class="{'user-account__section-nav__link-list__link_active': activeSection === '#Privacy'}"
-          url="#Privacy"
-        >
-          Privacy
+          {{ displayName }}
         </AppLink>
         <AppLink
           class="user-account__section-nav__link-list__link"
@@ -43,16 +24,16 @@
       </div>
     </nav>
     <section class="user-account__section-container">
-      <div v-if="activeSection === '#MyLearning'">
+      <div v-if="activeSection === sectionList[0].hash">
         PROGRESS SECTION
       </div>
-      <div v-if="activeSection === '#Groups'">
+      <div v-if="activeSection === sectionList[1].hash">
         GROUPS SECTION
       </div>
-      <div v-if="activeSection === '#Badges'">
+      <div v-if="activeSection === sectionList[2].hash">
         BADGES SECTION
       </div>
-      <div v-if="activeSection === '#Privacy'">
+      <div v-if="activeSection === sectionList[3].hash">
         PRIVACY SECTION
       </div>
     </section>
@@ -74,7 +55,25 @@ export default defineComponent({
   },
   data () {
     return {
-      activeSection: ''
+      activeSection: '',
+      sectionList: [
+        {
+          displayName: 'My Learning',
+          hash: '#MyLearning'
+        },
+        {
+          displayName: 'Groups',
+          hash: '#Groups'
+        },
+        {
+          displayName: 'Badges',
+          hash: '#Badges'
+        },
+        {
+          displayName: 'Privacy',
+          hash: '#Privacy'
+        }
+      ]
     }
   },
   mounted () {
