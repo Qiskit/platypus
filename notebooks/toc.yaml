@@ -263,8 +263,8 @@
       id: project
       url: /intro/project
 
-- title: Summer school 2021
-  url: /qgss2021
+- title: Summer School 2021
+  url: /2021
   type: learning-path
   sections:
     - title: Vector Spaces, Tensor Products, and Qubits
