@@ -43,7 +43,7 @@ const initLeftSidebar = function () {
   const docClientWidth = document.documentElement.clientWidth
 
   if (docClientWidth < mobileBreakpoint) {
-    parentContainer.classList.add(hiddenPanelClass)
+    parentContainer?.classList?.add(hiddenPanelClass)
   }
 
   window.addEventListener('resize', collapseMobileMenu)
