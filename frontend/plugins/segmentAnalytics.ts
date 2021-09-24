@@ -1,7 +1,8 @@
 
 import {
   CtaClickedEventSegmentSchema,
-  PerformedSearchEventSegmentSchema
+  PerformedSearchEventSegmentSchema,
+  UpdatedObjectEventSegmentSchema
 } from '../constants/segment'
 
 /**
@@ -136,6 +137,30 @@ function trackPerformedSearch (uiElement: string, field: string) {
   bluemixAnalytics.trackEvent('Performed Search', eventOptions)
 }
 
+/**
+ * Send the information of a "Updated Object" event to Segment.
+ * @param context Bluemix Analytics configuration
+ * @param objectType Type of object that was updated
+ * @param object Object that was updated
+ */
+function trackUpdatedObject (objectType: string, object: string) {
+  const { bluemixAnalytics, digitalData } = window
+
+  if (!bluemixAnalytics || !digitalData) { return }
+
+  const productTitle = getOrFailProductTitle(digitalData)
+  const category = getOrFailCategory(digitalData)
+
+  const eventOptions: UpdatedObjectEventSegmentSchema = {
+    category,
+    productTitle,
+    object,
+    objectType
+  }
+
+  bluemixAnalytics.trackEvent('Updated Object', eventOptions)
+}
+
 function getOrFailProductTitle (digitalData: any): string {
   return assertCanGet(
     () => digitalData.page.pageInfo.productTitle,
@@ -171,6 +196,7 @@ function install (app: any, _options: any = {}) {
   app.config.globalProperties.$trackClickEvent = trackClickEvent
   app.config.globalProperties.$trackPage = trackPage
   app.config.globalProperties.$trackPerformedSearch = trackPerformedSearch
+  app.config.globalProperties.$trackUpdatedObject = trackUpdatedObject
 }
 
 export {
@@ -178,7 +204,8 @@ export {
   install,
   trackClickEvent,
   trackPage,
-  trackPerformedSearch
+  trackPerformedSearch,
+  trackUpdatedObject
 }
 
 export type {

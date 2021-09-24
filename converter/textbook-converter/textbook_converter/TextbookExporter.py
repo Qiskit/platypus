@@ -314,9 +314,14 @@ def handle_code_cell(cell, resources):
 
         and indent all lines. Include cell output if configured.
     """
-    formatted_source = cell.source.replace('\n', '\n      ').replace('<', '&lt;')
+    formatted_source = (cell.source
+                            .replace('\n', '\n      ')
+                            .replace('<', '&lt;')
+                            .replace('[[', '[ [')
+                            .replace(']]', '] ]'))
 
     code_lines = [
+        '\n<span></span>\n'
         '\n    pre(data-executable="true" data-language="python").\n      ',
         formatted_source,
         '\n\n'

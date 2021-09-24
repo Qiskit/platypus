@@ -38,3 +38,14 @@ export interface PerformedSearchEventSegmentSchema
   extends IbmCloudCommonEventSegmentSchema {
   field: string
 }
+
+/**
+ * Properties sent to Segment for the event "Updated Object".
+ * Only the properties used in this project are included in this interface.
+ * https://segment-standards.prod.ddp.cis.ibm.net/events/updated-object
+ */
+export interface UpdatedObjectEventSegmentSchema
+ extends IbmCloudCommonEventSegmentSchema {
+  object: string
+  objectType: string
+}
