@@ -2,7 +2,7 @@
 // Project Platypus
 // =============================================================================
 
-import { Request } from 'express';
+import { Request } from 'express'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities'
@@ -13,8 +13,6 @@ import {
   findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
 } from './utilities'
 import * as storageApi from './storage'
-
-import { translate } from '@mathigon/studio/server/i18n'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
