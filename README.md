@@ -1,8 +1,20 @@
 # platypus
 
-Qiskit Textbook (beta)
+This repsoitory is the home of the [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/) content pages.
 
-## Getting up and running
+## Tools & technologies
+
+- [Python](https://www.python.org/doc/) - interpreted, interactive, object-oriented programming language
+- [Jupyter Notebooks](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html) - documents containing interactive code and rich text
+- [Node.js](https://nodejs.org/en/docs/) - JavaScript runtime
+- [Mathigon Studio](https://github.com/mathigon/studio) - platform for highly interactive online courses
+- [Typescript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [Vue 3](https://v3.vuejs.org/guide/introduction.html) - framework for building user interfaces
+- [Sass/SCSS](https://sass-lang.com/documentation) - stylesheet language
+- [Cypress](https://docs.cypress.io/) - front end testing tool
+
+
+## Getting Started
 
 ### Pre-requisites
 
@@ -32,7 +44,7 @@ After the application has started, access the site at: http://localhost:8080/
 
 
 ## Contribution Guidelines
-If you'd like to contribute to Qiskit Textbook, please take a look at our [contributors guide](https://github.com/qiskit-community/qiskit-textbook/blob/main/CONTRIBUTING.md).
+If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) abd code of conduct(CODE_OF_CONDUCT.md)
 
 
 ## License

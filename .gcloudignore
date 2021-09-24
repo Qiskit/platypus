@@ -32,6 +32,5 @@ notebooks/
 app.json
 cypress.json
 Dockerfile
-heroku.yml
 LICENSE
 README.md
