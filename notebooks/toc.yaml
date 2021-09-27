@@ -268,76 +268,76 @@
   type: learning-path
   sections:
     - title: Vector Spaces, Tensor Products, and Qubits
-      id: lec1-1
+      id: lec1-1-vector-spaces-tensor-products-and-qubits
       url: /summer-school/2021/lec1.1
     - title: Introduction to Quantum Circuits
-      id: lec1-2
+      id: lec1-2-introduction-to-quantum-circuits
       url: /summer-school/2021/lec1.2
     - title: Simple Quantum Algorithms I
-      id: lec2-1
+      id: lec2-1-simple-quantum-algorithms-i
       url: /summer-school/2021/lec2.1
     - title: Simple Quantum Algorithms II
-      id: lec2-2
+      id: lec2-2-simple-quantum-algorithms-ii
       url: /summer-school/2021/lec2.2
     - title: Noise in Quantum Computers pt 1
-      id: lec3-1
+      id: lec3-1-noise-in-quantum-computers-pt-1
       url: /summer-school/2021/lec3.1
     - title: Noise in Quantum Computers pt 2
-      id: lec3-2
+      id: lec3-2-noise-in-quantum-computers-pt-2
       url: /summer-school/2021/lec3.2
     - title: Lab 1
-      id: lab1
+      id: lab1-quantum-computing-algorithm-operations
       url: /summer-school/2021/lab1
     - title: Introduction to Classical Machine Learning
-      id: lec4-1
+      id: lec4-1-introduction-to-classical-machine-learning
       url: /summer-school/2021/lec4.1
     - title: Advanced Classical Machine Learning
-      id: lec4-2
+      id: lec4-2-advanced-classical-machine-learning
       url: /summer-school/2021/lec4.2
     - title: Building a Quantum Classifier
-      id: lec5-1
+      id: lec5-1-building-a-quantum-classifier
       url: /summer-school/2021/lec5.1
     - title: Introduction to the Quantum Approximate Optimization Algorithm and Applications
-      id: lec5-2
+      id: lec5-2-introduction-to-the-quantum-approximate-optimization-algorithm-and-applications
       url: /summer-school/2021/lec5.2
     - title: Lab 2
-      id: lab2
+      id: lab2-variational-algorithms
       url: /summer-school/2021/lab2
     - title: From Variational Classifiers to Linear Classifiers
-      id: lec6-1
+      id: lec6-1-from-variational-classifiers-to-linear-classifiers
       url: /summer-school/2021/lec6.1
     - title: Quantum Feature Spaces and Kernels
-      id: lec6-2
+      id: lec6-2-quantum-feature-spaces-and-kernels
       url: /summer-school/2021/lec6.2
     - title: Quantum Kernels in Practice
-      id: lec7-1
+      id: lec7-1-quantum-kernels-in-practice
       url: /summer-school/2021/lec7.1
     - title: Lab 3
-      id: lab3
+      id: lab3-introduction-quantum-kernels-support-vector-machines
       url: /summer-school/2021/lab3
     - title: Introduction and Applications of Quantum Models
-      id: lec8-1
+      id: lec8-1-introduction-and-applications-of-quantum-models
       url: /summer-school/2021/lec8.1
     - title: Barren Plateaus, Trainability Issues, and How to Avoid Them
-      id: lec8-2
+      id: lec8-2-barren-plateaus-trainability-issues-and-how-to-avoid-them
       url: /summer-school/2021/lec8.2
     - title: Lab 4
-      id: lab4
+      id: lab4-introduction-training-quantum-circuits
       url: /summer-school/2021/lab4
     - title: Introduction to Quantum Hardware
-      id: lec9-1
+      id: lec9-1-introduction-to-quantum-hardware
       url: /summer-school/2021/lec9.1
     - title: Hardware Efficient Ansatze for Quantum Machine Learning
-      id: lec9-2
+      id: lec9-2-hardware-efficient-ansatze-for-quantum-machine-learning
       url: /summer-school/2021/lec9.2
     - title: Lab 5
-      id: lab5
+      id: lab5-introduction-hardware-efficient-ansatze-quantum-machine-learning
       url: /summer-school/2021/lab5
     - title: Advanced QML Algorithms
-      id: lec10-1
+      id: lec10-1-advanced-qml-algorithms
       url: /summer-school/2021/lec10.1
     - title: The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning
-      id: lec10-2
+      id: lec10-2-the-capacity-and-power-of-quantum-machine-learning-models-the-future-of-quantum-machine-learning
       url: /summer-school/2021/lec10.2
 
 - title: Quantum Machine Learning
