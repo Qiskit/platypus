@@ -117,6 +117,12 @@
     - title: Quantum Image Processing - FRQI and NEQR Image Representations
       id: flexible-representation-of-quantum-images-frqi
       url: /ch-applications/image-processing-frqi-neqr
+    - title: Quantum Edge Detection
+      id: quantum-edge-detection
+      url: /ch-applications/quantum-edge-detection
+    - title: Quantum Facial Expression Recognition
+      id: facial-expression-recognition
+      url: /ch-applications/facial-expression-recognition
 
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
@@ -134,6 +140,9 @@
     - title: Measuring Quantum Volume
       id: measuring-quantum-volume
       url: /quantum-hardware/measuring-quantum-volume
+    - title: The Density Matrix & Mixed States
+      id: density-matrix
+      url: /quantum-hardware/density-matrix
 
 
 - title: Investigating Quantum Hardware Using Microwave Pulses
@@ -186,6 +195,9 @@
     - title: Lab 7. Quantum Simulation as a Search Algorithm
       id: lab-7-quantum-simulation-as-a-search-algorithm
       url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
+    - title: Lab 8. Quantum Error Correction
+      id: lab-8-quantum-error-correction
+      url: /ch-labs/Lab08_QEC
 
 
 - title: Appendix
