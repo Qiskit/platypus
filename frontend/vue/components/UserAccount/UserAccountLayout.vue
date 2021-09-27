@@ -50,7 +50,7 @@
         BADGES SECTION
       </div>
       <div v-if="activeSection === sectionList[3].hash">
-        PRIVACY SECTION
+        <PrivacySection />
       </div>
     </section>
   </div>
@@ -59,11 +59,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import AppLink from '../common/AppLink.vue'
+import PrivacySection from './PrivacySection.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
   components: {
-    AppLink
+    AppLink,
+    PrivacySection
   },
   props: {
     userName: { type: String, required: false, default: 'Unknown' },
