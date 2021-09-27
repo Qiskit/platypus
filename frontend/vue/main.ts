@@ -22,7 +22,7 @@ import UniversalGlossary from './components/UtilityPanel/UniversalGlossary.vue'
 import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
-import SignIn from './components/SignIn/index.vue'
+import SignIn from './components/SignIn/SignIn.vue'
 
 declare global {
   interface Window {
