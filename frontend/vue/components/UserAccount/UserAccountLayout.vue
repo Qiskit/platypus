@@ -12,12 +12,14 @@
           class="user-account__section-nav__link-list__link"
           :class="{'user-account__section-nav__link-list__link_active': activeSection === hash}"
           :url="hash"
+          target="_self"
         >
           {{ displayName }}
         </AppLink>
         <AppLink
           class="user-account__section-nav__link-list__link"
           url="/LogOut"
+          target="_self"
         >
           Log Out
         </AppLink>
