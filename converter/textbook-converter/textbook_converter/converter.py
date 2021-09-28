@@ -229,9 +229,10 @@ def update_image_path(line, source_path):
 def get_order_from_toc(toc_file_path, md_dir_path):
     """Return the chapter title and sections (in order) as defined in toc yaml
     """
+    md_path = md_dir_path.replace(os.path.sep, '/')
     chapters = yml_to_dict(toc_file_path)
 
-    chapter = next((ch for ch in chapters if md_dir_path.endswith(ch['url'])), [])
+    chapter = next((ch for ch in chapters if md_path.endswith(ch['url'])), [])
 
     def get_sections(s):
         return (s['id'], s['url'][1:] if s['url'].startswith('/') else s['url'])
