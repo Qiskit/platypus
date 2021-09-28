@@ -64,7 +64,7 @@ def append_to_glossary_yaml(resources, yaml_output_path):
         updated_glossary = { **existing_glossary, **new_glossary }
 
         content = yaml.load(json.dumps(updated_glossary), Loader=yaml.BaseLoader)
-        with open(glossary_file_path, 'w') as glossary_file:
+        with open(glossary_file_path, 'w', encoding='utf-8') as glossary_file:
             glossary_file.write(f'{yaml.dump(content)}')
 
 
@@ -79,7 +79,7 @@ def append_to_notations_yaml(resources, yaml_output_path):
         updated_formulas = { **existing_formulas, **new_formulas }
 
         content = yaml.load(json.dumps(updated_formulas), Loader=yaml.BaseLoader)
-        with open(formulas_file_path, 'w') as formulas_file:
+        with open(formulas_file_path, 'w', encoding='utf-8') as formulas_file:
             formulas_file.write(f'{yaml.dump(content)}')
 
 
@@ -90,7 +90,7 @@ def append_to_styles(nb_node, output_path):
     styles_path = Path(styles_file_path).resolve()
 
     if not styles_path.exists():
-        with open(styles_path, 'w') as styles_file:
+        with open(styles_path, 'w', encoding='utf-8') as styles_file:
             styles_file.write('\n@import "../shared/shared";\n')
 
 
@@ -103,13 +103,13 @@ def append_to_ts(resources, source_path, output_path):
     if not ts_path.exists():
         src_ts_file_path = Path(os.path.join(source_path, 'functions.ts')).resolve()
         if not src_ts_file_path.exists():
-            with open(ts_path, 'w') as ts_file:
+            with open(ts_path, 'w', encoding='utf-8') as ts_file:
                 ts_file.write('import * as shared from "../shared/shared";\n')
         else:
             shutil.copy(str(src_ts_file_path), str(ts_path))
 
     if 'textbook' in resources and 'functions' in resources['textbook']:
-        with open(ts_path, 'a') as ts_file:
+        with open(ts_path, 'a', encoding='utf-8') as ts_file:
             ts_file.write(f'\n\n{resources["textbook"]["functions"]}')
 
 
@@ -124,7 +124,7 @@ def append_to_index(resources, output_path):
         updated_index = { **existing_index, **new_index }
 
         content = yaml.load(json.dumps(updated_index), Loader=yaml.BaseLoader)
-        with open(index_file_path, 'w') as index_file:
+        with open(index_file_path, 'w', encoding='utf-8') as index_file:
             index_file.write(f'{yaml.dump(content)}')
 
 
@@ -202,7 +202,7 @@ def yml_to_dict(yml_file_path):
         return None
 
     yml_dict = None
-    with open(yml_path) as file:
+    with open(yml_path, encoding='utf-8') as file:
         yml_dict = yaml.load(file, Loader=yaml.BaseLoader)
 
     return yml_dict
@@ -264,14 +264,14 @@ def merge(md_dir, toc_file_path, output_dir=None):
     else:
         md_files_path = [x for x in md_dir_path.glob('*.md') if x.name != merged_file_name]
 
-    with open(merged_md_path, 'w') as out_file:
+    with open(merged_md_path, 'w', encoding='utf-8') as out_file:
         if title and sections:
             out_file.write(f'# {title}\n\n')
         for count, md_path in enumerate(md_files_path):
             if count > 0:
                 out_file.write('\n\n---\n')
             out_file.write(f'\n> section: {sections[count][0]}\n\n')
-            with open(md_path) as in_file:
+            with open(md_path, encoding='utf-8') as in_file:
                 for line in in_file:
                     if sections:
                         line = update_image_path(line, sections[count][1].split('/')[0])
