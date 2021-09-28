@@ -90,16 +90,29 @@ export default defineComponent({
 @import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 @import '~/../scss/variables/fonts.scss';
+@import '~/../scss/variables/mq.scss';
 
 .user-account {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 17rem 1fr;
   height: calc(100vh - 60px);
+  grid-template-areas: "navigation section";
+
+  @include mq($from: medium, $until: large) {
+    grid-template-columns: 12rem 1fr;
+  }
+  @include mq($until: medium) {
+    grid-template-areas: "section";
+    grid-template-columns: 1fr;
+  }
 
   &__section-nav {
+    grid-area: "navigation";
     display: flex;
+    @include mq($until: medium) {
+      display: none;
+    }
     flex-direction: column;
-    width: 18rem;
     padding: $spacing-07;
 
     background-color: $background-color-light;
@@ -110,9 +123,15 @@ export default defineComponent({
       margin-bottom: $spacing-07;
 
       &__name {
+        word-break: break-word;
+        max-height: 75px;
+        overflow: hidden;
         @include type-style('expressive-heading-04');
       }
       &__role {
+        word-break: break-word;
+        max-height: 55px;
+        overflow: hidden;
         @include type-style('expressive-heading-01');
       }
     }
@@ -132,7 +151,8 @@ export default defineComponent({
     }
   }
   &__section-container {
-
+    grid-area: "section";
+    overflow: auto;
   }
 }
 </style>

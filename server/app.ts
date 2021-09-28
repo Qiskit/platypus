@@ -73,8 +73,8 @@ new MathigonStudioApp()
   })
   .get('/account', async (req, res) => {
     const userMockData = {
-      name: 'Russell Huffman',
-      role: 'Administrator'
+      name: 'Russell Huffman ReallyReallyReallyLongLongLongText',
+      role: 'Administrator ReallyReallyReallyLongLongLongText'
     }
 
     res.render('userAccount', {
