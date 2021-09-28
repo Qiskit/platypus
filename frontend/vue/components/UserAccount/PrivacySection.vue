@@ -70,6 +70,7 @@ export default defineComponent({
 
 .privacy-section {
   @include contained();
+  margin-left: 0;
   padding-top: $spacing-07;
 
   &__title {
