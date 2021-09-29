@@ -9,7 +9,6 @@
       </div>
       <div class="sign-in__content-section sign-in__content-section__footer">
         <img class="sign-in__content-section__img" :src="footerImgPath" :alt="footerImgAlt">
-
         <div>
           <p><strong>Join a community of learners</strong></p>
           <p>{{ footerDescription }}</p>
@@ -76,11 +75,24 @@ export default class SignIn extends Vue {
   overflow: hidden;
   display: flex;
 
+  @include mq($until: medium) {
+    flex-direction: column;
+  }
+
   &__content {
-    flex-grow: 1;
+    @include mq($from: medium) {
+      flex-grow: 1;
+    }
     &-section {
-      min-height: 50%;
       padding: $spacing-11;
+
+      @include mq($until: large) {
+        padding: $spacing-11 $spacing-07;
+      }
+
+      @include mq($from: medium) {
+        min-height: 50%;
+      }
 
       &__hero {
         flex-direction: column;
@@ -93,13 +105,31 @@ export default class SignIn extends Vue {
 
       &__footer {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+
+        @include mq($until: large) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        @include mq($until: medium) {
+          display: none;
+        }
       }
 
       &__img {
         margin-right: $spacing-10;
         max-width: 16rem;
+        @include mq($from: max-size) {
+          max-width: 26rem;
+        }
+
+        @include mq($until: large) {
+          flex-direction: column;
+          align-items: flex-start;
+          margin-bottom: $spacing-05;
+        }
       }
 
       &:not(:last-child) {
@@ -119,7 +149,19 @@ export default class SignIn extends Vue {
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
-    min-width: 752px;
+
+    // @include mq($from: x-large) {
+    //   min-width: 28rem;
+    // }
+
+    @include mq($until: large) {
+      padding: $spacing-11 $spacing-07;
+      min-width: 28rem;
+    }
+
+    @include mq($from: large) {
+      min-width: 40rem;
+    }
 
     &__title {
       @include type-style('expressive-heading-05');
