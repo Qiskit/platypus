@@ -18,7 +18,7 @@
         </AppLink>
         <AppLink
           class="user-account__section-nav__link-list__link"
-          url="/LogOut"
+          url="#"
           target="_self"
         >
           Log Out
