@@ -108,7 +108,7 @@ export default class SignIn extends Vue {
         justify-content: flex-start;
         align-items: center;
 
-        @include mq($until: large) {
+        @include mq($until: max-size) {
           flex-direction: column;
           align-items: flex-start;
         }
@@ -120,14 +120,8 @@ export default class SignIn extends Vue {
 
       &__img {
         margin-right: $spacing-10;
-        max-width: 16rem;
-        @include mq($from: max-size) {
-          max-width: 26rem;
-        }
-
-        @include mq($until: large) {
-          flex-direction: column;
-          align-items: flex-start;
+        @include mq($from: medium) {
+          max-width: 20rem;
           margin-bottom: $spacing-05;
         }
       }
@@ -149,10 +143,6 @@ export default class SignIn extends Vue {
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
-
-    // @include mq($from: x-large) {
-    //   min-width: 28rem;
-    // }
 
     @include mq($until: large) {
       padding: $spacing-11 $spacing-07;
