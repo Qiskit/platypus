@@ -99,16 +99,6 @@ li.c-sidebar__chapter > a {
   }
 }
 
-a.c-sidebar__entry {
-  &:visited {
-    color: $text-color-dark;
-  }
-  &:hover {
-    background: initial;
-    color: $link-color-tertiary;
-  }
-}
-
 .c-sidebar__entry--active {
   &.c-sidebar__entry--active {
     color: $text-active-color;
