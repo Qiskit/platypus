@@ -44,7 +44,7 @@
     "@mathigon/boost": "^0.6.17",
     "@mathigon/euclid": "^0.6.12",
     "@mathigon/studio": "git+https://github.com/vabarbosa/studio.git#platypus",
-    "@qiskit-community/qiskit-vue": "^0.24.0",
+    "@qiskit-community/qiskit-vue": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "carbon-components": "~10.40.2",
     "carbon-web-components": "~1.15.1",
