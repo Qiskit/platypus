@@ -41,7 +41,7 @@
     </bx-dropdown>
     <section class="user-account__section-container">
       <div v-if="activeSection === sectionList[0].hash">
-        PROGRESS SECTION
+        <UserProgress />
       </div>
       <div v-if="activeSection === sectionList[1].hash">
         GROUPS SECTION
@@ -60,12 +60,14 @@
 import { defineComponent } from 'vue-demi'
 import AppLink from '../common/AppLink.vue'
 import PrivacySection from './PrivacySection.vue'
+import UserProgress from './UserProgress.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
   components: {
     AppLink,
-    PrivacySection
+    PrivacySection,
+    UserProgress
   },
   props: {
     userName: { type: String, required: false, default: 'Unknown' },

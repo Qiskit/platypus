@@ -24,6 +24,8 @@ class Props {
 }
 
 export default class BasicLink extends Vue.with(Props) {
+  [x: string]: any
+
   static isExternal (url: string): boolean {
     return !!url && url.startsWith('http')
   }
@@ -53,7 +55,8 @@ export default class BasicLink extends Vue.with(Props) {
   }
 
   get isNuxtLink (): boolean {
-    return !this.isAnchor
+    // eslint-disable-next-line dot-notation
+    return this.$nuxt && !this.isAnchor
   }
 }
 </script>
