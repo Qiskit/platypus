@@ -8,7 +8,7 @@
         <p>{{ heroDescription }}</p>
       </div>
       <div class="sign-in__content-section sign-in__content-section__footer">
-        <video class="sign-in__content-section__img" autoplay loop>
+        <video class="sign-in__content-section__media" autoplay loop>
           <source :src="footerImgPath" type="video/mp4">
         </video>
         <div>
@@ -119,7 +119,8 @@ export default class SignIn extends Vue {
         }
       }
 
-      &__img {
+      &__media {
+        border: 1px solid $cool-gray-20;
         @include mq($from: medium) {
           max-width: 20rem;
           margin-bottom: $spacing-05;
