@@ -3,28 +3,28 @@
     <div class="sign-in__content">
       <div class="sign-in__content-section sign-in__content-section__hero">
         <div id="page-title" class="sign-in__content-section__hero-title">
-          {{ heroTitle }}
+          {{ $translate('Learn quantum computing with Qiskit.') }}
         </div>
-        <p>{{ heroDescription }}</p>
+        <p>{{ $translate('Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.') }}</p>
       </div>
       <div class="sign-in__content-section sign-in__content-section__footer">
         <video class="sign-in__content-section__media" autoplay loop>
-          <source :src="footerImgPath" type="video/mp4">
+          <source :src="footerMediaPath" type="video/mp4">
         </video>
         <div>
-          <p><strong>Join a community of learners</strong></p>
-          <p>{{ footerDescription }}</p>
+          <p><strong>{{ $translate('Join a community of learners') }}</strong></p>
+          <p>{{ $translate('Build your knowledge, take quizes and build your own quantum circuits.') }}</p>
         </div>
       </div>
     </div>
     <div class="sign-in__form">
       <h2 class="sign-in__form__title">
-        {{ formTitle }}
+        {{ $translate('Sign Into Qiskit') }}
       </h2>
       <AppCta
         class="sign-in__cta"
-        label="Sign in with IBM Id"
-        url="/some-auth-url-here"
+        :label="$translate('IBM id')"
+        :url="authenticationUrl"
       />
       <div class="sign-in__icons">
         <LogoGoogle32 class="sign-in__icons__item" />
@@ -51,11 +51,8 @@ import AppCta from '../common/AppCta.vue'
 })
 
 export default class SignIn extends Vue {
-  heroTitle = 'Learn quantum computing with Qiskit.'
-  heroDescription = 'Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.'
-  footerDescription = 'Build your knowledge, take quizes and build your own quantum circuits.'
-  footerImgPath = '/images/textbook_demo.mp4'
-  formTitle = 'Sign Into Qiskit'
+  authenticationUrl = '/some-auth-url-here'
+  footerMediaPath = '/images/textbook_demo.mp4'
 }
 </script>
 
