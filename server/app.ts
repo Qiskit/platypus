@@ -105,9 +105,14 @@ new MathigonStudioApp()
     }
   })
   .get('/signin', async (req, res) => {
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
     res.render('signIn', {
       textbookHome: TEXTBOOK_HOME,
-      config: CONFIG
+      config: CONFIG,
+      lang,
+      translationsJSON
     })
   })
   .course(storageApi)

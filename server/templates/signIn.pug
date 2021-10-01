@@ -12,6 +12,8 @@ html(lang=lang dir=dir)
     .body
       q-sign-in
 
+    script(type="application/json")#translations!= translationsJSON
+
     script.
       var user = null;
       var textbookAnalytics = {
