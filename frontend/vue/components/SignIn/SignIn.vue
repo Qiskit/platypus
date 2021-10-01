@@ -24,6 +24,7 @@
       <AppCta
         class="sign-in__cta"
         label="Sign in with IBM Id"
+        url="/some-auth-url-here"
       />
       <div class="sign-in__icons">
         <LogoGoogle32 class="sign-in__icons__item" />
@@ -121,6 +122,8 @@ export default class SignIn extends Vue {
 
       &__media {
         border: 1px solid $cool-gray-20;
+        width: 100%;
+        max-width: initial;
         @include mq($from: medium) {
           max-width: 20rem;
           margin-bottom: $spacing-05;
@@ -173,6 +176,11 @@ export default class SignIn extends Vue {
 
     &__item {
       margin-right: $spacing-04;
+
+      &:hover {
+        fill: $cool-gray-70;
+        cursor: pointer;
+      }
     }
   }
 }
