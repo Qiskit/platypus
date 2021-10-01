@@ -280,7 +280,7 @@ def handle_markdown_cell(cell, resources, cell_number):
             markdown_lines.append(heading_text)
         else:
             line = handle_inline_code(line)
-            markdown_lines.append(line)#.replace('$$', '$').replace('\\', '\\\\'))
+            markdown_lines.append(line.replace('\\%', '\\\\%'))  #.replace('$$', '$').replace('\\', '\\\\'))
             markdown_lines.append('\n')
 
     markdown_lines.append('\n')
