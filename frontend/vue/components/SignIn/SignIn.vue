@@ -8,7 +8,9 @@
         <p>{{ heroDescription }}</p>
       </div>
       <div class="sign-in__content-section sign-in__content-section__footer">
-        <img class="sign-in__content-section__img" :src="footerImgPath" :alt="footerImgAlt">
+        <video class="sign-in__content-section__img" autoplay loop>
+          <source :src="footerImgPath" type="video/mp4">
+        </video>
         <div>
           <p><strong>Join a community of learners</strong></p>
           <p>{{ footerDescription }}</p>
@@ -51,8 +53,7 @@ export default class SignIn extends Vue {
   heroTitle = 'Learn quantum computing with Qiskit.'
   heroDescription = 'Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.'
   footerDescription = 'Build your knowledge, take quizes and build your own quantum circuits.'
-  footerImgPath = '/images/textbook-screenshot.png'
-  footerImgAlt = 'Sign in to learn quantum computing with Qiskit'
+  footerImgPath = '/images/textbook_demo.mp4'
   formTitle = 'Sign Into Qiskit'
 }
 </script>
@@ -119,10 +120,12 @@ export default class SignIn extends Vue {
       }
 
       &__img {
-        margin-right: $spacing-10;
         @include mq($from: medium) {
           max-width: 20rem;
           margin-bottom: $spacing-05;
+        }
+        @include mq($from: large) {
+          margin-right: $spacing-10;
         }
       }
 
@@ -149,6 +152,10 @@ export default class SignIn extends Vue {
       min-width: 28rem;
     }
 
+    @include mq($until: medium) {
+      min-width: initial;
+    }
+
     @include mq($from: large) {
       min-width: 40rem;
     }
@@ -156,6 +163,7 @@ export default class SignIn extends Vue {
     &__title {
       @include type-style('expressive-heading-05');
       margin-top: initial;
+      margin-bottom: $spacing-05;
     }
   }
 

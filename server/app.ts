@@ -104,6 +104,12 @@ new MathigonStudioApp()
       res.render('textbook', courseData)
     }
   })
+  .get('/signin', async (req, res) => {
+    res.render('signIn', {
+      textbookHome: TEXTBOOK_HOME,
+      config: CONFIG
+    })
+  })
   .course(storageApi)
   .errors()
   .listen()
