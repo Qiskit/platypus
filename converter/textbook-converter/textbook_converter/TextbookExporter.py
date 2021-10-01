@@ -216,11 +216,6 @@ def handle_markdown_cell(cell, resources, cell_number):
     headings = []
 
     for count, line in enumerate(lines):
-        if "\\%" in line:
-            l = line.replace("\\%", "\\\\%")
-            markdown_lines.append(f'{l}\n' if len(l) else l)
-            continue
-
         if latex:
             if line.rstrip().endswith('$$'):
                 l = line.replace('$$', '')
@@ -285,7 +280,7 @@ def handle_markdown_cell(cell, resources, cell_number):
             markdown_lines.append(heading_text)
         else:
             line = handle_inline_code(line)
-            markdown_lines.append(line)#.replace('$$', '$').replace('\\', '\\\\'))
+            markdown_lines.append(line.replace('\\%', '\\\\%'))  #.replace('$$', '$').replace('\\', '\\\\'))
             markdown_lines.append('\n')
 
     markdown_lines.append('\n')
