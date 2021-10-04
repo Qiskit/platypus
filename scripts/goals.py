@@ -1,25 +1,30 @@
 
+from typing import List
+
+
 NB_ROOT = './notebooks'
 NB_PATHS = './scripts/notebook_paths.txt'
 
 
-def check_file(filename, goal_names):
-    with open(filename) as f:
-        f = f.read()
-    for line in f.split('\n'):
+def check_file(filename: str, goal_names: List[str]) -> None:
+    with open(filename, encoding='utf-8') as f:
+        content: str = f.read()
+    for line in content.split('\n'):
         if '(goal=\\"' in line:
             name = line.split('"')[2].strip('\\')
             if name in goal_names:
-                raise ValueError(f'Found multiple quizzes with goal name "{name}"')
+                raise ValueError(
+                    f'Found multiple quizzes with goal name "{name}"'
+                )
             else:
                 goal_names.append(name)
 
 
 if __name__ == '__main__':
-    goal_names = []
-    with open(NB_PATHS) as f:
-        f = f.readlines()
-    for filename in f:
+    goal_names: List[str] = []
+    with open(NB_PATHS, encoding='utf-8') as f:
+        file_names: List[str] = f.readlines()
+    for filename in file_names:
         if not filename.strip():
             # blank line
             continue
