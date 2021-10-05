@@ -9,6 +9,7 @@ dependencies:
 - matplotlib-base
 - qutip
 - sympy
+- pylatexenc
 - numexpr
 - pip:
   - pandas
