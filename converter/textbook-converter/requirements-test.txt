@@ -1,6 +1,0 @@
-nbqa
-pylint
-qiskit
-matplotlib
-mypy
-pycodestyle
