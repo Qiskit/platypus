@@ -48,7 +48,6 @@ export default defineComponent({
 @import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/variables/colors.scss';
-@import '~/../scss/variables/fonts.scss';
 @import '~/../scss/mixins/mixins.scss';
 
 .user-progress {
