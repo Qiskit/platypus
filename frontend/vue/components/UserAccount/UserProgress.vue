@@ -30,15 +30,10 @@ export default defineComponent({
   props: {
     userName: { type: String, required: false, default: 'Unknown' }
   },
-  data () {
-    return { }
-  },
   computed: {
     courseList () : Course[] {
       return getLearningPathCourses()
     }
-  },
-  mounted () {
   }
 })
 </script>

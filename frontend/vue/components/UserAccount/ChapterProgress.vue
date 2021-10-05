@@ -29,13 +29,6 @@ export default defineComponent({
         return { }
       }
     }
-  },
-  data () {
-    return { }
-  },
-  computed: {
-  },
-  mounted () {
   }
 })
 </script>
@@ -43,10 +36,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '../../../../node_modules/carbon-components/scss/globals/scss/layout';
 @import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
-@import '~/../scss/variables/mq.scss';
 @import '~/../scss/variables/colors.scss';
-@import '~/../scss/variables/fonts.scss';
-@import '~/../scss/mixins/mixins.scss';
 
 .chapter-progress {
   @include type-style('body-long-01');

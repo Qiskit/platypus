@@ -36,13 +36,6 @@ export default defineComponent({
         return { }
       }
     }
-  },
-  data () {
-    return { }
-  },
-  computed: {
-  },
-  mounted () {
   }
 })
 </script>
