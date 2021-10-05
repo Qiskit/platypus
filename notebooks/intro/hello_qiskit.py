@@ -1,4 +1,6 @@
-import hello_quantum
+with open('hello_quantum.py', 'r') as file:
+    hello_quantum = file.read()
+exec(hello_quantum)
 
 exercises = [
     {
