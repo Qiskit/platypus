@@ -13,3 +13,4 @@ dependencies:
 - pip:
   - pandas
   - qiskit
+  - ./qiskit-textbook-src
