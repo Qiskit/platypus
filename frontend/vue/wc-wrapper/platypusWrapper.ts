@@ -29,7 +29,6 @@ class VueWidgetView extends HTMLBaseView<ICustomElement> implements StepComponen
   setup ($step: Step /*, goal: string, initialData?: UserData | undefined */) {
     const app = this._el._wrapper
     app.config.globalProperties.$step = $step
-    // app.config.globalProperties.$textbook = textbook
   }
 }
 

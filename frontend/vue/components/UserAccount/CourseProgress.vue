@@ -5,10 +5,10 @@
     </h5>
     <div
       class="course-progress__chapter-list"
-      :style="`--row-count-l: ${Math.ceil(course.chapters.length / 3)}; --row-count-m: ${Math.ceil(course.chapters.length / 2)}; --row-count-s: ${course.chapters.length};`"
+      :style="`--row-count-l: ${Math.ceil(course.sections.length / 3)}; --row-count-m: ${Math.ceil(course.sections.length / 2)}; --row-count-s: ${course.sections.length};`"
     >
       <ChapterProgress
-        v-for="(chapter, index) in course.chapters"
+        v-for="(chapter, index) in course.sections"
         :key="index"
         class="course-progress__chapter"
         :chapter="chapter"
@@ -31,31 +31,7 @@ export default defineComponent({
       type: Object,
       required: false,
       default: () => {
-        return {
-          title: 'Prerequisites',
-          chapters: [
-            {
-              title: '1. Setting Up Your Environment',
-              url: '/course/introduction/why-quantum-computing',
-              progress: 1
-            },
-            {
-              title: '2. Setting Up Your Environment',
-              url: '/course/introduction/why-quantum-computing',
-              progress: 1
-            },
-            {
-              title: '3. Setting Up Your Environment',
-              url: '/course/introduction/why-quantum-computing',
-              progress: 0.75
-            },
-            {
-              title: '4. Setting Up Your Environment',
-              url: '/course/introduction/why-quantum-computing',
-              progress: 0.3
-            }
-          ]
-        }
+        return { }
       }
     }
   },
@@ -89,15 +65,17 @@ export default defineComponent({
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(var(--column-count), 1fr);
-    grid-template-rows: repeat(var(--row-count-l, 3), 1fr);
+    grid-template-rows: repeat(var(--row-count-l, 3), max-content);
+    gap: $spacing-06 $spacing-10;
+    padding: $spacing-04 $spacing-06 $spacing-04 0;
 
     @include mq($from: medium, $until: large) {
       --column-count:2;
-      grid-template-rows: repeat(var(--row-count-m, 5), 1fr);
+      grid-template-rows: repeat(var(--row-count-m, 5), max-content);
     }
     @include mq($until: medium) {
       --column-count:1;
-      grid-template-rows: repeat(var(--row-count-s, 9), 1fr);
+      grid-template-rows: repeat(var(--row-count-s, 9), max-content);
     }
   }
 }

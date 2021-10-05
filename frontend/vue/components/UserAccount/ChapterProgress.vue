@@ -26,11 +26,7 @@ export default defineComponent({
       type: Object,
       required: false,
       default: () => {
-        return {
-          title: '1. Setting Up Your Environment',
-          url: '/course/introduction/why-quantum-computing',
-          progress: 1
-        }
+        return { }
       }
     }
   },
@@ -54,9 +50,8 @@ export default defineComponent({
 
 .chapter-progress {
   @include type-style('body-long-01');
-  padding: $spacing-04 $spacing-04 $spacing-04 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   // this is to make x-progress render properly
   z-index: 0;
   color: $text-color-black;
@@ -67,6 +62,7 @@ export default defineComponent({
 
   &__progress-indicator {
     margin-right: $spacing-03;
+    margin-top: $spacing-01;
   }
 }
 </style>

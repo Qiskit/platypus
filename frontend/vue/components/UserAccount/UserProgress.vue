@@ -19,6 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import { getLearningPathCourses, Course } from '../../../ts/courses'
 import CourseProgress from './CourseProgress.vue'
 
 export default defineComponent({
@@ -27,105 +28,15 @@ export default defineComponent({
     CourseProgress
   },
   props: {
-    userName: { type: String, required: false, default: 'Unknown' },
-    courseList: {
-      type: Array,
-      required: false,
-      default: () => {
-        return [
-          {
-            title: 'Prerequisites',
-            chapters: [
-              {
-                title: '1. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 1
-              },
-              {
-                title: '2. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 1
-              },
-              {
-                title: '3. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.75
-              },
-              {
-                title: '4. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.3
-              }
-            ]
-          },
-          {
-            title: 'Quantum States and Qubits',
-            chapters: [
-              {
-                title: '1. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 1
-              },
-              {
-                title: '2. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 1
-              },
-              {
-                title: '3. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.75
-              },
-              {
-                title: '4. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.3
-              },
-              {
-                title: '4. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.3
-              },
-              {
-                title: '4. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.3
-              },
-              {
-                title: '4. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.3
-              },
-              {
-                title: '4. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 0.3
-              }
-            ]
-          },
-          {
-            title: 'Multiple Qubits and Entanglement',
-            chapters: [
-              {
-                title: '1. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 1
-              },
-              {
-                title: '2. Setting Up Your Environment',
-                url: '/course/introduction/why-quantum-computing',
-                progress: 1
-              }
-            ]
-          }
-        ]
-      }
-    }
+    userName: { type: String, required: false, default: 'Unknown' }
   },
   data () {
     return { }
   },
   computed: {
+    courseList () : Course[] {
+      return getLearningPathCourses()
+    }
   },
   mounted () {
   }
@@ -144,6 +55,7 @@ export default defineComponent({
   @include contained();
   margin-left: 0;
   padding-top: $spacing-07;
+  padding-bottom: $spacing-07;
 
   &__title {
     @include type-style('expressive-heading-04');
