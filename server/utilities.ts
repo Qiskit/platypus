@@ -32,7 +32,7 @@ const analytics: AnalyticsEntry = process.env.NODE_ENV === 'production'
 
 CONFIG.analytics = analytics
 
-const toc: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
+const TOC: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
 
 const sectionIndexes: {[l: string]: {[x: string]: Subsection[]}} = {}
 
@@ -41,7 +41,7 @@ const sectionIndexes: {[l: string]: {[x: string]: Subsection[]}} = {}
 const learningPaths:string[] = []
 const textbookCourses:string[] = []
 const miscCourses:string[] = []
-toc.forEach((t: TocCourse) => {
+TOC.forEach((t: TocCourse) => {
   const url = t.url.startsWith('/') ? t.url.substring(1) : t.url
   if (t.type === 'learning-path') {
     learningPaths.push(url)
@@ -90,7 +90,7 @@ const updateGlossary = function(course: Course): string {
 }
 
 const isLearningPath = function(course: Course) {
-  const c = toc.find((t: { url: string; }) => {
+  const c = TOC.find((t: { url: string; }) => {
     return t.url === `/${course.id}`
   })
   return c ? c.type === 'learning-path' : false
@@ -154,7 +154,7 @@ export {
   TEXTBOOK_HOME,
   TRANSLATIONS,
   UNIVERSAL_NOTATIONS,
-  toc,
+  TOC,
   findNextSection,
   findPrevSection,
   getSectionIndex,
