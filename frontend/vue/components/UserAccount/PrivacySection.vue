@@ -72,6 +72,7 @@ export default defineComponent({
   @include contained();
   margin-left: 0;
   padding-top: $spacing-07;
+  padding-bottom: $spacing-07;
 
   &__title {
     @include type-style('expressive-heading-04');
@@ -96,6 +97,10 @@ export default defineComponent({
     color: $text-color-dark;
     max-height: 30rem;
     overflow: auto;
+
+    @include mq($until: medium) {
+      max-height: none;
+    }
 
     & > ::v-deep(*) {
       margin-bottom: $spacing-05;
