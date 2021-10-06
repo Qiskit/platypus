@@ -2,10 +2,10 @@
   <section class="user-progress">
     <div class="user-progress__title-container">
       <h3 class="user-progress__title">
-        Default
+        {{ $translate("Default") }}
       </h3>
       <p class="user-progress__title-text">
-        Default shows your progress in chronological order as seen in the textbook. Checkmarks appear next to section that you have completed.
+        {{ $translate("Default shows your progress in chronological order as seen in the textbook. Checkmarks appear next to section that you have completed.") }}
       </p>
     </div>
     <CourseProgress
