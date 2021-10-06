@@ -25,6 +25,20 @@
         </AppLink>
       </div>
     </nav>
+    <bx-dropdown
+      class="user-account__section-dropdown"
+      :value="activeSection"
+      @bx-dropdown-selected="switchPanel($event)"
+    >
+      <bx-dropdown-item
+        class="user-account__section-dropdown__item"
+        v-for="{displayName, hash} in sectionList"
+        :key="hash"
+        :value="hash"
+      >
+        {{ displayName }}
+      </bx-dropdown-item>
+    </bx-dropdown>
     <section class="user-account__section-container">
       <div v-if="activeSection === sectionList[0].hash">
         PROGRESS SECTION
@@ -79,10 +93,15 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.activeSection = window.location.hash || '#MyLearning'
-    window.addEventListener('hashchange', () => {
+    this.activeSection = window.location.hash || this.sectionList[0].hash
+    window?.addEventListener('hashchange', () => {
       this.activeSection = window.location.hash
     }, false)
+  },
+  methods: {
+    switchPanel (event: any) {
+      window.location.hash = event.detail.item.value
+    }
   }
 })
 </script>
@@ -106,6 +125,22 @@ export default defineComponent({
   @include mq($until: medium) {
     grid-template-areas: "section";
     grid-template-columns: 1fr;
+  }
+
+  &__section-dropdown {
+    --cds-field-01: #{$background-color-white};
+    --cds-hover-ui: #{$background-color-lighter};
+    --cds-ui-04: #{$border-color-tertiary};
+    --cds-ui-01: #{$background-color-white};
+
+    @include mq($from: medium) {
+      display: none;
+    }
+
+    &__item {
+      --cds-hover-selected-ui: #{$background-color-lighter};
+      --cds-selected-ui: #{$background-color-white};
+    }
   }
 
   &__section-nav {
