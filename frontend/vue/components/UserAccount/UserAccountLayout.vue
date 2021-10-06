@@ -125,6 +125,7 @@ export default defineComponent({
   @include mq($until: medium) {
     grid-template-areas: "section";
     grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
   }
 
   &__section-dropdown {
