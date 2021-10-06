@@ -31,9 +31,9 @@
       @bx-dropdown-selected="switchPanel($event)"
     >
       <bx-dropdown-item
-        class="user-account__section-dropdown__item"
         v-for="{displayName, hash} in sectionList"
         :key="hash"
+        class="user-account__section-dropdown__item"
         :value="hash"
       >
         {{ displayName }}
@@ -74,19 +74,19 @@ export default defineComponent({
       activeSection: '',
       sectionList: [
         {
-          displayName: 'My Learning',
+          displayName: this.$translate('My Learning'),
           hash: '#MyLearning'
         },
         {
-          displayName: 'Groups',
+          displayName: this.$translate('Groups'),
           hash: '#Groups'
         },
         {
-          displayName: 'Badges',
+          displayName: this.$translate('Badges'),
           hash: '#Badges'
         },
         {
-          displayName: 'Privacy',
+          displayName: this.$translate('Privacy'),
           hash: '#Privacy'
         }
       ]

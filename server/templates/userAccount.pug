@@ -12,6 +12,8 @@ html(lang=lang dir=dir)
     .body
       q-user-account-layout(user-name=userData.name user-role=userData.role)
 
+    script(type="application/json")#translations!= translationsJSON
+
     script.
       var textbookAnalytics = {
         url: "#{config.analytics.url || ''}",

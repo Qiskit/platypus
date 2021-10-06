@@ -72,6 +72,9 @@ new MathigonStudioApp()
     next()
   })
   .get('/account', async (req, res) => {
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
     const userMockData = {
       name: 'Russell Huffman ReallyReallyReallyLongLongLongText',
       role: 'Administrator ReallyReallyReallyLongLongLongText'
@@ -80,7 +83,8 @@ new MathigonStudioApp()
     res.render('userAccount', {
       textbookHome: TEXTBOOK_HOME,
       config: CONFIG,
-      userData: userMockData
+      userData: userMockData,
+      translationsJSON
     })
   })
   .get('/summer-school/:course', (req, res, next) => {
