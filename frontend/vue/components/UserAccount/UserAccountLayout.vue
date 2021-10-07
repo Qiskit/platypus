@@ -21,7 +21,7 @@
           url="#"
           target="_self"
         >
-          Log Out
+          {{ $translate('Log Out') }}
         </AppLink>
       </div>
     </nav>
