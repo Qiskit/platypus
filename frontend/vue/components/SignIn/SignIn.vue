@@ -5,16 +5,14 @@
         <div id="page-title" class="sign-in__content-section__hero-title">
           {{ $translate('Learn quantum computing with Qiskit.') }}
         </div>
-        <p>{{ $translate('Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.') }}</p>
+        <p class="sign-in__content-section__hero-description">
+          {{ $translate('Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.') }}
+        </p>
       </div>
       <div class="sign-in__content-section sign-in__content-section__footer">
         <video class="sign-in__content-section__media" autoplay loop>
           <source :src="footerMediaPath" type="video/mp4">
         </video>
-        <div>
-          <p><strong>{{ $translate('Join a community of learners') }}</strong></p>
-          <p>{{ $translate('Build your knowledge, take quizes and build your own quantum circuits.') }}</p>
-        </div>
       </div>
     </div>
     <div class="sign-in__form">
@@ -28,9 +26,9 @@
       />
       <div class="sign-in__icons">
         <LogoGoogle32 class="sign-in__icons__item" />
+        <LogoGitHub32 class="sign-in__icons__item" />
         <LogoLinkedIn32 class="sign-in__icons__item" />
         <LogoTwitter32 class="sign-in__icons__item" />
-        <LogoGitHub32 class="sign-in__icons__item" />
       </div>
     </div>
   </section>
@@ -98,7 +96,11 @@ export default class SignIn extends Vue {
 
         &-title {
           margin-bottom: $spacing-05;
-          max-width: 520px;
+          max-width: 32rem;
+        }
+
+        &-description {
+          max-width: 40rem;
         }
       }
 
@@ -122,11 +124,8 @@ export default class SignIn extends Vue {
         width: 100%;
         max-width: initial;
         @include mq($from: medium) {
-          max-width: 20rem;
+          max-width: 32rem;
           margin-bottom: $spacing-05;
-        }
-        @include mq($from: large) {
-          margin-right: $spacing-10;
         }
       }
 
