@@ -115,14 +115,12 @@ export default defineComponent({
   display: grid;
   grid-template-columns: 17rem 1fr;
   height: calc(100vh - 60px);
-  grid-template-areas: "navigation section";
 
   @include mq($from: medium, $until: large) {
     grid-template-columns: 12rem 1fr;
   }
 
   @include mq($until: medium) {
-    grid-template-areas: section;
     grid-template-columns: 1fr;
     grid-template-rows: min-content 1fr;
   }
@@ -145,7 +143,6 @@ export default defineComponent({
 
   &__section-nav {
     background-color: $background-color-lighter;
-    grid-area: navigation;
     display: flex;
     flex-direction: column;
     padding: $spacing-07;
@@ -189,7 +186,6 @@ export default defineComponent({
     }
   }
   &__section-container {
-    grid-area: "section";
     overflow: auto;
   }
 }
