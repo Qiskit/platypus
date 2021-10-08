@@ -153,7 +153,7 @@ export default defineComponent({
     flex-direction: column;
     padding: $spacing-07;
 
-    background-color: $background-color-light;
+    background-color: $background-color-lighter;
 
     &__user-data {
       display: flex;
