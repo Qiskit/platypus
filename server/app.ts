@@ -84,6 +84,7 @@ new MathigonStudioApp()
       textbookHome: TEXTBOOK_HOME,
       config: CONFIG,
       userData: userMockData,
+      lang,
       translationsJSON
     })
   })
