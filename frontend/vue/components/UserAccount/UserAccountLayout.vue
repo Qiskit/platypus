@@ -99,7 +99,7 @@ export default defineComponent({
     }, false)
   },
   methods: {
-    switchPanel (event: any) {
+    switchPanel (event: CustomEvent) {
       window.location.hash = event.detail.item.value
     }
   }
