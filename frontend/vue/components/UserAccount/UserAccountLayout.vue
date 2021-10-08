@@ -160,17 +160,17 @@ export default defineComponent({
       margin-bottom: $spacing-07;
 
       &__name {
+        @include type-style('expressive-heading-04');
         word-break: break-word;
         max-height: 9.25rem;
         overflow: hidden;
-        @include type-style('expressive-heading-04');
       }
 
       &__role {
+        @include type-style('expressive-heading-01');
         word-break: break-word;
         max-height: 3.5rem;
         overflow: hidden;
-        @include type-style('expressive-heading-01');
       }
     }
 
