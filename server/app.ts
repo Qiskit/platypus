@@ -81,7 +81,6 @@ new MathigonStudioApp()
     }
 
     res.render('userAccount', {
-      textbookHome: TEXTBOOK_HOME,
       config: CONFIG,
       userData: userMockData,
       lang,
