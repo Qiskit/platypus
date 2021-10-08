@@ -107,10 +107,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../node_modules/carbon-components/scss/globals/scss/layout';
-@import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
-@import '~/../scss/variables/fonts.scss';
 @import '~/../scss/variables/mq.scss';
 
 .user-account {
@@ -122,8 +120,9 @@ export default defineComponent({
   @include mq($from: medium, $until: large) {
     grid-template-columns: 12rem 1fr;
   }
+
   @include mq($until: medium) {
-    grid-template-areas: "section";
+    grid-template-areas: section;
     grid-template-columns: 1fr;
     grid-template-rows: min-content 1fr;
   }
@@ -145,15 +144,15 @@ export default defineComponent({
   }
 
   &__section-nav {
-    grid-area: "navigation";
+    background-color: $background-color-lighter;
+    grid-area: navigation;
     display: flex;
+    flex-direction: column;
+    padding: $spacing-07;
+    
     @include mq($until: medium) {
       display: none;
     }
-    flex-direction: column;
-    padding: $spacing-07;
-
-    background-color: $background-color-lighter;
 
     &__user-data {
       display: flex;
@@ -162,13 +161,14 @@ export default defineComponent({
 
       &__name {
         word-break: break-word;
-        max-height: 75px;
+        max-height: 9.25rem;
         overflow: hidden;
         @include type-style('expressive-heading-04');
       }
+
       &__role {
         word-break: break-word;
-        max-height: 55px;
+        max-height: 3.5rem;
         overflow: hidden;
         @include type-style('expressive-heading-01');
       }
@@ -193,4 +193,5 @@ export default defineComponent({
     overflow: auto;
   }
 }
+
 </style>
