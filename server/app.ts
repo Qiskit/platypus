@@ -71,7 +71,7 @@ new MathigonStudioApp()
     })
     next()
   })
-  .get('/account', async (req, res) => {
+  .get('/account', (req, res) => {
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
