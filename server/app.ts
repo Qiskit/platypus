@@ -76,7 +76,7 @@ new MathigonStudioApp()
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
     const userMockData = {
-      name: 'Russell Huffman ReallyReallyReallyLongLongLongText',
+      name: 'John Doe ReallyReallyReallyLongLongLongText',
       role: 'Administrator ReallyReallyReallyLongLongLongText'
     }
 
