@@ -341,21 +341,15 @@
       url: /summer-school/2021/lec10.2
 
 - title: Quantum Machine Learning
-  url: /learning-qml
+  url: /machine-learning
   type: learning-path
   sections:
     - title: Introduction
       id: introduction
-      url: /quantum-machine-learning/introduction
-    - title: Parameterized Quantum Circuits
-      id: parametrized-quantum-circuits
-      url: /quantum-machine-learning/pqc
-    - title: Data Encoding
+      url: /qml/introduction
+    - title: Parametrized quantum circuits
+      id: paramterized-quantum-circuits
+      url: /qml/pqc
+    - title: Data encoding
       id: data-encoding
-      url: /quantum-machine-learning/encoding
-    - title: Quantum Kernels
-      id: quantum-feature-maps-and-kernels
-      url: /quantum-machine-learning/kernel
-    - title: Variational Classification
-      id: variational-classification
-      url: /quantum-machine-learning/vqc
+      url: /qml/encoding
