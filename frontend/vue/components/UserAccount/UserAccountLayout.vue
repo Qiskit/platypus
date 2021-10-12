@@ -146,7 +146,6 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     padding: $spacing-07;
-    
     @include mq($until: medium) {
       display: none;
     }
