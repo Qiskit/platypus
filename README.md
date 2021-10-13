@@ -44,7 +44,7 @@ After the application has started, access the site at: http://localhost:8080/
 
 
 ## Contribution Guidelines
-If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) abd code of conduct(CODE_OF_CONDUCT.md)
+If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md)
 
 
 ## License
