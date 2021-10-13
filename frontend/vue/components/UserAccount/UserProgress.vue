@@ -61,4 +61,5 @@ export default defineComponent({
     border-top: 2px solid $border-color-light-2;
   }
 }
+
 </style>

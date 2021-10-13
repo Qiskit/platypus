@@ -49,4 +49,5 @@ export default defineComponent({
     padding: $spacing-04 0;
   }
 }
+
 </style>

@@ -23,25 +23,25 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../node_modules/carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/globals/scss/layout';
 @import '~/../scss/variables/mq.scss';
 
 .column-flow-grid {
-  --column-count:3;
+  --column-count: 3;
+  --row-count: var(--row-count-l, 3);
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: repeat(var(--column-count), 1fr);
-  grid-template-rows: repeat(var(--row-count-l, 3), max-content);
+  grid-template-rows: repeat(var(--row-count), max-content);
   gap: $spacing-06 $spacing-10;
   padding: $spacing-04 $spacing-06 $spacing-04 0;
-
   @include mq($from: medium, $until: large) {
     --column-count:2;
-    grid-template-rows: repeat(var(--row-count-m, 5), max-content);
+    --row-count: var(--row-count-m, 5);
   }
   @include mq($until: medium) {
     --column-count:1;
-    grid-template-rows: repeat(var(--row-count-s, 9), max-content);
+    --row-count: var(--row-count-s, 9);
   }
 }
 </style>

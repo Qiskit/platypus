@@ -54,4 +54,5 @@ export default defineComponent({
     margin-top: $spacing-01;
   }
 }
+
 </style>
