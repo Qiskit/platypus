@@ -24,16 +24,12 @@ import axios, { AxiosResponse } from 'axios'
 import AppLink from '../common/AppLink.vue'
 
 export default defineComponent({
-  name: 'UserAccountLayout',
+  name: 'PrivacySection',
   components: {
     AppLink
   },
-  props: {
-    userName: { type: String, required: false, default: 'Unknown' }
-  },
   data () {
     return {
-      activeSection: '',
       options: {
         html: true,
         xhtmlOut: true,
@@ -61,11 +57,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../node_modules/carbon-components/scss/globals/scss/layout';
-@import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/variables/colors.scss';
-@import '~/../scss/variables/fonts.scss';
 @import '~/../scss/mixins/mixins.scss';
 
 .privacy-section {
@@ -80,24 +74,27 @@ export default defineComponent({
     border-bottom: 1px solid $border-color-light-2;
     padding-bottom: $spacing-05;
   }
+
   &__subtitle {
     @include type-style('expressive-heading-04');
     padding: $spacing-05 0;
+
     &_quantum {
       margin-top: $spacing-08;
     }
   }
+
   &__policy-link {
     @include type-style('body-long-02');
     color: $link-color-secondary;
   }
+
   &__policy-text {
     padding: $spacing-05;
     background-color: $background-color-lighter;
     color: $text-color-dark;
     max-height: 30rem;
     overflow: auto;
-
     @include mq($until: medium) {
       max-height: none;
     }
@@ -107,4 +104,5 @@ export default defineComponent({
     }
   }
 }
+
 </style>
