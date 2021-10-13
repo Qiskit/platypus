@@ -23,6 +23,7 @@ import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
 import SignIn from './components/SignIn/SignIn.vue'
+import UserAccountLayout from './components/UserAccount/UserAccountLayout.vue'
 
 declare global {
   interface Window {
@@ -61,7 +62,8 @@ const components: any = {
   MiniComposer,
   Binary,
   BinaryTile,
-  SignIn
+  SignIn,
+  UserAccountLayout
 }
 
 Object.keys(components).forEach((c) => {
