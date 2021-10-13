@@ -74,6 +74,8 @@ export default class SignIn extends Vue {
 
   @include mq($until: medium) {
     flex-direction: column;
+    position: initial;
+    max-height: initial;
   }
 
   &__content {
@@ -140,7 +142,7 @@ export default class SignIn extends Vue {
   }
 
   &__form {
-    padding: $spacing-11;
+    padding: $spacing-11 $spacing-11 $spacing-13 $spacing-11;
     background-color: $cool-gray-20;
     display: flex;
     flex-direction: column;
@@ -148,7 +150,7 @@ export default class SignIn extends Vue {
     flex-grow: 1;
 
     @include mq($until: large) {
-      padding: $spacing-11 $spacing-07;
+      padding: $spacing-11 $spacing-07 $spacing-13 $spacing-07;
       min-width: 28rem;
     }
 
