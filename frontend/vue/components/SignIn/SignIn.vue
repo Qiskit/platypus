@@ -16,19 +16,21 @@
       </div>
     </div>
     <div class="sign-in__form">
-      <h2 class="sign-in__form__title">
-        {{ $translate('Sign Into Qiskit') }}
-      </h2>
-      <AppCta
-        class="sign-in__cta"
-        :label="$translate('IBM id')"
-        :url="authenticationUrl"
-      />
-      <div class="sign-in__icons">
-        <LogoGoogle32 class="sign-in__icons__item" />
-        <LogoGitHub32 class="sign-in__icons__item" />
-        <LogoLinkedIn32 class="sign-in__icons__item" />
-        <LogoTwitter32 class="sign-in__icons__item" />
+      <div class="sign-in__form__content">
+        <h2 class="sign-in__form__title">
+          {{ $translate('Sign Into Qiskit') }}
+        </h2>
+        <AppCta
+          class="sign-in__cta"
+          :label="$translate('IBM id')"
+          :url="authenticationUrl"
+        />
+        <div class="sign-in__icons">
+          <LogoGoogle32 class="sign-in__icons__item" />
+          <LogoGitHub32 class="sign-in__icons__item" />
+          <LogoLinkedIn32 class="sign-in__icons__item" />
+          <LogoTwitter32 class="sign-in__icons__item" />
+        </div>
       </div>
     </div>
   </section>
@@ -142,15 +144,14 @@ export default class SignIn extends Vue {
   }
 
   &__form {
-    padding: $spacing-11 $spacing-11 $spacing-13 $spacing-11;
+    padding: $spacing-11;
     background-color: $cool-gray-20;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
 
     @include mq($until: large) {
-      padding: $spacing-11 $spacing-07 $spacing-13 $spacing-07;
+      padding: $spacing-11 $spacing-07;
       min-width: 28rem;
     }
 
@@ -166,6 +167,14 @@ export default class SignIn extends Vue {
       @include type-style('expressive-heading-05');
       margin-top: initial;
       margin-bottom: $spacing-05;
+      display: inline-block;
+    }
+
+    &__content {
+      margin: 0 auto;
+      @include mq($until: medium) {
+        margin: initial;
+      }
     }
   }
 
