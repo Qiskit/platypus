@@ -27,9 +27,6 @@ export default defineComponent({
   components: {
     CourseProgress
   },
-  props: {
-    userName: { type: String, required: false, default: 'Unknown' }
-  },
   computed: {
     courseList () : Course[] {
       return getLearningPathCourses()
@@ -39,8 +36,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../node_modules/carbon-components/scss/globals/scss/layout';
-@import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/variables/colors.scss';
 @import '~/../scss/mixins/mixins.scss';

@@ -41,8 +41,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../../node_modules/carbon-components/scss/globals/scss/layout';
-@import '../../../../node_modules/carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/typography';
 
 .course-progress {
   &__title {
