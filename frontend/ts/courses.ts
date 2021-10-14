@@ -19,12 +19,13 @@ let courseList: Course[] | undefined
 
 const getCourseList = () : Course[] => {
   if (!courseList) {
+    const userData = getUserData()
     courseList = (loadYAML(document.getElementById('toc')?.textContent || '') || []) as [Course]
     courseList.forEach((course) => {
       course.id = course.url.startsWith('/') ? course.url.substring(1) : course.url
       course.sections.forEach((section) => {
         section.url = `/course/${course.id}/${section.id}`
-        section.progress = getUserData()?.[course.id]?.[section.id]?.progress
+        section.progress = userData?.[course.id]?.[section.id]?.progress
       })
     })
   }
