@@ -82,7 +82,7 @@ export default defineComponent({
   }
 
   &__policy-text {
-    padding: $spacing-05;
+    padding: $spacing-06;
     background-color: $background-color-lighter;
     color: $text-color-dark;
     max-height: 30rem;
