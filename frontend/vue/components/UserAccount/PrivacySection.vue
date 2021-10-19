@@ -20,7 +20,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import MarkdownIt from 'markdown-it'
-import axios, { AxiosResponse } from 'axios'
 import AppLink from '../common/AppLink.vue'
 
 export default defineComponent({
@@ -44,14 +43,7 @@ export default defineComponent({
     privacyPolicyHTML (): string { return this.markdownItInstance.render(this.privacyPolicyMd) }
   },
   mounted () {
-    axios.get('/markdown/privacy-policy.md').then(
-      (response: AxiosResponse<string>) => {
-        this.privacyPolicyMd = response.data
-      },
-      () => {
-        this.privacyPolicyMd = 'Error loading privacy policy text.'
-      }
-    )
+    this.privacyPolicyMd = document.getElementById('privacyPolicy')?.textContent || ''
   }
 })
 </script>

@@ -10,9 +10,12 @@ import { getCourse } from '@mathigon/studio/server/utilities'
 import { LOCALES, translate } from '@mathigon/studio/server/i18n'
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
-  findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
+  findNextSection, findPrevSection, getSectionIndex, isLearningPath,
+  updateGlossary, loadLocaleRawFile
 } from './utilities'
 import * as storageApi from './storage'
+
+const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
@@ -75,15 +78,18 @@ new MathigonStudioApp()
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
+    const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
     const userMockData = {
-      name: 'John Doe ReallyReallyReallyLongLongLongText',
-      role: 'Administrator ReallyReallyReallyLongLongLongText'
+      name: 'John Doe',
+      role: 'Administrator'
     }
 
     res.render('userAccount', {
       config: CONFIG,
       userData: userMockData,
       lang,
+      privacyPolicyMD,
       translationsJSON
     })
   })

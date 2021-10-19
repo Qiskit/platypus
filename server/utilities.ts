@@ -1,4 +1,5 @@
 import * as path from 'path'
+import * as fs from 'fs'
 
 import { AVAILABLE_LOCALES } from '@mathigon/studio/server/i18n'
 import { Course, Section } from '@mathigon/studio/server/interfaces'
@@ -131,6 +132,20 @@ for (const locale of AVAILABLE_LOCALES) {
   TRANSLATIONS[locale.id] = loadCombinedYAML(`translations/${locale.id}/strings.yaml`) as Record<string, string>;
 }
 
+const loadLocaleRawFile = function (path: string, locale: string): string {
+  const fullPath = process.cwd() + `/translations/${locale}/${path}`
+  let content = ''
+  if (fs.existsSync(fullPath)) {
+    content = fs.readFileSync(fullPath, 'utf-8')
+  } else {
+    const defaultPath = process.cwd() + `/translations/${path}`
+    if (fs.existsSync(defaultPath)) {
+      content = fs.readFileSync(defaultPath, 'utf-8')
+    }
+  }
+  return content
+}
+
 export {
   CONFIG,
   COURSES,
@@ -143,5 +158,6 @@ export {
   findPrevSection,
   getSectionIndex,
   isLearningPath,
-  updateGlossary
+  updateGlossary,
+  loadLocaleRawFile
 }

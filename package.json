@@ -46,7 +46,6 @@
     "@mathigon/studio": "git+https://github.com/vabarbosa/studio.git#platypus",
     "@qiskit-community/qiskit-vue": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
-    "axios": "^0.21.4",
     "carbon-components": "~10.40.2",
     "carbon-web-components": "~1.15.1",
     "lit-element": "^2.5.1",
