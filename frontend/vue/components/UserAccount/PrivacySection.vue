@@ -94,6 +94,9 @@ export default defineComponent({
     & > ::v-deep(*) {
       margin-bottom: $spacing-05;
     }
+    & > ::v-deep(*):last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
