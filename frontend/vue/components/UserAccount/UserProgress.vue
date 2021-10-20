@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
-import { getLearningPathCourses, Course } from '../../../ts/courses'
+import { getCourseList, Course } from '../../../ts/courses'
 import CourseProgress from './CourseProgress.vue'
 
 export default defineComponent({
@@ -27,10 +27,15 @@ export default defineComponent({
   components: {
     CourseProgress
   },
-  computed: {
-    courseList () : Course[] {
-      return getLearningPathCourses()
+  data () {
+    return {
+      courseList: [] as Course[]
     }
+  },
+  mounted () {
+    getCourseList().then((courses) => {
+      this.courseList = courses.filter(course => course.type === 'learning-path')
+    })
   }
 })
 </script>

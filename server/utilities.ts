@@ -34,6 +34,14 @@ CONFIG.analytics = analytics
 
 const TOC: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
 
+// postprocess
+TOC.forEach((course: TocCourse) => {
+  course.id = course.url.startsWith('/') ? course.url.substring(1) : course.url
+  course.sections.forEach((section) => {
+    section.pageUrl = `/course/${course.id}/${section.id}`
+  })
+})
+
 const sectionIndexes: {[l: string]: {[x: string]: Subsection[]}} = {}
 
 // const COURSES = fs.readdirSync(CONTENT_DIR)
@@ -51,6 +59,14 @@ TOC.forEach((t: TocCourse) => {
     textbookCourses.push(url)
   }
 })
+
+const tocFilterByType = function (type: string = '') {
+  if (type === '') {
+    return TOC
+  }
+  return TOC.filter(course => course.type === type)
+}
+
 const COURSES = {
   uncategorized: textbookCourses,
   learningPaths: learningPaths,
@@ -160,5 +176,6 @@ export {
   getSectionIndex,
   isLearningPath,
   updateGlossary,
-  loadLocaleRawFile
+  loadLocaleRawFile,
+  tocFilterByType
 }

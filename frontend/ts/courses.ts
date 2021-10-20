@@ -1,4 +1,4 @@
-import { load as loadYAML } from 'js-yaml'
+// import { load as loadYAML } from 'js-yaml'
 import { getUserData } from './storage'
 
 interface Chapter {
@@ -15,31 +15,18 @@ interface Course {
   type: string,
   sections: Chapter[]
 }
-let courseList: Course[] | undefined
 
-const getCourseList = () : Course[] => {
-  if (!courseList) {
-    const userData = getUserData()
-    courseList = (loadYAML(document.getElementById('toc')?.textContent || '') || []) as [Course]
-    courseList.forEach((course) => {
-      course.id = course.url.startsWith('/') ? course.url.substring(1) : course.url
-      course.sections.forEach((section) => {
-        section.url = `/course/${course.id}/${section.id}`
-        section.progress = userData?.[course.id]?.[section.id]?.progress
-      })
-    })
+let promise: Promise<Course[]> | undefined
+
+const getCourseList = () : Promise<Course[]> => {
+  if (!promise) {
+    promise = fetch('/courseList/').then(res => res?.json ? res.json() : [])
   }
-  return courseList || []
-}
-
-const getLearningPathCourses = (): Course[] => {
-  const allCourses = getCourseList()
-  return allCourses.filter(course => course.type === 'learning-path')
+  return promise
 }
 
 export {
-  getCourseList,
-  getLearningPathCourses
+  getCourseList
 }
 
 export type {
