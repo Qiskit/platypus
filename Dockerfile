@@ -20,8 +20,8 @@ COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
 RUN npm run build
-# only need to keep all the strings.yaml
-RUN find ./translations -type f ! -iname "*.yaml" -delete
+# don't keep the notebooks
+RUN find ./translations -type f -iname "*.ipynb" -delete
 
 FROM base
 WORKDIR /usr/app
