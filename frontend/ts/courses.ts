@@ -1,10 +1,11 @@
 // import { load as loadYAML } from 'js-yaml'
 import { getUserData } from './storage'
 
-interface Chapter {
+interface Section {
   title: string,
   id: string,
   url: string,
+  pageUrl: string,
   progress: number
 }
 
@@ -13,16 +14,30 @@ interface Course {
   url: string,
   id: string
   type: string,
-  sections: Chapter[]
+  sections: Section[]
 }
 
 let promise: Promise<Course[]> | undefined
 
 const getCourseList = () : Promise<Course[]> => {
   if (!promise) {
-    promise = fetch('/courseList/').then(res => res?.json ? res.json() : [])
+    promise = fetch('/courseList/').then((res) => {
+      return res.json().then((courses: Course[]) => {
+        assignProgressToCourses(courses)
+        return courses
+      })
+    })
   }
   return promise
+}
+
+const assignProgressToCourses = (courses: Course[]) => {
+  const userData = getUserData()
+  courses.forEach((course) => {
+    course.sections.forEach((section) => {
+      section.progress = userData?.[course.id]?.[section.id]?.progress
+    })
+  })
 }
 
 export {
@@ -30,6 +45,6 @@ export {
 }
 
 export type {
-  Chapter,
+  Section,
   Course
 }

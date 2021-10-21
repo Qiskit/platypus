@@ -4,13 +4,13 @@
       {{ course.title }}
     </h5>
     <ColumnFlowGrid
-      class="course-progress__chapter-list"
+      class="course-progress__section-list"
       :elements="course.sections"
     >
       <template #default="slotProps">
-        <ChapterProgress
-          class="course-progress__chapter"
-          :chapter="slotProps.element"
+        <SectionProgress
+          class="course-progress__section"
+          :section="slotProps.element"
         />
       </template>
     </ColumnFlowGrid>
@@ -20,12 +20,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
-import ChapterProgress from './ChapterProgress.vue'
+import SectionProgress from './SectionProgress.vue'
 
 export default defineComponent({
   name: 'CourseProgress',
   components: {
-    ChapterProgress,
+    SectionProgress,
     ColumnFlowGrid
   },
   props: {

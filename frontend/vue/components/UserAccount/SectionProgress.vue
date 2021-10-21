@@ -1,14 +1,14 @@
 <template>
   <BasicLink
-    class="chapter-progress"
-    :url="chapter.url"
+    class="section-progress"
+    :url="section.pageUrl"
   >
     <x-progress
-      class="chapter-progress__progress-indicator"
+      class="section-progress__progress-indicator"
       r="8"
-      :p="chapter.progress"
+      :p="section.progress"
     />
-    <span>{{ chapter.title }}</span>
+    <span>{{ section.title }}</span>
   </BasicLink>
 </template>
 
@@ -17,12 +17,12 @@ import { defineComponent } from 'vue-demi'
 import BasicLink from '../common/BasicLink.vue'
 
 export default defineComponent({
-  name: 'ChapterProgress',
+  name: 'SectionProgress',
   components: {
     BasicLink
   },
   props: {
-    chapter: {
+    section: {
       type: Object,
       required: false,
       default: () => {
@@ -37,7 +37,7 @@ export default defineComponent({
 @import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
-.chapter-progress {
+.section-progress {
   @include type-style('body-long-01');
   display: flex;
   align-items: flex-start;
