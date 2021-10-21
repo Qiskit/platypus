@@ -8,6 +8,8 @@ import { Course } from '@mathigon/studio/server/interfaces'
 import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/utilities'
 import { parseYAML} from '@mathigon/studio/build/markdown'
 
+// import { mathjax } from 'mathjax-full/ts/mathjax'
+
 import {
   translationsLanguages,
   workingContentPath,
@@ -33,6 +35,13 @@ const findCourse = function (courseId: string, locale: string = 'en'): Course {
   const course = loadJSON(OUTPUT + `/content/${courseId}/data_${locale}.json`) as Course
   if (!course) return undefined;
   return course
+}
+
+const findIndexCourse = function(courseId: string) {
+  const indexCourse = loadYAML(`${workingContentPath}/${courseId}/index.yaml`)
+  // TODO: this can be improved adding lodash to check it with isEmpty
+  if (Object.entries(indexCourse).length === 0) return undefined
+  return indexCourse
 }
 
 const insertSections = (content: object, document: HTMLDocument, includeHtml: boolean): object => {
@@ -82,6 +91,35 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
   })
 
   return content
+}
+
+const updateIndexYaml = async function() {
+  // const mathjax = init({
+  //   loader: {load: ['input/tex-full', 'output/chtml']},
+  //   // https://docs.mathjax.org/en/latest/options/output/chtml.html#the-configuration-block
+  //   chtml: {
+  //     adaptiveCSS: false,
+  //     fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/output/chtml/fonts/woff-v2'
+  //   }
+  // })
+  
+
+  // TODO: i would use p-map here
+  for(let courseId of COURSES) {
+    const indexCourse = findIndexCourse(courseId)
+    if(indexCourse) {
+      const chapters = Object.keys(indexCourse)
+      for(let chapter of chapters) {
+        const sections = indexCourse[chapter]
+        for(let section of sections) {
+          console.log('------------------------ SECTION')
+          console.log(section)
+          console.log('------------------------ SUBSECTION')
+          console.log(section.subsections)
+        }
+      }
+    }
+  }
 }
 
 const updateSharedYaml = async function(language: string = 'en') {
@@ -136,6 +174,8 @@ const updateSharedYaml = async function(language: string = 'en') {
 translationsLanguages.forEach(async(language) => {
   updateSharedYaml(language)
 })
+
+updateIndexYaml()
 
 generateJsonSitemap(
   path.join(__dirname, '../public/sitemap.xml'),
