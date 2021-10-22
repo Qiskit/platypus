@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout qiskit-community/platypus
+      - name: Checkout Qiskit/platypus
         uses: actions/checkout@v2
         with:
           path: platypus

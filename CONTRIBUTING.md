@@ -56,7 +56,7 @@ There are tons of useful resources about Git [out there](https://try.github.io/)
 
 ## Opening issues
 
-You can issues at https://github.com/qiskit-community/platypus/issues/new for reporting a misfunction. Please do provide steps to reproduce and expected behaviour.
+You can issues at https://github.com/Qiskit/platypus/issues/new for reporting a misfunction. Please do provide steps to reproduce and expected behaviour.
 
 In addition issues can be opened for content-related problems such as typos or rewordings.
 
@@ -87,7 +87,7 @@ track this repository. A typical Git setup after
 # After forking the repository in GitHub
 git clone https://github.com/<your_username>/platypus.git
 cd platypus
-git remote add upstream https://github.com/qiskit-community/platypus.git
+git remote add upstream https://github.com/Qiskit/platypus.git
 git remote update upstream
 git checkout main
 git branch -u upstream/main
