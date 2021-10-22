@@ -113,15 +113,16 @@ const updateIndexYaml = async function() {
       for(let chapter of chapters) {
         const sections = indexCourse[chapter]
         for(let section of sections) {
-          console.log('------------------------ SECTION')
-          console.log(section)
-          console.log('------------------------ SUBSECTION')
-          console.log(section.subsections)
-          console.log('------------------------ MATHJAX')
-          console.log(section.title)
-          const html = await test.tex2chtml(section.title)
-          const output = adaptor.outerHTML(html)
-          console.dir(output)
+          if(section.id === 'examples') {
+            for(let subsection of section.subsections) {
+              console.log('------------------------ MATHJAX')
+              console.log(subsection.title)
+              let html = await test.tex2chtml(subsection.title.match(/\$(.*?)\$/g)[0].replace(/\$/g, ''), {display: false})
+              let output = adaptor.outerHTML(html)
+              let doc = subsection.title.replace(subsection.title.match(/\$(.*?)\$/g)[0], output);
+              console.dir(doc) 
+            }
+          }
         }
       }
     }
