@@ -1,7 +1,7 @@
-
 q-block.tabs.qml-approaches {
   --tab-size: 7.5rem;
   --double-tab-size: calc(var(--tab-size) * 2);
+
   .qb-body {
     display: grid;
     grid-template-areas: 
@@ -72,7 +72,7 @@ q-block.tabs.qml-approaches {
             color: $text-color-dark;
             background-color: $background-color-light-2;
           }
-          
+
           &.active {
             background-color: $active-color;
             color: $text-color-white;

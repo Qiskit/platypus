@@ -1,7 +1,5 @@
 @import 'variables/mq.scss';
 @import 'variables/settings.scss';
-@import 'variables/colors.scss';
-@import '../../node_modules/carbon-components/scss/globals/scss/typography';
 
 /* Hide contents on bigger screens */
 @media only screen and (min-width: 860px) {
