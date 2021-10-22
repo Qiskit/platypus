@@ -3,7 +3,7 @@
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
         <span class="user-account__section-nav__user-data__name">{{ userName }}</span>
-        <span class="user-account__section-nav__user-data__role">{{ userRole }}</span>
+        <span v-if="!!userRole && userRole != ''" class="user-account__section-nav__user-data__role">{{ userRole }}</span>
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
@@ -70,8 +70,8 @@ export default defineComponent({
     UserProgress
   },
   props: {
-    userName: { type: String, required: false, default: 'Unknown' },
-    userRole: { type: String, required: false, default: 'Unknown' }
+    userName: { type: String, required: false, default: '' },
+    userRole: { type: String, required: false, default: '' }
   },
   data () {
     return {
