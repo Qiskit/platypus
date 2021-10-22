@@ -8,7 +8,8 @@ import { Course } from '@mathigon/studio/server/interfaces'
 import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/utilities'
 import { parseYAML} from '@mathigon/studio/build/markdown'
 
-// import { mathjax } from 'mathjax-full/ts/mathjax'
+// TODO: as an improvement we can try to declare a ts module to use import instead of require
+const mathjax = require('mathjax')
 
 import {
   translationsLanguages,
@@ -94,15 +95,15 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
 }
 
 const updateIndexYaml = async function() {
-  // const mathjax = init({
-  //   loader: {load: ['input/tex-full', 'output/chtml']},
-  //   // https://docs.mathjax.org/en/latest/options/output/chtml.html#the-configuration-block
-  //   chtml: {
-  //     adaptiveCSS: false,
-  //     fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/output/chtml/fonts/woff-v2'
-  //   }
-  // })
-  
+  const test = await mathjax.init({
+    loader: {load: ['input/tex-full', 'output/chtml']},
+    // https://docs.mathjax.org/en/latest/options/output/chtml.html#the-configuration-block
+    chtml: {
+      adaptiveCSS: false,
+      fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/output/chtml/fonts/woff-v2'
+    }
+  })
+  const adaptor = test.startup.adaptor;
 
   // TODO: i would use p-map here
   for(let courseId of COURSES) {
@@ -116,6 +117,11 @@ const updateIndexYaml = async function() {
           console.log(section)
           console.log('------------------------ SUBSECTION')
           console.log(section.subsections)
+          console.log('------------------------ MATHJAX')
+          console.log(section.title)
+          const html = await test.tex2chtml(section.title)
+          const output = adaptor.outerHTML(html)
+          console.dir(output)
         }
       }
     }
