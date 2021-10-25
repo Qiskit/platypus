@@ -101,16 +101,6 @@ const updateIndexYaml = async function() {
   if (fs.existsSync(cacheFile)) {
     const mathJaxStore = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
 
-    // const test = await mathjax.init({
-    //   loader: {load: ['input/tex-full', 'output/chtml']},
-    //   // https://docs.mathjax.org/en/latest/options/output/chtml.html#the-configuration-block
-    //   chtml: {
-    //     adaptiveCSS: false,
-    //     fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/output/chtml/fonts/woff-v2'
-    //   }
-    // })
-    // const adaptor = test.startup.adaptor;
-
     // TODO: i would use p-map here
     for(let courseId of COURSES) {
       const indexCourse = findIndexCourse(courseId)
@@ -121,16 +111,14 @@ const updateIndexYaml = async function() {
           for(let section of sections) {
             if(section.id === 'examples') {
               for(let subsection of section.subsections) {
-                console.log('------------------------ MATHJAX')
+                console.log('------------------------ MATHJAX TITLE')
                 console.log(subsection.title)
-                // let html = await test.tex2chtml(subsection.title.match(/\$(.*?)\$/g)[0].replace(/\$/g, ''), {display: false})
-                // let output = adaptor.outerHTML(html)
-                // let doc = subsection.title.replace(subsection.title.match(/\$(.*?)\$/g)[0], output);
-                // console.dir(doc) 
                 const code = subsection.title.match(/\$(.*?)\$/g)[0].replace(/\$/g, '').replace(/\\/g, '')
                 const id = `${entities.decode(code)}truehtml`
+                console.log('------------------------ MATHJAX ID')
                 console.log(id)
                 if (mathJaxStore[id]) {
+                  console.log('------------------------ MATHJAX TRANSLATION')
                   console.log(mathJaxStore[id])
                 }
               }
