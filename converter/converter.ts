@@ -11,6 +11,7 @@ import {
 
 const CWD = process.cwd()
 const nbImagesDirName = 'images'
+const nbResourcesDirName = 'resources'
 const nbDir = path.join(CWD, 'notebooks')
 const nbDirTranslations = path.join(CWD, 'translations')
 
@@ -90,6 +91,11 @@ const prepare = function (language: string) {
   // copy over notebook `images/`
   copyNotebookAssets(notebooks, working, (src: string, dest: string) => {
     return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
+  })
+
+  // copy over notebook `resources/`
+  copyNotebookAssets(notebooks, working, (src: string, dest: string) => {
+    return path.dirname(src).split(path.sep).indexOf(nbResourcesDirName) > -1
   })
 }
 
