@@ -7,6 +7,7 @@ import * as yaml from 'js-yaml'
 import { Course } from '@mathigon/studio/server/interfaces'
 import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/utilities'
 import { parseYAML} from '@mathigon/studio/build/markdown'
+import {decode} from 'html-entities'
 
 // TODO: as an improvement we can try to declare a ts module to use import instead of require
 const mathjax = require('mathjax')
@@ -26,6 +27,16 @@ const loadJSON = function (file: string) {
   return JSON.parse(fs.readFileSync(file, 'utf8')) as unknown
 }
 
+const cleanEquation = function(text) {
+  return text.replace(/(^|[^\\])\$([^{][^$]*?)\$($|[^\w])/g, (_, prefix, body, suffix) => {
+      return prefix + decode(body) + suffix;
+    }).replace(/\\/g, '')
+}
+
+const getIdCode = function(code) {
+  return `${decode(code)}truehtml`
+}
+
 const getSharedPath = function (language: string = 'en') {
   return language == 'en'
     ? path.join(workingContentPath, 'shared')
@@ -38,7 +49,11 @@ const findCourse = function (courseId: string, locale: string = 'en'): Course {
   return course
 }
 
-const findIndexCourse = function(courseId: string) {
+const findEquationFromTitle = function(title) {
+  return title.match(/\$(.*?)\$/g)
+}
+
+const findIndexFromCourse = function(courseId: string) {
   const indexCourse = loadYAML(`${workingContentPath}/${courseId}/index.yaml`)
   // TODO: this can be improved adding lodash to check it with isEmpty
   if (Object.entries(indexCourse).length === 0) return undefined
@@ -95,32 +110,34 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
 }
 
 const updateIndexYaml = async function() {
-  const entities = require('html-entities')
   // Get Mathjax cache from Mathigon build
   const cacheFile = path.join(process.env.HOME, '/.mathjax-cache')
-  if (fs.existsSync(cacheFile)) {
-    const mathJaxStore = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
+  if(!fs.existsSync(cacheFile)) {
+    return
+  }
+  const mathJaxStore = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
 
-    // TODO: i would use p-map here
-    for(let courseId of COURSES) {
-      const indexCourse = findIndexCourse(courseId)
-      if(indexCourse) {
-        const chapters = Object.keys(indexCourse)
-        for(let chapter of chapters) {
-          const sections = indexCourse[chapter]
-          for(let section of sections) {
-            if(section.id === 'examples') {
-              for(let subsection of section.subsections) {
-                console.log('------------------------ MATHJAX TITLE')
-                console.log(subsection.title)
-                const code = subsection.title.match(/\$(.*?)\$/g)[0].replace(/\$/g, '').replace(/\\/g, '')
-                const id = `${entities.decode(code)}truehtml`
-                console.log('------------------------ MATHJAX ID')
-                console.log(id)
-                if (mathJaxStore[id]) {
-                  console.log('------------------------ MATHJAX TRANSLATION')
-                  console.log(mathJaxStore[id])
-                }
+  for(let courseId of COURSES) {
+    const indexCourse = findIndexFromCourse(courseId)
+    if(indexCourse) {
+      const chapters = Object.keys(indexCourse)
+      for(let chapter of chapters) {
+        const sections = indexCourse[chapter]
+        for(let section of sections) {
+          if(section.id === 'examples') {
+            for(let subsection of section.subsections) {
+              console.log('------------------------ MATHJAX TITLE')
+              console.log(subsection.title)
+              let code = findEquationFromTitle(subsection.title)
+              code = cleanEquation(code[0])
+              console.log('------------------------ MATHJAX CODE')
+              console.log(code)
+              const id = getIdCode(code)
+              console.log('------------------------ MATHJAX ID')
+              console.log(id)
+              if (mathJaxStore[id]) {
+                console.log('------------------------ MATHJAX TRANSLATION')
+                console.log(mathJaxStore[id])
               }
             }
           }
