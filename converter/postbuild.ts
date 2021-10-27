@@ -37,6 +37,10 @@ const getCodeId = function(code) {
   return `${decode(code)}truehtml`
 }
 
+const getIndexPath = function(courseId) {
+  return `${workingContentPath}/${courseId}/index.yaml`
+}
+
 const getSharedPath = function (language: string = 'en') {
   return language == 'en'
     ? path.join(workingContentPath, 'shared')
@@ -57,8 +61,8 @@ const replaceEquationByMathjax = function(title, mathjaxEquation) {
   return title.replace(/\$(.*?)\$/g, mathjaxEquation)
 }
 
-const findIndexFromCourse = function(courseId: string) {
-  const indexCourse = loadYAML(`${workingContentPath}/${courseId}/index.yaml`)
+const findIndexFromCourse = function(path) {
+  const indexCourse = loadYAML(path)
   // TODO: this can be improved adding lodash to check it with isEmpty
   if (Object.entries(indexCourse).length === 0) return undefined
   return indexCourse
@@ -138,7 +142,8 @@ const updateIndexYaml = async function() {
   }
   const mathJaxStore = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
 
-  const indexCourses = COURSES.map(courseId => findIndexFromCourse(courseId))
+  const indexCoursePaths = COURSES.map(courseId => getIndexPath(courseId))
+  const indexCourses = indexCoursePaths.map(indexCoursePath => findIndexFromCourse(indexCoursePath))
   const indexCoursesParsed = indexCourses.map(index => {
     if(!index) return undefined
 
@@ -150,6 +155,13 @@ const updateIndexYaml = async function() {
     moduleIds.map((moduleId, index) => newIndex[moduleId] = modulesParsed[index])
     return newIndex
   })
+  
+  for(let indexCoursePath of indexCoursePaths) {
+    const indexCourse = indexCoursesParsed[indexCoursePaths.indexOf(indexCoursePath)]
+    if(indexCourse) {
+      await writeFile(indexCoursePath, yaml.dump(indexCourse, {sortKeys: true}))
+    }
+  }
 }
 
 const updateSharedYaml = async function(language: string = 'en') {
