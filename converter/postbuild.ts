@@ -6,8 +6,8 @@ import * as yaml from 'js-yaml'
 
 import { Course } from '@mathigon/studio/server/interfaces'
 import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/utilities'
-import { parseYAML} from '@mathigon/studio/build/markdown'
-import {decode} from 'html-entities'
+import { parseYAML } from '@mathigon/studio/build/markdown'
+import { decode } from 'html-entities'
 
 import {
   translationsLanguages,
@@ -22,16 +22,6 @@ const COURSES = fs.readdirSync(CONTENT)
 const loadJSON = function (file: string) {
   if (!fs.existsSync(file)) return undefined
   return JSON.parse(fs.readFileSync(file, 'utf8')) as unknown
-}
-
-const cleanEquation = function(text) {
-  return text.replace(/(^|[^\\])\$([^{][^$]*?)\$($|[^\w])/g, (_, prefix, body, suffix) => {
-      return prefix + decode(body) + suffix;
-    }).replace(/\\/g, '')
-}
-
-const getCodeId = function(code) {
-  return `${decode(code)}truehtml`
 }
 
 const getIndexPath = function(courseId) {
@@ -121,8 +111,8 @@ const parseSection = function(section, store) {
   const code = findEquationFromTitle(section.title)
   if(!code) return section
 
-  const codeCleaned = cleanEquation(code[0])
-  const codeId = getCodeId(codeCleaned)
+  const codeCleaned = parseParagraph(code[0])
+  const codeId = getId(codeCleaned)
   if (store[codeId]) {
     section.title = replaceEquationByMathjax(section.title, store[codeId])
   }
@@ -133,7 +123,7 @@ const updateIndexYaml = async function() {
   // Get Mathjax cache from Mathigon build
   const cacheFile = path.join(process.env.HOME, '/.mathjax-cache')
   if(!fs.existsSync(cacheFile)) {
-    return
+    return undefined
   }
   const mathJaxStore = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
 
@@ -218,3 +208,59 @@ generateJsonSitemap(
   path.join(__dirname, '../public/sitemap.xml'),
   path.join(__dirname, '../public/sitemap.json')
 )
+
+/** Mathigon methods from mathjax.js */
+
+/** This method differs from the original one in two things:
+ * 1.- to simplify the logic the key always finishes with truehtml
+ * 2.- there is a replace that removes \; by ;
+*/
+const getId = function(code) {
+  return `${decode(code)}truehtml`.replace(/\\;/g, ';')
+}
+
+/** Mathigon methods from renderer.js */
+
+/** This method differs from the original to avoid the GitHub Emoji replace */
+const parseParagraph = function(text) {
+  text = inlineBlanks(text);
+  text = inlineEquations(text);
+  text = inlineVariables(text);
+
+  // Replace non-breaking space and escaped $s.
+  return text.replace(/\\ /g, '&nbsp;').replace(/\\\$/g, '$');
+}
+
+/** Render inline blank elements using [[a|b]]. */
+function inlineBlanks(text) {
+  return text.replace(/\[\[([^\]]+)]]/g, (x, body) => {
+    const choices = body.split('§§');  // Replacement for |s because of tables.
+
+    if (choices.length === 1) {
+      const [_1, value, _2, hint] = (/^([^(]+)(\((.*)\))?\s*$/g).exec(body);
+      const hintAttr = hint ? `hint="${hint}"` : '';
+      return `<x-blank solution="${value}" ${hintAttr}></x-blank>`;
+
+    } else {
+      const choiceEls = choices.map(c => `<button class="choice">${c}</button>`);
+      return `<x-blank-mc>${choiceEls.join('')}</x-blank-mc>`;
+    }
+  });
+}
+
+/** Render inline LaTeX equations using $x^2$. */
+function inlineEquations(text) {
+  // We want to match $a$ strings, except
+  //  * the closing $ is immediately followed by a word character (e.g. currencies)
+  //  * the opening $ is prefixed with a \ (for custom override)
+  //  * they start with ${} (for variables)
+  return text.replace(/(^|[^\\])\$([^{][^$]*?)\$($|[^\w])/g, (_, prefix, body, suffix) => {
+    return prefix + decode(body) + suffix;
+  });
+}
+
+/** Render inline variables using ${x}. */
+function inlineVariables(text) {
+  return text.replace(/\${([^}]+)}{([^}]+)}/g, '<x-var bind="$2">${$1}</x-var>')
+      .replace(/\${([^}]+)}(?!<\/x-var>)/g, '<span class="var">${$1}</span>');
+}
