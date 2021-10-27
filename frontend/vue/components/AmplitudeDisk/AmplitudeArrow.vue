@@ -1,7 +1,7 @@
 <template>
   <div
     class="amplitude-arrow"
-    :style="`--magnitude: ${internalMagnitude}; --phase: ${internalPhase}`"
+    :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
   >
     <div ref="origin" class="amplitude-arrow__origin-reference" />
     <div class="amplitude-arrow__line" />
@@ -32,15 +32,12 @@ export default defineComponent({
   components: {
   },
   props: {
-    magnitude: {
-      type: Number,
+    amplitude: {
+      type: Object,
       required: false,
-      default: 0.7071
-    },
-    phase: {
-      type: Number,
-      required: false,
-      default: 30
+      default: () => {
+        return { phase: 30, magnitude: 1 }
+      }
     },
     isInteractive: {
       type: Boolean,
@@ -52,21 +49,16 @@ export default defineComponent({
     return {
       isGrabbing: false,
       center: new Point(0, 0),
-      internalPhase: 0,
-      internalMagnitude: 0
+      internalAmplitude: { phase: 30, magnitude: 1 }
     }
   },
   watch: {
-    phase (newVal) {
-      this.internalPhase = newVal
-    },
-    magnitude (newVal) {
-      this.internalMagnitude = newVal
+    amplitude (newVal) {
+      this.internalAmplitude = newVal
     }
   },
   mounted () {
-    this.internalPhase = this.phase
-    this.internalMagnitude = this.magnitude
+    this.internalAmplitude = this.amplitude as Amplitude
   },
   methods: {
     startGrabbingArrow () {
@@ -85,9 +77,9 @@ export default defineComponent({
         const vector = dragPosition.subtract(this.center)
         const vectorUnit = vector.unitVector
 
-        this.internalPhase = (Math.atan2(vectorUnit.x, vectorUnit.y) * 180 / Math.PI) - 90
-        this.internalMagnitude = Math.max(Math.min(vector.length / 50, 1), 0)
-        this.$emit('updateAmplitude', { phase: this.internalPhase, magnitude: this.internalMagnitude })
+        this.internalAmplitude.phase = (Math.atan2(vectorUnit.x, vectorUnit.y) * 180 / Math.PI) - 90
+        this.internalAmplitude.magnitude = Math.max(Math.min(vector.length / 50, 1), 0)
+        this.$emit('updateAmplitude', this.internalAmplitude)
       }
     }
   }
@@ -106,7 +98,7 @@ export default defineComponent({
 
   &__line {
     position: absolute;
-    width: calc(100% - 6px);
+    width: calc(100% - 5px);
     height: 1px;
 
     background-color: $block-border-color;
@@ -115,15 +107,15 @@ export default defineComponent({
     position: absolute;
     right: 0;
     top: 50%;
-    transform: translate(0%, -3px);
+    transform: translate(0%, -2px);
 
     transition: all 0.2s ease-in;
     width: 0;
     height: 0;
-    border-top: 3.5px solid transparent;
-    border-bottom: 3.5px solid transparent;
+    border-top: 2.5px solid transparent;
+    border-bottom: 2.5px solid transparent;
 
-    border-left: 7px solid $block-border-color;
+    border-left: 6px solid $block-border-color;
     &__grabbable {
       cursor: grab;
       pointer-events: auto;
