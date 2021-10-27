@@ -33,7 +33,7 @@ const cleanEquation = function(text) {
     }).replace(/\\/g, '')
 }
 
-const getIdCode = function(code) {
+const getCodeId = function(code) {
   return `${decode(code)}truehtml`
 }
 
@@ -51,6 +51,10 @@ const findCourse = function (courseId: string, locale: string = 'en'): Course {
 
 const findEquationFromTitle = function(title) {
   return title.match(/\$(.*?)\$/g)
+}
+
+const replaceEquationByMathjax = function(title, mathjaxEquation) {
+  return title.replace(/\$(.*?)\$/g, mathjaxEquation)
 }
 
 const findIndexFromCourse = function(courseId: string) {
@@ -109,6 +113,23 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
   return content
 }
 
+const parseSection = function(section, store) {
+  if(section.subsections?.length) {
+    // TODO: improve this logic
+    section.subsections = section.subsections.map(subsection => parseSection(subsection, store))
+  }
+
+  const code = findEquationFromTitle(section.title)
+  if(!code) return section
+
+  const codeCleaned = cleanEquation(code[0])
+  const codeId = getCodeId(codeCleaned)
+  if (store[codeId]) {
+    section.title = replaceEquationByMathjax(section.title, store[codeId])
+  }
+  return section
+}
+
 const updateIndexYaml = async function() {
   // Get Mathjax cache from Mathigon build
   const cacheFile = path.join(process.env.HOME, '/.mathjax-cache')
@@ -117,34 +138,18 @@ const updateIndexYaml = async function() {
   }
   const mathJaxStore = JSON.parse(fs.readFileSync(cacheFile, 'utf8'))
 
-  for(let courseId of COURSES) {
-    const indexCourse = findIndexFromCourse(courseId)
-    if(indexCourse) {
-      const chapters = Object.keys(indexCourse)
-      for(let chapter of chapters) {
-        const sections = indexCourse[chapter]
-        for(let section of sections) {
-          if(section.id === 'examples') {
-            for(let subsection of section.subsections) {
-              console.log('------------------------ MATHJAX TITLE')
-              console.log(subsection.title)
-              let code = findEquationFromTitle(subsection.title)
-              code = cleanEquation(code[0])
-              console.log('------------------------ MATHJAX CODE')
-              console.log(code)
-              const id = getIdCode(code)
-              console.log('------------------------ MATHJAX ID')
-              console.log(id)
-              if (mathJaxStore[id]) {
-                console.log('------------------------ MATHJAX TRANSLATION')
-                console.log(mathJaxStore[id])
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  const indexCourses = COURSES.map(courseId => findIndexFromCourse(courseId))
+  const indexCoursesParsed = indexCourses.map(index => {
+    if(!index) return undefined
+
+    const newIndex = {}
+    const moduleIds = Object.keys(index)
+    const modules = moduleIds.map(moduleId => index[moduleId])
+    const modulesParsed = modules.map(module => 
+      module.map(section => parseSection(section, mathJaxStore)))
+    moduleIds.map((moduleId, index) => newIndex[moduleId] = modulesParsed[index])
+    return newIndex
+  })
 }
 
 const updateSharedYaml = async function(language: string = 'en') {
