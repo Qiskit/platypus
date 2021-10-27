@@ -25,9 +25,7 @@ export default defineComponent({
     section: {
       type: Object,
       required: false,
-      default: () => {
-        return { }
-      }
+      default: () => {}
     }
   }
 })

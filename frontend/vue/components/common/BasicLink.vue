@@ -55,7 +55,6 @@ export default class BasicLink extends Vue.with(Props) {
   }
 
   get isNuxtLink (): boolean {
-    // eslint-disable-next-line dot-notation
     return this.$nuxt && !this.isAnchor
   }
 }

@@ -34,7 +34,6 @@ CONFIG.analytics = analytics
 
 const TOC: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
 
-// postprocess
 TOC.forEach((course: TocCourse) => {
   course.id = course.url.startsWith('/') ? course.url.substring(1) : course.url
   course.sections.forEach((section) => {

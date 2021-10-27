@@ -1,4 +1,3 @@
-// import { load as loadYAML } from 'js-yaml'
 import { getUserData } from './storage'
 
 interface Section {

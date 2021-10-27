@@ -32,9 +32,7 @@ export default defineComponent({
     course: {
       type: Object,
       required: false,
-      default: () => {
-        return { }
-      }
+      default: () => {}
     }
   }
 })
