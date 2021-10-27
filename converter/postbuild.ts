@@ -198,16 +198,6 @@ const updateSharedYaml = async function(language: string = 'en') {
   await writeFile(universalYaml, yaml.dump(universal, {sortKeys: true}))
 }
 
-translationsLanguages.forEach(async(language) => {
-  updateSharedYaml(language)
-})
-
-updateIndexYaml()
-
-generateJsonSitemap(
-  path.join(__dirname, '../public/sitemap.xml'),
-  path.join(__dirname, '../public/sitemap.json')
-)
 
 /** Mathigon methods from mathjax.js */
 
@@ -264,3 +254,14 @@ function inlineVariables(text) {
   return text.replace(/\${([^}]+)}{([^}]+)}/g, '<x-var bind="$2">${$1}</x-var>')
       .replace(/\${([^}]+)}(?!<\/x-var>)/g, '<span class="var">${$1}</span>');
 }
+
+translationsLanguages.forEach(async(language) => {
+  updateSharedYaml(language)
+})
+
+updateIndexYaml()
+
+generateJsonSitemap(
+  path.join(__dirname, '../public/sitemap.xml'),
+  path.join(__dirname, '../public/sitemap.json')
+)
