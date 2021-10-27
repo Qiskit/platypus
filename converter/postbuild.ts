@@ -9,9 +9,6 @@ import { CONTENT, OUTPUT, loadYAML, writeFile } from '@mathigon/studio/build/uti
 import { parseYAML} from '@mathigon/studio/build/markdown'
 import {decode} from 'html-entities'
 
-// TODO: as an improvement we can try to declare a ts module to use import instead of require
-const mathjax = require('mathjax')
-
 import {
   translationsLanguages,
   workingContentPath,
@@ -63,7 +60,6 @@ const replaceEquationByMathjax = function(title, mathjaxEquation) {
 
 const findIndexFromCourse = function(path) {
   const indexCourse = loadYAML(path)
-  // TODO: this can be improved adding lodash to check it with isEmpty
   if (Object.entries(indexCourse).length === 0) return undefined
   return indexCourse
 }
