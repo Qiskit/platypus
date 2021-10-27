@@ -6,20 +6,29 @@
   >
     <div class="amplitude-disk__magnitude-disk" />
     <div class="amplitude-disk__arrows">
-      <div class="amplitude-disk__arrows__main">
-        <div ref="origin" class="amplitude-disk__arrows__main__origin-reference" />
-        <div class="amplitude-disk__arrows__main__line" />
-        <div
-          class="amplitude-disk__arrows__main__head"
-          :class="{
-            'amplitude-disk__arrows__main__head__grabbable': isInteractive,
-            'amplitude-disk__arrows__main__head__grabbing': isGrabbing
-          }"
-          @pointerdown="startGrabbingArrow"
-          @pointerup="stopGrabbingArrow"
-          @pointermove="grabArrow"
+      <AmplitudeArrow
+        class="amplitude-disk__arrows__main"
+        :magnitude="magnitude"
+        :phase="phase"
+        :is-interactive="isInteractive"
+        @updateAmplitude="updateInternalAmplitude"
+      />
+      <div class="amplitude-disk__arrows__secondary__wrapper">
+        <AmplitudeArrow
+          class="amplitude-disk__arrows__secondary"
+          :magnitude="internalMagnitude"
+          :phase="internalPhase"
+          :is-interactive="false"
+          @updateAmplitude="updateInternalAmplitude"
         />
       </div>
+      <!--AmplitudeArrow
+        class="amplitude-disk__arrows__result"
+        :magnitude="magnitude"
+        :phase="phase"
+        :is-interactive="isInteractive"
+        @updateAmplitude="updateInternalAmplitude"
+      /-->
     </div>
   </div>
 </template>
@@ -27,10 +36,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { Point } from '@mathigon/euclid'
+import AmplitudeArrow from './AmplitudeArrow.vue'
 
 export default defineComponent({
   name: 'AmplitudeDisk',
   components: {
+    AmplitudeArrow
   },
   props: {
     magnitude: {
@@ -66,29 +77,12 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.internalPhase = this.phase
-    this.internalMagnitude = this.magnitude
+    this.updateInternalAmplitude({ phase: this.phase, magnitude: this.magnitude })
   },
   methods: {
-    startGrabbingArrow () {
-      this.isGrabbing = this.isInteractive
-    },
-    stopGrabbingArrow () {
-      this.isGrabbing = false
-    },
-    grabArrow (evt: any) {
-      if (this.isGrabbing) {
-        const origin = this.$refs.origin as HTMLDivElement
-        const originClientRect = origin.getBoundingClientRect()
-        this.center = new Point(originClientRect.x, originClientRect.y)
-
-        const dragPosition = new Point(evt.x, evt.y)
-        const vector = dragPosition.subtract(this.center)
-        const vectorUnit = vector.unitVector
-
-        this.internalPhase = (Math.atan2(vectorUnit.x, vectorUnit.y) * 180 / Math.PI) - 90
-        this.internalMagnitude = Math.max(Math.min(vector.length / 50, 1), 0)
-      }
+    updateInternalAmplitude (amplitude: { phase: number, magnitude: number }) {
+      this.internalPhase = amplitude.phase
+      this.internalMagnitude = amplitude.magnitude
     }
   }
 })
@@ -132,53 +126,21 @@ export default defineComponent({
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%) rotate(calc(var(--phase, 30) * -1deg)) translate(50%, 0);
-      width: calc(var(--magnitude, 1) * 50%);
-      height: 0px;
+    }
 
-      &__line {
+    &__secondary {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+
+      &__wrapper {
         position: absolute;
-        width: calc(100% - 6px);
-        height: 1px;
-
-        background-color: $block-border-color;
-      }
-      &__head {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translate(0%, -3px);
-
-        transition: all 0.2s ease-in;
-        width: 0;
-        height: 0;
-        border-top: 3.5px solid transparent;
-        border-bottom: 3.5px solid transparent;
-
-        border-left: 7px solid $block-border-color;
-        &__grabbable {
-          cursor: grab;
-
-          &:hover {
-            transform: translate(4px, -6px);
-            border-top: 6.5px solid transparent;
-            border-bottom: 6.5px solid transparent;
-
-            border-left: 14px solid $block-border-color;
-          }
-        }
-
-        &__grabbing {
-          cursor: grabbing;
-        }
-      }
-      &__origin-reference {
-        width: 0;
-        height: 0;
-        position: absolute;
-        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
         left: 0;
-        top: 50%;
+        pointer-events: none;
+        transform: rotate(calc(var(--phase, 30) * -1deg)) translate(calc(var(--magnitude, 1) * 50%), 0)  rotate(calc(var(--phase, 30) * 1deg));
       }
     }
   }
