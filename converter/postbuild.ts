@@ -119,7 +119,6 @@ const insertSections = (content: object, document: HTMLDocument, includeHtml: bo
 
 const parseSection = function(section, store) {
   if(section.subsections?.length) {
-    // TODO: improve this logic
     section.subsections = section.subsections.map(subsection => parseSection(subsection, store))
   }
 
