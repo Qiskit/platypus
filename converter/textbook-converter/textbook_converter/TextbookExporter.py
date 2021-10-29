@@ -15,6 +15,7 @@ IMAGE_START = '!['
 markdown_img_regex = re.compile(r'^!\[.*]\((.*)\)')
 html_img_regex = re.compile(r'<img(.+?)src="(.+?)"(.*?)/?>')
 mathigon_ximg_regex = re.compile(r'x-img\(src="(.*)"\)')
+inline_markdown_img_regex = re.compile(r'!\[(.*?)]\((.+?)\)')
 
 HEADING_START = '#'
 tag_id_regex = re.compile(r'(<.*\sid=["\'])(.*)(["\'])')
@@ -49,6 +50,24 @@ JS_VALUE_GOAL = """
       }});
     }}
 """
+
+
+def handle_inline_images(line):
+    """Convert syntax from this:
+
+        ![alt text](path/image)
+
+        to this:
+
+            <img src="path/image" alt="alt text">
+    """
+    for match_alt, match_link in inline_markdown_img_regex.findall(line):
+        if match_link:
+            line = line.replace(
+                f'![{match_alt}]({match_link})',
+                f'<img src="{match_link}" alt="{match_alt}">'
+            )
+    return line
 
 
 def handle_inline_code(line):
@@ -280,6 +299,7 @@ def handle_markdown_cell(cell, resources, cell_number):
             markdown_lines.append(heading_text)
         else:
             line = handle_inline_code(line)
+            line = handle_inline_images(line)
             markdown_lines.append(line.replace('\\%', '\\\\%'))  #.replace('$$', '$').replace('\\', '\\\\'))
             markdown_lines.append('\n')
 
