@@ -3,7 +3,7 @@
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
         <span class="user-account__section-nav__user-data__name">{{ userName }}</span>
-        <span class="user-account__section-nav__user-data__role">{{ userRole }}</span>
+        <span v-if="userRole" class="user-account__section-nav__user-data__role">{{ userRole }}</span>
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
@@ -41,7 +41,7 @@
     </bx-dropdown>
     <section class="user-account__section-container">
       <div v-if="activeSection === sectionList[0].hash">
-        PROGRESS SECTION
+        <UserProgress />
       </div>
       <div v-if="activeSection === sectionList[1].hash">
         GROUPS SECTION
@@ -60,16 +60,18 @@
 import { defineComponent } from 'vue-demi'
 import AppLink from '../common/AppLink.vue'
 import PrivacySection from './PrivacySection.vue'
+import UserProgress from './UserProgress.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
   components: {
     AppLink,
-    PrivacySection
+    PrivacySection,
+    UserProgress
   },
   props: {
-    userName: { type: String, required: false, default: 'Unknown' },
-    userRole: { type: String, required: false, default: 'Unknown' }
+    userName: { type: String, required: false, default: '' },
+    userRole: { type: String, required: false, default: '' }
   },
   data () {
     return {
