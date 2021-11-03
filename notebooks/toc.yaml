@@ -346,10 +346,10 @@
   sections:
     - title: Introduction
       id: introduction
-      url: /qml/introduction
+      url: /quantum-machine-learning/introduction
     - title: Parametrized quantum circuits
       id: paramterized-quantum-circuits
-      url: /qml/pqc
+      url: /quantum-machine-learning/pqc
     - title: Data encoding
       id: data-encoding
-      url: /qml/encoding
+      url: /quantum-machine-learning/encoding
