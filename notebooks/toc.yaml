@@ -353,3 +353,6 @@
     - title: Data encoding
       id: data-encoding
       url: /quantum-machine-learning/encoding
+    - title: Training quantum circuits
+      id: training-quantum-circuits
+      url: /quantum-machine-learning/training
