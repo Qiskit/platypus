@@ -12,6 +12,11 @@ x-step {
     padding-left: 0;
     padding-right: 0;
   }
+  a {
+    code {
+      color: $link-color-tertiary;
+    }
+  }
 }
 
 pre {
