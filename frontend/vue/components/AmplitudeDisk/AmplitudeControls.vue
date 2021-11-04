@@ -79,7 +79,8 @@ export default defineComponent({
 .amplitude-controls {
   display: flex;
   flex-direction: column;
-  width: 12.5rem;
+  width: 10rem;
   gap: $spacing-05;
 }
+
 </style>
