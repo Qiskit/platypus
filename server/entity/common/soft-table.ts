@@ -1,23 +1,33 @@
-import { Entity, Column } from 'typeorm'
+import { Entity, Column, BeforeInsert, BeforeUpdate, BeforeRemove, DeleteDateColumn } from 'typeorm'
 
 @Entity()
 export class SoftTable {
 
     @Column({
-        type: "timestamp without time zone",
+        type: 'timestamp without time zone',
         nullable: true
     })
-    createdAt?: Date;
+    createdAt?: Date
 
     @Column({
-        type: "timestamp without time zone",
+        type: 'timestamp without time zone',
         nullable: true
     })
-    updatedAt?: Date;
+    updatedAt?: Date
 
-    @Column({
-        type: "timestamp without time zone",
+    @DeleteDateColumn({
+        type: 'timestamp without time zone',
         nullable: true
     })
-    lastdeletedAtName?: Date;
+    deletedAt?: Date
+
+    @BeforeInsert()
+    newCreationDate() {
+        this.createdAt = new Date()
+    }
+
+    @BeforeUpdate()
+    newUpdateDate() {
+        this.updatedAt = new Date()
+    }
 }

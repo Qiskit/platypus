@@ -127,6 +127,6 @@ createConnection({
   logging: process.env.NODE_ENV === 'production' ? ['error'] : ['warn', 'error']
 }).then(() => {
   initializeMathigon()
-}).catch(error => console.log(error));
+}).catch(error => console.log(error))
 
 
