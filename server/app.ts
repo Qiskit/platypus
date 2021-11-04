@@ -16,6 +16,11 @@ import * as storageApi from './storage'
 
 import { translate } from '@mathigon/studio/server/i18n'
 
+import 'reflect-metadata'
+
+import { createConnection } from 'typeorm'
+import { CommunityUser, CommunityUserProgression } from "./entity/"
+
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
   const section = course?.sections.find(s => s.id === req.params.section)
@@ -55,55 +60,73 @@ const getCourseData = async function (req: Request) {
   }
 }
 
-new MathigonStudioApp()
-  .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
-  .secure()
-  .setup({ sessionSecret: 'project-platypus-beta' })
-  .redirects({
-    '/': TEXTBOOK_HOME,
-    '/textbook': TEXTBOOK_HOME
-  })
-  .get('/locales/:locale', async (req, res) => {
-    const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
-    res.json(translations)
-  })
-  .use(async (req, res, next) => {
-    res.locals.availableLocales = CONFIG.locales.map((l) => {
-      return LOCALES[l]
+const initializeMathigon = () => {
+  new MathigonStudioApp()
+    .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
+    .secure()
+    .setup({ sessionSecret: 'project-platypus-beta' })
+    .redirects({
+      '/': TEXTBOOK_HOME,
+      '/textbook': TEXTBOOK_HOME
     })
-    next()
-  })
-  .get('/summer-school/:course', (req, res, next) => {
-    // redirect to first lecture when no lecture specified
-    const course = getCourse(req.params.course, req.locale.id)
-    return course ? res.redirect(`/summer-school/${course.id}/${course.sections[0].id}`) : next();
-  })
-  .get('/summer-school/:course/:section', async(req, res, next) => {
-    // example URL: /summer-school/2021/lec1-2
-    // :course - refers to the summer school year
-    // :section - refers to the lecture id
-    const courseData = await getCourseData(req)
-
-    courseData?.course.sections.forEach(section => {
-      // Mathigon by default set url as 'course/'
-      section.url = section.url.replace('course/', 'summer-school/')
+    .get('/locales/:locale', async (req, res) => {
+      const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
+      res.json(translations)
     })
+    .use(async (req, res, next) => {
+      res.locals.availableLocales = CONFIG.locales.map((l) => {
+        return LOCALES[l]
+      })
+      next()
+    })
+    .get('/summer-school/:course', (req, res, next) => {
+      // redirect to first lecture when no lecture specified
+      const course = getCourse(req.params.course, req.locale.id)
+      return course ? res.redirect(`/summer-school/${course.id}/${course.sections[0].id}`) : next();
+    })
+    .get('/summer-school/:course/:section', async (req, res, next) => {
+      // example URL: /summer-school/2021/lec1-2
+      // :course - refers to the summer school year
+      // :section - refers to the lecture id
+      const courseData = await getCourseData(req)
 
-    if (!courseData) {
-      return next()
-    } else {
-      res.render('textbook', courseData)
-    }
-  })
-  .get('/course/:course/:section', async (req, res, next) => {
-    const courseData = await getCourseData(req)
+      courseData?.course.sections.forEach(section => {
+        // Mathigon by default set url as 'course/'
+        section.url = section.url.replace('course/', 'summer-school/')
+      })
 
-    if (!courseData) {
-      return next()
-    } else {
-      res.render('textbook', courseData)
-    }
-  })
-  .course(storageApi)
-  .errors()
-  .listen()
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
+    .get('/course/:course/:section', async (req, res, next) => {
+      const courseData = await getCourseData(req)
+
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
+    .course(storageApi)
+    .errors()
+    .listen()
+}
+
+createConnection({
+  type: 'postgres',
+  url: process.env.TYPEORM_URL, // TODO: we need to check how we should manage environment variables
+  ssl: { rejectUnauthorized: false },
+  entities: [
+    CommunityUser,
+    CommunityUserProgression
+  ],
+  synchronize: process.env.NODE_ENV !== 'production',
+  logging: process.env.NODE_ENV === 'production' ? ['error'] : ['warn', 'error']
+}).then(() => {
+  initializeMathigon()
+}).catch(error => console.log(error));
+
+
