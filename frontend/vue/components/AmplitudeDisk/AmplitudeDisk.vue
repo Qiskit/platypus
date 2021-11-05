@@ -16,7 +16,12 @@
         @updateAmplitude="updateInternalAmplitude"
       />
     </div>
-    <AmplitudeControls v-if="showControls" :magnitude="internalAmplitude.magnitude" :phase="internalAmplitude.phase" />
+    <AmplitudeControls
+      v-if="showControls"
+      :magnitude="internalAmplitude.magnitude"
+      :phase="internalAmplitude.phase"
+      @updateAmplitude="updateInternalAmplitude"
+    />
   </div>
 </template>
 
@@ -80,6 +85,7 @@ export default defineComponent({
   },
   methods: {
     updateInternalAmplitude (amplitude: Amplitude) {
+      console.log(amplitude)
       this.internalAmplitude = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
     }
   }

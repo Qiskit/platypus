@@ -10,6 +10,7 @@
         :max="max"
         :step="step"
         :value="value"
+        @change="valueChange"
       >
       <button class="number-input__controls__add" @click="stepUp"> <ChevronUp16 class="number-input__controls__add__icon" /> </button>
       <button class="number-input__controls__sub" @click="stepDown"> <ChevronDown16 class="number-input__controls__sub__icon" /> </button>
@@ -58,11 +59,25 @@ export default defineComponent({
   methods: {
     stepUp () {
       const input = this.$refs.inputElement as HTMLInputElement
-      input.stepUp()
+      if (input.value === `${this.max}`) {
+        input.value = `${this.min}`
+      } else {
+        input.stepUp()
+      }
+      this.valueChange()
     },
     stepDown () {
       const input = this.$refs.inputElement as HTMLInputElement
-      input.stepDown()
+      if (input.value === `${this.min}`) {
+        input.value = `${this.max}`
+      } else {
+        input.stepDown()
+      }
+      this.valueChange()
+    },
+    valueChange () {
+      const input = this.$refs.inputElement as HTMLInputElement
+      this.$emit('onValueChange', input.value)
     }
   }
 })

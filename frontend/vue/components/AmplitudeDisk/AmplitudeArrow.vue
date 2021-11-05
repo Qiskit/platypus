@@ -74,6 +74,9 @@ export default defineComponent({
         const vectorUnit = vector.unitVector
 
         this.internalAmplitude.phase = (Math.atan2(vectorUnit.x, vectorUnit.y) * 180 / Math.PI) - 90
+        if (this.internalAmplitude.phase < 0) {
+          this.internalAmplitude.phase += 360
+        }
         this.internalAmplitude.magnitude = Math.max(Math.min(vector.length / 50, 1), 0)
         this.$emit('updateAmplitude', this.internalAmplitude)
       }
