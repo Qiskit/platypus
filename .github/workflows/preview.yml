@@ -5,6 +5,7 @@ on: [pull_request]
 
 jobs:
   preview:
+    # Prevents action to be executed by forks and drafts
     if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     env:
