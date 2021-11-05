@@ -1,25 +1,17 @@
 <template>
-  <div class="amplitude-disk__wrapper">
+  <div
+    class="amplitude-disk"
+    :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
+    @pointerout="stopGrabbingArrow"
+  >
     <div
-      class="amplitude-disk"
-      :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
-      @pointerout="stopGrabbingArrow"
-    >
-      <div
-        class="amplitude-disk__magnitude-disk"
-        :class="{'amplitude-disk__magnitude-disk_amplitude-overflow': amplitudeOverflow}"
-      />
-      <AmplitudeArrow
-        class="amplitude-disk__arrow"
-        :amplitude="internalAmplitude"
-        :is-interactive="isInteractive"
-        @updateAmplitude="updateInternalAmplitude"
-      />
-    </div>
-    <AmplitudeControls
-      v-if="showControls"
-      :magnitude="internalAmplitude.magnitude"
-      :phase="internalAmplitude.phase"
+      class="amplitude-disk__magnitude-disk"
+      :class="{'amplitude-disk__magnitude-disk_amplitude-overflow': amplitudeOverflow}"
+    />
+    <AmplitudeArrow
+      class="amplitude-disk__arrow"
+      :amplitude="internalAmplitude"
+      :is-interactive="isInteractive"
       @updateAmplitude="updateInternalAmplitude"
     />
   </div>
@@ -29,14 +21,12 @@
 import { defineComponent } from 'vue-demi'
 import { Point } from '@mathigon/euclid'
 import AmplitudeArrow from './AmplitudeArrow.vue'
-import AmplitudeControls from './AmplitudeControls.vue'
 import { Amplitude } from './amplitude'
 
 export default defineComponent({
   name: 'AmplitudeDisk',
   components: {
-    AmplitudeArrow,
-    AmplitudeControls
+    AmplitudeArrow
   },
   props: {
     magnitude: {
@@ -86,6 +76,7 @@ export default defineComponent({
   methods: {
     updateInternalAmplitude (amplitude: Amplitude) {
       this.internalAmplitude = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
+      this.$emit('updateAmplitude', this.internalAmplitude)
     }
   }
 })

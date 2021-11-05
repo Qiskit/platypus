@@ -10,6 +10,9 @@ export default class QNumberInput extends BXNumberInput {
         padding-right: 6rem;
         min-width: none;
       }
+      .bx--label {
+        line-height: 1.43;
+      }
     `
   ]
 }
