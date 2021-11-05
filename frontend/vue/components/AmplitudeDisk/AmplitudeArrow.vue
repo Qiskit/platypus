@@ -21,11 +21,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { Point } from '@mathigon/euclid'
-
-export interface Amplitude {
-  phase: number,
-  magnitude: number
-}
+import { Amplitude } from './amplitude'
 
 export default defineComponent({
   name: 'AmplitudeArrow',

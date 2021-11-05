@@ -1,38 +1,37 @@
 <template>
-  <div
-    class="amplitude-disk"
-    :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
-    @pointerout="stopGrabbingArrow"
-  >
+  <div class="amplitude-disk__wrapper">
     <div
-      class="amplitude-disk__magnitude-disk"
-      :class="{'amplitude-disk__magnitude-disk_amplitude-overflow': amplitudeOverflow}"
-    />
-    <AmplitudeArrow
-      class="amplitude-disk__arrow"
-      :amplitude="internalAmplitude"
-      :is-interactive="isInteractive"
-      @updateAmplitude="updateInternalAmplitude"
-    />
-    <!--AmplitudeArrow
-      class="amplitude-disk__arrows__result"
-      :magnitude="magnitude"
-      :phase="phase"
-      :is-interactive="isInteractive"
-      @updateAmplitude="updateInternalAmplitude"
-    /-->
+      class="amplitude-disk"
+      :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
+      @pointerout="stopGrabbingArrow"
+    >
+      <div
+        class="amplitude-disk__magnitude-disk"
+        :class="{'amplitude-disk__magnitude-disk_amplitude-overflow': amplitudeOverflow}"
+      />
+      <AmplitudeArrow
+        class="amplitude-disk__arrow"
+        :amplitude="internalAmplitude"
+        :is-interactive="isInteractive"
+        @updateAmplitude="updateInternalAmplitude"
+      />
+    </div>
+    <AmplitudeControls v-if="showControls" :magnitude="internalAmplitude.magnitude" :phase="internalAmplitude.phase" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { Point } from '@mathigon/euclid'
-import AmplitudeArrow, { Amplitude } from './AmplitudeArrow.vue'
+import AmplitudeArrow from './AmplitudeArrow.vue'
+import AmplitudeControls from './AmplitudeControls.vue'
+import { Amplitude } from './amplitude'
 
 export default defineComponent({
   name: 'AmplitudeDisk',
   components: {
-    AmplitudeArrow
+    AmplitudeArrow,
+    AmplitudeControls
   },
   props: {
     magnitude: {
@@ -46,6 +45,11 @@ export default defineComponent({
       default: 30
     },
     isInteractive: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    showControls: {
       type: Boolean,
       required: false,
       default: false
@@ -92,6 +96,13 @@ export default defineComponent({
   border-radius: 50%;
   background-color: $background-color-light;
   position: relative;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-05;
+  }
 
   &__magnitude-disk {
     position: absolute;
