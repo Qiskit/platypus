@@ -1,33 +1,38 @@
 <template>
-  <label class="number-input">
-    <span v-if="label" class="number-input__label"> {{ label }} </span>
-    <div class="number-input__controls">
-      <input
-        ref="inputElement"
-        class="number-input__controls__input"
-        type="number"
-        :min="min"
-        :max="max"
-        :step="step"
-        :value="value"
-        @change="valueChange"
-      >
-      <button class="number-input__controls__add" @click="stepUp"> <ChevronUp16 class="number-input__controls__add__icon" /> </button>
-      <button class="number-input__controls__sub" @click="stepDown"> <ChevronDown16 class="number-input__controls__sub__icon" /> </button>
-    </div>
-  </label>
+  <bx-number-input
+    class="number-input"
+    :min="min"
+    :max="max"
+    :step="step"
+    :value="value"
+    :label-text="label"
+    @bx-number-input="valueChange($event)"
+  />
+
+  <!--span v-if="label" class="number-input__label"> {{ label }} </span>
+  <div class="number-input__controls">
+    <input
+      ref="inputElement"
+      class="number-input__controls__input"
+      type="number"
+      :min="min"
+      :max="max"
+      :step="step"
+      :value="value"
+      @change="valueChange"
+    >
+    <button class="number-input__controls__add" @click="stepUp"> <ChevronUp16 class="number-input__controls__add__icon" /> </button>
+    <button class="number-input__controls__sub" @click="stepDown"> <ChevronDown16 class="number-input__controls__sub__icon" /> </button>
+  </div-->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
-import ChevronUp16 from '@carbon/icons-vue/es/chevron--up/16'
-import ChevronDown16 from '@carbon/icons-vue/es/chevron--down/16'
+import 'carbon-web-components/es/components/number-input/number-input.js'
 
 export default defineComponent({
   name: 'NumberInput',
   components: {
-    ChevronUp16,
-    ChevronDown16
   },
   props: {
     label: {
@@ -57,27 +62,8 @@ export default defineComponent({
     }
   },
   methods: {
-    stepUp () {
-      const input = this.$refs.inputElement as HTMLInputElement
-      if (input.value === `${this.max}`) {
-        input.value = `${this.min}`
-      } else {
-        input.stepUp()
-      }
-      this.valueChange()
-    },
-    stepDown () {
-      const input = this.$refs.inputElement as HTMLInputElement
-      if (input.value === `${this.min}`) {
-        input.value = `${this.max}`
-      } else {
-        input.stepDown()
-      }
-      this.valueChange()
-    },
-    valueChange () {
-      const input = this.$refs.inputElement as HTMLInputElement
-      this.$emit('onValueChange', input.value)
+    valueChange (evt: CustomEvent) {
+      this.$emit('onValueChange', evt.detail.value)
     }
   }
 })
@@ -88,12 +74,9 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 
 .number-input {
-  @include type-style('body-long-01');
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-
+  --cds-ui-04: #{$border-color-secondary};
+  --cds-field-01: #{$background-color-white};
+  /*
   &__controls {
     display: grid;
     grid-template-areas:
@@ -155,5 +138,6 @@ export default defineComponent({
       }
     }
   }
+  */
 }
 </style>
