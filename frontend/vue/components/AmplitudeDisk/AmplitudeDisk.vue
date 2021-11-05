@@ -93,13 +93,6 @@ export default defineComponent({
   background-color: $background-color-light;
   position: relative;
 
-  &__wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: $spacing-05;
-  }
-
   &__magnitude-disk {
     position: absolute;
     left: 50%;

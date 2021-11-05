@@ -82,7 +82,7 @@ export default defineComponent({
 
 .amplitude-disk-with-values {
   display: flex;
-  flex-direction: column;
+  flex-direction: var(--display-direction, column);
   align-items: center;
   gap: $spacing-05;
 }
