@@ -71,6 +71,7 @@ export default defineComponent({
   methods: {
     updateInternalAmplitude (amplitude: Amplitude) {
       this.internalAmplitude = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
+      this.$emit('updateAmplitude', this.internalAmplitude)
     }
   }
 })

@@ -130,13 +130,14 @@ export default defineComponent({
     &__grabbable {
       cursor: grab;
       pointer-events: auto;
+      touch-action: none;
 
       &:hover::after {
         transform: translate(4px, -6px);
-        border-top: 6.5px solid transparent;
-        border-bottom: 6.5px solid transparent;
+        border-top-width: 6.5px;
+        border-bottom-width: 6.5px;
 
-        border-left: 14px solid $block-border-color;
+        border-left-width: 14px;
       }
     }
 
