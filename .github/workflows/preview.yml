@@ -5,101 +5,16 @@ on: [pull_request]
 
 jobs:
   preview:
-    #if: github.event.pull_request.draft == 'false' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     env:
       PR_TAG: pr-${{ github.event.pull_request.number }}
       DOCKER_IMAGE_NAME: platypus
       DOCKER_IMAGE_PORT: "8080"
 
-      IBMCLOUD_ACCOUNT: ${{ secrets.IBMCLOUD_ACCOUNT }}
-      IBMCLOUD_API_KEY: ${{ secrets.IBMCLOUD_API_KEY }}
-      IBMCLOUD_REGION: us-south
-      IBMCLOUD_RESOURCE_GROUP: Quantum Community
-      CODE_ENGINE_PROJECT: platypus-preview
-      CODE_ENGINE_REGISTRY_SECRET: ibm-container-registry
-
     steps:
-      - name: Fetch content of the PR
-        uses: actions/checkout@v2
-
-      - name: GH deployment status (start)
-        uses: bobheadxi/deployments@v0.4.3
-        id: gh_deployment
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
-        with:
-          step: start
-          token: ${{ github.token }}
-          env: ${{ env.APP_NAME }}
-          auto_inactive: true
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - name: Log-in into IBM Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: icr.io
-          username: iamapikey
-          password: ${{ env.IBMCLOUD_API_KEY }}
-
-      - name: Build and push to IBM registry
-        uses: docker/build-push-action@v2.6.1
-        with:
-          push: true
-          tags: ${{ env.DOCKER_IMAGE_TAG }}
-          cache-from: type=registry,ref=${{ env.DOCKER_IMAGE_TAG }}
-          cache-to: type=inline
-        env:
-          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
-
-      - name: Setup IBM Cloud CLI
+      - name: Check variables
         run: |
-          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
-          ibmcloud --version
-          ibmcloud config --check-version=false
-          ibmcloud plugin install -f code-engine
-          ibmcloud plugin install -f container-registry
-
-      - name: Authenticate with IBM Cloud CLI
-        run: |
-          ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
-
-      - name: Determine Code Engine project and app status
-        id: ce_command_choice
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
-        run: |
-          ibmcloud ce project select -n "$CODE_ENGINE_PROJECT"
-          if ibmcloud ce app list -q | grep "$APP_NAME" ; then
-            echo "::set-output name=command::update"
-          else
-            echo "::set-output name=command::create"
-          fi
-
-      - name: Create a new preview application in Code Engine
-        id: ce_app_creation
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
-          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
-        run: |
-          ibmcloud ce app ${{ steps.ce_command_choice.outputs.command }} \
-            --name "$APP_NAME" \
-            --image "$DOCKER_IMAGE_TAG" \
-            --registry-secret "$CODE_ENGINE_REGISTRY_SECRET" \
-            --port $DOCKER_IMAGE_PORT \
-            --cpu 0.25 \
-            --memory 0.5G \
-            --min 1
-          echo "::set-output name=preview_url::$(\
-            ibmcloud ce app get --name "$APP_NAME" --output url
-          )"
-
-      - name: GH deployment status (finish)
-        uses: bobheadxi/deployments@v0.4.3
-        if: always()
-        with:
-          step: finish
-          token: ${{ github.token }}
-          status: ${{ job.status }}
-          deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
-          env_url: "${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction"
+          echo ${{ github.event.pull_request.draft }}
+          echo ${{ github.event.pull_request.head.repo.full_name }}
+          echo ${{ github.repository }}
+          
