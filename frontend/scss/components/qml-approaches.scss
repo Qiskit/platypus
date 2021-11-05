@@ -1,0 +1,91 @@
+q-block.tabs.qml-approaches {
+  --tab-size: 7.5rem;
+  --double-tab-size: calc(var(--tab-size) * 2);
+
+  .qb-body {
+    display: grid;
+    grid-template-areas: 
+      ". x-axis-title"
+      "y-axis-title tabs";
+    grid-template-rows: 1.5rem auto;
+    grid-template-columns: 1.5rem auto;
+    position: relative;
+
+    @include mq($until: medium) {
+      max-width: calc(var(--double-tab-size) + 6rem);
+    }
+
+    h4 {
+      @include type-style('heading-01');
+      text-align: center;
+      width: var(--double-tab-size);
+
+      &:first-child {
+        grid-area: x-axis-title;
+        position: relative;
+      }
+
+      & + h4 {
+        grid-area: y-axis-title;
+        position: absolute;
+        transform: translate(calc(var(--tab-size) * -1), var(--tab-size)) rotate(270deg);
+        height: 0rem;
+      }
+    }
+
+    x-tabbox {
+      display: grid;
+      grid-area: tabs;
+      grid-template-rows: 1fr;
+      grid-template-columns: max-content auto;
+
+      @include mq($until: medium) {
+        grid-template-rows: max-content auto;
+        grid-template-columns: 1fr;
+        max-width: calc(var(--double-tab-size) + 3px);
+      }
+
+      .titles {
+        display: grid;
+        grid-template-rows: var(--tab-size) var(--tab-size);
+        grid-template-columns: var(--tab-size) var(--tab-size);
+        grid-gap: 1px;
+        border: 1px solid black;
+        background-color: black;
+        width: calc(var(--double-tab-size) + 3px);
+        max-width: none;
+        max-height: calc(var(--double-tab-size) + 3px);
+
+        h3 {
+          @include type-style('display-02');
+          background-color: $background-color-light;
+          color: $text-color-light;
+          height: 100%;
+          width: 100%;
+          margin: 0;
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            color: $text-color-dark;
+            background-color: $background-color-light-2;
+          }
+
+          &.active {
+            background-color: $active-color;
+            color: $text-color-white;
+            border: none;
+          }
+        }
+      }
+      .body {
+        padding: 0 $spacing-06;
+        @include mq($until: medium) {
+          padding: $spacing-06 0;
+        }
+      }
+    }
+  }
+}
