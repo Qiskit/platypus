@@ -25,7 +25,7 @@ jobs:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           step: deactivate-env
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           env: ${{ env.APP_NAME }}
 
       - name: Setup IBM Cloud CLI

@@ -29,7 +29,7 @@ jobs:
           APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
         with:
           step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           env: ${{ env.APP_NAME }}
           auto_inactive: true
           ref: ${{ github.event.pull_request.head.ref }}
@@ -98,7 +98,7 @@ jobs:
         if: always()
         with:
           step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.gh_deployment.outputs.deployment_id }}
           env_url: "${{ steps.ce_app_creation.outputs.preview_url }}/course/introduction"
