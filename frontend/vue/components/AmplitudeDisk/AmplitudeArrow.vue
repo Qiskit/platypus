@@ -104,22 +104,34 @@ export default defineComponent({
   }
   &__head {
     position: absolute;
-    right: 0;
+    right: -1.5rem;
     top: 50%;
-    transform: translate(0%, -2px);
+    width: 3rem;
+    height: 3rem;
+    transform: translate(0%, -50%);
 
-    transition: all 0.2s ease-in;
-    width: 0;
-    height: 0;
-    border-top: 2.5px solid transparent;
-    border-bottom: 2.5px solid transparent;
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      transform: translate(0%, -2px);
+      top: 50%;
+      right: 50%;
+      width: 0;
+      height: 0;
 
-    border-left: 6px solid $block-border-color;
+      transition: all 0.2s ease-in;
+      border-top: 2.5px solid transparent;
+      border-bottom: 2.5px solid transparent;
+
+      border-left: 6px solid $block-border-color;
+    }
+
     &__grabbable {
       cursor: grab;
       pointer-events: auto;
 
-      &:hover {
+      &:hover::after {
         transform: translate(4px, -6px);
         border-top: 6.5px solid transparent;
         border-bottom: 6.5px solid transparent;

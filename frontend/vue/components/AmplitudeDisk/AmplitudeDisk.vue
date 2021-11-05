@@ -92,6 +92,7 @@ export default defineComponent({
   border-radius: 50%;
   background-color: $background-color-light;
   position: relative;
+  margin: $spacing-05;
 
   &__magnitude-disk {
     position: absolute;

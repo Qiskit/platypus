@@ -84,6 +84,5 @@ export default defineComponent({
   display: flex;
   flex-direction: var(--display-direction, column);
   align-items: center;
-  gap: $spacing-05;
 }
 </style>
