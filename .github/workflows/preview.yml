@@ -5,7 +5,7 @@ on: [pull_request]
 
 jobs:
   preview:
-    #if: github.event.pull_request.draft == 'false' && github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.draft == 'false' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     env:
       PR_TAG: pr-${{ github.event.pull_request.number }}
