@@ -4,7 +4,10 @@
     :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
     @pointerout="stopGrabbingArrow"
   >
-    <div class="amplitude-disk__magnitude-disk" />
+    <div
+      class="amplitude-disk__magnitude-disk"
+      :class="{'amplitude-disk__magnitude-disk_amplitude-overflow': amplitudeOverflow}"
+    />
     <AmplitudeArrow
       class="amplitude-disk__arrow"
       :amplitude="internalAmplitude"
@@ -55,12 +58,17 @@ export default defineComponent({
       internalAmplitude: { phase: 30, magnitude: 1 }
     }
   },
+  computed: {
+    amplitudeOverflow (): boolean {
+      return this.internalAmplitude.magnitude > 1
+    }
+  },
   watch: {
     phase (newVal) {
-      this.internalAmplitude.phase = newVal
+      this.updateInternalAmplitude({ phase: newVal, magnitude: this.internalAmplitude.magnitude } as Amplitude)
     },
     magnitude (newVal) {
-      this.internalAmplitude.magnitude = newVal
+      this.updateInternalAmplitude({ phase: this.internalAmplitude.phase, magnitude: newVal } as Amplitude)
     }
   },
   mounted () {
@@ -68,7 +76,7 @@ export default defineComponent({
   },
   methods: {
     updateInternalAmplitude (amplitude: Amplitude) {
-      this.internalAmplitude = amplitude
+      this.internalAmplitude = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
     }
   }
 })
@@ -90,13 +98,17 @@ export default defineComponent({
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
     transition: all 0.5s ease-in-out;
     width: calc(var(--magnitude, 1) * 100%);
     height: calc(var(--magnitude, 1) * 100%);
     border-radius: 50%;
     background-color: $background-color-quaternary;
     border: 1px solid $block-border-color;
+
+    &_amplitude-overflow {
+      background-color: $status-color-wrong;
+      opacity: 0.7;
+    }
   }
 
   &__arrow {
