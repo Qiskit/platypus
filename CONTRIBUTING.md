@@ -79,9 +79,8 @@ need to know that qiskit.org follows the
 [Forking Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
 with [Feature Branches](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
 
-Regardless if you are a core contributor or not, the above means we expect you to fork
-the project on your own GitHub account and make your `main` branch to track this
-repository. A typical Git setup after
+The above means we expect you to fork the project on your own GitHub account and make your `main` branch to 
+track this repository. A typical Git setup after
 [forking the project](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) is:
 
 ```sh
@@ -95,6 +94,9 @@ git branch -u upstream/main
 git pull
 ```
 
+As a core contributor due to some access limitations between forks and the head branch we encourage you to 
+[clone](https://support.atlassian.com/bitbucket-cloud/docs/clone-a-repository/) the repository 
+instead of forking it.
 
 ### Assigning yourself
 
@@ -165,12 +167,14 @@ branch. In these occassions, remember to manually close the related pull request
 
 ### Live previews
 
-As part of our continuous integration infrastructure, every pull request that passes 
+As part of our continuous integration infrastructure, every pull request opened from the head repository that passes 
 the build process, receives a dedicated deployment running on [IBM Code Engine](https://cloud.ibm.com/codeengine/overview).
 
 This allows the team to have live branch previews, making it easier to share
 links and review changes as necessary. You can preview your working branch at 
 `https://qiskit-org-pr-<pull-request-number>.<unique_id>.us-south.codeengine.appdomain.cloud/`.
+
+This means that for forked repositories the pull request will not generate a live preview and that step will be skipped.
 
 ### Code review
 
