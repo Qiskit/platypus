@@ -24,7 +24,7 @@ cypress/
 scripts/
 docs/
 notebooks/
-!notebooks/**/*.toc
+!notebooks/toc.yaml
 !notebooks/**/*.yaml
 .browserslistrc
 .editorconfig
