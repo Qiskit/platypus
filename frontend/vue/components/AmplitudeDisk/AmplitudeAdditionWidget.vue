@@ -146,8 +146,8 @@ export default defineComponent({
     }
 
     &_result {
-      &_highlight-a ::v-deep(.amplitude-addition-disk__summands-arrows__A),
-      &_highlight-b ::v-deep(.amplitude-addition-disk__summands-arrows__B){
+      &_highlight-a :deep(.amplitude-addition-disk__summands-arrows__A),
+      &_highlight-b :deep(.amplitude-addition-disk__summands-arrows__B){
         --arrow-thickness: 2;
         opacity: 1;
         transition: opacity 0.2s ease-in;
