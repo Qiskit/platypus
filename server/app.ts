@@ -115,7 +115,7 @@ const initializeMathigon = () => {
     .listen()
 }
 
-createConnection({
+const connection = createConnection({
   type: 'postgres',
   url: process.env.TYPEORM_URL, // TODO: we need to check how we should manage environment variables
   ssl: { rejectUnauthorized: false },
@@ -125,8 +125,12 @@ createConnection({
   ],
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'production' ? ['error'] : ['warn', 'error']
-}).then(() => {
+})
+
+connection.then(() => {
   initializeMathigon()
 }).catch(error => console.log(error))
+
+export { connection }
 
 
