@@ -20,6 +20,10 @@
     <span class="amplitude-addition-widget__math-sign">=</span>
     <AmplitudeAdditionDiskWithValues
       class="amplitude-addition-widget__disk amplitude-addition-widget__disk_result"
+      :class="{
+        'amplitude-addition-widget__disk_result_highlight-a': highlightedA,
+        'amplitude-addition-widget__disk_result_highlight-b': highlightedB
+      }"
       :magnitude-a="internalAmplitudeA.magnitude"
       :phase-a="internalAmplitudeA.phase"
       :magnitude-b="internalAmplitudeB.magnitude"
@@ -65,19 +69,41 @@ export default defineComponent({
   data () {
     return {
       internalAmplitudeA: { phase: 30, magnitude: 1 },
-      internalAmplitudeB: { phase: 30, magnitude: 1 }
+      internalAmplitudeB: { phase: 30, magnitude: 1 },
+      highlightTimeoutA: -1,
+      highlightTimeoutB: -1,
+      highlightedA: false,
+      highlightedB: false
     }
   },
   mounted () {
     this.updateInternalAmplitudeA({ phase: this.phaseA, magnitude: this.magnitudeA } as Amplitude)
     this.updateInternalAmplitudeB({ phase: this.phaseB, magnitude: this.magnitudeB } as Amplitude)
+    this.highlightedA = false
+    this.highlightedB = false
   },
   methods: {
     updateInternalAmplitudeA (amplitude: Amplitude) {
+      if (this.highlightTimeoutA !== -1) {
+        clearTimeout(this.highlightTimeoutA)
+      }
+      this.highlightedA = true
+      this.highlightTimeoutA = setTimeout(this.removeHighlightA, 1000)
       this.internalAmplitudeA = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
     },
     updateInternalAmplitudeB (amplitude: Amplitude) {
+      if (this.highlightTimeoutB !== -1) {
+        clearTimeout(this.highlightTimeoutB)
+      }
+      this.highlightedB = true
+      this.highlightTimeoutB = setTimeout(this.removeHighlightB, 1000)
       this.internalAmplitudeB = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
+    },
+    removeHighlightA () {
+      this.highlightedA = false
+    },
+    removeHighlightB () {
+      this.highlightedB = false
     }
   }
 })
@@ -117,6 +143,15 @@ export default defineComponent({
   &__disk {
     @include mq($until: medium) {
       --display-direction: row;
+    }
+
+    &_result {
+      &_highlight-a ::v-deep(.amplitude-addition-disk__summands-arrows__A),
+      &_highlight-b ::v-deep(.amplitude-addition-disk__summands-arrows__B){
+        --arrow-thickness: 2;
+        opacity: 1;
+        transition: opacity 0.2s ease-in;
+      }
     }
   }
 }
