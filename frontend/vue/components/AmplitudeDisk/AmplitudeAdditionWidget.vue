@@ -70,8 +70,8 @@ export default defineComponent({
     return {
       internalAmplitudeA: { phase: 30, magnitude: 1 },
       internalAmplitudeB: { phase: 30, magnitude: 1 },
-      highlightTimeoutA: -1,
-      highlightTimeoutB: -1,
+      highlightTimeoutA: undefined as undefined | ReturnType<typeof setTimeout>,
+      highlightTimeoutB: undefined as undefined | ReturnType<typeof setTimeout>,
       highlightedA: false,
       highlightedB: false
     }
@@ -84,7 +84,7 @@ export default defineComponent({
   },
   methods: {
     updateInternalAmplitudeA (amplitude: Amplitude) {
-      if (this.highlightTimeoutA !== -1) {
+      if (this.highlightTimeoutA) {
         clearTimeout(this.highlightTimeoutA)
       }
       this.highlightedA = true
@@ -92,7 +92,7 @@ export default defineComponent({
       this.internalAmplitudeA = { phase: amplitude.phase, magnitude: Math.min(amplitude.magnitude, 1.1) }
     },
     updateInternalAmplitudeB (amplitude: Amplitude) {
-      if (this.highlightTimeoutB !== -1) {
+      if (this.highlightTimeoutB) {
         clearTimeout(this.highlightTimeoutB)
       }
       this.highlightedB = true
