@@ -66,9 +66,7 @@ jobs:
           ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
 
       - name: Determine Code Engine project
-        id: ce_project_name
-        env:
-          APP_NAME: ${{ env.DOCKER_IMAGE_NAME }}-${{ env.PR_TAG }}
+        id: ce_project_select
         run: |
           ibmcloud ce project select -n "$CODE_ENGINE_PROJECT"
 
