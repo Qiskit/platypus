@@ -65,6 +65,10 @@ jobs:
         run: |
           ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
 
+      - name: Prune older versions from IBM Registry
+        run: |
+          ibmcloud cr image-prune-untagged --restrict community-digital
+
       - name: Determine Code Engine project and app status
         id: ce_command_choice
         env:
