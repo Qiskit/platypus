@@ -21,7 +21,7 @@
       :value="Math.trunc(phase)"
       :min="0"
       :max="359"
-      :step="1"
+      :step="5"
       @onValueChange="phaseChange"
     />
     <div v-else class="amplitude-values__phase-state">
