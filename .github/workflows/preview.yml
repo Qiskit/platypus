@@ -67,6 +67,7 @@ jobs:
 
       - name: Prune older versions from IBM Registry
         run: |
+          ibmcloud cr login
           ibmcloud cr image-prune-untagged --restrict community-digital
 
       - name: Determine Code Engine project and app status
