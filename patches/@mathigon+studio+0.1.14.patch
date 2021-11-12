@@ -1,0 +1,120 @@
+diff --git a/node_modules/@mathigon/studio/build/markdown/mathjax.js b/node_modules/@mathigon/studio/build/markdown/mathjax.js
+index 93eae4d..e8da114 100644
+--- a/node_modules/@mathigon/studio/build/markdown/mathjax.js
++++ b/node_modules/@mathigon/studio/build/markdown/mathjax.js
+@@ -7,7 +7,7 @@
+ const path = require('path');
+ const entities = require('html-entities');
+ const mathjax = require('mathjax');
+-const {readFile, writeFile, warning} = require('../utilities');
++const {CONFIG, readFile, writeFile, warning} = require('../utilities');
+ 
+ const cacheFile = path.join(process.env.HOME, '/.mathjax-cache');
+ const mathJaxStore = JSON.parse(readFile(cacheFile, '{}'));
+@@ -17,9 +17,15 @@ const placeholders = {};
+ let placeholderCount = 0;
+ let promise = undefined;
+ 
++const tex2html = CONFIG.parser?.tex2html || false;
++
++function getId (code, isInline) {
++  return entities.decode(code) + (isInline || false) + (tex2html ? 'html' : '');
++}
++
+ 
+ module.exports.makeTexPlaceholder = function(code, isInline = false) {
+-  const id = entities.decode(code) + (isInline || false);
++  const id = getId(code, isInline);
+   if (id in mathJaxStore) return mathJaxStore[id];
+ 
+   const placeholder = `XEQUATIONX${placeholderCount++}XEQUATIONX`;
+@@ -28,7 +34,7 @@ module.exports.makeTexPlaceholder = function(code, isInline = false) {
+ };
+ 
+ async function texToSvg(code, isInline) {
+-  const id = entities.decode(code) + (isInline || false);
++  const id = getId(code, isInline);
+   if (mathJaxStore[id]) return mathJaxStore[id];
+ 
+   if (!promise) {
+@@ -56,10 +62,67 @@ async function texToSvg(code, isInline) {
+   return mathJaxStore[id] = output;
+ }
+ 
++async function texToHtml(code, isInline) {
++  const id = getId(code, isInline);
++  if (mathJaxStore[id]) return mathJaxStore[id];
++
++  if (!promise) {
++    promise = mathjax.init({
++      options: {
++        renderActions: {
++          // add the TEX string into the DOM node
++          addInputText: [200,
++            (doc) => {
++              for (const math of doc.math) MathJax.config.addInputText(math, doc);
++            },
++            (math, doc) => MathJax.config.addInputText(math, doc)
++          ]
++        }
++      },
++      addInputText(math, doc) {
++        const adaptor = doc.adaptor;
++        const text = adaptor.node('mjx-input-tex', {
++          'aria-hidden': true,
++          'style': 'display:none;'
++        }, [
++          adaptor.text(math.start.delim + math.math + math.end.delim)
++        ]);
++        adaptor.append(math.typesetRoot, text);
++      },
++      loader: {load: ['input/tex-full', 'output/chtml']},
++      // https://docs.mathjax.org/en/latest/options/output/chtml.html#the-configuration-block
++      chtml: {
++        adaptiveCSS: false,
++        fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/output/chtml/fonts/woff-v2'
++      }
++    });
++  }
++
++  let output = '';
++
++  try {
++    const MathJax = await promise;
++    const adaptor = MathJax.startup.adaptor;
++
++    const html = await MathJax.tex2chtml(code, {display: !isInline});
++    output = adaptor.outerHTML(html);
++  } catch (e) {
++    warning(`  MathJax Error: ${e.message} at "${code}"`);
++  }
++
++  storeChanged = true;
++  return mathJaxStore[id] = output;
++}
++
+ module.exports.fillTexPlaceholders = async function(doc) {
+   const matches = doc.match(/XEQUATIONX[0-9]+XEQUATIONX/g) || [];
+   for (const placeholder of matches) {
+-    const code = await texToSvg(...placeholders[placeholder]);
++    let code = '';
++    if (tex2html) {
++      code = await texToHtml(...placeholders[placeholder]);
++    } else {
++      code = await texToSvg(...placeholders[placeholder]);
++    }
+     doc = doc.replace(placeholder, code);
+   }
+   return doc;
+diff --git a/node_modules/@mathigon/studio/build/markdown/parser.js b/node_modules/@mathigon/studio/build/markdown/parser.js
+index b0a70cc..f98a4e5 100644
+--- a/node_modules/@mathigon/studio/build/markdown/parser.js
++++ b/node_modules/@mathigon/studio/build/markdown/parser.js
+@@ -111,6 +111,7 @@ async function parseStep(content, index, directory, courseId, locale = 'en') {
+   for (const $md of $$(body, '.md')) {
+     $md.classList.remove('md');
+     $md.innerHTML = marked($md.innerHTML, {renderer}).replace(/^<p>|<\/p>$/g, '');
++    $md.innerHTML = await fillTexPlaceholders($md.innerHTML);
+   }
+ 
+   // Add the [parent] attribute as class to all elements parents
