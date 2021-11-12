@@ -106,3 +106,15 @@ index 93eae4d..e8da114 100644
      doc = doc.replace(placeholder, code);
    }
    return doc;
+diff --git a/node_modules/@mathigon/studio/build/markdown/parser.js b/node_modules/@mathigon/studio/build/markdown/parser.js
+index b0a70cc..f98a4e5 100644
+--- a/node_modules/@mathigon/studio/build/markdown/parser.js
++++ b/node_modules/@mathigon/studio/build/markdown/parser.js
+@@ -111,6 +111,7 @@ async function parseStep(content, index, directory, courseId, locale = 'en') {
+   for (const $md of $$(body, '.md')) {
+     $md.classList.remove('md');
+     $md.innerHTML = marked($md.innerHTML, {renderer}).replace(/^<p>|<\/p>$/g, '');
++    $md.innerHTML = await fillTexPlaceholders($md.innerHTML);
+   }
+ 
+   // Add the [parent] attribute as class to all elements parents
