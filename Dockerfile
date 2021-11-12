@@ -5,6 +5,7 @@ FROM base AS builder
 WORKDIR /usr/app
 
 COPY package*.json ./
+COPY patches patches/
 RUN npm ci
 
 COPY converter/textbook-converter/requirements.txt converter/textbook-converter/
@@ -17,7 +18,6 @@ RUN python3 -m pip install -U pip \
 COPY converter converter/
 COPY frontend frontend/
 COPY notebooks notebooks/
-COPY patches patches/
 COPY translations translations/
 COPY config.yaml ./
 RUN npm run build
@@ -28,6 +28,7 @@ FROM base
 WORKDIR /usr/app
 
 COPY --from=builder /usr/app/package*.json ./
+COPY --from=builder /usr/app/patches patches/
 # npm ci --production is not working for some unknown reason
 RUN npm install --production
 COPY server server/
@@ -35,7 +36,6 @@ COPY --from=builder /usr/app/config.yaml ./
 COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
-COPY --from=builder /usr/app/patches patches/
 COPY --from=builder /usr/app/working working/
 COPY --from=builder /usr/app/translations translations/
 
