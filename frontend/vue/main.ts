@@ -22,6 +22,11 @@ import UniversalGlossary from './components/UtilityPanel/UniversalGlossary.vue'
 import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
+import AmplitudeDisk from './components/AmplitudeDisk/AmplitudeDisk.vue'
+import AmplitudeDiskWithValues from './components/AmplitudeDisk/AmplitudeDiskWithValues.vue'
+import AmplitudeAdditionDisk from './components/AmplitudeDisk/AmplitudeAdditionDisk.vue'
+import AmplitudeAdditionDiskWithValues from './components/AmplitudeDisk/AmplitudeAdditionDiskWithValues.vue'
+import AmplitudeAdditionWidget from './components/AmplitudeDisk/AmplitudeAdditionWidget.vue'
 
 declare global {
   interface Window {
@@ -59,7 +64,12 @@ const components: any = {
   EmptyPanel,
   MiniComposer,
   Binary,
-  BinaryTile
+  BinaryTile,
+  AmplitudeDisk,
+  AmplitudeDiskWithValues,
+  AmplitudeAdditionDisk,
+  AmplitudeAdditionDiskWithValues,
+  AmplitudeAdditionWidget
 }
 
 Object.keys(components).forEach((c) => {

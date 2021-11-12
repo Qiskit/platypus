@@ -168,24 +168,27 @@
     - title: Lab 1. Quantum Circuits
       id: lab-1-quantum-circuits
       url: /ch-labs/Lab01_QuantumCircuits
-    - title: Lab 2. Quantum Measurement
-      id: lab-2-quantum-measurements
-      url: /ch-labs/Lab02_QuantumMeasurement
-    - title: Lab 3. Accuracy of Quantum Phase Estimation
-      id: lab-3-accuracy-of-quantum-phase-estimation
-      url: /ch-labs/Lab03_AccuracyQPE
-    - title: Lab 4. Iterative Quantum Phase Estimation
-      id: lab-4-iterative-phase-estimation-algorithm
-      url: /ch-labs/Lab04_IterativePhaseEstimation
-    - title: Lab 5. Scalable Shor’s Algorithm
-      id: lab-5-scalable-shors-algorithm
-      url: /ch-labs/Lab05_Scalable_Shor_Algorithm
-    - title: Lab 6. Grover's search with an unknown number of solutions
-      id: lab-6-grovers-search-with-an-unknown-number-of-solutions
-      url: /ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions
-    - title: Lab 7. Quantum Simulation as a Search Algorithm
-      id: lab-7-quantum-simulation-as-a-search-algorithm
-      url: /ch-labs/Lab07_QuantumSimulationSearchAlgorithm
+    - title: Lab 2. Single Qubit Gates
+      id: lab-2-single-quibit-gates
+      url: /ch-labs/Lab02_Single_Qubit_Gates
+    - title: Lab 3. Quantum Measurement
+      id: lab-3-quantum-measurements
+      url: /ch-labs/Lab03_QuantumMeasurement
+    - title: Lab 4. Accuracy of Quantum Phase Estimation
+      id: lab-4-accuracy-of-quantum-phase-estimation
+      url: /ch-labs/Lab04_AccuracyQPE
+    - title: Lab 5. Iterative Quantum Phase Estimation
+      id: lab-5-iterative-phase-estimation-algorithm
+      url: /ch-labs/Lab05_IterativePhaseEstimation
+    - title: Lab 6. Scalable Shor’s Algorithm
+      id: lab-6-scalable-shors-algorithm
+      url: /ch-labs/Lab06_Scalable_Shor_Algorithm
+    - title: Lab 7. Grover's search with an unknown number of solutions
+      id: lab-7-grovers-search-with-an-unknown-number-of-solutions
+      url: /ch-labs/Lab07_Grover_search_with_an_unknown_number_of_solutions
+    - title: Lab 8. Quantum Simulation as a Search Algorithm
+      id: lab-8-quantum-simulation-as-a-search-algorithm
+      url: /ch-labs/Lab08_QuantumSimulationSearchAlgorithm
 
 
 - title: Appendix
