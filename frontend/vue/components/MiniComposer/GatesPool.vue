@@ -8,7 +8,7 @@
     @change="log"
   >
     <template #item="{ element }">
-      <Gate class="gates-pool__gate" :name="`${element.name}`" :rotation="element.rotation" />
+      <Gate class="gates-pool__gate" :name="element.name" :rotation="element.rotation" />
     </template>
   </draggable>
 </template>
