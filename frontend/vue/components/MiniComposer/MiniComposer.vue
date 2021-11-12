@@ -193,8 +193,11 @@ export default class MiniComposer extends Vue.with(Props) {
     return text.split(' ')
       .filter(text => text !== '')
       .map<ComposerGate>((gateText: string) => {
-        if (Object.values(GateName).some(gate => gate === gateText)) {
-          return { name: gateText as GateName, id: this.lastGateId++ }
+        if (Object.values(GateName).some(gate => gateText.startsWith(gate))) {
+          const parts = gateText.split('(')
+          const gateName = parts[0]
+          const rotation = parts[1]?.split(')')[0]
+          return { name: gateName as GateName, id: this.lastGateId++, rotation }
         }
         return { name: GateName.UNKNOWN, id: this.lastGateId++ }
       })
