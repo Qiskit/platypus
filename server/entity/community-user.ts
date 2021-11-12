@@ -36,8 +36,12 @@ export class CommunityUser extends SoftTable {
     @Column({ default: false })
     marketingConsent!: boolean;
 
-    @OneToOne(() => CommunityUserProgression)
+    @OneToOne(
+        () => CommunityUserProgression, 
+        communityUserProgression => communityUserProgression.communityUserProgressionID, 
+        { cascade: true }
+    )
     @JoinColumn()
-    communityUserProgressionID?: CommunityUserProgression;
+    communityUserProgression?: CommunityUserProgression;
 }
 

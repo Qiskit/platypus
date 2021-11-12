@@ -4,8 +4,8 @@ import {
   APIResponse, Course, Section, SectionProgressData
 } from '@mathigon/studio/server/interfaces'
 
-import { connection } from './app'
-import { CommunityUser, CommunityUserProgression, Progression } from "./entity/"
+import { CommunityUser } from "./entity/"
+import { getRepository } from 'typeorm'
 
 // const STORAGE_KEY = 'qiskit/textbook/course'
 // const merge = function (target, source) {
@@ -19,88 +19,80 @@ import { CommunityUser, CommunityUserProgression, Progression } from "./entity/"
 //   return target
 // }
 
-const setProgressData = function (
+const setProgressData = async function (
   req: Request, course: Course, section: Section
-): APIResponse<void>|undefined {
+): Promise<APIResponse<void>|undefined> {
   
-  let out: APIResponse<void> = { status: 400 }
+  let res: APIResponse<void> = { status: 400 }
 
-  connection
-    .then(async connection => {
-      // get user
-      let user = await connection.manager.findOne(CommunityUser, req.params.communityUserID)
-      
-      // get user's progress
-      let userProgress = await connection.manager.findOne(CommunityUserProgression, user?.communityUserProgressionID)
+  try {
+    const communityUserRepository = getRepository(CommunityUser)
+    const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
+    
+    // TODO: the logic to store the new progress needs to be improved
+    // TODO: check if the user exists to avoid errors
+    const progression = user?.communityUserProgression?.progression
+    progression![course.id][section.id] = req.body.data
 
-      // change user's progress, either by adding the new section or by updating it
-      const progresssion = userProgress?.progression;
-      progresssion![course.id][section.id] = req.body.data
-      connection.manager.save(userProgress)
+    // TODO: check if the user exists to avoid errors
+    await communityUserRepository.save(user!)
+    
+    res.status = 200
+  } catch(error) {
+    res.status = 500
+    res.error = error as Error
+  }
 
-      out.status = 200
-    })
-    .catch(error => {
-        out.status = 500
-        out.error = error
-    });
-
-  return out
+  return res
 }
 
-const getProgressData = function (
+const getProgressData = async function (
   req: Request, course: Course, section: Section
-): APIResponse<SectionProgressData>|undefined {
+): Promise<APIResponse<SectionProgressData>|undefined> {
 
-  let out: APIResponse<SectionProgressData> = { status: 400 }
+  const res: APIResponse<SectionProgressData> = { status: 400 }
 
-  connection
-    .then(async connection => {
-      // get user
-      let user = await connection.manager.findOne(CommunityUser, req.params.communityUserID)
-      
-      // get user's progress
-      let userProgress = await connection.manager.findOne(CommunityUserProgression, user?.communityUserProgressionID)
+  try {
+  const communityUserRepository = getRepository(CommunityUser)
+  const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
+  
+  // TODO: check if the user exists to avoid errors
+  const progression = user?.communityUserProgression?.progression
 
-      const progresssion: Progression = userProgress?.progression!
+  res.status = 200
+  res.data = progression ? progression[course.id][section.id] : undefined
+  } catch(error) {
+    res.status = 500
+    res.error = error as Error
+  }
 
-      out.status = 200
-      out.data = progresssion[course.id][section.id]
-    })
-    .catch(error => {
-        out.status = 500
-        out.error = error
-    });
-
-  return out
+  return res
 }
 
-const clearProgressData = function (
+const clearProgressData = async function (
   req: Request, course: Course
-): APIResponse<void>|undefined {
+): Promise<APIResponse<void>|undefined> {
 
-  let out: APIResponse<void> = { status: 400 }
+  const res: APIResponse<void> = { status: 400 }
 
-  connection
-    .then(async connection => {
-      // get user
-      let user = await connection.manager.findOne(CommunityUser, req.params.communityUserID)
-      
-      // get user's progress
-      let userProgress = await connection.manager.findOne(CommunityUserProgression, user?.communityUserProgressionID)
+  try {
+    const communityUserRepository = getRepository(CommunityUser)
+    const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
+    
+    // TODO: the logic to store the new progress needs to be improved
+    // TODO: check if the user exists to avoid errors
+    user!.communityUserProgression!.progression![course.id] = {}
+    
+    // TODO: check if the user exists to avoid errors
+    await communityUserRepository.save(user!)
+    
+    res.status = 200
+  } catch(error) {
+    res.status = 500
+    res.error = error as Error
+  }
 
-      // set the progress for this course to nothing
-      userProgress!.progression![course.id] = {}
-      connection.manager.save(userProgress)
-        
-      out.status = 200
-    })
-    .catch(error => {
-        out.status = 500
-        out.error = error
-    });
-
-  return out
+  return res
 }
 
 // const sendFeedback = function (

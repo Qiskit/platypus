@@ -130,7 +130,3 @@ const connection = createConnection({
 connection.then(() => {
   initializeMathigon()
 }).catch(error => console.log(error))
-
-export { connection }
-
-
