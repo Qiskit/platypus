@@ -17,6 +17,7 @@ RUN python3 -m pip install -U pip \
 COPY converter converter/
 COPY frontend frontend/
 COPY notebooks notebooks/
+COPY patches patches/
 COPY translations translations/
 COPY config.yaml ./
 RUN npm run build
@@ -34,6 +35,7 @@ COPY --from=builder /usr/app/config.yaml ./
 COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
+COPY --from=builder /usr/app/patches patches/
 COPY --from=builder /usr/app/working working/
 COPY --from=builder /usr/app/translations translations/
 
