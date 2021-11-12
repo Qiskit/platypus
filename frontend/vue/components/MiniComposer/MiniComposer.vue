@@ -260,7 +260,7 @@ export default class MiniComposer extends Vue.with(Props) {
       const qubitLineGoal = currentCircuitGoal[lineIdx]
       const hasSameGatesCount = qubitLineState.length === qubitLineGoal.length
 
-      const isLineCorrect = hasSameGatesCount && qubitLineState.every((gate, gateIdx) => gate.name === qubitLineGoal[gateIdx]?.name)
+      const isLineCorrect = hasSameGatesCount && qubitLineState.every((gate, gateIdx) => qubitLineGoal[gateIdx] && this.areSameGate(gate, qubitLineGoal[gateIdx]))
       return isLineCorrect
     })
 
@@ -271,6 +271,11 @@ export default class MiniComposer extends Vue.with(Props) {
 
     this.exerciseSteps[this.currentStepIdx].isCompleted = true
     this.currentStepData = this.cloneCurrentStepData()
+  }
+
+  areSameGate (gateA: ComposerGate, gateB: ComposerGate) {
+    return gateA.name === gateB.name &&
+           gateA.rotation === gateB.rotation
   }
 
   areAllStepsCompleted () {
