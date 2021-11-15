@@ -1,11 +1,5 @@
 import { Config, SectionProgressData } from '@mathigon/studio/server/interfaces'
 
-export interface Progression {
-  [key: string]: { // course
-      [key: string]: SectionProgressData // section
-  };
-}
-
 export interface AnalyticsEntry {
   url: string,
   key: string
@@ -47,6 +41,12 @@ export interface NotationsMap {
 
 export interface NotationsLocales {
   [x: string]: NotationsMap
+}
+
+export interface Progression {
+  [key: string]: { // course
+      [key: string]: SectionProgressData // section
+  };
 }
 
 export interface Subsection {

@@ -1,11 +1,11 @@
-import { Request } from 'express'
-
 import {
   APIResponse, Course, Section, SectionProgressData
 } from '@mathigon/studio/server/interfaces'
-
-import { CommunityUser } from "./entity/"
+import { Request } from 'express'
 import { getRepository } from 'typeorm'
+
+import { CommunityUser } from './entity/'
+import { HttpError } from './http-error'
 
 // const STORAGE_KEY = 'qiskit/textbook/course'
 // const merge = function (target, source) {
@@ -29,18 +29,29 @@ const setProgressData = async function (
     const communityUserRepository = getRepository(CommunityUser)
     const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
     
+    if(!user) {
+      throw new HttpError({
+        code: 404, 
+        message: `The user ${req.params.communityUserID} does not exist`
+      })
+    }
+
     // TODO: the logic to store the new progress needs to be improved
-    // TODO: check if the user exists to avoid errors
-    const progression = user?.communityUserProgression?.progression
+    const progression = user.communityUserProgression?.progression
     progression![course.id][section.id] = req.body.data
 
     // TODO: check if the user exists to avoid errors
     await communityUserRepository.save(user!)
     
     res.status = 200
-  } catch(error) {
-    res.status = 500
-    res.error = error as Error
+  } catch(error: any) {
+    if(error instanceof HttpError) {
+      res.status = error.code
+      res.message = error.message
+    } else {
+      res.status = 500
+      res.error = error.message
+    }
   }
 
   return res
