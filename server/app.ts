@@ -2,19 +2,21 @@
 // Project Platypus
 // =============================================================================
 
-import { Request } from 'express';
+import { Request } from 'express'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities'
 
-import { LOCALES } from '@mathigon/studio/server/i18n'
+import { LOCALES, translate } from '@mathigon/studio/server/i18n'
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
-  findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
+  findNextSection, findPrevSection, getSectionIndex, isLearningPath,
+  updateGlossary, loadLocaleRawFile, tocFilterByType
 } from './utilities'
+import { TocCourse } from './interfaces'
 import * as storageApi from './storage'
 
-import { translate } from '@mathigon/studio/server/i18n'
+const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
 import 'reflect-metadata'
 
@@ -79,6 +81,36 @@ const initializeMathigon = () => {
       })
       next()
     })
+    .get('/courseList', async (req, res) => {
+      res.json(tocFilterByType())
+    })
+    .get('/courseList/:type', async (req, res) => {
+      let type = req.params.type || ''
+      if (type === 'none') {
+        type = ''
+      }
+      const courses: TocCourse[] = tocFilterByType(type)
+      res.json(courses)
+    })
+    .get('/account', (req, res) => {
+      const lang = req.locale.id || 'en'
+      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+      const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+      const userMockData = {
+        name: 'John Doe',
+        role: 'Administrator'
+      }
+
+      res.render('userAccount', {
+        config: CONFIG,
+        userData: userMockData,
+        lang,
+        privacyPolicyMD,
+        translationsJSON
+      })
+    })
     .get('/summer-school/:course', (req, res, next) => {
       // redirect to first lecture when no lecture specified
       const course = getCourse(req.params.course, req.locale.id)
@@ -109,6 +141,26 @@ const initializeMathigon = () => {
       } else {
         res.render('textbook', courseData)
       }
+    })
+    .get('/course/:course/:section', async (req, res, next) => {
+      const courseData = await getCourseData(req)
+  
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
+    .get('/signin', async (req, res) => {
+      const lang = req.locale.id || 'en'
+      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+  
+      res.render('signIn', {
+        textbookHome: TEXTBOOK_HOME,
+        config: CONFIG,
+        lang,
+        translationsJSON
+      })
     })
     .course(storageApi)
     .errors()

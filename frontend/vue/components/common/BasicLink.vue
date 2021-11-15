@@ -1,7 +1,7 @@
 <template>
   <component
     :is="isNuxtLink ? 'nuxt-link' : 'a'"
-    :href="isAnchor && url"
+    :href="!isNuxtLink && url"
     :to="isNuxtLink && url"
     :style="hasLink && 'cursor:pointer'"
     :rel="isExternal && 'noopener'"
@@ -24,6 +24,8 @@ class Props {
 }
 
 export default class BasicLink extends Vue.with(Props) {
+  [x: string]: any
+
   static isExternal (url: string): boolean {
     return !!url && url.startsWith('http')
   }
@@ -53,7 +55,7 @@ export default class BasicLink extends Vue.with(Props) {
   }
 
   get isNuxtLink (): boolean {
-    return !this.isAnchor
+    return this.$nuxt && !this.isAnchor
   }
 }
 </script>
