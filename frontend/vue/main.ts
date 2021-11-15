@@ -24,6 +24,11 @@ import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
 import SignIn from './components/SignIn/SignIn.vue'
 import UserAccountLayout from './components/UserAccount/UserAccountLayout.vue'
+import AmplitudeDisk from './components/AmplitudeDisk/AmplitudeDisk.vue'
+import AmplitudeDiskWithValues from './components/AmplitudeDisk/AmplitudeDiskWithValues.vue'
+import AmplitudeAdditionDisk from './components/AmplitudeDisk/AmplitudeAdditionDisk.vue'
+import AmplitudeAdditionDiskWithValues from './components/AmplitudeDisk/AmplitudeAdditionDiskWithValues.vue'
+import AmplitudeAdditionWidget from './components/AmplitudeDisk/AmplitudeAdditionWidget.vue'
 
 declare global {
   interface Window {
@@ -63,7 +68,12 @@ const components: any = {
   Binary,
   BinaryTile,
   SignIn,
-  UserAccountLayout
+  UserAccountLayout,
+  AmplitudeDisk,
+  AmplitudeDiskWithValues,
+  AmplitudeAdditionDisk,
+  AmplitudeAdditionDiskWithValues,
+  AmplitudeAdditionWidget
 }
 
 Object.keys(components).forEach((c) => {

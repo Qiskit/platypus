@@ -5,6 +5,7 @@ FROM base AS builder
 WORKDIR /usr/app
 
 COPY package*.json ./
+COPY patches patches/
 RUN npm ci
 
 COPY converter/textbook-converter/requirements.txt converter/textbook-converter/
@@ -27,6 +28,7 @@ FROM base
 WORKDIR /usr/app
 
 COPY --from=builder /usr/app/package*.json ./
+COPY --from=builder /usr/app/patches patches/
 # npm ci --production is not working for some unknown reason
 RUN npm install --production
 COPY server server/
