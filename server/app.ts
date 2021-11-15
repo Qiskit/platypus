@@ -69,6 +69,12 @@ new MathigonStudioApp()
     const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
     res.json(translations)
   })
+  .use(async (req, res, next) => {
+    res.locals.availableLocales = CONFIG.locales.map((l) => {
+      return LOCALES[l]
+    })
+    next()
+  })
   .get('/courseList', async (req, res) => {
     res.json(tocFilterByType())
   })
@@ -79,16 +85,6 @@ new MathigonStudioApp()
     }
     const courses: TocCourse[] = tocFilterByType(type)
     res.json(courses)
-  })
-  .use(async (req, res, next) => {
-    res.locals.availableLocales = CONFIG.locales.map((l) => {
-      return LOCALES[l]
-    })
-    next()
-  })
-  .get('/locales/:locale', async (req, res) => {
-    const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
-    res.json(translations)
   })
   .get('/account', (req, res) => {
     const lang = req.locale.id || 'en'
