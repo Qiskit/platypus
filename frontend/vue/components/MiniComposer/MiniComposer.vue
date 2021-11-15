@@ -30,6 +30,7 @@
       />
     </div>
     <ProbablityChart
+      v-if="currentProbabilities.length > 0"
       class="mini-composer__probability-chart"
       :probabilities="currentProbabilities"
     />
@@ -305,8 +306,9 @@ export default class MiniComposer extends Vue.with(Props) {
 
 .mini-composer {
   display: grid;
+  min-height: 36rem;
   grid-template-columns: 320px 1fr 160px;
-  grid-template-rows: auto;
+  grid-template-rows: min-content min-content min-content auto min-content;
   grid-template-areas:
     "text text text"
     "gates lesson lesson"
