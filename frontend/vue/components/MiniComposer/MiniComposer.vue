@@ -194,8 +194,11 @@ export default class MiniComposer extends Vue.with(Props) {
     return text.split(' ')
       .filter(text => text !== '')
       .map<ComposerGate>((gateText: string) => {
-        if (Object.values(GateName).some(gate => gate === gateText)) {
-          return { name: gateText as GateName, id: this.lastGateId++ }
+        if (Object.values(GateName).some(gate => gateText.startsWith(gate))) {
+          const parts = gateText.split('(')
+          const gateName = parts[0]
+          const rotation = parts[1]?.split(')')[0]
+          return { name: gateName as GateName, id: this.lastGateId++, rotation }
         }
         return { name: GateName.UNKNOWN, id: this.lastGateId++ }
       })
@@ -258,7 +261,7 @@ export default class MiniComposer extends Vue.with(Props) {
       const qubitLineGoal = currentCircuitGoal[lineIdx]
       const hasSameGatesCount = qubitLineState.length === qubitLineGoal.length
 
-      const isLineCorrect = hasSameGatesCount && qubitLineState.every((gate, gateIdx) => gate.name === qubitLineGoal[gateIdx]?.name)
+      const isLineCorrect = hasSameGatesCount && qubitLineState.every((gate, gateIdx) => qubitLineGoal[gateIdx] && this.areSameGate(gate, qubitLineGoal[gateIdx]))
       return isLineCorrect
     })
 
@@ -269,6 +272,11 @@ export default class MiniComposer extends Vue.with(Props) {
 
     this.exerciseSteps[this.currentStepIdx].isCompleted = true
     this.currentStepData = this.cloneCurrentStepData()
+  }
+
+  areSameGate (gateA: ComposerGate, gateB: ComposerGate) {
+    return gateA.name === gateB.name &&
+           gateA.rotation === gateB.rotation
   }
 
   areAllStepsCompleted () {
