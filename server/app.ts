@@ -142,15 +142,6 @@ const initializeMathigon = () => {
         res.render('textbook', courseData)
       }
     })
-    .get('/course/:course/:section', async (req, res, next) => {
-      const courseData = await getCourseData(req)
-  
-      if (!courseData) {
-        return next()
-      } else {
-        res.render('textbook', courseData)
-      }
-    })
     .get('/signin', async (req, res) => {
       const lang = req.locale.id || 'en'
       const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
