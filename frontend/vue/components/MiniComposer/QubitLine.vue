@@ -13,7 +13,8 @@
         <template #item="{ element }">
           <Gate
             class="qubit-line__slot__gate"
-            :name="`${element.name}`"
+            :name="element.name"
+            :rotation="element.rotation"
           />
         </template>
       </draggable>
