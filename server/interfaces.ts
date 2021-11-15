@@ -1,4 +1,10 @@
-import { Config } from '@mathigon/studio/server/interfaces'
+import { Config, SectionProgressData } from '@mathigon/studio/server/interfaces'
+
+export interface Progression {
+  [key: string]: { // course
+      [key: string]: SectionProgressData // section
+  };
+}
 
 export interface AnalyticsEntry {
   url: string,
