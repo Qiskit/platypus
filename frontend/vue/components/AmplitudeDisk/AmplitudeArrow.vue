@@ -98,9 +98,10 @@ export default defineComponent({
   &__line {
     position: absolute;
     width: calc(100% - 5px);
-    height: 1px;
-
+    height: calc(var(--arrow-thickness, 1) * 1px);
+    top: calc(var(--arrow-thickness, 1) * -0.5px);
     background-color: $block-border-color;
+    transition: all 0.2s ease-in;
   }
   &__head {
     position: absolute;
@@ -114,7 +115,7 @@ export default defineComponent({
       content: "";
       display: block;
       position: absolute;
-      transform: translate(0%, -2px);
+      transform: translate(0%, -2.5px);
       top: 50%;
       right: 50%;
       width: 0;
