@@ -67,8 +67,14 @@ const getProgressData = async function (
   const communityUserRepository = getRepository(CommunityUser)
   const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
   
-  // TODO: check if the user exists to avoid errors
-  const progression = user?.communityUserProgression?.progression
+  if(!user) {
+    throw new HttpError({
+      code: 404, 
+      message: `The user ${req.params.communityUserID} does not exist`
+    })
+  }
+
+  const progression = user.communityUserProgression?.progression
 
   res.status = 200
   res.data = progression ? progression[course.id][section.id] : undefined
@@ -90,9 +96,14 @@ const clearProgressData = async function (
     const communityUserRepository = getRepository(CommunityUser)
     const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
     
+    if(!user) {
+      throw new HttpError({
+        code: 404, 
+        message: `The user ${req.params.communityUserID} does not exist`
+      })
+    }
     // TODO: the logic to store the new progress needs to be improved
-    // TODO: check if the user exists to avoid errors
-    user!.communityUserProgression!.progression![course.id] = {}
+    user.communityUserProgression!.progression![course.id] = {}
     
     // TODO: check if the user exists to avoid errors
     await communityUserRepository.save(user!)
