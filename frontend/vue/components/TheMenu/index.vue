@@ -98,7 +98,7 @@
 import { Options, mixins } from 'vue-class-component'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
 import Close20 from '@carbon/icons-vue/lib/close/20'
-import { ThemeToggle as QiskitThemeToggle } from '@qiskit-community/qiskit-vue'
+import { QiskitThemeToggle } from '@qiskit-community/qiskit-vue'
 import MenuMixin from '../../mixins/menu'
 import AppLogo from '../common/AppLogo.vue'
 import AppLink from '../common/AppLink.vue'
