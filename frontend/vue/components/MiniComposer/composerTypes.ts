@@ -3,6 +3,7 @@ import { ProbabilityState } from './ProbablityChart.vue'
 
 export interface ComposerGate {
   name: GateName
+  rotation?: string
   id: number
 }
 
