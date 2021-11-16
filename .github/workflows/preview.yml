@@ -49,7 +49,7 @@ jobs:
           ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
 
       - name: Remove previous Docker image (if exists)
-        id: remove_existing_image
+        id: remove_previous_image
         env:
           DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
         run: |
