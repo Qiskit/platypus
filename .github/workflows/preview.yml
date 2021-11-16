@@ -43,6 +43,18 @@ jobs:
           username: iamapikey
           password: ${{ env.IBMCLOUD_API_KEY }}
 
+      - name: Remove previous Docker image (if exists)
+        id: remove_existing_image
+        env:
+          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+        run: |
+          ibmcloud cr region-set global
+          if ibmcloud cr image-list | grep "${{ env.DOCKER_IMAGE_NAME }}" | grep "${{ env.PR_TAG }}" ; then
+            ibmcloud cr image-rm "$DOCKER_IMAGE_TAG"
+          else
+            echo "no image to remove"
+          fi
+
       - name: Build and push to IBM registry
         uses: docker/build-push-action@v2.6.1
         with:
@@ -64,11 +76,6 @@ jobs:
       - name: Authenticate with IBM Cloud CLI
         run: |
           ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
-
-      - name: Prune older versions from IBM Registry
-        run: |
-          ibmcloud cr login
-          ibmcloud cr image-prune-untagged --restrict community-digital
 
       - name: Determine Code Engine project and app status
         id: ce_command_choice
