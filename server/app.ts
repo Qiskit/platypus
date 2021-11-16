@@ -172,4 +172,5 @@ const connection = createConnection({
 
 connection.then(() => {
   initializeMathigon()
+  storageApi.clearProgressData({params: {communityUserID: '5255b3b8-98cd-4e32-86fd-f43c6bd01335'}} as any, {id: 'introduction'} as any)
 }).catch(error => console.log(error))

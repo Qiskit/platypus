@@ -4,7 +4,7 @@ import {
 import { Request } from 'express'
 import { getRepository } from 'typeorm'
 
-import { CommunityUser } from './entity/'
+import { CommunityUser, CommunityUserProgression } from './entity/'
 import { HttpError } from './http-error'
 
 // const STORAGE_KEY = 'qiskit/textbook/course'
@@ -27,8 +27,9 @@ const setProgressData = async function (
 
   try {
     const communityUserRepository = getRepository(CommunityUser)
+    const communityUserProgressionRepository = getRepository(CommunityUserProgression)
     const user = await communityUserRepository.findOne(req.params.communityUserID, {relations:['communityUserProgression']})
-    
+      
     if(!user) {
       throw new HttpError({
         code: 404, 
@@ -36,15 +37,24 @@ const setProgressData = async function (
       })
     }
 
-    // TODO: the logic to store the new progress needs to be improved
-    const progression = user.communityUserProgression?.progression
-    progression![course.id][section.id] = req.body.data
+    const progression = user.communityUserProgression?.progression || {}
+    progression[course.id] = {
+      [section.id]: req.body.data
+    }
 
-    // TODO: check if the user exists to avoid errors
-    await communityUserRepository.save(user!)
+    if(!user.communityUserProgression) {
+      const communityUserProgression = await communityUserProgressionRepository.create({progression})
+      user.communityUserProgression = communityUserProgression
+    } else {
+      user.communityUserProgression.progression = progression
+    }
+
+    await communityUserRepository.save(user)
     
     res.status = 200
   } catch(error: any) {
+    // TODO: we should a logger probably better here
+    console.error(error)
     if(error instanceof HttpError) {
       res.status = error.code
       res.message = error.message
@@ -74,13 +84,18 @@ const getProgressData = async function (
     })
   }
 
-  const progression = user.communityUserProgression?.progression
-
   res.status = 200
-  res.data = progression ? progression[course.id][section.id] : undefined
-  } catch(error) {
-    res.status = 500
-    res.error = error as Error
+  res.data = user.communityUserProgression?.progression?.[course.id]?.[section.id]
+  } catch(error: any) {
+    // TODO: we should a logger probably better here
+    console.error(error)
+    if(error instanceof HttpError) {
+      res.status = error.code
+      res.message = error.message
+    } else {
+      res.status = 500
+      res.error = error.message
+    }
   }
 
   return res
@@ -102,16 +117,25 @@ const clearProgressData = async function (
         message: `The user ${req.params.communityUserID} does not exist`
       })
     }
-    // TODO: the logic to store the new progress needs to be improved
-    user.communityUserProgression!.progression![course.id] = {}
-    
-    // TODO: check if the user exists to avoid errors
-    await communityUserRepository.save(user!)
-    
+
+    // Note: the reset only happens when the course exists
+    const courseProgression = user.communityUserProgression?.progression?.[course.id]
+    if(courseProgression) {
+      user.communityUserProgression!.progression![course.id] = {}
+      await communityUserRepository.save(user)
+    }
+
     res.status = 200
-  } catch(error) {
-    res.status = 500
-    res.error = error as Error
+  } catch(error: any) {
+    // TODO: we should a logger probably better here
+    console.error(error)
+    if(error instanceof HttpError) {
+      res.status = error.code
+      res.message = error.message
+    } else {
+      res.status = 500
+      res.error = error.message
+    }
   }
 
   return res
