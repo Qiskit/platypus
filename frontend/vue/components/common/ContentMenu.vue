@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component'
-import { MegaMenuDropdown as QiskitMegaMenuDropdown } from '@qiskit-community/qiskit-vue'
+import { QiskitMegaMenuDropdown } from '@qiskit-community/qiskit-vue'
 import { TEXTBOOK_DEMO_MEGA_MENU } from '../constants/megaMenuLinks'
 
 @Options({

@@ -1,6 +1,10 @@
 # platypus
 
-This repsoitory is the home of the [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/) content pages.
+This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/).
+
+The previous version of the Qiskit Textbook textbook can be found [here](https://github.com/qiskit-community/qiskit-textbook).
+
+The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
 
 ## Tools & technologies
 
@@ -44,7 +48,7 @@ After the application has started, access the site at: http://localhost:8080/
 
 
 ## Contribution Guidelines
-If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) abd code of conduct(CODE_OF_CONDUCT.md)
+If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md)
 
 
 ## License

@@ -18,5 +18,9 @@ describe('All pages', () => {
     it(`should load ${url}`, () => {
       cy.visit(url)
     })
+
+    it(`mathjax doesn't generate an error in ${url}`, () => {
+      cy.get('mjx-merror').should('not.exist')
+    })
   })
 })

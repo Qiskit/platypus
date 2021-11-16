@@ -22,7 +22,7 @@ html(lang=course.locale dir=dir)
           div.c-textbook__content#textbook_content
             div.jupyter-page
               #page-info
-                #page-title= section.title
+                #page-title !{section.title}
               .reveal-banner
                 | #{__('Reading time')}: ~#{section.duration} min
                 .complete

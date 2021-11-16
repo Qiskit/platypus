@@ -99,16 +99,6 @@ li.c-sidebar__chapter > a {
   }
 }
 
-a.c-sidebar__entry {
-  &:visited {
-    color: var(--qiskit--color-text-title);
-  }
-  &:hover {
-    background: initial;
-    color: var(--sidebar--link-color--active);
-  }
-}
-
 .c-sidebar__entry--active {
   &.c-sidebar__entry--active {
     color: var(--sidebar--link-color--active);

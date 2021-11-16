@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 from sys import argv
 
 
-with open('README.md') as f:
-  readme = f.read()
+with open('README.md', encoding='utf-8') as f:
+    readme = f.read()
 
 
 requirements = [
