@@ -359,3 +359,6 @@
     - title: Training quantum circuits
       id: training-quantum-circuits
       url: /quantum-machine-learning/training
+    - title: Project
+      id: project
+      url: /quantum-machine-learning/project
