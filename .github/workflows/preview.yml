@@ -36,6 +36,30 @@ jobs:
           auto_inactive: true
           ref: ${{ github.event.pull_request.head.ref }}
 
+      - name: Setup IBM Cloud CLI
+        run: |
+          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
+          ibmcloud --version
+          ibmcloud config --check-version=false
+          ibmcloud plugin install -f code-engine
+          ibmcloud plugin install -f container-registry
+
+      - name: Authenticate with IBM Cloud CLI
+        run: |
+          ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
+
+      - name: Remove previous Docker image (if exists)
+        id: remove_existing_image
+        env:
+          DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
+        run: |
+          ibmcloud cr region-set global
+          if ibmcloud cr image-list | grep "${{ env.DOCKER_IMAGE_NAME }}" | grep "${{ env.PR_TAG }}" ; then
+            ibmcloud cr image-rm "$DOCKER_IMAGE_TAG"
+          else
+            echo "no image to remove"
+          fi
+
       - name: Log-in into IBM Container Registry
         uses: docker/login-action@v1
         with:
@@ -52,18 +76,6 @@ jobs:
           cache-to: type=inline
         env:
           DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
-
-      - name: Setup IBM Cloud CLI
-        run: |
-          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
-          ibmcloud --version
-          ibmcloud config --check-version=false
-          ibmcloud plugin install -f code-engine
-          ibmcloud plugin install -f container-registry
-
-      - name: Authenticate with IBM Cloud CLI
-        run: |
-          ibmcloud login -g "$IBMCLOUD_RESOURCE_GROUP" -r "$IBMCLOUD_REGION" -c "$IBMCLOUD_ACCOUNT" --apikey $IBMCLOUD_API_KEY
 
       - name: Determine Code Engine project and app status
         id: ce_command_choice
