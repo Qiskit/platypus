@@ -63,3 +63,13 @@ analytics:
 
 parser:
   tex2html: true
+
+accounts:
+  enabled: true
+  oAuth:
+    google:
+      clientId: ''
+      clientSecret: ''
+    ibm:
+      clientId: ''
+      clientSecret: ''
