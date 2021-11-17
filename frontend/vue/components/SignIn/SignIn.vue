@@ -26,7 +26,11 @@
           :url="authenticationUrl"
         />
         <div class="sign-in__icons">
-          <LogoGoogle32 class="sign-in__icons__item" />
+          <BasicLink
+            url="/auth/google"
+          >
+            <LogoGoogle32 class="sign-in__icons__item" />
+          </BasicLink>
           <LogoGitHub32 class="sign-in__icons__item" />
           <LogoLinkedIn32 class="sign-in__icons__item" />
           <LogoTwitter32 class="sign-in__icons__item" />
@@ -43,15 +47,16 @@ import LogoGoogle32 from '@carbon/icons-vue/lib/logo--google/32'
 import LogoTwitter32 from '@carbon/icons-vue/lib/logo--twitter/32'
 import LogoGitHub32 from '@carbon/icons-vue/lib/logo--github/32'
 import AppCta from '../common/AppCta.vue'
+import BasicLink from '../common/BasicLink.vue'
 
 @Options({
   components: {
-    AppCta, LogoLinkedIn32, LogoGoogle32, LogoTwitter32, LogoGitHub32
+    AppCta, BasicLink, LogoLinkedIn32, LogoGoogle32, LogoTwitter32, LogoGitHub32
   }
 })
 
 export default class SignIn extends Vue {
-  authenticationUrl = '/some-auth-url-here'
+  authenticationUrl = '/auth/ibm'
   footerMediaPath = '/images/textbook_demo.mp4'
 }
 </script>
