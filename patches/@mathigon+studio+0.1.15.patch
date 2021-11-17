@@ -118,26 +118,3 @@ index b0a70cc..f98a4e5 100644
    }
  
    // Add the [parent] attribute as class to all elements parents
-diff --git a/node_modules/@mathigon/studio/build/markdown/renderer.js b/node_modules/@mathigon/studio/build/markdown/renderer.js
-index d306b7b..35328d4 100644
---- a/node_modules/@mathigon/studio/build/markdown/renderer.js
-+++ b/node_modules/@mathigon/studio/build/markdown/renderer.js
-@@ -11,7 +11,7 @@ const entities = require('html-entities');
- 
- const {Expression} = require('@mathigon/hilbert');
- const {makeTexPlaceholder} = require('./mathjax');
--const {warning} = require('../utilities');
-+const {CONFIG, warning} = require('../utilities');
- 
- 
- // -----------------------------------------------------------------------------
-@@ -122,7 +122,8 @@ module.exports.getRenderer = function(metadata, directory, locale='en') {
-       return `<x-target class="step-target pill" to="${href1.slice(2).replace(/_/g, ' ')}">${text}</x-target>`;
-     }
- 
--    return `<a href="${href}" target="_blank">${text}</a>`;
-+    const newWindow = !href.startsWith('#') && !href.includes(CONFIG.domain);
-+    return `<a href="${href}"${newWindow ? ' target="_blank"' : ''}>${text}</a>`;
-   };
- 
-   renderer.codespan = (code) => {
