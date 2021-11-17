@@ -118,31 +118,3 @@ index b0a70cc..f98a4e5 100644
    }
  
    // Add the [parent] attribute as class to all elements parents
-diff --git a/node_modules/@mathigon/studio/server/interfaces.ts b/node_modules/@mathigon/studio/server/interfaces.ts
-index 91c23b8..bde3402 100644
---- a/node_modules/@mathigon/studio/server/interfaces.ts
-+++ b/node_modules/@mathigon/studio/server/interfaces.ts
-@@ -62,7 +62,9 @@ export interface SectionProgressData {
-   progress: number;
-   completed: boolean;
-   activeStep: string;
--  steps: {scores: string[], data: any}[];
-+  steps: {
-+    [key: string]: {scores: string[], data: any}[]
-+  };
-   messages: {content: string, kind: string}[]
- }
- 
-@@ -74,9 +76,9 @@ export interface APIResponse<T> {
- }
- 
- export interface CourseRequestOptions {
--  getProgressData?: (req: express.Request, course: Course, section: Section) => APIResponse<SectionProgressData>|undefined;
--  setProgressData?: (req: express.Request, course: Course, section: Section) => APIResponse<void>|undefined;
--  clearProgressData?: (req: express.Request, course: Course) => APIResponse<void>|undefined;
-+  getProgressData?: (req: express.Request, course: Course, section: Section) => Promise<APIResponse<SectionProgressData>|undefined>;
-+  setProgressData?: (req: express.Request, course: Course, section: Section) => Promise<APIResponse<void>|undefined>;
-+  clearProgressData?: (req: express.Request, course: Course) => Promise<APIResponse<void>|undefined>;
-   sendFeedback?: (req: express.Request, course: Course) => APIResponse<void>|undefined;
-   askTutor?: (req: express.Request, course: Course) => APIResponse<undefined>|undefined;
- }

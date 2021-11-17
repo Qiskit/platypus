@@ -5,9 +5,9 @@
 import { Request } from 'express'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
-import { getCourse } from '@mathigon/studio/server/utilities'
+import { getCourse } from '@mathigon/studio/server/utilities/utilities'
 
-import { LOCALES, translate } from '@mathigon/studio/server/i18n'
+import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
@@ -153,7 +153,7 @@ const initializeMathigon = () => {
         translationsJSON
       })
     })
-    .course(storageApi)
+    .course({})
     .errors()
     .listen()
 }
