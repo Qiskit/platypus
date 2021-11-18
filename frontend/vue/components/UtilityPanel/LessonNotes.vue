@@ -1,18 +1,18 @@
 <template>
   <div class="lesson-notes">
-    <section v-if="filteredVocabulary.length == 0 && filteredNotations.length == 0" class="lesson-notes__section">
+    <section v-if="glossaryTerms.length == 0 && notations.length == 0" class="lesson-notes__section">
       <EmptyPanel @handleRedirect="handleEmptyStateRedirect($event)" />
     </section>
-    <section v-if="filteredVocabulary.length > 0" class="lesson-notes__section">
+    <section v-if="glossaryTerms.length > 0" class="lesson-notes__section">
       <p class="lesson-notes__section__title">
         {{ $translate('Vocabulary') }}
       </p>
-      <div v-for="term in filteredVocabulary" :key="term.index" class="lesson-notes__term">
+      <div v-for="term in glossaryTerms" :key="term.index" class="lesson-notes__term">
         <span class="lesson-notes__term__title">{{ term.title }}</span>
         – <div class="lesson-notes__term__description" v-html="term.text" />
       </div>
     </section>
-    <section v-if="filteredNotations.length > 0" class="lesson-notes__section">
+    <section v-if="notations.length > 0" class="lesson-notes__section">
       <p class="lesson-notes__section__title">
         {{ $translate('Math notations') }}
       </p>
@@ -25,7 +25,7 @@
             </bx-table-header-row>
           </bx-table-head>
           <bx-table-body>
-            <bx-table-row v-for="item in filteredNotations" :key="item.index">
+            <bx-table-row v-for="item in notations" :key="item.index">
               <bx-table-cell class="lesson-notes__symbol" v-html="item.html" />
               <bx-table-cell v-html="item.meaning" />
             </bx-table-row>
@@ -66,45 +66,15 @@ class Props {
 }
 
 @Options({
-  components: { EmptyPanel },
-  computed: {
-    filteredNotations (): Notation[] {
-      const notationsData = this.notations
-      const sectionNode = document.querySelector('x-course')
-      const finalNotations: Notation[] = []
-
-      if (sectionNode) {
-        const sectionTitle = sectionNode.getAttribute('data-section')
-        notationsData.forEach((item: Notation) => {
-          if (item.sections.includes(sectionTitle)) {
-            this.showLessonNotations = true
-            finalNotations.push(item)
-          }
-        })
-      }
-      return finalNotations
-    },
-    filteredVocabulary (): Term[] {
-      const glossaryTermsData = this.glossaryTerms
-      const sectionNode = document.querySelector('x-course')
-      const finalVocabulary: Term[] = []
-
-      if (sectionNode) {
-        const sectionTitle = sectionNode.getAttribute('data-section')
-        glossaryTermsData.forEach((item: Term) => {
-          if (item.sections.includes(sectionTitle)) {
-            this.showLessonNotations = true
-            finalVocabulary.push(item)
-          }
-        })
-      }
-      return finalVocabulary
-    }
-  }
+  components: { EmptyPanel }
 })
 
 export default class LessonNotes extends Vue.with(Props) {
   showLessonNotations = false;
+
+  mounted() {
+    console.log(this, "this?????????")
+  }
 
   handleEmptyStateRedirect (label:string) {
     this.$emit('handleEmptyStateRedirect', label)
