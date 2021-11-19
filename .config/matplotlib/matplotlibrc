@@ -359,7 +359,7 @@ text.color: 343A3F
 ## default font sizes for tick labels, and so on.  See
 ## https://matplotlib.org/api/axes_api.html#module-matplotlib.axes
 #axes.facecolor:     white   # axes background color
-axes.edgecolor:     DDE1E6   # axes edge color
+axes.edgecolor:     343A3F   # axes edge color
 #axes.linewidth:     0.8     # edge line width
 #axes.grid:          False   # display grid or not
 #axes.grid.axis:     both    # which axis the grid should apply to
@@ -402,8 +402,8 @@ axes.labelcolor:    343A3F
 
 #axes.spines.left:   True  # display axis spines
 #axes.spines.bottom: True
-#axes.spines.top:    True
-#axes.spines.right:  True
+axes.spines.top:    False
+axes.spines.right:  False
 
 #axes.unicode_minus: True  # use Unicode for the minus symbol rather than hyphen.  See
                            # https://en.wikipedia.org/wiki/Plus_and_minus_signs#Character_codes
@@ -473,7 +473,7 @@ axes.prop_cycle: cycler('color', ['0F62FE', '198038', '8A3FFC', 'D12771'])
 #xtick.minor.width:   0.6     # minor tick width in points
 #xtick.major.pad:     3.5     # distance to major tick label in points
 #xtick.minor.pad:     3.4     # distance to the minor tick label in points
-xtick.color:         DDE1E6   # color of the ticks
+xtick.color:         343A3F   # color of the ticks
 xtick.labelcolor:    343A3F   # color of the tick labels or inherit from xtick.color
 #xtick.labelsize:     medium  # font size of the tick labels
 #xtick.direction:     out     # direction: {in, out, inout}
@@ -494,7 +494,7 @@ xtick.labelcolor:    343A3F   # color of the tick labels or inherit from xtick.c
 #ytick.minor.width:   0.6     # minor tick width in points
 #ytick.major.pad:     3.5     # distance to major tick label in points
 #ytick.minor.pad:     3.4     # distance to the minor tick label in points
-ytick.color:         DDE1E6   # color of the ticks
+ytick.color:         343A3F   # color of the ticks
 ytick.labelcolor:    343A3F  # color of the tick labels or inherit from ytick.color
 #ytick.labelsize:     medium  # font size of the tick labels
 #ytick.direction:     out     # direction: {in, out, inout}
