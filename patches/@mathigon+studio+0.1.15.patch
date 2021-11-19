@@ -118,3 +118,29 @@ index b0a70cc..f98a4e5 100644
    }
  
    // Add the [parent] attribute as class to all elements parents
+diff --git a/node_modules/@mathigon/studio/server/data/oauth.yaml b/node_modules/@mathigon/studio/server/data/oauth.yaml
+index 5cc91fb..e1dfdbf 100644
+--- a/node_modules/@mathigon/studio/server/data/oauth.yaml
++++ b/node_modules/@mathigon/studio/server/data/oauth.yaml
+@@ -41,14 +41,13 @@ microsoft:
+ 
+ ibm:
+   name: IBM
+-  authorizeUrl: https://iam.cloud.ibm.com/identity/authorize
+-  accessUrl: https://iam.cloud.ibm.com/identity/token
+-  profileUrl: https://user-management.cloud.ibm.com/v2/accounts/{account_id}/users/{iam_id}
++  authorizeUrl: https://login.ibm.com/oidc/endpoint/default/authorize
++  accessUrl: https://login.ibm.com/oidc/endpoint/default/token
++  profileUrl: https://login.ibm.com/oidc/endpoint/default/userinfo
+   profileMethod: GET
+-  scope: user-management.user.update
++  scope: openid profile email
+   profile:
+-    id: ${user_id}
+-    firstName: ${firstname}
+-    lastName: ${lastname}
++    id: ${sub}
++    firstName: ${given_name}
++    lastName: ${family_name}
+     email: ${email}
+-    picture: ${photo}
