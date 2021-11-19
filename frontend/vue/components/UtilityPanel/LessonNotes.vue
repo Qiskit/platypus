@@ -72,10 +72,6 @@ class Props {
 export default class LessonNotes extends Vue.with(Props) {
   showLessonNotations = false;
 
-  mounted() {
-    console.log(this, "this?????????")
-  }
-
   handleEmptyStateRedirect (label:string) {
     this.$emit('handleEmptyStateRedirect', label)
   }

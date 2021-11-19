@@ -85,7 +85,6 @@ class Props {
       }
 
       this.vocabData = finalVocabulary
-      this.showDefaultPanel()
 
       return finalVocabulary
     }
@@ -95,13 +94,6 @@ class Props {
       const refPanelContent: any = this.$refs.panelContent
       this.selectedPanelTitle = val
       refPanelContent.chooseTitle(val)
-    },
-    showDefaultPanel () {
-      if (this.notationsData.length === 0 && this.vocabData.length === 0) {
-        this.showDefaultSidePanel = true
-      }
-
-      return true
     }
   }
 })
@@ -113,7 +105,6 @@ export default class UtilityPanel extends Vue.with(Props) {
 
   notationsData = []
   vocabData = []
-  showDefaultSidePanel = false
 
   mounted () {
     this.detectSmallScreen()
