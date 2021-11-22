@@ -1,13 +1,18 @@
 <template>
   <StatevectorBaseWidget
+    :number-of-elements="4"
+    :max-value="1"
+    :min-value="-1"
+    :step="0.01"
     :transform-function="transformFunction"
   >
-    AmplitudeEncoding
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convallis vitae elit fermentum sit. Pellentesque congue risus sed condimentum viverra dolor. Sapien nunc vulputate posuere vel.
   </StatevectorBaseWidget>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import { Amplitude } from '../AmplitudeDisk/amplitude'
 import StatevectorBaseWidget from './StatevectorBaseWidget.vue'
 
 export default defineComponent({
@@ -15,15 +20,11 @@ export default defineComponent({
   components: {
     StatevectorBaseWidget
   },
-  props: {
-  },
-  data () {
-  },
-  mounted () {
-  },
   methods: {
-    transformFunction (a: number) {
-      return { magnitude: 1 / 4, phase: a * 3.6 }
+    transformFunction (slidersValues: number[], currentAmplitudes: Amplitude[]): Amplitude[] {
+      return Array.from({ length: currentAmplitudes.length }, (_, index: number) => {
+        return { magnitude: Math.abs(slidersValues[index]), phase: slidersValues[index] < 0 ? 180 : 0 }
+      })
     }
   }
 })
