@@ -149,3 +149,10 @@ if (document.querySelector('[data-executable]')) {
   }
   document.head.append(thebelabScript)
 }
+
+// Fix cursor positioning bug:
+// wait until CSS fully loaded, then refresh codemirror
+window.addEventListener("load", function(){
+document.querySelectorAll('.CodeMirror').forEach((codeCell, codeCellIndex) =>
+    codeCell.CodeMirror.refresh()
+)});
