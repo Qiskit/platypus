@@ -125,6 +125,12 @@ export default defineComponent({
       border: none;
       background: $background-color-dark;
       cursor: pointer;
+      transition: all 0.2s ease-in;
+
+      &:hover {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
     }
 
     &::-webkit-slider-thumb {
