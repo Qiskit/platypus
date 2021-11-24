@@ -102,7 +102,7 @@ export default defineComponent({
     "explanation output"
     "input output";
   grid-template-columns: 2fr minmax(8rem, 1fr);
-  gap: $spacing-08;
+  gap: $spacing-05 $spacing-08;
 
   &__explanation {
     @include type-style('body-long-01');
