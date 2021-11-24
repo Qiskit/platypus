@@ -13,6 +13,7 @@
     <div v-else class="amplitude-values__magnitude-state">
       <span class="amplitude-values__magnitude-state__label">Magnitude:</span>
       <span class="amplitude-values__magnitude-state__value">{{ round2Decimals(magnitude) }}</span>
+      <span class="amplitude-values__magnitude-state__warning">{{ magnitude > 1 ? warningMessage : '' }}</span>
     </div>
     <NumberInput
       v-if="isInteractive"
@@ -60,7 +61,8 @@ export default defineComponent({
   },
   data () {
     return {
-      internalAmplitude: { phase: 30, magnitude: 1 }
+      internalAmplitude: { phase: 30, magnitude: 1 },
+      warningMessage: 'Cannot be > 1'
     }
   },
   watch: {
@@ -114,6 +116,17 @@ export default defineComponent({
       @include type-style('expressive-heading-04');
       display: block;
       height: 3rem;
+    }
+  }
+
+  &__magnitude-state {
+    &__value {
+      height: 2rem;
+    }
+    &__warning {
+      @include type-style('body-short-01');
+      color: $status-color-wrong;
+      height: 1rem;
     }
   }
 }
