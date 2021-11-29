@@ -3,6 +3,96 @@
 @import '../variables/colors.scss';
 @import '../variables/mq.scss';
 @import '../variables/fonts.scss';
+@import '../mixins/mixins.scss';
+
+x-blank, x-blank-mc {
+  .target {
+    background: $background-color-lighter;
+    border-top: 1px solid $block-border-color-secondary;
+    border-bottom: 1px solid $block-border-color-secondary;
+    border-radius: 0;
+    color: $text-color-light;
+    min-width: 50px; 
+    line-height: 20px; 
+    padding: 2px 12px;
+  }
+
+  &.on .target, &:hover .target { box-shadow: none; }
+
+  &.on, &:focus-within { .target { border-radius: 0; } }
+
+  .popup { background-color: $block-border-color-secondary; box-shadow: 0; border-radius: 0;}
+  &.left .popup { border-radius: 0; }
+  &.top .popup { border-radius: 0; }
+  &.left.top .popup { border-radius: 0; }
+
+  &.on, &:focus-within {
+    .target { border-radius: 0; }
+    &.top .target { border-radius: 0; }
+    &.invalid .target:before { border-radius: 0; }
+    &.top.invalid .target:before { border-radius: 0; }
+  }
+
+  .choice {
+    background: $background-color-lighter;
+    color: $text-color-light;
+    transition: none;
+
+    html.is-tabbing &:focus { box-shadow: 0; }
+
+    &:first-child { border-top-right-radius: 0; }
+    &:last-child { border-radius: 0; }
+  }
+
+  &.invalid .target:before {
+    content: url('/images/critical.svg');
+    background: $status-color-wrong;
+    left: 100%;
+    top: -1px;
+    bottom: -1px;
+    padding: 6px 0 0;
+    width: 20px;
+    text-align: center;
+    border-radius: 0;
+  }
+
+  &.done .target:before {
+    content: url('/images/checkmark--filled.svg');
+    line-height: 1;
+    background: $status-color-correct;
+    position: absolute;
+    left: 100%;
+    top: -1px;
+    bottom: -1px;
+    padding: 4px 0 5px;
+    width: 20px;
+    text-align: center;
+    border-radius: 0;
+    line-height: 20px; 
+    color: white;
+    height: auto;
+  }
+
+  &.invalid .target {
+    padding-left: 12px;
+    margin-right: 20px;
+  }
+
+  &.done .target {
+    padding-left: 12px;
+    margin-right: 20px;
+    min-width: 50px; 
+    line-height: 20px; 
+    padding: 2px 12px;
+    color: $text-color-light;
+
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    box-shadow: none;
+  }
+  &.done:hover .target { color: none; }
+}
 
 x-step {
   code {
