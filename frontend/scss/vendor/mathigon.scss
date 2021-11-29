@@ -50,7 +50,7 @@ x-blank, x-blank-mc {
     left: 100%;
     top: -1px;
     bottom: -1px;
-    padding: 6px 0 0;
+    padding: auto;
     width: 20px;
     text-align: center;
     border-radius: 0;
@@ -85,7 +85,6 @@ x-blank, x-blank-mc {
     line-height: 20px; 
     padding: 2px 12px;
     color: $text-color-light;
-
     display: inline-block;
     cursor: pointer;
     position: relative;
