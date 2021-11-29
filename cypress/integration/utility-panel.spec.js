@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Utility panel', () => {
-  const utilityPanelSelector = '[data-test=utility]'
+  const utilityPanelSelector = '[data-test=utility-panel]'
   const utilityPanelContent = '[data-test=utility-panel-content]'
   const utlityPanelToggle = '[data-test=utility-panel-header-toggle]'
 
