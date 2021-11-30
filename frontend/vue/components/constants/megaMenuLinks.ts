@@ -12,7 +12,7 @@ const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
 
-const baseUrl = 'https://learn.qiskit.org'
+const baseUrl = window && window.location ? window.location.origin : 'https://learn.qiskit.org'
 const pathPrerequisites = '/course/ch-prerequisites'
 const pathQuantumStatesAndQubits = '/course/ch-states'
 const pathMultipleQubitsAndEntanglement = '/course/ch-gates'
@@ -484,45 +484,52 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Lab 2. Quantum Measurement',
-      url: `${baseUrl}${pathLabs}/lab-2-quantum-measurements`,
+      label: 'Lab 2. Single Quibit Gates',
+      url: `${baseUrl}${pathLabs}/lab-2-single-quibit-gates`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-2-quantum-measurements`
+        action: `${actionPrefix} > ${sectionLabs} > lab-2-single-quibit-gates`
       }
     },
     {
-      label: 'Lab 3. Accuracy of Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/lab-3-accuracy-of-quantum-phase-estimation`,
+      label: 'Lab 3. Quantum Measurement',
+      url: `${baseUrl}${pathLabs}/lab-3-quantum-measurements`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-3-accuracy-of-quantum-phase-estimation`
+        action: `${actionPrefix} > ${sectionLabs} > lab-3-quantum-measurements`
       }
     },
     {
-      label: 'Lab 4. Iterative Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/lab-4-iterative-phase-estimation-algorithm`,
+      label: 'Lab 4. Accuracy of Quantum Phase Estimation',
+      url: `${baseUrl}${pathLabs}/lab-4-accuracy-of-quantum-phase-estimation`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-4-iterative-phase-estimation-algorithm`
+        action: `${actionPrefix} > ${sectionLabs} > lab-4-accuracy-of-quantum-phase-estimation`
       }
     },
     {
-      label: 'Lab 5. Scalable Shor\'s Algorithm',
-      url: `${baseUrl}${pathLabs}/lab-5-scalable-shors-algorithm`,
+      label: 'Lab 5. Iterative Quantum Phase Estimation',
+      url: `${baseUrl}${pathLabs}/lab-5-iterative-phase-estimation-algorithm`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-5-scalable-shors-algorithm`
+        action: `${actionPrefix} > ${sectionLabs} > lab-5-iterative-phase-estimation-algorithm`
       }
     },
     {
-      label: 'Lab 6. Grover\'s search with an unknown number of solutions',
-      url: `${baseUrl}${pathLabs}/lab-6-grovers-search-with-an-unknown-number-of-solutions`,
+      label: 'Lab 6. Scalable Shor\'s Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-6-scalable-shors-algorithm`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-6-grovers-search-with-an-unknown-number-of-solutions`
+        action: `${actionPrefix} > ${sectionLabs} > lab-6-scalable-shors-algorithm`
       }
     },
     {
-      label: 'Lab 7. Quantum Simulation as a Search Algorithm',
-      url: `${baseUrl}${pathLabs}/lab-7-quantum-simulation-as-a-search-algorithm`,
+      label: 'Lab 7. Grover\'s search with an unknown number of solutions',
+      url: `${baseUrl}${pathLabs}/lab-7-grovers-search-with-an-unknown-number-of-solutions`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-7-quantum-simulation-as-a-search-algorithm`
+        action: `${actionPrefix} > ${sectionLabs} > lab-7-grovers-search-with-an-unknown-number-of-solutions`
+      }
+    },
+    {
+      label: 'Lab 8. Quantum Simulation as a Search Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-8-quantum-simulation-as-a-search-algorithm`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLabs} > lab-8-quantum-simulation-as-a-search-algorithm`
       }
     }
   ]
