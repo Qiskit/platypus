@@ -44,7 +44,7 @@ x-blank, x-blank-mc {
   }
 
   &.invalid .target:before {
-    content: url('/images/critical.svg');
+    content: url('/images/error--filled.svg');
     background: $status-color-wrong;
     left: 100%;
     top: -1px;
