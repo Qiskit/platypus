@@ -31,7 +31,8 @@
     "test:debug": "start-server-and-test start :8080/health cy:open",
     "test:nb:goals": "python3 ./scripts/goals.py",
     "test:nb:lint": "./scripts/nb_lint.sh",
-    "test:nb": "npm run test:nb:lint && npm run test:nb:goals"
+    "test:nb": "npm run test:nb:lint && npm run test:nb:goals",
+    "setup:secrets": "mgon-secrets"
   },
   "engines": {
     "node": "14.16.0"

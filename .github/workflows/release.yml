@@ -62,7 +62,7 @@ jobs:
         run: rm -f Dockerfile
 
       - name: Secrets
-        run: mgon-secrets --ibmClientId ${{ secrets.IBMCLIENTID }} --ibmClientSecret ${{ secrets.IBMCLIENTSECRET }}
+        run: npm run setup:secrets -- --ibmClientId ${{ secrets.IBMID_CLIENT_ID }} --ibmClientSecret ${{ secrets.IBMID_CLIENT_SECRET }}
 
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main

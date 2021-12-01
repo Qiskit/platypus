@@ -3,8 +3,8 @@ RUN apk add --update nodejs npm
 
 FROM base AS builder
 
-ARG IBMCLIENTID
-ARG IBMCLIENTSECRET
+ARG IBMID_CLIENT_ID
+ARG IBMID_CLIENT_SECRET
 
 WORKDIR /usr/app
 
@@ -18,10 +18,8 @@ RUN apk add --no-cache g++ linux-headers python3 python3-dev py3-pip py3-pyzmq
 RUN python3 -m venv .venv && source .venv/bin/activate
 RUN python3 -m pip install -U pip \
   && python3 -m pip install -r converter/textbook-converter/requirements.txt
-
-RUN echo $IBMCLIENTID
-
-RUN mgon-secrets --ibmClientId $IBMCLIENTID --ibmClientSecret $IBMCLIENTSECRET
+  
+RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_ID --ibmClientSecret $IBMID_CLIENT_SECRET
 
 COPY converter converter/
 COPY frontend frontend/
