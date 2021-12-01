@@ -365,6 +365,9 @@
     - title: Variational classification
       id: variational-classification
       url: /quantum-machine-learning/vqc
+    - title: Quantum generative adversarial networks
+      id: quantum-generative-adversarial-networks
+      url: /quantum-machine-learning/qgan
     - title: Project
       id: project
       url: /quantum-machine-learning/project
