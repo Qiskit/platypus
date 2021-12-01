@@ -23,10 +23,10 @@ describe('Mega menu dropdown', () => {
 
   it('should contain correct links', () => {
     // find all links in megamenu
-    cy.get('q-content-menu a').each($a => {
+    cy.get('q-content-menu a').each((link) => {
       // skip the titles
-      if ($a.attr('class').indexOf('link_title') == -1) {
-        const url = $a.attr('href').replace(originRegex, '')
+      if (!link.attr('class').includes('link_title')) {
+        const url = link.attr('href').replace(originRegex, '')
         // url should match what is in the sitemap
         expect(url).to.be.oneOf(sitemapUrls)
       }
