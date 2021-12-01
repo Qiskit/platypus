@@ -61,6 +61,9 @@ jobs:
       - name: Remove Dockerfile
         run: rm -f Dockerfile
 
+      - name: Secrets
+        run: mgon-secrets --ibmClientId ${{ secrets.IBMCLIENTID }} --ibmClientSecret ${{ secrets.IBMCLIENTSECRET }}
+
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main
         with:

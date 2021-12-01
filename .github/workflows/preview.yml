@@ -74,6 +74,7 @@ jobs:
           tags: ${{ env.DOCKER_IMAGE_TAG }}
           cache-from: type=registry,ref=${{ env.DOCKER_IMAGE_TAG }}
           cache-to: type=inline
+          build-args: IBMCLIENTID:${{ secrets.IBMCLIENTID }},IBMCLIENTSECRET:${{ secrets.IBMCLIENTSECRET }}
         env:
           DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
 

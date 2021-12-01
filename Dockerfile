@@ -2,6 +2,10 @@ FROM alpine:3 AS base
 RUN apk add --update nodejs npm
 
 FROM base AS builder
+
+ARG IBMCLIENTID
+ARG IBMCLIENTSECRET
+
 WORKDIR /usr/app
 
 COPY package*.json ./
@@ -14,6 +18,10 @@ RUN apk add --no-cache g++ linux-headers python3 python3-dev py3-pip py3-pyzmq
 RUN python3 -m venv .venv && source .venv/bin/activate
 RUN python3 -m pip install -U pip \
   && python3 -m pip install -r converter/textbook-converter/requirements.txt
+
+RUN echo $IBMCLIENTID
+
+RUN mgon-secrets --ibmClientId $IBMCLIENTID --ibmClientSecret $IBMCLIENTSECRET
 
 COPY converter converter/
 COPY frontend frontend/
