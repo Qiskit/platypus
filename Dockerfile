@@ -1,5 +1,6 @@
-FROM alpine:3 AS base
-RUN apk add --update nodejs npm
+FROM node:14-stretch AS base
+SHELL ["/bin/bash", "-c"]
+RUN apt update
 
 FROM base AS builder
 
@@ -8,16 +9,15 @@ ARG IBMID_CLIENT_SECRET
 
 WORKDIR /usr/app
 
-COPY package*.json ./
-COPY patches patches/
-RUN npm ci
-
 COPY converter/textbook-converter/requirements.txt converter/textbook-converter/
-# py3-pyzmq is needed by pyyaml but pip is not able to compile it.
-RUN apk add --no-cache g++ linux-headers python3 python3-dev py3-pip py3-pyzmq
+RUN apt-get install -y g++ python3 python3-dev python3-pip python3-zmq python3-venv
 RUN python3 -m venv .venv && source .venv/bin/activate
 RUN python3 -m pip install -U pip \
   && python3 -m pip install -r converter/textbook-converter/requirements.txt
+
+COPY package*.json ./
+COPY patches patches/
+RUN npm ci
 
 COPY converter converter/
 COPY frontend frontend/
