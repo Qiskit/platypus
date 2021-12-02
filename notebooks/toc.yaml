@@ -259,7 +259,7 @@
     - title: Visualizing entanglement
       id: visualizing-entanglement
       url: /intro/visualizing-entanglement
-    - title: Grovers algorithm
+    - title: Grover's algorithm
       id: grovers-search-algorithm
       url: /intro/grover-intro
     - title: Project
