@@ -87,7 +87,7 @@ track this repository. A typical Git setup after
 # After forking the repository in GitHub
 git clone https://github.com/<your_username>/platypus.git
 cd platypus
-git remote add upstream https://github.com/qiskit/platypus.git
+git remote add upstream https://github.com/qiskit-community/platypus.git
 git remote update upstream
 git checkout main
 git branch -u upstream/main
@@ -161,8 +161,8 @@ When creating the pull request, provide a description and
 [link with the issue that is being solved](https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue).
 
 Linking the issue has the advantage of automatically closing the related issue when the pull
-request is merged. Unfortunately, this does not work when merging pull requests agains a feature
-branch. In these occassions, remember to manually close the related pull requests after
+request is merged. Unfortunately, this does not work when merging pull requests against a feature
+branch. In these occasions, remember to manually close the related pull requests after
 [merging the pull request](#merging).
 
 ### Live previews
@@ -213,7 +213,7 @@ so at least they can understand new contributions to the codebase.
 ### Type annotations
 
 Regarding type checking, we aim at being compliant with
-[Tyepscript strict checks](https://www.typescriptlang.org/tsconfig#strict). That means, no implicit
+[TypeScript strict checks](https://www.typescriptlang.org/tsconfig#strict). That means, no implicit
 `any` annotations, for instance although does not enforce any particular style in typing.
 
 The golden rule is: **declare your intentions and let type inference do the rest**. Annotate function
