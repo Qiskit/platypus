@@ -87,7 +87,7 @@ track this repository. A typical Git setup after
 # After forking the repository in GitHub
 git clone https://github.com/<your_username>/platypus.git
 cd platypus
-git remote add upstream https://github.com/qiskit/platypus.git
+git remote add upstream https://github.com/qiskit-community/platypus.git
 git remote update upstream
 git checkout main
 git branch -u upstream/main
