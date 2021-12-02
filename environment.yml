@@ -15,3 +15,7 @@ dependencies:
   - pandas
   - qiskit
   - ./qiskit-textbook-src
+  - 'qiskit-machine-learning[sparse]'
+  - qiskit-machine-learning
+  - tensorflow
+
