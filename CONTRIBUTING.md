@@ -213,7 +213,7 @@ so at least they can understand new contributions to the codebase.
 ### Type annotations
 
 Regarding type checking, we aim at being compliant with
-[Typescript strict checks](https://www.typescriptlang.org/tsconfig#strict). That means, no implicit
+[TypeScript strict checks](https://www.typescriptlang.org/tsconfig#strict). That means, no implicit
 `any` annotations, for instance although does not enforce any particular style in typing.
 
 The golden rule is: **declare your intentions and let type inference do the rest**. Annotate function
