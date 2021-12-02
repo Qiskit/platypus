@@ -7,16 +7,7 @@
       <h5 class="statevector-base-widget__input-data__title">
         Input data
       </h5>
-      <SliderInput
-        v-for="(value, index) in slidersData"
-        :key="index"
-        class="statevector-base-widget__input-data__slider"
-        :min="minValue"
-        :max="maxValue"
-        :step="step"
-        :value="value"
-        @value-changed="sliderChangedHandler($event, index)"
-      />
+      <slot name="input-elements" />
     </div>
     <div class="statevector-base-widget__output-data">
       <h5 class="statevector-base-widget__output-data__title">
@@ -25,7 +16,7 @@
       <div class="statevector-base-widget__output-data__statevector__wrapper">
         <div class="statevector-base-widget__output-data__statevector">
           <AmplitudeDisk
-            v-for="(data, index) in amplitudeDiskData"
+            v-for="(data, index) in internalAmplitudeDiskData"
             :key="index"
             class="statevector-base-widget__output-data__statevector__disk"
             :magnitude="data.magnitude"
@@ -43,50 +34,28 @@ import 'carbon-web-components/es/components/slider/slider.js'
 import 'carbon-web-components/es/components/slider/slider-input.js'
 import AmplitudeDisk from '../AmplitudeDisk/AmplitudeDisk.vue'
 import { Amplitude } from '../AmplitudeDisk/amplitude'
-import SliderInput from '../common/SliderInput.vue'
-
-const defaultTransformFunction = (slidersValues: number[], currentAmplitudes: Amplitude[], _: number) : Amplitude[] => {
-  const magnitude = 1 / Math.sqrt(slidersValues.length)
-
-  return Array.from({ length: currentAmplitudes.length }, (_, index: number) => {
-    return { magnitude, phase: slidersValues[index] * 3.6 }
-  })
-}
-
-function randomValue (min: number, max: number, step: number) {
-  const rnd = Math.random()
-  const rangedRandom = rnd * (max - min) + min
-
-  return Math.round(rangedRandom / step) * step
-}
 
 export default defineComponent({
   name: 'StatevectorBaseWidget',
   components: {
-    AmplitudeDisk,
-    SliderInput
+    AmplitudeDisk
   },
   props: {
-    transformFunction: { type: Function, default: defaultTransformFunction },
-    maxValue: { type: Number, default: 100 },
-    minValue: { type: Number, default: 0 },
-    step: { type: Number, default: 1 },
-    numberOfElements: { type: Number, default: 4 }
+    numberOfElements: { type: Number, default: 4 },
+    amplitudeDiskData: { type: Array, default: () => [] }
   },
   data () {
     return {
-      slidersData: Array.from({ length: this.numberOfElements }, _ => randomValue(this.maxValue, this.minValue, this.step)) as number[],
-      amplitudeDiskData: Array.from({ length: this.numberOfElements }, _ => ({ magnitude: 1 / this.numberOfElements, phase: 0 })) as Amplitude[]
+      internalAmplitudeDiskData: [] as Amplitude[]
+    }
+  },
+  watch: {
+    amplitudeDiskData (newVal) {
+      this.internalAmplitudeDiskData = newVal
     }
   },
   mounted () {
-    this.amplitudeDiskData = this.transformFunction(this.slidersData, this.amplitudeDiskData, 0)
-  },
-  methods: {
-    sliderChangedHandler (value: number, index: number) {
-      this.slidersData[index] = value
-      this.amplitudeDiskData = this.transformFunction(this.slidersData, this.amplitudeDiskData, index)
-    }
+    this.internalAmplitudeDiskData = this.amplitudeDiskData as Amplitude[]
   }
 })
 </script>
