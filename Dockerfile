@@ -21,6 +21,7 @@ RUN python3 -m pip install -U pip \
 
 COPY converter converter/
 COPY frontend frontend/
+COPY server server/
 COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
@@ -37,8 +38,8 @@ WORKDIR /usr/app
 COPY --from=builder /usr/app/package*.json ./
 COPY --from=builder /usr/app/patches patches/
 # npm ci --production is not working for some unknown reason
-RUN npm install --production
-COPY server server/
+RUN npm install
+COPY --from=builder /usr/app/server server/
 COPY --from=builder /usr/app/config.yaml ./
 COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
