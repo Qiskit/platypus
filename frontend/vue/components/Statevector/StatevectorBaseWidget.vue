@@ -73,6 +73,14 @@ export default defineComponent({
   grid-template-columns: 2fr minmax(8rem, 1fr);
   gap: $spacing-05 $spacing-08;
 
+  @include mq($until: medium) {
+    grid-template-areas:
+      "explanation"
+      "input"
+      "output";
+    grid-template-columns: auto;
+  }
+
   &__explanation {
     @include type-style('body-long-01');
     grid-area: explanation;
