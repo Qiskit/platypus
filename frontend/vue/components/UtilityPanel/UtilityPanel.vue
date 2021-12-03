@@ -1,23 +1,110 @@
 <template>
   <section class="utility-panel" :class="{ 'utility-panel_open': isVisible, 'utility-panel_closed': !isVisible }">
-    <UtilityPanelHeader ref="panelHeader" :label="getLabel()" @updatePanelStatus="togglePanel" @selectedPanelTitle="getSelectedPanelTitle" />
-    <UtilityPanelContent ref="panelContent" :selection="selectedPanelTitle" @emptyStateRedirect="redirectToPanel" />
+    <UtilityPanelHeader
+      ref="panelHeader"
+      :label="getLabel()"
+      @updatePanelStatus="togglePanel"
+      @selectedPanelTitle="getSelectedPanelTitle"
+    />
+    <UtilityPanelContent ref="panelContent" :selection="selectedPanelTitle" :notations-data="filteredNotations" :vocabulary-data="filteredVocabulary" @emptyStateRedirect="redirectToPanel" />
   </section>
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-class-component'
+import { Vue, Options, prop } from 'vue-class-component'
 import UtilityPanelHeader from './UtilityPanelHeader.vue'
 import UtilityPanelContent from './UtilityPanelContent.vue'
 
+export interface Notation {
+  html: string
+  say?: string
+  meaning: string
+  type?: string
+  sections: any[]
+}
+
+interface NotationsJson {
+  [key: string] : Notation
+}
+
+export interface Term {
+  title: string
+  text: string[]
+  sections: any[]
+}
+
+interface TermsJson {
+  [key: string] : Term
+}
+
+class Props {
+  notations = prop<Notation>({})
+  glossaryTerms = prop<Term>({})
+}
+
 @Options({
-  components: { UtilityPanelHeader, UtilityPanelContent }
+  components: { UtilityPanelHeader, UtilityPanelContent },
+  computed: {
+    filteredNotations (): Notation[] {
+      const data = document.getElementById('notations')
+      const sectionNode = document.querySelector('x-course')
+      const finalNotations: Notation[] = []
+
+      if (data && sectionNode) {
+        const sectionTitle = sectionNode.getAttribute('data-section')
+        const notationsParsed = JSON.parse(data.innerHTML) as NotationsJson
+        const notationsKeys = Object.keys(notationsParsed).filter(key => !key.startsWith('_'))
+        const notationsArr = notationsKeys.map(key => notationsParsed[key])
+
+        notationsArr.forEach((item: Notation) => {
+          if (item.sections.includes(sectionTitle)) {
+            finalNotations.push(item)
+          }
+        })
+      }
+
+      this.notationsData = finalNotations
+
+      return finalNotations
+    },
+    filteredVocabulary ():Term[] {
+      const data = document.getElementById('glossary')
+      const sectionNode = document.querySelector('x-course')
+      const finalVocabulary: Term[] = []
+
+      if (data && sectionNode) {
+        const vocabularyParsed = JSON.parse(data.innerHTML) as TermsJson
+        const vocabularyArr = Object.values(vocabularyParsed)
+        const sectionTitle = sectionNode.getAttribute('data-section')
+
+        vocabularyArr.forEach((item) => {
+          if (item.sections.includes(sectionTitle)) {
+            finalVocabulary.push(item)
+          }
+        })
+      }
+
+      this.vocabData = finalVocabulary
+
+      return finalVocabulary
+    }
+  },
+  methods: {
+    getSelectedPanelTitle (val: any) {
+      const refPanelContent: any = this.$refs.panelContent
+      this.selectedPanelTitle = val
+      refPanelContent.chooseTitle(val)
+    }
+  }
 })
 
-export default class UtilityPanel extends Vue {
+export default class UtilityPanel extends Vue.with(Props) {
   isVisible = true;
   selectedPanelTitle:string = ''
   isMobile = false;
+
+  notationsData = []
+  vocabData = []
 
   mounted () {
     this.detectSmallScreen()
@@ -51,12 +138,6 @@ export default class UtilityPanel extends Vue {
     } else {
       return 'Show details'
     }
-  }
-
-  getSelectedPanelTitle (val: any) {
-    const refPanelContent: any = this.$refs.panelContent
-    this.selectedPanelTitle = val
-    refPanelContent.chooseTitle(val)
   }
 
   redirectToPanel (e:string) {

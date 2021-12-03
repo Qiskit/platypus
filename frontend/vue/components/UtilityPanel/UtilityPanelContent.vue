@@ -3,7 +3,7 @@
     <LessonNotes
       v-if="showLessonNotes"
       :notations="notationsData"
-      :glossary-terms="vocabulary"
+      :glossary-terms="vocabularyData"
       @handleEmptyStateRedirect="emptyStateRedirect"
     />
     <UniversalGlossary v-if="showUniversalGlossary" :glossary-data="universalNotations" />
@@ -18,48 +18,18 @@ import 'carbon-web-components/es/components/data-table/table-head'
 import 'carbon-web-components/es/components/data-table/table-cell.js'
 import 'carbon-web-components/es/components/data-table/table-row.js'
 import 'carbon-web-components/es/components/data-table/table-header-row'
-import LessonNotes, { Notation } from './LessonNotes.vue'
+import LessonNotes from './LessonNotes.vue'
 import UniversalGlossary from './UniversalGlossary.vue'
-
-interface NotationsJson {
-  [key: string] : Notation
-}
 
 class Props {
   selection = prop<any>({})
+  notationsData = prop<any>({})
+  vocabularyData = prop<any>({})
 }
 
 @Options({
   components: { LessonNotes, UniversalGlossary },
   computed: {
-    notationsData: {
-      get () {
-        const data = document.getElementById('notations')
-        let localDefinitions: Notation[] = []
-        if (data) {
-          const notationsParsed = JSON.parse(data.innerHTML) as NotationsJson
-          const notationsKeys = Object.keys(notationsParsed).filter(key => !key.startsWith('_'))
-          const notationsArr = notationsKeys.map(key => notationsParsed[key])
-          localDefinitions = notationsArr
-        }
-        return localDefinitions
-      }
-    },
-    vocabulary: {
-      get () {
-        const data = document.getElementById('glossary')
-        let localVocablulary
-
-        if (data) {
-          const vocabularyParsed = JSON.parse(data.innerHTML)
-          const vocabularyArr = Object.values(vocabularyParsed)
-
-          localVocablulary = vocabularyArr
-        }
-
-        return localVocablulary
-      }
-    },
     universalNotations: {
       get () {
         const data = document.getElementById('universal-notes')
@@ -77,6 +47,7 @@ class Props {
 export default class UtilityPanelContent extends Vue.with(Props) {
   showLessonNotes:boolean = false;
   showUniversalGlossary:boolean = false;
+  fallbackPanelSelection = 'Glossary'
 
   chooseTitle (val: any) {
     this.showLessonNotes = val === 'Lesson Notes'
@@ -85,6 +56,12 @@ export default class UtilityPanelContent extends Vue.with(Props) {
 
   emptyStateRedirect (label:string) {
     this.$emit('emptyStateRedirect', label)
+  }
+
+  mounted () {
+    if (this.notationsData.length === 0 && this.vocabularyData.length === 0) {
+      this.$emit('emptyStateRedirect', this.fallbackPanelSelection)
+    }
   }
 }
 </script>
