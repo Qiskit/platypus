@@ -368,6 +368,9 @@
     - title: Quantum generative adversarial networks
       id: quantum-generative-adversarial-networks
       url: /quantum-machine-learning/qgan
+    - title: Quantum Boltzmann machines
+      id: quantum-boltzmann-machines
+      url: /quantum-machine-learning/qbm
     - title: Project
       id: project
       url: /quantum-machine-learning/project
