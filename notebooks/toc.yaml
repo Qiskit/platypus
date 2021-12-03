@@ -169,7 +169,7 @@
       id: lab-1-quantum-circuits
       url: /ch-labs/Lab01_QuantumCircuits
     - title: Lab 2. Single Qubit Gates
-      id: lab-2-single-quibit-gates
+      id: lab-2-single-qubit-gates
       url: /ch-labs/Lab02_Single_Qubit_Gates
     - title: Lab 3. Quantum Measurement
       id: lab-3-quantum-measurements
@@ -259,7 +259,7 @@
     - title: Visualizing entanglement
       id: visualizing-entanglement
       url: /intro/visualizing-entanglement
-    - title: Grovers algorithm
+    - title: Grover's algorithm
       id: grovers-search-algorithm
       url: /intro/grover-intro
     - title: Project
