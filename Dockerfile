@@ -26,7 +26,7 @@ COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
 
-RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_ID --ibmClientSecret $IBMID_CLIENT_SECRET
+RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_ID
 
 RUN npm run build
 # don't keep the notebooks
@@ -41,6 +41,7 @@ COPY --from=builder /usr/app/patches patches/
 RUN npm install
 COPY --from=builder /usr/app/server server/
 COPY --from=builder /usr/app/config.yaml ./
+RUN cat config.yml
 COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
