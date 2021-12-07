@@ -77,7 +77,6 @@ jobs:
           build-args: |
             IBMID_CLIENT_ID=${{ secrets.IBMID_CLIENT_ID }}
             IBMID_CLIENT_SECRET=${{ secrets.IBMID_CLIENT_SECRET }}
-            IBMID_CLIENT_TEST=testkey
         env:
           DOCKER_IMAGE_TAG: icr.io/community-digital/${{ env.DOCKER_IMAGE_NAME }}:${{ env.PR_TAG }}
 
