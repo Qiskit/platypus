@@ -157,16 +157,3 @@ index 5cc91fb..e1dfdbf 100644
 +    lastName: ${family_name}
      email: ${email}
 -    picture: ${photo}
-diff --git a/node_modules/@mathigon/studio/server/utilities/oauth.ts b/node_modules/@mathigon/studio/server/utilities/oauth.ts
-index 115cec3..06ad483 100644
---- a/node_modules/@mathigon/studio/server/utilities/oauth.ts
-+++ b/node_modules/@mathigon/studio/server/utilities/oauth.ts
-@@ -153,7 +153,7 @@ async function getToken(req: express.Request, provider: Provider) {
-     code: q(req, 'code'),
-     client_id: config.clientId,
-     client_secret: config.clientSecret,
--    redirect_uri: `${host(req)}/auth/${provider}/callback`
-+    redirect_uri: `https://cd00-88-13-231-143.ngrok.io/auth/${provider}/callback`
-   });
- 
-   const response = await fetch(config.accessUrl, {method: 'POST', body});
