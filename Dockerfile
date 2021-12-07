@@ -18,6 +18,8 @@ RUN python3 -m pip install -U pip \
 COPY package*.json ./
 COPY patches patches/
 RUN npm ci
+# the ci is not triggering the postinstall
+RUN npm run patch
 
 COPY converter converter/
 COPY frontend frontend/
@@ -39,6 +41,8 @@ COPY --from=builder /usr/app/package*.json ./
 COPY --from=builder /usr/app/patches patches/
 # npm ci --production is not working for some unknown reason
 RUN npm install
+# the ci is not triggering the postinstall
+RUN npm run patch
 COPY --from=builder /usr/app/server server/
 COPY --from=builder /usr/app/config.yaml ./
 COPY --from=builder /usr/app/public public/
