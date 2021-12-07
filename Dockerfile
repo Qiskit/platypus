@@ -26,6 +26,8 @@ COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
 
+RUN echo $IBMID_CLIENT_ID
+
 RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_ID
 
 RUN npm run build
