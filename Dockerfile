@@ -6,6 +6,7 @@ FROM base AS builder
 
 ARG IBMID_CLIENT_ID
 ARG IBMID_CLIENT_SECRET
+ARG IBMID_CLIENT_TEST
 
 WORKDIR /usr/app
 
@@ -26,9 +27,10 @@ COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
 
+RUN echo $IBMID_CLIENT_TEST
 RUN echo $IBMID_CLIENT_ID
 
-RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_ID
+RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_TEST
 
 RUN npm run build
 # don't keep the notebooks
