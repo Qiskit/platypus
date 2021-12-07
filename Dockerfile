@@ -41,7 +41,7 @@ COPY --from=builder /usr/app/patches patches/
 RUN npm install
 COPY --from=builder /usr/app/server server/
 COPY --from=builder /usr/app/config.yaml ./
-RUN cat config.yml
+RUN cat config.yaml
 COPY --from=builder /usr/app/public public/
 COPY --from=builder /usr/app/frontend frontend/
 COPY --from=builder /usr/app/notebooks/toc.yaml notebooks/
