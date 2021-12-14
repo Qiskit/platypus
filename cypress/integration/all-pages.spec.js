@@ -12,7 +12,7 @@ describe('All pages', () => {
     )
 
     return relativeUrl
-  })
+  }).splice(1) // skip root (which redirects to learn.qiskit.org)
 
   urls.forEach((url) => {
     it(`should load ${url}`, () => {
