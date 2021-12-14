@@ -1,16 +1,17 @@
-FROM node:14-stretch AS base
-SHELL ["/bin/bash", "-c"]
-RUN apt update
+FROM alpine:3 AS base
+RUN apk add --update nodejs npm
 
 FROM base AS builder
 
 ARG IBMID_CLIENT_ID
 ARG IBMID_CLIENT_SECRET
+ARG MONGODB_URI
 
 WORKDIR /usr/app
 
 COPY converter/textbook-converter/requirements.txt converter/textbook-converter/
-RUN apt-get install -y g++ python3 python3-dev python3-pip python3-zmq python3-venv
+# py3-pyzmq is needed by pyyaml but pip is not able to compile it.
+RUN apk add --no-cache g++ linux-headers python3 python3-dev py3-pip py3-pyzmq
 RUN python3 -m venv .venv && source .venv/bin/activate
 RUN python3 -m pip install -U pip \
   && python3 -m pip install -r converter/textbook-converter/requirements.txt
@@ -28,11 +29,11 @@ COPY notebooks notebooks/
 COPY translations translations/
 COPY config.yaml ./
 
-RUN npm run setup:secrets -- --ibmClientId $IBMID_CLIENT_ID --ibmClientSecret $IBMID_CLIENT_SECRET
+RUN npm run setup:secrets -- --mongo $MONGODB_URI --ibmClientId $IBMID_CLIENT_ID --ibmClientSecret $IBMID_CLIENT_SECRET
 
 RUN npm run build
-# don't keep the notebooks
-RUN find ./translations -type f -iname "*.ipynb" -delete
+# only need to keep all the strings.yaml
+RUN find ./translations -type f ! -iname "*.yaml" -delete
 
 FROM base
 WORKDIR /usr/app
