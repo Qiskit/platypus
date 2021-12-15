@@ -24,6 +24,7 @@ x-blank, x-blank-mc {
     background-color: $block-border-color-secondary;
     box-shadow: 0px 4px 4px rgba(52, 58, 63, 0.15);;
     border-radius: 0;
+    top: calc(100% + 3px);
   }
 
   &.left .popup { border-radius: 0; }
