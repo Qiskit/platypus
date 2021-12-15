@@ -1,5 +1,6 @@
 {
   "baseUrl": "http://localhost:8080",
   "defaultCommandTimeout": 8000,
+  "numTestsKeptInMemory": 5,
   "video": false
 }

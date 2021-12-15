@@ -70,7 +70,7 @@ html(lang=course.locale dir=dir)
                         segment=`${section.id} > ${nextSection.section.id}`
                         data-test="footer-nav-next-section"
                       )
-        div#utility-panel.c-textbook__utility_panel
+        div(id="utility-panel" class="c-textbook__utility_panel" data-test="utility-panel")
           q-utility-panel
         x-modal#glossary-modal.light: .modal-body
 
