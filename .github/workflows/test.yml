@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Apply configuration
-        run: npm run setup:secrets -- --mongo ${{ MONGODB_URI }}
+        run: npm run setup:secrets -- --mongo ${{ secrets.MONGODB_URI }}
 
       - name: Install Python 3.8
         uses: actions/setup-python@v2
