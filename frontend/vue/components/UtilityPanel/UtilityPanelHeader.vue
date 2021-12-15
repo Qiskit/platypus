@@ -6,8 +6,8 @@
       :url="link.url"
       :segment="link.segment"
       :is-static="true"
-      @click="togglePanel($event)"
       data-test="utility-panel-header-toggle"
+      @click="togglePanel($event)"
     >
       {{ $translate(ctaLabel) }}
       <OpenPanelRight16 class="utility-panel-header__icon" />
