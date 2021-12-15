@@ -20,7 +20,12 @@ x-blank, x-blank-mc {
 
   &.on, &:focus-within { .target { border-radius: 0; } }
 
-  .popup { background-color: $block-border-color-secondary; box-shadow: 0; border-radius: 0;}
+  .popup {
+    background-color: $block-border-color-secondary;
+    box-shadow: 0;
+    border-radius: 0;
+  }
+
   &.left .popup { border-radius: 0; }
   &.top .popup { border-radius: 0; }
   &.left.top .popup { border-radius: 0; }
@@ -41,6 +46,8 @@ x-blank, x-blank-mc {
 
     &:first-child { border-top-right-radius: 0; }
     &:last-child { border-radius: 0; }
+    &:hover { background: $background-color-light-2; }
+    &::before { background: $border-color; }
   }
 
   &.invalid .target:before {
@@ -78,6 +85,7 @@ x-blank, x-blank-mc {
   }
 
   &.done .target {
+    background: $background-color-lighter;
     padding-left: 12px;
     margin-right: 20px;
     min-width: 50px; 
@@ -90,6 +98,19 @@ x-blank, x-blank-mc {
     box-shadow: none;
   }
   &.done:hover .target { color: none; }
+}
+
+q-block {
+  x-blank, x-blank-mc {
+    .target {
+      background: $background-color-white;
+    }
+    .choice {
+      background: $background-color-white;
+    }
+
+    &.done .target { background: $background-color-white; }
+  }
 }
 
 x-step {
