@@ -5,7 +5,7 @@
     :amplitude-disk-data="amplitudeDiskData"
   >
     <template #default>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convallis vitae elit fermentum sit. Pellentesque congue risus sed condimentum viverra dolor. Sapien nunc vulputate posuere vel.
+      <slot />
       <div class="statevector-amplitude-encoding__warning">
         {{ areAllValuesZero ? 'Cannot analyze all zero values' : '&nbsp;' }}
       </div>
@@ -14,7 +14,6 @@
       <SliderInput
         v-for="(value, index) in inputData"
         :key="index"
-        class="statevector-amplitude-encoding__input-data__slider"
         :min="minValue"
         :max="maxValue"
         :step="step"
@@ -60,8 +59,8 @@ export default defineComponent({
     transformFunction (inputValues: number[]): Amplitude[] {
       this.areAllValuesZero = !inputValues.some(value => value !== 0)
       if (this.areAllValuesZero) {
-        const sqrtOfLenght = 1 / Math.sqrt(inputValues.length)
-        return Array.from({ length: inputValues.length }, () => ({ magnitude: sqrtOfLenght, phase: 0 }))
+        const sqrtOfLength = 1 / Math.sqrt(inputValues.length)
+        return Array.from({ length: inputValues.length }, () => ({ magnitude: sqrtOfLength, phase: 0 }))
       }
 
       const squaredValues = inputValues.map(value => value * value)
@@ -83,7 +82,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
-@import '~/../scss/variables/mq.scss';
 
 .statevector-amplitude-encoding {
   &__warning {
