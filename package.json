@@ -17,7 +17,7 @@
     "watch:vue": "cross-env VUE_CLI_SERVICE_CONFIG_PATH=./frontend/vue/vue.config.js vue-cli-service build --no-clean --watch --target lib --name textbooklib --dest public/lib frontend/vue/main.ts",
     "watch:studio": "mgon-build --assets --watch",
     "watch": "npm-run-all --parallel watch:vue watch:studio",
-    "start": "ts-node -I public -P server/tsconfig.json server/app.ts",
+    "start": "ts-node --transpile-only -I public -P server/tsconfig.json server/app.ts",
     "start-dev": "nodemon --watch 'server/**/*.ts' --exec 'ts-node -I public -P server/tsconfig.json server/app.ts'",
     "dev": "npm-run-all --parallel watch start-dev",
     "thumbnails": "mgon-build --thumbnails",

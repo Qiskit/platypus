@@ -35,4 +35,6 @@ WORKDIR /usr/app
 
 COPY --from=builder /usr/app ./
 
+RUN npm prune --production
+
 CMD ["npm", "start"]
