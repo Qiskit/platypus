@@ -63,6 +63,11 @@ jobs:
 
       - name: Secrets
         run: npm run setup:secrets -- --ibmClientId ${{ secrets.IBMID_CLIENT_ID }} --ibmClientSecret ${{ secrets.IBMID_CLIENT_SECRET }}
+      
+      - name: Authenticate to AppEngine
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_SERVICE_ACCOUNT }}'
 
       - name: Deploy to AppEngine
         uses: google-github-actions/deploy-appengine@main
@@ -73,7 +78,6 @@ jobs:
           #  - roles/iam.serviceAccountUser
           #  - roles/compute.storageAdmin
           #  - cloudbuild.builds.editor
-          credentials: ${{secrets.GCLOUD_SERVICE_ACCOUNT}}
           deliverables: app.yaml
           # qiskit-web is the Google Cloud App ID provided by Mathigon
           project_id: qiskit-web
