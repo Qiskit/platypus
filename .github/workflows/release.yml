@@ -44,6 +44,9 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r converter/textbook-converter/requirements.txt -r converter/textbook-converter/requirements-test.txt
 
+      - name: Secrets
+        run: npm run setup:secrets -- --mongo ${{ MONGODB_URI }} --ibmClientId ${{ secrets.IBMID_CLIENT_ID }} --ibmClientSecret ${{ secrets.IBMID_CLIENT_SECRET }}
+
       - name: Notebook tests
         run: npm run test:nb
 
@@ -60,9 +63,6 @@ jobs:
       # current directory, Google App Engine try to use it.
       - name: Remove Dockerfile
         run: rm -f Dockerfile
-
-      - name: Secrets
-        run: npm run setup:secrets -- --ibmClientId ${{ secrets.IBMID_CLIENT_ID }} --ibmClientSecret ${{ secrets.IBMID_CLIENT_SECRET }}
       
       - name: Authenticate to AppEngine
         uses: 'google-github-actions/auth@v0'
