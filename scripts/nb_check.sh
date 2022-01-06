@@ -2,7 +2,7 @@
 
 # this script creates a `notebooks.txt` containing list of notebooks that
 # are present in qiskit-community/qiskit-textbook but are not in
-# qiskit-community/platypus.
+# Qiskit/platypus.
 #
 # this script is run from the `Check for Textbook notebooks` GitHub action
 # which should contain a copy of the qiskit-textbook and platypus repos

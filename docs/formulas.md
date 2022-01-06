@@ -46,7 +46,7 @@ notation defined from within the section's Jupyter Notebook cell metadata
 
 ###  Defining a notation in notations.yaml
 
-https://github.com/qiskit-community/platypus/blob/main/shared/notations.yaml
+https://github.com/Qiskit/platypus/blob/main/shared/notations.yaml
 
   
 
