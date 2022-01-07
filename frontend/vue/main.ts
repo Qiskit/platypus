@@ -27,6 +27,8 @@ import AmplitudeDiskWithValues from './components/AmplitudeDisk/AmplitudeDiskWit
 import AmplitudeAdditionDisk from './components/AmplitudeDisk/AmplitudeAdditionDisk.vue'
 import AmplitudeAdditionDiskWithValues from './components/AmplitudeDisk/AmplitudeAdditionDiskWithValues.vue'
 import AmplitudeAdditionWidget from './components/AmplitudeDisk/AmplitudeAdditionWidget.vue'
+import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAmplitudeEncoding.vue'
+import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
 
 declare global {
   interface Window {
@@ -69,7 +71,9 @@ const components: any = {
   AmplitudeDiskWithValues,
   AmplitudeAdditionDisk,
   AmplitudeAdditionDiskWithValues,
-  AmplitudeAdditionWidget
+  AmplitudeAdditionWidget,
+  StatevectorAmplitudeEncoding,
+  StatevectorBinaryEncoding
 }
 
 Object.keys(components).forEach((c) => {

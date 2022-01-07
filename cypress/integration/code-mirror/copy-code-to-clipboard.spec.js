@@ -22,6 +22,6 @@ describe('Copy code to clipboard', () => {
 
     // TODO: Check the clipboard's content (for single and multiple lines of
     // code copied).
-    // https://github.com/qiskit-community/platypus/issues/96
+    // https://github.com/Qiskit/platypus/issues/96
   })
 })
