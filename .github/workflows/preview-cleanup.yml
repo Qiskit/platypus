@@ -1,0 +1,16 @@
+name: Preview
+
+# run when a pull request is closed
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  code-engine:
+    uses: Qiskit/gh-actions/.github/workflows/code-engine-cleanup.yml@main
+    with:
+      code_engine_project: platypus-preview
+      docker_image_name: platypus
+    secrets:
+      ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
+      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
