@@ -24,6 +24,7 @@ nbproject
 *.sublime-project
 *.sublime-workspace
 .idea
+.qiskit
 
 # Folders to ignore
 .vscode
