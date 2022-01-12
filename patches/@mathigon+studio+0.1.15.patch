@@ -131,6 +131,64 @@ index fb85d09..077fc7e 100755
    }
  
    await writeFile(src, yaml.dump(config));
+diff --git a/node_modules/@mathigon/studio/server/accounts.ts b/node_modules/@mathigon/studio/server/accounts.ts
+index a28f2db..62f4c05 100755
+--- a/node_modules/@mathigon/studio/server/accounts.ts
++++ b/node_modules/@mathigon/studio/server/accounts.ts
+@@ -267,14 +267,14 @@ function redirect(req: express.Request, res: express.Response, data: ResponseDat
+ export default function setupAuthEndpoints(app: MathigonStudioApp) {
+ 
+   app.get('/login', (req, res) => {
+-    if (req.user) return res.redirect('/dashboard');
++    if (req.user) return res.redirect('/account');
+     res.render('accounts/login');
+   });
+ 
+   app.post('/login', async (req, res) => {
+     const response = await login(req);
+     if (response.user) req.session.auth!.user = response.user.id;
+-    redirect(req, res, response, '/dashboard', '/login');
++    redirect(req, res, response, '/account', '/login');
+   });
+ 
+   app.get('/logout', (req, res) => {
+@@ -283,23 +283,23 @@ export default function setupAuthEndpoints(app: MathigonStudioApp) {
+   });
+ 
+   app.get('/signup', (req, res) => {
+-    if (req.user) return res.redirect('/dashboard');
++    if (req.user) return res.redirect('/account');
+     res.render('accounts/signup', {countries: COUNTRY_LIST});
+   });
+ 
+   app.post('/signup', async (req, res) => {
+     const response = await signup(req);
+     if (response.user) req.session.auth!.user = response.user.id;
+-    redirect(req, res, response, '/dashboard', '/signup');
++    redirect(req, res, response, '/account', '/signup');
+   });
+ 
+   app.get('/confirm/:id/:token', async (req, res) => {
+     const response = await confirmEmail(req);
+-    redirect(req, res, response, '/dashboard', '/login');
++    redirect(req, res, response, '/account', '/login');
+   });
+ 
+   app.get('/forgot', (req, res) => {
+-    if (req.user) return res.redirect('/dashboard');
++    if (req.user) return res.redirect('/account');
+     res.render('accounts/forgot');
+   });
+ 
+@@ -369,7 +369,7 @@ export default function setupAuthEndpoints(app: MathigonStudioApp) {
+     const response = await oAuthCallback(req);
+     if (!response) return next();
+     if (response.user) req.session.auth!.user = response.user.id;
+-    redirect(req, res, response, '/dashboard', '/signup');
++    redirect(req, res, response, '/account', '/signup');
+   });
+ 
+   app.get('/cron/cleanup', async (req, res, next) => {
 diff --git a/node_modules/@mathigon/studio/server/data/oauth.yaml b/node_modules/@mathigon/studio/server/data/oauth.yaml
 index 5cc91fb..e1dfdbf 100644
 --- a/node_modules/@mathigon/studio/server/data/oauth.yaml
