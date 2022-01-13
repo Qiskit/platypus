@@ -5,7 +5,7 @@ on: [pull_request]
 
 jobs:
   code-engine:
-    # Prevents action to be executed by forks and drafts
+    # Prevents action to be executed by forks
     if: github.event.pull_request.head.repo.full_name == github.repository
     uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@platypus-user-account
     with:
