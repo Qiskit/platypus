@@ -139,6 +139,8 @@ new MathigonStudioApp()
     }
   })
   .get('/signin', async (req, res) => {
+    if (req.user) return res.redirect('/account');
+    
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
