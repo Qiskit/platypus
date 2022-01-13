@@ -38,6 +38,10 @@ div.text_cell_render > p > a > img {
 
 body > .body {
   margin-top: $qiskit-navbar-height;
+  // prevent mobile resizing
+  @include mq($until: medium) {
+    overflow: hidden;
+  }
 }
 
 button span.rangle {
