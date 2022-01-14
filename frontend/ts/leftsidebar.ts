@@ -46,7 +46,14 @@ const initLeftSidebar = function () {
     parentContainer?.classList?.add(hiddenPanelClass)
   }
 
-  window.addEventListener('resize', collapseMobileMenu)
+  // prevent mobile resizing
+  let windowInnerWidth = window.innerWidth
+  window.addEventListener('resize', () => {
+    if (windowInnerWidth !== window.innerWidth) {
+      windowInnerWidth = window.innerWidth
+      collapseMobileMenu()
+    }
+  })
 }
 
 const toggleLanguagePicker = function () {
