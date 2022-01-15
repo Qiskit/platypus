@@ -498,38 +498,45 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Lab 4. Accuracy of Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/lab-4-accuracy-of-quantum-phase-estimation`,
+      label: 'Lab 4. Bell Circuit & GHZ Circuit',
+      url: `${baseUrl}${pathLabs}/lab-4-bell-ghz-circuit`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-4-accuracy-of-quantum-phase-estimation`
+        action: `${actionPrefix} > ${sectionLabs} > lab-4-bell-ghz-circuit`
       }
     },
     {
-      label: 'Lab 5. Iterative Quantum Phase Estimation',
-      url: `${baseUrl}${pathLabs}/lab-5-iterative-phase-estimation-algorithm`,
+      label: 'Lab 5. Accuracy of Quantum Phase Estimation',
+      url: `${baseUrl}${pathLabs}/lab-5-accuracy-of-quantum-phase-estimation`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-5-iterative-phase-estimation-algorithm`
+        action: `${actionPrefix} > ${sectionLabs} > lab-5-accuracy-of-quantum-phase-estimation`
       }
     },
     {
-      label: 'Lab 6. Scalable Shor\'s Algorithm',
-      url: `${baseUrl}${pathLabs}/lab-6-scalable-shors-algorithm`,
+      label: 'Lab 6. Iterative Quantum Phase Estimation',
+      url: `${baseUrl}${pathLabs}/lab-6-iterative-phase-estimation-algorithm`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-6-scalable-shors-algorithm`
+        action: `${actionPrefix} > ${sectionLabs} > lab-6-iterative-phase-estimation-algorithm`
       }
     },
     {
-      label: 'Lab 7. Grover\'s search with an unknown number of solutions',
-      url: `${baseUrl}${pathLabs}/lab-7-grovers-search-with-an-unknown-number-of-solutions`,
+      label: 'Lab 7. Scalable Shor\'s Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-7-scalable-shors-algorithm`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-7-grovers-search-with-an-unknown-number-of-solutions`
+        action: `${actionPrefix} > ${sectionLabs} > lab-7-scalable-shors-algorithm`
       }
     },
     {
-      label: 'Lab 8. Quantum Simulation as a Search Algorithm',
-      url: `${baseUrl}${pathLabs}/lab-8-quantum-simulation-as-a-search-algorithm`,
+      label: 'Lab 8. Grover\'s search with an unknown number of solutions',
+      url: `${baseUrl}${pathLabs}/lab-8-grovers-search-with-an-unknown-number-of-solutions`,
       segment: {
-        action: `${actionPrefix} > ${sectionLabs} > lab-8-quantum-simulation-as-a-search-algorithm`
+        action: `${actionPrefix} > ${sectionLabs} > lab-8-grovers-search-with-an-unknown-number-of-solutions`
+      }
+    },
+    {
+      label: 'Lab 9. Quantum Simulation as a Search Algorithm',
+      url: `${baseUrl}${pathLabs}/lab-9-quantum-simulation-as-a-search-algorithm`,
+      segment: {
+        action: `${actionPrefix} > ${sectionLabs} > lab-9-quantum-simulation-as-a-search-algorithm`
       }
     }
   ]
