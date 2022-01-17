@@ -1,12 +1,14 @@
 name: Preview
 
-# run when a pull request is made
-on: [pull_request]
+on:
+  pull_request:
 
 jobs:
   code-engine:
-    # Prevents action to be executed by forks
+    # Run only from the original repository
+    # Because this job requires secrets, which cannot be shared with forks
     if: github.event.pull_request.head.repo.full_name == github.repository
+
     uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
     with:
       code_engine_project: platypus-preview

@@ -1,12 +1,15 @@
 name: Preview
 
-# run when a pull request is closed
 on:
   pull_request:
     types: [closed]
 
 jobs:
   code-engine:
+    # Run only from the original repository
+    # Because this job requires secrets, which cannot be shared with forks
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
     uses: Qiskit/gh-actions/.github/workflows/code-engine-cleanup.yml@main
     with:
       code_engine_project: platypus-preview
