@@ -13,6 +13,10 @@ on:
 
 jobs:
   build-test-release:
+    # Run the job if the PR is from the same repository
+    # This is because this job requires a secret, and secrets cannot be shared with forks
+    if: github.repository == "Qiskit/platypus"
+
     name: Build, Test, and Release
 
     runs-on: ubuntu-latest
