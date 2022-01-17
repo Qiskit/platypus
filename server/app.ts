@@ -66,7 +66,6 @@ new MathigonStudioApp()
   .redirects({
     '/': TEXTBOOK_HOME,
     '/textbook': TEXTBOOK_HOME,
-    '/login': '/signin'
   })
   .get('/locales/:locale', async (req, res) => {
     const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
@@ -153,6 +152,9 @@ new MathigonStudioApp()
       lang,
       translationsJSON
     })
+  })
+  .get('/login', async (req, res) => {
+    res.redirect('/signin')
   })
   .course({})
   .errors()
