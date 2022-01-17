@@ -31,18 +31,28 @@ export default defineComponent({
       this.internalCode = newVal
     }
   },
+  mounted () {
+    this.internalCode = this.code
+  },
   methods: {
     copy () {
       console.log('copy from editor')
     },
     reset () {
       console.log('reset from reset')
+    },
+    textChanged () {
+      this.$emit('codeChanged', this.internalCode)
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-.code-exercise {
+.code-editor {
+  &__text-area {
+    width: 100%;
+    height: 8rem;
+  }
 }
 </style>
