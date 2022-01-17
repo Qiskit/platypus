@@ -13,7 +13,7 @@ jobs:
   build-test-release:
     # Run only from the original repository
     # Because this job requires secrets, which cannot be shared with forks
-    if: github.repository == "Qiskit/platypus"
+    if: github.repository == 'Qiskit/platypus'
 
     name: Build, Test, and Release
 
