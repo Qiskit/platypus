@@ -1,9 +1,7 @@
 name: Build, Test, and Release
 
 on:
-  # run when action is manually triggered
   workflow_dispatch:
-  # run on pushes to release branch
   push:
     branches: [release]
   # run daily at 08:00am UTC (on the default or base branch)
@@ -22,17 +20,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Install Node v14
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: "14"
           cache: "npm"
 
-      - name: Install npm dependencies
-        run: npm ci
+      - run: npm ci
 
       - name: Install Python 3.8
         uses: actions/setup-python@v2
@@ -58,20 +53,20 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
-          wait-on: 'http://localhost:8080/health'
+          wait-on: "http://localhost:8080/health"
 
       # We remove the Dockerfile because when there is a Dockerfile in the
       # current directory, Google App Engine try to use it.
       - name: Remove Dockerfile
         run: rm -f Dockerfile
 
-      - name: Authenticate to AppEngine
-        uses: 'google-github-actions/auth@v0'
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
         with:
-          credentials_json: '${{ secrets.GCLOUD_SERVICE_ACCOUNT }}'
+          credentials_json: ${{ secrets.GCLOUD_SERVICE_ACCOUNT }}
 
-      - name: Deploy to AppEngine
-        uses: google-github-actions/deploy-appengine@main
+      - name: Deploy to App Engine
+        uses: google-github-actions/deploy-appengine@v0
         with:
           # The GCLOUD_SERVICE_ACCOUNT secret is defined in the GitHub repo.
           # It needs the following permissions

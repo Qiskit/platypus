@@ -1,6 +1,5 @@
 name: Preview
 
-# run when a pull request is closed
 on:
   pull_request:
     types: [closed]

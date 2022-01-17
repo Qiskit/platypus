@@ -1,7 +1,6 @@
 name: Check for Textbook notebooks
 
 on:
-  # run when action is manually triggered
   workflow_dispatch:
   # run every 1st of each month at 10:00am UTC
   # https://crontab.guru/#0_10_1_*_*
