@@ -89,6 +89,9 @@ export default class SignIn extends Vue {
     @include mq($from: medium) {
       width: 100%;
     }
+    @include mq($until: large) {
+      overflow-y: auto;
+    }
     &-section {
       &__hero {
         padding: $spacing-11;
