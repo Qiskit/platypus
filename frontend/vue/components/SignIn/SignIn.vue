@@ -20,20 +20,19 @@
         <h2 class="sign-in__form__title">
           {{ $translate('Sign Into Qiskit') }}
         </h2>
-        <AppCta
-          class="sign-in__cta"
-          :label="$translate('IBM id')"
-          :url="authenticationUrl"
-        />
-        <div class="sign-in__icons">
-          <BasicLink
-            url="/auth/google"
-          >
-            <LogoGoogle32 class="sign-in__icons__item" />
-          </BasicLink>
-          <LogoGitHub32 class="sign-in__icons__item" />
-          <LogoLinkedIn32 class="sign-in__icons__item" />
-          <LogoTwitter32 class="sign-in__icons__item" />
+        <div class="sign-in__links">
+          <AppCta
+            class="sign-in__cta"
+            :label="$translate('IBM id')"
+            :url="authenticationUrl"
+          />
+          <AppCta
+            class="sign-in__cta"
+            :url="gmailAuthenticationLink.url"
+            :label="$translate('Sign in with Gmail')"
+            :segment="gmailAuthenticationLink.segment"
+            kind="ghost"
+          />
         </div>
       </div>
     </div>
@@ -42,22 +41,25 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
-import LogoLinkedIn32 from '@carbon/icons-vue/lib/logo--linkedin/32'
-import LogoGoogle32 from '@carbon/icons-vue/lib/logo--google/32'
-import LogoTwitter32 from '@carbon/icons-vue/lib/logo--twitter/32'
-import LogoGitHub32 from '@carbon/icons-vue/lib/logo--github/32'
 import AppCta from '../common/AppCta.vue'
 import BasicLink from '../common/BasicLink.vue'
 
 @Options({
   components: {
-    AppCta, BasicLink, LogoLinkedIn32, LogoGoogle32, LogoTwitter32, LogoGitHub32
+    AppCta, BasicLink
   }
 })
 
 export default class SignIn extends Vue {
   authenticationUrl = '/auth/ibm'
   footerMediaPath = '/images/textbook_demo.mp4'
+  gmailAuthenticationLink = {
+    url: '/auth/google',
+    segment: {
+      cta: 'auth-google',
+      location: 'sign-in'
+    }
+  }
 }
 </script>
 
@@ -145,7 +147,9 @@ export default class SignIn extends Vue {
   }
 
   &__cta {
-    margin-bottom: $spacing-05;
+    &:not(:last-child) {
+      margin-bottom: $spacing-03;
+    }
   }
 
   &__form {
