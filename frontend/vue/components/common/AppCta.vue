@@ -13,6 +13,7 @@
     </span>
     <component
       :is="iconPerLinkType"
+      v-if="iconPerLinkType !== ''"
       class="app-cta__icon"
       :class="`app-cta__icon_${iconPerLinkType}`"
     />
@@ -46,13 +47,10 @@ export default class AppCta extends Vue.with(Props) {
     // @ts-ignore
     const url:string = this.$attrs.url
 
-    if (BasicLink.isExternal(url)) {
-      return 'launch-16'
-    } else if (BasicLink.isIdAnchor(url)) {
-      return 'arrow-down-16'
-    } else {
-      return 'arrow-right-16'
-    }
+    if (!url) { return '' }
+    if (BasicLink.isExternal(url)) { return 'launch-16' }
+    if (BasicLink.isIdAnchor(url)) { return 'arrow-down-16' }
+    return 'arrow-right-16'
   }
 
   get isIdAnchor () {

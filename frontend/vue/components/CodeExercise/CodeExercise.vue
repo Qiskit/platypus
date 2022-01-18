@@ -1,10 +1,22 @@
 <template>
   <div class="code-exercise">
     <div class="code-exercise__editor-block">
-      <CodeEditor class="code-exercise__editor" :code="code" @codeChanged="codeChanged" />
-      <ExerciseActionsBar class="code-exercise__actions-bar" @run="run" @grade="grade" />
+      <CodeEditor
+        class="code-exercise__editor-block__editor"
+        :code="code"
+        @codeChanged="codeChanged"
+        @notebookCopyRequest="notebookCopyRequest"
+      />
+      <ExerciseActionsBar
+        class="code-exercise__editor-block__actions-bar"
+        @run="run"
+        @grade="grade"
+      />
     </div>
-    <CodeOutput ref="output" class="code-exercise__output" />
+    <CodeOutput
+      ref="output"
+      class="code-exercise__output"
+    />
   </div>
 </template>
 
@@ -34,7 +46,6 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
   },
   methods: {
     run () {
-      console.log('run from exercise')
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
       /*
@@ -55,17 +66,22 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
       */
     },
     grade () {
-      console.log('grade from exercise')
+      /* TBD */
+      console.log(`Grade request from exercise with code: ${this.code}`)
     },
     codeChanged (code: string) {
-      console.log(`codeChanged from exercise ${code}`)
       this.code = code
+    },
+    notebookCopyRequest (code: string) {
+      /* TBD */
+      console.log(`Requested a notebook copy of code: ${code}`)
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-exercise {
@@ -73,6 +89,22 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
   &__editor-block {
     // border-bottom: 1px solid $border-color;
     background-color: $background-color-lighter;
+    position: relative;
+    height: 13rem;
+
+    &__editor {
+      height: 100%;
+      padding-bottom: $spacing-02;
+    }
+    &__actions-bar {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
   }
+}
+
+.button {
+  background-color: red;
 }
 </style>

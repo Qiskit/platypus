@@ -1,21 +1,21 @@
 <template>
   <clipboard-copy
-    :for="targetId"
+    :value="text"
     class="code-mirror-clipboard-copy"
     @clipboard-copy="handleClick"
   >
     <div class="label" v-text="$translate(label)" />
-    <Copy32 class="copy-icon" />
+    <CopyIcon class="copy-icon" />
   </clipboard-copy>
 </template>
 
 <script lang="ts">
 import { Options, prop, Vue } from 'vue-class-component'
-import Copy32 from '@carbon/icons-vue/lib/copy/32'
+import CopyIcon from '@carbon/icons-vue/lib/copy/20'
 import '@github/clipboard-copy-element'
 
 class Props {
-  targetId = prop({ type: String, required: true });
+  text = prop({ type: String, required: true });
 }
 
 const LABEL = {
@@ -25,7 +25,7 @@ const LABEL = {
 
 @Options({
   components: {
-    Copy32
+    CopyIcon
   }
 })
 export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
@@ -46,16 +46,16 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
 </script>
 
 <style lang="scss" scoped>
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-mirror-clipboard-copy {
   align-items: center;
   display: flex;
   font-size: 0.875rem;
-  position: absolute;
-  right: 0;
-  top: 0;
+  position: relative;
   z-index: 100;
+  padding: $spacing-03;
 
   &:focus,
   &:hover {
@@ -63,18 +63,11 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
     cursor: pointer;
 
     .label {
+      display: block;
+      transition: display 0s ease-out 0.2s;
       opacity: 1;
     }
   }
-}
-
-.copy-icon {
-  height: 15px;
-  margin-bottom: 10px;
-  margin-left: 5px;
-  margin-right: 10px;
-  margin-top: 10px;
-  width: 100%;
 }
 
 .label {
@@ -82,6 +75,10 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
   opacity: 0;
   padding-left: 10px;
   padding-right: 10px;
+  right: calc(20px + #{$spacing-03} * 2);
   transition: opacity 0.2s ease-out;
+  display: none;
+  position: absolute;
+  pointer-events: none;
 }
 </style>
