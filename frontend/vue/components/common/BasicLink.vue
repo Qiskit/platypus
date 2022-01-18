@@ -42,7 +42,7 @@ export default class BasicLink extends Vue.with(Props) {
   }
 
   get isNuxtLink (): boolean {
-    return !this.isAnchor
+    return false
   }
 }
 </script>
