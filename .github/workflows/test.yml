@@ -1,9 +1,7 @@
 name: Test
 
 on:
-  # run when action is manually triggered
   workflow_dispatch:
-  # run on pull requests
   pull_request:
 
 jobs:
@@ -13,17 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Install Node v14
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: "14"
           cache: "npm"
 
-      - name: Install npm dependencies
-        run: npm ci
+      - run: npm ci
 
       - name: Install Python 3.8
         uses: actions/setup-python@v2
@@ -49,4 +44,4 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm start
-          wait-on: 'http://localhost:8080/health'
+          wait-on: "http://localhost:8080/health"
