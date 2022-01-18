@@ -89,6 +89,8 @@ new MathigonStudioApp()
     res.json(courses)
   })
   .get('/account', (req, res) => {
+    if (!req.user) return res.redirect('/signin');
+
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
