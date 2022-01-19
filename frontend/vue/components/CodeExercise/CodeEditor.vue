@@ -9,7 +9,8 @@
       @reset="resetRequest"
       @notebook="notebook"
     />
-    <textarea ref="textArea" v-model="internalCode" class="code-editor__text-area" @input="textChanged" />
+    <!-- textarea v-model="internalCode" class="code-editor__text-area" @input="textChanged" /-->
+    <CodeArea class="code-editor__text-area" :code="internalCode" @codeChanged="codeChanged" />
     <div
       v-if="resetNotificationOpen"
       class="code-editor__reset-notification__wrapper"
@@ -34,12 +35,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import CodeEditorTools from './CodeEditorTools.vue'
+import CodeArea from './CodeArea.vue'
 import 'carbon-web-components/es/components/notification/toast-notification'
 
 export default defineComponent({
   name: 'CodeExercise',
   components: {
-    CodeEditorTools
+    CodeEditorTools,
+    CodeArea
   },
   props: {
     code: {
@@ -89,8 +92,10 @@ export default defineComponent({
     resetConfirm () {
       this.resetNotificationOpen = false
       this.internalCode = this.initialCode
+      this.$emit('codeChanged', this.internalCode)
     },
-    textChanged () {
+    codeChanged (code: string) {
+      this.internalCode = code
       this.$emit('codeChanged', this.internalCode)
     },
     notebook () {
