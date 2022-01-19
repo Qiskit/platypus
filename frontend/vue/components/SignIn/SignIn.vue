@@ -88,7 +88,7 @@ export default class SignIn extends Vue {
     @include mq($from: medium) {
       width: 100%;
     }
-    @include mq($until: large) {
+    @include mq($until: x-large) {
       overflow-y: auto;
     }
     &-section {
@@ -113,20 +113,11 @@ export default class SignIn extends Vue {
 
       &__media {
         border-top: 1px solid $cool-gray-20;
-        max-width: 100%;
+        width: 100%;
+        max-width: initial;
 
         @include mq($until: medium) {
           display: none;
-        }
-      }
-
-      &__media {
-        border: 1px solid $cool-gray-20;
-        width: 100%;
-        max-width: initial;
-        @include mq($from: medium) {
-          max-width: 32rem;
-          margin-bottom: $spacing-05;
         }
       }
     }
@@ -169,19 +160,6 @@ export default class SignIn extends Vue {
       margin: 0 auto;
       @include mq($until: medium) {
         margin: initial;
-      }
-    }
-  }
-
-  &__icons {
-    display: flex;
-
-    &__item {
-      margin-right: $spacing-04;
-
-      &:hover {
-        fill: $cool-gray-70;
-        cursor: pointer;
       }
     }
   }
