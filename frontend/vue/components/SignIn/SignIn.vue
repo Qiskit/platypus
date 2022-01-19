@@ -85,11 +85,9 @@ export default class SignIn extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: auto;
     @include mq($from: medium) {
       width: 100%;
-    }
-    @include mq($until: x-large) {
-      overflow-y: auto;
     }
     &-section {
       &__hero {
@@ -113,8 +111,7 @@ export default class SignIn extends Vue {
 
       &__media {
         border-top: 1px solid $cool-gray-20;
-        width: 100%;
-        max-width: initial;
+        height: 100%;
 
         @include mq($until: medium) {
           display: none;
