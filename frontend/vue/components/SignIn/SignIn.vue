@@ -20,20 +20,17 @@
         <h2 class="sign-in__form__title">
           {{ $translate('Sign Into Qiskit') }}
         </h2>
-        <div class="sign-in__links">
-          <AppCta
-            class="sign-in__cta"
-            :label="$translate('IBM id')"
-            :url="authenticationUrl"
-          />
-          <AppCta
-            class="sign-in__cta"
-            :url="gmailAuthenticationLink.url"
-            :label="$translate('Sign in with Gmail')"
-            :segment="gmailAuthenticationLink.segment"
-            kind="ghost"
-          />
-        </div>
+        <AppCta
+          class="sign-in__cta"
+          :label="$translate('IBM id')"
+          :url="authenticationUrl"
+        />
+        <AppCta
+          :url="gmailAuthenticationLink.url"
+          :label="$translate('Sign in with Gmail')"
+          :segment="gmailAuthenticationLink.segment"
+          kind="ghost"
+        />
       </div>
     </div>
   </section>
@@ -104,6 +101,7 @@ export default class SignIn extends Vue {
 
       &__hero {
         flex-direction: column;
+        background-color: $white-0;
 
         &-title {
           margin-bottom: $spacing-05;
@@ -139,17 +137,11 @@ export default class SignIn extends Vue {
           margin-bottom: $spacing-05;
         }
       }
-
-      &:not(:last-child) {
-        background-color: $white-0;
-      }
     }
   }
 
   &__cta {
-    &:not(:last-child) {
-      margin-bottom: $spacing-03;
-    }
+    margin-bottom: $spacing-03;
   }
 
   &__form {
