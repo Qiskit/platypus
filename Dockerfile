@@ -29,8 +29,9 @@ WORKDIR /usr/app
 
 COPY --from=builder /usr/app/package*.json ./
 COPY --from=builder /usr/app/patches patches/
-# npm ci --production is not working for some unknown reason
-RUN npm install --production
+
+RUN npm ci --only=production
+
 COPY server server/
 COPY --from=builder /usr/app/config.yaml ./
 COPY --from=builder /usr/app/public public/
