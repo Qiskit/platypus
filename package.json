@@ -63,7 +63,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@types/fs-extra": "^9.0.12",
-    "@types/jsdom": "^16.2.13",
+    "@types/jsdom": "^16.2.14",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.1",
     "@vue/cli-plugin-typescript": "~4.5.13",
