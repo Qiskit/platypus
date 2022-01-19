@@ -23,16 +23,12 @@
           :label="$translate('IBM id')"
           :url="authenticationUrl"
         />
-        <div class="sign-in__icons">
-          <BasicLink
-            url="/auth/google"
-          >
-            <LogoGoogle32 class="sign-in__icons__item" />
-          </BasicLink>
-          <LogoGitHub32 class="sign-in__icons__item" />
-          <LogoLinkedIn32 class="sign-in__icons__item" />
-          <LogoTwitter32 class="sign-in__icons__item" />
-        </div>
+        <AppCta
+          :url="gmailAuthenticationLink.url"
+          :label="$translate('Sign in with Gmail')"
+          :segment="gmailAuthenticationLink.segment"
+          kind="ghost"
+        />
       </div>
     </div>
   </section>
@@ -40,22 +36,25 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
-import LogoLinkedIn32 from '@carbon/icons-vue/lib/logo--linkedin/32'
-import LogoGoogle32 from '@carbon/icons-vue/lib/logo--google/32'
-import LogoTwitter32 from '@carbon/icons-vue/lib/logo--twitter/32'
-import LogoGitHub32 from '@carbon/icons-vue/lib/logo--github/32'
 import AppCta from '../common/AppCta.vue'
 import BasicLink from '../common/BasicLink.vue'
 
 @Options({
   components: {
-    AppCta, BasicLink, LogoLinkedIn32, LogoGoogle32, LogoTwitter32, LogoGitHub32
+    AppCta, BasicLink
   }
 })
 
 export default class SignIn extends Vue {
   authenticationUrl = '/auth/ibm'
   signinMediaPath = '/images/textbook_showcase.mp4'
+  gmailAuthenticationLink = {
+    url: '/auth/google',
+    segment: {
+      cta: 'auth-google',
+      location: 'sign-in'
+    }
+  }
 }
 </script>
 
@@ -96,6 +95,7 @@ export default class SignIn extends Vue {
       &__hero {
         padding: $spacing-11;
         flex-direction: column;
+        background-color: $white-0;
 
         @include mq($until: large) {
           padding: $spacing-11 $spacing-07;
@@ -120,14 +120,20 @@ export default class SignIn extends Vue {
         }
       }
 
-      &:not(:last-child) {
-        background-color: $white-0;
+      &__media {
+        border: 1px solid $cool-gray-20;
+        width: 100%;
+        max-width: initial;
+        @include mq($from: medium) {
+          max-width: 32rem;
+          margin-bottom: $spacing-05;
+        }
       }
     }
   }
 
   &__cta {
-    margin-bottom: $spacing-05;
+    margin-bottom: $spacing-03;
   }
 
   &__form {
