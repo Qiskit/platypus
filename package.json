@@ -40,7 +40,7 @@
     "@carbon/colors": "^10.35.0",
     "@carbon/icons-vue": "^10.45.0",
     "@carbon/themes": "^10.49.0",
-    "@carbon/vue": "^2.39.0",
+    "@carbon/vue": "^2.40.0",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^5.2.1",
     "@mathigon/boost": "^0.6.17",
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
-    "@types/fs-extra": "^9.0.12",
+    "@types/fs-extra": "^9.0.13",
     "@types/jsdom": "^16.2.14",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
