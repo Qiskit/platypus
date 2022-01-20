@@ -5,5 +5,9 @@
     ":separateMultipleMajorReleases",
     ":maintainLockFilesWeekly"
   ],
-  "rangeStrategy": "bump"
+  "rangeStrategy": "bump",
+  "prConcurrentLimit": 5,
+  "schedule": [
+    "every weekend"
+  ]
 }
