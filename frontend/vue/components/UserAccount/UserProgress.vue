@@ -53,7 +53,7 @@ export default defineComponent({
   padding-bottom: $spacing-07;
 
   &__title {
-    @include type-style('expressive-heading-04');
+    @include type-style('expressive-heading-05');
     color: $text-active-color;
 
     &-container {
