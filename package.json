@@ -34,7 +34,7 @@
     "test:nb": "npm run test:nb:lint && npm run test:nb:goals"
   },
   "engines": {
-    "node": "14.16.0"
+    "node": "14.18.3"
   },
   "dependencies": {
     "@carbon/colors": "^10.35.0",
