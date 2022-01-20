@@ -9,11 +9,9 @@
           {{ $translate('Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.') }}
         </p>
       </div>
-      <div class="sign-in__content-section sign-in__content-section__footer">
-        <video class="sign-in__content-section__media" autoplay loop>
-          <source :src="footerMediaPath" type="video/mp4">
-        </video>
-      </div>
+      <video class="sign-in__content-section__media" autoplay loop muted>
+        <source :src="signinMediaPath" type="video/mp4">
+      </video>
     </div>
     <div class="sign-in__form">
       <div class="sign-in__form__content">
@@ -49,7 +47,7 @@ import BasicLink from '../common/BasicLink.vue'
 
 export default class SignIn extends Vue {
   authenticationUrl = '/auth/ibm'
-  footerMediaPath = '/images/textbook_demo.mp4'
+  signinMediaPath = '/images/textbook_showcase.mp4'
   gmailAuthenticationLink = {
     url: '/auth/google',
     segment: {
@@ -68,7 +66,6 @@ export default class SignIn extends Vue {
 
 .sign-in {
   position: fixed;
-  background-color: $cool-gray-10;
   top: 3.5rem;
   left: 0;
   right: 0;
@@ -85,23 +82,22 @@ export default class SignIn extends Vue {
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
     @include mq($from: medium) {
-      flex-grow: 1;
+      width: 100%;
     }
     &-section {
-      padding: $spacing-11;
-
-      @include mq($until: large) {
-        padding: $spacing-11 $spacing-07;
-      }
-
-      @include mq($from: medium) {
-        min-height: 50%;
-      }
-
       &__hero {
+        padding: $spacing-11;
         flex-direction: column;
         background-color: $white-0;
+
+        @include mq($until: large) {
+          padding: $spacing-11 $spacing-07;
+        }
 
         &-title {
           margin-bottom: $spacing-05;
@@ -113,28 +109,12 @@ export default class SignIn extends Vue {
         }
       }
 
-      &__footer {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-
-        @include mq($until: max-size) {
-          flex-direction: column;
-          align-items: flex-start;
-        }
+      &__media {
+        border-top: 1px solid $cool-gray-20;
+        height: 100%;
 
         @include mq($until: medium) {
           display: none;
-        }
-      }
-
-      &__media {
-        border: 1px solid $cool-gray-20;
-        width: 100%;
-        max-width: initial;
-        @include mq($from: medium) {
-          max-width: 32rem;
-          margin-bottom: $spacing-05;
         }
       }
     }
@@ -150,6 +130,8 @@ export default class SignIn extends Vue {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 40rem;
+    flex-grow: 1;
 
     @include mq($until: large) {
       padding: $spacing-11 $spacing-07;
@@ -175,19 +157,6 @@ export default class SignIn extends Vue {
       margin: 0 auto;
       @include mq($until: medium) {
         margin: initial;
-      }
-    }
-  }
-
-  &__icons {
-    display: flex;
-
-    &__item {
-      margin-right: $spacing-04;
-
-      &:hover {
-        fill: $cool-gray-70;
-        cursor: pointer;
       }
     }
   }
