@@ -78,7 +78,7 @@ export default defineComponent({
       activeSection: '',
       sectionList: [
         {
-          displayName: this.$translate('My Learning'),
+          displayName: this.$translate('Learning'),
           hash: '#MyLearning'
         },
         {
