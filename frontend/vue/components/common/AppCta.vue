@@ -25,7 +25,7 @@ import ArrowRight16 from '@carbon/icons-vue/lib/arrow--right/16'
 import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
 import BasicLink from './BasicLink.vue'
-import { isExternal, isIdAnchor } from '../constants/helper'
+import { isExternal, isIdAnchor } from '../../../ts/utilities'
 
 class Props {
   kind = prop({ type: String, default: 'primary' })

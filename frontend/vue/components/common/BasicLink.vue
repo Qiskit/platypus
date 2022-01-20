@@ -16,7 +16,7 @@
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
 import { CtaClickedEventProp } from '../../../constants/segment'
-import { isExternal, isMail, isIdAnchor } from '../constants/helper'
+import { isExternal, isMail, isIdAnchor } from '../../../ts/utilities'
 
 class Props {
   url = prop({ type: String, default: '' })
