@@ -25,6 +25,7 @@ import ArrowRight16 from '@carbon/icons-vue/lib/arrow--right/16'
 import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
 import BasicLink from './BasicLink.vue'
+import { isExternal, isIdAnchor } from '../constants/helper'
 
 class Props {
   kind = prop({ type: String, default: 'primary' })
@@ -46,9 +47,9 @@ export default class AppCta extends Vue.with(Props) {
     // @ts-ignore
     const url:string = this.$attrs.url
 
-    if (BasicLink.isExternal(url)) {
+    if (isExternal(url)) {
       return 'launch-16'
-    } else if (BasicLink.isIdAnchor(url)) {
+    } else if (isIdAnchor(url)) {
       return 'arrow-down-16'
     } else {
       return 'arrow-right-16'
