@@ -2,10 +2,10 @@
   <section class="user-progress">
     <div class="user-progress__title-container">
       <h3 class="user-progress__title">
-        {{ $translate("Default") }}
+        {{ $translate("Learning") }}
       </h3>
       <p class="user-progress__title-text">
-        {{ $translate("Default shows your progress in chronological order as seen in the textbook. Checkmarks appear next to section that you have completed.") }}
+        {{ $translate("This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.") }}
       </p>
     </div>
     <CourseProgress
