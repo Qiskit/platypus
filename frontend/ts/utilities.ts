@@ -22,7 +22,22 @@ const randomValue = function (min: number, max: number, step: number = 0.000001)
   return Math.round(rangedRandom / step) * step
 }
 
+const isExternal = function (url: string): boolean {
+  return !!url && url.startsWith('http')
+}
+
+const isMail = function (url: string): boolean {
+  return !!url && url.startsWith('mailto')
+}
+
+const isIdAnchor = function (url: string): boolean {
+  return !!url && url.startsWith('#')
+}
+
 export {
+  isExternal,
+  isMail,
+  isIdAnchor,
   mergeJson,
   randomValue
 }
