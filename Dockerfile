@@ -26,8 +26,8 @@ COPY config.yaml ./
 
 RUN npm run setup:secrets -- --mongo $MONGODB_URI --ibmClientId $IBMID_CLIENT_ID --ibmClientSecret $IBMID_CLIENT_SECRET
 RUN npm run build
-# only need to keep all the strings.yaml
-RUN find ./translations -type f ! -iname "*.yaml" -delete
+# only need to keep all the strings.yaml & *.md files
+RUN find ./translations -type f ! -iname "*.yaml" -type f ! -iname "*.md" -delete
 
 FROM node:16-alpine3.14 AS runtime
 
