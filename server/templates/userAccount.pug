@@ -10,7 +10,7 @@ html(lang=lang dir=dir)
       q-the-menu
 
     .body
-      q-user-account-layout(user-name=userData.name user-role=userData.role)
+      q-user-account-layout(user-name=userData.name)
 
     script(type="application/json")#translations!= translationsJSON
     script(type="application/json")#privacyPolicy!= privacyPolicyMD
@@ -23,7 +23,7 @@ html(lang=lang dir=dir)
       var textbook = {
         locale: "#{req.locale.id}"
       };
-    
+
     script(src='/textbook.js')
     script(src='/course.js')
     include ../includes/tail.html

@@ -3,7 +3,6 @@
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
         <span class="user-account__section-nav__user-data__name">{{ userName }}</span>
-        <span v-if="userRole" class="user-account__section-nav__user-data__role">{{ userRole }}</span>
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
@@ -44,12 +43,6 @@
         <UserProgress />
       </div>
       <div v-if="activeSection === sectionList[1].hash">
-        GROUPS SECTION
-      </div>
-      <div v-if="activeSection === sectionList[2].hash">
-        BADGES SECTION
-      </div>
-      <div v-if="activeSection === sectionList[3].hash">
         <PrivacySection />
       </div>
     </section>
@@ -71,7 +64,6 @@ export default defineComponent({
   },
   props: {
     userName: { type: String, required: false, default: '' },
-    userRole: { type: String, required: false, default: '' }
   },
   data () {
     return {
@@ -80,14 +72,6 @@ export default defineComponent({
         {
           displayName: this.$translate('Learning'),
           hash: '#MyLearning'
-        },
-        {
-          displayName: this.$translate('Groups'),
-          hash: '#Groups'
-        },
-        {
-          displayName: this.$translate('Badges'),
-          hash: '#Badges'
         },
         {
           displayName: this.$translate('Privacy'),
@@ -163,13 +147,6 @@ export default defineComponent({
         @include type-style('expressive-heading-05');
         word-break: break-word;
         max-height: 9.25rem;
-        overflow: hidden;
-      }
-
-      &__role {
-        @include type-style('expressive-heading-01');
-        word-break: break-word;
-        max-height: 3.5rem;
         overflow: hidden;
       }
     }

@@ -89,7 +89,7 @@ new MathigonStudioApp()
     res.json(courses)
   })
   .get('/account', (req, res) => {
-    if (!req.user) return res.redirect('/signin');
+    // if (!req.user) return res.redirect('/signin');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -98,7 +98,6 @@ new MathigonStudioApp()
 
     const userMockData = {
       name: 'John Doe',
-      role: 'Administrator'
     }
 
     res.render('userAccount', {
@@ -142,7 +141,7 @@ new MathigonStudioApp()
   })
   .get('/signin', async (req, res) => {
     if (req.user) return res.redirect('/account');
-    
+
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 
