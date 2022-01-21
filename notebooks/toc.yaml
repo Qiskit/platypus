@@ -259,7 +259,7 @@
     - title: Visualizing entanglement
       id: visualizing-entanglement
       url: /intro/visualizing-entanglement
-    - title: Grover's algorithm
+    - title: Grovers algorithm
       id: grovers-search-algorithm
       url: /intro/grover-intro
     - title: Project
@@ -380,21 +380,36 @@
       url: /summer-school/2021/lec10.2
 
 - title: Quantum Machine Learning
-  url: /learning-qml
+  url: /machine-learning
   type: learning-path
   sections:
     - title: Introduction
       id: introduction
       url: /quantum-machine-learning/introduction
-    - title: Parameterized Quantum Circuits
-      id: parametrized-quantum-circuits
+    - title: Parametrized quantum circuits
+      id: parameterized-quantum-circuits
       url: /quantum-machine-learning/pqc
-    - title: Data Encoding
+    - title: Data encoding
       id: data-encoding
       url: /quantum-machine-learning/encoding
-    - title: Quantum Kernels
-      id: quantum-feature-maps-and-kernels
-      url: /quantum-machine-learning/kernel
-    - title: Variational Classification
+    - title: Training quantum circuits
+      id: training-quantum-circuits
+      url: /quantum-machine-learning/training
+    - title: Supervised learning
+      id: supervised-learning
+      url: /quantum-machine-learning/supervised
+    - title: Variational classification
       id: variational-classification
       url: /quantum-machine-learning/vqc
+    - title: Quantum feature maps and kernels
+      id: quantum-feature-maps-kernels
+      url: /quantum-machine-learning/kernel
+    - title: Unsupervised learning
+      id: unsupervised-learning
+      url: /quantum-machine-learning/unsupervised
+    - title: Quantum generative adversarial networks
+      id: quantum-generative-adversarial-networks
+      url: /quantum-machine-learning/qgan
+    - title: Project
+      id: project
+      url: /quantum-machine-learning/project
