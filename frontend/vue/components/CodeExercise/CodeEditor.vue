@@ -1,5 +1,6 @@
 <template>
   <div class="code-editor">
+    <CodeArea class="code-editor__text-area" :code="internalCode" @codeChanged="codeChanged" />
     <CodeEditorTools
       class="code-editor__tools"
       :copy-text="internalCode"
@@ -9,8 +10,6 @@
       @reset="resetRequest"
       @notebook="notebook"
     />
-    <!-- textarea v-model="internalCode" class="code-editor__text-area" @input="textChanged" /-->
-    <CodeArea class="code-editor__text-area" :code="internalCode" @codeChanged="codeChanged" />
     <div
       v-if="resetNotificationOpen"
       class="code-editor__reset-notification__wrapper"
@@ -113,11 +112,11 @@ export default defineComponent({
   &__text-area {
     width: 100%;
     height: 100%;
-    padding: $spacing-05 $spacing-05 $spacing-08 $spacing-05;
   }
   &__tools {
     position: absolute;
     right: 0;
+    top: 0;
   }
   &__reset-notification {
     --cds-inverse-01: #{$text-color-dark};

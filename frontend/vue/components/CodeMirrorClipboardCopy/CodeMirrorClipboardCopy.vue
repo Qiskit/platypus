@@ -54,7 +54,6 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
   display: flex;
   font-size: 0.875rem;
   position: relative;
-  z-index: 100;
   padding: $spacing-03;
 
   &:focus,

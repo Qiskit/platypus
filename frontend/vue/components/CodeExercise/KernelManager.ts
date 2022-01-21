@@ -28,13 +28,6 @@ export const serverOptions = {
       storagePrefix: 'thebe-binder-'
     }
   },
-  codeMirrorconfig: {
-    lineWrapping: false
-  },
-  codeMirrorConfig: {
-    theme: 'abcdef',
-    mode: 'python'
-  },
   kernelOptions: {
     name: 'python3',
     kernelName: 'python3',

@@ -22,10 +22,6 @@ import { requestBinderKernel, IKernelConnection } from './KernelManager'
 
 export default defineComponent({
   name: 'CodeOutput',
-  components: {
-  },
-  props: {
-  },
   data () {
     return {
       kernelPromise: undefined as Promise<IKernelConnection> | undefined,
