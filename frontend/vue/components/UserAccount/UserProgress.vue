@@ -54,11 +54,16 @@ export default defineComponent({
 
   &__title {
     @include type-style('expressive-heading-05');
+    margin-bottom: $spacing-05;
     color: $text-active-color;
 
     &-container {
       @include type-style('body-long-01');
       padding-bottom: $spacing-05;
+    }
+
+    &-text {
+      max-width: 38rem;
     }
   }
   &__course {
