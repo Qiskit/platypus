@@ -43,6 +43,7 @@
     "@carbon/vue": "^2.39.0",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^5.2.1",
+    "@jupyterlab/codemirror": "^3.2.8",
     "@jupyterlab/mathjax2": "^3.2.8",
     "@jupyterlab/outputarea": "^3.2.8",
     "@jupyterlab/rendermime": "^3.2.8",

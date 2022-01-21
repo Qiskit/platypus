@@ -87,14 +87,12 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
 .code-exercise {
   border: 1px solid $border-color;
   &__editor-block {
-    // border-bottom: 1px solid $border-color;
     background-color: $background-color-lighter;
     position: relative;
     height: 13rem;
 
     &__editor {
       height: 100%;
-      padding-bottom: $spacing-02;
     }
     &__actions-bar {
       position: absolute;
@@ -102,9 +100,5 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
       bottom: 0;
     }
   }
-}
-
-.button {
-  background-color: red;
 }
 </style>

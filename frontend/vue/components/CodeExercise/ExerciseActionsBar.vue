@@ -1,12 +1,14 @@
 <template>
   <div class="exercise-actions-bar">
     <button
+      v-if="runEnabled"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
       @click="run()"
     >
       Run
     </button>
     <button
+      v-if="gradeEnabled"
       class="exercise-actions-bar__button exercise-actions-bar__button_grade"
       @click="grade()"
     >
@@ -20,6 +22,18 @@ import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
   name: 'ExerciseActionsBar',
+  props: {
+    runEnabled: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    gradeEnabled: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
   methods: {
     run () {
       this.$emit('run')
