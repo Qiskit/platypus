@@ -48,7 +48,7 @@
     "@mathigon/studio": "0.1.14",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
-    "carbon-components": "~10.48.0",
+    "carbon-components": "~10.51.0",
     "carbon-web-components": "^1.20.0",
     "lit-element": "^2.5.1",
     "patch-package": "^6.4.7",
