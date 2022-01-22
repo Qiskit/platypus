@@ -44,7 +44,7 @@
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^5.2.1",
     "@mathigon/boost": "^0.6.17",
-    "@mathigon/euclid": "^0.6.12",
+    "@mathigon/euclid": "^1.0.6",
     "@mathigon/studio": "0.1.14",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
