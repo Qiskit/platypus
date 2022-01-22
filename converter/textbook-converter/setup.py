@@ -7,7 +7,7 @@ with open('README.md', encoding='utf-8') as f:
 
 
 requirements = [
-    'ipython>=6',
+    'ipython>=6.5.0',
     'nbformat>=4',
     'nbconvert>=5',
     'requests',
