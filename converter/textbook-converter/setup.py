@@ -8,7 +8,7 @@ with open('README.md', encoding='utf-8') as f:
 
 requirements = [
     'ipython>=6',
-    'nbformat>=4',
+    'nbformat>=4.4.0',
     'nbconvert>=5',
     'requests',
     'pyyaml'
