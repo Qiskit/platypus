@@ -68,7 +68,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "@vue/cli-plugin-typescript": "4.5.13",
     "@vue/cli-service": "4.5.13",
-    "@vue/compiler-sfc": "~3.1.5",
+    "@vue/compiler-sfc": "~3.2.28",
     "@vue/eslint-config-typescript": "^7.0.0",
     "axe-core": "^4.3.5",
     "cross-env": "^7.0.3",
