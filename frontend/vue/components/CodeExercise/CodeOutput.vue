@@ -54,8 +54,8 @@ export default defineComponent({
           const requestFuture = kernel.requestExecute({ code })
           this.setOutputFuture(requestFuture)
           requestFuture.done.then(() => this.$emit('finished'))
-        } catch (error) {
-          this.error = error
+        } catch (error: any) {
+          this.error = error as string
           this.outputArea!.model.clear()
         }
       })

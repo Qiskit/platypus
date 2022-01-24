@@ -262,7 +262,7 @@ export function requestKernel () {
     .then(() => {
       return km.startNew(kernelOptions)
     })
-    .then((kernel) => {
+    .then((kernel: IKernelConnection) => {
       events.dispatchEvent(new CustomEvent('status', {
         detail: {
           status: 'ready',

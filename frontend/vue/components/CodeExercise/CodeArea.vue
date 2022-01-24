@@ -40,32 +40,32 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 
 .code-area {
-  & ::v-deep(.CodeMirror) {
+  & :deep(.CodeMirror) {
     height: 100%;
   }
 
-  & ::v-deep(.CodeMirror-scroll) {
+  & :deep(.CodeMirror-scroll) {
     background-color: $background-color-lighter;
     &:hover .CodeMirror-gutters {
       background-color: $background-color-light;
     }
   }
-  & ::v-deep(.CodeMirror-sizer) {
+  & :deep(.CodeMirror-sizer) {
     height: 100%;
     padding-top: 16px;
   }
-  & ::v-deep(.CodeMirror-line) {
+  & :deep(.CodeMirror-line) {
     z-index: auto;
 
     &:hover {
       background-color: $background-color-light;
     }
   }
-  & ::v-deep(.CodeMirror-gutters) {
+  & :deep(.CodeMirror-gutters) {
     background-color: $background-color-lighter;
     border-right-color: $border-color-light-2;
   }
-  & ::v-deep(.CodeMirror-hscrollbar) {
+  & :deep(.CodeMirror-hscrollbar) {
     width: calc(100% - 12rem);
   }
 }
