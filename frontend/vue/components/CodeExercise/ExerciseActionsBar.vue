@@ -1,28 +1,38 @@
 <template>
   <div class="exercise-actions-bar">
     <button
-      v-if="runEnabled"
+      v-if="runEnabled && !isRunning"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
       @click="run()"
     >
       Run
     </button>
     <button
-      v-if="gradeEnabled"
+      v-if="gradeEnabled && !isRunning"
       class="exercise-actions-bar__button exercise-actions-bar__button_grade"
       @click="grade()"
     >
       Grade
     </button>
+    <div v-if="isRunning" class="exercise-actions-bar__running-indicator">
+      <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
+      <span class="exercise-actions-bar__running-indicator__label"> Running </span>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import 'carbon-web-components/es/components/loading/loading'
 
 export default defineComponent({
   name: 'ExerciseActionsBar',
   props: {
+    isRunning: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
     runEnabled: {
       type: Boolean,
       required: false,
@@ -36,9 +46,15 @@ export default defineComponent({
   },
   methods: {
     run () {
+      if (this.isRunning) {
+        return
+      }
       this.$emit('run')
     },
     grade () {
+      if (this.isRunning) {
+        return
+      }
       this.$emit('grade')
     }
   }
@@ -77,7 +93,27 @@ export default defineComponent({
     color: $button-text-color;
 
     &_run {
-      @include bicolor-background($button-background-color-dark, $button-background-color-tertiary);
+      @include bicolor-background($button-background-color-quaternary-dark, $button-background-color-quaternary);
+    }
+  }
+
+  &__running-indicator {
+    display: flex;
+    height: 2.25rem;
+    background-color: $button-background-color-quaternary;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-03;
+    padding: $spacing-03 $spacing-04;
+
+    &__icon {
+      display: block;
+      width: 1.25rem;
+      height: 1.25rem;
+      --cds-interactive-04: #{$border-color-tertiary};
+    }
+    &__label {
+      color: $button-text-color;
     }
   }
 }

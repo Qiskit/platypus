@@ -1,13 +1,11 @@
 <template>
   <div ref="outputDiv" class="code-output">
-    <div class="code-output__state-info">
-      <div v-if="!kernel" class="code-output__state-info__connecting-kernel">
+    <div class="code-output__state-info__wrapper">
+      <div v-if="!kernel && !error" class="code-output__state-info">
+        <bx-loading class="code-output__state-info__icon" assistive-text="Connecting to the server" type="small" />
         Connecting to the server
       </div>
-      <div v-if="running" class="code-output__state-info__running-code">
-        Running code
-      </div>
-      <div v-if="error !== ''" class="code-output__state-info__running-code">
+      <div v-if="error !== ''" class="code-output__state-info">
         Failed to execute. {{ error }} Please refresh the page.
       </div>
     </div>
@@ -19,6 +17,7 @@
 import { defineComponent } from 'vue-demi'
 import { OutputArea, IOutputShellFuture, createOutputArea } from './OutputRenderer'
 import { requestBinderKernel, IKernelConnection } from './KernelManager'
+import 'carbon-web-components/es/components/loading/loading'
 
 export default defineComponent({
   name: 'CodeOutput',
@@ -27,15 +26,19 @@ export default defineComponent({
       kernelPromise: undefined as Promise<IKernelConnection> | undefined,
       kernel: undefined as IKernelConnection | undefined,
       outputArea: undefined as OutputArea | undefined,
-      error: '',
-      running: false
+      error: ''
     }
   },
   mounted () {
+    this.$emit('loadingKernel')
+
     this.kernelPromise = requestBinderKernel()
 
     this.kernelPromise.then((kernel: IKernelConnection) => {
       this.kernel = kernel
+      this.$emit('kernelReady')
+    }, (error: Error) => {
+      this.error = error.message
     })
 
     const outputDivRef = (this.$refs.outputDiv as HTMLDivElement)
@@ -46,26 +49,41 @@ export default defineComponent({
     requestExecute (code: string) {
       this.error = ''
       this.kernelPromise!.then((kernel: IKernelConnection) => {
-        this.running = true
+        this.$emit('running')
         try {
           const requestFuture = kernel.requestExecute({ code })
           this.setOutputFuture(requestFuture)
+          requestFuture.done.then(() => this.$emit('finished'))
         } catch (error) {
           this.error = error
-          this.running = false
           this.outputArea!.model.clear()
         }
       })
     },
     setOutputFuture (future : IOutputShellFuture) {
       this.outputArea!.future = future
-      this.outputArea!.future.done.then(() => { this.running = false })
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
+@import 'carbon-components/scss/globals/scss/typography';
+@import '~/../scss/variables/colors.scss';
+
 .code-output {
+  &__state-info {
+    padding: $spacing-07;
+    display: flex;
+    align-items: center;
+    gap: $spacing-05;
+
+    &__icon {
+      display: block;
+      width: 1.5rem;
+      height: 1.5rem;
+      --cds-interactive-04: #{$border-color-tertiary};
+    }
+  }
 }
 </style>
