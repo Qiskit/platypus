@@ -1,9 +1,9 @@
 <template>
   <section class="user-progress">
     <div class="user-progress__title-container">
-      <h3 class="user-progress__title">
+      <h1 class="user-progress__title">
         {{ $translate("Learning") }}
-      </h3>
+      </h1>
       <p class="user-progress__title-text">
         {{ $translate("This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.") }}
       </p>
@@ -53,7 +53,7 @@ export default defineComponent({
   padding-bottom: $spacing-07;
 
   &__title {
-    @include type-style('expressive-heading-05');
+    @include type-style('expressive-heading-05', $fluid: true);
     margin-bottom: $spacing-05;
     color: $text-active-color;
 

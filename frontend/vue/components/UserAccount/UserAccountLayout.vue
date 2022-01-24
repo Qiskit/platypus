@@ -2,7 +2,7 @@
   <div class="user-account">
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
-        <span class="user-account__section-nav__user-data__name">{{ userName }}</span>
+        <h2 class="user-account__section-nav__user-data__name">{{ userName }}</h2>
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
@@ -144,7 +144,7 @@ export default defineComponent({
       margin-bottom: $spacing-07;
 
       &__name {
-        @include type-style('expressive-heading-05');
+        @include type-style('expressive-heading-04', $fluid: true);
         word-break: break-word;
         max-height: 9.25rem;
         overflow: hidden;
