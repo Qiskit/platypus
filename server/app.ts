@@ -61,7 +61,7 @@ new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
   .setup({ sessionSecret: 'project-platypus-beta' })
-  // .redirects({'/login': '/signin'})
+  .redirects({'/login': '/signin'})
   .accounts()
   .redirects({
     '/': TEXTBOOK_HOME,
@@ -89,7 +89,7 @@ new MathigonStudioApp()
     res.json(courses)
   })
   .get('/account', (req, res) => {
-    // if (!req.user) return res.redirect('/signin');
+    if (!req.user) return res.redirect('/signin');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
