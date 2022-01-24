@@ -15,13 +15,13 @@
         >
           {{ displayName }}
         </AppLink>
-        <AppLink
+        <BasicLink
           class="user-account__section-nav__link-list__link"
-          url="#"
-          target="_self"
+          :url="logoutRoute"
+          :is-static="true"
         >
           {{ $translate('Log Out') }}
-        </AppLink>
+        </BasicLink>
       </div>
     </nav>
     <bx-dropdown
@@ -52,6 +52,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import AppLink from '../common/AppLink.vue'
+import BasicLink from '../common/BasicLink.vue'
 import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 
@@ -59,6 +60,7 @@ export default defineComponent({
   name: 'UserAccountLayout',
   components: {
     AppLink,
+    BasicLink,
     PrivacySection,
     UserProgress
   },
@@ -77,7 +79,8 @@ export default defineComponent({
           displayName: this.$translate('Privacy'),
           hash: '#Privacy'
         }
-      ]
+      ],
+      logoutRoute: '/logout'
     }
   },
   mounted () {
