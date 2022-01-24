@@ -65,9 +65,12 @@ textbook.runAfterDOMLoaded(() => {
   initIndexHighlight()
 
   // set up & trigger segment
-  initAnalytics(window.textbookAnalytics.key, window.textbookAnalytics.url)
-  textbook.trackClickEvent = trackClickEvent
-  textbook.trackPerformedSearch = trackPerformedSearch
-  textbook.trackUpdatedObject = trackUpdatedObject
-  trackPage(window.location.pathname)
+  initAnalytics(
+    window.textbookAnalytics.key, window.textbookAnalytics.url
+  ).then(() => {
+    textbook.trackClickEvent = trackClickEvent
+    textbook.trackPerformedSearch = trackPerformedSearch
+    textbook.trackUpdatedObject = trackUpdatedObject
+    trackPage(window.location.pathname)
+  })
 })
