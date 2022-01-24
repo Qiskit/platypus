@@ -107,7 +107,7 @@ index 93eae4d..e8da114 100644
    }
    return doc;
 diff --git a/node_modules/@mathigon/studio/build/markdown/parser.js b/node_modules/@mathigon/studio/build/markdown/parser.js
-index b0a70cc..f98a4e5 100644
+index 14a4bcf..e143648 100644
 --- a/node_modules/@mathigon/studio/build/markdown/parser.js
 +++ b/node_modules/@mathigon/studio/build/markdown/parser.js
 @@ -111,6 +111,7 @@ async function parseStep(content, index, directory, courseId, locale = 'en') {
@@ -118,55 +118,8 @@ index b0a70cc..f98a4e5 100644
    }
  
    // Add the [parent] attribute as class to all elements parents
-diff --git a/node_modules/@mathigon/studio/build/secrets.js b/node_modules/@mathigon/studio/build/secrets.js
-index fb85d09..077fc7e 100755
---- a/node_modules/@mathigon/studio/build/secrets.js
-+++ b/node_modules/@mathigon/studio/build/secrets.js
-@@ -30,7 +30,7 @@ const path = require('path');
-     const clientId = argv[`${k}ClientId`];
-     const clientSecret = argv[`${k}ClientSecret`];
-     if (clientId) config.accounts.oAuth[k].clientId = clientId;
--    if (clientSecret) config.accounts.oAuth[k].clientId = clientSecret;
-+    if (clientSecret) config.accounts.oAuth[k].clientSecret = clientSecret;
-   }
- 
-   await writeFile(src, yaml.dump(config));
-diff --git a/node_modules/@mathigon/studio/frontend/accounts.ts b/node_modules/@mathigon/studio/frontend/accounts.ts
-index 3999e60..c116d2f 100755
---- a/node_modules/@mathigon/studio/frontend/accounts.ts
-+++ b/node_modules/@mathigon/studio/frontend/accounts.ts
-@@ -91,16 +91,16 @@ Router.setup({
-   }
- });
- 
--Router.view('/signup', {
--  enter($el) {
--    const $bday = $el.$('input[name="birthday"]') as InputView;
--    $bday.change((date) => {
--      const age = (Date.now() - (+new Date(date))) / (1000 * 60 * 60 * 24 * 365);
--      if (age < 0 || age > 100) return $bday.setValidity('Please enter a valid date of birth.');
--      if (age < 13) return $bday.setValidity('You have to be at least 13 years old to create an account.');
--      $bday.setValidity('');
--    });
--  }
--});
--
--Router.paths('/login', '/forgot', '/reset', '/reset/:token', '/profile');
-+// Router.view('/signup', {
-+//   enter($el) {
-+//     const $bday = $el.$('input[name="birthday"]') as InputView;
-+//     $bday.change((date) => {
-+//       const age = (Date.now() - (+new Date(date))) / (1000 * 60 * 60 * 24 * 365);
-+//       if (age < 0 || age > 100) return $bday.setValidity('Please enter a valid date of birth.');
-+//       if (age < 13) return $bday.setValidity('You have to be at least 13 years old to create an account.');
-+//       $bday.setValidity('');
-+//     });
-+//   }
-+// });
-+
-+// Router.paths('/login', '/forgot', '/reset', '/reset/:token', '/profile');
 diff --git a/node_modules/@mathigon/studio/server/accounts.ts b/node_modules/@mathigon/studio/server/accounts.ts
-index a28f2db..9ef3d73 100755
+index a28f2db..336e162 100755
 --- a/node_modules/@mathigon/studio/server/accounts.ts
 +++ b/node_modules/@mathigon/studio/server/accounts.ts
 @@ -266,110 +266,110 @@ function redirect(req: express.Request, res: express.Response, data: ResponseDat
@@ -178,7 +131,7 @@ index a28f2db..9ef3d73 100755
 -    res.render('accounts/login');
 -  });
 +  // app.get('/login', (req, res) => {
-+  //   if (req.user) return res.redirect('/profile');
++  //   if (req.user) return res.redirect('/dashboard');
 +  //   res.render('accounts/login');
 +  // });
  
@@ -190,7 +143,7 @@ index a28f2db..9ef3d73 100755
 +  // app.post('/login', async (req, res) => {
 +  //   const response = await login(req);
 +  //   if (response.user) req.session.auth!.user = response.user.id;
-+  //   redirect(req, res, response, '/profile', '/login');
++  //   redirect(req, res, response, '/dashboard', '/login');
 +  // });
  
    app.get('/logout', (req, res) => {
@@ -202,24 +155,15 @@ index a28f2db..9ef3d73 100755
 -    if (req.user) return res.redirect('/dashboard');
 -    res.render('accounts/signup', {countries: COUNTRY_LIST});
 -  });
-+  // app.get('/signup', (req, res) => {
-+  //   if (req.user) return res.redirect('/profile');
-+  //   res.render('accounts/signup', {countries: COUNTRY_LIST});
-+  // });
- 
+-
 -  app.post('/signup', async (req, res) => {
 -    const response = await signup(req);
 -    if (response.user) req.session.auth!.user = response.user.id;
 -    redirect(req, res, response, '/dashboard', '/signup');
 -  });
-+  // app.post('/signup', async (req, res) => {
-+  //   const response = await signup(req);
-+  //   if (response.user) req.session.auth!.user = response.user.id;
-+  //   redirect(req, res, response, '/profile', '/signup');
-+  // });
- 
-   app.get('/confirm/:id/:token', async (req, res) => {
-     const response = await confirmEmail(req);
+-
+-  app.get('/confirm/:id/:token', async (req, res) => {
+-    const response = await confirmEmail(req);
 -    redirect(req, res, response, '/dashboard', '/login');
 -  });
 -
@@ -262,9 +206,8 @@ index a28f2db..9ef3d73 100755
 -  app.get('/profile/delete', async (req, res) => {
 -    const response = await deleteAccount(req, true);
 -    redirect(req, res, response, '/profile', '/profile');
-+    redirect(req, res, response, '/account', '/signin');
-   });
- 
+-  });
+-
 -  app.get('/profile/undelete', async (req, res) => {
 -    const response = await deleteAccount(req, false);
 -    redirect(req, res, response, '/profile', '/profile');
@@ -284,8 +227,24 @@ index a28f2db..9ef3d73 100755
 -    if (!req.user) return res.redirect('/login');
 -    res.json(await exportData(req.user));
 -  });
++  // app.get('/signup', (req, res) => {
++  //   if (req.user) return res.redirect('/dashboard');
++  //   res.render('accounts/signup', {countries: COUNTRY_LIST});
++  // });
++
++  // app.post('/signup', async (req, res) => {
++  //   const response = await signup(req);
++  //   if (response.user) req.session.auth!.user = response.user.id;
++  //   redirect(req, res, response, '/dashboard', '/signup');
++  // });
++
++  // app.get('/confirm/:id/:token', async (req, res) => {
++  //   const response = await confirmEmail(req);
++  //   redirect(req, res, response, '/dashboard', '/login');
++  // });
++
 +  // app.get('/forgot', (req, res) => {
-+  //   if (req.user) return res.redirect('/profile');
++  //   if (req.user) return res.redirect('/dashboard');
 +  //   res.render('accounts/forgot');
 +  // });
 +
@@ -361,42 +320,3 @@ index a28f2db..9ef3d73 100755
    });
  
    app.get('/cron/cleanup', async (req, res, next) => {
-diff --git a/node_modules/@mathigon/studio/server/data/oauth.yaml b/node_modules/@mathigon/studio/server/data/oauth.yaml
-index 5cc91fb..e1dfdbf 100644
---- a/node_modules/@mathigon/studio/server/data/oauth.yaml
-+++ b/node_modules/@mathigon/studio/server/data/oauth.yaml
-@@ -41,14 +41,13 @@ microsoft:
- 
- ibm:
-   name: IBM
--  authorizeUrl: https://iam.cloud.ibm.com/identity/authorize
--  accessUrl: https://iam.cloud.ibm.com/identity/token
--  profileUrl: https://user-management.cloud.ibm.com/v2/accounts/{account_id}/users/{iam_id}
-+  authorizeUrl: https://login.ibm.com/oidc/endpoint/default/authorize
-+  accessUrl: https://login.ibm.com/oidc/endpoint/default/token
-+  profileUrl: https://login.ibm.com/oidc/endpoint/default/userinfo
-   profileMethod: GET
--  scope: user-management.user.update
-+  scope: openid profile email
-   profile:
--    id: ${user_id}
--    firstName: ${firstname}
--    lastName: ${lastname}
-+    id: ${sub}
-+    firstName: ${given_name}
-+    lastName: ${family_name}
-     email: ${email}
--    picture: ${photo}
-diff --git a/node_modules/@mathigon/studio/server/utilities/oauth.ts b/node_modules/@mathigon/studio/server/utilities/oauth.ts
-index 115cec3..0795a27 100644
---- a/node_modules/@mathigon/studio/server/utilities/oauth.ts
-+++ b/node_modules/@mathigon/studio/server/utilities/oauth.ts
-@@ -132,7 +132,7 @@ async function findOrCreateUser(req: express.Request, provider: Provider, profil
- // We use req.headers.host rather than req.hostname because we need to include
- // the localhost port during local development. Note that the redirect URI
- // must exactly match a value set up with the third-party oAuth provider.
--const host = (req: express.Request) => `${req.protocol}://${req.headers.host}`;
-+const host = (req: express.Request) => `https://${req.headers.host}`;
- 
- function login(req: express.Request, provider: Provider) {
-   const config = PROVIDERS[provider];

@@ -46,7 +46,7 @@
     "@ibm/plex": "^6.0.0",
     "@mathigon/boost": "^0.6.17",
     "@mathigon/euclid": "^0.6.12",
-    "@mathigon/studio": "0.1.15",
+    "@mathigon/studio": "0.1.16",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "carbon-components": "~10.51.0",
