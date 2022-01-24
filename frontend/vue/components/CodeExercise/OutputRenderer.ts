@@ -9,7 +9,11 @@ import {
 } from '@jupyterlab/rendermime'
 import { IShellFuture } from '@jupyterlab/services/lib/kernel/kernel'
 import { KernelMessage } from '@jupyterlab/services'
-import { serverOptions } from './KernelManager'
+
+const outputOptions = {
+  mathjaxUrl: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js',
+  mathjaxConfig: 'TeX-AMS_CHTML-full,Safe'
+}
 
 interface IOutputShellFuture extends IShellFuture<KernelMessage.IExecuteRequestMsg, KernelMessage.IExecuteReplyMsg> { }
 
@@ -22,7 +26,7 @@ function getRenderers (options: any) {
         if (options.mathjaxUrl) {
           return true
         } else {
-          console.log('MathJax unavailable')
+          console.warn('MathJax unavailable')
           return false
         }
       } else {
@@ -35,15 +39,15 @@ function getRenderers (options: any) {
 
 function createOutputArea (parent : HTMLDivElement) {
   let latexTypesetter: MathJaxTypesetter | undefined
-  if (serverOptions.mathjaxUrl) {
+  if (outputOptions.mathjaxUrl) {
     latexTypesetter = new MathJaxTypesetter({
-      url: serverOptions.mathjaxUrl,
-      config: serverOptions.mathjaxConfig
+      url: outputOptions.mathjaxUrl,
+      config: outputOptions.mathjaxConfig
     })
   }
 
   const renderers = {
-    initialFactories: getRenderers(serverOptions),
+    initialFactories: getRenderers(outputOptions),
     latexTypesetter
   }
   const rendermime = new RenderMimeRegistry(renderers)

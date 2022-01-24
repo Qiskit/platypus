@@ -4,14 +4,16 @@
     class="code-mirror-clipboard-copy"
     @clipboard-copy="handleClick"
   >
-    <div class="label" v-text="$translate(label)" />
-    <CopyIcon class="copy-icon" />
+    <bx-tooltip-icon aligment="center" direction="top" :body-text="$translate(label)">
+      <CopyIcon class="code-mirror-clipboard-copy__icon" />
+    </bx-tooltip-icon>
   </clipboard-copy>
 </template>
 
 <script lang="ts">
 import { Options, prop, Vue } from 'vue-class-component'
 import CopyIcon from '@carbon/icons-vue/lib/copy/20'
+import 'carbon-web-components/es/components/tooltip/tooltip-icon'
 import '@github/clipboard-copy-element'
 
 class Props {
@@ -56,28 +58,13 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
   position: relative;
   padding: $spacing-03;
 
-  &:focus,
-  &:hover {
-    color: $active-color;
-    cursor: pointer;
-
-    .label {
-      display: block;
-      transition: display 0s ease-out 0.2s;
-      opacity: 1;
-    }
+  &__icon {
+    color: $text-color-light;
   }
-}
 
-.label {
-  background: $background-color-light;
-  opacity: 0;
-  padding-left: 10px;
-  padding-right: 10px;
-  right: calc(20px + #{$spacing-03} * 2);
-  transition: opacity 0.2s ease-out;
-  display: none;
-  position: absolute;
-  pointer-events: none;
+  &:focus #{&}__icon ,
+  &:hover #{&}__icon  {
+    color: $active-color;
+  }
 }
 </style>

@@ -9,6 +9,9 @@
       />
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
+        :is-running="isKernelBusy"
+        :run-enabled="isKernelReady"
+        :grade-enabled="isKernelReady"
         @run="run"
         @grade="grade"
       />
@@ -16,6 +19,9 @@
     <CodeOutput
       ref="output"
       class="code-exercise__output"
+      @running="kernelRunning"
+      @finished="kernelFinished"
+      @kernelReady="kernelReady"
     />
   </div>
 </template>
@@ -39,42 +45,35 @@ export default defineComponent({
       code: `p1 = 0.01
 p3 = 3 * p1**2 * (1-p1) + p1**3 # probability of 2 or 3 errors
 print('Probability of a single reply being garbled: {}'.format(p1))
-print('Probability of a the majority of three replies being garbled: {:.4f}'.format(p3))`
+print('Probability of a the majority of three replies being garbled: {:.4f}'.format(p3))`,
+      isKernelBusy: false,
+      isKernelReady: false
     }
-  },
-  mounted () {
   },
   methods: {
     run () {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
-      /*
-      getKernel();
-      let code = cm.getValue();
-      kernelPromise.then((kernel) => {
-        try {
-          $cell.find(".thebe-busy").css("visibility", "visible");
-          outputArea.future = kernel.requestExecute({ code: code });
-          outputArea.future.done.then(() => {
-            $cell.find(".thebe-busy").css("visibility", "hidden");
-          });
-        } catch (error) {
-          clearOnError(error);
-        }
-      });
-      return false;
-      */
     },
     grade () {
       /* TBD */
-      console.log(`Grade request from exercise with code: ${this.code}`)
+      console.log(`NOT IMPLEMENTED: Grade request from exercise with code: ${this.code}`)
     },
     codeChanged (code: string) {
       this.code = code
     },
     notebookCopyRequest (code: string) {
       /* TBD */
-      console.log(`Requested a notebook copy of code: ${code}`)
+      console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
+    },
+    kernelRunning () {
+      this.isKernelBusy = true
+    },
+    kernelFinished () {
+      this.isKernelBusy = false
+    },
+    kernelReady () {
+      this.isKernelReady = true
     }
   }
 })
@@ -90,6 +89,10 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
     background-color: $background-color-lighter;
     position: relative;
     height: 13rem;
+
+    &__tooltip {
+      position: relative;
+    }
 
     &__editor {
       height: 100%;
