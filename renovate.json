@@ -6,6 +6,9 @@
     ":maintainLockFilesWeekly"
   ],
   "rangeStrategy": "bump",
+  "python": {
+    "enabled": false
+  },
   "prConcurrentLimit": 5,
   "schedule": [
     "every weekend"
