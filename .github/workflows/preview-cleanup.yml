@@ -1,11 +1,11 @@
-name: Preview
+name: Preview (clean)
 
 on:
   pull_request:
     types: [closed]
 
 jobs:
-  code-engine:
+  teardown:
     # Run only from the original repository
     # Because this job requires secrets, which cannot be shared with forks
     if: github.event.pull_request.head.repo.full_name == github.repository
