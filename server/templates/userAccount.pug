@@ -10,7 +10,7 @@ html(lang=lang dir=dir)
       q-the-menu
 
     .body
-      q-user-account-layout(user-name=userData.name)
+      q-user-account-layout(first-name=userData.firstName, last-name=userData.lastName)
 
     script(type="application/json")#translations!= translationsJSON
     script(type="application/json")#privacyPolicy!= privacyPolicyMD

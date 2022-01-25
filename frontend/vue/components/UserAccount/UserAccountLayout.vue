@@ -2,7 +2,9 @@
   <div class="user-account">
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
-        <h2 class="user-account__section-nav__user-data__name">{{ userName }}</h2>
+        <h2 class="user-account__section-nav__user-data__name">
+          {{ firstName }} {{ lastName }}
+        </h2>
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
@@ -17,7 +19,7 @@
         </AppLink>
         <BasicLink
           class="user-account__section-nav__link-list__link"
-          :url="logoutRoute"
+          :url="logoutUrl"
           :is-static="true"
         >
           {{ $translate('Log Out') }}
@@ -65,7 +67,8 @@ export default defineComponent({
     UserProgress
   },
   props: {
-    userName: { type: String, required: false, default: '' },
+    firstName: { type: String, required: false, default: '' },
+    lastName: { type: String, required: false, default: '' }
   },
   data () {
     return {
@@ -80,7 +83,7 @@ export default defineComponent({
           hash: '#Privacy'
         }
       ],
-      logoutRoute: '/logout'
+      logoutUrl: '/logout'
     }
   },
   mounted () {
