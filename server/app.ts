@@ -61,7 +61,7 @@ new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
   .setup({ sessionSecret: 'project-platypus-beta' })
-  .redirects({'/login': '/signin'})
+  // .redirects({'/login': '/signin'})
   .accounts()
   .redirects({
     '/': TEXTBOOK_HOME,
