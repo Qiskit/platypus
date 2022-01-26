@@ -4,7 +4,36 @@ import { IKernelConnection } from '@jupyterlab/services/lib/kernel/kernel'
 
 export { IKernelConnection }
 
-export const serverOptions = {
+export interface ISavedSession {
+  enabled: boolean,
+  maxAge: number,
+  storagePrefix: string
+}
+
+export interface IBinderOptions {
+  repo: string,
+  ref: string,
+  binderUrl: string,
+  savedSession: ISavedSession
+}
+
+export interface IServerSettings {
+  appendToken: boolean
+}
+
+export interface IKernelOptions {
+  name: string,
+  kernelName: string,
+  path: string,
+  serverSettings: IServerSettings
+}
+
+export interface IServerOptions {
+  binderOptions: IBinderOptions,
+  kernelOptions: IKernelOptions
+}
+
+export const serverOptions: IServerOptions = {
   binderOptions: {
     repo: 'qiskit-community/platypus',
     ref: 'binder-env',
@@ -31,7 +60,7 @@ export function requestBinderKernel () {
   // request a Kernel from Binder
   // this strings together requestBinder and requestKernel.
   // returns a Promise for a running Kernel.
-  return requestBinder().then((serverSettings: any) => {
+  return requestBinder().then((serverSettings: ServerConnection.ISettings) => {
     console.debug('Recovered settings =====================')
     serverOptions.kernelOptions.serverSettings = serverSettings
     serverOptions.kernelOptions.serverSettings.appendToken = true
@@ -92,7 +121,7 @@ function getStoredServer (storageKey: string, maxAge: number) {
   return existingServer
 }
 
-async function getExistingServer (savedSession: any, storageKey: string) {
+async function getExistingServer (savedSession: ISavedSession, storageKey: string) {
   if (!savedSession.enabled) {
     return
   }
@@ -139,7 +168,7 @@ function logBuildingStatus () {
   console.debug(detail)
 }
 
-function logLostConnection (url: string, err: any) {
+function logLostConnection (url: string, err: Event) {
   const errorMessage = `Lost connection to Binder: ${url}`
   const detail = {
     status: 'binder-failed',
@@ -190,7 +219,7 @@ export async function requestBinder () {
 
   logBuildingStatus()
 
-  return new Promise((resolve, reject) => {
+  return new Promise<ServerConnection.ISettings>((resolve, reject) => {
     const es = new EventSource(url)
     es.onerror = (err) => {
       es.close()
