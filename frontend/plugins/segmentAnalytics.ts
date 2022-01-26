@@ -56,7 +56,9 @@ function configureAnalytics (analyticsKey: string) {
   }
 }
 
-function installAnalyticsOnce (analyticsScriptUrl: string = '') {
+function installAnalyticsOnce (
+  analyticsScriptUrl: string = ''
+): Promise<Event|void> {
   window._analyticsReady = window._analyticsReady || new Promise<Event>((resolve, reject) => {
     const script = document.createElement('script')
     script.async = true
@@ -68,6 +70,7 @@ function installAnalyticsOnce (analyticsScriptUrl: string = '') {
       reject(err)
     }
   })
+  return window._analyticsReady
 }
 
 /**
@@ -186,9 +189,9 @@ function assertCanGet<T> (getter: () => T, error: string): T {
   return result
 }
 
-function initAnalytics (key: string, url: string) {
+function initAnalytics (key: string, url: string): Promise<Event|void> {
   configureAnalytics(key)
-  installAnalyticsOnce(url)
+  return installAnalyticsOnce(url)
 }
 
 function install (app: any, _options: any = {}) {
