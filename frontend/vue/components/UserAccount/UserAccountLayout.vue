@@ -3,7 +3,7 @@
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
         <h2 class="user-account__section-nav__user-data__name">
-          {{ firstName }} {{ lastName }}
+          {{ userDisplayName }}
         </h2>
       </div>
       <div class="user-account__section-nav__link-list">
@@ -84,6 +84,18 @@ export default defineComponent({
         }
       ],
       logoutUrl: '/logout'
+    }
+  },
+  computed: {
+    userDisplayName () {
+      let userDisplayName: string
+      if (this.firstName === '' && this.lastName === '') {
+        userDisplayName = this.$translate('Your Profile')
+      } else {
+        userDisplayName = `${this.firstName} ${this.lastName}`
+      }
+
+      return userDisplayName
     }
   },
   mounted () {
