@@ -97,8 +97,8 @@ new MathigonStudioApp()
     const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
 
     const userMockData = {
-      name: 'John Doe',
-      role: 'Administrator'
+      firstName: req.user?.firstName,
+      lastName: req.user?.lastName
     }
 
     res.render('userAccount', {
@@ -142,7 +142,7 @@ new MathigonStudioApp()
   })
   .get('/signin', async (req, res) => {
     if (req.user) return res.redirect('/account');
-    
+
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
 

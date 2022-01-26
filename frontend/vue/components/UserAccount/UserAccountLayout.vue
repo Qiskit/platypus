@@ -2,8 +2,9 @@
   <div class="user-account">
     <nav class="user-account__section-nav">
       <div class="user-account__section-nav__user-data">
-        <span class="user-account__section-nav__user-data__name">{{ userName }}</span>
-        <span v-if="userRole" class="user-account__section-nav__user-data__role">{{ userRole }}</span>
+        <h2 class="user-account__section-nav__user-data__name">
+          {{ userDisplayName }}
+        </h2>
       </div>
       <div class="user-account__section-nav__link-list">
         <AppLink
@@ -16,13 +17,13 @@
         >
           {{ displayName }}
         </AppLink>
-        <AppLink
+        <BasicLink
           class="user-account__section-nav__link-list__link"
-          url="#"
-          target="_self"
+          :url="logoutUrl"
+          :is-static="true"
         >
           {{ $translate('Log Out') }}
-        </AppLink>
+        </BasicLink>
       </div>
     </nav>
     <bx-dropdown
@@ -44,12 +45,6 @@
         <UserProgress />
       </div>
       <div v-if="activeSection === sectionList[1].hash">
-        GROUPS SECTION
-      </div>
-      <div v-if="activeSection === sectionList[2].hash">
-        BADGES SECTION
-      </div>
-      <div v-if="activeSection === sectionList[3].hash">
         <PrivacySection />
       </div>
     </section>
@@ -59,6 +54,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import AppLink from '../common/AppLink.vue'
+import BasicLink from '../common/BasicLink.vue'
 import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 
@@ -66,34 +62,40 @@ export default defineComponent({
   name: 'UserAccountLayout',
   components: {
     AppLink,
+    BasicLink,
     PrivacySection,
     UserProgress
   },
   props: {
-    userName: { type: String, required: false, default: '' },
-    userRole: { type: String, required: false, default: '' }
+    firstName: { type: String, required: false, default: '' },
+    lastName: { type: String, required: false, default: '' }
   },
   data () {
     return {
       activeSection: '',
       sectionList: [
         {
-          displayName: this.$translate('My Learning'),
+          displayName: this.$translate('Learning'),
           hash: '#MyLearning'
-        },
-        {
-          displayName: this.$translate('Groups'),
-          hash: '#Groups'
-        },
-        {
-          displayName: this.$translate('Badges'),
-          hash: '#Badges'
         },
         {
           displayName: this.$translate('Privacy'),
           hash: '#Privacy'
         }
-      ]
+      ],
+      logoutUrl: '/logout'
+    }
+  },
+  computed: {
+    userDisplayName () {
+      let userDisplayName: string
+      if (this.firstName === '' && this.lastName === '') {
+        userDisplayName = this.$translate('Your Profile')
+      } else {
+        userDisplayName = `${this.firstName} ${this.lastName}`
+      }
+
+      return userDisplayName
     }
   },
   mounted () {
@@ -160,16 +162,9 @@ export default defineComponent({
       margin-bottom: $spacing-07;
 
       &__name {
-        @include type-style('expressive-heading-04');
+        @include type-style('expressive-heading-04', $fluid: true);
         word-break: break-word;
         max-height: 9.25rem;
-        overflow: hidden;
-      }
-
-      &__role {
-        @include type-style('expressive-heading-01');
-        word-break: break-word;
-        max-height: 3.5rem;
         overflow: hidden;
       }
     }

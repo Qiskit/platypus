@@ -1,8 +1,8 @@
 <template>
   <section class="privacy-section">
-    <h3 class="privacy-section__title">
+    <h1 class="privacy-section__title">
       Privacy
-    </h3>
+    </h1>
     <h4 class="privacy-section__subtitle privacy-section__subtitle_general">
       IBM Privacy Statement
     </h4>
@@ -61,7 +61,7 @@ export default defineComponent({
   padding-bottom: $spacing-07;
 
   &__title {
-    @include type-style('expressive-heading-04');
+    @include type-style('expressive-heading-05', $fluid: true);
     color: $text-active-color;
     border-bottom: 1px solid $border-color-light-2;
     padding-bottom: $spacing-05;

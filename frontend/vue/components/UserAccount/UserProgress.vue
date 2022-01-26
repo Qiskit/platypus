@@ -1,11 +1,11 @@
 <template>
   <section class="user-progress">
     <div class="user-progress__title-container">
-      <h3 class="user-progress__title">
-        {{ $translate("Default") }}
-      </h3>
+      <h1 class="user-progress__title">
+        {{ $translate("Learning") }}
+      </h1>
       <p class="user-progress__title-text">
-        {{ $translate("Default shows your progress in chronological order as seen in the textbook. Checkmarks appear next to section that you have completed.") }}
+        {{ $translate("This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.") }}
       </p>
     </div>
     <CourseProgress
@@ -53,12 +53,17 @@ export default defineComponent({
   padding-bottom: $spacing-07;
 
   &__title {
-    @include type-style('expressive-heading-04');
+    @include type-style('expressive-heading-05', $fluid: true);
+    margin-bottom: $spacing-05;
     color: $text-active-color;
 
     &-container {
       @include type-style('body-long-01');
       padding-bottom: $spacing-05;
+    }
+
+    &-text {
+      max-width: 38rem;
     }
   }
   &__course {
