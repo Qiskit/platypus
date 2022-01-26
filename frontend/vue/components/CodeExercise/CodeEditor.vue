@@ -133,7 +133,7 @@ export default defineComponent({
       background-color: $disabled-background-color;
       display: flex;
       justify-content: center;
-      z-index: 1;
+      z-index: 10;
     }
 
     &__confirm-button {
