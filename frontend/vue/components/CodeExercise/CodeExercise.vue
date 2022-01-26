@@ -101,6 +101,7 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
       position: absolute;
       right: 0;
       bottom: 0;
+      z-index: 3;
     }
   }
 }
