@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:base",
+    "docker:disable",
+    ":separateMultipleMajorReleases",
+    ":maintainLockFilesWeekly"
+  ],
+  "rangeStrategy": "bump",
+  "python": {
+    "enabled": false
+  },
+  "prConcurrentLimit": 5,
+  "schedule": [
+    "every weekend"
+  ]
+}
