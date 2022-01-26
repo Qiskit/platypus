@@ -117,6 +117,7 @@ export default defineComponent({
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 2;
   }
   &__reset-notification {
     --cds-inverse-01: #{$text-color-dark};

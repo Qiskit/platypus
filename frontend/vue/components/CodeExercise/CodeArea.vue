@@ -55,10 +55,8 @@ export default defineComponent({
     padding-top: 16px;
   }
   & :deep(.CodeMirror-line) {
-    z-index: auto;
-
     &:hover {
-      background-color: $background-color-light;
+      background-color: rgba($background-color-light-2, 0.5);
     }
   }
   & :deep(.CodeMirror-gutters) {
