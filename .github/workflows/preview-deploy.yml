@@ -1,10 +1,10 @@
-name: Preview
+name: Preview (deploy)
 
 on:
   pull_request:
 
 jobs:
-  code-engine:
+  setup:
     # Run only from the original repository
     # Because this job requires secrets, which cannot be shared with forks
     if: github.event.pull_request.head.repo.full_name == github.repository
