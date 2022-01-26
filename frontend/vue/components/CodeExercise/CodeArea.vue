@@ -37,6 +37,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-area {
@@ -52,19 +53,24 @@ export default defineComponent({
   }
   & :deep(.CodeMirror-sizer) {
     height: 100%;
-    padding-top: 16px;
+    padding-top: $spacing-05;
   }
   & :deep(.CodeMirror-line) {
+    padding-left: $spacing-05;
     &:hover {
       background-color: rgba($background-color-light-2, 0.5);
     }
+  }
+  & :deep(.CodeMirror-linenumber) {
+    padding-left: $spacing-04;
+    padding-right: $spacing-04;
   }
   & :deep(.CodeMirror-gutters) {
     background-color: $background-color-lighter;
     border-right-color: $border-color-light-2;
   }
   & :deep(.CodeMirror-hscrollbar) {
-    width: calc(100% - 12rem);
+    width: calc(100% - 13rem);
   }
 }
 </style>
