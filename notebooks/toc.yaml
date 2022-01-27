@@ -269,6 +269,42 @@
       id: project
       url: /intro/project
 
+- title: Summer School 2020
+  url: /2020
+  type: learning-path
+  sections:
+    - title: Qubits and Quantum States, Quantum Circuits, Measurements
+      id: qubits-states-circuits-measurements
+      url: /summer-school/2020/lec-00
+    - title: Writing and Running Quantum Programs
+      id: writing-running-programs
+      url: /summer-school/2020/lec-01
+    - title: Shor's Algorithm I Quantum Fourier Transform, Quantum Phase Estimation
+      id: shors-algorithm-i-fourier-transform-phase-estimation
+      url: /summer-school/2020/lec-02
+    - title: Shor's Algorithm II From Factoring to Period-Finding, Writing the Quantum Program
+      id: shors-algorithm-ii-from-factoring-to-period-finding-writing-program
+      url: /summer-school/2020/lec-03
+    - title: Quantum Error Correction using Repetition Codes
+      id: error-correction-using-repetition-codes
+      url: /summer-school/2020/lec-04
+    - title: Superconducting Qubits I Quantizing a Harmonic Oscillator, Josephson Junctions
+      id: superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions
+      url: /summer-school/2020/lec-05
+    - title: Superconducting Qubits II Circuit Quantum Electrodynamics, Readout and Calibration Methods
+      id: superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods
+      url: /summer-school/2020/lec-06
+    - title: Quantum Chemistry I Obtaining the Qubit Hamiltonian for H2 and LiH
+      id: chemistry-i-obtaining-qubit-hamiltonian-h2-lih
+      url: /summer-school/2020/lec-07
+    - title: Quantum Chemistry II Finding the Ground States of H2 and LiH
+      id: chemistry-ii-finding-ground-states-h2-lih
+      url: /summer-school/2020/lec-08
+    - title: Careers in Quantum Computin
+      id: careers-in-computing
+      url: /summer-school/2020/lec-09
+
+
 - title: Summer School 2021
   url: /2021
   type: learning-path
