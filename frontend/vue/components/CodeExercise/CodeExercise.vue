@@ -1,5 +1,8 @@
 <template>
   <div class="code-exercise">
+    <div ref="initialCodeElement" class="code-exercise__initial-code">
+      <slot />
+    </div>
     <div class="code-exercise__editor-block">
       <CodeEditor
         class="code-exercise__editor-block__editor"
@@ -42,13 +45,13 @@ export default defineComponent({
   props: {},
   data () {
     return {
-      code: `p1 = 0.01
-p3 = 3 * p1**2 * (1-p1) + p1**3 # probability of 2 or 3 errors
-print('Probability of a single reply being garbled: {}'.format(p1))
-print('Probability of a the majority of three replies being garbled: {:.4f}'.format(p3))`,
+      code: '',
       isKernelBusy: false,
       isKernelReady: false
     }
+  },
+  mounted () {
+    this.code = (this.$refs.initialCodeElement as HTMLDivElement)?.textContent?.trim() ?? ''
   },
   methods: {
     run () {
@@ -85,6 +88,11 @@ print('Probability of a the majority of three replies being garbled: {:.4f}'.for
 
 .code-exercise {
   border: 1px solid $border-color;
+
+  &__initial-code {
+    display: none;
+  }
+
   &__editor-block {
     background-color: $background-color-lighter;
     position: relative;
