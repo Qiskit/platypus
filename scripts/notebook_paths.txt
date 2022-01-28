@@ -13,7 +13,7 @@ quantum-machine-learning/supervised
 quantum-machine-learning/kernel
 quantum-machine-learning/unsupervised
 quantum-machine-learning/project
-#quantum-machine-learning/qgan
+quantum-machine-learning/qgan
 
 
 examples/annotations
