@@ -1,6 +1,8 @@
 nbqa
 pylint
 qiskit
+qiskit_machine_learning
 matplotlib
 mypy
 pycodestyle
+sklearn
