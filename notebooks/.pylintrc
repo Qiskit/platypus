@@ -7,6 +7,7 @@ disable=
     reimported,
     import-outside-toplevel,
     pointless-statement,
+    expression-not-assigned,
     missing-module-docstring,
     redefined-outer-name
 

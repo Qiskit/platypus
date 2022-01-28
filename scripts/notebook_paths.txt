@@ -4,6 +4,18 @@ intro/entangled-states
 #intro/visualizing-entanglement
 intro/grover-intro
 
+quantum-machine-learning/introduction
+quantum-machine-learning/pqc
+quantum-machine-learning/encoding
+quantum-machine-learning/training
+quantum-machine-learning/supervised
+#quantum-machine-learning/vqc
+quantum-machine-learning/kernel
+quantum-machine-learning/unsupervised
+quantum-machine-learning/project
+#quantum-machine-learning/qgan
+
+
 examples/annotations
 examples/blocks
 examples/widgets
