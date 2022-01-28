@@ -7,6 +7,7 @@ import MobileMenu from './components/TheMenu/MobileMenu.vue'
 import WhatIsQuantumVolume from './components/WhatIsQuantumVolume/WhatIsQuantumVolume.vue'
 import LayersCircuit from './components/WhatIsQuantumVolume/LayersCircuit.vue'
 import DragAndDropCode from './components/DragAndDropCode/DragAndDropCode.vue'
+import EndUserLicenseAgreementLayout from './components/UserAccount/EndUserLicenseAgreementLayout.vue'
 import Carousel from './components/Carousel/Carousel.vue'
 import MiniComposer from './components/MiniComposer/MiniComposer.vue'
 import Quiz from './components/Quiz/Quiz.vue'
@@ -57,6 +58,7 @@ const components: any = {
   LayersCircuit,
   WhatIsQuantumVolume,
   DragAndDropCode,
+  EndUserLicenseAgreementLayout,
   Carousel,
   Quiz,
   UtilityPanel,
