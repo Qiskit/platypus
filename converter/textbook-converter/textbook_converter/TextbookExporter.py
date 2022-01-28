@@ -341,6 +341,9 @@ def handle_code_cell(cell, resources):
 
     and indent all lines. Include cell output if configured.
     """
+    # remove pylint comments
+    cell.source = re.sub('#pylint:[^\n]*\n', '', cell.source)
+
     formatted_source = (
         cell.source.replace("\n", "\n      ")
         .replace("<", "&lt;")
