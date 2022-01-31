@@ -7,8 +7,15 @@ import {
   RenderMimeRegistry,
   standardRendererFactories
 } from '@jupyterlab/rendermime'
-import { IShellFuture } from '@jupyterlab/services/lib/kernel/kernel'
+
+import {
+  WIDGET_MIMETYPE,
+  WidgetRenderer
+} from '@jupyter-widgets/html-manager/lib/output_renderers'
+import { HTMLManager } from '@jupyter-widgets/html-manager'
+import { IShellFuture, IKernelConnection } from '@jupyterlab/services/lib/kernel/kernel'
 import { KernelMessage } from '@jupyterlab/services'
+import { getWidgetsManager } from './KernelManager'
 
 const outputOptions = {
   mathjaxUrl: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js',
@@ -37,7 +44,7 @@ function getRenderers (options: any) {
   return _renderers
 }
 
-function createOutputArea (parent : HTMLDivElement) {
+function createOutputArea (parent: HTMLDivElement) {
   let latexTypesetter: MathJaxTypesetter | undefined
   if (outputOptions.mathjaxUrl) {
     latexTypesetter = new MathJaxTypesetter({
@@ -51,6 +58,15 @@ function createOutputArea (parent : HTMLDivElement) {
     latexTypesetter
   }
   const rendermime = new RenderMimeRegistry(renderers)
+
+  rendermime.addFactory(
+    {
+      safe: false,
+      mimeTypes: [WIDGET_MIMETYPE],
+      createRenderer: options => new WidgetRenderer(options, getWidgetsManager() as unknown as HTMLManager)
+    },
+    1
+  )
 
   const model = new OutputAreaModel({ trusted: true })
 

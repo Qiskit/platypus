@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { KernelManager, KernelAPI, ServerConnection } from '@jupyterlab/services'
 import { IKernelConnection } from '@jupyterlab/services/lib/kernel/kernel'
+import { WidgetsManager } from './WidgetsManager'
 
 export { IKernelConnection }
 
@@ -55,17 +56,28 @@ export const serverOptions: IServerOptions = {
 }
 
 export const events = new EventTarget()
+let requestKernelPromise: Promise<IKernelConnection>
+let _widgetsManager: WidgetsManager | undefined
+
+export function getWidgetsManager () { return _widgetsManager }
 
 export function requestBinderKernel () {
+  if (requestKernelPromise === undefined) {
+    requestKernelPromise = requestBinder().then((serverSettings: ServerConnection.ISettings) => {
+      console.debug('Recovered settings =====================')
+      serverOptions.kernelOptions.serverSettings = serverSettings
+      serverOptions.kernelOptions.serverSettings.appendToken = true
+      return requestKernel().then((kernel) => {
+        _widgetsManager = new WidgetsManager(kernel)
+        return kernel
+      })
+    })
+  }
+
   // request a Kernel from Binder
   // this strings together requestBinder and requestKernel.
   // returns a Promise for a running Kernel.
-  return requestBinder().then((serverSettings: ServerConnection.ISettings) => {
-    console.debug('Recovered settings =====================')
-    serverOptions.kernelOptions.serverSettings = serverSettings
-    serverOptions.kernelOptions.serverSettings.appendToken = true
-    return requestKernel()
-  })
+  return requestKernelPromise
 }
 
 function buildBinderUrlToRepo (repo: string, binderUrl: string, ref: string) {
@@ -79,7 +91,7 @@ function buildBinderUrlToRepo (repo: string, binderUrl: string, ref: string) {
   return cleanBinderUrl + '/build/gh/' + cleanRepo + '/' + ref
 }
 
-function makeSettings (msg: any) {
+function makeSettings (msg: any): ServerConnection.ISettings {
   return ServerConnection.makeSettings({
     baseUrl: msg.url,
     wsUrl: 'ws' + msg.url.slice(4),
@@ -286,11 +298,9 @@ export function requestKernel () {
     }
   }))
 
-  const km = new KernelManager({ serverSettings })
-  return km.ready
-    .then(() => {
-      return km.startNew(kernelOptions)
-    })
+  const kernelManager = new KernelManager({ serverSettings })
+  return kernelManager.ready
+    .then(() => kernelManager.startNew(kernelOptions))
     .then((kernel: IKernelConnection) => {
       events.dispatchEvent(new CustomEvent('status', {
         detail: {

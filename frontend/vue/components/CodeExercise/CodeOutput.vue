@@ -31,19 +31,17 @@ export default defineComponent({
   },
   mounted () {
     this.$emit('loadingKernel')
+    const outputDivRef = (this.$refs.outputDiv as HTMLDivElement)
 
     this.kernelPromise = requestBinderKernel()
 
     this.kernelPromise.then((kernel: IKernelConnection) => {
       this.kernel = kernel
       this.$emit('kernelReady')
+      this.outputArea = createOutputArea(outputDivRef)
     }, (error: Error) => {
       this.error = error.message
     })
-
-    const outputDivRef = (this.$refs.outputDiv as HTMLDivElement)
-
-    this.outputArea = createOutputArea(outputDivRef)
   },
   methods: {
     requestExecute (code: string) {
