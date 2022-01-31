@@ -10,21 +10,16 @@
     <div class="eula__policy-text" v-html="privacyPolicyHTML" />
     <section class="eula__actions__container">
       <p class="eula__actions__description">
-        {{ $translate('By clicking &ldquo;Accept &amp; Continue&rdquo;, you are fully agreeing to the Qiskit End User Agreement.') }}
+        {{ $translate('By clicking &ldquo;Accept &amp; Continue&rdquo;, you are fully agreeing to Qiskit End User Agreement.') }}
       </p>
       <div class="eula__actions">
         <AppCta
           class="eula__actions__cancel"
-          :url="cancelAction.url"
-          :label="$translate('Cancel')"
-          :segment="cancelAction.segment"
+          v-bind="cancelAction"
           kind="ghost"
         />
         <AppCta
-          :url="acceptAction.url"
-          :label="$translate('Accept & continue')"
-          :is-static="true"
-          :segment="acceptAction.segment"
+          v-bind="acceptAction"
         />
       </div>
     </section>
@@ -52,14 +47,17 @@ export default defineComponent({
       },
       privacyPolicyMd: 'Loading...',
       cancelAction: {
-        url: '/signin',
+        url: 'signin',
+        label: this.$translate('Cancel'),
         segment: {
           cta: 'cancel',
           location: 'end-user-license-agreement'
         }
       },
       acceptAction: {
-        url: '/account',
+        url: 'account',
+        label: this.$translate('Accept & continue'),
+        isStatic: true,
         segment: {
           cta: 'accept',
           location: 'end-user-license-agreement'
