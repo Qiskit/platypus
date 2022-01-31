@@ -89,7 +89,28 @@ new MathigonStudioApp()
     res.json(courses)
   })
   .get('/account', (req, res) => {
-    // if (!req.user) return res.redirect('/signin');
+    if (!req.user) return res.redirect('/signin');
+
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+    const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+    const userMockData = {
+      firstName: req.user?.firstName,
+      lastName: req.user?.lastName
+    }
+
+    res.render('userAccount', {
+      config: CONFIG,
+      userData: userMockData,
+      lang,
+      privacyPolicyMD,
+      translationsJSON
+    })
+  })
+  .get('/eula', (req, res) => {
+    if (!req.user) return res.redirect('/signin');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -141,7 +162,7 @@ new MathigonStudioApp()
     }
   })
   .get('/signin', async (req, res) => {
-    if (req.user) return res.redirect('/account');
+    // if (req.user) return res.redirect('/account');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
