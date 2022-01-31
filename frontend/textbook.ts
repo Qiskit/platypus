@@ -68,9 +68,10 @@ textbook.runAfterDOMLoaded(() => {
   initAnalytics(
     window.textbookAnalytics.key, window.textbookAnalytics.url
   ).then(() => {
+    trackPage(window.location.pathname)
+  }).finally(() => {
     textbook.trackClickEvent = trackClickEvent
     textbook.trackPerformedSearch = trackPerformedSearch
     textbook.trackUpdatedObject = trackUpdatedObject
-    trackPage(window.location.pathname)
   })
 })
