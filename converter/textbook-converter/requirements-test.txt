@@ -2,7 +2,9 @@ nbqa
 pylint
 qiskit
 qiskit_machine_learning
+qiskit_finance
 matplotlib
 mypy
 pycodestyle
 sklearn
+tensorflow
