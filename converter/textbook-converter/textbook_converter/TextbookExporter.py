@@ -349,10 +349,10 @@ def handle_code_cell(cell, resources):
     )
 
     code_lines = [
-        "\n<span></span>\n"
-        '\n    pre(data-executable="true" data-language="python").\n      ',
+        '\n::: q-code-exercise\n',
+        '    pre.\n      ',
         formatted_source,
-        "\n\n",
+        "\n\n"
     ]
 
     if "textbook" not in resources:
@@ -365,7 +365,7 @@ def handle_code_cell(cell, resources):
         include_output = resources["textbook"]["include_output"]
 
     if include_output is not False and len(cell.outputs):
-        code_lines.append(f'\n{INDENT}div(data-executable-output="true")\n')
+        code_lines.append(f'\n    output\n')
         for cell_output in cell.outputs:
             output = handle_code_cell_output(cell_output) or ""
             if output.startswith("pre"):
@@ -377,6 +377,7 @@ def handle_code_cell(cell, resources):
                 )
                 code_lines.append(f"{output}\n\n")
 
+    code_lines.append(":::\n")
     joined_lines = "".join(code_lines)
     return joined_lines, resources
 

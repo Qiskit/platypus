@@ -1,8 +1,5 @@
 <template>
   <div class="code-exercise">
-    <div ref="initialCodeElement" class="code-exercise__initial-code">
-      <slot />
-    </div>
     <div class="code-exercise__editor-block">
       <CodeEditor
         class="code-exercise__editor-block__editor"
@@ -26,6 +23,13 @@
       @finished="kernelFinished"
       @kernelReady="kernelReady"
     />
+    <div
+      ref="initialCodeElement"
+      class="code-exercise__initial-code"
+      :class="{'code-exercise__initial-code__hidden-output': executedOnce}"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -42,16 +46,18 @@ export default defineComponent({
     ExerciseActionsBar,
     CodeOutput
   },
-  props: {},
   data () {
     return {
       code: '',
       isKernelBusy: false,
-      isKernelReady: false
+      isKernelReady: false,
+      executedOnce: false
     }
   },
   mounted () {
-    this.code = (this.$refs.initialCodeElement as HTMLDivElement)?.textContent?.trim() ?? ''
+    const slotWrapper = (this.$refs.initialCodeElement as HTMLDivElement)
+    const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
+    this.code = initialCodeElement?.textContent?.trim() ?? ''
   },
   methods: {
     run () {
@@ -71,6 +77,7 @@ export default defineComponent({
     },
     kernelRunning () {
       this.isKernelBusy = true
+      this.executedOnce = true
     },
     kernelFinished () {
       this.isKernelBusy = false
@@ -90,7 +97,15 @@ export default defineComponent({
   border: 1px solid $border-color;
 
   &__initial-code {
-    display: none;
+    & > :deep(pre) {
+      display: none;
+    }
+
+    &__hidden-output {
+      & > :deep(output) {
+        display: none;
+      }
+    }
   }
 
   &__editor-block {
