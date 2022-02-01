@@ -1,16 +1,16 @@
 <template>
   <div class="code-editors-tools">
     <button v-if="resetEnabled" class="code-editors-tools__button" @click="reset">
-      <bx-tooltip-icon aligment="center" direction="top" body-text="Reset cell to initial content">
+      <bx-tooltip-icon class="code-editors-tools__button__tooltip" aligment="center" direction="top" body-text="Reset cell to initial content">
         <ResetIcon class="code-editors-tools__button__icon" />
       </bx-tooltip-icon>
     </button>
     <button v-if="notebookEnabled" class="code-editors-tools__button" @click="notebook">
-      <bx-tooltip-icon aligment="center" direction="top" body-text="Copy to notebook notes">
+      <bx-tooltip-icon class="code-editors-tools__button__tooltip" aligment="center" direction="top" body-text="Copy to notebook notes">
         <NotebookIcon class="code-editors-tools__button__icon" />
       </bx-tooltip-icon>
     </button>
-    <CodeMirrorClipboardCopy :text="copyText" />
+    <CodeMirrorClipboardCopy class="code-editors-tools__button" :text="copyText" />
   </div>
 </template>
 
@@ -68,16 +68,24 @@ export default defineComponent({
 .code-editors-tools {
   display: flex;
   justify-content: flex-end;
-  padding: $spacing-02 0;
+  padding: $spacing-02;
+  background-color: rgba($background-color-lighter, 0.75);
 
   &__button {
-    padding: $spacing-03;
+    padding: $spacing-02 $spacing-02;
+    margin: $spacing-02;
+
+    &__tooltip {
+      display: flex;
+    }
 
     &__icon {
       color: $text-color-light;
     }
 
-    &:focus #{&}__icon ,
+    &:hover {
+      background-color: rgba($background-color-light-2, 0.75);
+    }
     &:hover #{&}__icon  {
       color: $active-color;
     }

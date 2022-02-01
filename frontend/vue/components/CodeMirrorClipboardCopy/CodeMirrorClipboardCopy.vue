@@ -4,7 +4,7 @@
     class="code-mirror-clipboard-copy"
     @clipboard-copy="handleClick"
   >
-    <bx-tooltip-icon aligment="center" direction="top" :body-text="$translate(label)">
+    <bx-tooltip-icon class="code-mirror-clipboard-copy__tooltip" aligment="center" direction="top" :body-text="$translate(label)">
       <CopyIcon class="code-mirror-clipboard-copy__icon" />
     </bx-tooltip-icon>
   </clipboard-copy>
@@ -56,7 +56,12 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
   display: flex;
   font-size: 0.875rem;
   position: relative;
-  padding: $spacing-03;
+  padding: $spacing-02 $spacing-02;
+  margin: $spacing-02;
+
+  &__tooltip {
+    display: flex;
+  }
 
   &__icon {
     color: $text-color-light;

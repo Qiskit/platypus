@@ -53,7 +53,7 @@ export default defineComponent({
   }
   & :deep(.CodeMirror-sizer) {
     height: 100%;
-    padding-top: $spacing-05;
+    padding-top: $spacing-08;
   }
   & :deep(.CodeMirror-line) {
     padding-left: $spacing-05;

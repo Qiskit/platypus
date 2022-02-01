@@ -11,7 +11,7 @@
         class="code-exercise__editor-block__actions-bar"
         :is-running="isKernelBusy"
         :run-enabled="isKernelReady"
-        :grade-enabled="isKernelReady"
+        :grade-enabled="isKernelReady && isGradeExercise"
         @run="run"
         @grade="grade"
       />
@@ -45,6 +45,13 @@ export default defineComponent({
     CodeEditor,
     ExerciseActionsBar,
     CodeOutput
+  },
+  props: {
+    isGradeExercise: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   },
   data () {
     return {
@@ -95,6 +102,7 @@ export default defineComponent({
 
 .code-exercise {
   border: 1px solid $border-color;
+  margin: $spacing-07 0;
 
   &__initial-code {
     & > :deep(pre) {
