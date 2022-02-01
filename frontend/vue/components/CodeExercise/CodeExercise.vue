@@ -4,6 +4,8 @@
       <CodeEditor
         class="code-exercise__editor-block__editor"
         :code="code"
+        :initial-code="initialCode"
+        :notebook-enabled="false"
         @codeChanged="codeChanged"
         @notebookCopyRequest="notebookCopyRequest"
       />
@@ -56,6 +58,7 @@ export default defineComponent({
   data () {
     return {
       code: '',
+      initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
       executedOnce: false
@@ -65,6 +68,7 @@ export default defineComponent({
     const slotWrapper = (this.$refs.initialCodeElement as HTMLDivElement)
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
     this.code = initialCodeElement?.textContent?.trim() ?? ''
+    this.initialCode = this.code
   },
   methods: {
     run () {

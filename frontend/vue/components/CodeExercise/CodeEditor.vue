@@ -49,6 +49,11 @@ export default defineComponent({
       required: false,
       default: ''
     },
+    initialCode: {
+      type: String,
+      required: false,
+      default: ''
+    },
     copyEnabled: {
       type: Boolean,
       required: false,
@@ -67,7 +72,6 @@ export default defineComponent({
   },
   data () {
     return {
-      initialCode: '',
       internalCode: '',
       resetNotificationOpen: false
     }
@@ -79,7 +83,6 @@ export default defineComponent({
   },
   mounted () {
     this.internalCode = this.code
-    this.initialCode = this.code
   },
   methods: {
     resetRequest () {
