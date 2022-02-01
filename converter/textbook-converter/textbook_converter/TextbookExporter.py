@@ -348,9 +348,17 @@ def handle_code_cell(cell, resources):
         .replace("]]", "] ]")
     )
 
+    graderImport = cell.metadata["grader_import"] if "grader_import" in cell.metadata else None
+    graderFunction = cell.metadata["grader_function"] if "grader_function" in cell.metadata else None
+
+    graderAttr = ""
+
+    if graderImport is not None and graderFunction is not None:
+        graderAttr = f"(grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\")"
+
     code_lines = [
-        '\n::: q-code-exercise\n',
-        '    pre.\n      ',
+        f"\n::: q-code-exercise{graderAttr}\n",
+        "    pre.\n      ",
         formatted_source,
         "\n\n"
     ]

@@ -13,7 +13,7 @@
         class="code-exercise__editor-block__actions-bar"
         :is-running="isKernelBusy"
         :run-enabled="isKernelReady"
-        :grade-enabled="isKernelReady && isGradeExercise"
+        :grade-enabled="isKernelReady && isGradingExercise"
         @run="run"
         @grade="grade"
       />
@@ -49,10 +49,15 @@ export default defineComponent({
     CodeOutput
   },
   props: {
-    isGradeExercise: {
-      type: Boolean,
+    graderImport: {
+      type: String,
       required: false,
-      default: false
+      default: ''
+    },
+    graderFunction: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data () {
@@ -62,6 +67,11 @@ export default defineComponent({
       isKernelBusy: false,
       isKernelReady: false,
       executedOnce: false
+    }
+  },
+  computed: {
+    isGradingExercise (): boolean {
+      return this.graderFunction !== '' && this.graderImport !== ''
     }
   },
   mounted () {
