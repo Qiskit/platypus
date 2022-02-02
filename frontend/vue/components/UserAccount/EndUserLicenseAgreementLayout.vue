@@ -10,7 +10,7 @@
     <div class="eula__policy-text" v-html="privacyPolicyHTML" />
     <section class="eula__actions__container">
       <p class="eula__actions__description">
-        {{ $translate('By clicking &ldquo;Accept &amp; Continue&rdquo;, you are fully agreeing to the Qiskit End User Agreement.') }}
+        {{ $translate('By clicking &ldquo;Accept &amp; Continue&rdquo;, you agree to the Qiskit End User Agreement.') }}
       </p>
       <div class="eula__actions">
         <AppCta
