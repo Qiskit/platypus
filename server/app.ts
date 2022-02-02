@@ -109,6 +109,21 @@ new MathigonStudioApp()
       translationsJSON
     })
   })
+  .get('/eula', (req, res) => {
+    if (!req.user) return res.redirect('/signin');
+
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+    const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+    res.render('eula', {
+      config: CONFIG,
+      lang,
+      privacyPolicyMD,
+      translationsJSON
+    })
+  })
   .get('/summer-school/:course', (req, res, next) => {
     // redirect to first lecture when no lecture specified
     const course = getCourse(req.params.course, req.locale.id)
