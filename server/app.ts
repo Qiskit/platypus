@@ -117,14 +117,8 @@ new MathigonStudioApp()
 
     const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
 
-    const userMockData = {
-      firstName: req.user?.firstName,
-      lastName: req.user?.lastName
-    }
-
     res.render('eula', {
       config: CONFIG,
-      userData: userMockData,
       lang,
       privacyPolicyMD,
       translationsJSON
