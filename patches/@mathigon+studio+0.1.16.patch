@@ -119,7 +119,7 @@ index 14a4bcf..e143648 100644
  
    // Add the [parent] attribute as class to all elements parents
 diff --git a/node_modules/@mathigon/studio/server/accounts.ts b/node_modules/@mathigon/studio/server/accounts.ts
-index a28f2db..336e162 100755
+index a28f2db..d1eb2e7 100755
 --- a/node_modules/@mathigon/studio/server/accounts.ts
 +++ b/node_modules/@mathigon/studio/server/accounts.ts
 @@ -266,110 +266,110 @@ function redirect(req: express.Request, res: express.Response, data: ResponseDat
@@ -217,16 +217,6 @@ index a28f2db..336e162 100755
 -    const response = await resendVerificationEmail(req);
 -    redirect(req, res, response, req.user ? '/profile' : '/login');
 -  });
--
--  app.post('/profile/accept-policies', async (req, res) => {
--    await acceptPolicies(req);
--    res.send('ok');
--  });
--
--  app.get('/profile/data.json', async (req, res) => {
--    if (!req.user) return res.redirect('/login');
--    res.json(await exportData(req.user));
--  });
 +  // app.get('/signup', (req, res) => {
 +  //   if (req.user) return res.redirect('/dashboard');
 +  //   res.render('accounts/signup', {countries: COUNTRY_LIST});
@@ -293,12 +283,16 @@ index a28f2db..336e162 100755
 +  //   const response = await resendVerificationEmail(req);
 +  //   redirect(req, res, response, req.user ? '/profile' : '/login');
 +  // });
-+
-+  // app.post('/profile/accept-policies', async (req, res) => {
-+  //   await acceptPolicies(req);
-+  //   res.send('ok');
-+  // });
-+
+ 
+   app.post('/profile/accept-policies', async (req, res) => {
+     await acceptPolicies(req);
+     res.send('ok');
+   });
+ 
+-  app.get('/profile/data.json', async (req, res) => {
+-    if (!req.user) return res.redirect('/login');
+-    res.json(await exportData(req.user));
+-  });
 +  // app.get('/profile/data.json', async (req, res) => {
 +  //   if (!req.user) return res.redirect('/login');
 +  //   res.json(await exportData(req.user));
