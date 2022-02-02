@@ -14,7 +14,7 @@
         Output statevector
       </h5>
       <div class="statevector-base-widget__output-data__statevector__wrapper">
-        <div class="statevector-base-widget__output-data__statevector">
+        <StatevectorBrackets class="statevector-base-widget__output-data__statevector">
           <AmplitudeDisk
             v-for="(data, index) in internalAmplitudeDiskData"
             :key="index"
@@ -22,7 +22,7 @@
             :magnitude="data.magnitude"
             :phase="data.phase"
           />
-        </div>
+        </StatevectorBrackets>
       </div>
     </div>
   </div>
@@ -34,11 +34,13 @@ import 'carbon-web-components/es/components/slider/slider.js'
 import 'carbon-web-components/es/components/slider/slider-input.js'
 import AmplitudeDisk from '../AmplitudeDisk/AmplitudeDisk.vue'
 import { Amplitude } from '../AmplitudeDisk/amplitude'
+import StatevectorBrackets from './StatevectorBrackets.vue'
 
 export default defineComponent({
   name: 'StatevectorBaseWidget',
   components: {
-    AmplitudeDisk
+    AmplitudeDisk,
+    StatevectorBrackets
   },
   props: {
     numberOfElements: { type: Number, default: 4 },
@@ -106,30 +108,6 @@ export default defineComponent({
     }
 
     &__statevector {
-      position: relative;
-
-      &::before {
-        content: "";
-        border: solid black;
-        border-width: 1px 0 1px 1px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: $spacing-05;
-        border-radius: 0.5rem 0 0 0.5rem;
-      }
-      &::after {
-        content: "";
-        border: solid black;
-        border-width: 1px 1px 1px 0;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: $spacing-05;
-        border-radius: 0 0.5rem 0.5rem 0;
-      }
 
       &__wrapper {
         display: flex;
