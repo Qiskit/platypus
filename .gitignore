@@ -27,6 +27,7 @@ nbproject
 .qiskit
 
 # Folders to ignore
+.venv
 .vscode
 node_modules
 ts_build
