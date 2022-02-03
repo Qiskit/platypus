@@ -2,19 +2,19 @@
 // Project Platypus
 // =============================================================================
 
-import { Request } from 'express';
+import { Request } from 'express'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
-import { getCourse } from '@mathigon/studio/server/utilities'
+import { getCourse } from '@mathigon/studio/server/utilities/utilities'
 
-import { LOCALES } from '@mathigon/studio/server/i18n'
+import { LOCALES } from '@mathigon/studio/server/utilities/i18n'
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
 } from './utilities'
 import * as storageApi from './storage'
 
-import { translate } from '@mathigon/studio/server/i18n'
+import { translate } from '@mathigon/studio/server/utilities/i18n'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
@@ -104,6 +104,6 @@ new MathigonStudioApp()
       res.render('textbook', courseData)
     }
   })
-  .course(storageApi)
+  .course({})
   .errors()
   .listen()
