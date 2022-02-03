@@ -8,11 +8,13 @@ jobs:
     # Run only from the original repository
     # Because this job requires secrets, which cannot be shared with forks
     if: github.event.pull_request.head.repo.full_name == github.repository
-
-    uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
+    uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@platypus-user-account
     with:
       code_engine_project: platypus-preview
       docker_image_name: platypus
     secrets:
       ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
       ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
+      ibmid_client_id: ${{ secrets.IBMID_CLIENT_ID }}
+      ibmid_client_secret: ${{ secrets.IBMID_CLIENT_SECRET }}
+      mongodb_uri: ${{ secrets.STAGING_MONGODB_URI }}
