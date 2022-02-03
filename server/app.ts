@@ -156,7 +156,8 @@ new MathigonStudioApp()
     }
   })
   .get('/signin', async (req, res) => {
-    if (req.user) return res.redirect('/account');
+    if (req.user && req.user.acceptedPolicies) return res.redirect('/account');
+    if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -167,6 +168,9 @@ new MathigonStudioApp()
       lang,
       translationsJSON
     })
+  })
+  .post('/profile/accept-policies', async (req, res) => {
+    res.redirect('/account')
   })
   .course({})
   .errors()
