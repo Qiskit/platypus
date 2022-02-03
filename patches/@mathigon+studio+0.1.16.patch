@@ -314,3 +314,14 @@ index a28f2db..d1eb2e7 100755
    });
  
    app.get('/cron/cleanup', async (req, res, next) => {
+diff --git a/node_modules/@mathigon/studio/server/utilities/mongodb.ts b/node_modules/@mathigon/studio/server/utilities/mongodb.ts
+index 227d047..85d879c 100644
+--- a/node_modules/@mathigon/studio/server/utilities/mongodb.ts
++++ b/node_modules/@mathigon/studio/server/utilities/mongodb.ts
+@@ -37,5 +37,6 @@ export async function connectMongo() {
+ 
+ export function getMongoStore() {
+   const clientPromise = connectMongo();  // async
++  // @ts-ignore
+   return MongoStore.create({clientPromise, touchAfter: 12 * 3600}); 
+ }
