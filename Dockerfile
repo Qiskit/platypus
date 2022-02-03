@@ -1,4 +1,4 @@
-FROM node:16-alpine3.14 AS builder
+FROM node:14-alpine AS builder
 
 ARG IBMID_CLIENT_ID
 ARG IBMID_CLIENT_SECRET
@@ -29,7 +29,7 @@ RUN npm run build
 # only need to keep all the strings.yaml & *.md files
 RUN find ./translations -type f ! -iname "*.yaml" -type f ! -iname "*.md" -delete
 
-FROM node:16-alpine3.14 AS runtime
+FROM node:14-alpine AS runtime
 
 WORKDIR /usr/app
 

@@ -20,9 +20,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Apply configuration
-        run: npm run setup:secrets -- --mongo ${{ secrets.MONGODB_URI }}
-
       - name: Install Python 3.8
         uses: actions/setup-python@v2
         with:
@@ -36,6 +33,9 @@ jobs:
 
       - name: Install Python dependencies
         run: pip install -r converter/textbook-converter/requirements.txt -r converter/textbook-converter/requirements-test.txt
+
+      - name: Apply configuration
+        run: npm run setup:secrets -- --mongo ${{ secrets.STAGING_MONGODB_URI }}
 
       - name: Notebook tests
         run: npm run test:nb
