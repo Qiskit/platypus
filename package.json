@@ -17,7 +17,7 @@
     "watch:vue": "cross-env VUE_CLI_SERVICE_CONFIG_PATH=./frontend/vue/vue.config.js vue-cli-service build --no-clean --watch --target lib --name textbooklib --dest public/lib frontend/vue/main.ts",
     "watch:studio": "mgon-build --assets --watch",
     "watch": "npm-run-all --parallel watch:vue watch:studio",
-    "start": "ts-node -I public -P server/tsconfig.json server/app.ts",
+    "start": "ts-node --transpile-only -I public -P server/tsconfig.json server/app.ts",
     "start-dev": "nodemon --watch 'server/**/*.ts' --exec 'ts-node -I public -P server/tsconfig.json server/app.ts'",
     "dev": "npm-run-all --parallel watch start-dev",
     "thumbnails": "mgon-build --thumbnails",
@@ -31,7 +31,8 @@
     "test:debug": "start-server-and-test start :8080/health cy:open",
     "test:nb:goals": "python3 ./scripts/goals.py",
     "test:nb:lint": "./scripts/nb_lint.sh",
-    "test:nb": "npm run test:nb:lint && npm run test:nb:goals"
+    "test:nb": "npm run test:nb:lint && npm run test:nb:goals",
+    "setup:secrets": "mgon-secrets"
   },
   "engines": {
     "node": "14.16.0"
@@ -45,12 +46,13 @@
     "@ibm/plex": "^6.0.0",
     "@mathigon/boost": "^0.6.17",
     "@mathigon/euclid": "^0.6.12",
-    "@mathigon/studio": "0.1.14",
+    "@mathigon/studio": "0.1.16",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "carbon-components": "~10.51.0",
     "carbon-web-components": "^1.20.0",
     "lit-element": "^2.5.1",
+    "mongodb": "4.2.1",
     "patch-package": "^6.4.7",
     "ts-node": "9.1.1",
     "typescript": "4.5.5",
@@ -62,8 +64,13 @@
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^8.0.0",
+    "@types/bcryptjs": "2.4.2",
+    "@types/express-flash": "0.0.2",
     "@types/fs-extra": "^9.0.13",
     "@types/jsdom": "^16.2.14",
+    "@types/node-fetch": "^2.5.12",
+    "@types/pug": "2.0.5",
+    "@types/validator": "13.6.6",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "@vue/cli-plugin-typescript": "4.5.13",
@@ -89,7 +96,7 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass-loader": "^10.2.1",
-    "sass-mq": "^5.0.1",
+    "sass-mq": "^6.0.0",
     "start-server-and-test": "^1.14.0",
     "tslib": "^2.3.1"
   }

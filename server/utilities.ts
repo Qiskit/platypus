@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-import { AVAILABLE_LOCALES } from '@mathigon/studio/server/i18n'
+import { AVAILABLE_LOCALES } from '@mathigon/studio/server/utilities/i18n'
 import { Course, Section } from '@mathigon/studio/server/interfaces'
 import {
   CONFIG as mConfig,
@@ -9,7 +9,7 @@ import {
   getCourse,
   loadYAML,
   loadCombinedYAML
-} from '@mathigon/studio/server/utilities'
+} from '@mathigon/studio/server/utilities/utilities'
 
 import {
   Analytics,
