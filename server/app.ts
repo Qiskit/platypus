@@ -169,9 +169,6 @@ new MathigonStudioApp()
       translationsJSON
     })
   })
-  .post('/profile/accept-policies', async (req, res) => {
-    res.redirect('/account')
-  })
   .course({})
   .errors()
   .listen()
