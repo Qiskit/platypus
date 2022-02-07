@@ -46,6 +46,7 @@
       </div>
       <div v-if="activeSection === sectionList[1].hash">
         <PrivacySection />
+        <ExportUserDataSection />
       </div>
     </section>
   </div>
@@ -56,6 +57,7 @@ import { defineComponent } from 'vue-demi'
 import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import PrivacySection from './PrivacySection.vue'
+import ExportUserDataSection from './ExportUserDataSection.vue'
 import UserProgress from './UserProgress.vue'
 
 export default defineComponent({
@@ -64,6 +66,7 @@ export default defineComponent({
     AppLink,
     BasicLink,
     PrivacySection,
+    ExportUserDataSection,
     UserProgress
   },
   props: {
