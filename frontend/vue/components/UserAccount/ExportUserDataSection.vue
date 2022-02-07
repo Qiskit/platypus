@@ -3,7 +3,9 @@
     <h4 class="export-section__title">
       {{ $translate('Export user data') }}
     </h4>
-    <p class="export-section__description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium harum eius est at temporibus minima pariatur quae quisquam sed, tempore accusamus enim repudiandae totam qui voluptatem. Quae temporibus corrupti rem.</p>
+    <p class="export-section__description">
+      {{ $translate('Click the button below to export your user data in a .csv file format') }}
+    </p>
     <AppCta
       class="export-section__cta"
       :label="exportDataLink.label"
