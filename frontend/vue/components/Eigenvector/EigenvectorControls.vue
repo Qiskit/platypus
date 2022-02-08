@@ -89,7 +89,7 @@ export default defineComponent({
         {
           name: "|->",
           state: [
-            { phase: 180, magnitude: 0.5 },
+            { phase: 0, magnitude: 0.5 },
             { phase: 180, magnitude: 0.5 },
           ],
         },
