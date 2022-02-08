@@ -8,12 +8,12 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M435 10 l-1000 0 M435 10 c20 0 20 0 40 40 l50 100 c20 40 20 40 40 40 l1000 0"
+        d="M435 15 l-1000 0 M435 15 c20 0 20 0 40 40 l50 90 c20 40 20 40 40 40 l1000 0"
         stroke="#343A3F"
         stroke-width="3"
       />
       <path
-        d="M435 10 l-1000 0 M435 10 c20 0 20 0 40 40 l50 100 c20 40 20 40 40 40 l1000 0"
+        d="M435 15 l-1000 0 M435 15 c20 0 20 0 40 40 l50 90 c20 40 20 40 40 40 l1000 0"
         stroke="#343A3F"
         stroke-width="3"
         transform="translate(0 200) scale(1 -1)"
@@ -26,8 +26,8 @@
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M0 10 l2000 0" stroke="#343A3F" stroke-width="3" />
-      <path d="M0 190 l2000 0" stroke="#343A3F" stroke-width="3" />
+      <path d="M0 15 l2000 0" stroke="#343A3F" stroke-width="3" />
+      <path d="M0 185 l2000 0" stroke="#343A3F" stroke-width="3" />
     </svg>
     <div class="eigenvector-transition-path__empty-box" v-if="!internalActivePath">
       <slot />
