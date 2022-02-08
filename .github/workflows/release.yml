@@ -44,7 +44,7 @@ jobs:
         run: pip install -r converter/textbook-converter/requirements.txt -r converter/textbook-converter/requirements-test.txt
 
       - name: Secrets
-        run: npm run setup:secrets -- --mongo ${{ secrets.PRODUCTION_MONGODB_URI }} --ibmClientId ${{ secrets.IBMID_CLIENT_ID }} --ibmClientSecret ${{ secrets.IBMID_CLIENT_SECRET }}
+        run: npm run setup:secrets -- --mongo ${{ secrets.PRODUCTION_MONGODB_URI }} --ibmClientId ${{ secrets.PRODUCTION_IBMID_CLIENT_ID }} --ibmClientSecret ${{ secrets.PRODUCTION_IBMID_CLIENT_SECRET }} --googleClientId ${{ secrets.PRODUCTION_GOOGLE_CLIENT_ID }} --googleClientSecret ${{ secrets.PRODUCTION_GOOGLE_CLIENT_SECRET }}
 
       - name: Notebook tests
         run: npm run test:nb
