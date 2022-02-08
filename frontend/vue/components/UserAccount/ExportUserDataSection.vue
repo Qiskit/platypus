@@ -10,6 +10,7 @@
       class="export-section__cta"
       :label="exportDataLink.label"
       :segment="exportDataLink.segment"
+      :isDownloadable="true"
     >
       {{ $translate('Export data') }}
     </AppCta>

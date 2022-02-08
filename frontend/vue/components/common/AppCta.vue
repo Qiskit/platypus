@@ -23,6 +23,7 @@
 import { Vue, Options, prop } from 'vue-class-component'
 import ArrowRight16 from '@carbon/icons-vue/lib/arrow--right/16'
 import ArrowDown16 from '@carbon/icons-vue/lib/arrow--down/16'
+import Download16 from '@carbon/icons-vue/lib/download/16'
 import Launch16 from '@carbon/icons-vue/lib/launch/16'
 import BasicLink from './BasicLink.vue'
 import { isExternal, isIdAnchor } from '../../../ts/utilities'
@@ -31,6 +32,7 @@ class Props {
   kind = prop({ type: String, default: 'primary' })
   theme = prop({ type: String, default: 'light' })
   label = prop({ type: String, default: '' })
+  isDownloadable = prop({ type: Boolean, default: false })
 }
 
 @Options({
@@ -38,7 +40,8 @@ class Props {
     BasicLink,
     ArrowRight16,
     ArrowDown16,
-    Launch16
+    Launch16,
+    Download16
   }
 })
 
@@ -51,6 +54,8 @@ export default class AppCta extends Vue.with(Props) {
       return 'launch-16'
     } else if (isIdAnchor(url)) {
       return 'arrow-down-16'
+    } else if (this.isDownloadable) {
+      return 'download-16'
     } else {
       return 'arrow-right-16'
     }
