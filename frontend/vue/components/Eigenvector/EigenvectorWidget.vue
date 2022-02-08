@@ -20,36 +20,54 @@
       </StatevectorBrackets>
       <div
         class="eigenvector-widget__representation__state-change"
-        :class="`eigenvector-widget__representation__state-change_${currentCircuit.transitionType}`"
+        :class="`eigenvector-widget__representation__state-change_${currentCircuit.name.toLowerCase()}`"
       >
         <EigenvectorTransitionPath
           class="eigenvector-widget__representation__state-change__path"
           :active-path="currentCircuit.transitionType"
         >
-          <div class="eigenvector-widget__representation__state-change__path__empty"> Select a circuit in the selector above</div>
+          <div
+            class="
+              eigenvector-widget__representation__state-change__path__empty
+            "
+          >
+            Select a circuit in the selector above
+          </div>
         </EigenvectorTransitionPath>
         <AmplitudeDisk
-          class="eigenvector-widget__representation__state-change__disk eigenvector-widget__representation__state-change__disk_0"
-          :phase="currentState.state[0].phase"
-          :magnitude="currentState.state[0].magnitude"
+          class="
+            eigenvector-widget__representation__state-change__disk
+            eigenvector-widget__representation__state-change__disk_0
+          "
+          :phase="transitionState[0].phase"
+          :magnitude="transitionState[0].magnitude"
+          @animationcancel="animationCancel"
+          @animationiteration="animationStart"
+          @animationstart="animationStart"
+          @animationend="animationEnd"
         />
         <AmplitudeDisk
-          class="eigenvector-widget__representation__state-change__disk eigenvector-widget__representation__state-change__disk_1"
-          :phase="currentState.state[1].phase"
-          :magnitude="currentState.state[1].magnitude"
+          class="
+            eigenvector-widget__representation__state-change__disk
+            eigenvector-widget__representation__state-change__disk_1
+          "
+          :phase="transitionState[1].phase"
+          :magnitude="transitionState[1].magnitude"
         />
         <!--div class="eigenvector-widget__representation__state-change__test"/-->
       </div>
       <StatevectorBrackets class="eigenvector-widget__representation__brackets">
         <AmplitudeDisk
+          v-if="currentCircuit?.name !== ''"
           class="eigenvector-widget__representation__disk"
-          :phase="currentState.state[0].phase"
-          :magnitude="currentState.state[0].magnitude"
+          :phase="endState[0].phase"
+          :magnitude="endState[0].magnitude"
         />
         <AmplitudeDisk
+          v-if="currentCircuit?.name !== ''"
           class="eigenvector-widget__representation__disk"
-          :phase="currentState.state[1].phase"
-          :magnitude="currentState.state[1].magnitude"
+          :phase="endState[1].phase"
+          :magnitude="endState[1].magnitude"
         />
       </StatevectorBrackets>
     </div>
@@ -59,6 +77,7 @@
 <script lang="ts">
 import { defineComponent } from "vue-demi";
 import AmplitudeDisk from "../AmplitudeDisk/AmplitudeDisk.vue";
+import { Amplitude } from "../AmplitudeDisk/amplitude";
 import StatevectorBrackets from "../Statevector/StatevectorBrackets.vue";
 import EigenvectorControls, {
   InitialState,
@@ -86,7 +105,35 @@ export default defineComponent({
       } as InitialState,
       currentCircuit: unselectedCircuit,
       uid: Math.random().toString().replace(".", ""),
+      transitionState: [
+        { phase: 0, magnitude: 0.5 },
+        { phase: 0, magnitude: 0.5 },
+      ],
+      timeout: [] as NodeJS.Timeout[],
+      animationFrame: [] as number[],
     };
+  },
+  computed: {
+    endState(): Amplitude[] {
+      const initialState = this.currentState.state;
+      const stateDelta = this.currentCircuit.stateDelta;
+      const newState = [
+        {
+          phase: initialState[0].phase + stateDelta[0].phase,
+          magnitude: initialState[0].magnitude + stateDelta[0].magnitude,
+        },
+        {
+          phase: initialState[1].phase + stateDelta[1].phase,
+          magnitude: initialState[1].magnitude + stateDelta[1].magnitude,
+        },
+      ];
+
+      if (this.currentCircuit.transitionType === "cross") {
+        return [newState[1], newState[0]];
+      } else {
+        return newState;
+      }
+    },
   },
   methods: {
     onCircuitChange(circuit: CircuitElement) {
@@ -94,7 +141,59 @@ export default defineComponent({
     },
     onInitialStateChange(state: InitialState) {
       this.currentState = state;
+      this.resetAnimation()
     },
+    clearTimers() {
+      clearTimeout(this.timeout[0]);
+      clearTimeout(this.timeout[1]);
+
+      cancelAnimationFrame(this.animationFrame[0]);
+      cancelAnimationFrame(this.animationFrame[1]);
+
+      this.timeout = [];
+      this.animationFrame = [];
+    },
+    setProgress(progress: number, idx: number) {
+      const initialState = this.currentState.state;
+      const stateDelta = this.currentCircuit.stateDelta;
+
+      this.transitionState[idx] = {
+        phase: initialState[idx].phase + stateDelta[idx].phase * progress,
+        magnitude: initialState[idx].magnitude + stateDelta[idx].magnitude * progress,
+      };
+    },
+    animateState(idx: number) {
+      const ANIMATION_TIME = 1000;
+      const initialTime = new Date().getTime();
+
+      const frame = () => {
+        const timeDiff = new Date().getTime() - initialTime;
+        const progress = Math.min(timeDiff / ANIMATION_TIME, 1);
+        this.setProgress(progress, idx);
+        this.animationFrame[idx] = progress < 1 ? requestAnimationFrame(frame) : -1;
+      };
+
+      frame();
+    },
+    resetAnimation() {
+      this.clearTimers();
+      this.setProgress(0, 0);
+      this.setProgress(0, 1);
+    },
+    animationStart() {
+      this.resetAnimation()
+      
+      const timeoutTimes = this.currentCircuit.transitionType === "cross" ? [1500, 3500] : [500, 500]
+
+      this.timeout[0] = setTimeout(() => { this.animateState(0); }, timeoutTimes[0]);
+      this.timeout[1] = setTimeout(() => { this.animateState(1); }, timeoutTimes[1]);
+    },
+    animationEnd() {
+      this.resetAnimation()
+    },
+    animationCancel() {
+      this.resetAnimation()
+    }
   },
 });
 </script>
@@ -103,86 +202,92 @@ export default defineComponent({
 @import "carbon-components/scss/globals/scss/typography";
 @import "~/../scss/variables/colors.scss";
 
-@keyframes cross-path-top {
-  0% {
-    top: $spacing-02;
-    left: 0;
-  }
-  10% {
-    top: $spacing-02;
-    left: 0;
-  }
-  25% {
-    top: $spacing-02;
-    left: calc(50% - 4rem);
-  }
-  27% {
-    top: $spacing-02;
-  }
-  42% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-  }
-  50% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: calc(50% + 1rem);
-  }
-  75% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: calc(50% + 1rem);
-  }
-  90% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: calc(100% - 3rem);
-  }
-  100% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: calc(100% - 3rem);
-  }
-}
-@keyframes cross-path-bottom {
-  0% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: 0;
-  }
-  10% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: 0;
-  }
-  25% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: calc(50% - 4rem);
-  }
-  50% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-    left: calc(50% - 4rem);
-  }
-  52% {
-    top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-  }
-  67% {
-    top: $spacing-02;
-  }
-  75% {
-    top: $spacing-02;
-    left: calc(50% + 1rem);
-  }
-  90% {
-    top: $spacing-02;
-    left: calc(100% - 3rem);
-  }
-  100% {
-    top: $spacing-02;
-    left: calc(100% - 3rem);
+@mixin cross-path-top($name) {
+  @keyframes #{$name} {
+    0% {
+      top: $spacing-02;
+      left: 0;
+    }
+    10% {
+      top: $spacing-02;
+      left: 0;
+    }
+    25% {
+      top: $spacing-02;
+      left: calc(50% - 4rem);
+    }
+    27% {
+      top: $spacing-02;
+    }
+    42% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+    }
+    50% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: calc(50% + 1rem);
+    }
+    75% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: calc(50% + 1rem);
+    }
+    90% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: calc(100% - 3rem);
+    }
+    100% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: calc(100% - 3rem);
+    }
   }
 }
 
+@mixin cross-path-bottom($name) {
+  @keyframes #{$name} {
+    0% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: 0;
+    }
+    10% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: 0;
+    }
+    25% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: calc(50% - 4rem);
+    }
+    50% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+      left: calc(50% - 4rem);
+    }
+    52% {
+      top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+    }
+    67% {
+      top: $spacing-02;
+    }
+    75% {
+      top: $spacing-02;
+      left: calc(50% + 1rem);
+    }
+    90% {
+      top: $spacing-02;
+      left: calc(100% - 3rem);
+    }
+    100% {
+      top: $spacing-02;
+      left: calc(100% - 3rem);
+    }
+  }
+}
+
+@include cross-path-top(x-path-top);
+@include cross-path-top(y-path-top);
+@include cross-path-bottom(x-path-bottom);
+@include cross-path-bottom(y-path-bottom);
+
 @keyframes straight-path {
-  0% {
-    left: 0;
-  }
-  100% {
-    left: calc(100% - 3rem);
-  }
+  0% { left: 0; }
+  100% { left: calc(100% - 3rem); }
 }
 
 .eigenvector-widget {
@@ -228,21 +333,35 @@ export default defineComponent({
         }
       }
 
-      &_straight #{&}__disk {
+      &_z #{&}__disk {
         display: block;
         animation-name: straight-path;
         animation-duration: 3s;
       }
-      &_cross #{&}__disk {
+
+      &_x #{&}__disk {
         display: block;
         animation-duration: 7s;
         &_0 {
           top: $spacing-02;
-          animation-name: cross-path-top;
+          animation-name: x-path-top;
         }
         &_1 {
           top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-          animation-name: cross-path-bottom;
+          animation-name: x-path-bottom;
+        }
+      }
+      
+      &_y #{&}__disk {
+        display: block;
+        animation-duration: 7s;
+        &_0 {
+          top: $spacing-02;
+          animation-name: y-path-top;
+        }
+        &_1 {
+          top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+          animation-name: y-path-bottom;
         }
       }
     }

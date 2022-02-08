@@ -53,7 +53,6 @@ export default defineComponent({
   },
   watch: {
     activePath (newVal) {
-      console.log(newVal)
       this.internalActivePath = newVal
     }
   },

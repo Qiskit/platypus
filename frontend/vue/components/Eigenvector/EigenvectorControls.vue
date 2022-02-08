@@ -36,7 +36,10 @@
           />
           <label
             class="eigenvector-controls__circuit__selector__element-label"
-            :class="{'eigenvector-controls__circuit__selector__element-label_active-selection': currentCircuit.name }"
+            :class="{
+              'eigenvector-controls__circuit__selector__element-label_active-selection':
+                currentCircuit.name,
+            }"
             :for="`${circuit.name}-${uid}`"
           >
             {{ circuit.name }}
@@ -48,10 +51,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue-demi";
+import { defineComponent, nextTick } from "vue-demi";
 import { Amplitude } from "../AmplitudeDisk/amplitude";
 
-export const unselectedCircuit = { name: "", transitionType: "" };
+export const unselectedCircuit = {
+  name: "",
+  transitionType: "",
+  stateDelta: [
+    { phase: 0, magnitude: 0 },
+    { phase: 0, magnitude: 0 },
+  ],
+};
 
 export interface InitialState {
   name: string;
@@ -61,6 +71,7 @@ export interface InitialState {
 export interface CircuitElement {
   name: string;
   transitionType: string;
+  stateDelta: Amplitude[]
 }
 
 export default defineComponent({
@@ -108,14 +119,26 @@ export default defineComponent({
         {
           name: "X",
           transitionType: "cross",
+          stateDelta: [
+            { phase: 0, magnitude: 0 },
+            { phase: 0, magnitude: 0 },
+          ],
         },
         {
           name: "Y",
           transitionType: "cross",
+          stateDelta: [
+            { phase: -90, magnitude: 0 },
+            { phase: 90, magnitude: 0 },
+          ],
         },
         {
           name: "Z",
           transitionType: "straight",
+          stateDelta: [
+            { phase: 0, magnitude: 0 },
+            { phase: 180, magnitude: 0 },
+          ],
         },
       ],
       currentCircuit: unselectedCircuit,
@@ -130,7 +153,7 @@ export default defineComponent({
   methods: {
     onRadioClick(
       ev: PointerEvent,
-      obj: { name: string; transitionType: string }
+      obj: CircuitElement
     ) {
       const radio = ev.target as HTMLInputElement;
       // console.log("input", ev)
@@ -147,7 +170,9 @@ export default defineComponent({
     },
     stateSelected(ev: CustomEvent) {
       this.currentState = ev.detail.item.value;
+      this.$emit("circuitChanged", unselectedCircuit);
       this.$emit("initialStateChanged", this.currentState);
+      setTimeout(() => this.$emit("circuitChanged", this.currentCircuit));
     },
   },
 });
@@ -210,7 +235,7 @@ export default defineComponent({
           }
         }
 
-        &:checked ~ #{&}-label_active-selection{
+        &:checked ~ #{&}-label_active-selection {
           background-color: $gates-1;
         }
       }
