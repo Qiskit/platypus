@@ -206,7 +206,7 @@ export default defineComponent({
   @keyframes #{$name} {
     0% {
       top: $spacing-02;
-      left: 0;
+      left: -3.5rem;
     }
     10% {
       top: $spacing-02;
@@ -232,11 +232,11 @@ export default defineComponent({
     }
     90% {
       top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-      left: calc(100% - 3rem);
+      left: calc(100% + 0.5rem);
     }
     100% {
       top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-      left: calc(100% - 3rem);
+      left: calc(100% + 0.5rem);
     }
   }
 }
@@ -245,7 +245,7 @@ export default defineComponent({
   @keyframes #{$name} {
     0% {
       top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-      left: 0;
+      left: -3.5rem;
     }
     10% {
       top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
@@ -271,11 +271,11 @@ export default defineComponent({
     }
     90% {
       top: $spacing-02;
-      left: calc(100% - 3rem);
+      left: calc(100% + 0.5rem);
     }
     100% {
       top: $spacing-02;
-      left: calc(100% - 3rem);
+      left: calc(100% + 0.5rem);
     }
   }
 }
@@ -286,8 +286,8 @@ export default defineComponent({
 @include cross-path-bottom(y-path-bottom);
 
 @keyframes straight-path {
-  0% { left: 0; }
-  100% { left: calc(100% - 3rem); }
+  0% { left: -3.5rem; }
+  100% { left: calc(100% + 0.5rem); }
 }
 
 .eigenvector-widget {
@@ -300,9 +300,11 @@ export default defineComponent({
     &__state-change {
       position: relative;
       flex: 1 0;
+      padding: 0 $spacing-05;
 
       &__path {
         height: 8rem;
+
         &__empty {
           height: 100%;
           display: flex;
@@ -339,30 +341,22 @@ export default defineComponent({
         animation-duration: 3s;
       }
 
-      &_x #{&}__disk {
-        display: block;
-        animation-duration: 7s;
-        &_0 {
-          top: $spacing-02;
-          animation-name: x-path-top;
-        }
-        &_1 {
-          top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-          animation-name: x-path-bottom;
-        }
-      }
-      
+      &_x #{&}__disk,
       &_y #{&}__disk {
         display: block;
         animation-duration: 7s;
-        &_0 {
-          top: $spacing-02;
-          animation-name: y-path-top;
-        }
-        &_1 {
-          top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
-          animation-name: y-path-bottom;
-        }
+
+        &_0 { top: $spacing-02; }
+        &_1 { top: calc(#{$spacing-02} + 3rem + #{$spacing-06}); }
+      }
+      
+      &_x #{&}__disk {
+        &_0 { animation-name: x-path-top; }
+        &_1 { animation-name: x-path-bottom; }
+      }
+      &_y #{&}__disk {
+        &_0 { animation-name: y-path-top; }
+        &_1 { animation-name: y-path-bottom; }
       }
     }
 

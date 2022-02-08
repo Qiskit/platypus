@@ -189,7 +189,7 @@ export default defineComponent({
   gap: $spacing-05;
 
   &__input {
-    flex: 0 0 9rem;
+    flex: 0 0 7rem;
     display: flex;
     flex-direction: column;
 
