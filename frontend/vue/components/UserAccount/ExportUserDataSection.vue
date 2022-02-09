@@ -18,6 +18,10 @@
     <CvToastNotification
       v-if="isToastVisible"
       class="export-section__toast"
+      :class="{
+        'export-section__toast__success': exportToastKind === 'success',
+        'export-section__toast__error': exportToastKind === 'error'
+      }"
       :kind="exportToastKind"
       :sub-title="exportToastMessage"
       :low-contrast="true"
@@ -54,24 +58,21 @@ export default defineComponent({
   methods: {
     exportUserDataAction(ev: any) {
       ev.preventDefault()
-
       this.isToastVisible = true
-
-      ev.preventDefault()
-      const requestOptions = {
-        method: "GET",
-        headers: { "Content-Type": "application/json" }
-      }
-      fetch("/profile/data.json", requestOptions)
-        .then((response) => {
-          if(response.ok) {
+      // const requestOptions = {
+      //   method: "GET",
+      //   headers: { "Content-Type": "application/json" }
+      // }
+      // fetch("/profile/data.json", requestOptions)
+      //   .then((response) => {
+      //     if(response.ok) {
             this.exportToastKind = "error"
             this.exportToastMessage = this.$translate('Error exporting data. Please try again later.')
-          } else {
-            this.exportToastKind = "success"
-            this.exportToastMessage = this.$translate('Data export successfully download will begin shortly.')
-          }
-        })
+      //     } else {
+      //       this.exportToastKind = "success"
+      //       this.exportToastMessage = this.$translate('Data export successfully download will begin shortly.')
+      //     }
+      //   })
     },
     closeToast () {
       this.isToastVisible = false
@@ -107,9 +108,21 @@ export default defineComponent({
 
   &__toast {
     position: fixed;
+    background-color: $cool-gray-10;
     top: $spacing-10;
     right: $spacing-02;
+
+    &__error {
+      border: $red-60;
+      border-style: solid;
+      border-width: 1px 1px 1px 3px;
+    }
+
+    &__success {
+      border: $green-60;
+      border-style: solid;
+      border-width: 1px 1px 1px 3px;
+    }
   }
 }
-
 </style>
