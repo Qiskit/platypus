@@ -1,7 +1,7 @@
 # platypus
 
 This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/).
-this is a change
+
 The previous version of the Qiskit Textbook textbook can be found [here](https://github.com/qiskit-community/qiskit-textbook).
 
 The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
