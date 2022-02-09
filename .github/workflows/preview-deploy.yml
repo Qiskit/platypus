@@ -15,6 +15,6 @@ jobs:
     secrets:
       ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
       ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
-      ibmid_client_id: ${{ secrets.IBMID_CLIENT_ID }}
-      ibmid_client_secret: ${{ secrets.IBMID_CLIENT_SECRET }}
+      ibmid_client_id: ${{ secrets.STAGING_IBMID_CLIENT_ID }}
+      ibmid_client_secret: ${{ secrets.STAGING_IBMID_CLIENT_SECRET }}
       mongodb_uri: ${{ secrets.STAGING_MONGODB_URI }}
