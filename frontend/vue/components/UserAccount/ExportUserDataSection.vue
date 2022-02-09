@@ -11,15 +11,25 @@
       :label="exportDataLink.label"
       :segment="exportDataLink.segment"
       :isDownloadable="true"
+      @click="exportUserData($event)"
     >
       {{ $translate('Export data') }}
     </AppCta>
+    <CvToastNotification
+      v-if="isToastVisible"
+      class="export-section__toast"
+      kind="success"
+      :sub-title="exportSuccessMessage.subtitle"
+      :low-contrast="true"
+      @close="closeToast"
+    />
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import AppCta from '../common/AppCta.vue'
+import CvToastNotification from '@carbon/vue/src/components/cv-toast-notification/cv-toast-notification.vue'
 
 export default defineComponent({
   name: 'ExportUserDataSection',
@@ -31,11 +41,26 @@ export default defineComponent({
           cta: 'export-data',
           location: 'user-account-privacy'
         }
-      }
+      },
+      exportSuccessMessage: {
+        subtitle: "Data export successfully download will begin shortly."
+      },
+      isToastVisible: false
     }
   },
   components: {
-    AppCta
+    AppCta,
+    CvToastNotification
+  },
+  methods: {
+    exportUserData(ev: any) {
+      ev.preventDefault()
+      this.isToastVisible = true
+    },
+    closeToast () {
+      this.isToastVisible = false
+      console.log('close toast')
+    }
   }
 })
 </script>
@@ -63,6 +88,12 @@ export default defineComponent({
 
   &__cta {
     @include type-style('body-long-02');
+  }
+
+  &__toast {
+    position: fixed;
+    top: $spacing-10;
+    right: $spacing-05;
   }
 }
 

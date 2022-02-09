@@ -188,6 +188,7 @@ export default defineComponent({
   }
 
   &__section-container {
+    position: relative;
     overflow: auto;
     padding-bottom: $spacing-13;
   }
