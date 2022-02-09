@@ -11,15 +11,15 @@
       :label="exportDataLink.label"
       :segment="exportDataLink.segment"
       :isDownloadable="true"
-      @click="exportUserData($event)"
+      @click="exportUserDataAction($event)"
     >
       {{ $translate('Export data') }}
     </AppCta>
     <CvToastNotification
       v-if="isToastVisible"
       class="export-section__toast"
-      kind="success"
-      :sub-title="exportSuccessMessage.subtitle"
+      :kind="exportToastKind"
+      :sub-title="exportToastMessage"
       :low-contrast="true"
       @close="closeToast"
     />
@@ -42,10 +42,9 @@ export default defineComponent({
           location: 'user-account-privacy'
         }
       },
-      exportSuccessMessage: {
-        subtitle: "Data export successfully download will begin shortly."
-      },
-      isToastVisible: false
+      exportToastKind: "",
+      exportToastMessage: "",
+      isToastVisible: false,
     }
   },
   components: {
@@ -53,13 +52,20 @@ export default defineComponent({
     CvToastNotification
   },
   methods: {
-    exportUserData(ev: any) {
+    exportUserDataAction(ev: any) {
       ev.preventDefault()
+
       this.isToastVisible = true
+      // if err
+      this.exportToastKind = "error"
+      this.exportToastMessage = this.$translate('Error exporting data. Please try again later.')
+      // if success
+      // this.exportToastKind = "success"
+      // this.exportToastMessage = this.$translate('Data export successfully download will begin shortly.')
+
     },
     closeToast () {
       this.isToastVisible = false
-      console.log('close toast')
     }
   }
 })
@@ -93,7 +99,7 @@ export default defineComponent({
   &__toast {
     position: fixed;
     top: $spacing-10;
-    right: $spacing-05;
+    right: $spacing-02;
   }
 }
 
