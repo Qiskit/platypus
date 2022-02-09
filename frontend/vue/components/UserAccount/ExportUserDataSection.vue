@@ -59,20 +59,10 @@ export default defineComponent({
     exportUserDataAction(ev: any) {
       ev.preventDefault()
       this.isToastVisible = true
-      // const requestOptions = {
-      //   method: "GET",
-      //   headers: { "Content-Type": "application/json" }
-      // }
-      // fetch("/profile/data.json", requestOptions)
-      //   .then((response) => {
-      //     if(response.ok) {
-            this.exportToastKind = "error"
-            this.exportToastMessage = this.$translate('Error exporting data. Please try again later.')
-      //     } else {
-      //       this.exportToastKind = "success"
-      //       this.exportToastMessage = this.$translate('Data export successfully download will begin shortly.')
-      //     }
-      //   })
+      this.exportToastKind = "success"
+      this.exportToastMessage = this.$translate('Data export successfully download will begin shortly.')
+      // this.exportToastKind = "error"
+      // this.exportToastMessage = this.$translate('Error exporting data. Please try again later.')
     },
     closeToast () {
       this.isToastVisible = false
@@ -110,7 +100,7 @@ export default defineComponent({
     position: fixed;
     background-color: $cool-gray-10;
     top: $spacing-10;
-    right: $spacing-02;
+    right: 0;
 
     &__error {
       border: $red-60;
