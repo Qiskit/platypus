@@ -156,7 +156,7 @@ export default defineComponent({
       obj: CircuitElement
     ) {
       const radio = ev.target as HTMLInputElement;
-      // console.log("input", ev)
+      
       if (obj.name === this.currentCircuit.name) {
         this.unselectCircuit(radio);
       } else {
