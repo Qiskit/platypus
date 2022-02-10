@@ -1,7 +1,7 @@
 <template>
   <div class="eigenvector-controls">
     <div class="eigenvector-controls__input">
-      <h6 class="eigenvector-controls__input__title">Input</h6>
+      <h6 class="eigenvector-controls__input__title">{{ $translate("Input") }}</h6>
       <bx-dropdown
         class="eigenvector-controls__input__dropdown"
         :trigger-content="currentState"
@@ -19,7 +19,7 @@
       </bx-dropdown>
     </div>
     <div class="eigenvector-controls__circuit">
-      <h6 class="eigenvector-controls__circuit__title">Circuit</h6>
+      <h6 class="eigenvector-controls__circuit__title">{{ $translate("Circuit") }}</h6>
       <div class="eigenvector-controls__circuit__selector">
         <div
           v-for="circuit in circuitList"

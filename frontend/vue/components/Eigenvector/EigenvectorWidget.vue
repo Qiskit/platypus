@@ -31,7 +31,7 @@
               eigenvector-widget__representation__state-change__path__empty
             "
           >
-            Select a circuit in the selector above
+            {{ $translate("Select a circuit in the selector above") }}
           </div>
         </EigenvectorTransitionPath>
         <AmplitudeDisk
@@ -54,7 +54,6 @@
           :phase="transitionState[1].phase"
           :magnitude="transitionState[1].magnitude"
         />
-        <!--div class="eigenvector-widget__representation__state-change__test"/-->
       </div>
       <StatevectorBrackets class="eigenvector-widget__representation__brackets">
         <AmplitudeDisk
