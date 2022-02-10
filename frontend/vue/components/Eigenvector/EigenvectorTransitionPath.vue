@@ -63,9 +63,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "carbon-components/scss/globals/scss/typography";
-@import "~/../scss/variables/colors.scss";
-
 .eigenvector-transition-path {
   position: relative;
   overflow: hidden;
