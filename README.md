@@ -42,14 +42,17 @@ $ npm start
 
 > _To watch changes and rebuild automatically run with `npm run watch` after installing the dependencies._
 
-After the application has started, access the site at: http://localhost:8080/
+After the application has started, the site will be available at http://localhost:8080/, but the index route will redirect to an external landing page.
+
+In order to test the application locally, you can visit a specific course page, like https://localhost:8080/course/ch-prerequisites/.
 
 > _You can specify the port setting the env variable `PORT`. For instance `PORT=5000 npm start`._
 
+## Contribution
 
-## Contribution Guidelines
 If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md)
 
+When opening a PR against the `main` branch, a preview build might be generated and deployed. The same redirection logic as the one described in the [Setup](#setup) section will apply, meaning that one would need to visit a specific course page to access the preview build.
 
 ## License
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](LICENSE).
