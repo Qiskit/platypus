@@ -71,7 +71,6 @@ export default defineComponent({
     position: absolute;
     transform: translate(-50%, 0);
     left: 50%;
-
     max-width: none;
     height: 65%;
     top: 17.5%;
