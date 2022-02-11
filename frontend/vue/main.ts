@@ -30,6 +30,7 @@ import AmplitudeAdditionWidget from './components/AmplitudeDisk/AmplitudeAdditio
 import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAmplitudeEncoding.vue'
 import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
 import CodeExercise from './components/CodeExercise/CodeExercise.vue'
+import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
 
 declare global {
   interface Window {
@@ -75,7 +76,8 @@ const components: any = {
   AmplitudeAdditionWidget,
   StatevectorAmplitudeEncoding,
   StatevectorBinaryEncoding,
-  CodeExercise
+  CodeExercise,
+  EigenvectorWidget,
 }
 
 Object.keys(components).forEach((c) => {

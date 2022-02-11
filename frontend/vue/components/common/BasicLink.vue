@@ -1,48 +1,70 @@
 <template>
-  <component
-    :is="isNuxtLink ? 'nuxt-link' : 'a'"
-    :href="isAnchor && url"
-    :to="isNuxtLink && url"
-    :style="hasLink && 'cursor:pointer'"
-    :rel="isExternal && 'noopener'"
-    :target="isExternal && '_blank'"
-    @click="segment && $trackClickEvent(segment.cta, segment.location)"
+  <a
+    :class="{'basic-link_has-link': hasLink }"
+    :href="url"
+    :rel="isExternal ? 'noopener' : null"
+    :target="isExternal ? '_blank' : null"
+    @click="onClick"
     @mouseenter="$emit('mouseenter')"
   >
     <slot />
-  </component>
+  </a>
 </template>
 
 <script lang="ts">
-import { Vue, prop } from 'vue-class-component'
-import { CtaClickedEventProp } from '../../../constants/segment'
-import { isExternal, isMail, isIdAnchor } from '../../../ts/utilities'
+import { defineComponent } from "vue-demi";
 
-class Props {
-  url = prop({ type: String, default: '' })
-  segment = prop<CtaClickedEventProp>({ type: Object, default: undefined })
-  isStatic = prop({ type: Boolean, default: false })
-}
-
-export default class BasicLink extends Vue.with(Props) {
-  get hasLink (): boolean {
-    return !!this.url
+export default defineComponent({
+  name: "BasicLink",
+  props: {
+    isStatic: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+    segment: {
+      type: Object,
+      default: undefined,
+      required: false,
+    },
+    url: {
+      type: String,
+      default: "#",
+      required: false,
+    },
+  },
+  computed: {
+    hasLink(): boolean {
+      return !!this.url;
+    },
+    isAnchor(): boolean {
+      return this.isExternal || this.isMail || this.isIdAnchor || this.isStatic;
+    },
+    isExternal(): boolean {
+      return !!this.url && this.url.startsWith("http");
+    },
+    isIdAnchor(): boolean {
+      return !!this.url && this.url.startsWith("#");
+    },
+    isMail(): boolean {
+      return !!this.url && this.url.startsWith("mailto");
+    }
+  },
+  methods: {
+    onClick(event: PointerEvent) {
+      if (this.segment)
+        this.$trackClickEvent(this.segment.cta, this.segment.location);
+      if (this.url === '#')
+        event.preventDefault()
+    }
   }
-
-  get isAnchor (): boolean {
-    const url = this.url
-    return isExternal(url) ||
-      isMail(url) ||
-      isIdAnchor(url) ||
-      this.isStatic
-  }
-
-  get isExternal (): boolean {
-    return isExternal(this.url)
-  }
-
-  get isNuxtLink (): boolean {
-    return false
-  }
-}
+});
 </script>
+
+<style lang="scss" scoped>
+.basic-link {
+  &_has-link {
+    cursor: pointer;
+  }
+}
+</style>
