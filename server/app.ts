@@ -90,6 +90,7 @@ new MathigonStudioApp()
   })
   .get('/account', (req, res) => {
     if (!req.user) return res.redirect('/signin');
+    if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -157,7 +158,6 @@ new MathigonStudioApp()
   })
   .get('/signin', async (req, res) => {
     if (req.user && req.user.acceptedPolicies) return res.redirect('/account');
-    if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})

@@ -22,12 +22,14 @@
           class="sign-in__cta"
           :label="$translate('IBM id')"
           :url="authenticationUrl"
+          target="_self"
         />
         <AppCta
           :url="gmailAuthenticationLink.url"
           :label="$translate('Sign in with Gmail')"
           :segment="gmailAuthenticationLink.segment"
           kind="ghost"
+          target="_self"
         />
       </div>
     </div>
