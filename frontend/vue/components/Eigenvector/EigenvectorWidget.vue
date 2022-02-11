@@ -20,7 +20,10 @@
       </StatevectorBrackets>
       <div
         class="eigenvector-widget__representation__state-change"
-        :class="`eigenvector-widget__representation__state-change_${currentCircuit.name.toLowerCase()}`"
+        :class="[
+          `eigenvector-widget__representation__state-change_${currentCircuit.name.toLowerCase()}`,
+          { 'eigenvector-widget__representation__state-change_pause': !isPlaying }
+        ]"
       >
         <EigenvectorTransitionPath
           class="eigenvector-widget__representation__state-change__path"
@@ -70,6 +73,25 @@
         />
       </StatevectorBrackets>
     </div>
+    <div class="eigenvector-widget__play-control">
+      <label
+        class="eigenvector-widget__play-control__label"
+        :for="`play-${uid}`"
+      >
+        {{ isPlaying ? $translate("Pause animation") : $translate("Play animation")}}
+      </label>
+      <label :for="`play-${uid}`">
+        <PauseIcon v-if="isPlaying" />
+        <PlayIcon v-else />
+      </label>
+      <input
+        class="eigenvector-widget__play-control__checkbox"
+        :id="`play-${uid}`"
+        type="checkbox"
+        :checked="isPlaying"
+        @change="switchPlayState"
+      />
+    </div>
   </div>
 </template>
 
@@ -84,6 +106,8 @@ import EigenvectorControls, {
   unselectedCircuit,
 } from "./EigenvectorControls.vue";
 import EigenvectorTransitionPath from "./EigenvectorTransitionPath.vue";
+import PauseIcon from "@carbon/icons-vue/lib/pause--filled/20";
+import PlayIcon from "@carbon/icons-vue/lib/play--filled--alt/20";
 
 export default defineComponent({
   name: "EigenvectorWidget",
@@ -92,6 +116,8 @@ export default defineComponent({
     AmplitudeDisk,
     EigenvectorControls,
     EigenvectorTransitionPath,
+    PauseIcon,
+    PlayIcon,
   },
   data() {
     return {
@@ -110,6 +136,7 @@ export default defineComponent({
       ],
       timeout: [] as NodeJS.Timeout[],
       animationFrame: [] as number[],
+      isPlaying: true,
     };
   },
   computed: {
@@ -140,7 +167,7 @@ export default defineComponent({
     },
     onInitialStateChange(state: InitialState) {
       this.currentState = state;
-      this.resetAnimation()
+      this.resetAnimation();
     },
     clearTimers() {
       clearTimeout(this.timeout[0]);
@@ -158,7 +185,8 @@ export default defineComponent({
 
       this.transitionState[idx] = {
         phase: initialState[idx].phase + stateDelta[idx].phase * progress,
-        magnitude: initialState[idx].magnitude + stateDelta[idx].magnitude * progress,
+        magnitude:
+          initialState[idx].magnitude + stateDelta[idx].magnitude * progress,
       };
     },
     animateState(idx: number) {
@@ -169,7 +197,8 @@ export default defineComponent({
         const timeDiff = new Date().getTime() - initialTime;
         const progress = Math.min(timeDiff / ANIMATION_TIME, 1);
         this.setProgress(progress, idx);
-        this.animationFrame[idx] = progress < 1 ? requestAnimationFrame(frame) : -1;
+        this.animationFrame[idx] =
+          progress < 1 ? requestAnimationFrame(frame) : -1;
       };
 
       frame();
@@ -180,19 +209,29 @@ export default defineComponent({
       this.setProgress(0, 1);
     },
     animationStart() {
-      this.resetAnimation()
-      
-      const timeoutTimes = this.currentCircuit.transitionType === "cross" ? [1500, 3500] : [500, 500]
+      this.resetAnimation();
 
-      this.timeout[0] = setTimeout(() => { this.animateState(0); }, timeoutTimes[0]);
-      this.timeout[1] = setTimeout(() => { this.animateState(1); }, timeoutTimes[1]);
+      const timeoutTimes =
+        this.currentCircuit.transitionType === "cross"
+          ? [1500, 3500]
+          : [500, 500];
+
+      this.timeout[0] = setTimeout(() => {
+        this.animateState(0);
+      }, timeoutTimes[0]);
+      this.timeout[1] = setTimeout(() => {
+        this.animateState(1);
+      }, timeoutTimes[1]);
     },
     animationEnd() {
-      this.resetAnimation()
+      this.resetAnimation();
     },
     animationCancel() {
-      this.resetAnimation()
-    }
+      this.resetAnimation();
+    },
+    switchPlayState(ev: Event) {
+      this.isPlaying = (ev.target as HTMLInputElement).checked;
+    },
   },
 });
 </script>
@@ -285,8 +324,12 @@ export default defineComponent({
 @include cross-path-bottom(y-path-bottom);
 
 @keyframes straight-path {
-  0% { left: -3.5rem; }
-  100% { left: calc(100% + 0.5rem); }
+  0% {
+    left: -3.5rem;
+  }
+  100% {
+    left: calc(100% + 0.5rem);
+  }
 }
 
 .eigenvector-widget {
@@ -345,17 +388,33 @@ export default defineComponent({
         display: block;
         animation-duration: 7s;
 
-        &_0 { top: $spacing-02; }
-        &_1 { top: calc(#{$spacing-02} + 3rem + #{$spacing-06}); }
+        &_0 {
+          top: $spacing-02;
+        }
+        &_1 {
+          top: calc(#{$spacing-02} + 3rem + #{$spacing-06});
+        }
       }
-      
+
       &_x #{&}__disk {
-        &_0 { animation-name: x-path-top; }
-        &_1 { animation-name: x-path-bottom; }
+        &_0 {
+          animation-name: x-path-top;
+        }
+        &_1 {
+          animation-name: x-path-bottom;
+        }
       }
       &_y #{&}__disk {
-        &_0 { animation-name: y-path-top; }
-        &_1 { animation-name: y-path-bottom; }
+        &_0 {
+          animation-name: y-path-top;
+        }
+        &_1 {
+          animation-name: y-path-bottom;
+        }
+      }
+
+      &_pause #{&}__disk {
+        display: none;
       }
     }
 
@@ -372,6 +431,20 @@ export default defineComponent({
       height: 3rem;
       width: 3rem;
       margin: 0;
+    }
+  }
+  &__play-control {
+    padding: $spacing-04;
+    display: flex;
+    flex-direction: row;
+    color: $active-color;
+
+    &__label {
+      @include type-style("body-long-01");
+      flex: 0 0 7rem;
+    }
+    &__checkbox {
+      display: none !important;
     }
   }
 }
