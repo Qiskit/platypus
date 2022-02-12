@@ -81,7 +81,7 @@ export default defineComponent({
         method: "POST",
         headers: { "Content-Type": "application/json" }
       }
-      fetch("/profile/accepted-policies", requestOptions)
+      fetch("/profile/accept-policies", requestOptions)
         .then(response => {
           if(response.ok) {
             window.location.href = '/account'
