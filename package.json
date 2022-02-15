@@ -40,7 +40,7 @@
   "dependencies": {
     "@carbon/colors": "^10.35.0",
     "@carbon/icons-vue": "^10.45.0",
-    "@carbon/themes": "^10.49.0",
+    "@carbon/themes": "^10.50.0",
     "@carbon/vue": "^2.40.0",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.0.0",
