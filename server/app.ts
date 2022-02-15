@@ -60,7 +60,7 @@ const getCourseData = async function (req: Request) {
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
-  .setup({ sessionSecret: 'project-platypus-beta' })
+  .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies'] })
   // .redirects({'/login': '/signin'})
   .accounts()
   .redirects({
@@ -90,6 +90,7 @@ new MathigonStudioApp()
   })
   .get('/account', (req, res) => {
     if (!req.user) return res.redirect('/signin');
+    if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -156,7 +157,7 @@ new MathigonStudioApp()
     }
   })
   .get('/signin', async (req, res) => {
-    if (req.user) return res.redirect('/account');
+    if (req.user && req.user.acceptedPolicies) return res.redirect('/account');
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})

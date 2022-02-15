@@ -10,7 +10,7 @@
     <div class="eula__policy-text" v-html="privacyPolicyHTML" />
     <section class="eula__actions__container">
       <p class="eula__actions__description">
-        {{ $translate('By clicking &ldquo;Accept &amp; Continue&rdquo;, you are fully agreeing to the Qiskit End User Agreement.') }}
+        {{ $translate('By clicking &ldquo;Accept &amp; Continue&rdquo;, you agree to the Qiskit End User Agreement.') }}
       </p>
       <div class="eula__actions">
         <AppCta
@@ -20,8 +20,10 @@
           kind="ghost"
         />
         <AppCta
-          v-bind="acceptAction"
+          :label="acceptAction.label"
+          :segment="acceptAction.segment"
           target="_self"
+          @click="acceptPolicies($event)"
         />
       </div>
     </section>
@@ -57,7 +59,6 @@ export default defineComponent({
         }
       },
       acceptAction: {
-        url: 'account',
         label: this.$translate('Accept & Continue'),
         segment: {
           cta: 'accept',
@@ -72,6 +73,21 @@ export default defineComponent({
   },
   mounted () {
     this.privacyPolicyMd = document.getElementById('privacyPolicy')?.textContent || ''
+  },
+  methods: {
+    acceptPolicies (ev: any) {
+      ev.preventDefault()
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      }
+      fetch("/profile/accept-policies", requestOptions)
+        .then(response => {
+          if(response.ok) {
+            window.location.href = '/account'
+          }
+        })
+    }
   }
 })
 </script>

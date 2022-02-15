@@ -21,6 +21,7 @@
           class="user-account__section-nav__link-list__link"
           :url="logoutUrl"
           :is-static="true"
+          target="_self"
         >
           {{ $translate('Log Out') }}
         </BasicLink>
