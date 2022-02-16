@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick } from "vue-demi";
+import { defineComponent } from "vue-demi";
 import { Amplitude } from "../AmplitudeDisk/amplitude";
 
 export const unselectedCircuit = {
