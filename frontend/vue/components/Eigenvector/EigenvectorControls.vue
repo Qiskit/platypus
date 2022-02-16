@@ -20,11 +20,7 @@
     <div class="eigenvector-controls__circuit">
       <h6>{{ $translate("Circuit") }}</h6>
       <div class="eigenvector-controls__circuit__selector">
-        <div
-          v-for="circuit in circuitList"
-          :key="circuit.name"
-          class="eigenvector-controls__circuit__selector__element__wrapper"
-        >
+        <div v-for="circuit in circuitList" :key="circuit.name">
           <input
             class="eigenvector-controls__circuit__selector__element"
             type="radio"
