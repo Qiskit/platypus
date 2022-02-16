@@ -68,6 +68,21 @@ def append_to_glossary_yaml(resources, yaml_output_path):
             glossary_file.write(f'{yaml.dump(content)}')
 
 
+def append_to_grader_yaml(resources, yaml_output_path):
+    """Append 'grader' metadata into 'grader.yaml'
+    """
+    if 'textbook' in resources and 'grader' in resources['textbook']:
+        grader_file_path = os.path.join(yaml_output_path, 'grader.yaml')
+
+        new_grader = resources["textbook"]["grader"]
+        existing_grader = yml_to_dict(grader_file_path) or {}
+        updated_grader = { **existing_grader, **new_grader }
+
+        content = yaml.load(json.dumps(updated_grader), Loader=yaml.BaseLoader)
+        with open(grader_file_path, 'w', encoding='utf-8') as grader_file:
+            grader_file.write(f'{yaml.dump(content)}')
+
+
 def append_to_notations_yaml(resources, yaml_output_path):
     """Create and append to 'notations.yaml'
     """
@@ -162,6 +177,7 @@ def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None, sectio
 
         if body:
             append_to_glossary_yaml(resources, shared_path)
+            append_to_grader_yaml(resources, shared_path)
             append_to_notations_yaml(resources, shared_path)
             append_to_ts(resources, str(nb_path.parent), output_path)
             append_to_index(resources, output_path)

@@ -350,21 +350,27 @@ def handle_code_cell(cell, resources):
 
     graderImport = cell.metadata["grader_import"] if "grader_import" in cell.metadata else None
     graderFunction = cell.metadata["grader_function"] if "grader_function" in cell.metadata else None
-
+    graderId = cell.metadata["grader_id"] if "grader_id" in cell.metadata else None
     graderAttr = ""
 
-    if graderImport is not None and graderFunction is not None:
-        graderAttr = f"(grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\")"
+    if graderId is not None:
+      if "textbook" not in resources:
+          resources["textbook"] = {}
 
+      if "grader" not in resources["textbook"]:
+          resources["textbook"]["grader"] = {}
+
+      new_grader = { graderId: { "grader_import": graderImport, "grader_function": graderFunction } }
+      old_grader = resources["textbook"]["grader"]
+      resources["textbook"]["grader"] = {**old_grader, **new_grader}
+      graderAttr = f"(grader-id=\"{graderId}\")"
+    
     code_lines = [
         f"\n::: q-code-exercise{graderAttr}\n",
         "    pre.\n      ",
         formatted_source,
         "\n\n"
     ]
-
-    if "textbook" not in resources:
-        resources["textbook"] = {}
 
     include_output = (
         cell.metadata["include_output"] if "include_output" in cell.metadata else None

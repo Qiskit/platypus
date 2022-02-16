@@ -49,12 +49,7 @@ export default defineComponent({
     CodeOutput
   },
   props: {
-    graderImport: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    graderFunction: {
+    graderId: {
       type: String,
       required: false,
       default: ''
@@ -71,7 +66,7 @@ export default defineComponent({
   },
   computed: {
     isGradingExercise (): boolean {
-      return this.graderFunction !== '' && this.graderImport !== ''
+      return this.graderId !== ''
     }
   },
   mounted () {
@@ -93,7 +88,7 @@ export default defineComponent({
       this.code = code
     },
     notebookCopyRequest (code: string) {
-      /* TBD */
+      /* TODO */
       console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
     },
     kernelRunning () {
