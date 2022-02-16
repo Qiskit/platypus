@@ -1,7 +1,6 @@
 <template>
   <div class="eigenvector-widget">
     <EigenvectorControls
-      class="eigenvector-widget__controls"
       @initialStateChanged="onInitialStateChange"
       @circuitChanged="onCircuitChange"
     />
