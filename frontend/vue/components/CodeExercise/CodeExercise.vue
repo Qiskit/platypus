@@ -86,7 +86,7 @@ export default defineComponent({
       codeOutput.requestExecute(this.code)
     },
     grade () {
-      /* TBD */
+      /* TODO */
       console.log(`NOT IMPLEMENTED: Grade request from exercise with code: ${this.code}`)
     },
     codeChanged (code: string) {
