@@ -18,7 +18,7 @@
       </bx-dropdown>
     </div>
     <div class="eigenvector-controls__circuit">
-      <h6 class="eigenvector-controls__circuit__title">{{ $translate("Circuit") }}</h6>
+      <h6>{{ $translate("Circuit") }}</h6>
       <div class="eigenvector-controls__circuit__selector">
         <div
           v-for="circuit in circuitList"
