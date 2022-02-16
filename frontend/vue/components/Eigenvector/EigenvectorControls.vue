@@ -11,7 +11,6 @@
         <bx-dropdown-item
           v-for="state in initialStates"
           :key="state.name"
-          class="eigenvector-controls__input__dropdown__item"
           :value="state"
         >
           {{ state.name }}
