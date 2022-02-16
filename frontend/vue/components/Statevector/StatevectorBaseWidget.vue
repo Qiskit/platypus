@@ -43,7 +43,6 @@ export default defineComponent({
     StatevectorBrackets
   },
   props: {
-    numberOfElements: { type: Number, default: 4 },
     amplitudeDiskData: { type: Array, default: () => [] }
   },
   data () {
