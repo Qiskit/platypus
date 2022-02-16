@@ -1,7 +1,7 @@
 <template>
   <div class="eigenvector-controls">
     <div class="eigenvector-controls__input">
-      <h6 class="eigenvector-controls__input__title">{{ $translate("Input") }}</h6>
+      <h6>{{ $translate("Input") }}</h6>
       <bx-dropdown
         class="eigenvector-controls__input__dropdown"
         :trigger-content="currentState"
