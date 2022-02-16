@@ -47,6 +47,7 @@
       </div>
       <div v-if="activeSection === sectionList[1].hash">
         <PrivacySection />
+        <DeleteUserDataSection />
       </div>
     </section>
   </div>
@@ -58,6 +59,7 @@ import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
+import DeleteUserDataSection from './DeleteUserDataSection.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
@@ -65,7 +67,8 @@ export default defineComponent({
     AppLink,
     BasicLink,
     PrivacySection,
-    UserProgress
+    UserProgress,
+    DeleteUserDataSection
   },
   props: {
     firstName: { type: String, required: false, default: '' },
