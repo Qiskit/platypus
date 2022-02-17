@@ -30,7 +30,8 @@
     <bx-modal-body class="delete_section__modal__body">
       <p>{{ $translate('Deleting your account is a perminent action that cannot be undone. Please type “delete” to continue.') }}</p>
       <bx-input
-        id="delete-account-input"
+        id="modalInputField"
+        :value="modalInputValue"
         color-scheme="light"
         type="text"
         name="confirmation-field"
@@ -39,7 +40,7 @@
       />
     </bx-modal-body>
     <bx-modal-footer>
-      <bx-btn kind="secondary" data-modal-close>
+      <bx-btn kind="secondary" @click="closeModal">
         {{ $translate('Cancel') }}
       </bx-btn>
       <bx-btn kind="danger" :disabled="isButtonDisabled" @click="modalDeleteAction">
@@ -73,6 +74,7 @@ export default defineComponent({
         }
       },
       modalSize: 'sm',
+      modalInputValue: '',
       isModalVisible: false,
       isButtonDisabled: true,
       inputValidationKey: 'delete',
@@ -85,21 +87,28 @@ export default defineComponent({
   methods: {
     showConfirmationModal(ev: any) {
       ev.preventDefault()
+      this.modalInputValue = ''
+      this.isButtonDisabled = true
       this.isModalVisible = true
     },
     modalDeleteAction() {
       this.isModalVisible = false
     },
     closeModal () {
+      const inputField = document.getElementById('modalInputField')
+      console.log(inputField, "inputField")
+      this.modalInputValue = ''
       this.isModalVisible = false
     },
     inputValueChange(event: any) {
       const inputValue = event.target._value
       if( inputValue.toLowerCase() === this.inputValidationKey ) {
+        this.modalInputValue = inputValue.toLowerCase()
         this.isButtonDisabled = false
       } else {
         this.isButtonDisabled = true
       }
+
     }
 
   }
