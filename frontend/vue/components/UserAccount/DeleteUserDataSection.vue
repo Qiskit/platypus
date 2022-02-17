@@ -42,7 +42,7 @@
       <bx-btn kind="secondary" data-modal-close>
         {{ $translate('Cancel') }}
       </bx-btn>
-      <bx-btn kind="danger" :disabled="isButtonDisabled" @click="primaryModalAction">
+      <bx-btn kind="danger" :disabled="isButtonDisabled" @click="modalDeleteAction">
         {{ $translate('Delete account') }}
       </bx-btn>
     </bx-modal-footer>
@@ -87,10 +87,7 @@ export default defineComponent({
       ev.preventDefault()
       this.isModalVisible = true
     },
-    primaryModalAction() {
-      this.isModalVisible = false
-    },
-    secondaryModalAction(){
+    modalDeleteAction() {
       this.isModalVisible = false
     },
     closeModal () {
