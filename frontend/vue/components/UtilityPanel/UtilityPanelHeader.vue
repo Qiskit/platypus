@@ -7,7 +7,7 @@
       :segment="link.segment"
       :is-static="true"
       data-test="utility-panel-header-toggle"
-      @click="togglePanel($event)"
+      @click="togglePanel"
     >
       {{ $translate(ctaLabel) }}
       <OpenPanelRight16 class="utility-panel-header__icon" />
@@ -52,8 +52,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 
   isPanelOpen = true;
 
-  togglePanel (e:any) {
-    e.preventDefault()
+  togglePanel () {
     const showPanel = this.isPanelOpen
     const panelDOMElement = document.getElementById('utility-panel')
     const contentDOMElement = document.getElementsByTagName('x-course')[0]
