@@ -11,7 +11,7 @@ export default defineComponent({ name: 'StatevectorBrackets' })
 </script>
 
 <style lang="scss" scoped>
-@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/spacing';
 @import '~/../scss/variables/colors.scss';
 
 .statevector-brackets {
