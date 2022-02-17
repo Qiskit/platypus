@@ -10,6 +10,7 @@
       class="delete-section__cta"
       :label="deleteUserDataCTA.label"
       :segment="deleteUserDataCTA.segment"
+      :icon="deleteUserDataCTA.icon"
       @click="showConfirmationModal($event)"
     >
       {{ $translate('Delete account') }}
@@ -69,6 +70,7 @@ export default defineComponent({
     return {
       deleteUserDataCTA: {
         label: 'Delete account',
+        icon: 'delete-16',
         segment: {
           cta: 'delete-account',
           location: 'user-account-privacy'
