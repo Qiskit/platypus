@@ -82,7 +82,7 @@ export default defineComponent({
     }
   },
   components: {
-    AppCta,
+    AppCta
   },
   methods: {
     showConfirmationModal(ev: any) {
@@ -95,8 +95,6 @@ export default defineComponent({
       this.isModalVisible = false
     },
     closeModal () {
-      const inputField = document.getElementById('modalInputField')
-      console.log(inputField, "inputField")
       this.modalInputValue = ''
       this.isModalVisible = false
     },
