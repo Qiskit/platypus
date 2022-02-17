@@ -21,7 +21,11 @@
     >
     <bx-modal-header class="delete_section__modal__header">
       <bx-modal-close-button></bx-modal-close-button>
-      <bx-modal-heading><h4>Delete your account?</h4></bx-modal-heading>
+      <bx-modal-heading>
+        <h4>
+          {{ $translate('Delete your account?') }}
+        </h4>
+      </bx-modal-heading>
     </bx-modal-header>
     <bx-modal-body class="delete_section__modal__body">
       <p>{{ $translate('Deleting your account is a perminent action that cannot be undone. Please type “delete” to continue.') }}</p>
@@ -30,13 +34,17 @@
         color-scheme="light"
         type="text"
         name="confirmation-field"
-        placeholder='Type “delete” to confirm'
+        placeholder='Type “delete” here'
         @input="inputValueChange"
       />
     </bx-modal-body>
     <bx-modal-footer>
-      <bx-btn kind="secondary" data-modal-close>Cancel</bx-btn>
-      <bx-btn kind="danger" :disabled="isButtonDisabled" @click="primaryModalAction">Delete your account</bx-btn>
+      <bx-btn kind="secondary" data-modal-close>
+        {{ $translate('Cancel') }}
+      </bx-btn>
+      <bx-btn kind="danger" :disabled="isButtonDisabled" @click="primaryModalAction">
+        {{ $translate('Delete account') }}
+      </bx-btn>
     </bx-modal-footer>
   </bx-modal>
   </section>
@@ -64,10 +72,11 @@ export default defineComponent({
           location: 'user-account-privacy'
         }
       },
-      isModalVisible: false,
       modalSize: 'sm',
+      isModalVisible: false,
       isButtonDisabled: true,
-      inputValidationKey: 'delete'
+      inputValidationKey: 'delete',
+      inputPlaceholder: 'Type “delete” here'
     }
   },
   components: {
@@ -88,8 +97,8 @@ export default defineComponent({
       this.isModalVisible = false
     },
     inputValueChange(event: any) {
-      const inputFieldValue = event.target._value
-      if(inputFieldValue.toLowerCase() === this.inputValidationKey) {
+      const inputValue = event.target._value
+      if( inputValue.toLowerCase() === this.inputValidationKey ) {
         this.isButtonDisabled = false
       } else {
         this.isButtonDisabled = true
