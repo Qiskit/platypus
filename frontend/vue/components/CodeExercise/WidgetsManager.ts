@@ -75,9 +75,6 @@ export class WidgetsManager extends JupyterLabManager {
     ) {
       return super.loadClass(className, moduleName, moduleVersion)
     } else {
-      console.error('==================== ERROR =================')
-      return super.loadClass(className, moduleName, moduleVersion)
-      /*
       // TODO: code duplicate from HTMLWidgetManager, consider a refactor
       return this.loader(moduleName, moduleVersion).then((module: { [x: string]: any }) => {
         if (module[className]) {
@@ -93,7 +90,6 @@ export class WidgetsManager extends JupyterLabManager {
           )
         }
       })
-      */
     }
   }
 
