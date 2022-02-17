@@ -1,7 +1,7 @@
 <template>
   <div class="eigenvector-transition-path">
     <svg
-      v-if="internalActivePath === 'cross'"
+      v-if="activePath === 'cross'"
       class="eigenvector-transition-path__path"
       viewBox="0 0 2000 200"
       fill="none"
@@ -20,7 +20,7 @@
       />
     </svg>
     <svg
-      v-if="internalActivePath === 'straight'"
+      v-if="activePath === 'straight'"
       class="eigenvector-transition-path__path"
       viewBox="0 0 2000 200"
       fill="none"
@@ -29,7 +29,7 @@
       <path d="M0 15 l2000 0" stroke="#343A3F" stroke-width="3" />
       <path d="M0 185 l2000 0" stroke="#343A3F" stroke-width="3" />
     </svg>
-    <div class="eigenvector-transition-path__empty-box" v-if="!internalActivePath">
+    <div class="eigenvector-transition-path__empty-box" v-if="!activePath">
       <slot />
     </div>
   </div>
@@ -45,19 +45,6 @@ export default defineComponent({
       type: String,
       default: ''
     }
-  },
-  data () {
-    return {
-      internalActivePath: ''
-    }
-  },
-  watch: {
-    activePath (newVal) {
-      this.internalActivePath = newVal
-    }
-  },
-  mounted () {
-    this.internalActivePath = this.activePath
   }
 });
 </script>
