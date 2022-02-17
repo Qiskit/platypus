@@ -15,6 +15,7 @@
       {{ $translate('Delete account') }}
     </AppCta>
      <bx-modal
+      class="delete-section__modal"
       :open="isModalVisible"
       :size="modalSize"
       @bx-modal-closed="closeModal"
@@ -136,6 +137,10 @@ export default defineComponent({
 
   &__cta {
     @include type-style('body-long-02');
+  }
+
+  &__modal {
+    left: 0px;
   }
 
   bx-modal::part(dialog) {
