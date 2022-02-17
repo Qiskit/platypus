@@ -77,7 +77,7 @@
         class="eigenvector-widget__play-control__label"
         :for="`play-${uid}`"
       >
-        {{ isPlaying ? $translate("Pause animation") : $translate("Play animation")}}
+        {{ isPlaying ? $translate("Stop animation") : $translate("Play animation")}}
       </label>
       <label :for="`play-${uid}`">
         <PauseIcon v-if="isPlaying" />
