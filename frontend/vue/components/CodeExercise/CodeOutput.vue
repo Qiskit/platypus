@@ -9,7 +9,7 @@
         Failed to execute. {{ error }} Please refresh the page.
       </div>
     </div>
-    <div ref="outputDiv" class="code-output__output-renderer" />
+    <div ref="outputDiv" />
   </div>
 </template>
 
@@ -66,7 +66,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/spacing';
 @import '~/../scss/variables/colors.scss';
 
 .code-output {

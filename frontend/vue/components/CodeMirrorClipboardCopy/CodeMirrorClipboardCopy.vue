@@ -48,7 +48,7 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
 </script>
 
 <style lang="scss" scoped>
-@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/spacing';
 @import '~/../scss/variables/colors.scss';
 
 .code-mirror-clipboard-copy {

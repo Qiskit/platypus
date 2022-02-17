@@ -9,7 +9,7 @@
     </button>
     <button
       v-if="gradeEnabled && !isRunning"
-      class="exercise-actions-bar__button exercise-actions-bar__button_grade"
+      class="exercise-actions-bar__button"
       @click="grade()"
     >
       Grade
@@ -62,7 +62,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/spacing';
 @import '~/../scss/variables/colors.scss';
 @import '~/../scss/variables/settings.scss';
 @import '~/../scss/variables/mq.scss';

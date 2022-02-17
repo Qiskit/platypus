@@ -20,7 +20,6 @@
     </div>
     <CodeOutput
       ref="output"
-      class="code-exercise__output"
       @running="kernelRunning"
       @finished="kernelFinished"
       @kernelReady="kernelReady"
@@ -93,7 +92,7 @@ export default defineComponent({
       this.code = code
     },
     notebookCopyRequest (code: string) {
-      /* TBD */
+      /* TODO */
       console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
     },
     kernelRunning () {
@@ -111,7 +110,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import 'carbon-components/scss/globals/scss/typography';
+@import 'carbon-components/scss/globals/scss/spacing';
 @import '~/../scss/variables/colors.scss';
 
 .code-exercise {
@@ -134,10 +133,6 @@ export default defineComponent({
     background-color: $background-color-lighter;
     position: relative;
     height: 13rem;
-
-    &__tooltip {
-      position: relative;
-    }
 
     &__editor {
       height: 100%;
