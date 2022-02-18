@@ -5,6 +5,7 @@
     @pointerout="stopGrabbingArrow"
   >
     <div
+      v-if="internalAmplitude.magnitude > 0.01"
       class="amplitude-disk__magnitude-disk"
       :class="{'amplitude-disk__magnitude-disk_amplitude-overflow': amplitudeOverflow}"
     />
