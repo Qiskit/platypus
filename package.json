@@ -35,7 +35,7 @@
     "setup:secrets": "mgon-secrets"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=14 <17"
   },
   "dependencies": {
     "@carbon/colors": "^10.35.0",
