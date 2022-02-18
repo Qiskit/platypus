@@ -36,8 +36,8 @@ export interface IServerOptions {
 
 export const serverOptions: IServerOptions = {
   binderOptions: {
-    repo: 'qiskit-community/platypus',
-    ref: 'binder-env',
+    repo: 'qiskit-community/platypus-binder',
+    ref: window.location.hostname.includes('localhost') ? 'staging' : 'production',
     binderUrl: 'https://mybinder.org',
     savedSession: {
       enabled: true,
