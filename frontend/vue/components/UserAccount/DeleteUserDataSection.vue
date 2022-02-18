@@ -32,7 +32,6 @@
     <bx-modal-body class="delete_section__modal__body">
       <p>{{ $translate('Deleting your account is a perminent action that cannot be undone. Please type “delete” to continue.') }}</p>
       <bx-input
-        id="modalInputField"
         :value="modalInputValue"
         color-scheme="light"
         type="text"
@@ -109,9 +108,7 @@ export default defineComponent({
       } else {
         this.isButtonDisabled = true
       }
-
     }
-
   }
 })
 </script>
