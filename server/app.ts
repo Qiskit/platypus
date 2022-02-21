@@ -96,7 +96,7 @@ new MathigonStudioApp()
     // 21 value is to maintain the probability collision similar to UUIDv4
     const nanoid = customAlphabet(alphabet, 21)
     const randomString = nanoid()
-    req.user.email = `deleted-${randomString}@qiskit.com`
+    req.user.email = `deleted-${randomString}@qiskit.org`
     req.user.firstName = randomString
     req.user.lastName = randomString
     req.user.picture = ''
