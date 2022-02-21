@@ -3,6 +3,7 @@
 // =============================================================================
 
 import { Request } from 'express'
+import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities/utilities'
@@ -87,6 +88,23 @@ new MathigonStudioApp()
     }
     const courses: TocCourse[] = tocFilterByType(type)
     res.json(courses)
+  })
+  .get('/delete/account', async (req, res) => {
+    if (!req.user) return {error: 'unauthenticated', errorCode: 401, redirect: '/signin'}
+
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    // 21 value is to maintain the probability collision similar to UUIDv4
+    const nanoid = customAlphabet(alphabet, 21)
+    const randomString = nanoid()
+    req.user.email = `deleted-${randomString}@qiskit.com`
+    req.user.firstName = randomString
+    req.user.lastName = randomString
+    req.user.picture = ''
+    req.user.oAuthTokens = []
+
+    await req.user.save()
+
+    res.redirect('/logout')
   })
   .get('/account', (req, res) => {
     if (!req.user) return res.redirect('/signin');

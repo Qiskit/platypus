@@ -44,7 +44,7 @@
       <bx-btn kind="secondary" @click="closeModal">
         {{ $translate('Cancel') }}
       </bx-btn>
-      <bx-btn kind="danger" :disabled="isButtonDisabled" @click="modalDeleteAction">
+      <bx-btn kind="danger" :disabled="isButtonDisabled" @click="modalDeleteAction($event)">
         {{ $translate('Delete account') }}
       </bx-btn>
     </bx-modal-footer>
@@ -93,8 +93,9 @@ export default defineComponent({
       this.isButtonDisabled = true
       this.isModalVisible = true
     },
-    modalDeleteAction() {
-      this.isModalVisible = false
+    modalDeleteAction(ev: any) {
+      ev.preventDefault()
+      window.location.href = '/delete/account'
     },
     closeModal () {
       this.modalInputValue = ''
