@@ -2,11 +2,13 @@
   <clipboard-copy
     :value="text"
     class="code-mirror-clipboard-copy"
+    :aria-label="$translate(label)"
     @clipboard-copy="handleClick"
   >
-    <bx-tooltip-icon class="code-mirror-clipboard-copy__tooltip" aligment="center" direction="top" :body-text="$translate(label)">
-      <CopyIcon class="code-mirror-clipboard-copy__icon" />
-    </bx-tooltip-icon>
+    <CopyIcon class="code-mirror-clipboard-copy__icon" />
+    <div class="code-mirror-clipboard-copy__tooltip">
+      {{ $translate(label) }}
+    </div>
   </clipboard-copy>
 </template>
 
@@ -17,7 +19,7 @@ import 'carbon-web-components/es/components/tooltip/tooltip-icon'
 import '@github/clipboard-copy-element'
 
 class Props {
-  text = prop({ type: String, required: true });
+  text = prop({ type: String, required: true })
 }
 
 const LABEL = {
@@ -56,11 +58,38 @@ export default class CodeMirrorClipboardCopy extends Vue.with(Props) {
   display: flex;
   font-size: 0.875rem;
   position: relative;
-  padding: $spacing-02 $spacing-02;
-  margin: $spacing-02;
 
   &__tooltip {
-    display: flex;
+    box-shadow: 0 2px 6px var(--cds-shadow, rgba($block-color-secondary, 0.3));
+    position: absolute;
+    left: 50%;
+    top: 0;
+    z-index: 6000;
+    transform: translate(-50%, -100%) translate(0, -#{$spacing-04});
+    display: none;
+    padding: 0 $spacing-04;
+    background: $background-color-dark;
+    border-radius: $spacing-01;
+    color: $text-color-white;
+    overflow-wrap: break-word;
+
+    &::after {
+      position: absolute;
+      bottom: calc(-0.429688rem + 1px);
+      right: 0px;
+      left: 0px;
+      width: 0px;
+      height: 0px;
+      border-right: 0.429688rem solid transparent;
+      border-top: 0.429688rem solid var(--cds-inverse-02, $background-color-dark);
+      border-left: 0.429688rem solid transparent;
+      margin: 0px auto;
+      content: "";
+    }
+  }
+
+  &:hover #{&}__tooltip {
+    display: block;
   }
 
   &__icon {
