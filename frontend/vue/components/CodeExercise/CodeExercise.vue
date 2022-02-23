@@ -86,10 +86,8 @@ export default defineComponent({
     },
     grade () {
       const codeOutput: any = this.$refs.output
-      const wrappedCode: string = this.graderImport + "\n" + this.code + "\n" + this.graderFunction
+      const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
-      /* TODO */
-      // console.log(`NOT IMPLEMENTED: Grade request from exercise with code: ${this.code}`)
     },
     codeChanged (code: string) {
       this.code = code
