@@ -15,7 +15,6 @@
 <script lang="ts">
 import { Options, prop, Vue } from 'vue-class-component'
 import CopyIcon from '@carbon/icons-vue/lib/copy/20'
-import 'carbon-web-components/es/components/tooltip/tooltip-icon'
 import '@github/clipboard-copy-element'
 
 class Props {

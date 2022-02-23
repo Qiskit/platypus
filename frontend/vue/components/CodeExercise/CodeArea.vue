@@ -44,7 +44,6 @@ export default defineComponent({
   & :deep(.CodeMirror) {
     height: 100%;
   }
-
   & :deep(.CodeMirror-scroll) {
     background-color: $background-color-lighter;
     &:hover .CodeMirror-gutters {
@@ -52,7 +51,6 @@ export default defineComponent({
     }
   }
   & :deep(.CodeMirror-sizer) {
-    height: 100%;
     padding-top: $spacing-08;
   }
   & :deep(.CodeMirror-line) {
@@ -71,6 +69,7 @@ export default defineComponent({
   }
   & :deep(.CodeMirror-hscrollbar) {
     width: calc(100% - 13rem);
+    height: 0.5rem;
   }
 }
 </style>
