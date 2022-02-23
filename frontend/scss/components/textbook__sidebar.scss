@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import '../variables/mq.scss';
 @import '../variables/settings.scss';
 @import '../variables/colors.scss';
@@ -89,7 +90,7 @@ li.c-sidebar__chapter > a {
   font-size: 0.875rem;
   line-height: 20px;
   letter-spacing: 0.16px;
-  padding: $spacing-unit-x-small/2;
+  padding: math.div($spacing-unit-x-small, 2);
   text-decoration: none;
 
   .c-sidebar__chapter & {

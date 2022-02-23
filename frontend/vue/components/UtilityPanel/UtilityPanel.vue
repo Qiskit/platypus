@@ -151,6 +151,7 @@ export default class UtilityPanel extends Vue.with(Props) {
 </script>
 
 <style lang="scss">
+@use 'sass:math';
 @import 'carbon-components/scss/globals/scss/typography';
 @import '../../../scss/variables/settings.scss';
 @import '../../../scss/variables/colors.scss';
@@ -181,7 +182,7 @@ export default class UtilityPanel extends Vue.with(Props) {
     }
 
     @include mq($from: medium, $until: large) {
-      max-width: $right-sidebar-width-xl / 1.5;
+      max-width: math.div($right-sidebar-width-xl, 1.5);
     }
 
     @include mq($until: medium) {

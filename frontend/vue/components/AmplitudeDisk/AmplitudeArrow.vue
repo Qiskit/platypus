@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="isInteractive || internalAmplitude.magnitude > 0.01"
     class="amplitude-arrow"
     :style="`--magnitude: ${internalAmplitude.magnitude}; --phase: ${internalAmplitude.phase}`"
   >
