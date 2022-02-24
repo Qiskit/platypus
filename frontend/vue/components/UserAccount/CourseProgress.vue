@@ -3,15 +3,9 @@
     <h5 class="course-progress__title">
       {{ course.title }}
     </h5>
-    <ColumnFlowGrid
-      class="course-progress__section-list"
-      :elements="course.sections"
-    >
+    <ColumnFlowGrid :elements="course.sections">
       <template #default="slotProps">
-        <SectionProgress
-          class="course-progress__section"
-          :section="slotProps.element"
-        />
+        <SectionProgress :section="slotProps.element" />
       </template>
     </ColumnFlowGrid>
   </div>
