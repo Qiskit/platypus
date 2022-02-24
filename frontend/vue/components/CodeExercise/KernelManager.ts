@@ -34,15 +34,17 @@ export interface IServerOptions {
   kernelOptions: IKernelOptions
 }
 
+const targetEnvironment = window.location.hostname.includes('localhost') ? 'staging' : 'production'
+
 export const serverOptions: IServerOptions = {
   binderOptions: {
     repo: 'qiskit-community/platypus-binder',
-    ref: window.location.hostname.includes('localhost') ? 'staging' : 'production',
+    ref: targetEnvironment,
     binderUrl: 'https://mybinder.org',
     savedSession: {
       enabled: true,
       maxAge: 86400,
-      storagePrefix: 'qiskit-binder-'
+      storagePrefix: `qiskit-binder-${targetEnvironment}`
     }
   },
   kernelOptions: {
