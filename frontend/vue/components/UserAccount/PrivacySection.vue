@@ -1,16 +1,16 @@
 <template>
   <section class="privacy-section">
     <h1 class="privacy-section__title">
-      Privacy
+      {{ $translate('Privacy') }}
     </h1>
     <h4 class="privacy-section__subtitle privacy-section__subtitle_general">
-      IBM Privacy Statement
+      {{ $translate('IBM Privacy Statement') }}
     </h4>
     <AppLink class="privacy-section__policy-link" url="https://www.ibm.com/privacy">
       https://www.ibm.com/privacy
     </AppLink>
     <h4 class="privacy-section__subtitle privacy-section__subtitle_quantum">
-      IBM Quantum End User Agreement
+      {{ $translate('IBM Quantum End User Agreement') }}
     </h4>
     <!-- eslint-disable-next-line vue/no-v-html -->
     <div class="privacy-section__policy-text" v-html="privacyPolicyHTML" />
