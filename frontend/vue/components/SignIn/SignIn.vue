@@ -1,15 +1,15 @@
 <template>
   <section class="sign-in">
     <div class="sign-in__content">
-      <div class="sign-in__content-section sign-in__content-section__hero">
-        <div id="page-title" class="sign-in__content-section__hero-title">
+      <div class="sign-in__content__hero">
+        <div id="page-title" class="sign-in__content__hero-title">
           {{ $translate('Learn quantum computing with Qiskit.') }}
         </div>
-        <p class="sign-in__content-section__hero-description">
+        <p class="sign-in__content__hero-description">
           {{ $translate('Qiskit is the worlds most popular open source quantum computing toolkit. Get started with a personalized learning experience that tracks your progress.') }}
         </p>
       </div>
-      <video class="sign-in__content-section__media" autoplay loop muted>
+      <video class="sign-in__content__media" autoplay loop muted>
         <source :src="signinMediaPath" type="video/mp4">
       </video>
     </div>
@@ -91,33 +91,32 @@ export default class SignIn extends Vue {
     @include mq($from: medium) {
       width: 100%;
     }
-    &-section {
-      &__hero {
-        padding: $spacing-11;
-        flex-direction: column;
-        background-color: $white-0;
 
-        @include mq($until: large) {
-          padding: $spacing-11 $spacing-07;
-        }
+    &__hero {
+      padding: $spacing-11;
+      flex-direction: column;
+      background-color: $white-0;
 
-        &-title {
-          margin-bottom: $spacing-05;
-          max-width: 32rem;
-        }
-
-        &-description {
-          max-width: 40rem;
-        }
+      @include mq($until: large) {
+        padding: $spacing-11 $spacing-07;
       }
 
-      &__media {
-        border-top: 1px solid $cool-gray-20;
-        height: 100%;
+      &-title {
+        margin-bottom: $spacing-05;
+        max-width: 32rem;
+      }
 
-        @include mq($until: medium) {
-          display: none;
-        }
+      &-description {
+        max-width: 40rem;
+      }
+    }
+
+    &__media {
+      border-top: 1px solid $cool-gray-20;
+      height: 100%;
+
+      @include mq($until: medium) {
+        display: none;
       }
     }
   }
