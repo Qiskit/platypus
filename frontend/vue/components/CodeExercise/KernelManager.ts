@@ -66,7 +66,6 @@ export function getWidgetsManager () { return _widgetsManager }
 export function requestBinderKernel () {
   if (requestKernelPromise === undefined) {
     requestKernelPromise = requestBinder().then((serverSettings: ServerConnection.ISettings) => {
-      console.debug('Recovered settings =====================')
       serverOptions.kernelOptions.serverSettings = serverSettings
       serverOptions.kernelOptions.serverSettings.appendToken = true
       return requestKernel().then((kernel) => {
