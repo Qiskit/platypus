@@ -16,16 +16,16 @@
     >
       <bx-toast-notification
         class="code-editor__reset-notification"
-        title="Reset code block?"
-        icon-description="Cancel"
-        subtitle="This will reset the code to de textbook default. Any custom edits will be removed."
+        :title="$translate('Reset code block?')"
+        :icon-description="$translate('Cancel')"
+        :subtitle="$translate('This will reset the code to the textbook default. Any custom edits will be removed.')"
         :timeout="null"
         :open="resetNotificationOpen"
         :kind="'warning'"
         :theme="'dark'"
         @bx-notification-closed="resetCancel"
       >
-        <a class="code-editor__reset-notification__confirm-button" @click="resetConfirm">Reset code</a>
+        <a class="code-editor__reset-notification__confirm-button" @click="resetConfirm">{{ $translate('Reset code') }}</a>
       </bx-toast-notification>
     </div>
   </div>

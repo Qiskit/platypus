@@ -5,7 +5,7 @@
         class="code-editors-tools__button__tooltip"
         aligment="center"
         direction="top"
-        body-text="Reset cell to initial content"
+        :body-text="$translate('Reset cell to initial content')"
         @click="reset"
       >
         <ResetIcon class="code-editors-tools__button__icon" />
@@ -16,7 +16,7 @@
         class="code-editors-tools__button__tooltip"
         aligment="center"
         direction="top"
-        body-text="Copy to notebook notes"
+        :body-text="$translate('Copy to notebook notes')"
         @click="notebook"
       >
         <NotebookIcon class="code-editors-tools__button__icon" />

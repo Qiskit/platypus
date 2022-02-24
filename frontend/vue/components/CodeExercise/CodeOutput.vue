@@ -3,10 +3,11 @@
     <div class="code-output__state-info__wrapper">
       <div v-if="!kernel && !error" class="code-output__state-info">
         <bx-loading class="code-output__state-info__icon" assistive-text="Connecting to the server" type="small" />
-        Connecting to the server
+        {{ $translate('Connecting to the server') }}
       </div>
       <div v-if="error !== ''" class="code-output__state-info">
-        Failed to execute. {{ error }} Please refresh the page.
+        <p>{{ $translate('Failed to execute. Please refresh the page.') }}</p>
+        {{ error }}
       </div>
     </div>
     <div ref="outputDiv" />

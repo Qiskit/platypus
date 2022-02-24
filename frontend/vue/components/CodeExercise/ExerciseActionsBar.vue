@@ -5,18 +5,18 @@
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
       @click="run()"
     >
-      Run
+      {{ $translate('Run') }}
     </button>
     <button
       v-if="gradeEnabled && !isRunning"
       class="exercise-actions-bar__button"
       @click="grade()"
     >
-      Grade
+      {{ $translate('Grade') }}
     </button>
     <div v-if="isRunning" class="exercise-actions-bar__running-indicator">
       <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
-      <span class="exercise-actions-bar__running-indicator__label"> Running </span>
+      <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
     </div>
   </div>
 </template>
