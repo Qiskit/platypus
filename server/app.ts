@@ -100,9 +100,16 @@ new MathigonStudioApp()
     req.user.firstName = randomString
     req.user.lastName = randomString
     req.user.picture = ''
-    req.user.oAuthTokens = []
+    req.user.oAuthTokens = [
+      `qiskit:${randomString}`
+    ]
 
-    await req.user.save()
+    try {
+      await req.user.save()
+    } catch(error) {
+      // TODO: we must improve our logs
+      console.error(error)
+    }
 
     res.redirect('/logout')
   })
