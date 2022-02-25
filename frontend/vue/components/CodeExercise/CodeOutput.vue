@@ -1,6 +1,6 @@
 <template>
   <div ref="outputDiv" class="code-output">
-    <div class="code-output__state-info__wrapper">
+    <div>
       <div v-if="!kernel && !error" class="code-output__state-info">
         <bx-loading class="code-output__state-info__icon" assistive-text="Connecting to the server" type="small" />
         {{ $translate('Connecting to the server') }}
