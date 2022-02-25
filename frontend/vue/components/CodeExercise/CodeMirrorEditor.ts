@@ -1,10 +1,7 @@
 import CodeMirror from 'codemirror/lib/codemirror'
 import 'codemirror/lib/codemirror.css'
 
-/**
- * Vue component variables has a wrapper. That wrapper causes
- * CodeMirror to break. This is a quick solution.
- * */
+// HACK: The Vue component variables have a wrapper that cause CodeMirror to break.
 const instances = new Map<any, any>()
 
 export function createEditor (id: any, parentHTMLElment: HTMLElement) {
