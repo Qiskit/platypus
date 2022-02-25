@@ -32,6 +32,7 @@ import AmplitudeAdditionDiskWithValues from './components/AmplitudeDisk/Amplitud
 import AmplitudeAdditionWidget from './components/AmplitudeDisk/AmplitudeAdditionWidget.vue'
 import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAmplitudeEncoding.vue'
 import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
+import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
 
 declare global {
@@ -81,7 +82,8 @@ const components: any = {
   AmplitudeAdditionWidget,
   StatevectorAmplitudeEncoding,
   StatevectorBinaryEncoding,
-  EigenvectorWidget
+  CodeExercise,
+  EigenvectorWidget,
 }
 
 Object.keys(components).forEach((c) => {

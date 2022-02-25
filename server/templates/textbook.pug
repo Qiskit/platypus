@@ -99,8 +99,3 @@ html(lang=course.locale dir=dir)
     script(src='/content/' + course.id + '/functions.js')
     script(src='/course.js')
 
-    include ../includes/thebe-config.html
-    script(defer)
-      | (function () { const run = "#{__('Run')}";
-      include ../includes/thebe-init.js
-      | })();
