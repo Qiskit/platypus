@@ -46,10 +46,9 @@ export default defineComponent({
   },
   methods: {
     run () {
-      if (this.isRunning) {
-        return
+      if (!this.isRunning) {
+        this.$emit('run')
       }
-      this.$emit('run')
     },
     grade () {
       if (this.isRunning) {
