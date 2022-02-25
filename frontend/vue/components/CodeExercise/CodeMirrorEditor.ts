@@ -1,4 +1,3 @@
-
 import CodeMirror from 'codemirror/lib/codemirror'
 import 'codemirror/lib/codemirror.css'
 
