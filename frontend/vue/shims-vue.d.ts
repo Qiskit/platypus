@@ -5,3 +5,4 @@ declare module '*.vue' {
 }
 
 declare module 'wc-wrapper';
+declare module 'codemirror/lib/codemirror';
