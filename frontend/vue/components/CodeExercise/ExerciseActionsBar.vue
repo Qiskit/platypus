@@ -51,10 +51,9 @@ export default defineComponent({
       }
     },
     grade () {
-      if (this.isRunning) {
-        return
+      if (!this.isRunning) {
+        this.$emit('grade')
       }
-      this.$emit('grade')
     }
   }
 })
