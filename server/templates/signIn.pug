@@ -1,0 +1,28 @@
+include /_mixins
+
+doctype html
+html(lang=lang dir=dir)
+  head
+    include head
+
+  body#app
+    div.qiskit__navbar#qiskit-navbar
+      q-the-menu
+
+    .body
+      q-sign-in
+
+    script(type="application/json")#translations!= translationsJSON
+
+    script.
+      var user = null;
+      var textbookAnalytics = {
+        url: "#{config.analytics.url || ''}",
+        key: "#{config.analytics.key || ''}"
+      };
+      var textbook = {
+        locale: "#{req.locale.id}"
+      };
+
+    script(src='/textbook.js')
+    include ../includes/tail.html
