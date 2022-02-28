@@ -16,11 +16,14 @@ export interface AnalyticsConfig extends Config {
 
 export interface TocSection {
   title: string,
-  url: string
+  id: string,
+  url: string,
+  pageUrl: string
 }
 
 export interface TocCourse {
   title: string,
+  id: string,
   url: string,
   type?: string,
   sections: [TocSection]

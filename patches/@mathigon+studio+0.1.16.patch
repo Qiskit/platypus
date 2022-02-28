@@ -325,3 +325,19 @@ index 227d047..22dcf81 100644
 +  // @ts-ignore
    return MongoStore.create({clientPromise, touchAfter: 12 * 3600});
  }
+diff --git a/node_modules/@mathigon/studio/server/utilities/oauth.ts b/node_modules/@mathigon/studio/server/utilities/oauth.ts
+index 115cec3..6ce1173 100644
+--- a/node_modules/@mathigon/studio/server/utilities/oauth.ts
++++ b/node_modules/@mathigon/studio/server/utilities/oauth.ts
+@@ -132,7 +132,10 @@ async function findOrCreateUser(req: express.Request, provider: Provider, profil
+ // We use req.headers.host rather than req.hostname because we need to include
+ // the localhost port during local development. Note that the redirect URI
+ // must exactly match a value set up with the third-party oAuth provider.
+-const host = (req: express.Request) => `${req.protocol}://${req.headers.host}`;
++const host = (req: express.Request) => {
++  const protocol = req.headers.host?.includes('localhost') ? 'http' : 'https';
++  return `${protocol}://${req.headers.host}`
++};
+ 
+ function login(req: express.Request, provider: Provider) {
+   const config = PROVIDERS[provider];
