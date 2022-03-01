@@ -9,7 +9,6 @@
       <div class="user-account__section-nav__link-list">
         <AppLink
           v-for="{displayName, hash} in sectionList"
-          :id="hash"
           :key="hash"
           class="user-account__section-nav__link-list__link"
           :class="{'user-account__section-nav__link-list__link_active': activeSection === hash}"
