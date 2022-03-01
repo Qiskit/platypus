@@ -34,6 +34,7 @@ import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAm
 import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
 import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
+import SyllabusLayout from './components/UserAccount/SyllabusLayout.vue'
 
 declare global {
   interface Window {
@@ -82,6 +83,7 @@ const components: any = {
   AmplitudeAdditionWidget,
   StatevectorAmplitudeEncoding,
   StatevectorBinaryEncoding,
+  SyllabusLayout,
   CodeExercise,
   EigenvectorWidget,
 }

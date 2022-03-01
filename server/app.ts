@@ -194,6 +194,9 @@ new MathigonStudioApp()
       translationsJSON
     })
   })
+  .get('/syllabus/:id', (req, res) => {
+    res.render('syllabus')
+  })
   .course({})
   .errors()
   .listen()

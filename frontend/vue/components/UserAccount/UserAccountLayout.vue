@@ -46,6 +46,9 @@
         <UserProgress />
       </div>
       <div v-if="activeSection === sectionList[1].hash">
+        <ClassroomSection />
+      </div>
+      <div v-if="activeSection === sectionList[2].hash">
         <PrivacySection />
         <DeleteUserDataSection />
       </div>
@@ -60,6 +63,7 @@ import BasicLink from '../common/BasicLink.vue'
 import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 import DeleteUserDataSection from './DeleteUserDataSection.vue'
+import ClassroomSection from './ClassroomSection.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
@@ -68,7 +72,8 @@ export default defineComponent({
     BasicLink,
     PrivacySection,
     UserProgress,
-    DeleteUserDataSection
+    DeleteUserDataSection,
+    ClassroomSection
   },
   props: {
     firstName: { type: String, required: false, default: '' },
@@ -81,6 +86,10 @@ export default defineComponent({
         {
           displayName: this.$translate('Learning'),
           hash: '#MyLearning'
+        },
+        {
+          displayName: this.$translate('Classroom'),
+          hash: '#Classroom'
         },
         {
           displayName: this.$translate('Privacy'),
