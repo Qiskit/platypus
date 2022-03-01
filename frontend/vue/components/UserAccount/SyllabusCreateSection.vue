@@ -1,40 +1,38 @@
 <template>
-  <div class="syllabus">
-    <section class="syllabus__title-container">
-      <!-- TODO: provide translations for all strings -->
-      <h1 class="syllabus__title">
-        Classroom
+  <section class="syllabus-create">
+    <div class="syllabus-create__title-container">
+      <h1 class="syllabus-create__title">
+        {{ $translate("Classroom") }}
       </h1>
-      <!-- TODO: update section subtitle -->
-      <p class="syllabus__title-text">
-        Create a customizable syllabus and share it with your students.
+      <p class="syllabus-create__title-text">
+        {{ $translate("Create a customizable syllabus and share it with your students.") }}
       </p>
-    </section>
-    <section class="syllabus__content">
-      <!-- TODO: update section description -->
+    </div>
+    <section class="syllabus-create__form">
       <h3>
-        You are viewing the syllabus for QML-100
+        {{ $translate("Create a syllabus") }}
       </h3>
     </section>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
-  name: 'SyllabusLayout'
+  name: 'SyllabusCreateSection'
 })
 </script>
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/typography';
-@import '~/../scss/variables/colors.scss';
 @import '~/../scss/variables/mq.scss';
+@import '~/../scss/variables/colors.scss';
 @import '~/../scss/mixins/mixins.scss';
 
-.syllabus {
+.syllabus-create {
   @include contained();
+  margin-left: 0;
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
 
@@ -53,9 +51,10 @@ export default defineComponent({
     }
   }
 
-  &__content {
+  &__form {
     padding: $spacing-07 0;
     border-top: 2px solid $border-color-light-2;
   }
 }
+
 </style>

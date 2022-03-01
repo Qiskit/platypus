@@ -19,6 +19,14 @@
       >
         View mock syllabus
       </BasicLink>
+      <BasicLink
+        class="classroom__syllabus-link"
+        url="/account#SyllabusCreate"
+        :is-static="true"
+        target="_self"
+      >
+        Create a syllabus
+      </BasicLink>
     </section>
   </section>
 </template>
@@ -70,6 +78,12 @@ export default defineComponent({
   &__content {
     padding: $spacing-07 0;
     border-top: 2px solid $border-color-light-2;
+  }
+
+  // TODO: remove when no longer needed
+  &__syllabus-link {
+    display: block;
+    padding-bottom: $spacing-05;
   }
 }
 </style>
