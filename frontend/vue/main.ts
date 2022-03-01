@@ -34,8 +34,8 @@ import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAm
 import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
 import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
-import SyllabusLayout from './components/UserAccount/SyllabusLayout.vue'
-import SyllabusCreateLayout from './components/UserAccount/SyllabusCreateLayout.vue'
+import SyllabusLayout from './components/Syllabus/SyllabusLayout.vue'
+import SyllabusCreateLayout from './components/Syllabus/SyllabusCreateLayout.vue'
 
 declare global {
   interface Window {
