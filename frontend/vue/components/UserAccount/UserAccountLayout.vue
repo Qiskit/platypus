@@ -200,10 +200,5 @@ export default defineComponent({
   &__section-container {
     overflow: auto;
   }
-
-  #SyllabusCreate {
-    display: none;
-  }
 }
-
 </style>
