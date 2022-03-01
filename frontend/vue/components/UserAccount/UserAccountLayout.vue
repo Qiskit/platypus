@@ -50,9 +50,6 @@
         <ClassroomSection />
       </div>
       <div v-if="activeSection === sectionList[2].hash">
-        <SyllabusCreateSection />
-      </div>
-      <div v-if="activeSection === sectionList[3].hash">
         <PrivacySection />
         <DeleteUserDataSection />
       </div>
@@ -68,7 +65,6 @@ import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 import DeleteUserDataSection from './DeleteUserDataSection.vue'
 import ClassroomSection from './ClassroomSection.vue'
-import SyllabusCreateSection from './SyllabusCreateSection.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
@@ -78,8 +74,7 @@ export default defineComponent({
     PrivacySection,
     UserProgress,
     DeleteUserDataSection,
-    ClassroomSection,
-    SyllabusCreateSection
+    ClassroomSection
   },
   props: {
     firstName: { type: String, required: false, default: '' },
@@ -96,10 +91,6 @@ export default defineComponent({
         {
           displayName: this.$translate('Classroom'),
           hash: '#Classroom'
-        },
-        {
-          displayName: this.$translate('Syllabus'),
-          hash: '#SyllabusCreate'
         },
         {
           displayName: this.$translate('Privacy'),

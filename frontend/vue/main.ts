@@ -35,6 +35,7 @@ import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinar
 import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
 import SyllabusLayout from './components/UserAccount/SyllabusLayout.vue'
+import SyllabusCreateLayout from './components/UserAccount/SyllabusCreateLayout.vue'
 
 declare global {
   interface Window {
@@ -84,8 +85,9 @@ const components: any = {
   StatevectorAmplitudeEncoding,
   StatevectorBinaryEncoding,
   SyllabusLayout,
+  SyllabusCreateLayout,
   CodeExercise,
-  EigenvectorWidget,
+  EigenvectorWidget
 }
 
 Object.keys(components).forEach((c) => {

@@ -21,7 +21,7 @@
       </BasicLink>
       <BasicLink
         class="classroom__syllabus-link"
-        url="/account#SyllabusCreate"
+        url="/syllabus/create"
         :is-static="true"
         target="_self"
       >

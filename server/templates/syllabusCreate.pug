@@ -1,0 +1,29 @@
+include /_mixins
+
+doctype html
+html(lang=lang dir=dir)
+  head
+    include head
+
+  body
+    div.qiskit__navbar#qiskit-navbar
+      q-the-menu
+
+    .body
+      q-syllabus-create-layout
+
+    script(type="application/json")#translations!= translationsJSON
+    script(type="application/json")#privacyPolicy!= privacyPolicyMD
+
+    script.
+      var textbookAnalytics = {
+        url: "#{config.analytics.url || ''}",
+        key: "#{config.analytics.key || ''}"
+      };
+      var textbook = {
+        locale: "#{req.locale.id}"
+      };
+
+    script(src='/textbook.js')
+    script(src='/course.js')
+    include ../includes/tail.html

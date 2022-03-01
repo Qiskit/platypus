@@ -7,7 +7,7 @@
       </h1>
       <!-- TODO: update section subtitle -->
       <p class="syllabus__title-text">
-        Create a customizable syllabus and share it with your students.
+        This is placeholder text for a page where students are viewing a syllabus.
       </p>
     </section>
     <section class="syllabus__content">

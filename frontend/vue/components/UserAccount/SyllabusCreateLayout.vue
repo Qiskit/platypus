@@ -20,7 +20,7 @@
 import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
-  name: 'SyllabusCreateSection'
+  name: 'SyllabusCreateLayout'
 })
 </script>
 
@@ -32,7 +32,6 @@ export default defineComponent({
 
 .syllabus-create {
   @include contained();
-  margin-left: 0;
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
 
