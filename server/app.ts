@@ -16,6 +16,7 @@ import {
 } from './utilities'
 import { TocCourse } from './interfaces'
 import * as storageApi from './storage'
+import { CreateSyllabusController } from './modules/syllabus/commands/create-syllabus/create-syllabus-controller'
 
 const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
@@ -61,7 +62,7 @@ const getCourseData = async function (req: Request) {
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
-  .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies'] })
+  .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus/create'] })
   // .redirects({'/login': '/signin'})
   .accounts()
   .redirects({
@@ -194,6 +195,7 @@ new MathigonStudioApp()
       translationsJSON
     })
   })
+  .post('/syllabus/create', CreateSyllabusController)
   .course({})
   .errors()
   .listen()
