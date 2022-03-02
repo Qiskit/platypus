@@ -13,6 +13,8 @@ $background-color-darker: $cool-gray-90;
 $background-color-tertiary: $purple-60;
 $background-color-quaternary: $purple-40;
 
+$disabled-background-color: rgba($cool-gray-50, 0.5);
+
 $text-color-white: $white-0;
 $text-color-black: $black-100;
 $text-color-dark: $cool-gray-100;
@@ -54,6 +56,8 @@ $button-background-color-tertiary: $cool-gray-90;
 $button-background-color-tertiary-dark: $purple-70;
 $button-text-color-tertiary: $purple-40;
 
+$button-background-color-quaternary: $cool-gray-90;
+$button-background-color-quaternary-dark: $cool-gray-80;
 
 $block-background-color: $purple-80;
 $block-border-color: $purple-80;

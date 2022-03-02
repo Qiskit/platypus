@@ -7,6 +7,7 @@ import MobileMenu from './components/TheMenu/MobileMenu.vue'
 import WhatIsQuantumVolume from './components/WhatIsQuantumVolume/WhatIsQuantumVolume.vue'
 import LayersCircuit from './components/WhatIsQuantumVolume/LayersCircuit.vue'
 import DragAndDropCode from './components/DragAndDropCode/DragAndDropCode.vue'
+import EndUserLicenseAgreementLayout from './components/UserAccount/EndUserLicenseAgreementLayout.vue'
 import Carousel from './components/Carousel/Carousel.vue'
 import MiniComposer from './components/MiniComposer/MiniComposer.vue'
 import Quiz from './components/Quiz/Quiz.vue'
@@ -22,6 +23,8 @@ import UniversalGlossary from './components/UtilityPanel/UniversalGlossary.vue'
 import EmptyPanel from './components/UtilityPanel/EmptyPanel.vue'
 import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
+import SignIn from './components/SignIn/SignIn.vue'
+import UserAccountLayout from './components/UserAccount/UserAccountLayout.vue'
 import AmplitudeDisk from './components/AmplitudeDisk/AmplitudeDisk.vue'
 import AmplitudeDiskWithValues from './components/AmplitudeDisk/AmplitudeDiskWithValues.vue'
 import AmplitudeAdditionDisk from './components/AmplitudeDisk/AmplitudeAdditionDisk.vue'
@@ -29,6 +32,7 @@ import AmplitudeAdditionDiskWithValues from './components/AmplitudeDisk/Amplitud
 import AmplitudeAdditionWidget from './components/AmplitudeDisk/AmplitudeAdditionWidget.vue'
 import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAmplitudeEncoding.vue'
 import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
+import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
 
 declare global {
@@ -56,6 +60,7 @@ const components: any = {
   LayersCircuit,
   WhatIsQuantumVolume,
   DragAndDropCode,
+  EndUserLicenseAgreementLayout,
   Carousel,
   Quiz,
   UtilityPanel,
@@ -68,6 +73,8 @@ const components: any = {
   MiniComposer,
   Binary,
   BinaryTile,
+  SignIn,
+  UserAccountLayout,
   AmplitudeDisk,
   AmplitudeDiskWithValues,
   AmplitudeAdditionDisk,
@@ -75,7 +82,8 @@ const components: any = {
   AmplitudeAdditionWidget,
   StatevectorAmplitudeEncoding,
   StatevectorBinaryEncoding,
-  EigenvectorWidget
+  CodeExercise,
+  EigenvectorWidget,
 }
 
 Object.keys(components).forEach((c) => {
