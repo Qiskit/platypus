@@ -45,7 +45,7 @@
       <div v-if="activeSection === sectionList[0].hash">
         <UserProgress />
       </div>
-      <div v-if="activeSection === sectionList[1].hash">
+      <div v-else-if="activeSection === sectionList[1].hash">
         <ClassroomSection />
       </div>
       <div v-if="activeSection === sectionList[2].hash">

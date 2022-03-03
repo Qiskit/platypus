@@ -25,6 +25,7 @@ import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
 import SignIn from './components/SignIn/SignIn.vue'
 import UserAccountLayout from './components/UserAccount/UserAccountLayout.vue'
+import UserAccountSectionHeader from './components/UserAccount/UserAccountSectionHeader.vue'
 import AmplitudeDisk from './components/AmplitudeDisk/AmplitudeDisk.vue'
 import AmplitudeDiskWithValues from './components/AmplitudeDisk/AmplitudeDiskWithValues.vue'
 import AmplitudeAdditionDisk from './components/AmplitudeDisk/AmplitudeAdditionDisk.vue'
@@ -77,6 +78,7 @@ const components: any = {
   BinaryTile,
   SignIn,
   UserAccountLayout,
+  UserAccountSectionHeader,
   AmplitudeDisk,
   AmplitudeDiskWithValues,
   AmplitudeAdditionDisk,

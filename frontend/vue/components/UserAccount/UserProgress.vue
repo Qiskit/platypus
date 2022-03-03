@@ -1,13 +1,9 @@
 <template>
   <section class="user-progress">
-    <div class="user-progress__title-container">
-      <h1 class="user-progress__title">
-        {{ $translate("Learning") }}
-      </h1>
-      <p class="user-progress__title-text">
-        {{ $translate("This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.") }}
-      </p>
-    </div>
+    <UserAccountSectionHeader
+      :title="$translate('Learning')"
+      :description="$translate('This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.')"
+    />
     <CourseProgress
       v-for="(course, index) in courseList"
       :key="index"
@@ -20,12 +16,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { getCourseList, Course } from '../../../ts/courses'
+import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
 import CourseProgress from './CourseProgress.vue'
 
 export default defineComponent({
   name: 'UserProgress',
   components: {
-    CourseProgress
+    CourseProgress, UserAccountSectionHeader
   },
   data () {
     return {
@@ -52,24 +49,12 @@ export default defineComponent({
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
 
-  &__title {
-    @include type-style('expressive-heading-05', $fluid: true);
-    margin-bottom: $spacing-05;
-    color: $text-active-color;
-
-    &-container {
-      @include type-style('body-long-01');
-      padding-bottom: $spacing-05;
-    }
-
-    &-text {
-      max-width: 38rem;
-    }
-  }
   &__course {
     padding: $spacing-04 0;
-    border-top: 2px solid $border-color-light-2;
+
+    &:not(:last-child) {
+      border-bottom: 2px solid $border-color-light-2;
+    }
   }
 }
-
 </style>
