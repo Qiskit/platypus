@@ -1,9 +1,13 @@
 <template>
   <section class="syllabus-create">
-    <UserAccountSectionHeader
-      :title="$translate('Syllabus')"
-      :description="$translate('Create a customizable syllabus and share it with your students.')"
-    />
+    <UserAccountSectionHeader>
+      <template #title>
+        {{ $translate("Syllabus") }}
+      </template>
+      <template #description>
+        {{ $translate("Create a customizable syllabus and share it with your students.") }}
+      </template>
+    </UserAccountSectionHeader>
     <div class="syllabus-create__content">
       <h3>
         {{ $translate("Create a syllabus") }}

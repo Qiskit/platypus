@@ -1,9 +1,13 @@
 <template>
   <section class="classroom">
-    <UserAccountSectionHeader
-      :title="$translate('Classroom')"
-      :description="$translate('This page shows your classroom activities in the Qiskit Textbook.')"
-    />
+    <UserAccountSectionHeader>
+      <template #title>
+        {{ $translate("Classroom") }}
+      </template>
+      <template #description>
+        {{ $translate("This page shows your classroom activities in the Qiskit Textbook.") }}
+      </template>
+    </UserAccountSectionHeader>
     <section class="classroom__content">
       <!-- TODO: remove mockSyllabusLink -->
       <BasicLink

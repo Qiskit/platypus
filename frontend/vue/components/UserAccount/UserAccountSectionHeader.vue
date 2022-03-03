@@ -1,13 +1,11 @@
 <template>
   <section class="user-account-section-header">
-    <div class="user-account-section-header__container">
-      <h1 class="user-account-section-header__title">
-        {{ title }}
-      </h1>
-      <p class="user-account-section-header__description">
-        {{ description }}
-      </p>
-    </div>
+    <h1 class="user-account-section-header__title">
+      <slot name="title" />
+    </h1>
+    <p class="user-account-section-header__description">
+      <slot name="description" />
+    </p>
   </section>
 </template>
 
@@ -15,11 +13,7 @@
 import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
-  name: 'UserAccountSectionHeader',
-  props: {
-    title: { type: String, required: false, default: '' },
-    description: { type: String, required: false, default: '' }
-  }
+  name: 'UserAccountSectionHeader'
 })
 </script>
 
@@ -32,6 +26,7 @@ export default defineComponent({
 $max-description-width: 38rem;
 
 .user-account-section-header {
+  padding-bottom: $spacing-05;
   border-bottom: 2px solid $border-color-light-2;
 
   &__container {

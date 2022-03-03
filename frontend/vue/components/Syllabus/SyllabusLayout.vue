@@ -1,10 +1,14 @@
 <template>
   <div class="syllabus">
     <!-- TODO: update section header description and provide translation -->
-    <UserAccountSectionHeader
-      :title="$translate('Syllabus')"
-      :description="'This is placeholder text for a page where students are viewing a syllabus.'"
-    />
+    <UserAccountSectionHeader>
+      <template #title>
+        {{ $translate("Syllabus") }}
+      </template>
+      <template #description>
+        {{ $translate("This is placeholder text for a page where students are viewing a syllabus.") }}
+      </template>
+    </UserAccountSectionHeader>
     <section class="syllabus__content">
       <!-- TODO: update section content -->
       <h3>

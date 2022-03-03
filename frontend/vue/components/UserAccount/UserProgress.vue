@@ -1,9 +1,13 @@
 <template>
   <section class="user-progress">
-    <UserAccountSectionHeader
-      :title="$translate('Learning')"
-      :description="$translate('This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.')"
-    />
+    <UserAccountSectionHeader>
+      <template #title>
+        {{ $translate("Learning") }}
+      </template>
+      <template #description>
+        {{ $translate("This page shows your progress in the Qiskit Textbook. Checkmarks appear next to section that you have completed.") }}
+      </template>
+    </UserAccountSectionHeader>
     <CourseProgress
       v-for="(course, index) in courseList"
       :key="index"
