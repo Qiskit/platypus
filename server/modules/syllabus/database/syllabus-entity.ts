@@ -28,7 +28,7 @@ export interface SyllabusDocument extends SyllabusBase, MongooseDocumentBase {
 interface SyllabusModel extends Model<SyllabusDocument> {}
 
 const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
-    code: {type: String, required: true, index: true, unique: true, sparse: true},
+    code: {type: String, index: true, unique: true, sparse: true},
     
     name: {type: String, default: '', maxlength: 255},
     instructor: {type: String, default: '', maxlength: 64},
@@ -51,6 +51,7 @@ const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
 SyllabusSchema.pre<SyllabusDocument>('save', async function (next) {
     if(!this.code) {
         // TODO: method to generate the code dynamically
+        this.code = ''
     }
     next();
 });
