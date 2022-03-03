@@ -11,8 +11,8 @@ export interface SyllabusBase {
     instructor: string,
     location: string,
     university: string,
-    officeHours: Date,
-    classHours: Date,
+    officeHours: string,
+    classHours: string,
     email: string,
     descriptionHtml: string,
     sections: Section[]
@@ -34,8 +34,8 @@ const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
     instructor: {type: String, default: '', maxlength: 64},
     location: {type: String, default: '', maxlength: 255},
     university: {type: String, default: '', maxlength: 255},
-    officeHours: Date,
-    classHours: Date,
+    officeHours: {type: String, default: '', maxlength: 255},
+    classHours: {type: String, default: '', maxlength: 255},
     email: {type: String, default: '', maxlength: 64},
     descriptionHtml: {type: String, default: ''},
     sections: [{

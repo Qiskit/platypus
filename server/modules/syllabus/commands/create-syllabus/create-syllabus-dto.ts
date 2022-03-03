@@ -10,8 +10,8 @@ export interface CreateSyllabus {
     instructor: string,
     location: string,
     university?: string,
-    officeHours: Date,
-    classHours: Date,
+    officeHours: string,
+    classHours: string,
     email: string,
     descriptionHtml: string,
     sections: Section[]
@@ -41,13 +41,13 @@ export class CreateSyllabusDto implements CreateSyllabus {
     @IsOptional()
     readonly university?: string;
 
-    @IsDate()
+    @IsString()
     @IsNotEmpty()
-    readonly officeHours!: Date;
+    readonly officeHours!: string;
 
-    @IsDate()
+    @IsString()
     @IsNotEmpty()
-    readonly classHours!: Date;
+    readonly classHours!: string;
 
     @MaxLength(64)
     @IsEmail()
@@ -86,8 +86,8 @@ export class CreateSyllabusDto implements CreateSyllabus {
         this.instructor = instructor;
         this.location = location;
         this.university = university;
-        this.officeHours = new Date(officeHours);
-        this.classHours = new Date(classHours);
+        this.officeHours = officeHours;
+        this.classHours = classHours;
         this.email = email;
         this.descriptionHtml = descriptionHtml;
         this.sections = sections;
