@@ -1,8 +1,14 @@
 <template>
   <section class="privacy-section">
-    <h1 class="privacy-section__title">
-      {{ $translate('Privacy') }}
-    </h1>
+    <UserAccountSectionHeader>
+      <template #title>
+        {{ $translate("Privacy") }}
+      </template>
+      <template #description>
+        <!-- TODO: update section header description and provide translation -->
+        Review our privacy policies, user licenses, and lorem ipsum lorem ipsum
+      </template>
+    </UserAccountSectionHeader>
     <h4 class="privacy-section__subtitle privacy-section__subtitle_general">
       {{ $translate('IBM Privacy Statement') }}
     </h4>
@@ -21,11 +27,12 @@
 import { defineComponent } from 'vue-demi'
 import MarkdownIt from 'markdown-it'
 import AppLink from '../common/AppLink.vue'
+import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
 
 export default defineComponent({
   name: 'PrivacySection',
   components: {
-    AppLink
+    AppLink, UserAccountSectionHeader
   },
   data () {
     return {
@@ -60,16 +67,9 @@ export default defineComponent({
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
 
-  &__title {
-    @include type-style('expressive-heading-05', $fluid: true);
-    color: $text-active-color;
-    border-bottom: 1px solid $border-color-light-2;
-    padding-bottom: $spacing-05;
-  }
-
   &__subtitle {
     @include type-style('expressive-heading-04');
-    padding: $spacing-05 0;
+    padding: $spacing-06 0 $spacing-05 0;
 
     &_quantum {
       margin-top: $spacing-08;
