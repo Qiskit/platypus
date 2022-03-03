@@ -1,6 +1,6 @@
 <template>
   <section class="user-account-section-header">
-    <div class="user-account-section-header__title-container">
+    <div class="user-account-section-header__container">
       <h1 class="user-account-section-header__title">
         {{ title }}
       </h1>
@@ -34,15 +34,16 @@ $max-description-width: 38rem;
 .user-account-section-header {
   border-bottom: 2px solid $border-color-light-2;
 
+  &__container {
+    @include type-style('body-long-01');
+    padding-bottom: $spacing-05;
+  }
+
   &__title {
     @include type-style('expressive-heading-05', $fluid: true);
     padding-bottom: $spacing-05;
     color: $text-active-color;
 
-    &-container {
-      @include type-style('body-long-01');
-      padding-bottom: $spacing-05;
-    }
   }
 
   &__description {
