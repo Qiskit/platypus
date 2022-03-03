@@ -39,7 +39,7 @@ export default defineComponent({
   padding-bottom: $spacing-07;
 
   &__content {
-    padding: $spacing-07 0;
+    padding: $spacing-06 0;
   }
 }
 </style>
