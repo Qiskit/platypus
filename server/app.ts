@@ -195,6 +195,12 @@ new MathigonStudioApp()
       translationsJSON
     })
   })
+  .get('/syllabus/create', (req, res) => {
+    res.render('syllabusCreate')
+  })
+  .get('/syllabus/:id', (req, res) => {
+    res.render('syllabus')
+  })
   .post('/syllabus', CreateSyllabusController)
   .course({})
   .errors()
