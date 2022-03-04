@@ -195,7 +195,7 @@ new MathigonStudioApp()
       translationsJSON
     })
   })
-  .post('/syllabus/create', CreateSyllabusController)
+  .post('/syllabus', CreateSyllabusController)
   .course({})
   .errors()
   .listen()

@@ -1,23 +1,7 @@
-import {IsArray, IsDate, IsEmail, IsString, MaxLength, IsNotEmpty, IsOptional, validateOrReject} from 'class-validator'
+import { IsArray, IsEmail, IsString, MaxLength, IsNotEmpty, IsOptional, validateOrReject } from 'class-validator'
+import { Syllabus, Section } from '../../domain/syllabus';
 
-export interface Section { 
-    title: string, 
-    chapters: number[] 
-}
-
-export interface CreateSyllabus {
-    name: string,
-    instructor: string,
-    location: string,
-    institution?: string,
-    officeHours: string,
-    classHours: string,
-    email: string,
-    descriptionHtml: string,
-    sections: Section[]
-    additionalHtml?: string,
-    owners: string[],
-}
+export type CreateSyllabus = Omit<Syllabus, 'id'>
 
 export class CreateSyllabusDto implements CreateSyllabus {
 

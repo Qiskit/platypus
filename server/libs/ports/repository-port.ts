@@ -31,13 +31,13 @@ export interface FindOneById<Entity> {
     findOneByIdOrThrow(id: string): Promise<Entity>;
 }
 
-export interface Save<Entity> {
-    save(entity: Entity): Promise<Entity>;
+export interface Save<Domain> {
+    save(entity: Domain): Promise<Domain>;
 }
 
-export interface RepositoryPort<Entity, EntityProps>
-  extends Save<Entity>,
+export interface RepositoryPort<Entity, EntityProps, Domain>
+  extends Save<Domain>,
     FindOneById<Entity>,
     FindManyPaginated<Entity, EntityProps> {
-        // TODO: here we are going to need to include findOne and Delete too
+        // TODO: here we are going to need to include more generic methods
 }

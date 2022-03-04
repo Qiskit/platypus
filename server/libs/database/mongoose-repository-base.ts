@@ -1,19 +1,26 @@
 import { Document, Model } from 'mongoose'
 
+import { OrmMapperBase } from './orm-mapper-base'
 import { DataWithPaginationMeta, FindManyPaginatedParams, RepositoryPort } from '../ports/repository-port'
 import { NotImplementedException } from '../exceptions/not-implemented-exception'
 
-export abstract class MongooseRepositoryBase<Entity extends Document, EntityProps> 
-    implements RepositoryPort<Entity, EntityProps>{
+export abstract class MongooseRepositoryBase<Entity extends Document, EntityProps, Domain> 
+    implements RepositoryPort<Entity, EntityProps, Domain>{
 
     protected model: Model<Entity>
 
-    constructor(model: Model<Entity>) {
+    protected mapper: OrmMapperBase<Entity, Domain>
+
+    constructor(model: Model<Entity>, mapper: OrmMapperBase<Entity, Domain>) {
         this.model = model
+        this.mapper = mapper
     }
 
-    async save(document: Entity): Promise<Entity> {
-        return document.save()
+    async save(data: Domain): Promise<Domain> {
+        this.mapper.toOrmEntity(data)
+        const document = new this.model(data)
+        document.save()
+        return this.mapper.toDomainEntity(document)
     }
 
     async findOneByIdOrThrow(id: string): Promise<Entity> {
