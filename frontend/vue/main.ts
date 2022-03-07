@@ -37,6 +37,7 @@ import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
 import SyllabusLayout from './components/Syllabus/SyllabusLayout.vue'
 import SyllabusCreateLayout from './components/Syllabus/SyllabusCreateLayout.vue'
+import SyllabusForm from './components/Syllabus/SyllabusForm.vue'
 
 declare global {
   interface Window {
@@ -88,6 +89,7 @@ const components: any = {
   StatevectorBinaryEncoding,
   SyllabusLayout,
   SyllabusCreateLayout,
+  SyllabusForm,
   CodeExercise,
   EigenvectorWidget
 }
