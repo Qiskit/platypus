@@ -68,6 +68,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/typography';
+@import '~/../scss/variables/mq.scss';
 @import '~/../scss/variables/colors.scss';
 
 .syllabus-card {
@@ -81,6 +82,16 @@ export default defineComponent({
   padding: $spacing-06 $spacing-06 $spacing-03 $spacing-06;
   gap: $spacing-07;
   background-color: $background-color-lighter;
+
+  @include mq($until: medium) {
+    grid-template-columns: auto;
+    grid-template-rows: min(60vw, 15rem) repeat(3, auto);
+    grid-template-areas:
+      "image"
+      "name"
+      "data"
+      "actions";
+  }
 
   &__name {
     @include type-style('productive-heading-01', $fluid: true);
@@ -101,6 +112,11 @@ export default defineComponent({
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     gap: $spacing-06;
+
+    @include mq($until: large) {
+      grid-template-columns: auto;
+    }
+
     &__item {
       &__heading {
         @include type-style('productive-heading-01');
@@ -114,6 +130,11 @@ export default defineComponent({
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     gap: $spacing-06;
+
+    @include mq($until: large) {
+      grid-template-columns: auto;
+      gap: $spacing-02;
+    }
   }
 }
 

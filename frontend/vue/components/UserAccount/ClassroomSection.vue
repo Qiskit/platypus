@@ -76,6 +76,7 @@ export default defineComponent({
   },
   data () {
     return {
+      // TODO: REPLACE MOCK DATA
       mockSyllabusLink: '/syllabus/QML-100',
       mockSyllabi: [
         {
