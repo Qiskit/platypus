@@ -10,5 +10,7 @@ export class CreateSyllabusService {
         const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
 
         const newSyllabus = await syllabusRepository.save(createSyllabusHttpRequest)
+
+        return newSyllabus
     }
 }

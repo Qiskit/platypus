@@ -4,7 +4,7 @@ import { Syllabus as SyllabusDomain } from '../domain/syllabus'
 
 export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusDomain> {
     toOrmEntity(data: SyllabusDomain): SyllabusDocument {
-        return new SyllabusOrm(data);
+        return new SyllabusOrm(data)
     }
 
     toDomainEntity(document: SyllabusDocument): SyllabusDomain {

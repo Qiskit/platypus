@@ -19,7 +19,8 @@ export abstract class MongooseRepositoryBase<Entity extends Document, EntityProp
     async save(data: Domain): Promise<Domain> {
         this.mapper.toOrmEntity(data)
         const document = new this.model(data)
-        document.save()
+        // TODO we should handle exceptions from save too
+        await document.save()
         return this.mapper.toDomainEntity(document)
     }
 
