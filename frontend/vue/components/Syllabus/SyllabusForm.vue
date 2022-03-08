@@ -17,7 +17,6 @@
             placeholder="Please enter the syllabus name"
             label-text="Syllabus name"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
         </div>
@@ -28,7 +27,6 @@
             placeholder="Instructor’s name"
             label-text="Instructor"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
           <bx-input
@@ -37,7 +35,6 @@
             placeholder="Enter the location"
             label-text="Location"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
         </div>
@@ -48,16 +45,14 @@
             placeholder="University name"
             label-text="University"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
           <bx-input
             class="syllabus-form__input-field"
             name="office-hours"
             placeholder="Enter the course office hours"
-            label-text="Location"
+            label-text="Office hours"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
         </div>
@@ -68,7 +63,6 @@
             placeholder="Enter the class hours"
             label-text="Class hours"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
           <bx-input
@@ -78,16 +72,24 @@
             placeholder="Enter the contact email"
             label-text="Email"
             color-scheme="light"
-            required-validity-message="This field is required"
             :required="true"
           />
         </div>
       </section>
       <section class="syllabus-form__section">
         <div class="syllabus-form__row">
+          <bx-input
+            class="syllabus-form__input-field"
+            name="module-title"
+            placeholder="Enter the module title"
+            label-text="Content - Use this section to write in content. You can then add Qiskit chapters that correlate, and add more text below."
+            color-scheme="light"
+            :required="true"
+          />
+        </div>
+        <div class="syllabus-form__row">
           <bx-textarea
             class="syllabus-form__textarea"
-            label-text="Content - Use this section to write in content. You can then add Qiskit chapters that correlate, and add more text below."
             color-scheme="light"
             placeholder="Enter content"
           />
@@ -143,15 +145,17 @@ export default defineComponent({
     }
   }
 
-  &__input-field {
+  &__input-field,
+  &__textarea {
     padding-right: $spacing-07;
     padding-bottom: $spacing-05;
+    @include mq($until: medium) {
+      padding-right: initial;
+    }
   }
 
   &__textarea {
     width: 100%;
-    padding-right: $spacing-07;
-    padding-bottom: $spacing-05;
   }
 }
 </style>
