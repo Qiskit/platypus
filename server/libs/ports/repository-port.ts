@@ -7,7 +7,7 @@ export interface PaginationMeta {
     limit?: number;
     page?: number;
 }
-  
+
 export interface FindManyPaginatedParams<EntityProps> {
     params?: EntityProps;
     pagination?: PaginationMeta;
@@ -39,5 +39,5 @@ export interface RepositoryPort<Entity, EntityProps, Domain>
   extends Save<Domain>,
     FindOneById<Entity>,
     FindManyPaginated<Entity, EntityProps> {
-        // TODO: here we are going to need to include more generic methods
+    // TODO: here we are going to need to include more generic methods
 }

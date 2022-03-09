@@ -1,6 +1,6 @@
-export interface Section { 
-    title: string, 
-    chapters: number[] 
+export interface Section {
+    title: string,
+    chapters: number[]
 }
 
 export interface Syllabus {

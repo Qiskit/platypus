@@ -1,6 +1,6 @@
-import { Model, model, Schema, Types } from 'mongoose';
+import { Model, model, Schema, Types } from 'mongoose'
 
-import { MongooseDocumentBase } from '../../../libs/database/mongoose-document-base';
+import { MongooseDocumentBase } from '../../../libs/database/mongoose-document-base'
 
 type Section = { title: string, chapters: number[] }
 
@@ -17,7 +17,7 @@ export interface SyllabusBase {
     descriptionHtml: string,
     sections: Section[]
     additionalHtml: string
-    
+
     owners: Types.ObjectId[],
 }
 
@@ -28,32 +28,32 @@ export interface SyllabusDocument extends SyllabusBase, MongooseDocumentBase {
 interface SyllabusModel extends Model<SyllabusDocument> {}
 
 const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
-    code: {type: String, index: true, unique: true, sparse: true},
-    
-    name: {type: String, default: '', maxlength: 255},
-    instructor: {type: String, default: '', maxlength: 64},
-    location: {type: String, default: '', maxlength: 255},
-    institution: {type: String, default: '', maxlength: 255},
-    officeHours: {type: String, default: '', maxlength: 255},
-    classHours: {type: String, default: '', maxlength: 255},
-    email: {type: String, default: '', maxlength: 64},
-    descriptionHtml: {type: String, default: ''},
-    sections: [{
-        title: String, 
-        chapters: [Number]
-    }],
-    additionalHtml: {type: String, default: ''},
-    deleted: {type: Boolean, default: false},
+  code: { type: String, index: true, unique: true, sparse: true },
 
-    owners: {type: [Types.ObjectId], ref: 'User'},
-}, {timestamps: true})
+  name: { type: String, default: '', maxlength: 255 },
+  instructor: { type: String, default: '', maxlength: 64 },
+  location: { type: String, default: '', maxlength: 255 },
+  institution: { type: String, default: '', maxlength: 255 },
+  officeHours: { type: String, default: '', maxlength: 255 },
+  classHours: { type: String, default: '', maxlength: 255 },
+  email: { type: String, default: '', maxlength: 64 },
+  descriptionHtml: { type: String, default: '' },
+  sections: [{
+    title: String,
+    chapters: [Number]
+  }],
+  additionalHtml: { type: String, default: '' },
+  deleted: { type: Boolean, default: false },
 
-SyllabusSchema.pre<SyllabusDocument>('save', async function (next) {
-    if(!this.code) {
-        // TODO: method to generate the code dynamically
-        this.code = ''
-    }
-    next();
-});
+  owners: { type: [Types.ObjectId], ref: 'User' }
+}, { timestamps: true })
 
-export const Syllabus = model<SyllabusDocument, SyllabusModel>('Syllabus', SyllabusSchema);
+SyllabusSchema.pre<SyllabusDocument>('save', function (next) {
+  if (!this.code) {
+    // TODO: method to generate the code dynamically
+    this.code = ''
+  }
+  next()
+})
+
+export const Syllabus = model<SyllabusDocument, SyllabusModel>('Syllabus', SyllabusSchema)

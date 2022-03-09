@@ -1,16 +1,16 @@
-import { CreateSyllabus } from './create-syllabus-dto';
-import { SyllabusRepository } from '../../database/syllabus-repository'
 import { Syllabus } from '../../database/syllabus-entity'
 import { SyllabusMapper } from '../../database/syllabus-mapper'
+import { SyllabusRepository } from '../../database/syllabus-repository'
+import { CreateSyllabus } from './create-syllabus-dto'
 
 export class CreateSyllabusService {
-    static async execute(createSyllabusHttpRequest: CreateSyllabus) {
-        const syllabusMapper = new SyllabusMapper()
-        
-        const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
+  static async execute (createSyllabusHttpRequest: CreateSyllabus) {
+    const syllabusMapper = new SyllabusMapper()
 
-        const newSyllabus = await syllabusRepository.save(createSyllabusHttpRequest)
+    const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
 
-        return newSyllabus
-    }
+    const newSyllabus = await syllabusRepository.save(createSyllabusHttpRequest)
+
+    return newSyllabus
+  }
 }
