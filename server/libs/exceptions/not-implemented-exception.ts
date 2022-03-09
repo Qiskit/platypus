@@ -7,4 +7,6 @@ export class NotImplementedException extends ExceptionBase {
   }
 
   readonly code = ExceptionCodes.notImplemented
+
+  readonly httpError = 501
 }

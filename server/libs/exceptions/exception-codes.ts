@@ -1,3 +1,4 @@
 export enum ExceptionCodes {
-  notImplemented = 'GENERIC.NOT_IMPLEMENTED'
+  notImplemented = 'GENERIC.NOT_IMPLEMENTED',
+  unauthorized = 'GENERIC.UNAUTHORIZED'
 }

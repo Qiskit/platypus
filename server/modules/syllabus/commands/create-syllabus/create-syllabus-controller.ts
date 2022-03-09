@@ -1,13 +1,21 @@
 import { Request, Response, NextFunction } from 'express'
 
+import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
+
 import { Syllabus } from '../../domain/syllabus'
 import { CreateSyllabusHttpRequest } from './create-syllabus-dto'
 import { CreateSyllabusService } from './create-syllabus-service'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const CreateSyllabusController = async (req: Request, res: Response, next: NextFunction) => {
+  if (!req.user || !req.user.acceptedPolicies) {
+    const error = new UnauthorizedException()
+    res.status(error.httpError)
+    return res.json(error)
+  }
+
   const { body } = req
-  const userId = '6218ab82743124885c31fa75' // TODO: Get the user from the request
+  const userId = req.user.id
 
   const syllabus = new CreateSyllabusHttpRequest({ ...body, owners: [userId] })
 
@@ -17,11 +25,12 @@ export const CreateSyllabusController = async (req: Request, res: Response, next
     await syllabus.validate()
     response = await CreateSyllabusService.execute(syllabus)
   } catch (error) {
+    // TODO: update res.status when we start to use our internal exceptions
     response = error
     // TODO: implemente new log system
     // eslint-disable-next-line no-console
     console.log(error)
   }
 
-  res.json(response)
+  return res.json(response)
 }
