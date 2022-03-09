@@ -64,10 +64,10 @@
           </AppLink>
           <bx-dropdown
             v-else
-            value="selectedMenuItem"
-            v-model="selectedMenuItem"
             ref="communityDropdown"
             :key="link.url"
+            v-model="selectedMenuItem"
+            value="selectedMenuItem"
             class="menu__entry"
             :class="{ 'menu__entry_active': isCommunityActive() }"
             :trigger-content="selectedMenuItem"
@@ -88,6 +88,13 @@
             </bx-dropdown-item>
           </bx-dropdown>
         </template>
+        <bx-btn
+          class="menu__account"
+          kind="ghost"
+          href="/account"
+        >
+          <User20 class="menu__account__icon" />
+        </bx-btn>
       </nav>
     </section>
   </div>
@@ -97,6 +104,7 @@
 import { Options, mixins } from 'vue-class-component'
 import Menu20 from '@carbon/icons-vue/lib/menu/20'
 import Close20 from '@carbon/icons-vue/lib/close/20'
+import User20 from '@carbon/icons-vue/lib/user/20'
 import MenuMixin from '../../mixins/menu'
 import AppLogo from '../common/AppLogo.vue'
 import AppLink from '../common/AppLink.vue'
@@ -105,9 +113,10 @@ import MobileMenu from './MobileMenu.vue'
 
 // using Carbon web-component from https://github.com/carbon-design-system/carbon-web-components#basic-usage
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
+import 'carbon-web-components/es/components/button/button.js'
 
 @Options({
-  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20 }
+  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20, User20 }
 })
 export default class TheMenu extends mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
@@ -117,11 +126,10 @@ export default class TheMenu extends mixins(MenuMixin) {
     this.selectedMenuItem = this.$translate('Community')
   }
 
-  switchPanel(event: any) {
+  switchPanel (event: any) {
     const selectionTitle = event.detail.item.value
     this.selectedMenuItem = selectionTitle
   }
-
 }
 </script>
 
@@ -161,6 +169,33 @@ export default class TheMenu extends mixins(MenuMixin) {
 
     &_active {
       color: $text-active-color;
+    }
+  }
+
+  &__account {
+    background-color: $carbon--purple-70;
+    &__icon {
+      height: 2rem;
+      width: 2rem;
+      border: 2px solid $white-0;
+      border-radius: 50%;
+      fill: $white-0;
+      box-sizing: border-box;
+    }
+
+    &::part(button) {
+      background-color: $carbon--purple-70;
+      transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9) 0s;
+      padding-right: 15px;
+
+      &:focus {
+        border-color: $carbon--purple-70;
+        box-shadow: initial;
+      }
+
+      &:hover {
+        background-color: $carbon--purple-80;
+      }
     }
   }
 
@@ -237,6 +272,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   &__navigation-level {
     padding-top: 0;
     padding-bottom: 0;
+    padding-right: 0;
     @include mq($until: large) {
       display: none;
     }

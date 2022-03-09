@@ -21,10 +21,10 @@
         </AppLink>
         <bx-dropdown
           v-else
-          value="selectedMenuItem"
-          v-model="selectedMenuItem"
           :key="link.url"
           ref="communityDropdown"
+          v-model="selectedMenuItem"
+          value="selectedMenuItem"
           class="mobile-menu__entry mobile-menu__entry_dropdown"
           :class="{ 'mobile-menu__entry_active': isCommunityActive() }"
           :trigger-content="selectedMenuItem"
@@ -45,6 +45,14 @@
           </bx-dropdown-item>
         </bx-dropdown>
       </template>
+      <BasicLink
+        class="mobile-menu__account-link"
+        :url="userProfileLink"
+        target="_self"
+      >
+        <User16 class="mobile-menu__account-link__icon" />
+        {{ $translate("Profile") }}
+      </BasicLink>
     </nav>
     <footer class="mobile-menu__footer">
       <div class="mobile-menu__footer-inner-container">
@@ -60,8 +68,10 @@
 <script lang="ts">
 // import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 import { Options, prop, mixins } from 'vue-class-component'
+import User16 from '@carbon/icons-vue/lib/user/16'
 import { STAY_CONNECTED_LINKS } from '../../../constants/menuLinks'
 import AppLink from '../common/AppLink.vue'
+import BasicLink from '../common/BasicLink.vue'
 import MenuMixin from '../../mixins/menu'
 // using Carbon web-component from https://github.com/carbon-design-system/carbon-web-components#basic-usage
 import 'carbon-web-components/es/components/dropdown/dropdown.js'
@@ -72,7 +82,7 @@ class Props {
 
 @Options({
   components: {
-    AppLink
+    AppLink, BasicLink, User16
   },
   watch: {
     openDropdown (isVisible) {
@@ -87,12 +97,13 @@ export default class MobileMenu extends mixins(MenuMixin) {
   stayConnectedElements = STAY_CONNECTED_LINKS
   theme = 'light'
   selectedMenuItem = 'Community'
+  userProfileLink = '/account'
 
   created () {
     this.selectedMenuItem = this.$translate('Community')
   }
 
-  switchPanel(event: any) {
+  switchPanel (event: any) {
     const selectionTitle = event.detail.item.value
     this.selectedMenuItem = selectionTitle
   }
@@ -104,6 +115,8 @@ export default class MobileMenu extends mixins(MenuMixin) {
 @import '~/../scss/variables/colors.scss';
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/mixins/mixins.scss';
+
+$mobile-menu-item-height: 4rem;
 
 .mobile-menu {
   display: flex;
@@ -140,7 +153,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
     justify-content: center;
     text-decoration: none;
     color: $text-color-light;
-    height: 4rem;
+    height: $mobile-menu-item-height;
     border-bottom: 1px solid $border-color-light;
 
     &_active:not(&_is-parent),
@@ -181,6 +194,23 @@ export default class MobileMenu extends mixins(MenuMixin) {
     padding: $spacing-05 $spacing-07;
   }
 
+  &__account-link {
+    display: flex;
+    align-items: center;
+    padding-left: $spacing-07;
+    padding-right: $spacing-05;
+    height: $mobile-menu-item-height;
+    border-bottom: 1px solid $border-color-light;
+    &__icon {
+      border: 1px solid $carbon--purple-70;
+      border-radius: 50%;
+      height: 1.5rem;
+      width: 1.5rem;
+      margin-right: $spacing-03;
+      fill: $carbon--purple-70;
+    }
+  }
+
   // component overrides
   // selecting within the shadow
   bx-dropdown::part(trigger-button) {
@@ -195,7 +225,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
   }
 
   bx-dropdown[open]::part(trigger-button) {
-    height: 4rem;
+    height: $mobile-menu-item-height;
     border-bottom: 1px solid $border-color;
   }
 
@@ -208,7 +238,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
 .mobile-menu {
   bx-dropdown-item {
     display: flex;
-    height: 4rem;
+    height: $mobile-menu-item-height;
     background-color: $background-color-lighter;
 
     &:not(:last-child) .menu__entry-label {
@@ -230,14 +260,14 @@ export default class MobileMenu extends mixins(MenuMixin) {
 
   .bx--list-box {
     background-color: $background-color-white;
-    height: 4rem;
+    height: $mobile-menu-item-height;
     max-height: initial;
     border-bottom: 1px solid $border-color-light;
   }
 
   .bx--list-box__field {
     padding: 0 $spacing-09 0 $spacing-07;
-    height: 4rem;
+    height: $mobile-menu-item-height;
 
     &:hover .bx--list-box__label {
       text-decoration: underline;
@@ -267,7 +297,7 @@ export default class MobileMenu extends mixins(MenuMixin) {
   }
 
   .bx--list-box--expanded {
-    min-height: 4rem;
+    min-height: $mobile-menu-item-height;
     height: 100%;
     background-color: $background-color-lighter;
 
