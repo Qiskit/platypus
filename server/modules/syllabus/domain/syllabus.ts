@@ -1,7 +1,5 @@
-export interface Section {
-    title: string,
-    chapters: number[]
-}
+import { SyllabusSection } from './syllabus-section'
+import type { SyllabusCode } from './syllabus-code'
 
 export interface Syllabus {
     id?: string,
@@ -13,8 +11,8 @@ export interface Syllabus {
     classHours: string,
     email: string,
     descriptionHtml: string,
-    sections: Section[]
+    sections: SyllabusSection[]
     additionalHtml?: string,
-    code?: string,
+    code?: SyllabusCode,
     owners: string[],
 }

@@ -2,10 +2,12 @@ import { Model, model, Schema, Types } from 'mongoose'
 
 import { MongooseDocumentBase } from '../../../libs/database/mongoose-document-base'
 
-type Section = { title: string, chapters: number[] }
+type SyllabusCode = string
+
+type SyllabusSection = { title: string, chapters: number[] }
 
 export interface SyllabusBase {
-    code: string,
+    code: SyllabusCode,
 
     name: string,
     instructor: string,
@@ -15,7 +17,7 @@ export interface SyllabusBase {
     classHours: string,
     email: string,
     descriptionHtml: string,
-    sections: Section[]
+    sections: SyllabusSection[]
     additionalHtml: string
 
     owners: Types.ObjectId[],
@@ -47,13 +49,5 @@ const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
 
   owners: { type: [Types.ObjectId], ref: 'User' }
 }, { timestamps: true })
-
-SyllabusSchema.pre<SyllabusDocument>('save', function (next) {
-  if (!this.code) {
-    // TODO: method to generate the code dynamically
-    this.code = ''
-  }
-  next()
-})
 
 export const Syllabus = model<SyllabusDocument, SyllabusModel>('Syllabus', SyllabusSchema)

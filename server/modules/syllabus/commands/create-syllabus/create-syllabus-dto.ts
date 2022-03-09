@@ -1,5 +1,7 @@
 import { IsArray, IsEmail, IsString, MaxLength, IsNotEmpty, IsOptional, validateOrReject } from 'class-validator'
-import { Syllabus, Section } from '../../domain/syllabus'
+import { Syllabus } from '../../domain/syllabus'
+import { SyllabusSection } from '../../domain/syllabus-section'
+import { SyllabusCode, generate } from '../../domain/syllabus-code'
 
 export type CreateSyllabus = Omit<Syllabus, 'id'>
 
@@ -43,7 +45,7 @@ export class CreateSyllabusDto implements CreateSyllabus {
 
   @IsArray()
   @IsNotEmpty()
-  readonly sections!: Section[]
+  readonly sections!: SyllabusSection[]
 
   @IsString()
   @IsOptional()
@@ -52,6 +54,8 @@ export class CreateSyllabusDto implements CreateSyllabus {
   @IsArray()
   @IsNotEmpty()
   readonly owners!: string[]
+
+  code?: SyllabusCode
 
   constructor ({
     name,
@@ -77,6 +81,7 @@ export class CreateSyllabusDto implements CreateSyllabus {
     this.sections = sections
     this.additionalHtml = additionalHtml
     this.owners = owners
+    this.code = generate()
   }
 }
 
