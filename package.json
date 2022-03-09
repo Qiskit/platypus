@@ -90,7 +90,7 @@
     "cypress": "^9.5.0",
     "cypress-axe": "^0.14.0",
     "cypress-wait-until": "^1.7.2",
-    "eslint": "^8.9.0",
+    "eslint": "^8.10.0",
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",
     "jsdom": "^19.0.0",
