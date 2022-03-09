@@ -5,7 +5,6 @@
         {{ $translate("Privacy") }}
       </template>
       <template #description>
-        <!-- TODO: update section header description and provide translation -->
         {{ $translate("This page contains privacy information, including the IBM privacy statement, the end user license agreement, and the ability to delete your account. If you would like copy of all of your user account data, please email") }}
         <AppLink class="privacy-section__policy-email" url="mailto:qiskit@us.ibm.com">
           qiskit@us.ibm.com.
