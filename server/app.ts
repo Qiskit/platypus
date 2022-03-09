@@ -3,18 +3,21 @@
 // =============================================================================
 
 import { Request } from 'express'
+import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities/utilities'
 
-import { LOCALES } from '@mathigon/studio/server/utilities/i18n'
+import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
-  findNextSection, findPrevSection, getSectionIndex, isLearningPath, updateGlossary
+  findNextSection, findPrevSection, getSectionIndex, isLearningPath,
+  updateGlossary, loadLocaleRawFile, tocFilterByType
 } from './utilities'
+import { TocCourse } from './interfaces'
 import * as storageApi from './storage'
 
-import { translate } from '@mathigon/studio/server/utilities/i18n'
+const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
@@ -58,7 +61,9 @@ const getCourseData = async function (req: Request) {
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
-  .setup({ sessionSecret: 'project-platypus-beta' })
+  .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies'] })
+  // .redirects({'/login': '/signin'})
+  .accounts()
   .redirects({
     '/': TEXTBOOK_HOME,
     '/textbook': TEXTBOOK_HOME
@@ -72,6 +77,78 @@ new MathigonStudioApp()
       return LOCALES[l]
     })
     next()
+  })
+  .get('/courseList', async (req, res) => {
+    res.json(tocFilterByType())
+  })
+  .get('/courseList/:type', async (req, res) => {
+    let type = req.params.type || ''
+    if (type === 'none') {
+      type = ''
+    }
+    const courses: TocCourse[] = tocFilterByType(type)
+    res.json(courses)
+  })
+  .get('/delete/account', async (req, res) => {
+    if (!req.user) return {error: 'unauthenticated', errorCode: 401, redirect: '/signin'}
+
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    // 21 value is to maintain the probability collision similar to UUIDv4
+    const nanoid = customAlphabet(alphabet, 21)
+    const randomString = nanoid()
+    req.user.email = `deleted-${randomString}@qiskit.org`
+    req.user.firstName = randomString
+    req.user.lastName = randomString
+    req.user.picture = ''
+    req.user.oAuthTokens = [
+      `qiskit:${randomString}`
+    ]
+
+    try {
+      await req.user.save()
+    } catch(error) {
+      // TODO: we must improve our logs
+      console.error(error)
+    }
+
+    res.redirect('/logout')
+  })
+  .get('/account', (req, res) => {
+    if (!req.user) return res.redirect('/signin');
+    if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
+
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+    const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+    const userMockData = {
+      firstName: req.user?.firstName,
+      lastName: req.user?.lastName
+    }
+
+    res.render('userAccount', {
+      config: CONFIG,
+      userData: userMockData,
+      lang,
+      privacyPolicyMD,
+      translationsJSON
+    })
+  })
+  .get('/eula', (req, res) => {
+    if (!req.user) return res.redirect('/signin');
+
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+    const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+    res.render('eula', {
+      config: CONFIG,
+      lang,
+      privacyPolicyMD,
+      translationsJSON
+    })
   })
   .get('/summer-school/:course', (req, res, next) => {
     // redirect to first lecture when no lecture specified
@@ -103,6 +180,19 @@ new MathigonStudioApp()
     } else {
       res.render('textbook', courseData)
     }
+  })
+  .get('/signin', async (req, res) => {
+    if (req.user && req.user.acceptedPolicies) return res.redirect('/account');
+
+    const lang = req.locale.id || 'en'
+    const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+    res.render('signIn', {
+      textbookHome: TEXTBOOK_HOME,
+      config: CONFIG,
+      lang,
+      translationsJSON
+    })
   })
   .course({})
   .errors()
