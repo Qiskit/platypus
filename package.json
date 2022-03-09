@@ -46,7 +46,7 @@
     "@ibm/plex": "^6.0.0",
     "@jupyter-widgets/html-manager": "^0.20.0",
     "@jupyter-widgets/jupyterlab-manager": "^3.0.1",
-    "@jupyterlab/codemirror": "^3.2.8",
+    "@jupyterlab/codemirror": "^3.2.9",
     "@jupyterlab/mathjax2": "^3.2.8",
     "@jupyterlab/outputarea": "^3.2.8",
     "@jupyterlab/rendermime": "^3.2.8",
