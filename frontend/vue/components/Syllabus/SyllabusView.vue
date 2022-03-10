@@ -73,6 +73,7 @@ export default defineComponent({
   },
   data () {
     return {
+      // TODO mock data
       syllabus: {
         title: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
         instructor: 'instructor name',
