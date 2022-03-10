@@ -71,7 +71,8 @@ new MathigonStudioApp()
     const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
     res.json(translations)
   })
-  .use((req, res, next) => {
+  // eslint-disable-next-line require-await
+  .use(async (req, res, next) => {
     res.locals.availableLocales = CONFIG.locales.map((l) => {
       return LOCALES[l]
     })
