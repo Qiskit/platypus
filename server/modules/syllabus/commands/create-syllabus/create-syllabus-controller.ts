@@ -10,7 +10,7 @@ import { CreateSyllabusService } from './create-syllabus-service'
 export const CreateSyllabusController = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.user || !req.user.acceptedPolicies) {
     const error = new UnauthorizedException()
-    res.status(error.httpError)
+    res.status(error.code)
     return res.json(error)
   }
 

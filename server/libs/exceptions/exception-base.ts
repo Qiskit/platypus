@@ -1,9 +1,9 @@
 export interface SerializedException {
-    message: string;
-    code: string;
-    httpError: number,
-    stack?: string;
-    metadata?: unknown;
+  code: number;
+  name: string;
+  message: string;
+  stack?: string;
+  metadata?: unknown;
 }
 
 export abstract class ExceptionBase extends Error {
@@ -12,15 +12,15 @@ export abstract class ExceptionBase extends Error {
     Error.captureStackTrace(this, this.constructor)
   }
 
-  abstract code: string
+  abstract code: number
 
-  abstract httpError: number
+  abstract name: string
 
   toJSON (): SerializedException {
     return {
-      message: this.message,
+      name: this.name,
       code: this.code,
-      httpError: this.httpError,
+      message: this.message,
       // TODO: improve the logic to send the stack only with development
       stack: (process.env.node_env !== 'production') ? this.stack : undefined,
       metadata: this.metadata
