@@ -26,7 +26,8 @@ import CourseProgress from './CourseProgress.vue'
 export default defineComponent({
   name: 'UserProgress',
   components: {
-    CourseProgress, UserAccountSectionHeader
+    CourseProgress,
+    UserAccountSectionHeader
   },
   data () {
     return {

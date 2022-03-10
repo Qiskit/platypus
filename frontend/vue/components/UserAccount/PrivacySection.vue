@@ -34,7 +34,8 @@ import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vu
 export default defineComponent({
   name: 'PrivacySection',
   components: {
-    AppLink, UserAccountSectionHeader
+    AppLink,
+    UserAccountSectionHeader
   },
   data () {
     return {
