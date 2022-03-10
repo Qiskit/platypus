@@ -1,22 +1,22 @@
 <template>
   <div class="syllabus-general-information">
     <div class="syllabus-general-information__item">
-      <span class="syllabus-general-information__heading">Instructor:</span> <slot name="instructor" />
+      <span class="syllabus-general-information__item__heading">Instructor:</span> <slot name="instructor" />
     </div>
-    <div class="syllabus-general-information">
-      <span class="syllabus-general-information__heading">Location:</span> <slot name="location" />
+    <div class="syllabus-general-information__item">
+      <span class="syllabus-general-information__item__heading">Location:</span> <slot name="location" />
     </div>
-    <div class="syllabus-general-information">
-      <span class="syllabus-general-information__heading">University:</span> <slot name="university" />
+    <div class="syllabus-general-information__item">
+      <span class="syllabus-general-information__item__heading">University:</span> <slot name="university" />
     </div>
-    <div class="syllabus-general-information">
-      <span class="syllabus-general-information__heading">Office Hours:</span> <slot name="office-hours" />
+    <div class="syllabus-general-information__item">
+      <span class="syllabus-general-information__item__heading">Office Hours:</span> <slot name="office-hours" />
     </div>
-    <div class="syllabus-general-information">
-      <span class="syllabus-general-information__heading">Class Hours:</span> <slot name="class-hours" />
+    <div class="syllabus-general-information__item">
+      <span class="syllabus-general-information__item__heading">Class Hours:</span> <slot name="class-hours" />
     </div>
-    <div class="syllabus-general-information">
-      <span class="syllabus-general-information__heading">Email:</span> <slot name="email" />
+    <div class="syllabus-general-information__item">
+      <span class="syllabus-general-information__item__heading">Email:</span> <slot name="email" />
     </div>
   </div>
 </template>
@@ -36,13 +36,12 @@ export default defineComponent({
 
 .syllabus-general-information {
   @include type-style('body-long-01');
-  grid-area: data;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
   gap: $spacing-06;
 
-  @include mq($until: large) {
+  @include mq($until: medium) {
     grid-template-columns: auto;
   }
 
