@@ -89,15 +89,15 @@ export default defineComponent({
             chapterList: [
               {
                 name: 'Why quantum computing?',
-                url: 'course/introduction/why-quantum-computing'
+                url: '/course/introduction/why-quantum-computing'
               },
               {
                 name: 'The atoms of computation',
-                url: 'course/introduction/the-atoms-of-computation'
+                url: '/course/introduction/the-atoms-of-computation'
               },
               {
                 name: 'What is quantum?',
-                url: 'course/introduction/what-is-quantum'
+                url: '/course/introduction/what-is-quantum'
               }
             ]
           },
@@ -107,15 +107,15 @@ export default defineComponent({
             chapterList: [
               {
                 name: 'Why quantum computing?',
-                url: 'course/introduction/why-quantum-computing'
+                url: '/course/introduction/why-quantum-computing'
               },
               {
                 name: 'The atoms of computation',
-                url: 'course/introduction/the-atoms-of-computation'
+                url: '/course/introduction/the-atoms-of-computation'
               },
               {
                 name: 'What is quantum?',
-                url: 'course/introduction/what-is-quantum'
+                url: '/course/introduction/what-is-quantum'
               }
             ]
           }
