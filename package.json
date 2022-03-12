@@ -80,7 +80,7 @@
     "@types/jsdom": "^16.2.14",
     "@types/markdown-it": "^12.2.1",
     "@types/node-fetch": "^2.6.1",
-    "@types/pug": "2.0.5",
+    "@types/pug": "2.0.6",
     "@types/validator": "13.6.6",
     "@vue/cli-plugin-typescript": "4.5.13",
     "@vue/cli-service": "4.5.13",
