@@ -4,9 +4,6 @@
       <bx-tab id="tab-write" class="syllabus-form__tab" target="panel-write" value="write">
         {{ $translate('Write') }}
       </bx-tab>
-      <bx-tab id="tab-preview" class="syllabus-form__tab" target="panel-preview" value="preview">
-        {{ $translate('Preview') }}
-      </bx-tab>
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
       <section class="syllabus-form__section">
@@ -95,9 +92,6 @@
           />
         </div>
       </section>
-    </div>
-    <div id="panel-preview" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-preview">
-      <!-- TODO: Update with syllabus preview content -->
     </div>
   </section>
 </template>
