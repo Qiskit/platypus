@@ -1,13 +1,23 @@
-export interface SyllabusQueryParams {
-  owner: string
-}
+import { SyllabusQueryParams } from '../../domain/syllabus-query-params'
 
-export class SyllabusQueryParamsDto implements SyllabusQueryParams {
-  readonly owner: string
+import { FindManyPaginatedParams, PaginationMeta } from '../../../../libs/ports/repository-port'
 
-  constructor ({ owner }: SyllabusQueryParams) {
-    this.owner = owner
+export class SyllabusQueryParamsDto implements FindManyPaginatedParams<SyllabusQueryParams> {
+  readonly params: SyllabusQueryParams
+
+  readonly pagination: PaginationMeta
+
+  constructor ({ owner, limit, page }: SyllabusQueryParams) {
+    this.params = { owner }
+
+    // Pagination
+    const defaultLimit = limit || 10
+    const defaultPage = page || 0
+    this.pagination = {
+      limit: defaultLimit,
+      skip: defaultPage * defaultLimit
+    }
   }
 }
 
-export class SyllabusQueryParamsHttpRequest extends SyllabusQueryParamsDto implements SyllabusQueryParams {}
+export class SyllabusQueryParamsHttpRequest extends SyllabusQueryParamsDto implements FindManyPaginatedParams<SyllabusQueryParams> {}

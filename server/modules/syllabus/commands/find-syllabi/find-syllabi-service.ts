@@ -9,6 +9,8 @@ export class FindSyllabiService {
 
     const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
 
-    
+    const syllabi = await syllabusRepository.findManyPaginated(queryParams)
+
+    return syllabi
   }
 }

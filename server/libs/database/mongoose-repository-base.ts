@@ -1,11 +1,11 @@
-import { Document, Model } from 'mongoose'
+import { Document, Model, FilterQuery, QueryOptions } from 'mongoose'
 
 import { DataWithPaginationMeta, FindManyPaginatedParams, RepositoryPort } from '../ports/repository-port'
 import { NotImplementedException } from '../exceptions/not-implemented-exception'
 import { OrmMapperBase } from './orm-mapper-base'
 
-export abstract class MongooseRepositoryBase<Entity extends Document, EntityProps, Domain>
-implements RepositoryPort<Entity, EntityProps, Domain> {
+export abstract class MongooseRepositoryBase<Entity extends Document, QueryParams, Domain>
+implements RepositoryPort<Entity, QueryParams, Domain> {
   protected EntityModel: Model<Entity>
 
   protected mapper: OrmMapperBase<Entity, Domain>
@@ -14,6 +14,8 @@ implements RepositoryPort<Entity, EntityProps, Domain> {
     this.EntityModel = entityModel
     this.mapper = mapper
   }
+
+  abstract processQueryParam (queryParams: FindManyPaginatedParams<QueryParams>): { filter: FilterQuery<Entity>, options: QueryOptions }
 
   async save (data: Domain): Promise<Domain> {
     this.mapper.toOrmEntity(data)
@@ -29,7 +31,21 @@ implements RepositoryPort<Entity, EntityProps, Domain> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, require-await
-  async findManyPaginated (options: FindManyPaginatedParams<EntityProps>): Promise<DataWithPaginationMeta<Entity[]>> {
-    throw new NotImplementedException()
+  async findManyPaginated (search: FindManyPaginatedParams<QueryParams>): Promise<DataWithPaginationMeta<Domain[]>> {
+    const { filter, options } = this.processQueryParam(search)
+
+    // TODO: here we can call to populate to retrieve relations
+    const documents = await this.EntityModel.find(filter, null, options)
+    const total = await this.EntityModel.count(filter)
+
+    const syllabi = documents.map(document => this.mapper.toDomainEntity(document))
+    const skip = options.skip || 0
+    const limit = options.limit || 10
+    return {
+      data: syllabi,
+      count: total,
+      limit,
+      page: skip / limit
+    }
   }
 }
