@@ -1,4 +1,5 @@
 import { SyllabusQueryParams } from '../../domain/syllabus-query-params'
+import { DEFAULT_PAGINATION_LIMIT } from '../../../../libs/database/mongoose-repository-base'
 
 import { FindManyPaginatedParams, PaginationMeta } from '../../../../libs/ports/repository-port'
 
@@ -11,7 +12,7 @@ export class SyllabusQueryParamsDto implements FindManyPaginatedParams<SyllabusQ
     this.params = { owner }
 
     // Pagination
-    const defaultLimit = limit || 10
+    const defaultLimit = limit || DEFAULT_PAGINATION_LIMIT
     const defaultPage = page || 0
     this.pagination = {
       limit: defaultLimit,

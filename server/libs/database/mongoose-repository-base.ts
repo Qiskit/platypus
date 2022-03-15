@@ -4,6 +4,8 @@ import { DataWithPaginationMeta, FindManyPaginatedParams, RepositoryPort } from 
 import { NotImplementedException } from '../exceptions/not-implemented-exception'
 import { OrmMapperBase } from './orm-mapper-base'
 
+export const DEFAULT_PAGINATION_LIMIT = 10
+
 export abstract class MongooseRepositoryBase<Entity extends Document, QueryParams, Domain>
 implements RepositoryPort<Entity, QueryParams, Domain> {
   protected EntityModel: Model<Entity>
@@ -39,8 +41,8 @@ implements RepositoryPort<Entity, QueryParams, Domain> {
     const total = await this.EntityModel.count(filter)
 
     const syllabi = documents.map(document => this.mapper.toDomainEntity(document))
+    const limit = options.limit || DEFAULT_PAGINATION_LIMIT
     const skip = options.skip || 0
-    const limit = options.limit || 10
     return {
       data: syllabi,
       count: total,
