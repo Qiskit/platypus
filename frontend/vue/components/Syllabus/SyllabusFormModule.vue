@@ -157,6 +157,8 @@ export default defineComponent({
       margin-bottom: $spacing-05;
       margin-right: $spacing-05;
       flex-direction: column;
+      max-height: 16rem;
+      overflow-y: scroll;
     }
 
     &__list {
