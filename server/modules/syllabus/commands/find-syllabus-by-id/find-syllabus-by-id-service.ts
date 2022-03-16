@@ -1,6 +1,7 @@
 import { Syllabus } from '../../database/syllabus-entity'
 import { SyllabusMapper } from '../../database/syllabus-mapper'
 import { SyllabusRepository } from '../../database/syllabus-repository'
+import { SyllabusNotFound } from '../../exceptions/syllabus-not-found'
 import { FindSyllabusByIdHttpRequest } from './find-syllabus-by-id-dto'
 
 export class FindSyllabusByIdService {
@@ -11,6 +12,9 @@ export class FindSyllabusByIdService {
 
     const syllabus = await syllabusRepository.findOneByIdAndOwner(findSyllabusByIdHttpRequest)
 
+    if (!syllabus) {
+      throw new SyllabusNotFound(findSyllabusByIdHttpRequest.params.id)
+    }
     return syllabus
   }
 }
