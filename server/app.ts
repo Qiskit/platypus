@@ -16,8 +16,8 @@ import {
 } from './utilities'
 import { TocCourse } from './interfaces'
 import * as storageApi from './storage'
-
-const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
+import { CreateSyllabusController } from './modules/syllabus/commands/create-syllabus/create-syllabus-controller'
+import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/find-syllabi-controller'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
@@ -61,27 +61,28 @@ const getCourseData = async function (req: Request) {
 new MathigonStudioApp()
   .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
   .secure()
-  .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies'] })
+  .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus'] })
   // .redirects({'/login': '/signin'})
   .accounts()
   .redirects({
     '/': TEXTBOOK_HOME,
     '/textbook': TEXTBOOK_HOME
   })
-  .get('/locales/:locale', async (req, res) => {
+  .get('/locales/:locale', (req, res) => {
     const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
     res.json(translations)
   })
+  // eslint-disable-next-line require-await
   .use(async (req, res, next) => {
     res.locals.availableLocales = CONFIG.locales.map((l) => {
       return LOCALES[l]
     })
     next()
   })
-  .get('/courseList', async (req, res) => {
+  .get('/courseList', (req, res) => {
     res.json(tocFilterByType())
   })
-  .get('/courseList/:type', async (req, res) => {
+  .get('/courseList/:type', (req, res) => {
     let type = req.params.type || ''
     if (type === 'none') {
       type = ''
@@ -90,7 +91,9 @@ new MathigonStudioApp()
     res.json(courses)
   })
   .get('/delete/account', async (req, res) => {
-    if (!req.user) return {error: 'unauthenticated', errorCode: 401, redirect: '/signin'}
+    if (!req.user) {
+      return { error: 'unauthenticated', errorCode: 401, redirect: '/signin' }
+    }
 
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'
     // 21 value is to maintain the probability collision similar to UUIDv4
@@ -106,7 +109,7 @@ new MathigonStudioApp()
 
     try {
       await req.user.save()
-    } catch(error) {
+    } catch (error) {
       // TODO: we must improve our logs
       console.error(error)
     }
@@ -114,8 +117,12 @@ new MathigonStudioApp()
     res.redirect('/logout')
   })
   .get('/account', (req, res) => {
-    if (!req.user) return res.redirect('/signin');
-    if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
+    if (!req.user) {
+      return res.redirect('/signin')
+    }
+    if (req.user && !req.user.acceptedPolicies) {
+      return res.redirect('/eula')
+    }
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -136,7 +143,9 @@ new MathigonStudioApp()
     })
   })
   .get('/eula', (req, res) => {
-    if (!req.user) return res.redirect('/signin');
+    if (!req.user) {
+      return res.redirect('/signin')
+    }
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -153,15 +162,15 @@ new MathigonStudioApp()
   .get('/summer-school/:course', (req, res, next) => {
     // redirect to first lecture when no lecture specified
     const course = getCourse(req.params.course, req.locale.id)
-    return course ? res.redirect(`/summer-school/${course.id}/${course.sections[0].id}`) : next();
+    return course ? res.redirect(`/summer-school/${course.id}/${course.sections[0].id}`) : next()
   })
-  .get('/summer-school/:course/:section', async(req, res, next) => {
+  .get('/summer-school/:course/:section', async (req, res, next) => {
     // example URL: /summer-school/2021/lec1-2
     // :course - refers to the summer school year
     // :section - refers to the lecture id
     const courseData = await getCourseData(req)
 
-    courseData?.course.sections.forEach(section => {
+    courseData?.course.sections.forEach((section: any) => {
       // Mathigon by default set url as 'course/'
       section.url = section.url.replace('course/', 'summer-school/')
     })
@@ -181,8 +190,10 @@ new MathigonStudioApp()
       res.render('textbook', courseData)
     }
   })
-  .get('/signin', async (req, res) => {
-    if (req.user && req.user.acceptedPolicies) return res.redirect('/account');
+  .get('/signin', (req, res) => {
+    if (req.user && req.user.acceptedPolicies) {
+      return res.redirect('/account')
+    }
 
     const lang = req.locale.id || 'en'
     const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -200,6 +211,8 @@ new MathigonStudioApp()
   .get('/syllabus/:id', (req, res) => {
     res.render('syllabus')
   })
+  .get('/syllabus', FindSyllabiController)
+  .post('/syllabus', CreateSyllabusController)
   .course({})
   .errors()
   .listen()
