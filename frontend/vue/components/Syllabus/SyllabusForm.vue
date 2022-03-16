@@ -9,60 +9,73 @@
       <section class="syllabus-form__section">
         <div class="syllabus-form__row">
           <bx-input
+            v-model="courseName"
             class="syllabus-form__input-field"
             name="name"
             placeholder="Please enter the syllabus name"
             label-text="Syllabus name"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
         </div>
         <div class="syllabus-form__row">
           <bx-input
+            v-model="courseInstructor"
             class="syllabus-form__input-field"
             name="instructor"
             placeholder="Instructor’s name"
             label-text="Instructor"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
           <bx-input
+            v-model="courseLocation"
             class="syllabus-form__input-field"
             name="location"
             placeholder="Enter the location"
             label-text="Location"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
         </div>
         <div class="syllabus-form__row">
           <bx-input
+            v-model="courseUniversity"
             class="syllabus-form__input-field"
             name="university"
             placeholder="University name"
             label-text="University"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
           <bx-input
+            v-model="courseOfficeHours"
             class="syllabus-form__input-field"
-            name="office-hours"
+            name="courseOfficeHours"
             placeholder="Enter the course office hours"
             label-text="Office hours"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
         </div>
         <div class="syllabus-form__row">
           <bx-input
+            v-model="courseHours"
             class="syllabus-form__input-field"
-            name="class-hours"
+            name="courseHours"
             placeholder="Enter the class hours"
             label-text="Class hours"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
           <bx-input
+            v-model="courseEmail"
             class="syllabus-form__input-field"
             name="email"
             type="email"
@@ -70,6 +83,7 @@
             label-text="Email"
             color-scheme="light"
             :required="true"
+            @input="updateFormInfo"
           />
         </div>
         <div class="syllabus-form__row syllabus-form__row__save">
@@ -81,19 +95,24 @@
       <section class="syllabus-form__section">
         <div class="syllabus-form__row">
           <bx-input
+            v-model="moduleTitle"
             class="syllabus-form__input-field"
-            name="module-title"
+            name="moduleTitle"
             placeholder="Enter the module title"
             label-text="Content - Use this section to write in content. You can then add Qiskit chapters that correlate, and add more text below."
             color-scheme="light"
             :required="true"
+            @input="updateFormContent"
           />
         </div>
         <div class="syllabus-form__row">
           <bx-textarea
+            v-model="moduleContent"
             class="syllabus-form__textarea"
+            name="moduleContent"
             color-scheme="light"
             placeholder="Enter content"
+            @input="updateFormContent"
           />
         </div>
         <div class="syllabus-form__row syllabus-form__row__save">
@@ -129,7 +148,16 @@ export default defineComponent({
       saveSyllabusModuleLink: {
         label: 'Save content',
         url: '#'
-      }
+      },
+      courseName: '',
+      courseInstructor: '',
+      courseLocation: '',
+      courseUniversity: '',
+      courseOfficeHours: '',
+      courseHours: '',
+      courseEmail: '',
+      moduleTitle: '',
+      moduleContent: ''
     }
   },
   methods: {
@@ -138,6 +166,12 @@ export default defineComponent({
     },
     saveModuleAction () {
       this.saveSyllabusModuleLink.label = 'Saved'
+    },
+    updateFormInfo () {
+      this.saveSyllabusInfoLink.label = 'Save to syllabus'
+    },
+    updateFormContent () {
+      this.saveSyllabusModuleLink.label = 'Save to syllabus'
     }
   }
 })
