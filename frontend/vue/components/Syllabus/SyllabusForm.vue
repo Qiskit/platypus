@@ -73,8 +73,8 @@
           />
         </div>
         <div class="syllabus-form__row syllabus-form__row__save">
-          <BasicLink class="syllabus-form__link" v-bind="saveToSyllabusLink" @click="saveToSyllabusAction">
-            {{ $translate(saveToSyllabusLink.label) }}
+          <BasicLink class="syllabus-form__link" v-bind="saveSyllabusInfoLink" @click="saveInfoAction">
+            {{ $translate(saveSyllabusInfoLink.label) }}
           </BasicLink>
         </div>
       </section>
@@ -95,6 +95,11 @@
             color-scheme="light"
             placeholder="Enter content"
           />
+        </div>
+        <div class="syllabus-form__row syllabus-form__row__save">
+          <BasicLink class="syllabus-form__link" v-bind="saveSyllabusModuleLink" @click="saveModuleAction">
+            {{ $translate(saveSyllabusModuleLink.label) }}
+          </BasicLink>
         </div>
       </section>
     </div>
@@ -117,15 +122,22 @@ export default defineComponent({
   data () {
     return {
       defaultActiveTab: 'write',
-      saveToSyllabusLink: {
+      saveSyllabusInfoLink: {
         label: 'Save to syllabus',
+        url: '#'
+      },
+      saveSyllabusModuleLink: {
+        label: 'Save content',
         url: '#'
       }
     }
   },
   methods: {
-    saveToSyllabusAction () {
-      this.saveToSyllabusLink.label = 'Saved'
+    saveInfoAction () {
+      this.saveSyllabusInfoLink.label = 'Saved'
+    },
+    saveModuleAction () {
+      this.saveSyllabusModuleLink.label = 'Saved'
     }
   }
 })
@@ -153,7 +165,7 @@ export default defineComponent({
 
   &__row {
     display: flex;
-    padding-right: $spacing-07;
+    padding-right: $spacing-05;
     @include mq($until: medium) {
       flex-direction: column;
     }
