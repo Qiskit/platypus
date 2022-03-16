@@ -72,6 +72,11 @@
             :required="true"
           />
         </div>
+        <div class="syllabus-form__row syllabus-form__row__save">
+          <BasicLink class="syllabus-form__link" v-bind="saveToSyllabusLink" @click="saveToSyllabusAction">
+            {{ $translate(saveToSyllabusLink.label) }}
+          </BasicLink>
+        </div>
       </section>
       <section class="syllabus-form__section">
         <div class="syllabus-form__row">
@@ -102,12 +107,25 @@ import 'carbon-web-components/es/components/tabs/tabs.js'
 import 'carbon-web-components/es/components/tabs/tab.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
+import BasicLink from '../common/BasicLink.vue'
 
 export default defineComponent({
   name: 'SyllabusForm',
+  components: {
+    BasicLink
+  },
   data () {
     return {
-      defaultActiveTab: 'write'
+      defaultActiveTab: 'write',
+      saveToSyllabusLink: {
+        label: 'Save to syllabus',
+        url: '#'
+      }
+    }
+  },
+  methods: {
+    saveToSyllabusAction () {
+      this.saveToSyllabusLink.label = 'Saved'
     }
   }
 })
@@ -117,6 +135,7 @@ export default defineComponent({
 @import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/mixins/mixins.scss';
+@import '~/../scss/variables/colors.scss';
 
 .syllabus-form {
   margin-top: $spacing-06;
@@ -127,29 +146,45 @@ export default defineComponent({
   }
 
   &__section {
-      padding: $spacing-07 $spacing-05;
-      margin-bottom: $spacing-07;
-      background-color: $cool-gray-10;
+    padding: $spacing-07 $spacing-05;
+    margin-bottom: $spacing-07;
+    background-color: $cool-gray-10;
   }
 
   &__row {
     display: flex;
+    padding-right: $spacing-07;
     @include mq($until: medium) {
       flex-direction: column;
+    }
+
+    &__save {
+      justify-content: flex-end;
+      @include mq($until: medium) {
+        flex-direction: row;
+      }
     }
   }
 
   &__input-field,
   &__textarea {
-    padding-right: $spacing-07;
     padding-bottom: $spacing-05;
-    @include mq($until: medium) {
-      padding-right: initial;
+
+    &:not(:last-child) {
+      padding-right: $spacing-07;
+
+      @include mq($until: medium) {
+        padding-right: initial;
+      }
     }
   }
 
   &__textarea {
     width: 100%;
+  }
+
+  &__link {
+    color: $text-active-color;
   }
 }
 </style>
