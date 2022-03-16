@@ -162,7 +162,7 @@ export default defineComponent({
 
   &__section {
     padding: $spacing-07 $spacing-05;
-    margin-bottom: $spacing-07;
+    margin-bottom: $spacing-05;
     background-color: $cool-gray-10;
   }
 

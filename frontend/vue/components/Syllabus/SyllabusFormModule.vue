@@ -22,12 +22,30 @@
         @input="updateFormModule"
       />
     </div>
+    <div class="syllabus-form-module__row">
+      <label class="syllabus-form-module__label">
+        Chapters - Click to add qiskit chapters you want show in this section.
+      </label>
+    </div>
+    <div class="syllabus-form-module__row syllabus-form-module__courses__container">
+      <div v-for="course in courseList" :key="course.id">
+        <h4 class="syllabus-form-module__courses__header">
+          {{ course.title }}
+        </h4>
+        <ColumnFlowGrid class="syllabus-form-module__courses__list" :elements="course.sections">
+          <template #default="slotProps">
+            <CoursesChecklist :section="slotProps.element" />
+          </template>
+        </ColumnFlowGrid>
+      </div>
+    </div>
     <div class="syllabus-form-module__row syllabus-form-module__row__save">
       <BasicLink
         class="syllabus-form-module__link"
         :class="{'syllabus-form-module__link__disabled': syllabusSaved}"
         v-bind="saveSyllabusModuleLink"
-        @click="saveModuleAction">
+        @click="saveModuleAction"
+      >
         {{ $translate(saveSyllabusModuleLink.label) }}
       </BasicLink>
     </div>
@@ -36,17 +54,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import { getCourseList, Course } from '../../../ts/courses'
+import BasicLink from '../common/BasicLink.vue'
+import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
-import BasicLink from '../common/BasicLink.vue'
+import 'carbon-web-components/es/components/checkbox/checkbox.js'
+import CoursesChecklist from '../UserAccount/CoursesChecklist.vue'
 
 export default defineComponent({
   name: 'SyllabusFormModule',
   components: {
-    BasicLink
+    BasicLink, ColumnFlowGrid, CoursesChecklist
   },
   data () {
     return {
+      courseList: [] as Course[],
       saveSyllabusModuleLink: {
         label: 'Save content',
         url: '#'
@@ -55,6 +78,11 @@ export default defineComponent({
       moduleTitle: '',
       moduleContent: ''
     }
+  },
+  mounted () {
+    getCourseList().then((courses) => {
+      this.courseList = courses.filter(course => course.type === 'learning-path')
+    })
   },
   methods: {
     saveModuleAction () {
@@ -78,7 +106,7 @@ export default defineComponent({
 .syllabus-form-module {
   margin-top: $spacing-06;
   padding: $spacing-07 $spacing-05;
-  margin-bottom: $spacing-07;
+  margin-bottom: $spacing-05;
   background-color: $cool-gray-10;
 
   &__row {
@@ -96,21 +124,18 @@ export default defineComponent({
     }
   }
 
-  &__input-field,
-  &__textarea {
-    padding-bottom: $spacing-05;
-
-    &:not(:last-child) {
-      padding-right: $spacing-07;
-
-      @include mq($until: medium) {
-        padding-right: initial;
-      }
-    }
+  &__input-field {
+    margin-bottom: 0;
   }
 
   &__textarea {
     width: 100%;
+    padding-bottom: $spacing-05;
+  }
+
+  &__label {
+    @include type-style('label-01');
+    margin: $spacing-05 0;
   }
 
   &__link {
@@ -122,6 +147,26 @@ export default defineComponent({
       &:hover {
         text-decoration: none;
       }
+    }
+  }
+
+  &__courses {
+    &__container {
+      background-color: $white-0;
+      padding: $spacing-05;
+      margin-bottom: $spacing-05;
+      margin-right: $spacing-05;
+      flex-direction: column;
+    }
+
+    &__list {
+      margin-bottom: $spacing-05;
+      padding: $spacing-05 0;
+      gap: $spacing-05 $spacing-10;
+    }
+
+    &__header {
+      @include type-style('productive-heading-01');
     }
   }
 }
