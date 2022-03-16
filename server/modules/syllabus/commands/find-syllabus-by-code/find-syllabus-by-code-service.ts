@@ -10,7 +10,7 @@ export class FindSyllabusByIdService {
 
     const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
 
-    const syllabus = await syllabusRepository.findOneByIdAndOwner(findSyllabusByCodeHttpRequest)
+    const syllabus = await syllabusRepository.findOneByCode(findSyllabusByCodeHttpRequest)
 
     if (!syllabus) {
       throw new SyllabusNotFound(findSyllabusByCodeHttpRequest.params.code)
