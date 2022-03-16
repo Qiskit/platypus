@@ -21,7 +21,6 @@ export const FindSyllabusByIdController = async (req: Request, res: Response, ne
   // TODO: This response must be a type from a domain or an exception
   let response: Syllabus | unknown
   try {
-    await findSyllabusByIdHttpRequest.validate()
     response = await FindSyllabusByIdService.execute(findSyllabusByIdHttpRequest)
   } catch (error) {
     // TODO: update res.status when we start to use our internal exceptions

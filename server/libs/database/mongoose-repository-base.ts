@@ -16,7 +16,7 @@ implements RepositoryPort<QueryParams, Domain> {
     this.mapper = mapper
   }
 
-  abstract processQueryParam (queryParams: FindManyPaginatedParams<QueryParams>): { filter: FilterQuery<Entity>, options: QueryOptions }
+  abstract processQueryParams (queryParams: FindManyPaginatedParams<QueryParams>): { filter: FilterQuery<Entity>, options: QueryOptions }
 
   async save (data: Domain): Promise<Domain> {
     this.mapper.toOrmEntity(data)
@@ -26,18 +26,17 @@ implements RepositoryPort<QueryParams, Domain> {
     return this.mapper.toDomainEntity(document)
   }
 
-  async findOneById (id: string): Promise<Domain | null> {
+  async findById (id: string): Promise<Domain | null> {
     const document = await this.EntityModel.findById(id)
 
     if (document) {
       return this.mapper.toDomainEntity(document)
     }
-
     return document
   }
 
   async findManyPaginated (search: FindManyPaginatedParams<QueryParams>): Promise<DataWithPaginationMeta<Domain[]>> {
-    const { filter, options } = this.processQueryParam(search)
+    const { filter, options } = this.processQueryParams(search)
 
     // TODO: here we can call to populate to retrieve relations
     const documents = await this.EntityModel.find(filter, null, options)

@@ -1,27 +1,21 @@
-import { IsNotEmpty, IsString, validateOrReject } from 'class-validator'
 
-export interface FindSyllabusById {
-  id: string,
-  owner: string
-}
+import { DEFAULT_PAGINATION_LIMIT } from '../../../../libs/database/mongoose-repository-base'
+import { FindManyPaginatedParams, PaginationMeta } from '../../../../libs/ports/repository-port'
 
-export class FindSyllabusByIdDto implements FindSyllabusById {
-  @IsString()
-  @IsNotEmpty()
-  readonly id!: string
+import { SyllabusQueryParams } from '../../domain/syllabus-query-params'
 
-  @IsString()
-  @IsNotEmpty()
-  readonly owner!: string
+export class FindSyllabusByIdDto implements FindManyPaginatedParams<SyllabusQueryParams> {
+  readonly params: SyllabusQueryParams
 
-  constructor ({ id, owner }: FindSyllabusById) {
-    this.id = id
-    this.owner = owner
+  readonly pagination: PaginationMeta
+
+  constructor ({ id, owner }: SyllabusQueryParams) {
+    this.params = { id, owner }
+    this.pagination = {
+      limit: DEFAULT_PAGINATION_LIMIT,
+      skip: 0
+    }
   }
 }
 
-export class FindSyllabusByIdHttpRequest extends FindSyllabusByIdDto implements FindSyllabusById {
-  validate () {
-    return validateOrReject(this)
-  }
-}
+export class FindSyllabusByIdHttpRequest extends FindSyllabusByIdDto implements FindManyPaginatedParams<SyllabusQueryParams> {}

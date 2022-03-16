@@ -9,7 +9,7 @@ export class FindSyllabusByIdService {
 
     const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
 
-    const syllabus = await syllabusRepository.findOneById(findSyllabusByIdHttpRequest.id)
+    const syllabus = await syllabusRepository.findOneByIdAndOwner(findSyllabusByIdHttpRequest)
 
     return syllabus
   }

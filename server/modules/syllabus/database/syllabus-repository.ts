@@ -12,10 +12,11 @@ import { SyllabusRepositoryPort } from './syllabus-repository-port'
 export class SyllabusRepository
   extends MongooseRepositoryBase<SyllabusDocument, SyllabusQueryParams, Syllabus>
   implements SyllabusRepositoryPort {
-  processQueryParam (queryParams: FindManyPaginatedParams<SyllabusQueryParams>): { filter: FilterQuery<SyllabusQueryParams>, options: QueryOptions } {
+  processQueryParams (queryParams: FindManyPaginatedParams<SyllabusQueryParams>): { filter: FilterQuery<SyllabusQueryParams>, options: QueryOptions } {
     return {
       filter: {
-        ownners: queryParams.params?.owner
+        _id: queryParams.params?.id,
+        owners: queryParams.params?.owner
       },
       options: {
         limit: queryParams.pagination?.limit,
@@ -24,8 +25,19 @@ export class SyllabusRepository
     }
   }
 
+  async findOneByIdAndOwner (search: FindManyPaginatedParams<SyllabusQueryParams>): Promise<Syllabus | null> {
+    const { filter } = this.processQueryParams(search)
+
+    const document = await this.EntityModel.findOne(filter)
+
+    if (document) {
+      return this.mapper.toDomainEntity(document)
+    }
+    return document
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  findOneByCode (code: string): Promise<SyllabusDocument> {
+  findOneByCode (code: string): Promise<Syllabus | null> {
     throw new NotImplementedException()
   }
 }
