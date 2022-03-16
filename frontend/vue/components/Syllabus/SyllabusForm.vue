@@ -87,7 +87,12 @@
           />
         </div>
         <div class="syllabus-form__row syllabus-form__row__save">
-          <BasicLink class="syllabus-form__link" v-bind="saveSyllabusInfoLink" @click="saveInfoAction">
+          <BasicLink
+            class="syllabus-form__link"
+            :class="{'syllabus-form__link__disabled': syllabusSaved}"
+            v-bind="saveSyllabusInfoLink"
+            @click="saveInfoAction"
+          >
             {{ $translate(saveSyllabusInfoLink.label) }}
           </BasicLink>
         </div>
@@ -118,21 +123,24 @@ export default defineComponent({
         label: 'Save to syllabus',
         url: '#'
       },
+      syllabusSaved: false,
       courseName: '',
       courseInstructor: '',
       courseLocation: '',
       courseUniversity: '',
       courseOfficeHours: '',
       courseHours: '',
-      courseEmail: '',
+      courseEmail: ''
     }
   },
   methods: {
     saveInfoAction () {
       this.saveSyllabusInfoLink.label = 'Saved'
+      this.syllabusSaved = true
     },
     updateFormInfo () {
       this.saveSyllabusInfoLink.label = 'Save to syllabus'
+      this.syllabusSaved = false
     }
   }
 })
@@ -187,6 +195,15 @@ export default defineComponent({
 
   &__link {
     color: $text-active-color;
+    @include type-style('body-long-01');
+
+    &__disabled {
+      color: $text-color-dark;
+      pointer-events: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 }
 </style>

@@ -22,8 +22,12 @@
         @input="updateFormModule"
       />
     </div>
-    <div class="syllabus-form-module__row syllabus-form-module__save">
-      <BasicLink class="syllabus-form-module__link" v-bind="saveSyllabusModuleLink" @click="saveModuleAction">
+    <div class="syllabus-form-module__row syllabus-form-module__row__save">
+      <BasicLink
+        class="syllabus-form-module__link"
+        :class="{'syllabus-form-module__link__disabled': syllabusSaved}"
+        v-bind="saveSyllabusModuleLink"
+        @click="saveModuleAction">
         {{ $translate(saveSyllabusModuleLink.label) }}
       </BasicLink>
     </div>
@@ -47,6 +51,7 @@ export default defineComponent({
         label: 'Save content',
         url: '#'
       },
+      syllabusSaved: false,
       moduleTitle: '',
       moduleContent: ''
     }
@@ -54,9 +59,11 @@ export default defineComponent({
   methods: {
     saveModuleAction () {
       this.saveSyllabusModuleLink.label = 'Saved'
+      this.syllabusSaved = true
     },
     updateFormModule () {
       this.saveSyllabusModuleLink.label = 'Save to syllabus'
+      this.syllabusSaved = false
     }
   }
 })
@@ -69,6 +76,11 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 
 .syllabus-form-module {
+  margin-top: $spacing-06;
+  padding: $spacing-07 $spacing-05;
+  margin-bottom: $spacing-07;
+  background-color: $cool-gray-10;
+
   &__row {
     display: flex;
     padding-right: $spacing-05;
@@ -103,6 +115,14 @@ export default defineComponent({
 
   &__link {
     color: $text-active-color;
+    @include type-style('body-long-01');
+    &__disabled {
+      color: $text-color-dark;
+      pointer-events: none;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 }
 </style>
