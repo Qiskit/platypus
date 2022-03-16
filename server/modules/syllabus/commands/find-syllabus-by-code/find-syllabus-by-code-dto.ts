@@ -9,8 +9,10 @@ export class FindSyllabusByCodeDto implements FindManyPaginatedParams<SyllabusQu
 
   readonly pagination: PaginationMeta
 
-  constructor ({ code, owner }: SyllabusQueryParams) {
-    this.params = { code, owner }
+  constructor ({ code }: SyllabusQueryParams) {
+    this.params = { code: code?.toUpperCase() }
+
+    // The pagination for this use-case is not needed so it is populated with default values
     this.pagination = {
       limit: DEFAULT_PAGINATION_LIMIT,
       skip: 0
