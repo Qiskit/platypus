@@ -18,6 +18,7 @@ import { TocCourse } from './interfaces'
 import * as storageApi from './storage'
 import { CreateSyllabusController } from './modules/syllabus/commands/create-syllabus/create-syllabus-controller'
 import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/find-syllabi-controller'
+import { FindSyllabusByIdController } from './modules/syllabus/commands/find-syllabus-by-id/find-syllabus-by-id-controller'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
@@ -208,10 +209,11 @@ new MathigonStudioApp()
   .get('/syllabus/create', (req, res) => {
     res.render('syllabusCreate')
   })
-  .get('/syllabus/:id', (req, res) => {
-    res.render('syllabus')
-  })
+  // .get('/syllabus/:id', (req, res) => {
+  //   res.render('syllabus')
+  // })
   .get('/syllabus', FindSyllabiController)
+  .get('/syllabus/:id', FindSyllabusByIdController)
   .post('/syllabus', CreateSyllabusController)
   .course({})
   .errors()

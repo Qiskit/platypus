@@ -1,13 +1,12 @@
 import { Document, Model, FilterQuery, QueryOptions } from 'mongoose'
 
 import { DataWithPaginationMeta, FindManyPaginatedParams, RepositoryPort } from '../ports/repository-port'
-import { NotImplementedException } from '../exceptions/not-implemented-exception'
 import { OrmMapperBase } from './orm-mapper-base'
 
 export const DEFAULT_PAGINATION_LIMIT = 10
 
 export abstract class MongooseRepositoryBase<Entity extends Document, QueryParams, Domain>
-implements RepositoryPort<Entity, QueryParams, Domain> {
+implements RepositoryPort<QueryParams, Domain> {
   protected EntityModel: Model<Entity>
 
   protected mapper: OrmMapperBase<Entity, Domain>
@@ -27,12 +26,16 @@ implements RepositoryPort<Entity, QueryParams, Domain> {
     return this.mapper.toDomainEntity(document)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, require-await
-  async findOneByIdOrThrow (id: string): Promise<Entity> {
-    throw new NotImplementedException()
+  async findOneById (id: string): Promise<Domain | null> {
+    const document = await this.EntityModel.findById(id)
+
+    if (document) {
+      return this.mapper.toDomainEntity(document)
+    }
+
+    return document
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, require-await
   async findManyPaginated (search: FindManyPaginatedParams<QueryParams>): Promise<DataWithPaginationMeta<Domain[]>> {
     const { filter, options } = this.processQueryParam(search)
 
