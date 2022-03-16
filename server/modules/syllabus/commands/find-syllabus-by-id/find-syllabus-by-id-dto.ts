@@ -9,8 +9,8 @@ export class FindSyllabusByIdDto implements FindManyPaginatedParams<SyllabusQuer
 
   readonly pagination: PaginationMeta
 
-  constructor ({ id, owner }: SyllabusQueryParams) {
-    this.params = { id, owner }
+  constructor ({ code, owner }: SyllabusQueryParams) {
+    this.params = { code, owner }
     this.pagination = {
       limit: DEFAULT_PAGINATION_LIMIT,
       skip: 0

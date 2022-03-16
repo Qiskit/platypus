@@ -13,7 +13,7 @@ export class FindSyllabusByIdService {
     const syllabus = await syllabusRepository.findOneByIdAndOwner(findSyllabusByIdHttpRequest)
 
     if (!syllabus) {
-      throw new SyllabusNotFound(findSyllabusByIdHttpRequest.params.id)
+      throw new SyllabusNotFound(findSyllabusByIdHttpRequest.params.code)
     }
     return syllabus
   }

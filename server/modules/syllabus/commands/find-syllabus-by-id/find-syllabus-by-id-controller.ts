@@ -14,9 +14,9 @@ export const FindSyllabusByIdController = async (req: Request, res: Response, ne
   }
 
   const userId = req.user.id
-  const syllabusId = req.params.id
+  const { code } = req.params
 
-  const findSyllabusByIdHttpRequest = new FindSyllabusByIdHttpRequest({ id: syllabusId, owner: userId })
+  const findSyllabusByIdHttpRequest = new FindSyllabusByIdHttpRequest({ code, owner: userId })
 
   // TODO: This response must be a type from a domain or an exception
   let response: Syllabus | unknown

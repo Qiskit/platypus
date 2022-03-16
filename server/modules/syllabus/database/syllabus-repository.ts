@@ -15,7 +15,7 @@ export class SyllabusRepository
   processQueryParams (queryParams: FindManyPaginatedParams<SyllabusQueryParams>): { filter: FilterQuery<SyllabusQueryParams>, options: QueryOptions } {
     return {
       filter: {
-        _id: queryParams.params?.id,
+        code: queryParams.params?.code,
         owners: queryParams.params?.owner
       },
       options: {
