@@ -29,5 +29,7 @@ export const FindSyllabusByCodeController = async (req: Request, res: Response, 
     console.log(error)
   }
 
-  return res.json(response)
+  res.render('syllabus', {
+    syllabus: response
+  })
 }

@@ -209,9 +209,6 @@ new MathigonStudioApp()
   .get('/syllabus/create', (req, res) => {
     res.render('syllabusCreate')
   })
-  // .get('/syllabus/:id', (req, res) => {
-  //   res.render('syllabus')
-  // })
   .get('/syllabus', FindSyllabiController)
   .get('/syllabus/:code', FindSyllabusByCodeController)
   .post('/syllabus', CreateSyllabusController)
