@@ -92,35 +92,7 @@
           </BasicLink>
         </div>
       </section>
-      <section class="syllabus-form__section">
-        <div class="syllabus-form__row">
-          <bx-input
-            v-model="moduleTitle"
-            class="syllabus-form__input-field"
-            name="moduleTitle"
-            placeholder="Enter the module title"
-            label-text="Content - Use this section to write in content. You can then add Qiskit chapters that correlate, and add more text below."
-            color-scheme="light"
-            :required="true"
-            @input="updateFormContent"
-          />
-        </div>
-        <div class="syllabus-form__row">
-          <bx-textarea
-            v-model="moduleContent"
-            class="syllabus-form__textarea"
-            name="moduleContent"
-            color-scheme="light"
-            placeholder="Enter content"
-            @input="updateFormContent"
-          />
-        </div>
-        <div class="syllabus-form__row syllabus-form__row__save">
-          <BasicLink class="syllabus-form__link" v-bind="saveSyllabusModuleLink" @click="saveModuleAction">
-            {{ $translate(saveSyllabusModuleLink.label) }}
-          </BasicLink>
-        </div>
-      </section>
+      <SyllabusFormModule />
     </div>
   </section>
 </template>
@@ -132,21 +104,18 @@ import 'carbon-web-components/es/components/tabs/tab.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import BasicLink from '../common/BasicLink.vue'
+import SyllabusFormModule from './SyllabusFormModule.vue'
 
 export default defineComponent({
   name: 'SyllabusForm',
   components: {
-    BasicLink
+    BasicLink, SyllabusFormModule
   },
   data () {
     return {
       defaultActiveTab: 'write',
       saveSyllabusInfoLink: {
         label: 'Save to syllabus',
-        url: '#'
-      },
-      saveSyllabusModuleLink: {
-        label: 'Save content',
         url: '#'
       },
       courseName: '',
@@ -156,22 +125,14 @@ export default defineComponent({
       courseOfficeHours: '',
       courseHours: '',
       courseEmail: '',
-      moduleTitle: '',
-      moduleContent: ''
     }
   },
   methods: {
     saveInfoAction () {
       this.saveSyllabusInfoLink.label = 'Saved'
     },
-    saveModuleAction () {
-      this.saveSyllabusModuleLink.label = 'Saved'
-    },
     updateFormInfo () {
       this.saveSyllabusInfoLink.label = 'Save to syllabus'
-    },
-    updateFormContent () {
-      this.saveSyllabusModuleLink.label = 'Save to syllabus'
     }
   }
 })
@@ -212,8 +173,7 @@ export default defineComponent({
     }
   }
 
-  &__input-field,
-  &__textarea {
+  &__input-field {
     padding-bottom: $spacing-05;
 
     &:not(:last-child) {
@@ -223,10 +183,6 @@ export default defineComponent({
         padding-right: initial;
       }
     }
-  }
-
-  &__textarea {
-    width: 100%;
   }
 
   &__link {
