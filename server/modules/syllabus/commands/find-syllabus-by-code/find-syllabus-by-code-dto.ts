@@ -4,7 +4,7 @@ import { FindManyPaginatedParams, PaginationMeta } from '../../../../libs/ports/
 
 import { SyllabusQueryParams } from '../../domain/syllabus-query-params'
 
-export class FindSyllabusByIdDto implements FindManyPaginatedParams<SyllabusQueryParams> {
+export class FindSyllabusByCodeDto implements FindManyPaginatedParams<SyllabusQueryParams> {
   readonly params: SyllabusQueryParams
 
   readonly pagination: PaginationMeta
@@ -18,4 +18,4 @@ export class FindSyllabusByIdDto implements FindManyPaginatedParams<SyllabusQuer
   }
 }
 
-export class FindSyllabusByIdHttpRequest extends FindSyllabusByIdDto implements FindManyPaginatedParams<SyllabusQueryParams> {}
+export class FindSyllabusByCodeHttpRequest extends FindSyllabusByCodeDto implements FindManyPaginatedParams<SyllabusQueryParams> {}
