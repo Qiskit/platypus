@@ -34,7 +34,7 @@
         </h4>
         <ColumnFlowGrid class="syllabus-form-module__courses__list" :elements="course.sections">
           <template #default="slotProps">
-            <CoursesChecklist :section="slotProps.element" />
+            <bx-checkbox :label-text="slotProps.element.title" />
           </template>
         </ColumnFlowGrid>
       </div>
@@ -60,12 +60,11 @@ import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import 'carbon-web-components/es/components/checkbox/checkbox.js'
-import CoursesChecklist from '../UserAccount/CoursesChecklist.vue'
 
 export default defineComponent({
   name: 'SyllabusFormModule',
   components: {
-    BasicLink, ColumnFlowGrid, CoursesChecklist
+    BasicLink, ColumnFlowGrid
   },
   data () {
     return {
@@ -90,7 +89,7 @@ export default defineComponent({
       this.syllabusSaved = true
     },
     updateFormModule () {
-      this.saveSyllabusModuleLink.label = 'Save to syllabus'
+      this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
     }
   }

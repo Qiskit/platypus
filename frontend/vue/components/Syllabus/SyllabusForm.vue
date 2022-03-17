@@ -6,97 +6,7 @@
       </bx-tab>
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
-      <section class="syllabus-form__section">
-        <div class="syllabus-form__row">
-          <bx-input
-            v-model="courseName"
-            class="syllabus-form__input-field"
-            name="name"
-            placeholder="Please enter the syllabus name"
-            label-text="Syllabus name"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-        </div>
-        <div class="syllabus-form__row">
-          <bx-input
-            v-model="courseInstructor"
-            class="syllabus-form__input-field"
-            name="instructor"
-            placeholder="Instructor’s name"
-            label-text="Instructor"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-          <bx-input
-            v-model="courseLocation"
-            class="syllabus-form__input-field"
-            name="location"
-            placeholder="Enter the location"
-            label-text="Location"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-        </div>
-        <div class="syllabus-form__row">
-          <bx-input
-            v-model="courseUniversity"
-            class="syllabus-form__input-field"
-            name="university"
-            placeholder="University name"
-            label-text="University"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-          <bx-input
-            v-model="courseOfficeHours"
-            class="syllabus-form__input-field"
-            name="courseOfficeHours"
-            placeholder="Enter the course office hours"
-            label-text="Office hours"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-        </div>
-        <div class="syllabus-form__row">
-          <bx-input
-            v-model="courseHours"
-            class="syllabus-form__input-field"
-            name="courseHours"
-            placeholder="Enter the class hours"
-            label-text="Class hours"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-          <bx-input
-            v-model="courseEmail"
-            class="syllabus-form__input-field"
-            name="email"
-            type="email"
-            placeholder="Enter the contact email"
-            label-text="Email"
-            color-scheme="light"
-            :required="true"
-            @input="updateFormInfo"
-          />
-        </div>
-        <div class="syllabus-form__row syllabus-form__row__save">
-          <BasicLink
-            class="syllabus-form__link"
-            :class="{'syllabus-form__link__disabled': syllabusSaved}"
-            v-bind="saveSyllabusInfoLink"
-            @click="saveInfoAction"
-          >
-            {{ $translate(saveSyllabusInfoLink.label) }}
-          </BasicLink>
-        </div>
-      </section>
+      <SyllabusFormCourseInfo />
       <SyllabusFormModule />
     </div>
   </section>
@@ -109,12 +19,15 @@ import 'carbon-web-components/es/components/tabs/tab.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import BasicLink from '../common/BasicLink.vue'
+import SyllabusFormCourseInfo from './SyllabusFormCourseInfo.vue'
 import SyllabusFormModule from './SyllabusFormModule.vue'
 
 export default defineComponent({
   name: 'SyllabusForm',
   components: {
-    BasicLink, SyllabusFormModule
+    BasicLink,
+    SyllabusFormCourseInfo,
+    SyllabusFormModule
   },
   data () {
     return {
