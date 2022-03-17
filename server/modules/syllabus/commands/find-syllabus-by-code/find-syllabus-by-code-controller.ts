@@ -1,18 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
 import { Syllabus } from '../../domain/syllabus'
 import { FindSyllabusByCodeHttpRequest } from './find-syllabus-by-code-dto'
 import { FindSyllabusByIdService } from './find-syllabus-by-code-service'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const FindSyllabusByCodeController = async (req: Request, res: Response, next: NextFunction) => {
-  if (!req.user || !req.user.acceptedPolicies) {
-    const error = new UnauthorizedException()
-    res.status(error.code)
-    return res.json(error)
-  }
-
   const { code } = req.params
 
   const findSyllabusByCodeHttpRequest = new FindSyllabusByCodeHttpRequest({ code })
