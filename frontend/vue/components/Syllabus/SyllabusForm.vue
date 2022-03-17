@@ -7,7 +7,7 @@
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
       <SyllabusFormCourseInfo />
-      <SyllabusFormModule />
+      <SyllabusFormModule v-for="module in modules" :key="module.id" />
       <div class="syllabus-form__add-content">
         <BasicLink
           class="syllabus-form__add-content__link"
@@ -43,11 +43,18 @@ export default defineComponent({
         label: 'Add content',
         url: '#'
       },
+      modules: [{
+        id: 'module-1'
+      }],
+      modulesCounter: 0
     }
   },
   methods: {
     addContentBlock () {
       console.log('add content block!')
+      this.modules.push({
+        id: `module-${++this.modulesCounter}`
+      })
     }
   }
 })
