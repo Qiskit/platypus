@@ -37,4 +37,13 @@ export class SyllabusRepository
     }
     return document
   }
+
+  async updateSyllabusFilteredByOwner (id: string, owner: string, data: Partial<Syllabus>): Promise<Syllabus | null> {
+    const document = await this.EntityModel.findOneAndUpdate({ _id: id, owners: owner }, data, { new: true })
+
+    if (document) {
+      return this.mapper.toDomainEntity(document)
+    }
+    return document
+  }
 }

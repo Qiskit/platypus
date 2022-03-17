@@ -36,7 +36,7 @@ export interface Save<Domain> {
 }
 
 export interface Update<Domain> {
-    update(id:string, entity: Domain): Promise<Domain | null>;
+    update(id:string, entity: Partial<Domain>): Promise<Domain | null>;
 }
 
 export interface RepositoryPort<QueryParams, Domain>

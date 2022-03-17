@@ -25,7 +25,7 @@ implements RepositoryPort<QueryParams, Domain> {
     return this.mapper.toDomainEntity(document)
   }
 
-  async update (id: string, data: Domain): Promise<Domain | null> {
+  async update (id: string, data: Partial<Domain>): Promise<Domain | null> {
     const document = await this.EntityModel.findByIdAndUpdate({ _id: id }, data, { new: true })
 
     if (document) {

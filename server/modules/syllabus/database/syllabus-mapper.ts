@@ -1,10 +1,28 @@
+import pickBy from 'lodash/pickBy'
+
 import { OrmMapperBase } from '../../../libs/database/orm-mapper-base'
 import { Syllabus as SyllabusDomain } from '../domain/syllabus'
 import { SyllabusDocument, Syllabus as SyllabusOrm } from './syllabus-entity'
 
 export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusDomain> {
   toOrmEntity (data: SyllabusDomain): SyllabusDocument {
-    return new SyllabusOrm(data)
+    const fields = {
+      id: data.id,
+      name: data.name,
+      instructor: data.instructor,
+      location: data.location,
+      institution: data.institution,
+      officeHours: data.officeHours,
+      classHours: data.classHours,
+      email: data.email,
+      descriptionHtml: data.descriptionHtml,
+      sections: data.sections,
+      additionalHtml: data.additionalHtml,
+      code: data.id,
+      owners: data.owners
+    }
+    const cleanedFields = pickBy(fields, field => field !== undefined)
+    return new SyllabusOrm(cleanedFields)
   }
 
   toDomainEntity (document: SyllabusDocument): SyllabusDomain {

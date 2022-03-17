@@ -216,7 +216,7 @@ new MathigonStudioApp()
   .get('/syllabus/:code', FindSyllabusByCodeController)
   .post('/syllabus', CreateSyllabusController)
   // Here we use POST instead of PUT because Mathigon doesn't support PUT requests
-  .post('/syllabus/:code', UpdateSyllabusController)
+  .post('/syllabus/:id', UpdateSyllabusController)
   .course({})
   .errors()
   .listen()

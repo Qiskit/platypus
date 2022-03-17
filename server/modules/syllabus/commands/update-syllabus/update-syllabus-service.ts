@@ -1,3 +1,5 @@
+import pickBy from 'lodash/pickBy'
+
 import { Syllabus } from '../../database/syllabus-entity'
 import { SyllabusMapper } from '../../database/syllabus-mapper'
 import { SyllabusRepository } from '../../database/syllabus-repository'
@@ -9,7 +11,11 @@ export class UpdateSyllabusService {
 
     const syllabusRepository = new SyllabusRepository(Syllabus, syllabusMapper)
 
-    const updatedSyllabus = await syllabusRepository.update(updateSyllabusHttpRequest.id!, updateSyllabusHttpRequest)
+    // TODO: Check here if the user can edite the syllabus
+
+    const newFields = pickBy(updateSyllabusHttpRequest, field => field !== undefined)
+
+    const updatedSyllabus = await syllabusRepository.updateSyllabusFilteredByOwner(updateSyllabusHttpRequest.id, updateSyllabusHttpRequest.owner, newFields)
 
     return updatedSyllabus
   }

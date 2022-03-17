@@ -32,19 +32,19 @@ interface SyllabusModel extends Model<SyllabusDocument> {}
 const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
   code: { type: String, index: true, unique: true, sparse: true },
 
-  name: { type: String, default: '', maxlength: 255 },
-  instructor: { type: String, default: '', maxlength: 64 },
-  location: { type: String, default: '', maxlength: 255 },
-  institution: { type: String, default: '', maxlength: 255 },
-  officeHours: { type: String, default: '', maxlength: 255 },
-  classHours: { type: String, default: '', maxlength: 255 },
-  email: { type: String, default: '', maxlength: 64 },
-  descriptionHtml: { type: String, default: '' },
+  name: { type: String, maxlength: 255 },
+  instructor: { type: String, maxlength: 64 },
+  location: { type: String, maxlength: 255 },
+  institution: { type: String, maxlength: 255 },
+  officeHours: { type: String, maxlength: 255 },
+  classHours: { type: String, maxlength: 255 },
+  email: { type: String, maxlength: 64 },
+  descriptionHtml: { type: String },
   sections: [{
     title: String,
     chapters: [Number]
   }],
-  additionalHtml: { type: String, default: '' },
+  additionalHtml: { type: String },
   deleted: { type: Boolean, default: false },
 
   owners: { type: [Types.ObjectId], ref: 'User' }
