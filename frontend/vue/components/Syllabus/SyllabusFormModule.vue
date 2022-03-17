@@ -111,7 +111,7 @@ export default defineComponent({
       this.syllabusSaved = false
     },
     removeFormModule (id: string) {
-      this.$emit('testRemove', id)
+      this.$emit('removeModuleAction', id)
     }
   }
 })

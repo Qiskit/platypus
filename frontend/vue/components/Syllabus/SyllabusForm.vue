@@ -7,7 +7,7 @@
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
       <SyllabusFormCourseInfo />
-      <SyllabusFormModule v-for="module in modules" :key="module.id" :module-id="module.id" @testRemove="removeContentBlock(module.id)" />
+      <SyllabusFormModule v-for="module in modules" :key="module.id" :module-id="module.id" @removeModuleAction="removeContentBlock(module.id)" />
       <div class="syllabus-form__add-content">
         <BasicLink
           class="syllabus-form__add-content__link"
