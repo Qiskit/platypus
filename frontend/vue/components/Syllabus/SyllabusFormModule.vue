@@ -34,7 +34,7 @@
         </h4>
         <ColumnFlowGrid class="syllabus-form-module__courses__list" :elements="course.sections">
           <template #default="slotProps">
-            <bx-checkbox :label-text="slotProps.element.title" />
+            <bx-checkbox :label-text="slotProps.element.title" @input="updateFormModule" />
           </template>
         </ColumnFlowGrid>
       </div>
