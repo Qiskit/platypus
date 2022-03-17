@@ -16,9 +16,12 @@ import {
 } from './utilities'
 import { TocCourse } from './interfaces'
 import * as storageApi from './storage'
+
+// Syllabus
 import { CreateSyllabusController } from './modules/syllabus/commands/create-syllabus/create-syllabus-controller'
 import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/find-syllabi-controller'
 import { FindSyllabusByCodeController } from './modules/syllabus/commands/find-syllabus-by-code/find-syllabus-by-code-controller'
+import { UpdateSyllabusController } from './modules/syllabus/commands/update-syllabus/update-syllabus-controller'
 
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
@@ -212,6 +215,8 @@ new MathigonStudioApp()
   .get('/syllabus', FindSyllabiController)
   .get('/syllabus/:code', FindSyllabusByCodeController)
   .post('/syllabus', CreateSyllabusController)
+  // Here we use POST instead of PUT because Mathigon doesn't support PUT requests
+  .post('/syllabus/:code', UpdateSyllabusController)
   .course({})
   .errors()
   .listen()

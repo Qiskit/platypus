@@ -19,11 +19,19 @@ implements RepositoryPort<QueryParams, Domain> {
   abstract processQueryParams (queryParams: FindManyPaginatedParams<QueryParams>): { filter: FilterQuery<Entity>, options: QueryOptions }
 
   async save (data: Domain): Promise<Domain> {
-    this.mapper.toOrmEntity(data)
-    const document = new this.EntityModel(data)
+    const document = this.mapper.toOrmEntity(data)
     // TODO we should handle exceptions from save too
     await document.save()
     return this.mapper.toDomainEntity(document)
+  }
+
+  async update (id: string, data: Domain): Promise<Domain | null> {
+    const document = await this.EntityModel.findByIdAndUpdate({ _id: id }, data, { new: true })
+
+    if (document) {
+      return this.mapper.toDomainEntity(document)
+    }
+    return document
   }
 
   async findById (id: string): Promise<Domain | null> {

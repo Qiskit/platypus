@@ -35,9 +35,12 @@ export interface Save<Domain> {
     save(entity: Domain): Promise<Domain>;
 }
 
+export interface Update<Domain> {
+    update(id:string, entity: Domain): Promise<Domain | null>;
+}
+
 export interface RepositoryPort<QueryParams, Domain>
   extends Save<Domain>,
     FindById<Domain>,
-    FindManyPaginated<Domain, QueryParams> {
-    // TODO: here we are going to need to include more generic methods
-}
+    FindManyPaginated<Domain, QueryParams>,
+    Update<Domain> {}
