@@ -1,5 +1,12 @@
 <template>
   <section class="syllabus-form-module">
+    <bx-btn
+      class="syllabus-form-module__delete"
+      kind="ghost"
+      @click="removeFormModule(moduleId)"
+    >
+      <Close16 class="syllabus-form-module__delete__icon" />
+    </bx-btn>
     <div class="syllabus-form-module__row">
       <bx-input
         v-model="moduleTitle"
@@ -54,9 +61,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import Close16 from '@carbon/icons-vue/es/close/16'
 import { getCourseList, Course } from '../../../ts/courses'
 import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
+import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import 'carbon-web-components/es/components/checkbox/checkbox.js'
@@ -64,7 +73,16 @@ import 'carbon-web-components/es/components/checkbox/checkbox.js'
 export default defineComponent({
   name: 'SyllabusFormModule',
   components: {
-    BasicLink, ColumnFlowGrid
+    BasicLink,
+    ColumnFlowGrid,
+    Close16
+  },
+  props: {
+    moduleId: {
+      type: String,
+      default: '',
+      required: true
+    }
   },
   data () {
     return {
@@ -91,6 +109,9 @@ export default defineComponent({
     updateFormModule () {
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
+    },
+    removeFormModule (id: string) {
+      this.$emit('testRemove', id)
     }
   }
 })
@@ -103,10 +124,21 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 
 .syllabus-form-module {
+  position: relative;
   margin-top: $spacing-06;
   padding: $spacing-07 $spacing-05;
   margin-bottom: $spacing-05;
   background-color: $cool-gray-10;
+
+  &__delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &__icon {
+      fill: $text-color-dark;
+    }
+  }
 
   &__row {
     display: flex;

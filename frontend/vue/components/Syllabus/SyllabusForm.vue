@@ -7,7 +7,7 @@
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
       <SyllabusFormCourseInfo />
-      <SyllabusFormModule v-for="module in modules" :key="module.id" />
+      <SyllabusFormModule v-for="module in modules" :key="module.id" :module-id="module.id" @testRemove="removeContentBlock(module.id)" />
       <div class="syllabus-form__add-content">
         <BasicLink
           class="syllabus-form__add-content__link"
@@ -51,9 +51,13 @@ export default defineComponent({
   },
   methods: {
     addContentBlock () {
-      console.log('add content block!')
       this.modules.push({
         id: `module-${++this.modulesCounter}`
+      })
+    },
+    removeContentBlock (id: string) {
+      this.modules = this.modules.filter((item) => {
+        return item.id !== id
       })
     }
   }
