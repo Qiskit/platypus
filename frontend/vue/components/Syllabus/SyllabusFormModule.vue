@@ -1,6 +1,7 @@
 <template>
   <section class="syllabus-form-module">
     <bx-btn
+      v-if="moduleId !== 1"
       class="syllabus-form-module__delete"
       kind="ghost"
       @click="removeFormModule(moduleId)"
@@ -79,8 +80,8 @@ export default defineComponent({
   },
   props: {
     moduleId: {
-      type: String,
-      default: '',
+      type: Number,
+      default: undefined,
       required: true
     }
   },
@@ -103,10 +104,12 @@ export default defineComponent({
   },
   methods: {
     saveModuleAction () {
+      // TODO: Add proper functionality for persisting module data
       this.saveSyllabusModuleLink.label = 'Saved'
       this.syllabusSaved = true
     },
     updateFormModule () {
+      // TODO: Add proper functionality for updating module data
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
     },

@@ -7,7 +7,12 @@
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
       <SyllabusFormCourseInfo />
-      <SyllabusFormModule v-for="module in modules" :key="module.id" :module-id="module.id" @removeModuleAction="removeContentBlock(module.id)" />
+      <SyllabusFormModule
+        v-for="module in modules"
+        :key="module.id"
+        :module-id="module.id"
+        @removeModuleAction="removeContentBlock(module.id)"
+      />
       <div class="syllabus-form__add-content">
         <BasicLink
           class="syllabus-form__add-content__link"
@@ -17,6 +22,25 @@
           {{ addContentLink.label }}
         </BasicLink>
       </div>
+      <SyllabusInlineNotification
+        v-if="showInlineNotification"
+        @on-close-notification="closeNotification"
+        @undo-deletion="undoDeleteAction(lastDeletedModuleId)"
+      />
+      <div class="syllabus-form__actions">
+        <AppCta
+          class="syllabus-form__actions__cancel"
+          v-bind="cancelAction"
+          target="_self"
+          kind="ghost"
+        />
+        <AppCta
+          :label="submitAction.label"
+          :segment="submitAction.segment"
+          target="_self"
+          @click="submitForm($event)"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -25,39 +49,75 @@
 import { defineComponent } from 'vue-demi'
 import 'carbon-web-components/es/components/tabs/tabs.js'
 import 'carbon-web-components/es/components/tabs/tab.js'
+import AppCta from '../common/AppCta.vue'
 import BasicLink from '../common/BasicLink.vue'
 import SyllabusFormCourseInfo from './SyllabusFormCourseInfo.vue'
 import SyllabusFormModule from './SyllabusFormModule.vue'
+import SyllabusInlineNotification from './SyllabusInlineNotification.vue'
 
 export default defineComponent({
   name: 'SyllabusForm',
   components: {
+    AppCta,
     BasicLink,
     SyllabusFormCourseInfo,
-    SyllabusFormModule
+    SyllabusFormModule,
+    SyllabusInlineNotification
   },
   data () {
     return {
       defaultActiveTab: 'write',
+      showInlineNotification: false,
+      lastDeletedModuleId: 0,
       addContentLink: {
         label: 'Add content',
         url: '#'
       },
+      cancelAction: {
+        url: '/account#Classroom',
+        label: this.$translate('Cancel'),
+        segment: {
+          cta: 'cancel',
+          location: 'create-syllabus'
+        }
+      },
+      submitAction: {
+        label: 'Publish syllabus',
+        url: '#',
+        segment: {
+          cta: 'publish-syllabus',
+          location: 'create-syllabus'
+        }
+      },
       modules: [{
-        id: 'module-1'
+        id: 1
       }],
-      modulesCounter: 0
+      modulesCounter: 1
     }
   },
   methods: {
     addContentBlock () {
       this.modules.push({
-        id: `module-${++this.modulesCounter}`
+        id: ++this.modulesCounter
       })
     },
-    removeContentBlock (id: string) {
+    removeContentBlock (id: number) {
+      this.showInlineNotification = true
+      this.lastDeletedModuleId = id
       this.modules = this.modules.filter((item) => {
         return item.id !== id
+      })
+    },
+    closeNotification () {
+      this.showInlineNotification = false
+    },
+    submitForm () {
+      // TODO: add logic for submitting form
+    },
+    undoDeleteAction (deletedModuleId: number) {
+      // TODO: add logic for proper undo that persists w/ data
+      this.modules.push({
+        id: deletedModuleId
       })
     }
   }
@@ -80,11 +140,37 @@ export default defineComponent({
 
   &__add-content {
     display: flex;
-    padding: $spacing-05;
+    padding: $spacing-03 $spacing-05;
     background-color: $cool-gray-10;
+    margin-bottom: $spacing-05;
     &__link {
       color: $text-active-color;
       @include type-style('body-long-01');
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: $spacing-05;
+
+    &__cancel {
+      display: flex;
+      justify-content: space-between;
+      padding: $spacing-05;
+      background-color: $cool-gray-10;
+      margin-right: $spacing-05;
+
+      :deep() > .app-cta__icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: $spacing-07 0;
     }
   }
 }
