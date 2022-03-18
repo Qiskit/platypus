@@ -2,39 +2,20 @@
   <div class="syllabus-card">
     <div class="syllabus-card__image" :style="`background-image: url('${image}')`" />
     <div class="syllabus-card__name">
-      <slot name="name" />
+      {{ syllabus.name }}
     </div>
-    <SyllabusGeneralInformation class="syllabus-card__data">
-      <template #instructor>
-        <slot name="instructor" />
-      </template>
-      <template #location>
-        <slot name="location" />
-      </template>
-      <template #university>
-        <slot name="university" />
-      </template>
-      <template #office-hours>
-        <slot name="office-hours" />
-      </template>
-      <template #class-hours>
-        <slot name="class-hours" />
-      </template>
-      <template #email>
-        <slot name="email" />
-      </template>
-    </SyllabusGeneralInformation>
+    <SyllabusGeneralInformation class="syllabus-card__data" :syllabus="syllabus" />
     <div class="syllabus-card__actions">
       <AppCta
         class="syllabus-card__actions__enter"
-        :url="`/syllabus/${syllabusId}`"
+        :url="`/syllabus/${syllabus.id}`"
         kind="ghost"
         label="Go to this learning course"
       />
       <!-- TODO: Edit url not created yet -->
       <AppCta
         class="syllabus-card__actions__edit"
-        :url="`/syllabus/edit/${syllabusId}`"
+        :url="`/syllabus/edit/${syllabus.id}`"
         kind="ghost"
         label="Edit Syllabus"
       />
@@ -54,12 +35,12 @@ export default defineComponent({
     SyllabusGeneralInformation
   },
   props: {
-    image: {
-      type: String,
+    syllabus: {
+      type: Object,
       required: false,
       default: ''
     },
-    syllabusId: {
+    image: {
       type: String,
       required: false,
       default: ''

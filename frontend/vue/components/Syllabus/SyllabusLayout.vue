@@ -36,9 +36,5 @@ export default defineComponent({
   @include contained();
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
-
-  &__content {
-    padding: $spacing-07 0;
-  }
 }
 </style>

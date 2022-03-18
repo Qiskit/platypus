@@ -6,49 +6,30 @@
     <h2 class="syllabus-view__section-title">
       General Information
     </h2>
-    <SyllabusGeneralInformation class="syllabus-view__general-information">
-      <template #instructor>
-        {{ syllabus.instructor }}
-      </template>
-      <template #location>
-        {{ syllabus.location }}
-      </template>
-      <template #university>
-        {{ syllabus.university }}
-      </template>
-      <template #office-hours>
-        {{ syllabus.officeHours }}
-      </template>
-      <template #class-hours>
-        {{ syllabus.classHours }}
-      </template>
-      <template #email>
-        {{ syllabus.email }}
-      </template>
-    </SyllabusGeneralInformation>
+    <SyllabusGeneralInformation class="syllabus-view__general-information" :syllabus="syllabus" />
     <div
-      v-for="(workPackage, idx) in syllabus.workPackages"
-      :key="`${idx}-${workPackage.title}`"
-      class="syllabus-view__work-package"
+      v-for="(module, idx) in syllabus.module"
+      :key="`${idx}-${module.title}`"
+      class="syllabus-view__module"
     >
-      <div class="syllabus-view__work-package__title">
-        {{ workPackage.title }}
+      <div class="syllabus-view__module__title">
+        {{ module.title }}
       </div>
-      <p class="syllabus-view__work-package__description">
-        {{ workPackage.description }}
+      <p class="syllabus-view__module__description">
+        {{ module.description }}
       </p>
-      <div class="syllabus-view__work-package__chapters-title">
+      <div class="syllabus-view__module__chapters-title">
         <!-- TODO replace with translation on final design -->
         Chapters
       </div>
       <ColumnFlowGrid
         tag="ul"
-        class="syllabus-view__work-package__chapter-list"
-        :elements="workPackage.chapterList"
+        class="syllabus-view__module__chapter-list"
+        :elements="module.chapterList"
       >
         <template #default="slotProps">
-          <li class="syllabus-view__work-package__chapter-list__item">
-            <BasicLink class="syllabus-view__work-package__chapter-list__chapter" :url="slotProps.element.url">
+          <li class="syllabus-view__module__chapter-list__item">
+            <BasicLink class="syllabus-view__module__chapter-list__chapter" :url="slotProps.element.url">
               {{ slotProps.element.name }}
             </BasicLink>
           </li>
@@ -82,7 +63,7 @@ export default defineComponent({
         officeHours: '10:00 to 13:00',
         classHours: '15:00 to 18:00',
         email: 'none@none.never',
-        workPackages: [
+        module: [
           {
             title: 'Week 1',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
@@ -148,7 +129,7 @@ export default defineComponent({
     padding-bottom: $spacing-06;
   }
 
-  &__work-package {
+  &__module {
     border-top: 2px solid $border-color-light-2;
     padding-bottom: $spacing-05;
 
