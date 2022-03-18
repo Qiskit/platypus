@@ -115,6 +115,8 @@ export default defineComponent({
 .syllabus-view {
   background-color: $background-color-lighter;
   padding: $spacing-06 $spacing-05;
+  user-select: text;
+  cursor: auto;
 
   &__title {
     @include type-style('expressive-heading-04', $fluid: true);
