@@ -1,7 +1,7 @@
 <template>
   <section class="syllabus-form-module">
     <bx-btn
-      v-if="moduleId !== 1"
+      v-if="moduleCount > 1"
       class="syllabus-form-module__delete"
       kind="ghost"
       @click="removeFormModule(moduleId)"
@@ -80,6 +80,11 @@ export default defineComponent({
   },
   props: {
     moduleId: {
+      type: Number,
+      default: undefined,
+      required: true
+    },
+    moduleCount: {
       type: Number,
       default: undefined,
       required: true

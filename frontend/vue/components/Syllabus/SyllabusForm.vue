@@ -11,6 +11,7 @@
         v-for="module in modules"
         :key="module.id"
         :module-id="module.id"
+        :module-count="modules.length"
         @removeModuleAction="removeContentBlock(module.id)"
       />
       <div class="syllabus-form__add-content">
