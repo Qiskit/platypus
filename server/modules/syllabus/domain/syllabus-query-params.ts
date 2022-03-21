@@ -1,4 +1,5 @@
 export interface SyllabusQueryParams {
+  code?: string
   owner?: string
 
   // Pagination

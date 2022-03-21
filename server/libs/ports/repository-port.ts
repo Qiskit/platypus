@@ -27,17 +27,17 @@ export interface FindManyPaginated<Domain, QueryParams> {
     ): Promise<DataWithPaginationMeta<Domain[]>>;
 }
 
-export interface FindOneById<Entity> {
-    findOneByIdOrThrow(id: string): Promise<Entity>;
+export interface FindById<Domain> {
+    findById(id: string): Promise<Domain | null>;
 }
 
 export interface Save<Domain> {
     save(entity: Domain): Promise<Domain>;
 }
 
-export interface RepositoryPort<Entity, QueryParams, Domain>
+export interface RepositoryPort<QueryParams, Domain>
   extends Save<Domain>,
-    FindOneById<Entity>,
+    FindById<Domain>,
     FindManyPaginated<Domain, QueryParams> {
     // TODO: here we are going to need to include more generic methods
 }

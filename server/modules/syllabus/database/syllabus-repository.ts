@@ -1,7 +1,7 @@
 import { FilterQuery, QueryOptions } from 'mongoose'
+import pickBy from 'lodash/pickBy'
 
 import { MongooseRepositoryBase } from '../../../libs/database/mongoose-repository-base'
-import { NotImplementedException } from '../../../libs/exceptions/not-implemented-exception'
 import { FindManyPaginatedParams } from '../../../libs/ports/repository-port'
 
 import { Syllabus } from '../domain/syllabus'
@@ -12,11 +12,14 @@ import { SyllabusRepositoryPort } from './syllabus-repository-port'
 export class SyllabusRepository
   extends MongooseRepositoryBase<SyllabusDocument, SyllabusQueryParams, Syllabus>
   implements SyllabusRepositoryPort {
-  processQueryParam (queryParams: FindManyPaginatedParams<SyllabusQueryParams>): { filter: FilterQuery<SyllabusQueryParams>, options: QueryOptions } {
+  processQueryParams (queryParams: FindManyPaginatedParams<SyllabusQueryParams>): { filter: FilterQuery<SyllabusQueryParams>, options: QueryOptions } {
+    const filter = {
+      code: queryParams.params?.code,
+      owners: queryParams.params?.owner
+    }
+
     return {
-      filter: {
-        ownners: queryParams.params?.owner
-      },
+      filter: pickBy(filter, param => param !== undefined), // Mongoose filter by undefined so we clean first the filters
       options: {
         limit: queryParams.pagination?.limit,
         skip: queryParams.pagination?.skip
@@ -24,8 +27,14 @@ export class SyllabusRepository
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  findOneByCode (code: string): Promise<SyllabusDocument> {
-    throw new NotImplementedException()
+  async findOneByCode (search: FindManyPaginatedParams<SyllabusQueryParams>): Promise<Syllabus | null> {
+    const { filter } = this.processQueryParams(search)
+
+    const document = await this.EntityModel.findOne(filter)
+
+    if (document) {
+      return this.mapper.toDomainEntity(document)
+    }
+    return document
   }
 }

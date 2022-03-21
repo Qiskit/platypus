@@ -5,7 +5,7 @@ import { Syllabus } from '../../domain/syllabus'
 import { SyllabusQueryParamsHttpRequest } from './find-syllabi-dto'
 import { FindSyllabiService } from './find-syllabi-service'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, require-await
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const FindSyllabiController = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.user || !req.user.acceptedPolicies) {
     const error = new UnauthorizedException()
