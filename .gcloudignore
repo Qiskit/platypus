@@ -23,7 +23,6 @@ converter/
 cypress/
 docs/
 notebooks/
-!notebooks/toc.yaml
 scripts/
 .browserslistrc
 .editorconfig
