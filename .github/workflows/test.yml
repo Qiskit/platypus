@@ -44,7 +44,7 @@ jobs:
         run: npm run build
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v3
         with:
           start: npm start
           wait-on: "http://localhost:8080/health"
