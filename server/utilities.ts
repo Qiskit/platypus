@@ -6,7 +6,6 @@ import { Course, Section } from '@mathigon/studio/server/interfaces'
 import {
   CONFIG as mConfig,
   CONTENT_DIR,
-  PROJECT_DIR,
   getCourse,
   loadYAML,
   loadCombinedYAML
@@ -24,6 +23,8 @@ import {
 
 const TEXTBOOK_HOME = 'https://qiskit.org/textbook-beta'
 
+const DEFAULT_SHARED_FOLDER = path.join(CONTENT_DIR, 'shared')
+
 const CONFIG: AnalyticsConfig = <AnalyticsConfig>mConfig
 
 const analytics: AnalyticsEntry = process.env.NODE_ENV === 'production'
@@ -32,7 +33,7 @@ const analytics: AnalyticsEntry = process.env.NODE_ENV === 'production'
 
 CONFIG.analytics = analytics
 
-const TOC: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
+const TOC: [TocCourse] = (loadYAML(path.join(DEFAULT_SHARED_FOLDER, 'toc.yaml')) || []) as [TocCourse]
 
 TOC.forEach((course: TocCourse) => {
   course.id = course.url.startsWith('/') ? course.url.substring(1) : course.url
@@ -83,10 +84,9 @@ const GLOSSARY: {[x: string]: any} = {}
 const UNIVERSAL_NOTATIONS: {[x: string]: Array<any>} = {}
 
 CONFIG.locales.forEach(language => {
-  const defaultShared = path.join(CONTENT_DIR, 'shared')
-  NOTATIONS[language] = (loadYAML(resolvePath(defaultShared, 'notations.yaml', language)) || {}) as NotationsMap
-  GLOSSARY[language] = (loadYAML(resolvePath(defaultShared, 'glossary.yaml')) || {}) as object
-  UNIVERSAL_NOTATIONS[language] = Object.values((loadYAML(resolvePath(defaultShared, 'universal.yaml')) || {}) as object)
+  NOTATIONS[language] = (loadYAML(resolvePath(DEFAULT_SHARED_FOLDER, 'notations.yaml', language)) || {}) as NotationsMap
+  GLOSSARY[language] = (loadYAML(resolvePath(DEFAULT_SHARED_FOLDER, 'glossary.yaml')) || {}) as object
+  UNIVERSAL_NOTATIONS[language] = Object.values((loadYAML(resolvePath(DEFAULT_SHARED_FOLDER, 'universal.yaml')) || {}) as object)
 })
 
 const updateGlossary = function(course: Course): string {
