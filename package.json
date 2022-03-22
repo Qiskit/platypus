@@ -53,7 +53,7 @@
     "@jupyterlab/services": "^6.2.8",
     "@lumino/widgets": "^1.31.1",
     "@mathigon/boost": "^1.0.13",
-    "@mathigon/euclid": "^1.0.8",
+    "@mathigon/euclid": "^1.0.9",
     "@mathigon/studio": "0.1.16",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
