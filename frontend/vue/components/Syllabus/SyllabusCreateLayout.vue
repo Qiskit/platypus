@@ -23,7 +23,8 @@ import SyllabusForm from './SyllabusForm.vue'
 export default defineComponent({
   name: 'SyllabusCreateLayout',
   components: {
-    UserAccountSectionHeader, SyllabusForm
+    UserAccountSectionHeader,
+    SyllabusForm
   }
 })
 </script>

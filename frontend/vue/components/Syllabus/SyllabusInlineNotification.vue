@@ -8,7 +8,6 @@
         Undo delete
       </BasicLink>
     </div>
-    <!-- TODO: add action for undoing a delete -->
     <div>
       <bx-btn
         class="syllabus-inline-notification__delete"
@@ -61,8 +60,8 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   padding: $spacing-03 $spacing-05;
-  background-color: $cool-gray-10;
-  border-left: 4px solid $purple-70;
+  background-color: $background-color-lighter;
+  border-left: 4px solid $border-color-secondary;
 
   &__content {
     display: flex;

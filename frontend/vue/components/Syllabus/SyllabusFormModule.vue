@@ -1,7 +1,7 @@
 <template>
   <section class="syllabus-form-module">
     <bx-btn
-      v-if="moduleCount > 1"
+      v-if="showCloseButton"
       class="syllabus-form-module__delete"
       kind="ghost"
       @click="removeFormModule(moduleId)"
@@ -84,9 +84,9 @@ export default defineComponent({
       default: undefined,
       required: true
     },
-    moduleCount: {
-      type: Number,
-      default: undefined,
+    showCloseButton: {
+      type: Boolean,
+      default: false,
       required: true
     }
   },
@@ -118,8 +118,8 @@ export default defineComponent({
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
     },
-    removeFormModule (id: string) {
-      this.$emit('removeModuleAction', id)
+    removeFormModule () {
+      this.$emit('removeModuleAction')
     }
   }
 })
@@ -136,7 +136,7 @@ export default defineComponent({
   margin-top: $spacing-06;
   padding: $spacing-07 $spacing-05;
   margin-bottom: $spacing-05;
-  background-color: $cool-gray-10;
+  background-color: $background-color-lighter;
 
   &__delete {
     position: absolute;

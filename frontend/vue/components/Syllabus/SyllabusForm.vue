@@ -11,7 +11,7 @@
         v-for="module in modules"
         :key="module.id"
         :module-id="module.id"
-        :module-count="modules.length"
+        :show-close-button="modules.length > 1"
         @removeModuleAction="removeContentBlock(module.id)"
       />
       <div class="syllabus-form__add-content">
@@ -135,14 +135,14 @@ export default defineComponent({
   margin-top: $spacing-06;
 
   &__tab {
-    --cds-interactive-01: #{$purple-70};
+    --cds-interactive-01: #{$border-color-secondary};
     max-width: 6rem;
   }
 
   &__add-content {
     display: flex;
     padding: $spacing-03 $spacing-05;
-    background-color: $cool-gray-10;
+    background-color: $background-color-lighter;
     margin-bottom: $spacing-05;
     &__link {
       color: $text-active-color;
@@ -159,7 +159,7 @@ export default defineComponent({
       display: flex;
       justify-content: space-between;
       padding: $spacing-05;
-      background-color: $cool-gray-10;
+      background-color: $background-color-lighter;
       margin-right: $spacing-05;
 
       :deep() > .app-cta__icon {

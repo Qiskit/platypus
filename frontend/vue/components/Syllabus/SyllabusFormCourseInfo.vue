@@ -144,14 +144,14 @@ export default defineComponent({
   margin-top: $spacing-06;
 
   &__tab {
-    --cds-interactive-01: #{$purple-70};
+    --cds-interactive-01: #{$border-color-secondary};
     max-width: 6rem;
   }
 
   &__section {
     padding: $spacing-07 $spacing-05;
     margin-bottom: $spacing-05;
-    background-color: $cool-gray-10;
+    background-color: $background-color-lighter;
   }
 
   &__row {
