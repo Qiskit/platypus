@@ -116,7 +116,15 @@ import 'carbon-web-components/es/components/dropdown/dropdown.js'
 import 'carbon-web-components/es/components/button/button.js'
 
 @Options({
-  components: { AppLink, AppLogo, MobileMenu, BasicLink, Menu20, Close20, User20 }
+  components: {
+    AppLink,
+    AppLogo,
+    MobileMenu,
+    BasicLink,
+    Menu20,
+    Close20,
+    User20
+  }
 })
 export default class TheMenu extends mixins(MenuMixin) {
   isMobileMenuVisible: boolean = false
@@ -173,7 +181,7 @@ export default class TheMenu extends mixins(MenuMixin) {
   }
 
   &__account {
-    background-color: $carbon--purple-70;
+    background-color: $button-background-color;
     &__icon {
       height: 2rem;
       width: 2rem;
@@ -184,17 +192,17 @@ export default class TheMenu extends mixins(MenuMixin) {
     }
 
     &::part(button) {
-      background-color: $carbon--purple-70;
+      background-color: $button-background-color;
       transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9) 0s;
       padding-right: 15px;
 
       &:focus {
-        border-color: $carbon--purple-70;
+        border-color: $border-color-secondary;
         box-shadow: initial;
       }
 
       &:hover {
-        background-color: $carbon--purple-80;
+        background-color: $button-background-color-dark;
       }
     }
   }

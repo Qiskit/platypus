@@ -82,7 +82,9 @@ class Props {
 
 @Options({
   components: {
-    AppLink, BasicLink, User16
+    AppLink,
+    BasicLink,
+    User16
   },
   watch: {
     openDropdown (isVisible) {
@@ -202,12 +204,12 @@ $mobile-menu-item-height: 4rem;
     height: $mobile-menu-item-height;
     border-bottom: 1px solid $border-color-light;
     &__icon {
-      border: 1px solid $carbon--purple-70;
+      border: 1px solid $border-color-secondary;
       border-radius: 50%;
       height: 1.5rem;
       width: 1.5rem;
       margin-right: $spacing-03;
-      fill: $carbon--purple-70;
+      fill: $border-color-secondary;
     }
   }
 
