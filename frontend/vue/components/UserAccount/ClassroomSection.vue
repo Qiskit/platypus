@@ -32,30 +32,8 @@
           v-for="syllabus in mockSyllabi"
           :key="syllabus.id"
           image="/images/header.png"
-          :syllabus-id="syllabus.id"
-        >
-          <template #name>
-            {{ syllabus.name }}
-          </template>
-          <template #instructor>
-            {{ syllabus.instructor }}
-          </template>
-          <template #location>
-            {{ syllabus.location }}
-          </template>
-          <template #university>
-            {{ syllabus.university }}
-          </template>
-          <template #office-hours>
-            {{ syllabus.officeHours }}
-          </template>
-          <template #class-hours>
-            {{ syllabus.classHours }}
-          </template>
-          <template #email>
-            {{ syllabus.email }}
-          </template>
-        </SyllabusCard>
+          :syllabus="syllabus"
+        />
       </div>
     </section>
   </section>

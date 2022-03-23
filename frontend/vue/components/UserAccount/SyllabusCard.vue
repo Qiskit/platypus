@@ -2,39 +2,20 @@
   <div class="syllabus-card">
     <div class="syllabus-card__image" :style="`background-image: url('${image}')`" />
     <div class="syllabus-card__name">
-      <slot name="name" />
+      {{ syllabus.name }}
     </div>
-    <div class="syllabus-card__data">
-      <div class="syllabus-card__data__item">
-        <span class="syllabus-card__data__item__heading">Instructor:</span> <slot name="instructor" />
-      </div>
-      <div class="syllabus-card__data__item">
-        <span class="syllabus-card__data__item__heading">Location:</span> <slot name="location" />
-      </div>
-      <div class="syllabus-card__data__item">
-        <span class="syllabus-card__data__item__heading">University:</span> <slot name="university" />
-      </div>
-      <div class="syllabus-card__data__item">
-        <span class="syllabus-card__data__item__heading">Office Hours:</span> <slot name="office-hours" />
-      </div>
-      <div class="syllabus-card__data__item">
-        <span class="syllabus-card__data__item__heading">Class Hours:</span> <slot name="class-hours" />
-      </div>
-      <div class="syllabus-card__data__item">
-        <span class="syllabus-card__data__item__heading">Email:</span> <slot name="email" />
-      </div>
-    </div>
+    <SyllabusGeneralInformation class="syllabus-card__data" :syllabus="syllabus" />
     <div class="syllabus-card__actions">
       <AppCta
         class="syllabus-card__actions__enter"
-        :url="`/syllabus/${syllabusId}`"
+        :url="`/syllabus/${syllabus.id}`"
         kind="ghost"
         label="Go to this learning course"
       />
       <!-- TODO: Edit url not created yet -->
       <AppCta
         class="syllabus-card__actions__edit"
-        :url="`/syllabus/edit/${syllabusId}`"
+        :url="`/syllabus/edit/${syllabus.id}`"
         kind="ghost"
         label="Edit Syllabus"
       />
@@ -45,19 +26,21 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import AppCta from '../common/AppCta.vue'
+import SyllabusGeneralInformation from '../Syllabus/SyllabusGeneralInformation.vue'
 
 export default defineComponent({
   name: 'SyllabusCard',
   components: {
-    AppCta
+    AppCta,
+    SyllabusGeneralInformation
   },
   props: {
-    image: {
-      type: String,
+    syllabus: {
+      type: Object,
       required: false,
       default: ''
     },
-    syllabusId: {
+    image: {
       type: String,
       required: false,
       default: ''
@@ -106,22 +89,7 @@ export default defineComponent({
   }
 
   &__data {
-    @include type-style('body-long-01');
     grid-area: data;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: $spacing-06;
-
-    @include mq($until: large) {
-      grid-template-columns: auto;
-    }
-
-    &__item {
-      &__heading {
-        @include type-style('productive-heading-01');
-      }
-    }
   }
 
   &__actions {

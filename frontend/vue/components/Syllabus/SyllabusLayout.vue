@@ -9,23 +9,20 @@
         {{ $translate("This is placeholder text for a page where students are viewing a syllabus.") }}
       </template>
     </UserAccountSectionHeader>
-    <section class="syllabus__content">
-      <!-- TODO: update section content -->
-      <h3>
-        You are viewing a mock syllabus for QML-100
-      </h3>
-    </section>
+    <SyllabusView />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
+import SyllabusView from './SyllabusView.vue'
 
 export default defineComponent({
   name: 'SyllabusLayout',
   components: {
-    UserAccountSectionHeader
+    UserAccountSectionHeader,
+    SyllabusView
   }
 })
 </script>
@@ -39,9 +36,5 @@ export default defineComponent({
   @include contained();
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
-
-  &__content {
-    padding: $spacing-07 0;
-  }
 }
 </style>

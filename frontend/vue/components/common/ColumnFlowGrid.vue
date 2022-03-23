@@ -1,5 +1,6 @@
 <template>
-  <div
+  <component
+    :is="tag"
     class="column-flow-grid"
     :style="`--row-count-l: ${Math.ceil(elements.length / 3)}; --row-count-m: ${Math.ceil(elements.length / 2)}; --row-count-s: ${elements.length};`"
   >
@@ -8,7 +9,7 @@
       :key="index"
       :element="element"
     />
-  </div>
+  </component>
 </template>
 
 <script lang="ts">
@@ -17,7 +18,8 @@ import { defineComponent } from 'vue-demi'
 export default defineComponent({
   name: 'ColumnFlowGrid',
   props: {
-    elements: { type: Array, required: false, default: () => [] }
+    elements: { type: Array, required: false, default: () => [] },
+    tag: { type: String, required: false, default: 'div' }
   }
 })
 </script>
