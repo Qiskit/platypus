@@ -18,7 +18,7 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       descriptionHtml: data.descriptionHtml,
       sections: data.sections,
       additionalHtml: data.additionalHtml,
-      code: data.id,
+      code: data.code,
       owners: data.owners
     }
     const cleanedFields = pickBy(fields, field => field !== undefined)
