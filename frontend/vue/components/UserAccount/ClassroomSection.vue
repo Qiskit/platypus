@@ -79,6 +79,22 @@ export default defineComponent({
         }
       ]
     }
+  },
+  mounted () {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    const mockSyllabusId = '123-abc'
+    const syllabusEndpoint = '/syllabus/' + mockSyllabusId
+
+    fetch(syllabusEndpoint, requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          console.log(data, 'data')
+        })
+      })
   }
 })
 </script>
