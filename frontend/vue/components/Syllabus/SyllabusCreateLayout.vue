@@ -9,9 +9,8 @@
       </template>
     </UserAccountSectionHeader>
     <div class="syllabus-create__content">
-      <h3>
-        {{ $translate("Create a syllabus") }}
-      </h3>
+      <h3>{{ $translate("Create a syllabus") }}</h3>
+      <SyllabusForm />
     </div>
   </section>
 </template>
@@ -19,11 +18,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
+import SyllabusForm from './SyllabusForm.vue'
 
 export default defineComponent({
   name: 'SyllabusCreateLayout',
   components: {
-    UserAccountSectionHeader
+    UserAccountSectionHeader,
+    SyllabusForm
   }
 })
 </script>
