@@ -55,6 +55,7 @@ export class CreateSyllabusDto implements CreateSyllabus {
   @IsNotEmpty()
   readonly owners!: string[]
 
+  // This field is generated in the constructor and can be modified in the service
   code?: SyllabusCode
 
   constructor ({
