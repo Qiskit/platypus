@@ -28,19 +28,19 @@ implements RepositoryPort<QueryParams, Domain> {
   async update (id: string, data: Partial<Domain>): Promise<Domain | null> {
     const document = await this.EntityModel.findByIdAndUpdate({ _id: id }, data, { new: true })
 
-    if (document) {
-      return this.mapper.toDomainEntity(document)
+    if (!document) {
+      return null
     }
-    return document
+    return this.mapper.toDomainEntity(document)
   }
 
   async findById (id: string): Promise<Domain | null> {
     const document = await this.EntityModel.findById(id)
 
-    if (document) {
-      return this.mapper.toDomainEntity(document)
+    if (!document) {
+      return null
     }
-    return document
+    return this.mapper.toDomainEntity(document)
   }
 
   async findManyPaginated (search: FindManyPaginatedParams<QueryParams>): Promise<DataWithPaginationMeta<Domain[]>> {
