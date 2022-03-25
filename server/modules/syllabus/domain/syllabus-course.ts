@@ -1,4 +1,4 @@
 export interface SyllabusCourse {
     title: string,
-    chapters: number[]
+    unitList: string[]
 }
