@@ -10,7 +10,6 @@ export interface Syllabus {
     officeHours: string,
     classHours: string,
     email: string,
-    descriptionHtml: string,
     courseList: SyllabusCourse[]
     code?: SyllabusCode,
     ownerList: string[],

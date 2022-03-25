@@ -4,7 +4,7 @@ import { MongooseDocumentBase } from '../../../libs/database/mongoose-document-b
 
 type SyllabusCode = string
 
-type SyllabusCourse = { title: string, unitList: string[] }
+type SyllabusCourse = { title: string, description: string, unitList: string[] }
 
 export interface SyllabusBase {
     code: SyllabusCode,
@@ -16,7 +16,6 @@ export interface SyllabusBase {
     officeHours: string,
     classHours: string,
     email: string,
-    descriptionHtml: string,
     courseList: SyllabusCourse[]
 
     ownerList: Types.ObjectId[],
@@ -38,9 +37,9 @@ const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
   officeHours: { type: String, maxlength: 255 },
   classHours: { type: String, maxlength: 255 },
   email: { type: String, maxlength: 64 },
-  descriptionHtml: { type: String },
   courseList: [{
     title: String,
+    description: String,
     unitList: [String]
   }],
   deleted: { type: Boolean, default: false },
