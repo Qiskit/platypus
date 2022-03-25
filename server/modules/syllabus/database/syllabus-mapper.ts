@@ -18,7 +18,7 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       descriptionHtml: data.descriptionHtml,
       courseList: data.courseList,
       code: data.code,
-      owners: data.owners
+      ownerList: data.ownerList
     }
     const cleanedFields = pickBy(fields, field => field !== undefined)
     return new SyllabusOrm(cleanedFields)
@@ -37,7 +37,7 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       descriptionHtml: document.descriptionHtml,
       courseList: document.courseList,
       code: document.code,
-      owners: document.owners.map(id => id.toString())
+      ownerList: document.ownerList.map(id => id.toString())
     }
   }
 }

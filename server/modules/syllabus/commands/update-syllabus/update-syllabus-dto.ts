@@ -49,7 +49,7 @@ export class UpdateSyllabusDto implements Syllabus {
 
   @IsArray()
   @IsOptional()
-  readonly owners: string[]
+  readonly ownerList: string[]
 
   @IsString()
   @IsNotEmpty()
@@ -72,7 +72,7 @@ export class UpdateSyllabusDto implements Syllabus {
       email,
       descriptionHtml,
       courseList,
-      owners
+      ownerList
     }: UpdateSyllabus) {
     this.id = id
     this.owner = owner
@@ -85,7 +85,7 @@ export class UpdateSyllabusDto implements Syllabus {
     this.email = email
     this.descriptionHtml = descriptionHtml
     this.courseList = courseList
-    this.owners = owners
+    this.ownerList = ownerList
   }
 }
 

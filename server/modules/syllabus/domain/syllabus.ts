@@ -13,5 +13,5 @@ export interface Syllabus {
     descriptionHtml: string,
     courseList: SyllabusCourse[]
     code?: SyllabusCode,
-    owners: string[],
+    ownerList: string[],
 }

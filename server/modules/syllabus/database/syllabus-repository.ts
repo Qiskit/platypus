@@ -15,7 +15,7 @@ export class SyllabusRepository
   processQueryParams (queryParams: FindManyPaginatedParams<SyllabusQueryParams>): { filter: FilterQuery<SyllabusQueryParams>, options: QueryOptions } {
     const filter = {
       code: queryParams.params?.code,
-      owners: queryParams.params?.owner
+      ownerList: queryParams.params?.owner
     }
 
     return {
@@ -39,7 +39,7 @@ export class SyllabusRepository
   }
 
   async updateSyllabusFilteredByOwner (id: string, owner: string, data: Partial<Syllabus>): Promise<Syllabus | null> {
-    const document = await this.EntityModel.findOneAndUpdate({ _id: id, owners: owner }, data, { new: true })
+    const document = await this.EntityModel.findOneAndUpdate({ _id: id, ownerList: owner }, data, { new: true })
 
     if (!document) {
       return null

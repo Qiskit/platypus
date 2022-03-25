@@ -49,7 +49,7 @@ export class CreateSyllabusDto implements CreateSyllabus {
 
   @IsArray()
   @IsNotEmpty()
-  readonly owners!: string[]
+  readonly ownerList!: string[]
 
   // This field is generated in the constructor and can be modified in the service
   code?: SyllabusCode
@@ -64,7 +64,7 @@ export class CreateSyllabusDto implements CreateSyllabus {
     email,
     descriptionHtml,
     courseList,
-    owners
+    ownerList
   }: CreateSyllabus) {
     this.name = name
     this.instructor = instructor
@@ -75,7 +75,7 @@ export class CreateSyllabusDto implements CreateSyllabus {
     this.email = email
     this.descriptionHtml = descriptionHtml
     this.courseList = courseList
-    this.owners = owners
+    this.ownerList = ownerList
     this.code = generate()
   }
 }

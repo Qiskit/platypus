@@ -19,7 +19,7 @@ export interface SyllabusBase {
     descriptionHtml: string,
     courseList: SyllabusCourse[]
 
-    owners: Types.ObjectId[],
+    ownerList: Types.ObjectId[],
 }
 
 export interface SyllabusDocument extends SyllabusBase, MongooseDocumentBase {
@@ -45,7 +45,7 @@ const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
   }],
   deleted: { type: Boolean, default: false },
 
-  owners: { type: [Types.ObjectId], ref: 'User' }
+  ownerList: { type: [Types.ObjectId], ref: 'User' }
 }, { timestamps: true })
 
 export const Syllabus = model<SyllabusDocument, SyllabusModel>('Syllabus', SyllabusSchema)

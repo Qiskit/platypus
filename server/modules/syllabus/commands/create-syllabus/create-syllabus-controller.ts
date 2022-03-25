@@ -17,7 +17,7 @@ export const CreateSyllabusController = async (req: Request, res: Response, next
   const { body } = req
   const userId = req.user.id
 
-  const syllabus = new CreateSyllabusHttpRequest({ ...body, owners: [userId] })
+  const syllabus = new CreateSyllabusHttpRequest({ ...body, ownerList: [userId] })
 
   // TODO: This response must be a type from a domain or an exception
   let response: Syllabus | unknown
