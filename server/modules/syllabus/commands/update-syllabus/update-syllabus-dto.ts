@@ -1,7 +1,7 @@
 import { IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, validateOrReject } from 'class-validator'
 
 import { Syllabus } from '../../domain/syllabus'
-import { SyllabusSection } from '../../domain/syllabus-section'
+import { SyllabusCourse } from '../../domain/syllabus-course'
 
 export type UpdateSyllabus = Omit<Syllabus, 'id' | 'code'>
 
@@ -45,7 +45,7 @@ export class UpdateSyllabusDto implements Syllabus {
 
   @IsArray()
   @IsOptional()
-  readonly sections: SyllabusSection[]
+  readonly courseList: SyllabusCourse[]
 
   @IsArray()
   @IsOptional()
@@ -71,7 +71,7 @@ export class UpdateSyllabusDto implements Syllabus {
       classHours,
       email,
       descriptionHtml,
-      sections,
+      courseList,
       owners
     }: UpdateSyllabus) {
     this.id = id
@@ -84,7 +84,7 @@ export class UpdateSyllabusDto implements Syllabus {
     this.classHours = classHours
     this.email = email
     this.descriptionHtml = descriptionHtml
-    this.sections = sections
+    this.courseList = courseList
     this.owners = owners
   }
 }

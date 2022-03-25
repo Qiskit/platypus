@@ -1,4 +1,4 @@
-import { SyllabusSection } from './syllabus-section'
+import { SyllabusCourse } from './syllabus-course'
 import type { SyllabusCode } from './syllabus-code'
 
 export interface Syllabus {
@@ -11,7 +11,7 @@ export interface Syllabus {
     classHours: string,
     email: string,
     descriptionHtml: string,
-    sections: SyllabusSection[]
+    courseList: SyllabusCourse[]
     code?: SyllabusCode,
     owners: string[],
 }

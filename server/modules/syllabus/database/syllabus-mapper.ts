@@ -16,7 +16,7 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       classHours: data.classHours,
       email: data.email,
       descriptionHtml: data.descriptionHtml,
-      sections: data.sections,
+      courseList: data.courseList,
       code: data.code,
       owners: data.owners
     }
@@ -35,7 +35,7 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       classHours: document.classHours,
       email: document.email,
       descriptionHtml: document.descriptionHtml,
-      sections: document.sections,
+      courseList: document.courseList,
       code: document.code,
       owners: document.owners.map(id => id.toString())
     }
