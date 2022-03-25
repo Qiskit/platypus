@@ -12,7 +12,6 @@ export interface Syllabus {
     email: string,
     descriptionHtml: string,
     sections: SyllabusSection[]
-    additionalHtml?: string,
     code?: SyllabusCode,
     owners: string[],
 }

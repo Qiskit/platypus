@@ -47,10 +47,6 @@ export class CreateSyllabusDto implements CreateSyllabus {
   @IsNotEmpty()
   readonly sections!: SyllabusSection[]
 
-  @IsString()
-  @IsOptional()
-  readonly additionalHtml?: string
-
   @IsArray()
   @IsNotEmpty()
   readonly owners!: string[]
@@ -68,7 +64,6 @@ export class CreateSyllabusDto implements CreateSyllabus {
     email,
     descriptionHtml,
     sections,
-    additionalHtml,
     owners
   }: CreateSyllabus) {
     this.name = name
@@ -80,7 +75,6 @@ export class CreateSyllabusDto implements CreateSyllabus {
     this.email = email
     this.descriptionHtml = descriptionHtml
     this.sections = sections
-    this.additionalHtml = additionalHtml
     this.owners = owners
     this.code = generate()
   }

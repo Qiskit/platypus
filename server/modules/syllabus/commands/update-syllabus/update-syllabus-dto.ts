@@ -47,10 +47,6 @@ export class UpdateSyllabusDto implements Syllabus {
   @IsOptional()
   readonly sections: SyllabusSection[]
 
-  @IsString()
-  @IsOptional()
-  readonly additionalHtml?: string
-
   @IsArray()
   @IsOptional()
   readonly owners: string[]
@@ -76,7 +72,6 @@ export class UpdateSyllabusDto implements Syllabus {
       email,
       descriptionHtml,
       sections,
-      additionalHtml,
       owners
     }: UpdateSyllabus) {
     this.id = id
@@ -90,7 +85,6 @@ export class UpdateSyllabusDto implements Syllabus {
     this.email = email
     this.descriptionHtml = descriptionHtml
     this.sections = sections
-    this.additionalHtml = additionalHtml
     this.owners = owners
   }
 }

@@ -18,7 +18,6 @@ export interface SyllabusBase {
     email: string,
     descriptionHtml: string,
     sections: SyllabusSection[]
-    additionalHtml: string
 
     owners: Types.ObjectId[],
 }
@@ -44,7 +43,6 @@ const SyllabusSchema = new Schema<SyllabusDocument, SyllabusModel>({
     title: String,
     chapters: [Number]
   }],
-  additionalHtml: { type: String },
   deleted: { type: Boolean, default: false },
 
   owners: { type: [Types.ObjectId], ref: 'User' }
