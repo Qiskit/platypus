@@ -9,7 +9,7 @@
         {{ $translate("This is placeholder text for a page where students are viewing a syllabus.") }}
       </template>
     </UserAccountSectionHeader>
-    <SyllabusView />
+    <SyllabusView :syllabus-data="syllabusMetadata" />
   </div>
 </template>
 
@@ -23,6 +23,12 @@ export default defineComponent({
   components: {
     UserAccountSectionHeader,
     SyllabusView
+  },
+  props: {
+    syllabusMetadata: {
+      type: Object,
+      required: true
+    }
   }
 })
 </script>

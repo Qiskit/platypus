@@ -10,9 +10,10 @@ html(lang=lang dir=dir)
       q-the-menu
 
     .body
-      q-syllabus-layout
+      q-syllabus-layout(syllabus-metadata=syllabus)
 
     script(type="application/json")#translations!= translationsJSON
+    script(type="application/json")#syllabus!= syllabusJSON
 
     script.
       var textbookAnalytics = {

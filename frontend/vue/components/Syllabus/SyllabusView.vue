@@ -1,14 +1,14 @@
 <template>
   <section class="syllabus-view">
     <h1 class="syllabus-view__title">
-      {{ syllabus.title }}
+      {{ syllabusData.title }}
     </h1>
     <h2 class="syllabus-view__section-title">
       General Information
     </h2>
-    <SyllabusGeneralInformation class="syllabus-view__general-information" :syllabus="syllabus" />
+    <SyllabusGeneralInformation class="syllabus-view__general-information" :syllabus="syllabusData" />
     <div
-      v-for="(module, idx) in syllabus.module"
+      v-for="(module, idx) in syllabusData.module"
       :key="`${idx}-${module.title}`"
       class="syllabus-view__module"
     >
@@ -52,57 +52,14 @@ export default defineComponent({
     BasicLink,
     ColumnFlowGrid
   },
-  data () {
-    return {
-      // TODO replace mock data
-      syllabus: {
-        title: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
-        instructor: 'instructor name',
-        location: 'Madrid',
-        university: 'UCM',
-        officeHours: '10:00 to 13:00',
-        classHours: '15:00 to 18:00',
-        email: 'none@none.never',
-        module: [
-          {
-            title: 'Week 1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            chapterList: [
-              {
-                name: 'Why quantum computing?',
-                url: '/course/introduction/why-quantum-computing'
-              },
-              {
-                name: 'The atoms of computation',
-                url: '/course/introduction/the-atoms-of-computation'
-              },
-              {
-                name: 'What is quantum?',
-                url: '/course/introduction/what-is-quantum'
-              }
-            ]
-          },
-          {
-            title: 'Week 2',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            chapterList: [
-              {
-                name: 'Why quantum computing?',
-                url: '/course/introduction/why-quantum-computing'
-              },
-              {
-                name: 'The atoms of computation',
-                url: '/course/introduction/the-atoms-of-computation'
-              },
-              {
-                name: 'What is quantum?',
-                url: '/course/introduction/what-is-quantum'
-              }
-            ]
-          }
-        ]
-      }
+  props: {
+    syllabusData: {
+      type: Object,
+      required: true
     }
+  },
+  mounted () {
+    console.log(this.syllabusData, 'syllabusDataInView')
   }
 })
 </script>
