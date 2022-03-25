@@ -62,7 +62,7 @@ export default defineComponent({
           name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
           instructor: 'instructorName',
           location: 'Madrid',
-          university: 'UCM',
+          institution: 'UCM',
           officeHours: '10:00 to 13:00',
           classHours: '15:00 to 18:00',
           email: 'none@none.never'
@@ -72,7 +72,7 @@ export default defineComponent({
           name: 'PHYS 332: Quantum Mechanics III (Summer, 2022)',
           instructor: 'instructorName',
           location: 'Madrid',
-          university: 'UCM',
+          institution: 'UCM',
           officeHours: '10:00 to 13:00',
           classHours: '15:00 to 18:00',
           email: 'none@none.never'

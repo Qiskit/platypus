@@ -6,13 +6,17 @@
       </bx-tab>
     </bx-tabs>
     <div id="panel-write" class="syllabus-form__tab-panel" role="tabpanel" aria-labelledby="tab-write">
-      <SyllabusFormCourseInfo />
+      <SyllabusFormCourseInfo
+        :syllabus="syllabus"
+        @change="syllabusInfoChanged"
+      />
       <SyllabusFormModule
-        v-for="module in modules"
-        :key="module.id"
-        :module-id="module.id"
-        :show-close-button="modules.length > 1"
-        @removeModuleAction="removeContentBlock(module.id)"
+        v-for="(course, index) in syllabus.courseList"
+        :key="course"
+        :show-close-button="syllabus.courseList.length > 1"
+        :course="course"
+        @removeModuleAction="removeContentBlock(course)"
+        @change="newCourse => courseInfoChanged(newCourse, index)"
       />
       <div class="syllabus-form__add-content">
         <BasicLink
@@ -24,9 +28,9 @@
         </BasicLink>
       </div>
       <SyllabusInlineNotification
-        v-if="showInlineNotification"
+        v-if="lastDeletedCourse"
         @on-close-notification="closeNotification"
-        @undo-deletion="undoDeleteAction(lastDeletedModuleId)"
+        @undo-deletion="undoDeleteAction"
       />
       <div class="syllabus-form__actions">
         <AppCta
@@ -55,6 +59,12 @@ import BasicLink from '../common/BasicLink.vue'
 import SyllabusFormCourseInfo from './SyllabusFormCourseInfo.vue'
 import SyllabusFormModule from './SyllabusFormModule.vue'
 import SyllabusInlineNotification from './SyllabusInlineNotification.vue'
+import { Syllabus, SyllabusCourse } from '../../../ts/syllabus'
+
+interface DeletedCourse {
+  index: number, 
+  course: SyllabusCourse
+}
 
 export default defineComponent({
   name: 'SyllabusForm',
@@ -68,8 +78,7 @@ export default defineComponent({
   data () {
     return {
       defaultActiveTab: 'write',
-      showInlineNotification: false,
-      lastDeletedModuleId: 0,
+      lastDeletedCourse: undefined as DeletedCourse|undefined,
       addContentLink: {
         label: 'Add content',
         url: '#'
@@ -90,36 +99,92 @@ export default defineComponent({
           location: 'create-syllabus'
         }
       },
-      modules: [{
-        id: 1
-      }],
-      modulesCounter: 1
+      syllabus: {
+        name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
+        instructor: 'instructor name',
+        location: 'Madrid',
+        institution: 'UCM',
+        officeHours: '10:00 to 13:00',
+        classHours: '15:00 to 18:00',
+        email: 'none@none.never',
+        courseList: [
+          {
+            title: 'Week 1',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
+            unitList: [
+              {
+                id: '',
+                name: 'Why quantum computing?',
+                url: '/course/introduction/why-quantum-computing'
+              },
+              {
+                id: '',
+                name: 'The atoms of computation',
+                url: '/course/introduction/the-atoms-of-computation'
+              },
+              {
+                id: '',
+                name: 'What is quantum?',
+                url: '/course/introduction/what-is-quantum'
+              }
+            ]
+          },
+          {
+            title: 'Week 2',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
+            unitList: [
+              {
+                id: '',
+                name: 'Why quantum computing?',
+                url: '/course/introduction/why-quantum-computing'
+              },
+              {
+                name: 'The atoms of computation',
+                url: '/course/introduction/the-atoms-of-computation'
+              },
+              {
+                name: 'What is quantum?',
+                url: '/course/introduction/what-is-quantum'
+              }
+            ]
+          }
+        ]
+      } as Syllabus
     }
   },
   methods: {
     addContentBlock () {
-      this.modules.push({
-        id: ++this.modulesCounter
+      this.syllabus.courseList.push({
+        title: '',
+        description: '',
+        unitList: []
       })
     },
-    removeContentBlock (id: number) {
-      this.showInlineNotification = true
-      this.lastDeletedModuleId = id
-      this.modules = this.modules.filter((item) => {
-        return item.id !== id
-      })
+    removeContentBlock (course: SyllabusCourse) {
+      const index = this.syllabus.courseList.indexOf(course)
+      this.lastDeletedCourse = { index, course }
+      this.syllabus.courseList.splice(index, 1);
     },
     closeNotification () {
-      this.showInlineNotification = false
+      this.lastDeletedCourse = undefined
     },
     submitForm () {
       // TODO: add logic for submitting form
     },
-    undoDeleteAction (deletedModuleId: number) {
-      // TODO: add logic for proper undo that persists w/ data
-      this.modules.push({
-        id: deletedModuleId
-      })
+    undoDeleteAction () {
+      if (!this.lastDeletedCourse) {
+        return
+      }
+
+      const index = this.lastDeletedCourse.index
+      this.syllabus.courseList.splice(index, 0, this.lastDeletedCourse.course);
+      this.lastDeletedCourse = undefined
+    },
+    syllabusInfoChanged (data: Syllabus) {
+      this.syllabus = data
+    },
+    courseInfoChanged (data: SyllabusCourse, index: number) {
+      this.syllabus.courseList[index] = data
     }
   }
 })

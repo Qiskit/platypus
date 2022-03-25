@@ -2,7 +2,8 @@
   <section class="syllabus-form-course-info__section">
     <div class="syllabus-form-course-info__row">
       <bx-input
-        v-model="courseName"
+        ref="nameInput"
+        :value="syllabus.name"
         class="syllabus-form-course-info__input-field"
         name="name"
         placeholder="Please enter the syllabus name"
@@ -14,7 +15,8 @@
     </div>
     <div class="syllabus-form-course-info__row">
       <bx-input
-        v-model="courseInstructor"
+        ref="instructorInput"
+        :value="syllabus.instructor"
         class="syllabus-form-course-info__input-field"
         name="instructor"
         placeholder="Instructor’s name"
@@ -24,7 +26,8 @@
         @input="updateFormInfo"
       />
       <bx-input
-        v-model="courseLocation"
+        ref="locationInput"
+        :value="syllabus.location"
         class="syllabus-form-course-info__input-field"
         name="location"
         placeholder="Enter the location"
@@ -36,7 +39,8 @@
     </div>
     <div class="syllabus-form-course-info__row">
       <bx-input
-        v-model="courseUniversity"
+        ref="institutionInput"
+        :value="syllabus.institution"
         class="syllabus-form-course-info__input-field"
         name="university"
         placeholder="University name"
@@ -46,7 +50,8 @@
         @input="updateFormInfo"
       />
       <bx-input
-        v-model="courseOfficeHours"
+        ref="officeHoursInput"
+        :value="syllabus.officeHours"
         class="syllabus-form-course-info__input-field"
         name="courseOfficeHours"
         placeholder="Enter the course office hours"
@@ -58,7 +63,8 @@
     </div>
     <div class="syllabus-form-course-info__row">
       <bx-input
-        v-model="courseHours"
+        ref="classHoursInput"
+        :value="syllabus.classHours"
         class="syllabus-form-course-info__input-field"
         name="courseHours"
         placeholder="Enter the class hours"
@@ -68,7 +74,8 @@
         @input="updateFormInfo"
       />
       <bx-input
-        v-model="courseEmail"
+        ref="emailInput"
+        :value="syllabus.email"
         class="syllabus-form-course-info__input-field"
         name="email"
         type="email"
@@ -98,11 +105,20 @@ import 'carbon-web-components/es/components/tabs/tabs.js'
 import 'carbon-web-components/es/components/tabs/tab.js'
 import 'carbon-web-components/es/components/input/input.js'
 import BasicLink from '../common/BasicLink.vue'
+import BXInput from 'carbon-web-components/es/components/input/input.js'
+import { Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'SyllabusFormCourseInfo',
   components: {
     BasicLink
+  },
+  props: {
+    syllabus: {
+      type: Object,
+      default: () => ({} as Syllabus),
+      required: false
+    }
   },
   data () {
     return {
@@ -111,14 +127,7 @@ export default defineComponent({
         label: 'Save to syllabus',
         url: '#'
       },
-      syllabusSaved: false,
-      courseName: '',
-      courseInstructor: '',
-      courseLocation: '',
-      courseUniversity: '',
-      courseOfficeHours: '',
-      courseHours: '',
-      courseEmail: ''
+      syllabusSaved: false
     }
   },
   methods: {
@@ -126,9 +135,26 @@ export default defineComponent({
       this.saveSyllabusInfoLink.label = 'Saved'
       this.syllabusSaved = true
     },
-    updateFormInfo () {
+    updateFormInfo (evt: InputEvent) {
       this.saveSyllabusInfoLink.label = 'Save to syllabus'
       this.syllabusSaved = false
+
+      const updatedData = {
+        name: (this.$refs.nameInput as BXInput).value,
+        instructor: (this.$refs.instructorInput as BXInput).value,
+        location: (this.$refs.locationInput as BXInput).value,
+        institution: (this.$refs.institutionInput as BXInput).value,
+        officeHours: (this.$refs.officeHoursInput as BXInput).value,
+        classHours: (this.$refs.classHoursInput as BXInput).value,
+        email: (this.$refs.emailInput as BXInput).value
+      }
+
+      const mergedObject = {
+        ...this.syllabus,
+        ...updatedData
+      }
+
+      this.$emit('change', mergedObject)
     }
   }
 })
