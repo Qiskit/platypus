@@ -253,28 +253,36 @@
   type: learning-path
   sections:
     - title: Why quantum computing?
+      uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
       id: why-quantum-computing
       url: /intro/why-quantum-computing
     - title: The atoms of computation
       id: the-atoms-of-computation
+      uuid: 37ef477e-ab8d-11ec-b909-0242ac120002
       url: /intro/atoms-of-computation
     - title: What is quantum?
       id: what-is-quantum
+      uuid: 7c765036-aebc-11ec-b909-0242ac120002
       url: /intro/what-is-quantum
     - title: Describing quantum computers
       id: describing-quantum-computers
+      uuid: 9260a554-aebc-11ec-b909-0242ac120002
       url: /intro/describing-quantum-computers
     - title: Entangled states
       id: entangled-states
+      uuid: 98aa9032-aebc-11ec-b909-0242ac120002
       url: /intro/entangled-states
     - title: Visualizing entanglement
       id: visualizing-entanglement
+      uuid: 9e8ceb9e-aebc-11ec-b909-0242ac120002
       url: /intro/visualizing-entanglement
     - title: Grovers algorithm
       id: grovers-search-algorithm
+      uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
       url: /intro/grover-intro
     - title: Project
       id: project
+      uuid: e25c3f90-aebd-11ec-b909-0242ac120002
       url: /intro/project
 
 - title: Summer School 2020

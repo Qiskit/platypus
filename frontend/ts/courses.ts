@@ -3,6 +3,7 @@ import { getUserData } from './storage'
 interface Section {
   title: string,
   id: string,
+  uuid: string,
   url: string,
   pageUrl: string,
   progress: number

@@ -29,8 +29,8 @@
       >
         <template #default="slotProps">
           <li class="syllabus-view__course__unit-list__item">
-            <BasicLink class="syllabus-view__course__unit-list__unit" :url="slotProps.element.url">
-              {{ slotProps.element.name }}
+            <BasicLink class="syllabus-view__course__unit-list__unit" :url="getUrlById(slotProps.element.id)">
+              {{ getNameById(slotProps.element.id) }}
             </BasicLink>
           </li>
         </template>
@@ -45,6 +45,7 @@ import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import SyllabusGeneralInformation from './SyllabusGeneralInformation.vue'
 import { Syllabus } from '../../../ts/syllabus'
+import { getCourseList, Section, Course } from '../../../ts/courses'
 
 export default defineComponent({
   name: 'SyllabusView',
@@ -58,6 +59,27 @@ export default defineComponent({
       type: Object,
       default: () => ({} as Syllabus),
       required: true
+    }
+  },
+  data () {
+    return {
+      sectionList: [] as Section[],
+    }
+  },
+  mounted () {
+    getCourseList().then((courses) => {
+      const learningPathCourses = courses.filter(course => course.type === 'learning-path')
+      this.sectionList = learningPathCourses.reduce((sectionList: Section[], course: Course) => {
+          return sectionList.concat(course.sections)
+        }, [] as Section[])
+    })
+  },
+  methods: {
+    getUrlById (id: string) {
+      return this.sectionList.find((section: Section) => section.uuid === id)?.pageUrl
+    },
+    getNameById (id: string) {
+      return this.sectionList.find((section: Section) => section.uuid === id)?.title
     }
   }
 })

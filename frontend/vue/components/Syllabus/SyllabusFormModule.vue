@@ -36,13 +36,17 @@
       </label>
     </div>
     <div class="syllabus-form-course__row syllabus-form-course__units__container">
-      <div v-for="unit in unitList" :key="unit.id">
+      <div v-for="course in courseList" :key="course.id">
         <h4 class="syllabus-form-course__units__header">
-          {{ unit.title }}
+          {{ course.title }}
         </h4>
-        <ColumnFlowGrid class="syllabus-form-course__units__list" :elements="unit.sections">
+        <ColumnFlowGrid class="syllabus-form-course__units__list" :elements="course.sections">
           <template #default="slotProps">
-            <bx-checkbox :label-text="slotProps.element.title" @input="updateFormModule" />
+            <bx-checkbox
+              :checked="containsUnitID(slotProps.element.uuid)"
+              :label-text="slotProps.element.title"
+              @bx-checkbox-changed="ev => updateFormModuleUnit(slotProps.element.uuid, ev)"
+            />
           </template>
         </ColumnFlowGrid>
       </div>
@@ -70,8 +74,9 @@ import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import 'carbon-web-components/es/components/checkbox/checkbox.js'
-import { SyllabusCourse } from '../../../ts/syllabus'
+import { SyllabusCourse, Unit } from '../../../ts/syllabus'
 import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
+import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
 
 export default defineComponent({
   name: 'SyllabusFormModule',
@@ -94,7 +99,7 @@ export default defineComponent({
   },
   data () {
     return {
-      unitList: [] as Course[],
+      courseList: [] as Course[],
       saveSyllabusModuleLink: {
         label: 'Save content',
         url: '#'
@@ -104,10 +109,13 @@ export default defineComponent({
   },
   mounted () {
     getCourseList().then((courses) => {
-      this.unitList = courses.filter(course => course.type === 'learning-path')
+      this.courseList = courses.filter(course => course.type === 'learning-path')
     })
   },
   methods: {
+    containsUnitID(uuid: string) {
+      return this.course.unitList.some((unit: Unit) => unit.id === uuid)
+    },
     saveModuleAction () {
       // TODO: Add proper functionality for persisting course data
       this.saveSyllabusModuleLink.label = 'Saved'
@@ -122,7 +130,7 @@ export default defineComponent({
         ...this.course,
         ...{ title: (event.target as BXTextarea).value }
       }
-      console.log(newData)
+
       this.$emit('change', newData)
     },
     updateFormDescription (event: InputEvent) {
@@ -134,9 +142,21 @@ export default defineComponent({
         ...this.course,
         ...{ description: (event.target as BXTextarea).value }
       }
-      console.log(newData)
 
       this.$emit('change', newData)
+    },
+    updateFormModuleUnit (uuid: string, event: Event) {
+      console.log("asd")
+      if ((event.target as BXCheckbox).checked) {
+        this.course.unitList.push({ id: uuid })
+      } else {
+        const idx = this.course.unitList.findIndex((unit: Unit) => unit.id === uuid)
+        if (idx >= 0) {
+          this.course.unitList.splice(idx, 1)
+        } 
+      }
+
+      this.$emit('change', this.course)
     },
     removeFormModule () {
       this.$emit('removeModuleAction')

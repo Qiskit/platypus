@@ -42,19 +42,13 @@ export default defineComponent({
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
             unitList: [
               {
-                id: '',
-                name: 'Why quantum computing?',
-                url: '/course/introduction/why-quantum-computing'
+                id: 'bdb1d662-e0f6-428a-8830-befe6b47f320'
               },
               {
-                id: '',
-                name: 'The atoms of computation',
-                url: '/course/introduction/the-atoms-of-computation'
+                id: '7c765036-aebc-11ec-b909-0242ac120002'
               },
               {
-                id: '',
-                name: 'What is quantum?',
-                url: '/course/introduction/what-is-quantum'
+                id: '9260a554-aebc-11ec-b909-0242ac120002'
               }
             ]
           },
@@ -63,17 +57,10 @@ export default defineComponent({
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
             unitList: [
               {
-                id: '',
-                name: 'Why quantum computing?',
-                url: '/course/introduction/why-quantum-computing'
+                id: '9e8ceb9e-aebc-11ec-b909-0242ac120002'
               },
               {
-                name: 'The atoms of computation',
-                url: '/course/introduction/the-atoms-of-computation'
-              },
-              {
-                name: 'What is quantum?',
-                url: '/course/introduction/what-is-quantum'
+                id: 'a2e6f7a2-aebc-11ec-b909-0242ac120002'
               }
             ]
           }
