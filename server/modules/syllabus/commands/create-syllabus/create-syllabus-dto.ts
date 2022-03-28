@@ -1,6 +1,6 @@
 import { IsArray, IsEmail, IsString, MaxLength, IsNotEmpty, IsOptional, validateOrReject } from 'class-validator'
 import { Syllabus } from '../../domain/syllabus'
-import { SyllabusSection } from '../../domain/syllabus-section'
+import { SyllabusCourse } from '../../domain/syllabus-course'
 import { SyllabusCode, generate } from '../../domain/syllabus-code'
 
 export type CreateSyllabus = Omit<Syllabus, 'id'>
@@ -39,21 +39,13 @@ export class CreateSyllabusDto implements CreateSyllabus {
   @IsNotEmpty()
   readonly email!: string
 
-  @IsString()
+  @IsArray()
   @IsNotEmpty()
-  readonly descriptionHtml!: string
+  readonly courseList!: SyllabusCourse[]
 
   @IsArray()
   @IsNotEmpty()
-  readonly sections!: SyllabusSection[]
-
-  @IsString()
-  @IsOptional()
-  readonly additionalHtml?: string
-
-  @IsArray()
-  @IsNotEmpty()
-  readonly owners!: string[]
+  readonly ownerList!: string[]
 
   // This field is generated in the constructor and can be modified in the service
   code?: SyllabusCode
@@ -66,10 +58,8 @@ export class CreateSyllabusDto implements CreateSyllabus {
     officeHours,
     classHours,
     email,
-    descriptionHtml,
-    sections,
-    additionalHtml,
-    owners
+    courseList,
+    ownerList
   }: CreateSyllabus) {
     this.name = name
     this.instructor = instructor
@@ -78,10 +68,8 @@ export class CreateSyllabusDto implements CreateSyllabus {
     this.officeHours = officeHours
     this.classHours = classHours
     this.email = email
-    this.descriptionHtml = descriptionHtml
-    this.sections = sections
-    this.additionalHtml = additionalHtml
-    this.owners = owners
+    this.courseList = courseList
+    this.ownerList = ownerList
     this.code = generate()
   }
 }

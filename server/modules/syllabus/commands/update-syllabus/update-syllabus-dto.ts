@@ -1,7 +1,7 @@
 import { IsArray, IsNotEmpty, IsOptional, IsString, MaxLength, validateOrReject } from 'class-validator'
 
 import { Syllabus } from '../../domain/syllabus'
-import { SyllabusSection } from '../../domain/syllabus-section'
+import { SyllabusCourse } from '../../domain/syllabus-course'
 
 export type UpdateSyllabus = Omit<Syllabus, 'id' | 'code'>
 
@@ -39,21 +39,13 @@ export class UpdateSyllabusDto implements Syllabus {
   @IsOptional()
   readonly email: string
 
-  @IsString()
+  @IsArray()
   @IsOptional()
-  readonly descriptionHtml: string
+  readonly courseList: SyllabusCourse[]
 
   @IsArray()
   @IsOptional()
-  readonly sections: SyllabusSection[]
-
-  @IsString()
-  @IsOptional()
-  readonly additionalHtml?: string
-
-  @IsArray()
-  @IsOptional()
-  readonly owners: string[]
+  readonly ownerList: string[]
 
   @IsString()
   @IsNotEmpty()
@@ -74,10 +66,8 @@ export class UpdateSyllabusDto implements Syllabus {
       officeHours,
       classHours,
       email,
-      descriptionHtml,
-      sections,
-      additionalHtml,
-      owners
+      courseList,
+      ownerList
     }: UpdateSyllabus) {
     this.id = id
     this.owner = owner
@@ -88,10 +78,8 @@ export class UpdateSyllabusDto implements Syllabus {
     this.officeHours = officeHours
     this.classHours = classHours
     this.email = email
-    this.descriptionHtml = descriptionHtml
-    this.sections = sections
-    this.additionalHtml = additionalHtml
-    this.owners = owners
+    this.courseList = courseList
+    this.ownerList = ownerList
   }
 }
 

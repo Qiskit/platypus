@@ -15,11 +15,9 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       officeHours: data.officeHours,
       classHours: data.classHours,
       email: data.email,
-      descriptionHtml: data.descriptionHtml,
-      sections: data.sections,
-      additionalHtml: data.additionalHtml,
+      courseList: data.courseList,
       code: data.code,
-      owners: data.owners
+      ownerList: data.ownerList
     }
     const cleanedFields = pickBy(fields, field => field !== undefined)
     return new SyllabusOrm(cleanedFields)
@@ -35,11 +33,9 @@ export class SyllabusMapper implements OrmMapperBase<SyllabusDocument, SyllabusD
       officeHours: document.officeHours,
       classHours: document.classHours,
       email: document.email,
-      descriptionHtml: document.descriptionHtml,
-      sections: document.sections,
-      additionalHtml: document.additionalHtml,
+      courseList: document.courseList,
       code: document.code,
-      owners: document.owners.map(id => id.toString())
+      ownerList: document.ownerList.map(id => id.toString())
     }
   }
 }
