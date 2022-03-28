@@ -66,7 +66,6 @@
 </template>
 
 <script lang="ts">
-// import { Component, Mixins, Prop, Watch } from 'vue-property-decorator'
 import { Options, prop, mixins } from 'vue-class-component'
 import User16 from '@carbon/icons-vue/lib/user/16'
 import { STAY_CONNECTED_LINKS } from '../../../constants/menuLinks'
