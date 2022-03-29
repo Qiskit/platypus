@@ -48,7 +48,7 @@ const createSyllabus = async (userId: string) => {
       }
     ],
     code: 'ABC-DEF',
-    owners: [userId]
+    ownerList: [userId]
   })
   return await newSyllabusDocument.save()
 }
@@ -62,7 +62,7 @@ export const clean = async () => {
 export const populate = async () => {
   if (process.env.NODE_ENV === 'production') { return }
   const newUser = await createUser()
-  await createSyllabus(newUser.id)
+  await createSyllabus(newUser._id.toString())
 }
 
 export const cleanAndPopulate = async () => {
