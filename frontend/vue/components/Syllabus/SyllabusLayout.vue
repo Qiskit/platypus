@@ -17,7 +17,7 @@
 import { defineComponent } from 'vue-demi'
 import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
 import SyllabusView from './SyllabusView.vue'
-import { Syllabus } from '../../../ts/syllabus'
+import { getActiveSyllabus, Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'SyllabusLayout',
@@ -27,7 +27,9 @@ export default defineComponent({
   },
   data () {
     return {
+      syllabus: {} as Syllabus
       // TODO replace mock data
+      /*
       syllabus: {
         name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
         instructor: 'instructor name',
@@ -56,7 +58,11 @@ export default defineComponent({
           }
         ]
       } as Syllabus
+      */
     }
+  },
+  mounted() {
+    this.syllabus = getActiveSyllabus()
   }
 })
 </script>
