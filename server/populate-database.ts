@@ -6,7 +6,7 @@ import type { Config } from '@mathigon/studio/server/interfaces'
 import { Syllabus } from './modules/syllabus/database/syllabus-entity'
 
 interface PopulateConfig extends Config {
-  fakeData: {
+  mockData: {
     email: string
   }
 }
@@ -17,7 +17,7 @@ const cleanUsers = async () => {
 
 const createUser = async () => {
   const newUserDocument = new User({
-    email: (CONFIG as PopulateConfig).fakeData.email,
+    email: (CONFIG as PopulateConfig).mockData.email,
     firstName: 'John',
     lastName: 'Doe',
     acceptedPolicies: true

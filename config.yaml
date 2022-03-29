@@ -74,5 +74,5 @@ accounts:
       clientId: ''
       clientSecret: ''
 
-fakeData:
+mockData:
   email: john.doe@example.com
