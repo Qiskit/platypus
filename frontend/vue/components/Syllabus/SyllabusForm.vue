@@ -59,7 +59,7 @@ import BasicLink from '../common/BasicLink.vue'
 import SyllabusFormCourseInfo from './SyllabusFormCourseInfo.vue'
 import SyllabusFormModule from './SyllabusFormModule.vue'
 import SyllabusInlineNotification from './SyllabusInlineNotification.vue'
-import { Syllabus, Unit, SyllabusCourse } from '../../../ts/syllabus'
+import { Syllabus, UnitUUID, SyllabusCourse } from '../../../ts/syllabus'
 import { getCourseList, Course, Section } from '../../../ts/courses'
 
 interface DeletedCourse {
@@ -114,27 +114,17 @@ export default defineComponent({
             title: 'Week 1',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
             unitList: [
-              {
-                id: 'bdb1d662-e0f6-428a-8830-befe6b47f320'
-              },
-              {
-                id: '7c765036-aebc-11ec-b909-0242ac120002'
-              },
-              {
-                id: '9260a554-aebc-11ec-b909-0242ac120002'
-              }
+              'bdb1d662-e0f6-428a-8830-befe6b47f320',
+              '7c765036-aebc-11ec-b909-0242ac120002',
+              '9260a554-aebc-11ec-b909-0242ac120002'
             ]
           },
           {
             title: 'Week 2',
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
             unitList: [
-              {
-                id: '9e8ceb9e-aebc-11ec-b909-0242ac120002'
-              },
-              {
-                id: 'a2e6f7a2-aebc-11ec-b909-0242ac120002'
-              }
+              '9e8ceb9e-aebc-11ec-b909-0242ac120002',
+              'a2e6f7a2-aebc-11ec-b909-0242ac120002'
             ]
           }
         ]
@@ -173,7 +163,6 @@ export default defineComponent({
       this.syllabus = data
     },
     courseInfoChanged (data: SyllabusCourse, index: number) {
-      console.log(data)
       this.syllabus.courseList[index] = data
     }
   }

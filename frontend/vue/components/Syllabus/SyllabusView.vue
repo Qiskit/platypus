@@ -29,8 +29,8 @@
       >
         <template #default="slotProps">
           <li class="syllabus-view__course__unit-list__item">
-            <BasicLink class="syllabus-view__course__unit-list__unit" :url="getUrlById(slotProps.element.id)">
-              {{ getNameById(slotProps.element.id) }}
+            <BasicLink class="syllabus-view__course__unit-list__unit" :url="getUrlById(slotProps.element)">
+              {{ getNameById(slotProps.element) }}
             </BasicLink>
           </li>
         </template>
@@ -113,7 +113,7 @@ export default defineComponent({
     border-top: 2px solid $border-color-light-2;
     padding-bottom: $spacing-05;
 
-    &__chapters-title,
+    &__units-title,
     &__title {
       @include type-style('expressive-heading-03', $fluid: true);
       margin: $spacing-05 0;
@@ -122,7 +122,7 @@ export default defineComponent({
       @include type-style("body-long-01");
       margin: $spacing-05 0;
     }
-    &__chapter-list {
+    &__unit-list {
       &__item {
         list-style-position: outside;
         list-style-type: disc;
@@ -133,7 +133,7 @@ export default defineComponent({
           font-size: 1.25rem;
         }
       }
-      &__chapter {
+      &__unit {
         color: $block-link-color-tertiary;
       }
     }

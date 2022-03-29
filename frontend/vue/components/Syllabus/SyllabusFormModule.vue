@@ -74,7 +74,7 @@ import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import 'carbon-web-components/es/components/checkbox/checkbox.js'
-import { SyllabusCourse, Unit } from '../../../ts/syllabus'
+import { SyllabusCourse, UnitUUID } from '../../../ts/syllabus'
 import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
 import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
 
@@ -114,7 +114,7 @@ export default defineComponent({
   },
   methods: {
     containsUnitID(uuid: string) {
-      return this.course.unitList.some((unit: Unit) => unit.id === uuid)
+      return this.course.unitList.some((unit: UnitUUID) => unit === uuid)
     },
     saveModuleAction () {
       // TODO: Add proper functionality for persisting course data
@@ -146,11 +146,10 @@ export default defineComponent({
       this.$emit('change', newData)
     },
     updateFormModuleUnit (uuid: string, event: Event) {
-      console.log("asd")
       if ((event.target as BXCheckbox).checked) {
-        this.course.unitList.push({ id: uuid })
+        this.course.unitList.push(uuid)
       } else {
-        const idx = this.course.unitList.findIndex((unit: Unit) => unit.id === uuid)
+        const idx = this.course.unitList.indexOf(uuid)
         if (idx >= 0) {
           this.course.unitList.splice(idx, 1)
         } 

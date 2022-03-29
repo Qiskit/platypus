@@ -17,11 +17,7 @@ export type SyllabusCode = string
 export interface SyllabusCourse {
   title: string,
   description: string,
-  unitList: Unit[],
+  unitList: UnitUUID[],
 }
 
-export interface Unit {
-  name: string,
-  url: string,
-  id: string
-}
+export type UnitUUID = string
