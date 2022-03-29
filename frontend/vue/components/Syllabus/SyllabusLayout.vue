@@ -9,7 +9,10 @@
         {{ $translate("This is placeholder text for a page where students are viewing a syllabus.") }}
       </template>
     </UserAccountSectionHeader>
-    <SyllabusView :syllabus="syllabus"/>
+    <SyllabusView v-if="syllabus" :syllabus="syllabus"/>
+    <div v-else class="syllabus__not-found">
+      Syllabus not found
+    </div>
   </div>
 </template>
 
@@ -27,7 +30,7 @@ export default defineComponent({
   },
   data () {
     return {
-      syllabus: {} as Syllabus
+      syllabus: undefined as Syllabus | undefined
     }
   },
   mounted() {
@@ -45,5 +48,10 @@ export default defineComponent({
   @include contained();
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
+
+  &__not-found {
+    @include type-style('expressive-heading-04');
+    padding-top: $spacing-07;
+  }
 }
 </style>
