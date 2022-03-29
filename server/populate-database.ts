@@ -1,6 +1,15 @@
 /* eslint-disable no-console */
 import { User } from '@mathigon/studio/server/models/user'
+import { CONFIG } from '@mathigon/studio/server/utilities/utilities'
+import type { Config } from '@mathigon/studio/server/interfaces'
+
 import { Syllabus } from './modules/syllabus/database/syllabus-entity'
+
+interface PopulateConfig extends Config {
+  fakeData: {
+    email: string
+  }
+}
 
 const cleanUsers = async () => {
   await User.deleteMany()
@@ -8,7 +17,7 @@ const cleanUsers = async () => {
 
 const createUser = async () => {
   const newUserDocument = new User({
-    email: 'john.doe@example.com', // TODO: get email from config.yaml
+    email: (CONFIG as PopulateConfig).fakeData.email,
     firstName: 'John',
     lastName: 'Doe',
     acceptedPolicies: true
