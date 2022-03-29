@@ -100,7 +100,6 @@ export default defineComponent({
           location: 'create-syllabus'
         }
       },
-      sections: [] as Section[],
       syllabus: {
         name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
         instructor: 'instructor name',
