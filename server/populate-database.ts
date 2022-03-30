@@ -2,6 +2,7 @@
 import { User } from '@mathigon/studio/server/models/user'
 import { CONFIG } from '@mathigon/studio/server/utilities/utilities'
 import type { Config } from '@mathigon/studio/server/interfaces'
+import { connection } from 'mongoose'
 
 import { Syllabus } from './modules/syllabus/database/syllabus-entity'
 
@@ -67,8 +68,17 @@ export const populate = async () => {
 
 export const cleanAndPopulate = async () => {
   // TODO: we should use our logs here once time we have them
-  console.log('Initiating clean and populate database process...')
-  await clean()
-  await populate()
-  console.log('Finished with the clean and populate database')
+  if (process.env.NODE_ENV === 'production') { return }
+
+  console.log('Connecting to DB...')
+  const interval = setInterval(async () => {
+    if (connection.readyState === 1) {
+      clearInterval(interval)
+
+      console.log('Initiating clean and populate database process...')
+      await clean()
+      await populate()
+      console.log('Finished with the clean and populate database')
+    }
+  }, 1000)
 }
