@@ -3,7 +3,7 @@ import { Document, Model, FilterQuery, QueryOptions } from 'mongoose'
 import { DataWithPaginationMeta, FindManyPaginatedParams, RepositoryPort } from '../ports/repository-port'
 import { OrmMapperBase } from './orm-mapper-base'
 
-export const DEFAULT_PAGINATION_LIMIT = 10
+export const DEFAULT_PAGINATION_LIMIT = 100
 
 export abstract class MongooseRepositoryBase<Entity extends Document, QueryParams, Domain>
 implements RepositoryPort<QueryParams, Domain> {
