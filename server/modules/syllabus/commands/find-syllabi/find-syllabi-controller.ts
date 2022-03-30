@@ -13,10 +13,15 @@ export const FindSyllabiController = async (req: Request, res: Response, next: N
     return res.json(error)
   }
 
+  const { limit, page } = req.query
   const userId = req.user.id
 
   // Note: this object doesn't introduce external data so there is no need to validate it by now
-  const queryParams = new SyllabusQueryParamsHttpRequest({ owner: userId })
+  const queryParams = new SyllabusQueryParamsHttpRequest({
+    limit: (limit !== undefined ? parseInt(limit as string) : limit),
+    page: (page !== undefined ? parseInt(page as string) : page),
+    owner: userId
+  })
 
   let response: Syllabus[] | unknown
   try {
