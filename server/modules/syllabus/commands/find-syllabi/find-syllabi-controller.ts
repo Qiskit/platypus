@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 
+import { ExceptionBase } from '../../../../libs/exceptions/exception-base'
 import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
+
 import { Syllabus } from '../../domain/syllabus'
 import { SyllabusQueryParamsHttpRequest } from './find-syllabi-dto'
 import { FindSyllabiService } from './find-syllabi-service'
@@ -27,11 +29,16 @@ export const FindSyllabiController = async (req: Request, res: Response, next: N
   try {
     response = await FindSyllabiService.execute(queryParams)
   } catch (error) {
-    // TODO: update res.status when we start to use our internal exceptions
-    response = error
+    if (error instanceof ExceptionBase) {
+      res.status(error.code)
+      response = error.toJSON()
+    } else {
+      res.status(500)
+      response = error
+    }
     // TODO: implemente new log system
     // eslint-disable-next-line no-console
-    console.log(error)
+    console.error(response)
   }
 
   return res.json(response)

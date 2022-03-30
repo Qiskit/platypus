@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
+import { ExceptionBase } from '../../../../libs/exceptions/exception-base'
 import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
 
 import { Syllabus } from '../../domain/syllabus'
@@ -26,11 +27,16 @@ export const UpdateSyllabusController = async (req: Request, res: Response, next
     await syllabus.validate()
     response = await UpdateSyllabusService.execute(syllabus)
   } catch (error) {
-    // TODO: update res.status when we start to use our internal exceptions
-    response = error
+    if (error instanceof ExceptionBase) {
+      res.status(error.code)
+      response = error.toJSON()
+    } else {
+      res.status(500)
+      response = error
+    }
     // TODO: implemente new log system
     // eslint-disable-next-line no-console
-    console.log(error)
+    console.error(response)
   }
 
   return res.json(response)
