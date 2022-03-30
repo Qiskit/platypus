@@ -28,7 +28,11 @@ export const FindSyllabusByCodeController = async (req: Request, res: Response, 
     console.error(response)
   }
 
-  res.render('syllabus', {
-    syllabus: response
-  })
+  if (res.statusCode === 200) {
+    res.render('syllabus', {
+      syllabus: response
+    })
+  } else {
+    res.render('error')
+  }
 }
