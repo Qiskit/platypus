@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 
+import { ExceptionBase, SerializedException } from '../../../../libs/exceptions/exception-base'
+
 import { Syllabus } from '../../domain/syllabus'
 import { FindSyllabusByCodeHttpRequest } from './find-syllabus-by-code-dto'
 import { FindSyllabusByIdService } from './find-syllabus-by-code-service'
@@ -10,19 +12,27 @@ export const FindSyllabusByCodeController = async (req: Request, res: Response, 
 
   const findSyllabusByCodeHttpRequest = new FindSyllabusByCodeHttpRequest({ code })
 
-  // TODO: This response must be a type from a domain or an exception
-  let response: Syllabus | unknown
+  let response: Syllabus | SerializedException
   try {
     response = await FindSyllabusByIdService.execute(findSyllabusByCodeHttpRequest)
   } catch (error) {
-    // TODO: update res.status when we start to use our internal exceptions
-    response = error
+    if (error instanceof ExceptionBase) {
+      res.status(error.code)
+      response = error.toJSON()
+    } else {
+      res.status(500)
+      response = error as any
+    }
     // TODO: implemente new log system
     // eslint-disable-next-line no-console
-    console.log(error)
+    console.error(response)
   }
 
-  res.render('syllabus', {
-    syllabus: response
-  })
+  if (res.statusCode === 200) {
+    res.render('syllabus', {
+      syllabus: response
+    })
+  } else {
+    res.render('error')
+  }
 }
