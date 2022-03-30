@@ -21,8 +21,8 @@ export const FindSyllabiController = async (req: Request, res: Response, next: N
 
   // Note: this object doesn't introduce external data so there is no need to validate it by now
   const queryParams = new SyllabusQueryParamsHttpRequest({
-    limit: (limit !== undefined ? parseInt(limit as string) : limit),
-    page: (page !== undefined ? parseInt(page as string) : page),
+    limit: parseInt(limit as string) || undefined,
+    page: parseInt(page as string) || undefined,
     owner: userId
   })
 
