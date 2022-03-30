@@ -5,8 +5,10 @@
         {{ $translate("Privacy") }}
       </template>
       <template #description>
-        <!-- TODO: update section header description and provide translation -->
-        Review our privacy policies, user licenses, and lorem ipsum lorem ipsum
+        {{ $translate("This page contains privacy information, including the IBM privacy statement, the end user license agreement, and the ability to delete your account. If you would like copy of all of your user account data, please email") }}
+        <AppLink class="privacy-section__policy-email" url="mailto:qiskit@us.ibm.com">
+          qiskit@us.ibm.com.
+        </AppLink>
       </template>
     </UserAccountSectionHeader>
     <h4 class="privacy-section__subtitle privacy-section__subtitle_general">
@@ -32,7 +34,8 @@ import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vu
 export default defineComponent({
   name: 'PrivacySection',
   components: {
-    AppLink, UserAccountSectionHeader
+    AppLink,
+    UserAccountSectionHeader
   },
   data () {
     return {
@@ -97,6 +100,10 @@ export default defineComponent({
     & > ::v-deep(*):last-child {
       margin-bottom: 0;
     }
+  }
+
+  &__policy-email {
+    color: $link-color-secondary;
   }
 }
 

@@ -6,3 +6,6 @@ lint:
 	@echo "Running content style checks"
 	bash scripts/nb_lint.sh
 	python3 scripts/goals.py
+
+gitconf:
+	git config filter.notebookMetadata "python3 ./scripts/gitclean.py"

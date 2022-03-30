@@ -38,11 +38,10 @@ $max-description-width: 38rem;
     @include type-style('expressive-heading-05', $fluid: true);
     padding-bottom: $spacing-05;
     color: $text-active-color;
-
   }
 
   &__description {
-      max-width: $max-description-width;
+    max-width: $max-description-width;
   }
 }
 </style>

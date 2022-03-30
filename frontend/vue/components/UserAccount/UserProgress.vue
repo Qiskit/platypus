@@ -26,7 +26,8 @@ import CourseProgress from './CourseProgress.vue'
 export default defineComponent({
   name: 'UserProgress',
   components: {
-    CourseProgress, UserAccountSectionHeader
+    CourseProgress,
+    UserAccountSectionHeader
   },
   data () {
     return {
@@ -55,7 +56,7 @@ export default defineComponent({
 
   &__course {
     padding: $spacing-04 0;
-
+    
     &:not(:last-child) {
       border-bottom: 2px solid $border-color-light-2;
     }
