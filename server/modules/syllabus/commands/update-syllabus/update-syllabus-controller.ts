@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { ExceptionBase } from '../../../../libs/exceptions/exception-base'
+import { ExceptionBase, SerializedException } from '../../../../libs/exceptions/exception-base'
 import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
 
 import { Syllabus } from '../../domain/syllabus'
@@ -21,8 +21,7 @@ export const UpdateSyllabusController = async (req: Request, res: Response, next
 
   const syllabus = new UpdateSyllabusHttpRequest(id, userId, { ...body })
 
-  // TODO: This response must be a type from a domain or an exception
-  let response: Syllabus | unknown
+  let response: Syllabus | SerializedException
   try {
     await syllabus.validate()
     response = await UpdateSyllabusService.execute(syllabus)
@@ -32,7 +31,7 @@ export const UpdateSyllabusController = async (req: Request, res: Response, next
       response = error.toJSON()
     } else {
       res.status(500)
-      response = error
+      response = error as any
     }
     // TODO: implemente new log system
     // eslint-disable-next-line no-console

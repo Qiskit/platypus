@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { ExceptionBase } from '../../../../libs/exceptions/exception-base'
+import { ExceptionBase, SerializedException } from '../../../../libs/exceptions/exception-base'
 
 import { Syllabus } from '../../domain/syllabus'
 import { FindSyllabusByCodeHttpRequest } from './find-syllabus-by-code-dto'
@@ -12,8 +12,7 @@ export const FindSyllabusByCodeController = async (req: Request, res: Response, 
 
   const findSyllabusByCodeHttpRequest = new FindSyllabusByCodeHttpRequest({ code })
 
-  // TODO: This response must be a type from a domain or an exception
-  let response: Syllabus | unknown
+  let response: Syllabus | SerializedException
   try {
     response = await FindSyllabusByIdService.execute(findSyllabusByCodeHttpRequest)
   } catch (error) {
@@ -22,7 +21,7 @@ export const FindSyllabusByCodeController = async (req: Request, res: Response, 
       response = error.toJSON()
     } else {
       res.status(500)
-      response = error
+      response = error as any
     }
     // TODO: implemente new log system
     // eslint-disable-next-line no-console

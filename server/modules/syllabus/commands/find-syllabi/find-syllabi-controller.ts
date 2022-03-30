@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 
-import { ExceptionBase } from '../../../../libs/exceptions/exception-base'
+import { ExceptionBase, SerializedException } from '../../../../libs/exceptions/exception-base'
 import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
+import { DataWithPaginationMeta } from '../../../../libs/ports/repository-port'
 
 import { Syllabus } from '../../domain/syllabus'
 import { SyllabusQueryParamsHttpRequest } from './find-syllabi-dto'
@@ -25,7 +26,7 @@ export const FindSyllabiController = async (req: Request, res: Response, next: N
     owner: userId
   })
 
-  let response: Syllabus[] | unknown
+  let response: DataWithPaginationMeta<Syllabus[]> | SerializedException
   try {
     response = await FindSyllabiService.execute(queryParams)
   } catch (error) {
@@ -34,7 +35,7 @@ export const FindSyllabiController = async (req: Request, res: Response, next: N
       response = error.toJSON()
     } else {
       res.status(500)
-      response = error
+      response = error as any
     }
     // TODO: implemente new log system
     // eslint-disable-next-line no-console
