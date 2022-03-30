@@ -1,56 +1,60 @@
 <template>
-  <section class="syllabus-form-module">
+  <section class="syllabus-form-course">
     <bx-btn
       v-if="showCloseButton"
-      class="syllabus-form-module__delete"
+      class="syllabus-form-course__delete"
       kind="ghost"
-      @click="removeFormModule(moduleId)"
+      @click="removeFormModule(courseId)"
     >
-      <Close16 class="syllabus-form-module__delete__icon" />
+      <Close16 class="syllabus-form-course__delete__icon" />
     </bx-btn>
-    <div class="syllabus-form-module__row">
+    <div class="syllabus-form-course__row">
       <bx-input
-        v-model="moduleTitle"
-        class="syllabus-form-module__input-field"
-        name="moduleTitle"
-        placeholder="Enter the module title"
+        :value="course.title"
+        class="syllabus-form-course__input-field"
+        name="courseTitle"
+        placeholder="Enter the course title"
         label-text="Content - Use this section to write in content. You can then add Qiskit chapters that correlate, and add more text below."
         color-scheme="light"
         :required="true"
-        @input="updateFormModule"
+        @input="updateFormTitle"
       />
     </div>
-    <div class="syllabus-form-module__row">
+    <div class="syllabus-form-course__row">
       <bx-textarea
-        v-model="moduleContent"
-        class="syllabus-form-module__textarea"
-        name="moduleContent"
+        :value="course.description"
+        class="syllabus-form-course__textarea"
+        name="courseContent"
         color-scheme="light"
         placeholder="Enter content"
-        @input="updateFormModule"
+        @input="updateFormDescription"
       />
     </div>
-    <div class="syllabus-form-module__row">
-      <label class="syllabus-form-module__label">
+    <div class="syllabus-form-course__row">
+      <label class="syllabus-form-course__label">
         Chapters - Click to add qiskit chapters you want show in this section.
       </label>
     </div>
-    <div class="syllabus-form-module__row syllabus-form-module__courses__container">
+    <div class="syllabus-form-course__row syllabus-form-course__units__container">
       <div v-for="course in courseList" :key="course.id">
-        <h4 class="syllabus-form-module__courses__header">
+        <h4 class="syllabus-form-course__units__header">
           {{ course.title }}
         </h4>
-        <ColumnFlowGrid class="syllabus-form-module__courses__list" :elements="course.sections">
+        <ColumnFlowGrid class="syllabus-form-course__units__list" :elements="course.sections">
           <template #default="slotProps">
-            <bx-checkbox :label-text="slotProps.element.title" @input="updateFormModule" />
+            <bx-checkbox
+              :checked="containsUnitID(slotProps.element.uuid)"
+              :label-text="slotProps.element.title"
+              @bx-checkbox-changed="ev => updateFormModuleUnit(slotProps.element.uuid, ev)"
+            />
           </template>
         </ColumnFlowGrid>
       </div>
     </div>
-    <div class="syllabus-form-module__row syllabus-form-module__row__save">
+    <div class="syllabus-form-course__row syllabus-form-course__row__save">
       <BasicLink
-        class="syllabus-form-module__link"
-        :class="{'syllabus-form-module__link__disabled': syllabusSaved}"
+        class="syllabus-form-course__link"
+        :class="{'syllabus-form-course__link__disabled': syllabusSaved}"
         v-bind="saveSyllabusModuleLink"
         @click="saveModuleAction"
       >
@@ -70,6 +74,9 @@ import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
 import 'carbon-web-components/es/components/textarea/textarea.js'
 import 'carbon-web-components/es/components/checkbox/checkbox.js'
+import { SyllabusCourse, UnitUUID } from '../../../ts/syllabus'
+import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
+import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
 
 export default defineComponent({
   name: 'SyllabusFormModule',
@@ -79,9 +86,9 @@ export default defineComponent({
     Close16
   },
   props: {
-    moduleId: {
-      type: Number,
-      default: undefined,
+    course: {
+      type: Object,
+      default: () => ({} as SyllabusCourse),
       required: true
     },
     showCloseButton: {
@@ -97,9 +104,7 @@ export default defineComponent({
         label: 'Save content',
         url: '#'
       },
-      syllabusSaved: false,
-      moduleTitle: '',
-      moduleContent: ''
+      syllabusSaved: false
     }
   },
   mounted () {
@@ -108,15 +113,49 @@ export default defineComponent({
     })
   },
   methods: {
+    containsUnitID(uuid: string) {
+      return this.course.unitList.some((unit: UnitUUID) => unit === uuid)
+    },
     saveModuleAction () {
-      // TODO: Add proper functionality for persisting module data
+      // TODO: Add proper functionality for persisting course data
       this.saveSyllabusModuleLink.label = 'Saved'
       this.syllabusSaved = true
     },
-    updateFormModule () {
-      // TODO: Add proper functionality for updating module data
+    updateFormTitle (event: InputEvent) {
+      // TODO: Add proper functionality for updating course data
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
+
+      const newData = {
+        ...this.course,
+        ...{ title: (event.target as BXTextarea).value }
+      }
+
+      this.$emit('change', newData)
+    },
+    updateFormDescription (event: InputEvent) {
+      // TODO: Add proper functionality for updating course data
+      this.saveSyllabusModuleLink.label = 'Save content'
+      this.syllabusSaved = false
+
+      const newData = {
+        ...this.course,
+        ...{ description: (event.target as BXTextarea).value }
+      }
+
+      this.$emit('change', newData)
+    },
+    updateFormModuleUnit (uuid: string, event: Event) {
+      if ((event.target as BXCheckbox).checked) {
+        this.course.unitList.push(uuid)
+      } else {
+        const idx = this.course.unitList.indexOf(uuid)
+        if (idx >= 0) {
+          this.course.unitList.splice(idx, 1)
+        } 
+      }
+
+      this.$emit('change', this.course)
     },
     removeFormModule () {
       this.$emit('removeModuleAction')
@@ -131,7 +170,7 @@ export default defineComponent({
 @import '~/../scss/mixins/mixins.scss';
 @import '~/../scss/variables/colors.scss';
 
-.syllabus-form-module {
+.syllabus-form-course {
   position: relative;
   margin-top: $spacing-06;
   padding: $spacing-07 $spacing-05;
@@ -189,7 +228,7 @@ export default defineComponent({
     }
   }
 
-  &__courses {
+  &__units {
     &__container {
       background-color: $white-0;
       padding: $spacing-05;

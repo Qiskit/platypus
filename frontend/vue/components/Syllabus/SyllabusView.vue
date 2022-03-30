@@ -1,36 +1,36 @@
 <template>
   <section class="syllabus-view">
     <h1 class="syllabus-view__title">
-      {{ syllabus.title }}
+      {{ syllabus.name }}
     </h1>
     <h2 class="syllabus-view__section-title">
       General Information
     </h2>
     <SyllabusGeneralInformation class="syllabus-view__general-information" :syllabus="syllabus" />
     <div
-      v-for="(module, idx) in syllabus.module"
-      :key="`${idx}-${module.title}`"
-      class="syllabus-view__module"
+      v-for="(course, idx) in syllabus.courseList"
+      :key="`${idx}-${course.title}`"
+      class="syllabus-view__course"
     >
-      <div class="syllabus-view__module__title">
-        {{ module.title }}
+      <div class="syllabus-view__course__title">
+        {{ course.title }}
       </div>
-      <p class="syllabus-view__module__description">
-        {{ module.description }}
+      <p class="syllabus-view__course__description">
+        {{ course.description }}
       </p>
-      <div class="syllabus-view__module__chapters-title">
+      <div class="syllabus-view__course__units-title">
         <!-- TODO replace with translation on final design -->
         Chapters
       </div>
       <ColumnFlowGrid
         tag="ul"
-        class="syllabus-view__module__chapter-list"
-        :elements="module.chapterList"
+        class="syllabus-view__course__unit-list"
+        :elements="course.unitList"
       >
         <template #default="slotProps">
-          <li class="syllabus-view__module__chapter-list__item">
-            <BasicLink class="syllabus-view__module__chapter-list__chapter" :url="slotProps.element.url">
-              {{ slotProps.element.name }}
+          <li class="syllabus-view__course__unit-list__item">
+            <BasicLink class="syllabus-view__course__unit-list__unit" :url="getUrlById(slotProps.element)">
+              {{ getNameById(slotProps.element) }}
             </BasicLink>
           </li>
         </template>
@@ -44,6 +44,8 @@ import { defineComponent } from 'vue-demi'
 import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import SyllabusGeneralInformation from './SyllabusGeneralInformation.vue'
+import { Syllabus } from '../../../ts/syllabus'
+import { getCourseList, Section, Course } from '../../../ts/courses'
 
 export default defineComponent({
   name: 'SyllabusView',
@@ -52,56 +54,32 @@ export default defineComponent({
     BasicLink,
     ColumnFlowGrid
   },
+  props: {
+    syllabus: {
+      type: Object,
+      default: () => ({} as Syllabus),
+      required: true
+    }
+  },
   data () {
     return {
-      // TODO replace mock data
-      syllabus: {
-        title: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
-        instructor: 'instructor name',
-        location: 'Madrid',
-        university: 'UCM',
-        officeHours: '10:00 to 13:00',
-        classHours: '15:00 to 18:00',
-        email: 'none@none.never',
-        module: [
-          {
-            title: 'Week 1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            chapterList: [
-              {
-                name: 'Why quantum computing?',
-                url: '/course/introduction/why-quantum-computing'
-              },
-              {
-                name: 'The atoms of computation',
-                url: '/course/introduction/the-atoms-of-computation'
-              },
-              {
-                name: 'What is quantum?',
-                url: '/course/introduction/what-is-quantum'
-              }
-            ]
-          },
-          {
-            title: 'Week 2',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            chapterList: [
-              {
-                name: 'Why quantum computing?',
-                url: '/course/introduction/why-quantum-computing'
-              },
-              {
-                name: 'The atoms of computation',
-                url: '/course/introduction/the-atoms-of-computation'
-              },
-              {
-                name: 'What is quantum?',
-                url: '/course/introduction/what-is-quantum'
-              }
-            ]
-          }
-        ]
-      }
+      sectionList: [] as Section[],
+    }
+  },
+  mounted () {
+    getCourseList().then((courses) => {
+      const learningPathCourses = courses.filter(course => course.type === 'learning-path')
+      this.sectionList = learningPathCourses.reduce((sectionList: Section[], course: Course) => {
+          return sectionList.concat(course.sections)
+        }, [] as Section[])
+    })
+  },
+  methods: {
+    getUrlById (id: string) {
+      return this.sectionList.find((section: Section) => section.uuid === id)?.pageUrl
+    },
+    getNameById (id: string) {
+      return this.sectionList.find((section: Section) => section.uuid === id)?.title
     }
   }
 })
@@ -131,11 +109,11 @@ export default defineComponent({
     padding-bottom: $spacing-06;
   }
 
-  &__module {
+  &__course {
     border-top: 2px solid $border-color-light-2;
     padding-bottom: $spacing-05;
 
-    &__chapters-title,
+    &__units-title,
     &__title {
       @include type-style('expressive-heading-03', $fluid: true);
       margin: $spacing-05 0;
@@ -144,7 +122,7 @@ export default defineComponent({
       @include type-style("body-long-01");
       margin: $spacing-05 0;
     }
-    &__chapter-list {
+    &__unit-list {
       &__item {
         list-style-position: outside;
         list-style-type: disc;
@@ -155,7 +133,7 @@ export default defineComponent({
           font-size: 1.25rem;
         }
       }
-      &__chapter {
+      &__unit {
         color: $block-link-color-tertiary;
       }
     }

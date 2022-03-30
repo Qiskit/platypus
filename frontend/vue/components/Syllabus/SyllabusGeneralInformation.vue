@@ -42,10 +42,10 @@ export default defineComponent({
           value: this.syllabus.location
         });
       }
-      if (this.syllabus.university) {
+      if (this.syllabus.institution) {
         fieldList.push({
           name: this.$translate('University'),
-          value: this.syllabus.university
+          value: this.syllabus.institution
         });
       }
       if (this.syllabus.officeHours) {
