@@ -38,7 +38,7 @@ const targetEnvironment = window.location.hostname.includes('localhost') ? 'stag
 
 export const serverOptions: IServerOptions = {
   binderOptions: {
-    repo: 'qiskit/platypus-binder',
+    repo: 'Qiskit/platypus-binder',
     ref: targetEnvironment,
     binderUrl: 'https://mybinder.org',
     savedSession: {
