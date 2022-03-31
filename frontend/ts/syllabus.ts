@@ -24,9 +24,6 @@ export type UnitUUID = string
 
 export const getActiveSyllabus = (): Syllabus | undefined => {
   const jsonText: string = document.getElementById('syllabus')?.textContent || ''
-  if (jsonText.startsWith('SYLLABUS.NOT_FOUND')) {
-    return undefined
-  }
   
   return JSON.parse(jsonText) as Syllabus
 }

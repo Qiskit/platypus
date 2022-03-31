@@ -9,10 +9,7 @@
         {{ $translate("This is placeholder text for a page where students are viewing a syllabus.") }}
       </template>
     </UserAccountSectionHeader>
-    <SyllabusView v-if="syllabus" :syllabus="syllabus"/>
-    <div v-else class="syllabus__not-found">
-      Syllabus not found
-    </div>
+    <SyllabusView :syllabus="syllabus"/>
   </div>
 </template>
 
