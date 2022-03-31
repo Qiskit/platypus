@@ -21,3 +21,9 @@ export interface SyllabusCourse {
 }
 
 export type UnitUUID = string
+
+export const getActiveSyllabus = (): Syllabus | undefined => {
+  const jsonText: string = document.getElementById('syllabus')?.textContent || ''
+  
+  return JSON.parse(jsonText) as Syllabus
+}
