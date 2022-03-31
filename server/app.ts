@@ -213,6 +213,10 @@ const start = () => {
       })
     })
     .get('/syllabus/create', (req, res) => {
+      if (!req.user) {
+        return res.redirect('/signin')
+      }
+
       res.render('syllabusCreate')
     })
     .get('/syllabus', FindSyllabiController)
