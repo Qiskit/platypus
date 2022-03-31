@@ -41,3 +41,9 @@ export const getSyllabi = () : Promise<Syllabus[]> => {
   }
   return promise
 }
+
+export const getActiveSyllabus = (): Syllabus | undefined => {
+  const jsonText: string = document.getElementById('syllabus')?.textContent || ''
+  
+  return JSON.parse(jsonText) as Syllabus
+}

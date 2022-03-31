@@ -17,7 +17,7 @@
 import { defineComponent } from 'vue-demi'
 import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
 import SyllabusView from './SyllabusView.vue'
-import { Syllabus } from '../../../ts/syllabus'
+import { getActiveSyllabus, Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'SyllabusLayout',
@@ -27,36 +27,11 @@ export default defineComponent({
   },
   data () {
     return {
-      // TODO replace mock data
-      syllabus: {
-        name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
-        instructor: 'instructor name',
-        location: 'Madrid',
-        institution: 'UCM',
-        officeHours: '10:00 to 13:00',
-        classHours: '15:00 to 18:00',
-        email: 'none@none.never',
-        courseList: [
-          {
-            title: 'Week 1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            unitList: [
-              'bdb1d662-e0f6-428a-8830-befe6b47f320',
-              '7c765036-aebc-11ec-b909-0242ac120002',
-              '9260a554-aebc-11ec-b909-0242ac120002'
-            ]
-          },
-          {
-            title: 'Week 2',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            unitList: [
-              '9e8ceb9e-aebc-11ec-b909-0242ac120002',
-              'a2e6f7a2-aebc-11ec-b909-0242ac120002'
-            ]
-          }
-        ]
-      } as Syllabus
+      syllabus: undefined as Syllabus | undefined
     }
+  },
+  mounted() {
+    this.syllabus = getActiveSyllabus()
   }
 })
 </script>
@@ -70,5 +45,10 @@ export default defineComponent({
   @include contained();
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
+
+  &__not-found {
+    @include type-style('expressive-heading-04');
+    padding-top: $spacing-07;
+  }
 }
 </style>
