@@ -122,7 +122,6 @@ export default defineComponent({
       this.syllabusSaved = true
     },
     updateFormTitle (event: InputEvent) {
-      // TODO: Add proper functionality for updating course data
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
 
@@ -134,7 +133,6 @@ export default defineComponent({
       this.$emit('change', newData)
     },
     updateFormDescription (event: InputEvent) {
-      // TODO: Add proper functionality for updating course data
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
 

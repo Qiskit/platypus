@@ -12,7 +12,7 @@
       />
       <SyllabusFormModule
         v-for="(course, index) in syllabus.courseList"
-        :key="course"
+        :key="index"
         :show-close-button="syllabus.courseList.length > 1"
         :course="course"
         @removeModuleAction="removeContentBlock(course)"
