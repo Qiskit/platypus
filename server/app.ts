@@ -220,9 +220,9 @@ const start = () => {
       res.render('syllabusCreate')
     })
     .get('/syllabus/edit/:code', async (req, res, next) => {
-      //if (!req.user) {
-      //  return res.redirect('/signin')
-      //}
+      if (!req.user) {
+        return res.redirect('/signin')
+      }
       // TODO check if user is the owner
       const result = await FindSyllabusByCodeController(req, res, next)
 

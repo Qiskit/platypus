@@ -108,9 +108,6 @@ export default defineComponent({
     if (activeSyllabus) {
       this.syllabus = activeSyllabus
       this.editMode = true
-      console.log('EDITING SYLLABUS')
-    } else {
-      console.log('CREATING NEW SYLLABUS')
     }
   },
   methods: {
@@ -130,7 +127,26 @@ export default defineComponent({
       this.lastDeletedCourse = undefined
     },
     submitForm () {
-      // TODO: add logic for submitting form
+      const url = this.editMode ? `/syllabus/${this.syllabus.id}` : '/syllabus'
+      const csrfToken = { _csrf: window.csrfToken }
+      fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          ...csrfToken,
+          ...this.syllabus
+        })
+      }).then((res) => {
+        if (res.status === 200) {
+          res.json().then((jsonResult: Syllabus) => {
+            console.log(jsonResult)
+            window.location.href = `/syllabus/${jsonResult.code}`
+          })
+        } else {
+          // TODO: Manage this error (and improve backend feedback)
+          console.error(res)
+        }
+      })
     },
     undoDeleteAction () {
       if (!this.lastDeletedCourse) {
