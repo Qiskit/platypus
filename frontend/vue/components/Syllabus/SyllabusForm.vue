@@ -59,8 +59,7 @@ import BasicLink from '../common/BasicLink.vue'
 import SyllabusFormCourseInfo from './SyllabusFormCourseInfo.vue'
 import SyllabusFormModule from './SyllabusFormModule.vue'
 import SyllabusInlineNotification from './SyllabusInlineNotification.vue'
-import { Syllabus, UnitUUID, SyllabusCourse } from '../../../ts/syllabus'
-import { getCourseList, Course, Section } from '../../../ts/courses'
+import { Syllabus, SyllabusCourse, emptySyllabus, getActiveSyllabus } from '../../../ts/syllabus'
 
 interface DeletedCourse {
   index: number, 
@@ -78,6 +77,7 @@ export default defineComponent({
   },
   data () {
     return {
+      editMode: false,
       defaultActiveTab: 'write',
       lastDeletedCourse: undefined as DeletedCourse|undefined,
       addContentLink: {
@@ -100,34 +100,17 @@ export default defineComponent({
           location: 'create-syllabus'
         }
       },
-      syllabus: {
-        name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
-        instructor: 'instructor name',
-        location: 'Madrid',
-        institution: 'UCM',
-        officeHours: '10:00 to 13:00',
-        classHours: '15:00 to 18:00',
-        email: 'none@none.never',
-        courseList: [
-          {
-            title: 'Week 1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            unitList: [
-              'bdb1d662-e0f6-428a-8830-befe6b47f320',
-              '7c765036-aebc-11ec-b909-0242ac120002',
-              '9260a554-aebc-11ec-b909-0242ac120002'
-            ]
-          },
-          {
-            title: 'Week 2',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tellus non ligula hendrerit interdum. Suspendisse sit amet erat vitae urna mattis sodales. Nullam consequat sagittis tellus. In et justo ex. Suspendisse tempor auctor blandit. Sed vel est eu felis vehicula varius id non ante. Morbi lacinia dolor ac nunc malesuada, dictum imperdiet ligula pellentesque.',
-            unitList: [
-              '9e8ceb9e-aebc-11ec-b909-0242ac120002',
-              'a2e6f7a2-aebc-11ec-b909-0242ac120002'
-            ]
-          }
-        ]
-      } as Syllabus
+      syllabus: emptySyllabus()
+    }
+  },
+  mounted() {
+    const activeSyllabus = getActiveSyllabus()
+    if (activeSyllabus) {
+      this.syllabus = activeSyllabus
+      this.editMode = true
+      console.log('EDITING SYLLABUS')
+    } else {
+      console.log('CREATING NEW SYLLABUS')
     }
   },
   methods: {
