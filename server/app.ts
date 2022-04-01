@@ -50,6 +50,7 @@ const getCourseData = async function (req: Request) {
     section,
     config: CONFIG,
     progressJSON,
+    progressData: response,
     notationsJSON,
     learningPath,
     nextSection,
