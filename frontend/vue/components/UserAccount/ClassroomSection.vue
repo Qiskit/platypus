@@ -29,7 +29,7 @@
       </p>
       <div class="classroom__content__syllabi-list">
         <SyllabusCard
-          v-for="syllabus in mockSyllabi"
+          v-for="syllabus in syllabi"
           :key="syllabus.id"
           image="/images/header.png"
           :syllabus="syllabus"
@@ -44,6 +44,7 @@ import { defineComponent } from 'vue-demi'
 import AppCta from '../common/AppCta.vue'
 import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
 import SyllabusCard from './SyllabusCard.vue'
+import { getSyllabi, Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'ClassRoomSection',
@@ -55,30 +56,13 @@ export default defineComponent({
   data () {
     return {
       // TODO: REPLACE MOCK DATA
-      mockSyllabusLink: '/syllabus/QML-100',
-      mockSyllabi: [
-        {
-          id: '123-abc',
-          name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
-          instructor: 'instructorName',
-          location: 'Madrid',
-          institution: 'UCM',
-          officeHours: '10:00 to 13:00',
-          classHours: '15:00 to 18:00',
-          email: 'none@none.never'
-        },
-        {
-          id: '123-abc',
-          name: 'PHYS 332: Quantum Mechanics III (Summer, 2022)',
-          instructor: 'instructorName',
-          location: 'Madrid',
-          institution: 'UCM',
-          officeHours: '10:00 to 13:00',
-          classHours: '15:00 to 18:00',
-          email: 'none@none.never'
-        }
-      ]
+      syllabi: ([] as  Syllabus[])
     }
+  },
+  mounted() {
+    getSyllabi().then((syllabi: Syllabus[]) => {
+      this.syllabi = syllabi
+    })
   }
 })
 </script>

@@ -22,6 +22,26 @@ export interface SyllabusCourse {
 
 export type UnitUUID = string
 
+let promise: Promise<Syllabus[]> | undefined
+
+interface fetchResult {
+  data: Syllabus[],
+  count: number,
+  limit: number,
+  page: number
+}
+
+export const getSyllabi = () : Promise<Syllabus[]> => {
+  if (!promise) {
+    promise = fetch('/syllabus').then((res) => {
+      return res.json().then((jsonResult: fetchResult) => {
+        return jsonResult.data
+      })
+    })
+  }
+  return promise
+}
+
 export const getActiveSyllabus = (): Syllabus | undefined => {
   const jsonText: string = document.getElementById('syllabus')?.textContent || ''
   

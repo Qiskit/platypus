@@ -8,14 +8,14 @@
     <div class="syllabus-card__actions">
       <AppCta
         class="syllabus-card__actions__enter"
-        :url="`/syllabus/${syllabus.id}`"
+        :url="`/syllabus/${syllabus.code}`"
         kind="ghost"
         label="Go to this learning course"
       />
       <!-- TODO: Edit url not created yet -->
       <AppCta
         class="syllabus-card__actions__edit"
-        :url="`/syllabus/edit/${syllabus.id}`"
+        :url="`/syllabus/edit/${syllabus.code}`"
         kind="ghost"
         label="Edit Syllabus"
       />
