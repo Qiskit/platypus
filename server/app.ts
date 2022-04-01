@@ -30,7 +30,11 @@ const getCourseData = async function (req: Request) {
   const learningPath = isLearningPath(course)
 
   const response = await Progress.lookup(req, course.id)
-  const progressJSON = JSON.stringify(response || {})
+  const progressJSON = JSON.stringify({
+    [course.id]: {
+      [section.id]: JSON.parse(response?.getJSON(section.id) || '{}')
+    }
+  })
   const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
   const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
   const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -62,6 +66,33 @@ const getCourseData = async function (req: Request) {
     // override `__()`  to pass in the course locale instead of default req locale
     __: (str: string, ...args: string[]) => translate(lang, str, args)
   }
+}
+
+const getUserProgressData = async (userId: string) => {
+  let progress = {}
+  const courses = await Progress.find({ userId }).exec()
+
+  for (const course of courses) {
+    const sections = {}
+    const keySteps = course.steps.keys()
+    const valueSteps = course.steps.values()
+    for (const [key, value] of course.sections) {
+      sections[key] = {
+        progress: value.progress,
+        steps: {
+          [keySteps.next().value]: {
+            scores: valueSteps.next().value.scores
+          }
+        }
+      }
+    }
+    progress = {
+      ...progress,
+      [course.courseId]: sections
+    }
+  }
+
+  return progress
 }
 
 new MathigonStudioApp()
@@ -119,7 +150,7 @@ new MathigonStudioApp()
 
     res.redirect('/logout')
   })
-  .get('/account', (req, res) => {
+  .get('/account', async (req, res) => {
     if (!req.user) return res.redirect('/signin');
     if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
 
@@ -133,9 +164,12 @@ new MathigonStudioApp()
       lastName: req.user?.lastName
     }
 
+    const progressData = await getUserProgressData(req.user.id)
+
     res.render('userAccount', {
       config: CONFIG,
       userData: userMockData,
+      progressJSON: JSON.stringify(progressData),
       lang,
       privacyPolicyMD,
       translationsJSON

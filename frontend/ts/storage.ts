@@ -18,7 +18,13 @@ const getUserData = function (): {[x: string]: any} {
   } catch (e) {
     console.error(e)
   }
-  return userData
+
+  const userDataFromMathigon = JSON.parse(document.getElementById('userdata')?.textContent || '{}')
+
+  return {
+    ...userData,
+    ...userDataFromMathigon
+  }
 }
 
 const storeUserData = function (data: {[x: string]: any}): boolean {
