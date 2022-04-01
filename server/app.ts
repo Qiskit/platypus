@@ -7,15 +7,16 @@ import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities/utilities'
-
+import { Progress } from '@mathigon/studio/server/models/progress'
+import { CourseAnalytics } from '@mathigon/studio/server/models/analytics'
 import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
+
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
   updateGlossary, loadLocaleRawFile, tocFilterByType
 } from './utilities'
 import { TocCourse } from './interfaces'
-import * as storageApi from './storage'
 
 const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
@@ -28,8 +29,8 @@ const getCourseData = async function (req: Request) {
   const lang = course.locale || 'en'
   const learningPath = isLearningPath(course)
 
-  const response = await storageApi.getProgressData?.(req, course, section)
-  const progressJSON = JSON.stringify(response?.data || {})
+  const response = await Progress.lookup(req, course.id)
+  const progressJSON = JSON.stringify(response || {})
   const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
   const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
   const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -39,6 +40,10 @@ const getCourseData = async function (req: Request) {
   const nextSection = findNextSection(course, section)
   const prevSection = findPrevSection(course, section)
   const subsections = getSectionIndex(course, section)
+
+  if (req.user) {
+    CourseAnalytics.track(req.user.id) // async
+  }
 
   return {
     course,
