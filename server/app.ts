@@ -6,7 +6,7 @@ import { Request } from 'express'
 import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
-import { getCourse } from '@mathigon/studio/server/utilities/utilities'
+import { getCourse, loadJSON } from '@mathigon/studio/server/utilities/utilities'
 import { Progress } from '@mathigon/studio/server/models/progress'
 import { CourseAnalytics } from '@mathigon/studio/server/models/analytics'
 import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
@@ -73,19 +73,23 @@ const getUserProgressData = async (userId: string) => {
   const courses = await Progress.find({ userId }).exec()
 
   for (const course of courses) {
-    const sections = {}
-    const keySteps = course.steps.keys()
-    const valueSteps = course.steps.values()
+    const courseContent = loadJSON(`public/content/${course.courseId}/data_en.json`) as any
+    const sections: { [key: string]: any } = {}
+
     for (const [key, value] of course.sections) {
+      const sectrionFromCourseContent = courseContent.sections.find((section: any) => section.id === key)
+      const { steps } = sectrionFromCourseContent
+
       sections[key] = {
         progress: value.progress,
-        steps: {
-          [keySteps.next().value]: {
-            scores: valueSteps.next().value.scores
-          }
-        }
+        steps: {}
+      }
+
+      for (const step of steps) {
+        sections[key].steps[step] = course.steps.get(step)?.scores
       }
     }
+
     progress = {
       ...progress,
       [course.courseId]: sections
