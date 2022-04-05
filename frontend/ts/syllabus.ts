@@ -45,5 +45,26 @@ export const getSyllabi = () : Promise<Syllabus[]> => {
 export const getActiveSyllabus = (): Syllabus | undefined => {
   const jsonText: string = document.getElementById('syllabus')?.textContent || ''
   
-  return JSON.parse(jsonText) as Syllabus
+  try {
+    return JSON.parse(jsonText) as Syllabus
+  } catch {
+    return undefined
+  }
 }
+
+export const emptySyllabus = (): Syllabus => ({
+  name: '',
+  instructor: '',
+  location: '',
+  institution: '',
+  officeHours: '',
+  classHours: '',
+  email: '',
+  courseList: [
+    {
+      title: '',
+      description: '',
+      unitList: [],
+    }
+  ]
+})

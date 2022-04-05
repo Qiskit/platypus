@@ -2,7 +2,7 @@
 // Project Platypus
 // =============================================================================
 
-import { Request } from 'express'
+import { Request, Response, NextFunction  } from 'express'
 import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
@@ -219,8 +219,33 @@ const start = () => {
 
       res.render('syllabusCreate')
     })
+    .get('/syllabus/edit/:code', async (req, res, next) => {
+      if (!req.user) {
+        return res.redirect('/signin')
+      }
+      // TODO check if user is the owner
+      const result = await FindSyllabusByCodeController(req, res, next)
+
+      if (res.statusCode === 200) {
+        res.render('syllabusCreate', {
+          syllabus: JSON.stringify(result)
+        })
+      } else {
+        res.render('error')
+      }
+    })
     .get('/syllabus', FindSyllabiController)
-    .get('/syllabus/:code', FindSyllabusByCodeController)
+    .get('/syllabus/:code', async (req: Request, res: Response, next: NextFunction) => {
+      const result = await FindSyllabusByCodeController(req, res, next)
+
+      if (res.statusCode === 200) {
+        res.render('syllabus', {
+          syllabus: JSON.stringify(result)
+        })
+      } else {
+        res.render('error')
+      }
+    })
     .post('/syllabus', CreateSyllabusController)
     // Here we use POST instead of PUT because Mathigon doesn't support PUT requests
     .post('/syllabus/:id', UpdateSyllabusController)

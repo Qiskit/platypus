@@ -27,16 +27,15 @@ export class CreateSyllabusDto implements CreateSyllabus {
   readonly institution?: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   readonly officeHours!: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   readonly classHours!: string
 
   @MaxLength(64)
-  @IsEmail()
-  @IsNotEmpty()
+  @IsOptional()
   readonly email!: string
 
   @IsArray()
