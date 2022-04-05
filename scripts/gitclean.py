@@ -1,6 +1,5 @@
 import sys
 import nbformat
-from joblib import Parallel, delayed
 
 CLEAN_METADATA = {'kernelspec': {'display_name': 'Python 3',
   'language': 'python',
