@@ -139,7 +139,6 @@ export default defineComponent({
       }).then((res) => {
         if (res.status === 200) {
           res.json().then((jsonResult: Syllabus) => {
-            console.log(jsonResult)
             window.location.href = `/syllabus/${jsonResult.code}`
           })
         } else {
