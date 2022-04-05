@@ -6,7 +6,7 @@ import { Request } from 'express'
 import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
-import { getCourse, loadJSON } from '@mathigon/studio/server/utilities/utilities'
+import { getCourse } from '@mathigon/studio/server/utilities/utilities'
 import { Progress } from '@mathigon/studio/server/models/progress'
 import { CourseAnalytics } from '@mathigon/studio/server/models/analytics'
 import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
@@ -20,6 +20,28 @@ import { TocCourse } from './interfaces'
 
 const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
+// TODO once time we have the new backend structure from syllabus move this to that one
+// Similar to await Progress.lookup(req, course.id) but without the requirement to pass a request and adapted to our requirements
+const getProgressData = async (userId: string | null, courseId: string, sectionId: string) => {
+  if (!userId) {
+    return {}
+  }
+  const progressCourse = await Progress.findOne({ userId, courseId }).exec()
+
+  // We need to add the progress to the section information
+  const progressSection = JSON.stringify({
+    [courseId]: {
+      [sectionId]: {
+        ...JSON.parse(progressCourse?.getJSON(sectionId) || '{}'),
+        progress: progressCourse?.sections.get(sectionId)?.progress
+      }
+    }
+  })
+
+  // Note: progressCourse is used by Mathigon in progressData, progressSection is used by us in progressJSON and in account
+  return { progressCourse, progressSection }
+}
+
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
   const section = course?.sections.find(s => s.id === req.params.section)
@@ -29,12 +51,8 @@ const getCourseData = async function (req: Request) {
   const lang = course.locale || 'en'
   const learningPath = isLearningPath(course)
 
-  const response = await Progress.lookup(req, course.id)
-  const progressJSON = JSON.stringify({
-    [course.id]: {
-      [section.id]: JSON.parse(response?.getJSON(section.id) || '{}')
-    }
-  })
+  const userId = req.user?.id || req.tmpUser || null
+  const { progressCourse, progressSection } = await getProgressData(userId, course.id, section.id)
   const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
   const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
   const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -53,8 +71,8 @@ const getCourseData = async function (req: Request) {
     course,
     section,
     config: CONFIG,
-    progressJSON,
-    progressData: response,
+    progressJSON: progressSection,
+    progressData: progressCourse,
     notationsJSON,
     learningPath,
     nextSection,
@@ -69,30 +87,17 @@ const getCourseData = async function (req: Request) {
 }
 
 const getUserProgressData = async (userId: string) => {
-  let progress = {}
+  const progress: { [key: string]: any } = {}
   const courses = await Progress.find({ userId }).exec()
 
   for (const course of courses) {
-    const courseContent = loadJSON(`public/content/${course.courseId}/data_en.json`) as any
-    const sections: { [key: string]: any } = {}
-
-    for (const [key, value] of course.sections) {
-      const sectrionFromCourseContent = courseContent.sections.find((section: any) => section.id === key)
-      const { steps } = sectrionFromCourseContent
-
-      sections[key] = {
-        progress: value.progress,
-        steps: {}
+    for (const [key] of course.sections) {
+      const { progressSection } = await getProgressData(userId, course.courseId, key)
+      const progressJSON = JSON.parse(progressSection || '{}')
+      progress[course.courseId] = {
+        ...progress[course.courseId],
+        [key]: progressJSON[course.courseId][key]
       }
-
-      for (const step of steps) {
-        sections[key].steps[step] = course.steps.get(step)?.scores
-      }
-    }
-
-    progress = {
-      ...progress,
-      [course.courseId]: sections
     }
   }
 
