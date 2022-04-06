@@ -350,11 +350,12 @@ def handle_code_cell(cell, resources):
 
     graderImport = cell.metadata["grader_import"] if "grader_import" in cell.metadata else None
     graderFunction = cell.metadata["grader_function"] if "grader_function" in cell.metadata else None
+    goal = cell.metadata["goals"] if "goals" in cell.metadata else None
 
     graderAttr = ""
 
     if graderImport is not None and graderFunction is not None:
-        graderAttr = f"(grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\")"
+        graderAttr = f"(grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\" goal=\"{goal[0].id}\")"
 
     code_lines = [
         f"\n::: q-code-exercise{graderAttr}\n",
