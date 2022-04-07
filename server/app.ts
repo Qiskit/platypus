@@ -20,24 +20,6 @@ import { TocCourse } from './interfaces'
 
 const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
-// TODO once time we have the new backend structure from syllabus move this to that one
-const getProgressData = async (req: Request, courseId: string, sectionId: string) => {
-  const progressCourse = await Progress.lookup(req, courseId)
-
-  // We need to add the progress to the section information
-  const progressSection = JSON.stringify({
-    [courseId]: {
-      [sectionId]: {
-        ...JSON.parse(progressCourse?.getJSON(sectionId) || '{}'),
-        progress: progressCourse?.sections.get(sectionId)?.progress
-      }
-    }
-  })
-
-  // Note: progressCourse is used by Mathigon in progressData, progressSection is used by us in progressJSON and in account
-  return { progressCourse, progressSection }
-}
-
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
   const section = course?.sections.find(s => s.id === req.params.section)
@@ -47,7 +29,7 @@ const getCourseData = async function (req: Request) {
   const lang = course.locale || 'en'
   const learningPath = isLearningPath(course)
 
-  const { progressCourse, progressSection } = await getProgressData(req, course.id, section.id)
+  const progressData = await Progress.lookup(req, course.id)
   const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
   const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
   const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -66,8 +48,7 @@ const getCourseData = async function (req: Request) {
     course,
     section,
     config: CONFIG,
-    progressJSON: progressSection,
-    progressData: progressCourse,
+    progressData,
     notationsJSON,
     learningPath,
     nextSection,
@@ -86,18 +67,12 @@ const getUserProgressData = async (req: Request) => {
   if (!userId) {
     return {}
   }
+
   const progress: { [key: string]: any } = {}
-  const courses = await Progress.find({ userId }).exec()
+  const courses = Array.from((await Progress.getUserData(userId)).values())
 
   for (const course of courses) {
-    for (const [key] of course.sections) {
-      const { progressSection } = await getProgressData(req, course.courseId, key)
-      const progressJSON = JSON.parse(progressSection || '{}')
-      progress[course.courseId] = {
-        ...progress[course.courseId],
-        [key]: progressJSON[course.courseId][key]
-      }
-    }
+    progress[course.courseId] = course.sections
   }
 
   return progress
