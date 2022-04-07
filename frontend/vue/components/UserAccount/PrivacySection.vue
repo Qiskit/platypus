@@ -1,8 +1,16 @@
 <template>
   <section class="privacy-section">
-    <h1 class="privacy-section__title">
-      {{ $translate('Privacy') }}
-    </h1>
+    <UserAccountSectionHeader>
+      <template #title>
+        {{ $translate("Privacy") }}
+      </template>
+      <template #description>
+        {{ $translate("This page contains privacy information, including the IBM privacy statement, the end user license agreement, and the ability to delete your account. If you would like copy of all of your user account data, please email") }}
+        <AppLink class="privacy-section__policy-email" url="mailto:qiskit@us.ibm.com">
+          qiskit@us.ibm.com.
+        </AppLink>
+      </template>
+    </UserAccountSectionHeader>
     <h4 class="privacy-section__subtitle privacy-section__subtitle_general">
       {{ $translate('IBM Privacy Statement') }}
     </h4>
@@ -21,11 +29,13 @@
 import { defineComponent } from 'vue-demi'
 import MarkdownIt from 'markdown-it'
 import AppLink from '../common/AppLink.vue'
+import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
 
 export default defineComponent({
   name: 'PrivacySection',
   components: {
-    AppLink
+    AppLink,
+    UserAccountSectionHeader
   },
   data () {
     return {
@@ -60,13 +70,6 @@ export default defineComponent({
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
 
-  &__title {
-    @include type-style('expressive-heading-05', $fluid: true);
-    color: $text-active-color;
-    border-bottom: 1px solid $border-color-light-2;
-    padding-bottom: $spacing-05;
-  }
-
   &__subtitle {
     @include type-style('expressive-heading-04');
     padding: $spacing-05 0;
@@ -97,6 +100,10 @@ export default defineComponent({
     & > ::v-deep(*):last-child {
       margin-bottom: 0;
     }
+  }
+
+  &__policy-email {
+    color: $link-color-secondary;
   }
 }
 

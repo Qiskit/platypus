@@ -34,7 +34,7 @@ const assignProgressToCourses = (courses: Course[]) => {
   const userData = getUserData()
   courses.forEach((course) => {
     course.sections.forEach((section) => {
-      section.progress = userData?.[course.id]?.[section.id]?.progress
+      section.progress = (userData?.[course.id]?.[section.id]?.progress || 0) / 100
     })
   })
 }

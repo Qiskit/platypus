@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
           cache: "npm"
@@ -35,7 +35,7 @@ jobs:
           python-version: 3.8
 
       - name: Load pip cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: py-${{ hashFiles('converter/textbook-converter/requirements.txt') }}-${{ hashFiles('converter/textbook-converter/requirements-test.txt') }}

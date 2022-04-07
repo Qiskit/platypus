@@ -120,6 +120,16 @@ const convert = function (language: string) {
 
 const run = function () {
   // run conversion for each available language
+
+  const notebooks = getNotebookPath()
+  const working = getWorkingPath()
+  const workingShared = path.join(working, 'shared')
+
+  // copy toc.yaml
+  copyNotebookAssets(notebooks, workingShared, (src: string, dest: string) => {
+    return src.includes('toc.yaml')
+  })
+
   translationsLanguages.forEach(language => {
     prepare(language)
     convert(language)
