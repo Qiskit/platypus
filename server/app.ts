@@ -7,15 +7,16 @@ import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
 import { getCourse } from '@mathigon/studio/server/utilities/utilities'
-
+import { Progress } from '@mathigon/studio/server/models/progress'
+import { CourseAnalytics } from '@mathigon/studio/server/models/analytics'
 import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
+
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
   updateGlossary, loadLocaleRawFile, tocFilterByType
 } from './utilities'
 import { TocCourse } from './interfaces'
-import * as storageApi from './storage'
 
 const DEFAULT_PRIVACY_POLICY_PATH = '/translations/privacy-policy.md'
 
@@ -28,8 +29,7 @@ const getCourseData = async function (req: Request) {
   const lang = course.locale || 'en'
   const learningPath = isLearningPath(course)
 
-  const response = await storageApi.getProgressData?.(req, course, section)
-  const progressJSON = JSON.stringify(response?.data || {})
+  const progressData = await Progress.lookup(req, course.id)
   const notationsJSON = JSON.stringify(NOTATIONS[lang] || {})
   const universalJSON = JSON.stringify(UNIVERSAL_NOTATIONS[lang] || {})
   const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
@@ -40,11 +40,15 @@ const getCourseData = async function (req: Request) {
   const prevSection = findPrevSection(course, section)
   const subsections = getSectionIndex(course, section)
 
+  if (req.user) {
+    CourseAnalytics.track(req.user.id) // async
+  }
+
   return {
     course,
     section,
     config: CONFIG,
-    progressJSON,
+    progressData,
     notationsJSON,
     learningPath,
     nextSection,
@@ -56,6 +60,22 @@ const getCourseData = async function (req: Request) {
     // override `__()`  to pass in the course locale instead of default req locale
     __: (str: string, ...args: string[]) => translate(lang, str, args)
   }
+}
+
+const getUserProgressData = async (req: Request) => {
+  const userId = req.user?.id || req.tmpUser || null
+  if (!userId) {
+    return {}
+  }
+
+  const progress: { [key: string]: any } = {}
+  const courses = Array.from((await Progress.getUserData(userId)).values())
+
+  for (const course of courses) {
+    progress[course.courseId] = course.sections
+  }
+
+  return progress
 }
 
 new MathigonStudioApp()
@@ -113,7 +133,7 @@ new MathigonStudioApp()
 
     res.redirect('/logout')
   })
-  .get('/account', (req, res) => {
+  .get('/account', async (req, res) => {
     if (!req.user) return res.redirect('/signin');
     if (req.user && !req.user.acceptedPolicies) return res.redirect('/eula');
 
@@ -127,9 +147,12 @@ new MathigonStudioApp()
       lastName: req.user?.lastName
     }
 
+    const progressData = await getUserProgressData(req)
+
     res.render('userAccount', {
       config: CONFIG,
       userData: userMockData,
+      progressJSON: JSON.stringify(progressData),
       lang,
       privacyPolicyMD,
       translationsJSON
