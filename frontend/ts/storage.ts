@@ -49,10 +49,10 @@ const saveProgressData = function (course: XCourse, progressData: SectionProgres
   for (let s in steps) {
     scores += steps[s].scores.length
   }
-  const progress = scores / (course.goals || 0)
+  const progress = (scores * 100) / (course.goals || 0)
   if (!isNaN(progress)) {
     updatedProgressData.progress = parseFloat(progress.toFixed(2))
-    updatedProgressData.completed = progress > 0.99
+    updatedProgressData.completed = progress > 99
   
     storeUserData({
       [course.id]: {
@@ -82,7 +82,7 @@ const renderProgessData = function (courseId: string) {
   for (let sectionId in courseSectionsData) {
     const sectionProgressIndicator = document.querySelector(`[data-section-id="${sectionId}"] x-progress`)
     if (sectionProgressIndicator) {
-      sectionProgressIndicator.setAttribute('p', courseSectionsData[sectionId]?.progress || 0)
+      sectionProgressIndicator.setAttribute('p', `${(courseSectionsData[sectionId]?.progress || 0) / 100}`)
     }
   }
 }
