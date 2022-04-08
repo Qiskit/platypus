@@ -77,7 +77,7 @@ html(lang=course.locale dir=dir)
         script(type="application/json")#glossary!= course.glossJSON
         script(type="application/json")#bios!= course.biosJSON
         script(type="application/json")#hints!= course.hintsJSON
-        script(type="application/json")#userdata!= progressJSON
+        script(type="application/json")#userdata!= progressData ? progressData.getJSON(section.id) : '{}'
         script(type="application/json")#notations!= notationsJSON
         script(type="application/json")#universal-notes!= universalJSON
         script(type="application/json")#translations!= translationsJSON
