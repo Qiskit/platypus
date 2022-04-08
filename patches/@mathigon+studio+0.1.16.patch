@@ -314,6 +314,19 @@ index a28f2db..d1eb2e7 100755
    });
  
    app.get('/cron/cleanup', async (req, res, next) => {
+diff --git a/node_modules/@mathigon/studio/server/models/progress.ts b/node_modules/@mathigon/studio/server/models/progress.ts
+index 6c9581e..504d21e 100755
+--- a/node_modules/@mathigon/studio/server/models/progress.ts
++++ b/node_modules/@mathigon/studio/server/models/progress.ts
+@@ -85,7 +85,7 @@ const ProgressSchema = new Schema<ProgressDocument, ProgressModel>({
+   messages: [{content: String, kind: {type: String, default: 'hint'}}]
+ }, {timestamps: true});
+ 
+-ProgressSchema.index({user: 1, course: 1}, {unique: true});
++ProgressSchema.index({userId: 1, courseId: 1}, {unique: true});
+ 
+ ProgressSchema.virtual('activeSection').get(function(this: ProgressDocument) {
+   const course = getCourse(this.courseId, 'en')!;
 diff --git a/node_modules/@mathigon/studio/server/utilities/mongodb.ts b/node_modules/@mathigon/studio/server/utilities/mongodb.ts
 index 227d047..22dcf81 100644
 --- a/node_modules/@mathigon/studio/server/utilities/mongodb.ts
