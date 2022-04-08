@@ -15,8 +15,7 @@
         url="/syllabus/create"
       />
       <p class="classroom__create-syllabus__description">
-        <!-- TODO: update with final string and provide translation -->
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        {{ $translate("Create a curated learning path for your students, using Qiskit Textbook Chapters, Labs, and Summer Schools") }}
       </p>
     </div>
     <section class="classroom__content">
@@ -24,8 +23,7 @@
         {{ $translate("Active Syllabi") }}
       </h1>
       <p class="classroom__content__description">
-        <!-- TODO: update with final string and provide translation -->
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        {{ $translate("Here are your active syllabi. You can edit, publish, and share them with your students") }}
       </p>
       <div class="classroom__content__syllabi-list">
         <SyllabusCard
