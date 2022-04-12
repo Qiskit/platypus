@@ -87,7 +87,7 @@
     "@vue/compiler-sfc": "~3.1.5",
     "axe-core": "^4.4.1",
     "cross-env": "^7.0.3",
-    "cypress": "^9.5.0",
+    "cypress": "^9.5.4",
     "cypress-axe": "^0.14.0",
     "cypress-wait-until": "^1.7.2",
     "eslint": "^8.11.0",
