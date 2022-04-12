@@ -1,9 +1,9 @@
-
+# This script checks that each quiz in NB_PATHS has a unique goal name
 from typing import List
 
 
 NB_ROOT = './notebooks'
-NB_PATHS = './scripts/notebook_paths.txt'
+NB_PATHS = './scripts/content_checks/notebook_paths.txt'
 
 
 def check_file(filename: str, goal_names: List[str]) -> None:
@@ -30,6 +30,7 @@ if __name__ == '__main__':
             continue
         if filename.startswith('#'):
             print(f'Skipping: {filename}')
+            pass
         else:
-            print(f'Goals check: {filename}')
+            #print(f'Goals check: {filename}')
             check_file(f'{NB_ROOT}/{filename.strip()}.ipynb', goal_names)
