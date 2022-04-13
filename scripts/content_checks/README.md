@@ -49,12 +49,12 @@ the notebooks that hold the textbook content.
   to overwrite the metadata. It's a good idea to add this as a commit
   hook.
 
-- `nb_svg.py`: Minify SVGs in notebooks.
+- `nb_svg.py`: Clean SVGs in notebooks.
   We prefer notebook output images to be SVG as they produce clearer
   diagrams with smaller file sizes. The downside is that they produce
   large git diffs (lots of line changes), so we require that each SVG is
-  minified to a single line. This script checks the inline SVGs have been
-  minified, and can minify any multi-line SVGs when run with the `--fix`
+  optimized to a single line. This script checks the inline SVGs have been
+  optimized, and can optimize any multi-line SVGs when run with the `--fix`
   argument.
 
 - `missing_nb_check.sh`: Compares files in old textbook repo to this repo.
