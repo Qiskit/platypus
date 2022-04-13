@@ -25,7 +25,7 @@ div.c-sidebar(data-test="sidebar")
               - var progclass = section && section.id === s.id ? "progress-wrapper sidebar-row active" : "progress-wrapper"
               if section && section.id === s.id
                 div(class=progclass, title=s.title)
-                  x-progress(r=10 p=0)
+                  x-progress(r=10 p=(progressData ? progressData.getSectionProgress(s) : 0))
               else
                 a(
                   href=`${s.url}`
@@ -33,7 +33,7 @@ div.c-sidebar(data-test="sidebar")
                   onclick=`textbook.trackClickEvent('${s.id}', '${sidebarLocation}')`
                   , title=s.title
                 )
-                  x-progress(r=10 p=0)
+                  x-progress(r=10 p=(progressData ? progressData.getSectionProgress(s) : 0))
             if section && section.id === s.id
               span(class="c-sidebar__entry c-sidebar__entry--active")
                 | !{s.title}

@@ -29,9 +29,10 @@
     "cy:run": "cypress run",
     "test": "start-server-and-test start :8080/health cy:run",
     "test:debug": "start-server-and-test start :8080/health cy:open",
-    "test:nb:goals": "python3 ./scripts/goals.py",
-    "test:nb:lint": "./scripts/nb_lint.sh",
-    "test:nb": "npm run test:nb:lint && npm run test:nb:goals",
+    "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py",
+    "test:nb:pylint": "./scripts/content_checks/nb_pylint.sh",
+    "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix",
+    "test:nb": "npm run test:nb:pylint && npm run test:nb:meta",
     "setup:secrets": "mgon-secrets"
   },
   "engines": {
@@ -44,7 +45,7 @@
     "@carbon/vue": "^2.40.0",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.0.0",
-    "@jupyter-widgets/html-manager": "^0.20.0",
+    "@jupyter-widgets/html-manager": "^0.20.1",
     "@jupyter-widgets/jupyterlab-manager": "^3.0.1",
     "@jupyterlab/codemirror": "^3.2.9",
     "@jupyterlab/mathjax2": "^3.2.9",
