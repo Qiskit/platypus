@@ -355,10 +355,14 @@ def handle_code_cell(cell, resources):
     graderAttr = ""
 
     if graderImport is not None and graderFunction is not None:
-        graderAttr = f"(grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\" goal=\"{goal[0].id}\")"
+        graderAttr = f"{graderAttr}grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\""
+
+    if graderImport is not None and graderFunction is not None and goal is not None:
+        graderAttr = f"{graderAttr} goal=\"{goal[0].id}\""
+
 
     code_lines = [
-        f"\n::: q-code-exercise{graderAttr}\n",
+        f"\n::: q-code-exercise({graderAttr})\n",
         "    pre.\n      ",
         formatted_source,
         "\n\n"
