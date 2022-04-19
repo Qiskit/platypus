@@ -32,5 +32,4 @@ if __name__ == '__main__':
             print(f'Skipping: {filename}')
             pass
         else:
-            #print(f'Goals check: {filename}')
             check_file(f'{NB_ROOT}/{filename.strip()}.ipynb', goal_names)
