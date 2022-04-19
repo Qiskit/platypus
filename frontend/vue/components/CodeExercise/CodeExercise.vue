@@ -51,7 +51,7 @@ export default defineComponent({
   props: {
     goal: {
       type: String,
-      required: true,
+      required: false,
       default: ''
     },
     graderImport: {
