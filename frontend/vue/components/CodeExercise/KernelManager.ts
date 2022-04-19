@@ -265,7 +265,6 @@ export async function requestBinder () {
           resolve(makeSettings(msg))
           break
         default:
-          console.log(msg);
       }
     }
   })
