@@ -52,7 +52,7 @@ export default defineComponent({
     goal: {
       type: String,
       required: true,
-      default: 'exercise-solved'
+      default: ''
     },
     graderImport: {
       type: String,
@@ -96,7 +96,9 @@ export default defineComponent({
       codeOutput.requestExecute(wrappedCode)
     },
     gradeSuccess () {
-      this.$step?.score(this.goal as string)
+      if (this.goal) {
+        this.$step?.score(this.goal as string)
+      }
     },
     codeChanged (code: string) {
       this.code = code
