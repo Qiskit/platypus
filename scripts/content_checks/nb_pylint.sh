@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
+# This script runs pylint on each notebook in NB_PATHS
 
 NB_ROOT="./notebooks"
-NB_PATHS="./scripts/notebook_paths.txt"
+NB_PATHS="./scripts/content_checks/notebook_paths.txt"
 
 while read line
 do
