@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 import { KernelManager, KernelAPI, ServerConnection } from '@jupyterlab/services'
 import { IKernelConnection } from '@jupyterlab/services/lib/kernel/kernel'
+import { IStreamMsg } from '@jupyterlab/services/lib/kernel/messages'
 import { WidgetsManager } from './WidgetsManager'
 
-export { IKernelConnection }
+export { IKernelConnection, IStreamMsg }
 
 export interface ISavedSession {
   enabled: boolean,
@@ -264,7 +265,6 @@ export async function requestBinder () {
           resolve(makeSettings(msg))
           break
         default:
-        // console.log(msg);
       }
     }
   })
