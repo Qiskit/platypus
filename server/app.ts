@@ -84,6 +84,36 @@ const getUserProgressData = async (req: Request) => {
   return progress
 }
 
+const getAccountData = async (req: Request, res: Response) => {
+  if (!req.user) {
+    return res.redirect('/signin')
+  }
+  if (req.user && !req.user.acceptedPolicies) {
+    return res.redirect('/eula')
+  }
+
+  const lang = req.locale.id || 'en'
+  const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+  const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+  const userMockData = {
+    firstName: req.user?.firstName,
+    lastName: req.user?.lastName
+  }
+
+  const progressData = await getUserProgressData(req)
+
+  res.render('userAccount', {
+    config: CONFIG,
+    userData: userMockData,
+    progressJSON: JSON.stringify(progressData),
+    lang,
+    privacyPolicyMD,
+    translationsJSON
+  })
+}
+
 const start = () => {
   new MathigonStudioApp()
     .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
@@ -143,95 +173,9 @@ const start = () => {
 
       res.redirect('/logout')
     })
-    .get('/account', async (req, res) => {
-      if (!req.user) {
-        return res.redirect('/signin')
-      }
-      if (req.user && !req.user.acceptedPolicies) {
-        return res.redirect('/eula')
-      }
-
-      const lang = req.locale.id || 'en'
-      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
-
-      const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
-
-      const userMockData = {
-        firstName: req.user?.firstName,
-        lastName: req.user?.lastName
-      }
-
-      const progressData = await getUserProgressData(req)
-
-      res.render('userAccount', {
-        config: CONFIG,
-        userData: userMockData,
-        progressJSON: JSON.stringify(progressData),
-        lang,
-        privacyPolicyMD,
-        translationsJSON
-      })
-    })
-    .get('/account/classroom', async (req, res) => {
-      if (!req.user) {
-        return res.redirect('/signin')
-      }
-      if (req.user && !req.user.acceptedPolicies) {
-        return res.redirect('/eula')
-      }
-
-      const lang = req.locale.id || 'en'
-      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
-
-      const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
-
-      const userMockData = {
-        firstName: req.user?.firstName,
-        lastName: req.user?.lastName
-      }
-
-      const progressData = await getUserProgressData(req)
-
-      res.render('userAccount', {
-        config: CONFIG,
-        userData: userMockData,
-        progressJSON: JSON.stringify(progressData),
-        lang,
-        privacyPolicyMD,
-        translationsJSON
-      })
-    })
-
-    .get('/account/privacy', async (req, res) => {
-      if (!req.user) {
-        return res.redirect('/signin')
-      }
-      if (req.user && !req.user.acceptedPolicies) {
-        return res.redirect('/eula')
-      }
-
-      const lang = req.locale.id || 'en'
-      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
-
-      const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
-
-      const userMockData = {
-        firstName: req.user?.firstName,
-        lastName: req.user?.lastName
-      }
-
-      const progressData = await getUserProgressData(req)
-
-      res.render('userAccount', {
-        config: CONFIG,
-        userData: userMockData,
-        progressJSON: JSON.stringify(progressData),
-        lang,
-        privacyPolicyMD,
-        translationsJSON
-      })
-    })
-
+    .get('/account', getAccountData)
+    .get('/account/classroom', getAccountData)
+    .get('/account/privacy', getAccountData)
     .get('/eula', (req, res) => {
       if (!req.user) {
         return res.redirect('/signin')
