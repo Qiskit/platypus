@@ -23,6 +23,7 @@
       @running="kernelRunning"
       @finished="kernelFinished"
       @kernelReady="kernelReady"
+      @correctAnswer="gradeSuccess"
     />
     <div
       ref="initialCodeElement"
@@ -48,6 +49,11 @@ export default defineComponent({
     CodeOutput
   },
   props: {
+    goal: {
+      type: String,
+      required: false,
+      default: ''
+    },
     graderImport: {
       type: String,
       required: false,
@@ -88,6 +94,11 @@ export default defineComponent({
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
+    },
+    gradeSuccess () {
+      if (this.goal) {
+        this.$step?.score(this.goal as string)
+      }
     },
     codeChanged (code: string) {
       this.code = code

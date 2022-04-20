@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { OutputArea, IOutputShellFuture, createOutputArea } from './OutputRenderer'
-import { requestBinderKernel, IKernelConnection } from './KernelManager'
+import { requestBinderKernel, IKernelConnection, IStreamMsg } from './KernelManager'
 import 'carbon-web-components/es/components/loading/loading'
 
 export default defineComponent({
@@ -53,6 +53,13 @@ export default defineComponent({
           const requestFuture = kernel.requestExecute({ code })
           this.setOutputFuture(requestFuture)
           requestFuture.done.then(() => this.$emit('finished'))
+          requestFuture.registerMessageHook((msgContainer) => {
+            const message = (msgContainer as IStreamMsg)?.content?.text
+            if (message && message.includes("Your answer is correct")) {
+              this.$emit('correctAnswer')
+            }
+            return true
+          })
         } catch (error: any) {
           this.error = error as string
           this.outputArea!.model.clear()
