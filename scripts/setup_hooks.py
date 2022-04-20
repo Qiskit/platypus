@@ -1,4 +1,4 @@
-import os, sys, re
+import sys, re
 
 HOOK_PATH = './.git/hooks/pre-commit'
 
@@ -15,16 +15,16 @@ npm run --silent test:nb:meta || {
 """
 
 if __name__ == '__main__':
-    if not os.path.isfile(HOOK_PATH):
-            pre_comments = '#!/bin/sh'
-            old_hook = ''
-    else:
+    try:
         with open(HOOK_PATH, 'r') as file:
             contents = file.read()
             if 'test:nb:meta' in contents:
                 print('pre-commit hook already set up.')
                 sys.exit(0)
             pre_comments, old_hook = re.split(r'\n *[^#]', contents, 1)
+    except IOError:
+        pre_comments = '#!/bin/sh'
+        old_hook = ''
 
     new_hook = pre_comments + SCRIPT + old_hook
     with open(HOOK_PATH, 'w+') as file:
