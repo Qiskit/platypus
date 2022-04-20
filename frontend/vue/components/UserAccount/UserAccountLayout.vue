@@ -7,16 +7,16 @@
         </h2>
       </div>
       <div class="user-account__section-nav__link-list">
-        <AppLink
-          v-for="{displayName, hash} in sectionList"
-          :key="hash"
+        <BasicLink
+          v-for="{displayName, url} in sectionList"
+          :key="url"
           class="user-account__section-nav__link-list__link"
-          :class="{'user-account__section-nav__link-list__link_active': activeSection === hash}"
-          :url="hash"
+          :class="{'user-account__section-nav__link-list__link_active': activeSection === url}"
+          :url="url"
           target="_self"
         >
           {{ displayName }}
-        </AppLink>
+        </BasicLink>
         <BasicLink
           class="user-account__section-nav__link-list__link"
           :url="logoutUrl"
@@ -33,22 +33,22 @@
       @bx-dropdown-selected="switchPanel($event)"
     >
       <bx-dropdown-item
-        v-for="{displayName, hash} in sectionList"
-        :key="hash"
+        v-for="{displayName, url} in sectionList"
+        :key="url"
         class="user-account__section-dropdown__item"
-        :value="hash"
+        :value="url"
       >
         {{ displayName }}
       </bx-dropdown-item>
     </bx-dropdown>
     <section class="user-account__section-container">
-      <div v-if="activeSection === sectionList[0].hash">
+      <div v-if="activeSection === sectionList[0].url">
         <UserProgress />
       </div>
-      <div v-else-if="activeSection === sectionList[1].hash">
+      <div v-else-if="activeSection === sectionList[1].url">
         <ClassroomSection />
       </div>
-      <div v-if="activeSection === sectionList[2].hash">
+      <div v-if="activeSection === sectionList[2].url">
         <PrivacySection />
         <DeleteUserDataSection />
       </div>
@@ -58,7 +58,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
-import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
@@ -68,7 +67,6 @@ import ClassroomSection from './ClassroomSection.vue'
 export default defineComponent({
   name: 'UserAccountLayout',
   components: {
-    AppLink,
     BasicLink,
     PrivacySection,
     UserProgress,
@@ -85,15 +83,15 @@ export default defineComponent({
       sectionList: [
         {
           displayName: this.$translate('Learning'),
-          hash: '#MyLearning'
+          url: '/account'
         },
         {
           displayName: this.$translate('Classroom'),
-          hash: '#Classroom'
+          url: '/account/classroom'
         },
         {
           displayName: this.$translate('Privacy'),
-          hash: '#Privacy'
+          url: '/account/privacy'
         }
       ],
       logoutUrl: '/logout'
@@ -112,14 +110,11 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.activeSection = window.location.hash || this.sectionList[0].hash
-    window?.addEventListener('hashchange', () => {
-      this.activeSection = window.location.hash
-    }, false)
+    this.activeSection = window.location.pathname || this.sectionList[0].url
   },
   methods: {
     switchPanel (event: CustomEvent) {
-      window.location.hash = event.detail.item.value
+      window.location.pathname = event.detail.item.value
     }
   }
 })

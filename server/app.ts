@@ -172,6 +172,66 @@ const start = () => {
         translationsJSON
       })
     })
+    .get('/account/classroom', async (req, res) => {
+      if (!req.user) {
+        return res.redirect('/signin')
+      }
+      if (req.user && !req.user.acceptedPolicies) {
+        return res.redirect('/eula')
+      }
+
+      const lang = req.locale.id || 'en'
+      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+      const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+      const userMockData = {
+        firstName: req.user?.firstName,
+        lastName: req.user?.lastName
+      }
+
+      const progressData = await getUserProgressData(req)
+
+      res.render('userAccount', {
+        config: CONFIG,
+        userData: userMockData,
+        progressJSON: JSON.stringify(progressData),
+        lang,
+        privacyPolicyMD,
+        translationsJSON
+      })
+    })
+
+    .get('/account/privacy', async (req, res) => {
+      if (!req.user) {
+        return res.redirect('/signin')
+      }
+      if (req.user && !req.user.acceptedPolicies) {
+        return res.redirect('/eula')
+      }
+
+      const lang = req.locale.id || 'en'
+      const translationsJSON = JSON.stringify(TRANSLATIONS[lang] || {})
+
+      const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
+
+      const userMockData = {
+        firstName: req.user?.firstName,
+        lastName: req.user?.lastName
+      }
+
+      const progressData = await getUserProgressData(req)
+
+      res.render('userAccount', {
+        config: CONFIG,
+        userData: userMockData,
+        progressJSON: JSON.stringify(progressData),
+        lang,
+        privacyPolicyMD,
+        translationsJSON
+      })
+    })
+
     .get('/eula', (req, res) => {
       if (!req.user) {
         return res.redirect('/signin')
