@@ -357,8 +357,8 @@ def handle_code_cell(cell, resources):
     if graderImport is not None and graderFunction is not None:
         graderAttr = f"{graderAttr}grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\""
 
-    if graderImport is not None and graderFunction is not None and goal is not None:
-        graderAttr = f"{graderAttr} goal=\"{goal[0].id}\""
+        if goal is not None:
+            graderAttr = f"{graderAttr} goal=\"{goal[0].id}\""
 
 
     code_lines = [
