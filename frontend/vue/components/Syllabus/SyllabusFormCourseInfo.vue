@@ -131,13 +131,22 @@ export default defineComponent({
     }
   },
   methods: {
+    isValid () {
+      const hasName = (this.$refs.nameInput as BXInput).checkValidity()
+      const hasInstructor = (this.$refs.instructorInput as BXInput).checkValidity()
+      return hasName && hasInstructor
+    },
     saveInfoAction () {
-      this.saveSyllabusInfoLink.label = 'Saved'
-      this.syllabusSaved = true
+      if (this.isValid()) {
+          this.saveSyllabusInfoLink.label = 'Saved'
+          this.syllabusSaved = true
+      }
     },
     updateFormInfo (evt: InputEvent) {
       this.saveSyllabusInfoLink.label = 'Save to syllabus'
-      this.syllabusSaved = false
+      this.syllabusSaved = false;
+
+      this.isValid()
 
       const updatedData = {
         name: (this.$refs.nameInput as BXInput).value,
