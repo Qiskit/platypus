@@ -109,7 +109,7 @@ export default defineComponent({
   },
   mounted () {
     getCourseList().then((courses) => {
-      this.courseList = courses.filter(course => course.type === 'learning-path')
+      this.courseList = courses.filter(course => course.type !== 'docs')
     })
   },
   methods: {
@@ -150,7 +150,7 @@ export default defineComponent({
         const idx = this.course.unitList.indexOf(uuid)
         if (idx >= 0) {
           this.course.unitList.splice(idx, 1)
-        } 
+        }
       }
 
       this.$emit('change', this.course)
