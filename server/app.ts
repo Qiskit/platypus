@@ -88,7 +88,7 @@ const getAccountData = async (req: Request, res: Response) => {
   if (!req.user) {
     return res.redirect('/signin')
   }
-  if (req.user && !req.user.acceptedPolicies) {
+  if (!req.user.acceptedPolicies) {
     return res.redirect('/eula')
   }
 
