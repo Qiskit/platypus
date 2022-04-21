@@ -1,4 +1,4 @@
-import { IsArray, IsEmail, IsString, MaxLength, IsNotEmpty, IsOptional, validateOrReject } from 'class-validator'
+import { IsArray, IsString, MaxLength, IsNotEmpty, IsOptional, validateOrReject } from 'class-validator'
 import { Syllabus } from '../../domain/syllabus'
 import { SyllabusCourse } from '../../domain/syllabus-course'
 import { SyllabusCode, generate } from '../../domain/syllabus-code'
@@ -18,8 +18,8 @@ export class CreateSyllabusDto implements CreateSyllabus {
 
   @MaxLength(255)
   @IsString()
-  @IsNotEmpty()
-  readonly location!: string
+  @IsOptional()
+  readonly location?: string
 
   @MaxLength(255)
   @IsString()
@@ -28,19 +28,19 @@ export class CreateSyllabusDto implements CreateSyllabus {
 
   @IsString()
   @IsOptional()
-  readonly officeHours!: string
+  readonly officeHours?: string
 
   @IsString()
   @IsOptional()
-  readonly classHours!: string
+  readonly classHours?: string
 
   @MaxLength(64)
   @IsOptional()
-  readonly email!: string
+  readonly email?: string
 
   @IsArray()
-  @IsNotEmpty()
-  readonly courseList!: SyllabusCourse[]
+  @IsOptional()
+  readonly courseList?: SyllabusCourse[]
 
   @IsArray()
   @IsNotEmpty()

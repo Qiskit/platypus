@@ -19,7 +19,7 @@ export class UpdateSyllabusDto implements Syllabus {
   @MaxLength(255)
   @IsString()
   @IsOptional()
-  readonly location: string
+  readonly location?: string
 
   @MaxLength(255)
   @IsString()
@@ -28,20 +28,20 @@ export class UpdateSyllabusDto implements Syllabus {
 
   @IsString()
   @IsOptional()
-  readonly officeHours: string
+  readonly officeHours?: string
 
   @IsString()
   @IsOptional()
-  readonly classHours: string
+  readonly classHours?: string
 
   @MaxLength(64)
   @IsString()
   @IsOptional()
-  readonly email: string
+  readonly email?: string
 
   @IsArray()
   @IsOptional()
-  readonly courseList: SyllabusCourse[]
+  readonly courseList?: SyllabusCourse[]
 
   @IsArray()
   @IsOptional()

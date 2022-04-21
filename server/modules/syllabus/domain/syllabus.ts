@@ -5,12 +5,12 @@ export interface Syllabus {
     id?: string,
     name: string,
     instructor: string,
-    location: string,
+    location?: string,
     institution?: string,
-    officeHours: string,
-    classHours: string,
-    email: string,
-    courseList: SyllabusCourse[]
+    officeHours?: string,
+    classHours?: string,
+    email?: string,
+    courseList?: SyllabusCourse[]
     code?: SyllabusCode,
     ownerList: string[],
 }
