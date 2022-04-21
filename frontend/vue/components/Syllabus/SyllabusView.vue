@@ -68,7 +68,7 @@ export default defineComponent({
   },
   mounted () {
     getCourseList().then((courses) => {
-      const learningPathCourses = courses.filter(course => course.type === 'learning-path')
+      const learningPathCourses = courses.filter(course => course.type !== 'docs')
       this.sectionList = learningPathCourses.reduce((sectionList: Section[], course: Course) => {
           return sectionList.concat(course.sections)
         }, [] as Section[])
