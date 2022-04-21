@@ -2,7 +2,7 @@
 // Project Platypus
 // =============================================================================
 
-import { Request, Response, NextFunction  } from 'express'
+import { Request, Response, NextFunction } from 'express'
 import { customAlphabet } from 'nanoid/non-secure'
 
 import { MathigonStudioApp } from '@mathigon/studio/server/app'
