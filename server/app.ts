@@ -98,8 +98,8 @@ const getAccountData = async (req: Request, res: Response) => {
   const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
 
   const userMockData = {
-    firstName: req.user?.firstName,
-    lastName: req.user?.lastName
+    firstName: req.user.firstName,
+    lastName: req.user.lastName
   }
 
   const progressData = await getUserProgressData(req)
