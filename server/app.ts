@@ -97,7 +97,7 @@ const getAccountData = async (req: Request, res: Response) => {
 
   const privacyPolicyMD = loadLocaleRawFile('privacy-policy.md', lang)
 
-  const userMockData = {
+  const loggedInUser = {
     firstName: req.user.firstName,
     lastName: req.user.lastName
   }
@@ -106,7 +106,7 @@ const getAccountData = async (req: Request, res: Response) => {
 
   res.render('userAccount', {
     config: CONFIG,
-    userData: userMockData,
+    userData: loggedInUser,
     progressJSON: JSON.stringify(progressData),
     lang,
     privacyPolicyMD,
