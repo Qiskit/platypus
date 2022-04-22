@@ -7,7 +7,7 @@
         class="syllabus-form-course-info__input-field"
         name="name"
         placeholder="Please enter the syllabus name"
-        label-text="Syllabus name"
+        label-text="Syllabus name *"
         color-scheme="light"
         :required="true"
         @input="updateFormInfo"
@@ -20,7 +20,7 @@
         class="syllabus-form-course-info__input-field"
         name="instructor"
         placeholder="Instructor’s name"
-        label-text="Instructor"
+        label-text="Instructor *"
         color-scheme="light"
         :required="true"
         @input="updateFormInfo"
@@ -103,9 +103,8 @@
 import { defineComponent } from 'vue-demi'
 import 'carbon-web-components/es/components/tabs/tabs.js'
 import 'carbon-web-components/es/components/tabs/tab.js'
-import 'carbon-web-components/es/components/input/input.js'
-import BasicLink from '../common/BasicLink.vue'
 import BXInput from 'carbon-web-components/es/components/input/input.js'
+import BasicLink from '../common/BasicLink.vue'
 import { Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
@@ -127,17 +126,46 @@ export default defineComponent({
         label: 'Save to syllabus',
         url: '#'
       },
-      syllabusSaved: false
+      syllabusSaved: false,
+      nameInputIsPristine: true,
+      instructorIsPristine: true
     }
   },
   methods: {
-    saveInfoAction () {
-      this.saveSyllabusInfoLink.label = 'Saved'
-      this.syllabusSaved = true
+    updatePristineStatus () {
+      if (this.nameInputIsPristine) {
+        this.nameInputIsPristine = (this.$refs.nameInput as BXInput).value.length === 0
+      }
+      if (this.instructorIsPristine) {
+        this.instructorIsPristine = (this.$refs.instructorInput as BXInput).value.length === 0
+      }
     },
-    updateFormInfo (evt: InputEvent) {
+    isValid (skipPrestineCheck?: boolean) {
+      let hasName = false
+      let hasInstructor = false
+
+      this.updatePristineStatus()
+
+      if (skipPrestineCheck || !this.nameInputIsPristine) {
+        hasName = (this.$refs.nameInput as BXInput).checkValidity()
+      }
+      if (skipPrestineCheck || !this.instructorIsPristine) {
+        hasInstructor = (this.$refs.instructorInput as BXInput).checkValidity()
+      }
+
+      return hasName && hasInstructor
+    },
+    saveInfoAction () {
+      if (this.isValid(true)) {
+        this.saveSyllabusInfoLink.label = 'Saved'
+        this.syllabusSaved = true
+      }
+    },
+    updateFormInfo () {
       this.saveSyllabusInfoLink.label = 'Save to syllabus'
       this.syllabusSaved = false
+
+      this.isValid()
 
       const updatedData = {
         name: (this.$refs.nameInput as BXInput).value,

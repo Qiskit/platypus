@@ -40,6 +40,7 @@
           kind="ghost"
         />
         <AppCta
+          ref="submitForm"
           :label="submitAction.label"
           :segment="submitAction.segment"
           target="_self"
@@ -109,6 +110,7 @@ export default defineComponent({
       this.syllabus = activeSyllabus
       this.editMode = true
     }
+    this.syllabusInfoChanged(this.syllabus)
   },
   methods: {
     addContentBlock () {
@@ -158,6 +160,11 @@ export default defineComponent({
     },
     syllabusInfoChanged (data: Syllabus) {
       this.syllabus = data
+      if (this.syllabus.name && this.syllabus.instructor) {
+        ((this.$refs.submitForm as AppCta).$el as HTMLElement).removeAttribute('disabled')
+      } else {
+        ((this.$refs.submitForm as AppCta).$el as HTMLElement).setAttribute('disabled', 'true')
+      }
     },
     courseInfoChanged (data: SyllabusCourse, index: number) {
       this.syllabus.courseList[index] = data

@@ -18,7 +18,7 @@
       <p class="syllabus-view__course__description">
         {{ course.description }}
       </p>
-      <div class="syllabus-view__course__units-title">
+      <div v-if="course.unitList.length > 0" class="syllabus-view__course__units-title">
         <!-- TODO replace with translation on final design -->
         Chapters
       </div>
