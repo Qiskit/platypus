@@ -103,9 +103,8 @@
 import { defineComponent } from 'vue-demi'
 import 'carbon-web-components/es/components/tabs/tabs.js'
 import 'carbon-web-components/es/components/tabs/tab.js'
-import 'carbon-web-components/es/components/input/input.js'
-import BasicLink from '../common/BasicLink.vue'
 import BXInput from 'carbon-web-components/es/components/input/input.js'
+import BasicLink from '../common/BasicLink.vue'
 import { Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
@@ -138,13 +137,13 @@ export default defineComponent({
     },
     saveInfoAction () {
       if (this.isValid()) {
-          this.saveSyllabusInfoLink.label = 'Saved'
-          this.syllabusSaved = true
+        this.saveSyllabusInfoLink.label = 'Saved'
+        this.syllabusSaved = true
       }
     },
-    updateFormInfo (evt: InputEvent) {
+    updateFormInfo () {
       this.saveSyllabusInfoLink.label = 'Save to syllabus'
-      this.syllabusSaved = false;
+      this.syllabusSaved = false
 
       this.isValid()
 
