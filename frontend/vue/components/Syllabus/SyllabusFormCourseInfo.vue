@@ -7,7 +7,7 @@
         class="syllabus-form-course-info__input-field"
         name="name"
         placeholder="Please enter the syllabus name"
-        label-text="Syllabus name"
+        label-text="* Syllabus name"
         color-scheme="light"
         :required="true"
         @input="updateFormInfo"
@@ -20,7 +20,7 @@
         class="syllabus-form-course-info__input-field"
         name="instructor"
         placeholder="Instructor’s name"
-        label-text="Instructor"
+        label-text="* Instructor"
         color-scheme="light"
         :required="true"
         @input="updateFormInfo"
@@ -140,23 +140,23 @@ export default defineComponent({
         this.instructorIsPristine = (this.$refs.instructorInput as BXInput).value.length === 0
       }
     },
-    isValid () {
+    isValid (skipPrestineCheck?: boolean) {
       let hasName = false
       let hasInstructor = false
 
       this.isPristine()
 
-      if (!this.nameInputIsPristine) {
+      if (skipPrestineCheck || !this.nameInputIsPristine) {
         hasName = (this.$refs.nameInput as BXInput).checkValidity()
       }
-      if (!this.instructorIsPristine) {
+      if (skipPrestineCheck || !this.instructorIsPristine) {
         hasInstructor = (this.$refs.instructorInput as BXInput).checkValidity()
       }
 
       return hasName && hasInstructor
     },
     saveInfoAction () {
-      if (this.isValid()) {
+      if (this.isValid(true)) {
         this.saveSyllabusInfoLink.label = 'Saved'
         this.syllabusSaved = true
       }
