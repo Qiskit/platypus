@@ -126,13 +126,33 @@ export default defineComponent({
         label: 'Save to syllabus',
         url: '#'
       },
-      syllabusSaved: false
+      syllabusSaved: false,
+      nameInputIsPristine: true,
+      instructorIsPristine: true
     }
   },
   methods: {
+    isPristine () {
+      if (this.nameInputIsPristine) {
+        this.nameInputIsPristine = (this.$refs.nameInput as BXInput).value.length === 0
+      }
+      if (this.instructorIsPristine) {
+        this.instructorIsPristine = (this.$refs.instructorInput as BXInput).value.length === 0
+      }
+    },
     isValid () {
-      const hasName = (this.$refs.nameInput as BXInput).checkValidity()
-      const hasInstructor = (this.$refs.instructorInput as BXInput).checkValidity()
+      let hasName = false
+      let hasInstructor = false
+
+      this.isPristine()
+
+      if (!this.nameInputIsPristine) {
+        hasName = (this.$refs.nameInput as BXInput).checkValidity()
+      }
+      if (!this.instructorIsPristine) {
+        hasInstructor = (this.$refs.instructorInput as BXInput).checkValidity()
+      }
+
       return hasName && hasInstructor
     },
     saveInfoAction () {
