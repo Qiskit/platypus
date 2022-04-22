@@ -201,7 +201,7 @@ $mobile-menu-item-height: 4rem;
     padding-left: $spacing-07;
     padding-right: $spacing-05;
     height: $mobile-menu-item-height;
-    border-bottom: 1px solid $border-color-light;
+    border-bottom: 1px solid $border-color-secondary;
     &__icon {
       border: 1px solid $border-color-secondary;
       border-radius: 50%;
