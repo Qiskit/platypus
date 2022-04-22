@@ -132,7 +132,7 @@ export default defineComponent({
     }
   },
   methods: {
-    isPristine () {
+    updatePristineStatus () {
       if (this.nameInputIsPristine) {
         this.nameInputIsPristine = (this.$refs.nameInput as BXInput).value.length === 0
       }
@@ -144,7 +144,7 @@ export default defineComponent({
       let hasName = false
       let hasInstructor = false
 
-      this.isPristine()
+      this.updatePristineStatus()
 
       if (skipPrestineCheck || !this.nameInputIsPristine) {
         hasName = (this.$refs.nameInput as BXInput).checkValidity()
