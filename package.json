@@ -39,7 +39,7 @@
     "node": ">=14 <17"
   },
   "dependencies": {
-    "@carbon/colors": "^10.36.0",
+    "@carbon/colors": "^10.37.1",
     "@carbon/icons-vue": "^10.46.0",
     "@carbon/themes": "^10.50.0",
     "@carbon/vue": "^2.40.0",
