@@ -7,3 +7,14 @@ intro/grover-intro
 examples/annotations
 examples/blocks
 examples/widgets
+
+summer-school/2020/lec-00
+summer-school/2020/lec-01
+summer-school/2020/lec-02
+summer-school/2020/lec-03
+summer-school/2020/lec-04
+summer-school/2020/lec-05
+summer-school/2020/lec-06
+summer-school/2020/lec-07
+summer-school/2020/lec-08
+summer-school/2020/lec-09
