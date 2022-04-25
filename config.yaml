@@ -73,3 +73,6 @@ accounts:
     ibm:
       clientId: ''
       clientSecret: ''
+
+mockData:
+  email: john.doe@example.com
