@@ -264,10 +264,20 @@ const start = () => {
     .get('/syllabus', FindSyllabiController)
     .get('/syllabus/:code', async (req: Request, res: Response, next: NextFunction) => {
       const result = await FindSyllabusByCodeController(req, res, next)
+      const loggedInUser = {
+        firstName: '',
+        lastName: ''
+      }
+
+      if (req.user) {
+        loggedInUser.firstName = req.user.firstName
+        loggedInUser.lastName = req.user.lastName
+      }
 
       if (res.statusCode === 200) {
         res.render('syllabus', {
-          syllabus: JSON.stringify(result)
+          syllabus: JSON.stringify(result),
+          userData: loggedInUser
         })
       } else {
         res.render('error')

@@ -1,10 +1,16 @@
 <template>
   <div class="account-menu">
     <nav class="account-menu__section-nav">
-      <div class="account-menu__section-nav__user-data">
+      <div v-if="loggedIn" class="account-menu__section-nav__user-data">
         <h2 class="account-menu__section-nav__user-data__name">
           {{ userDisplayName }}
         </h2>
+      </div>
+      <div v-else class="account-menu__section-nav__user-data">
+        <h2 class="account-menu__section-nav__user-data__name">
+          User Account
+        </h2>
+        <p>Login or create an account</p>
       </div>
       <div class="account-menu__section-nav__link-list">
         <BasicLink
@@ -18,6 +24,7 @@
           {{ displayName }}
         </BasicLink>
         <BasicLink
+          v-if="loggedIn"
           class="account-menu__section-nav__link-list__link"
           :url="logoutUrl"
           :is-static="true"
@@ -28,6 +35,7 @@
       </div>
     </nav>
     <bx-dropdown
+      v-if="loggedIn"
       class="account-menu__section-dropdown"
       :value="currentSection"
       @bx-dropdown-selected="switchPanel($event)"
@@ -64,7 +72,8 @@ export default defineComponent({
     firstName: { type: String, required: false, default: '' },
     lastName: { type: String, required: false, default: '' },
     currentSection: { type: String, required: false, default: '' },
-    sectionList: { type: Array, required: false, default: () => [] }
+    sectionList: { type: Array, required: false, default: () => [] },
+    loggedIn: { type: Boolean, required: true, default: false }
   },
   data () {
     return {
@@ -82,10 +91,6 @@ export default defineComponent({
 
       return userDisplayName
     }
-  },
-  mounted () {
-    console.log(this.sectionList, "sectionlist")
-    console.log(this.currentSection, "currentSection")
   },
   methods: {
     switchPanel (event: CustomEvent) {

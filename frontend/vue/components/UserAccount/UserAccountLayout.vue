@@ -5,6 +5,7 @@
       :last-name="lastName"
       :current-section="activeSection"
       :section-list="sectionList"
+      :user-logged-in="userIsLoggedIn"
     />
     <section class="user-account__section-container">
       <div v-if="activeSection === sectionList[0].url">
@@ -59,6 +60,15 @@ export default defineComponent({
           url: '/account/privacy'
         }
       ]
+    }
+  },
+  computed: {
+    userIsLoggedIn () {
+      if (this.firstName !== '' && this.lastName !== '') {
+        return true
+      } else {
+        return false
+      }
     }
   },
   mounted () {
