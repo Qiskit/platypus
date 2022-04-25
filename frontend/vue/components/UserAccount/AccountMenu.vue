@@ -1,24 +1,24 @@
 <template>
-  <div class="user-account-menu">
-    <nav class="user-account-menu__section-nav">
-      <div class="user-account-menu__section-nav__user-data">
-        <h2 class="user-account-menu__section-nav__user-data__name">
+  <div class="account-menu">
+    <nav class="account-menu__section-nav">
+      <div class="account-menu__section-nav__user-data">
+        <h2 class="account-menu__section-nav__user-data__name">
           {{ userDisplayName }}
         </h2>
       </div>
-      <div class="user-account-menu__section-nav__link-list">
+      <div class="account-menu__section-nav__link-list">
         <BasicLink
           v-for="{displayName, url} in sectionList"
           :key="url"
-          class="user-account-menu__section-nav__link-list__link"
-          :class="{'user-account-menu__section-nav__link-list__link_active': activeSection === url}"
+          class="account-menu__section-nav__link-list__link"
+          :class="{'account-menu__section-nav__link-list__link_active': currentSection === url}"
           :url="url"
           target="_self"
         >
           {{ displayName }}
         </BasicLink>
         <BasicLink
-          class="user-account-menu__section-nav__link-list__link"
+          class="account-menu__section-nav__link-list__link"
           :url="logoutUrl"
           :is-static="true"
           target="_self"
@@ -28,21 +28,21 @@
       </div>
     </nav>
     <bx-dropdown
-      class="user-account-menu__section-dropdown"
-      :value="activeSection"
+      class="account-menu__section-dropdown"
+      :value="currentSection"
       @bx-dropdown-selected="switchPanel($event)"
     >
       <bx-dropdown-item
         v-for="{displayName, url} in sectionList"
         :key="url"
-        class="user-account-menu__section-dropdown__item"
+        class="account-menu__section-dropdown__item"
         :value="url"
       >
         {{ displayName }}
       </bx-dropdown-item>
       <bx-dropdown-item
         :key="logoutUrl"
-        class="user-account-menu__section-dropdown__item"
+        class="account-menu__section-dropdown__item"
         :value="logoutUrl"
       >
         {{ $translate('Log Out') }}
@@ -56,31 +56,18 @@ import { defineComponent } from 'vue-demi'
 import BasicLink from '../common/BasicLink.vue'
 
 export default defineComponent({
-  name: 'UserAccountMenu',
+  name: 'AccountMenu',
   components: {
     BasicLink
   },
   props: {
     firstName: { type: String, required: false, default: '' },
-    lastName: { type: String, required: false, default: '' }
+    lastName: { type: String, required: false, default: '' },
+    currentSection: { type: String, required: false, default: '' },
+    sectionList: { type: Array, required: false, default: () => [] }
   },
   data () {
     return {
-      activeSection: '',
-      sectionList: [
-        {
-          displayName: this.$translate('Learning'),
-          url: '/account'
-        },
-        {
-          displayName: this.$translate('Classroom'),
-          url: '/account/classroom'
-        },
-        {
-          displayName: this.$translate('Privacy'),
-          url: '/account/privacy'
-        }
-      ],
       logoutUrl: '/logout'
     }
   },
@@ -97,7 +84,8 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.activeSection = window.location.pathname || this.sectionList[0].url
+    console.log(this.sectionList, "sectionlist")
+    console.log(this.currentSection, "currentSection")
   },
   methods: {
     switchPanel (event: CustomEvent) {
@@ -112,7 +100,7 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 @import '~/../scss/variables/mq.scss';
 
-.user-account-menu {
+.account-menu {
   display: grid;
   grid-template-columns: 17rem 1fr;
   height: calc(100vh - 60px);

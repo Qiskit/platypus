@@ -1,6 +1,11 @@
 <template>
   <div class="user-account">
-    <UserAccountMenu :first-name="firstName" :last-name="lastName" />
+    <AccountMenu
+      :first-name="firstName"
+      :last-name="lastName"
+      :current-section="activeSection"
+      :section-list="sectionList"
+    />
     <section class="user-account__section-container">
       <div v-if="activeSection === sectionList[0].url">
         <UserProgress />
@@ -22,7 +27,7 @@ import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 import DeleteUserDataSection from './DeleteUserDataSection.vue'
 import ClassroomSection from './ClassroomSection.vue'
-import UserAccountMenu from './UserAccountMenu.vue'
+import AccountMenu from './AccountMenu.vue'
 
 export default defineComponent({
   name: 'UserAccountLayout',
@@ -31,7 +36,7 @@ export default defineComponent({
     UserProgress,
     DeleteUserDataSection,
     ClassroomSection,
-    UserAccountMenu
+    AccountMenu
   },
   props: {
     firstName: { type: String, required: false, default: '' },
@@ -53,8 +58,7 @@ export default defineComponent({
           displayName: this.$translate('Privacy'),
           url: '/account/privacy'
         }
-      ],
-      logoutUrl: '/logout'
+      ]
     }
   },
   mounted () {
