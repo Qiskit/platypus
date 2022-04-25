@@ -6,7 +6,7 @@
       :last-name="lastName"
       :logged-in="userIsLoggedIn"
     />
-    <div class="syllabus__content">
+    <div class="syllabus__container">
       <UserAccountSectionHeader>
         <template #title>
           {{ $translate("Syllabus") }}
@@ -46,12 +46,9 @@ export default defineComponent({
   },
   mounted () {
     this.syllabus = getActiveSyllabus()
-    console.log(this.firstName, "FIRST NAME")
-    console.log(this.lastName, "LAST NAME")
     if (this.firstName !== '' && this.lastName !== '') {
       this.userIsLoggedIn = true
     }
-    console.log(this.userIsLoggedIn, "userIsLoggedIn")
   }
 
 })
@@ -63,9 +60,6 @@ export default defineComponent({
 @import '~/../scss/mixins/mixins.scss';
 
 .syllabus {
-  // @include contained();
-  // padding-top: $spacing-07;
-  // padding-bottom: $spacing-07;
   display: grid;
   grid-template-columns: 17rem 1fr;
   height: calc(100vh - 60px);
@@ -79,11 +73,9 @@ export default defineComponent({
     grid-template-rows: min-content 1fr;
   }
 
-  &__content {
-    @include contained();
+  &__container {
     margin-left: 0;
-    padding-top: $spacing-07;
-    padding-bottom: $spacing-07;
+    padding: $spacing-07 $spacing-08;
   }
 
   &__not-found {

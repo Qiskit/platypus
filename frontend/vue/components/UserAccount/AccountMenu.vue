@@ -10,9 +10,26 @@
         <h2 class="account-menu__section-nav__user-data__name">
           User Account
         </h2>
-        <p>Login or create an account</p>
+        <p>
+          <BasicLink
+            class="account-menu__login-link"
+            :url="loginOrRegisterLink"
+            :is-static="true"
+            target="_self"
+          >
+            {{ $translate('Log in') }}
+          </BasicLink> or
+          <BasicLink
+            class="account-menu__login-link"
+            :url="loginOrRegisterLink"
+            :is-static="true"
+            target="_self"
+          >
+            {{ $translate('create an account') }}
+          </BasicLink>.
+        </p>
       </div>
-      <div class="account-menu__section-nav__link-list">
+      <div v-if="loggedIn" class="account-menu__section-nav__link-list">
         <BasicLink
           v-for="{displayName, url} in sectionList"
           :key="url"
@@ -24,7 +41,6 @@
           {{ displayName }}
         </BasicLink>
         <BasicLink
-          v-if="loggedIn"
           class="account-menu__section-nav__link-list__link"
           :url="logoutUrl"
           :is-static="true"
@@ -77,7 +93,8 @@ export default defineComponent({
   },
   data () {
     return {
-      logoutUrl: '/logout'
+      logoutUrl: '/logout',
+      loginOrRegisterLink: '/signin'
     }
   },
   computed: {
@@ -170,6 +187,10 @@ export default defineComponent({
           color: $text-active-color;
         }
       }
+    }
+
+    &__login-link {
+      color: $text-active-color;
     }
   }
 }
