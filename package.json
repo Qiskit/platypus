@@ -30,14 +30,18 @@
     "cy:run": "cypress run",
     "test": "start-server-and-test start :8080/health cy:run",
     "test:debug": "start-server-and-test start :8080/health cy:open",
-    "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py",
+    "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py && python3 ./scripts/content_checks/nb_svg.py",
     "test:nb:pylint": "./scripts/content_checks/nb_pylint.sh",
-    "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix",
+    "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix && python3 ./scripts/content_checks/nb_svg.py --fix",
     "test:nb": "npm run test:nb:pylint && npm run test:nb:meta",
     "setup:secrets": "mgon-secrets"
   },
   "nano-staged": {
-    "*.{ts,tsx}": "eslint"
+    "*.{ts,tsx}": "eslint",
+    "*.ipynb": [
+      "python3 ./scripts/content_checks/nb_metadata.py",
+      "python3 ./scripts/content_checks/nb_svg.py"
+    ]
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
