@@ -106,6 +106,13 @@ export default class AppCta extends Vue.with(Props) {
     background-position-x: 0;
   }
 
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
   /*
     Per kind and theming styles
   */
