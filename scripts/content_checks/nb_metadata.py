@@ -1,5 +1,6 @@
 import sys
 import nbformat
+from pathlib import Path
 
 
 NB_ROOT = './notebooks'
@@ -30,15 +31,26 @@ def check_metadata(filepath, fix=False):
         )
 
 if __name__ == '__main__':
-    fix = '--fix' in sys.argv
-    with open(NB_PATHS, encoding='utf-8') as f:
-        file_names = f.readlines()
+    # usage: python nb_metadata.py --fix notebook1.ipynb path/to/notebook2.ipynb
+    file_names = sys.argv[1:] if len(sys.argv) > 1 else []
+
+    fix = False
+    if '--fix' in file_names:
+        fix = True
+        file_names.remove('--fix')
+
+    if len(file_names) == 0:
+        # no files were passed read from text file
+        with open(NB_PATHS, encoding='utf-8') as f:
+            file_names = f.readlines()
+
     for filename in file_names:
         if not filename.strip():
             # blank line
             continue
         if filename.startswith('#'):
             print(f'Skipping: {filename}')
+        elif Path(filename).is_absolute():
+            check_metadata(filename, fix)
         else:
-            #print(f'Goals check: {filename}')
             check_metadata(f'{NB_ROOT}/{filename.strip()}.ipynb', fix)
