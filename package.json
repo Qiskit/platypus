@@ -24,7 +24,7 @@
     "screenshots": "mgon-screenshots --output screenshots",
     "patch": "patch-package",
     "postbuild:studio": "ts-node -s converter/postbuild.ts",
-    "postinstall": "patch-package && npx simple-git-hooks",
+    "postinstall": "patch-package",
     "prepare": "npx simple-git-hooks",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
