@@ -8,7 +8,7 @@ ket:
 
 bra:
   notation: $\langle a |$
-  description: The ⟨ and | in this order is known as a ‘Bra’ in Dirac Notation. ⟨𝑎| is equal to the complex conjugate of |𝑎⟩, also  denoted as 𝑎* (when 𝑎 is a vector). A Bra refers to a vector with each component replaced by its complex conjugate and then transposed (i.e. converted from a column vector to a row vector).
+  description: The ⟨ and | in this order is known as a ‘Bra’ in Dirac Notation. ⟨𝑎| is equal to the transpose of complex conjugate of |𝑎⟩, also  denoted as 𝑎† (when 𝑎 is a vector). A Bra refers to a vector with each component replaced by its complex conjugate and then transposed (i.e. converted from a column vector to a row vector).
 
 inner_product:
   notation: $\langle a |  b \rangle$
