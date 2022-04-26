@@ -39,7 +39,7 @@
   "lint-staged": {
     "*.(ts|tsx)": "eslint",
     "*.ipynb": [
-      "python3 ./scripts/content_checks/nb_svg.py"
+      "python3 ./scripts/content_checks/nb_svg.py --fix"
     ]
   },
   "engines": {
