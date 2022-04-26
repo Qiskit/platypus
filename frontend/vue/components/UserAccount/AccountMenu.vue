@@ -1,14 +1,14 @@
 <template>
   <div class="account-menu">
-    <nav class="account-menu__section-nav">
-      <div v-if="loggedIn" class="account-menu__section-nav__user-data">
-        <h2 class="account-menu__section-nav__user-data__name">
+    <nav class="account-menu__nav">
+      <div v-if="loggedIn" class="account-menu__nav__header">
+        <h2 class="account-menu__nav__header__name">
           {{ userDisplayName }}
         </h2>
       </div>
-      <div v-else class="account-menu__section-nav__user-data">
-        <h2 class="account-menu__section-nav__user-data__name">
-          User Account
+      <div v-else class="account-menu__nav__header">
+        <h2 class="account-menu__nav__header__name">
+          {{ $translate('User Account') }}
         </h2>
         <p>
           <BasicLink
@@ -29,19 +29,19 @@
           </BasicLink>.
         </p>
       </div>
-      <div v-if="loggedIn" class="account-menu__section-nav__link-list">
+      <div v-if="loggedIn" class="account-menu__nav__link-list">
         <BasicLink
           v-for="{displayName, url} in sectionList"
           :key="url"
-          class="account-menu__section-nav__link-list__link"
-          :class="{'account-menu__section-nav__link-list__link_active': currentSection === url}"
+          class="account-menu__nav__link-list__link"
+          :class="{'account-menu__nav__link-list__link_active': currentSection === url}"
           :url="url"
           target="_self"
         >
           {{ displayName }}
         </BasicLink>
         <BasicLink
-          class="account-menu__section-nav__link-list__link"
+          class="account-menu__nav__link-list__link"
           :url="logoutUrl"
           :is-static="true"
           target="_self"
@@ -88,13 +88,12 @@ export default defineComponent({
     firstName: { type: String, required: false, default: '' },
     lastName: { type: String, required: false, default: '' },
     currentSection: { type: String, required: false, default: '' },
-    sectionList: { type: Array, required: false, default: () => [] },
-    loggedIn: { type: Boolean, required: true, default: false }
+    sectionList: { type: Array, required: false, default: () => [] }
   },
   data () {
     return {
-      logoutUrl: '/logout',
-      loginOrRegisterLink: '/signin'
+      loggedIn: false,
+      logoutUrl: '/logout'
     }
   },
   computed: {
@@ -107,6 +106,15 @@ export default defineComponent({
       }
 
       return userDisplayName
+    },
+    loginOrRegisterLink () {
+      const currentSyllabusPath = window.location.pathname
+      return '/signin?returnTo=' + currentSyllabusPath
+    }
+  },
+  mounted () {
+    if (this.firstName !== '' && this.lastName !== '') {
+      this.loggedIn = true
     }
   },
   methods: {
@@ -153,7 +161,7 @@ export default defineComponent({
     }
   }
 
-  &__section-nav {
+  &__nav {
     background-color: $background-color-lighter;
     display: flex;
     flex-direction: column;
@@ -162,13 +170,13 @@ export default defineComponent({
       display: none;
     }
 
-    &__user-data {
+    &__header {
       display: flex;
       flex-direction: column;
-      margin-bottom: $spacing-07;
 
       &__name {
         @include type-style('expressive-heading-04', $fluid: true);
+        margin-bottom: $spacing-07;
         word-break: break-word;
         max-height: 9.25rem;
         overflow: hidden;

@@ -4,7 +4,7 @@
     <AccountMenu
       :first-name="firstName"
       :last-name="lastName"
-      :logged-in="userIsLoggedIn"
+      :section-list="sectionList"
     />
     <div class="syllabus__container">
       <UserAccountSectionHeader>
@@ -23,6 +23,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { getActiveSyllabus, Syllabus } from '../../../ts/syllabus'
+import { ACCOUNT_MENU_LINKS } from '../constants/accountMenuLinks'
 import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
 import AccountMenu from '../UserAccount/AccountMenu.vue'
 import SyllabusView from './SyllabusView.vue'
@@ -41,16 +42,13 @@ export default defineComponent({
   data () {
     return {
       syllabus: undefined as Syllabus | undefined,
-      userIsLoggedIn: false
+      userIsLoggedIn: false,
+      sectionList: ACCOUNT_MENU_LINKS
     }
   },
   mounted () {
     this.syllabus = getActiveSyllabus()
-    if (this.firstName !== '' && this.lastName !== '') {
-      this.userIsLoggedIn = true
-    }
   }
-
 })
 </script>
 

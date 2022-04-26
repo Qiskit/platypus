@@ -5,7 +5,6 @@
       :last-name="lastName"
       :current-section="activeSection"
       :section-list="sectionList"
-      :logged-in="userIsLoggedIn"
     />
     <section class="user-account__section-container">
       <div v-if="activeSection === sectionList[0].url">
@@ -24,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import { ACCOUNT_MENU_LINKS } from '../constants/accountMenuLinks'
 import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 import DeleteUserDataSection from './DeleteUserDataSection.vue'
@@ -46,20 +46,7 @@ export default defineComponent({
   data () {
     return {
       activeSection: '',
-      sectionList: [
-        {
-          displayName: this.$translate('Learning'),
-          url: '/account'
-        },
-        {
-          displayName: this.$translate('Classroom'),
-          url: '/account/classroom'
-        },
-        {
-          displayName: this.$translate('Privacy'),
-          url: '/account/privacy'
-        }
-      ]
+      sectionList: ACCOUNT_MENU_LINKS
     }
   },
   computed: {
@@ -73,6 +60,8 @@ export default defineComponent({
   },
   mounted () {
     this.activeSection = window.location.pathname || this.sectionList[0].url
+    // redirect to Syllabus if needed
+    
   }
 })
 </script>
