@@ -70,15 +70,18 @@ export const cleanAndPopulate = async () => {
   // TODO: we should use our logs here once time we have them
   if (process.env.NODE_ENV === 'production') { return }
 
-  console.log('Connecting to DB...')
-  const interval = setInterval(async () => {
-    if (connection.readyState === 1) {
-      clearInterval(interval)
+  return await new Promise((resolve) => {
+    console.log('Connecting to DB...')
+    const interval = setInterval(async () => {
+      if (connection.readyState === 1) {
+        resolve()
+        clearInterval(interval)
 
-      console.log('Initiating clean and populate database process...')
-      await clean()
-      await populate()
-      console.log('Finished with the clean and populate database')
-    }
-  }, 1000)
+        console.log('Initiating clean and populate database process...')
+        await clean()
+        await populate()
+        console.log('Finished with the clean and populate database')
+      }
+    }, 1000)
+  })
 }

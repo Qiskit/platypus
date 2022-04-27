@@ -307,4 +307,3 @@ const start = () => {
 }
 
 start()
-cleanAndPopulate()
