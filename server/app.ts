@@ -85,6 +85,15 @@ const getUserProgressData = async (req: Request) => {
 }
 
 const getAccountData = async (req: Request, res: Response) => {
+  // @ts-ignore
+  if (req.session.redirectTo) {
+    // @ts-ignore
+    const syllabusRedirectUrl = req.session.redirectTo
+    // @ts-ignore
+    delete req.session.redirectTo
+    return res.redirect(syllabusRedirectUrl)
+  }
+
   if (!req.user) {
     return res.redirect('/signin')
   }
@@ -225,6 +234,12 @@ const start = () => {
       }
     })
     .get('/signin', (req, res) => {
+      const syllabusRedirect = String(req.query.returnTo)
+      if (syllabusRedirect) {
+        // @ts-ignore
+        req.session.redirectTo = syllabusRedirect
+      }
+
       if (req.user && req.user.acceptedPolicies) {
         return res.redirect('/account')
       }

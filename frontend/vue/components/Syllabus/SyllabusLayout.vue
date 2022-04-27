@@ -5,6 +5,7 @@
       :first-name="firstName"
       :last-name="lastName"
       :section-list="sectionList"
+      :current-section="syllabusParentPath"
     />
     <div class="syllabus__container">
       <UserAccountSectionHeader>
@@ -43,7 +44,8 @@ export default defineComponent({
     return {
       syllabus: undefined as Syllabus | undefined,
       userIsLoggedIn: false,
-      sectionList: ACCOUNT_MENU_LINKS
+      sectionList: ACCOUNT_MENU_LINKS,
+      syllabusParentPath: '/account/classroom'
     }
   },
   mounted () {
