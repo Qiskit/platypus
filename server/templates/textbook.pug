@@ -13,46 +13,48 @@ html(lang=course.locale dir=dir)
     div.qiskit__navbar#qiskit-navbar
       q-the-menu
 
-    .body
-      x-course.qv-layout.js-show-sidebar(id=course.id data-section=section.id data-goals=section.goals data-reveal='true')
+    main.body
+      x-course.c-textbook(id=course.id data-section=section.id data-goals=section.goals data-reveal='true')
         include sidebar
 
         article.c-textbook__page(data-test="textbook-page")
           include banner
+          .reveal-banner
+            | #{__('Reading time')}: ~#{section.duration} min
+            // keep this for mathigon stuff
+            .complete
           div.c-textbook__content#textbook_content
-            div.jupyter-page
-              #page-info
-                #page-title !{section.title}
-              .reveal-banner
-                | #{__('Reading time')}: ~#{section.duration} min
-              .steps
-                for stepId in section.steps
-                  | !{course.steps[stepId].html}
+            .page-title !{section.title}
+            .steps
+              for stepId in section.steps
+                | !{course.steps[stepId].html}
 
-              footer
-                div.footer-nav
-                  div.footer-nav__cta__container
-                    if prevSection
-                      q-app-cta.footer-nav__cta__prev(
-                        label=`${prevSection.section.title}`
-                        url=`${prevSection.section.url}`
-                        is-static=true
-                        target="_self"
-                        kind="secondary"
-                        segment=`${section.id} > ${prevSection.section.id}`
-                        data-test="footer-nav-previous-section"
-                      )
+            footer
+              // keep this for mathigon stuff
+              div.skip-step.skip.show-all
+              div.footer-nav
+                div.footer-nav__cta__container
+                  if prevSection
+                    q-app-cta.footer-nav__cta__prev(
+                      label=`${prevSection.section.title}`
+                      url=`${prevSection.section.url}`
+                      is-static=true
+                      target="_self"
+                      kind="secondary"
+                      segment=`${section.id} > ${prevSection.section.id}`
+                      data-test="footer-nav-previous-section"
+                    )
 
-                  div.footer-nav__cta__container
-                    if nextSection
-                      q-app-cta.footer-nav__cta__next(
-                        label=`${nextSection.section.title}`
-                        url=`${nextSection.section.url}`
-                        is-static=true
-                        target="_self"
-                        segment=`${section.id} > ${nextSection.section.id}`
-                        data-test="footer-nav-next-section"
-                      )
+                div.footer-nav__cta__container
+                  if nextSection
+                    q-app-cta.footer-nav__cta__next(
+                      label=`${nextSection.section.title}`
+                      url=`${nextSection.section.url}`
+                      is-static=true
+                      target="_self"
+                      segment=`${section.id} > ${nextSection.section.id}`
+                      data-test="footer-nav-next-section"
+                    )
 
         div(id="utility-panel" class="c-textbook__utility_panel" data-test="utility-panel")
           q-utility-panel

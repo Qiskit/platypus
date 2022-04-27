@@ -4,6 +4,89 @@
 @import '../variables/mq.scss';
 @import '../variables/fonts.scss';
 
+body {
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+main.body {
+  padding: 0;
+  margin: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.c-textbook {
+  display: flex;
+  max-height: 100%;
+  overflow: hidden;
+
+  @include mq($until: medium) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+      "sidebar-mobile-menu utility-panel"
+      "textbook-content textbook-content";
+    position: relative;
+  }
+
+  &__page {
+    grid-area: textbook-content;
+    max-height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: none;
+    flex: 1;
+    gap: $spacing-05;
+    
+    @include mq($until: medium) {
+      overflow: hidden;
+    }
+  }
+  
+  &__sidebar--hidden .c-textbook__page {
+    @include mq($until: medium) {
+      overflow: auto;
+    }
+  }
+  
+  .reveal-banner {
+    z-index: auto;
+    position: initial;
+    display: inline-block;
+    width: max-content;
+  }
+  
+  // banner
+  .page__banner {
+    height: $textbook-page-banner-height;
+  }
+
+  &__content {
+    max-width: $content-max-width;
+    padding: 0 $spacing-06 $spacing-05 $spacing-05;
+
+    x-step {
+      z-index: auto;
+    }
+  }
+  
+  .page-title {
+    color: $text-color-dark;
+    @include type-style('expressive-heading-05', $fluid: true);
+    margin-top: $spacing-06;
+    margin-bottom: $spacing-06;
+    max-width: 70%;
+  }
+
+}
+
+/*
 .c-textbook {
   position: relative;
   height: 100vh;
@@ -289,3 +372,4 @@ div.preface-checker-pattern {
     height: initial;
   }
 }
+*/
