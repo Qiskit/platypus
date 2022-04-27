@@ -173,11 +173,11 @@ export default class UtilityPanel extends Vue.with(Props) {
     max-width: $right-sidebar-width-xl;
     min-height: 100vh;
 
-    @include mq($from: max-size) {
+    @include mq($from: x-large) {
       max-width: $right-sidebar-width-xl;
     }
 
-    @include mq($from: large, $until: max-size) {
+    @include mq($from: large, $until: x-large) {
       max-width: $right-sidebar-width-lg;
     }
 

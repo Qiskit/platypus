@@ -84,6 +84,42 @@ main.body {
     max-width: 70%;
   }
 
+  &__utility-panel {
+    grid-area: utility-panel;
+
+    @include mq($from: medium) {
+      position: absolute;
+      right: 0;
+    }
+
+    .utility-panel_open {
+      @include mq($until: medium) {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+    }
+    
+    .utility-panel-content {
+      max-height: 100%;
+      overflow: auto;
+      padding-bottom: 8rem;
+    }
+    
+    /*
+    .utility-panel_open .utility-panel-header {
+      @include mq($until: medium) {
+        position: absolute;
+        width: 100%;
+        left: 0;
+      }
+    }
+    */
+
+  }
+  
 }
 
 /*
