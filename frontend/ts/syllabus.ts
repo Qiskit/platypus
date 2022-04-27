@@ -1,4 +1,14 @@
 
+export type UnitUUID = string
+
+export type SyllabusCode = string
+
+export interface SyllabusCourse {
+  title: string,
+  description: string,
+  unitList: UnitUUID[],
+}
+
 export interface Syllabus {
   id?: string,
   code?: SyllabusCode,
@@ -11,16 +21,6 @@ export interface Syllabus {
   email: string,
   courseList: SyllabusCourse[]
 }
-
-export type SyllabusCode = string
-
-export interface SyllabusCourse {
-  title: string,
-  description: string,
-  unitList: UnitUUID[],
-}
-
-export type UnitUUID = string
 
 let promise: Promise<Syllabus[]> | undefined
 
@@ -44,7 +44,7 @@ export const getSyllabi = () : Promise<Syllabus[]> => {
 
 export const getActiveSyllabus = (): Syllabus | undefined => {
   const jsonText: string = document.getElementById('syllabus')?.textContent || ''
-  
+
   try {
     return JSON.parse(jsonText) as Syllabus
   } catch {
@@ -64,7 +64,7 @@ export const emptySyllabus = (): Syllabus => ({
     {
       title: '',
       description: '',
-      unitList: [],
+      unitList: []
     }
   ]
 })

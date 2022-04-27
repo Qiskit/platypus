@@ -25,15 +25,26 @@
     "patch": "patch-package",
     "postbuild:studio": "ts-node -s converter/postbuild.ts",
     "postinstall": "patch-package",
+    "prepare": "npx simple-git-hooks",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test": "start-server-and-test start :8080/health cy:run",
     "test:debug": "start-server-and-test start :8080/health cy:open",
-    "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py",
+    "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py && python3 ./scripts/content_checks/nb_svg.py",
     "test:nb:pylint": "./scripts/content_checks/nb_pylint.sh",
-    "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix",
+    "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix && python3 ./scripts/content_checks/nb_svg.py --fix",
     "test:nb": "npm run test:nb:pylint && npm run test:nb:meta",
     "setup:secrets": "mgon-secrets"
+  },
+  "nano-staged": {
+    "*.{ts,tsx}": "eslint",
+    "*.ipynb": [
+      "python3 ./scripts/content_checks/nb_metadata.py",
+      "python3 ./scripts/content_checks/nb_svg.py"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "./node_modules/.bin/nano-staged"
   },
   "engines": {
     "node": ">=14 <17"
@@ -98,12 +109,14 @@
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",
     "jsdom": "^19.0.0",
+    "nano-staged": "^0.8.0",
     "node-sass": "^7.0.0",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass-loader": "^10.2.1",
     "sass-mq": "^6.0.0",
+    "simple-git-hooks": "^2.7.0",
     "start-server-and-test": "^1.14.0",
     "tslib": "^2.3.1",
     "vue-demi": "^0.12.1"
