@@ -34,7 +34,7 @@
           v-for="{displayName, url} in sectionList"
           :key="url"
           class="account-menu__nav__link-list__link"
-          :class="{'account-menu__nav__link-list__link_active': currentSection === url}"
+          :class="{'account-menu__nav__link-list__link_active': activeMenuItem === url}"
           :url="url"
           target="_self"
         >
@@ -53,7 +53,7 @@
     <bx-dropdown
       v-if="loggedIn"
       class="account-menu__section-dropdown"
-      :value="currentSection"
+      :value="activeMenuItem"
       @bx-dropdown-selected="switchPanel($event)"
     >
       <bx-dropdown-item
@@ -87,7 +87,7 @@ export default defineComponent({
   props: {
     firstName: { type: String, required: false, default: '' },
     lastName: { type: String, required: false, default: '' },
-    currentSection: { type: String, required: false, default: '' },
+    activeMenuItem: { type: String, required: false, default: '' },
     sectionList: { type: Array, required: false, default: () => [] }
   },
   data () {

@@ -4,8 +4,8 @@
     <AccountMenu
       :first-name="firstName"
       :last-name="lastName"
+      :active-menu-item="syllabusParentPath"
       :section-list="sectionList"
-      :current-section="syllabusParentPath"
     />
     <div class="syllabus__container">
       <UserAccountSectionHeader>

@@ -3,7 +3,7 @@
     <AccountMenu
       :first-name="firstName"
       :last-name="lastName"
-      :current-section="activeSection"
+      :active-menu-item="activeSection"
       :section-list="sectionList"
     />
     <section class="user-account__section-container">
