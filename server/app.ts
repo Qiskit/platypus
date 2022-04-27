@@ -282,4 +282,3 @@ const start = () => {
 }
 
 start()
-cleanAndPopulate()
