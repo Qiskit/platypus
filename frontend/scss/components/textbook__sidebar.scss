@@ -181,6 +181,11 @@
 
     #app-panel-language-toggle {
       display: none;
+      text-align: center;
+      
+      svg {
+        display: inline-block;
+      }
     }
   }
   
