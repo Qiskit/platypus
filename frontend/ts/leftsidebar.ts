@@ -1,3 +1,5 @@
+import { BXDropdown } from "carbon-web-components"
+
 const hiddenPanelClass = 'c-textbook__sidebar--hidden'
 const mobileBreakpoint = 1056
 let parentContainer = null
@@ -14,12 +16,16 @@ const collapseMobileMenu = function () {
   }
 }
 
-const languageDropDown = function () {
-  if (!bxDropdown) {
-    bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0]
+const languageDropDown = (() => {
+  let bxDropdown: BXDropdown | undefined
+
+  return () => {
+    if (!bxDropdown) {
+      bxDropdown = document.getElementsByClassName('language-selector__dropdown')[0] as BXDropdown
+    }
+    return bxDropdown
   }
-  return bxDropdown
-}
+})()
 
 const initLeftSidebar = function () {
   // toggle left-side menu
