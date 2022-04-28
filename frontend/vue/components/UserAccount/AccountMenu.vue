@@ -72,6 +72,29 @@
         {{ $translate('Log Out') }}
       </bx-dropdown-item>
     </bx-dropdown>
+    <div v-else class="account-menu__mobile-header">
+      <h2 class="account-menu__mobile-header__title">
+        {{ $translate('User Account') }}
+      </h2>
+      <p>
+        <BasicLink
+          class="account-menu__login-link"
+          :url="loginOrRegisterLink"
+          :is-static="true"
+          target="_self"
+        >
+          {{ $translate('Log in') }}
+        </BasicLink> or
+        <BasicLink
+          class="account-menu__login-link"
+          :url="loginOrRegisterLink"
+          :is-static="true"
+          target="_self"
+        >
+          {{ $translate('create an account') }}
+        </BasicLink>.
+      </p>
+    </div>
   </div>
 </template>
 
@@ -113,7 +136,7 @@ export default defineComponent({
     }
   },
   mounted () {
-    if (this.firstName !== '' && this.lastName !== '') {
+    if (this.firstName !== '' || this.lastName !== '') {
       this.loggedIn = true
     }
   },
@@ -133,7 +156,6 @@ export default defineComponent({
 .account-menu {
   display: grid;
   grid-template-columns: 17rem 1fr;
-  height: calc(100vh - 60px);
 
   @include mq($from: medium, $until: large) {
     grid-template-columns: 12rem 1fr;
@@ -199,6 +221,18 @@ export default defineComponent({
 
     &__login-link {
       color: $text-active-color;
+    }
+  }
+
+  &__mobile-header {
+    padding: $spacing-03 $spacing-08;
+    background-color: $background-color-lighter;
+    &__title {
+      @include type-style('expressive-heading-04', $fluid: true);
+    }
+
+    @include mq($from: medium) {
+      display: none;
     }
   }
 }

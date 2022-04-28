@@ -49,15 +49,6 @@ export default defineComponent({
       sectionList: ACCOUNT_MENU_LINKS
     }
   },
-  computed: {
-    userIsLoggedIn () {
-      if (this.firstName !== '' && this.lastName !== '') {
-        return true
-      } else {
-        return false
-      }
-    }
-  },
   mounted () {
     this.activeSection = window.location.pathname || this.sectionList[0].url
   }

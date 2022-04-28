@@ -18,8 +18,6 @@ import {
 } from './utilities'
 import { TocCourse } from './interfaces'
 
-import { cleanAndPopulate } from './populate-database'
-
 // Syllabus
 import { CreateSyllabusController } from './modules/syllabus/commands/create-syllabus/create-syllabus-controller'
 import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/find-syllabi-controller'
@@ -172,6 +170,8 @@ const start = () => {
       req.user.oAuthTokens = [
         `qiskit:${randomString}`
       ]
+      // @ts-ignore
+      delete req.session.redirectTo
 
       try {
         await req.user.save()
@@ -234,10 +234,10 @@ const start = () => {
       }
     })
     .get('/signin', (req, res) => {
-      const syllabusRedirect = String(req.query.returnTo)
+      const syllabusRedirect = req.query.returnTo
       if (syllabusRedirect) {
         // @ts-ignore
-        req.session.redirectTo = syllabusRedirect
+        req.session.redirectTo = String(syllabusRedirect)
       }
 
       if (req.user && req.user.acceptedPolicies) {
