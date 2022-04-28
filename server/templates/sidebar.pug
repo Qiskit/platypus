@@ -17,13 +17,15 @@ div.c-sidebar(data-test="sidebar")
 
       ul.c-sidebar__chapter__section-list
         for s in c.sections
-          li.c-sidebar__chapter__section(data-section-id=s.id)
+          - var isActiveSection = section && section.id === s.id
+          - var sectionClass = isActiveSection ? "c-sidebar__chapter__section c-sidebar__chapter__section--active" : "c-sidebar__chapter__section"
+          li(data-section-id=s.id class=sectionClass)
             if course && course.id === c.id
               .connection
-              if section && section.id === s.id
+              if isActiveSection
                 .connection.connection--progress
-              - var progclass = section && section.id === s.id ? "progress-wrapper sidebar-row active" : "progress-wrapper"
-              if section && section.id === s.id
+              - var progclass = isActiveSection ? "progress-wrapper sidebar-row active" : "progress-wrapper"
+              if isActiveSection
                 div(class=progclass, title=s.title)
                   x-progress(r=10 p=(progressData ? progressData.getSectionProgress(s) : 0))
               else
@@ -34,7 +36,7 @@ div.c-sidebar(data-test="sidebar")
                   , title=s.title
                 )
                   x-progress(r=10 p=(progressData ? progressData.getSectionProgress(s) : 0))
-            if section && section.id === s.id
+            if isActiveSection
               span(class="c-sidebar__entry c-sidebar__entry--active")
                 | !{s.title}
               ul.c-sidebar__subsections

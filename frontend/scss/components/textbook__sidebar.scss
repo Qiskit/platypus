@@ -71,7 +71,6 @@
         position: absolute;
         top: $spacing-06;
         border: 1px solid;
-        border-color: $border-color-light-2;
         visibility: hidden;
         
         body[data-learning-path="true"] & {
@@ -85,6 +84,10 @@
         }
       }
       
+      .progress-wrapper {
+        z-index: 0;
+      }
+
       x-progress {
         display: inline-block;
         height: 20px;
@@ -94,6 +97,12 @@
       &-list {
         padding: $spacing-06 0 8rem 0;
         margin: 0;
+      }
+      
+      &--active {
+        .connection {
+          border-color: $border-color-light-2;
+        }
       }
     }
 

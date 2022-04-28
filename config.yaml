@@ -68,11 +68,11 @@ accounts:
   enabled: true
   oAuth:
     google:
-      clientId: ''
-      clientSecret: ''
+      clientId: '111304772064-0a9fege3rrijki5dss75etfhal4d6q4n.apps.googleusercontent.com'
+      clientSecret: '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'
     ibm:
       clientId: ''
       clientSecret: ''
 
 mockData:
-  email: john.doe@example.com
+  email: korgan00@gmail.com
