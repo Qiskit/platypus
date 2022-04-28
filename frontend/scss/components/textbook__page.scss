@@ -78,8 +78,8 @@ main.body {
   }
   
   .page-title {
-    color: $text-color-dark;
     @include type-style('expressive-heading-05', $fluid: true);
+    color: $text-color-dark;
     margin-top: $spacing-06;
     margin-bottom: $spacing-06;
     max-width: 70%;

@@ -8,6 +8,7 @@
   grid-template-rows: auto 1fr auto;
   max-height: 100%;
   width: $left-sidebar-width;
+  z-index: 1;
 
   @include mq($until: small) {
     padding-top: $spacing-07;
@@ -26,27 +27,25 @@
     }
   }
 
+  &__content-menu {
+    z-index: 1;
+  }
+
   &__chapters-container {
+    @include type-style('body-long-01');
     overflow: auto;
     background-color: $background-color-lighter;
     padding: $spacing-unit-small $spacing-unit;
     scrollbar-color: $background-color-lighter $background-color-lighter;
     transition: scrollbar-color 0.2s ease-in-out;
-    font-size: 0.875rem;
-    line-height: 1.71429;
     
     &:hover {
       scrollbar-color: $text-color-lighter-3 $background-color-lighter;
     }
     
-    @include mq($from: medium) {
-      z-index: 100;
-    }
-    
     @include mq($until: medium) {
       max-width: 100%;
       width: 100%;
-      z-index: 1;
     }
   }
 
@@ -59,28 +58,18 @@
       margin-bottom: 0;
       padding-left: 0;
     }
-    
-    &-title {
-      display: none;
-    }
-
-    & > a {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 22px;
-    }
 
     &__section {
-      margin: 0 0 .5em;
+      margin: 0 0 $spacing-03;
       position: relative;
-      padding-bottom: 0.7rem;
+      padding-bottom: $spacing-04;
 
       .connection {
         height: calc(100% - 12px);
         left: 9px;
         pointer-events: none;
         position: absolute;
-        top: 24px;
+        top: $spacing-06;
         border: 1px solid;
         border-color: $border-color-light-2;
         visibility: hidden;
@@ -111,23 +100,19 @@
     &__subsections {
       list-style: none;
       margin-bottom: 0;
-      margin-left: 24px;
+      margin-left: $spacing-06;
     }
   }
 
   &__entry {
+    @include type-style('body-long-01');
     display: block;
     color: $text-color-dark;
-    font-size: 0.875rem;
-    line-height: 20px;
-    letter-spacing: 0.16px;
     padding: math.div($spacing-unit-x-small, 2);
     text-decoration: none;
   
     .c-sidebar__chapter & {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 22px;
+      @include type-style('expressive-heading-02');
     }
 
     &--active {
@@ -143,12 +128,10 @@
   }
 
   &__footer {
+    @include type-style('body-long-01');
     direction: rtl;
-    font-size: 14px;
-    line-height: 24px;
     background-color: $background-color-lighter;
     width: 100%;
-    z-index: 100;
   
     @include mq($until: medium) {
       padding-bottom: $spacing-unit;
@@ -166,7 +149,7 @@
         height: $spacing-08;
         align-items: center;
         justify-content: flex-end;
-        padding: .5rem 2rem;
+        padding: $spacing-03 $spacing-07;
         border-top: 1px solid rgba(0, 0, 0, 0.07);
         color: $link-color-tertiary;
         gap: $spacing-03;
@@ -216,7 +199,7 @@
       display: flex;
       align-items: center;
       text-align: right;
-      padding: .5rem 1rem;
+      padding: $spacing-03 $spacing-05;
       
       svg {
         width: $spacing-05;
@@ -224,7 +207,7 @@
       }
 
       &__label {
-        margin-left: 0.5rem;
+        margin-left: $spacing-03;
       }
     }
   }
@@ -255,7 +238,7 @@
 
     &__chapters-container {
       max-width: $left-sidebar-width-hidden;
-      padding: 0.5rem;
+      padding: $spacing-03;
     }
 
     &__chapter {
@@ -264,7 +247,7 @@
       }
 
       &__section-list {
-        margin-left: 0.5rem;
+        margin-left: $spacing-03;
         margin-bottom: 0;
       }
     }
@@ -272,7 +255,7 @@
     &__footer {
       &__menu {
         &__item {
-          padding: 0.5rem;
+          padding: $spacing-03;
           justify-content: center;
         }
         &__item-label {
