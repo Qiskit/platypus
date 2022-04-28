@@ -99,9 +99,18 @@
         margin: 0;
       }
       
+      &:last-child {
+        .connection {
+          display: none;
+        }
+      }
+
       &--active {
         .connection {
           border-color: $border-color-light-2;
+        }
+        &:last-child .connection {
+          display: block;
         }
       }
     }
