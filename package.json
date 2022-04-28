@@ -25,7 +25,7 @@
     "patch": "patch-package",
     "postbuild:studio": "ts-node -s converter/postbuild.ts",
     "postinstall": "patch-package",
-    "prepare": "npx simple-git-hooks",
+    "prepare": "simple-git-hooks",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "test": "start-server-and-test start :8080/health cy:run",
