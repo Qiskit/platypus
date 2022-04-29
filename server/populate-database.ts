@@ -5,6 +5,7 @@ import type { Config } from '@mathigon/studio/server/interfaces'
 import { connection } from 'mongoose'
 
 import { Syllabus } from './modules/syllabus/database/syllabus-entity'
+import { logger } from './libs/logger/logger'
 
 interface PopulateConfig extends Config {
   mockData: {
@@ -71,16 +72,16 @@ export const cleanAndPopulate = async () => {
   if (process.env.NODE_ENV === 'production') { return }
 
   return await new Promise((resolve) => {
-    console.log('Connecting to DB...')
+    logger.info('Connecting to DB...')
     const interval = setInterval(async () => {
       if (connection.readyState === 1) {
-        resolve()
+        resolve(true)
         clearInterval(interval)
 
-        console.log('Initiating clean and populate database process...')
+        logger.info('Initiating clean and populate database process...')
         await clean()
         await populate()
-        console.log('Finished with the clean and populate database')
+        logger.info('Finished with the clean and populate database')
       }
     }, 1000)
   })
