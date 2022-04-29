@@ -107,9 +107,7 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
 .utility-panel-header {
   display: flex;
   justify-content: space-between;
-  position: sticky;
   top: 0;
-  z-index: 1;
 
   &__toggle {
     @include type-style('body-short-01');

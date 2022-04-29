@@ -35,20 +35,22 @@ div.text_cell_render > p > a > img {
   transition: opacity 0.3s;
 }
 
-
+/*
 body > .body {
-  margin-top: $qiskit-navbar-height;
+  // margin-top: $qiskit-navbar-height;
   // prevent mobile resizing
   @include mq($until: medium) {
     overflow: hidden;
   }
 }
+*/
 
 button span.rangle {
   float: right;
   margin-left: 2em;
 }
 
+/*
 @media (max-width: $browser-small) {
   body > .body {
     position: relative;
@@ -60,6 +62,7 @@ button span.rangle {
     overflow-x: hidden;
   }
 }
+*/
 
 /* Make youtube full width */
 .youtube-wrapper {
