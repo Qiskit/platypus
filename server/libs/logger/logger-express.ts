@@ -1,7 +1,11 @@
 import { stdTimeFunctions } from 'pino'
 import { pinoHttp } from 'pino-http'
 
+const isProd = process.env.NODE_ENV === 'production'
+
+const level = isProd ? 'info' : 'debug'
+
 export const loggerExpress = pinoHttp({
-  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+  level,
   timestamp: stdTimeFunctions.isoTime
 })
