@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@carbon/colors": "^10.36.0",
-    "@carbon/icons-vue": "^10.46.0",
+    "@carbon/icons-vue": "^10.49.1",
     "@carbon/themes": "^10.50.0",
     "@carbon/vue": "^2.40.0",
     "@github/clipboard-copy-element": "^1.1.2",
