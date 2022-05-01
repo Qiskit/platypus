@@ -3,8 +3,27 @@
   sections:
     - title: Single systems
       id: single-systems
-      url: /basics/single-systems
+      url: /basics/single-systems-intro
 
+    - title: Classical information
+      id: single-systems-classical
+      url: /basics/single-systems-classical
+
+    - title: Quantum information
+      id: single-systems-quantum
+      url: /basics/single-systems-quantum
+
+    - title: Multiple systems
+      id: multiple-systems
+      url: /basics/multiple-systems-intro
+
+    - title: Classical information
+      id: multiple-systems-classical
+      url: /basics/multiple-systems-classical
+
+    - title: Quantum information
+      id: multiple-systems-quantum
+      url: /basics/multiple-systems-quantum
 
 - title: Prerequisites
   url: /ch-prerequisites
