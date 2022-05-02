@@ -1,5 +1,6 @@
 nbqa
 pylint
+scour
 qiskit
 matplotlib
 mypy
