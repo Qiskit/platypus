@@ -172,20 +172,6 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Bonus Level: Make your own puzzles',
-      url: `${baseUrl}${pathGamesAndDemos}/bonus-level-make-your-own-puzzles`,
-      segment: {
-        action: `${actionPrefix} > ${sectionGamesAndDemos} > bonus-level-make-your-own-puzzles`
-      }
-    },
-    {
-      label: 'Level 5: Proving the Uniqueness of Quantum Variables',
-      url: `${baseUrl}${pathGamesAndDemos}/level-5-proving-the-uniqueness-of-quantum-variables`,
-      segment: {
-        action: `${actionPrefix} > ${sectionGamesAndDemos} > level-5-proving-the-uniqueness-of-quantum-variables`
-      }
-    },
-    {
       label: 'Estimating Pi Using Quantum Phase Estimation Algorithm',
       url: `${baseUrl}${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
