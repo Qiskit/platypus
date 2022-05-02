@@ -83,11 +83,8 @@ const getUserProgressData = async (req: Request) => {
 }
 
 const getAccountData = async (req: Request, res: Response) => {
-  // @ts-ignore
   if (req.session.redirectTo) {
-    // @ts-ignore
     const syllabusRedirectUrl = req.session.redirectTo
-    // @ts-ignore
     delete req.session.redirectTo
     return res.redirect(syllabusRedirectUrl)
   }
@@ -170,7 +167,7 @@ const start = () => {
       req.user.oAuthTokens = [
         `qiskit:${randomString}`
       ]
-      // @ts-ignore
+
       delete req.session.redirectTo
 
       try {
@@ -236,7 +233,6 @@ const start = () => {
     .get('/signin', (req, res) => {
       const syllabusRedirect = req.query.returnTo
       if (syllabusRedirect) {
-        // @ts-ignore
         req.session.redirectTo = String(syllabusRedirect)
       }
 
