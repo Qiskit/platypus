@@ -49,7 +49,7 @@ However, please note that the above does not guarantee that a language will be o
 If you have further questions, please feel free to contact [Soolu Thomas](mailto:soolu.thomas@ibm.com?subject=[GitHub]%20Qiskit%20Documentation%20Translation) and [Yuri Kobayashi](mailto:yurik@jp.ibm.com?subject=[GitHub]%20Qiskit%20Documentation%20Translation). Thank you.
 
 
-## How to add my name to TEXTBOOK_CONTRIBUTORS list and open a PR in GitHub?
+## How to add my name to LOCALIZATION_CONTRIBUTORS list and open a PR in GitHub?
 
 **Option 1: In Github (Recommended)**
 1. Click on the pen-like button which says "Edit this file" in the [LOCALIZATION_CONTRIBUTORS](https://github.com/Qiskit/platypus/blob/main/LOCALIZATION_CONTRIBUTORS) file.
