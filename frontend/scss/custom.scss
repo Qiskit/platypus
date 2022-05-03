@@ -8,7 +8,6 @@
 	}
 }
 
-
 div.text_cell_render > p > img,
 div.text_cell_render > p > a > img {
 	margin-top: 36px;
@@ -20,7 +19,6 @@ div.text_cell_render > p > a > img {
 :not(.is-active) > img.sidebar_open_img {
 	display: none;
 }
-
 
 .target-body {
   position: fixed;
@@ -35,34 +33,10 @@ div.text_cell_render > p > a > img {
   transition: opacity 0.3s;
 }
 
-/*
-body > .body {
-  // margin-top: $qiskit-navbar-height;
-  // prevent mobile resizing
-  @include mq($until: medium) {
-    overflow: hidden;
-  }
-}
-*/
-
 button span.rangle {
   float: right;
   margin-left: 2em;
 }
-
-/*
-@media (max-width: $browser-small) {
-  body > .body {
-    position: relative;
-  }
-}
-
-@media (min-width: $browser-medium) {
-  body > .body {
-    overflow-x: hidden;
-  }
-}
-*/
 
 /* Make youtube full width */
 .youtube-wrapper {

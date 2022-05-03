@@ -182,7 +182,7 @@ export default class UtilityPanel extends Vue.with(Props) {
   &__content {
     flex: 1 0 0;
     overflow: auto;
-    padding-bottom: 8rem;
+    padding-bottom: $spacing-13;
   }
 
   &_open {
