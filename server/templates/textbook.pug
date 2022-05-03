@@ -17,7 +17,7 @@ html(lang=course.locale dir=dir)
       x-course.c-textbook(id=course.id data-section=section.id data-goals=section.goals data-reveal='true')
         include sidebar
 
-        article.c-textbook__page(data-test="textbook-page")
+        article.c-textbook__page(data-test="textbook-page" tabindex="0")
           include banner
           .reveal-banner
             | #{__('Reading time')}: ~#{section.duration} min
