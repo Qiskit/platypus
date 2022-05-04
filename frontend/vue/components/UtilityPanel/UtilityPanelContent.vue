@@ -1,5 +1,5 @@
 <template>
-  <div class="utility-panel-content" data-test="utility-panel-content">
+  <div class="utility-panel-content" data-test="utility-panel-content" tabindex="0">
     <LessonNotes
       v-if="showLessonNotes"
       :notations="notationsData"

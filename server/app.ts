@@ -86,6 +86,12 @@ const getUserProgressData = async (req: Request) => {
 }
 
 const getAccountData = async (req: Request, res: Response) => {
+  if (req.session.redirectTo) {
+    const syllabusRedirectUrl = req.session.redirectTo
+    delete req.session.redirectTo
+    return res.redirect(syllabusRedirectUrl)
+  }
+
   if (!req.user) {
     return res.redirect('/signin')
   }
@@ -168,6 +174,8 @@ const start = () => {
         `qiskit:${randomString}`
       ]
 
+      delete req.session.redirectTo
+
       try {
         await req.user.save()
       } catch (error) {
@@ -228,6 +236,11 @@ const start = () => {
       }
     })
     .get('/signin', (req, res) => {
+      const syllabusRedirect = req.query.returnTo
+      if (syllabusRedirect) {
+        req.session.redirectTo = String(syllabusRedirect)
+      }
+
       if (req.user && req.user.acceptedPolicies) {
         return res.redirect('/account')
       }
@@ -267,10 +280,20 @@ const start = () => {
     .get('/syllabus', FindSyllabiController)
     .get('/syllabus/:code', async (req: Request, res: Response, next: NextFunction) => {
       const result = await FindSyllabusByCodeController(req, res, next)
+      const loggedInUser = {
+        firstName: '',
+        lastName: ''
+      }
+
+      if (req.user) {
+        loggedInUser.firstName = req.user.firstName
+        loggedInUser.lastName = req.user.lastName
+      }
 
       if (res.statusCode === 200) {
         res.render('syllabus', {
-          syllabus: JSON.stringify(result)
+          syllabus: JSON.stringify(result),
+          userData: loggedInUser
         })
       } else {
         res.render('error')

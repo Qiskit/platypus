@@ -209,7 +209,6 @@ pre {
 
   + span.c-sidebar__entry,
   + a.c-sidebar__entry {
-    display: inline-block;
     margin-left: 25px;
     max-width: calc(100% - 35px);
   }
@@ -243,47 +242,6 @@ x-progress {
 
   path.pie {
     color: $background-color-tertiary;
-  }
-
-  .c-sidebar__section & {
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-  }
-}
-
-.connection {
-  .c-sidebar__section & {
-    height: calc(100% - 12px);
-    left: 9px;
-    pointer-events: none;
-    position: absolute;
-    top: 24px;
-    border: 1px solid;
-    visibility: hidden;
-
-    body[data-learning-path="true"] & {
-      visibility: initial;
-    }
-  }
-
-  &.connection--progress {
-    border-color: $border-color-secondary;
-    height: 0;
-    transition: height .2s ease-out;
-  }
-
-  + .connection {
-    border-color: $border-color-light-2;
-    z-index: -1;
-  }
-}
-
-.c-sidebar__section {
-  &:last-child {
-    .connection {
-      display: none;
-    }
   }
 }
 
