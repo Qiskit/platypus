@@ -1,8 +1,8 @@
-const isProd = process.env.NODE_ENV === 'production'
+import { IS_PRODUCTION } from '../../configuration'
 
 export const pinoPrettyTransport = {
   target: 'pino-pretty',
-  level: isProd ? 'info' : 'debug',
+  level: IS_PRODUCTION ? 'info' : 'debug',
   options: {
     colorize: true
   }

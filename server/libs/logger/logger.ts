@@ -1,17 +1,17 @@
 import { pino, stdTimeFunctions } from 'pino'
 import type { Logger, LoggerOptions } from 'pino'
 
-import { pinoPrettyTransport } from './transports'
+import { IS_PRODUCTION } from '../../configuration'
 
-const isProd = process.env.NODE_ENV === 'production'
+import { pinoPrettyTransport } from './transports'
 
 const pinoConfiguration = (): LoggerOptions => {
   let configuration: LoggerOptions = {
-    level: isProd ? 'info' : 'debug',
+    level: IS_PRODUCTION ? 'info' : 'debug',
     timestamp: stdTimeFunctions.isoTime
   }
 
-  if (!isProd) {
+  if (!IS_PRODUCTION) {
     configuration = {
       ...configuration,
       transport: {

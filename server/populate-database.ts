@@ -7,6 +7,8 @@ import { connection } from 'mongoose'
 import { Syllabus } from './modules/syllabus/database/syllabus-entity'
 import { logger } from './libs/logger/logger'
 
+import { IS_PRODUCTION } from './configuration'
+
 interface PopulateConfig extends Config {
   mockData: {
     email: string
@@ -56,20 +58,20 @@ const createSyllabus = async (userId: string) => {
 }
 
 export const clean = async () => {
-  if (process.env.NODE_ENV === 'production') { return }
+  if (IS_PRODUCTION) { return }
   await cleanUsers()
   await cleanSyllabus()
 }
 
 export const populate = async () => {
-  if (process.env.NODE_ENV === 'production') { return }
+  if (IS_PRODUCTION) { return }
   const newUser = await createUser()
   await createSyllabus(newUser._id.toString())
 }
 
 export const cleanAndPopulate = async () => {
   // TODO: we should use our logs here once time we have them
-  if (process.env.NODE_ENV === 'production') { return }
+  if (IS_PRODUCTION) { return }
 
   return await new Promise((resolve) => {
     logger.info('Connecting to DB...')
