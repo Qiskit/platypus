@@ -11,11 +11,26 @@ describe('Page pagination', () => {
     const nextPage =
       '/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks'
 
+    // TODO Look at a better implementation of this test without using the utility-panel
+    const hideUtilityPanel = () => {
+      const utilityPanelToggleSelector = '[data-test=utility-panel-header-toggle]'
+      const utilityPanelContentSelector = '[data-test=utility-panel-content]'
+      cy.get(utilityPanelContentSelector).then(($panel) => {
+        if ($panel.is(':visible')) {
+          cy.get(utilityPanelToggleSelector).click()
+        }
+      })
+    }
+
     viewports.forEach((viewport) => {
       cy.viewport(viewport)
       cy.visit(initialPage)
+
+      hideUtilityPanel()
       cy.get(nextPageLinkSelector).click()
       cy.url().should('include', nextPage)
+
+      hideUtilityPanel()
       cy.get(previousPageLinkSelector).click()
       cy.url().should('include', initialPage)
     })

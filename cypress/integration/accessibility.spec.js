@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-const viewports = ['ipad-2', 'iphone-x', 'macbook-15']
+const viewports = ['macbook-15', 'ipad-2', 'iphone-x']
 
 function terminalLog (violations) {
   cy.task(
@@ -18,6 +18,9 @@ function terminalLog (violations) {
       nodes: nodes.length
     })
   )
+  violations.forEach((violation) => {
+    cy.task('log', violation)
+  })
 
   cy.task('table', violationData)
 }
