@@ -24,6 +24,9 @@ import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/
 import { FindSyllabusByCodeController } from './modules/syllabus/commands/find-syllabus-by-code/find-syllabus-by-code-controller'
 import { UpdateSyllabusController } from './modules/syllabus/commands/update-syllabus/update-syllabus-controller'
 
+import { loggerExpress } from './libs/logger/logger-express'
+import { logger } from './libs/logger/logger'
+
 const getCourseData = async function (req: Request) {
   const course = getCourse(req.params.course, req.locale.id)
   const section = course?.sections.find(s => s.id === req.params.section)
@@ -120,6 +123,9 @@ const getAccountData = async (req: Request, res: Response) => {
 
 const start = () => {
   new MathigonStudioApp()
+    // Mathigon has the return types incorrect here
+    // @ts-expect-error(2345)
+    .use(loggerExpress)
     .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
     .secure()
     .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus'] })
@@ -173,8 +179,7 @@ const start = () => {
       try {
         await req.user.save()
       } catch (error) {
-        // TODO: we must improve our logs
-        console.error(error)
+        logger.error(error)
       }
 
       res.redirect('/logout')

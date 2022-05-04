@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import { ExceptionBase, SerializedException } from '../../../../libs/exceptions/exception-base'
 import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
+import { logger } from '../../../../libs/logger/logger'
 import { DataWithPaginationMeta } from '../../../../libs/ports/repository-port'
 
 import { Syllabus } from '../../domain/syllabus'
@@ -37,9 +38,7 @@ export const FindSyllabiController = async (req: Request, res: Response, next: N
       res.status(500)
       response = error as any
     }
-    // TODO: implemente new log system
-    // eslint-disable-next-line no-console
-    console.error(response)
+    logger.error(response)
   }
 
   return res.json(response)
