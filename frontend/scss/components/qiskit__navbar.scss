@@ -1,74 +1,13 @@
 @import '../variables/colors.scss';
 @import '../variables/settings.scss';
 
-div.qiskit__navbar {
-  height: $qiskit-navbar-height;
-  background-color: $background-color-white;
+/* height keeps the space and prevent loading jumps */
+.qiskit__navbar {
   border-bottom: 1px solid $border-color;
-  font-size: 1em;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
+  background-color: $background-color-white;
+  height: $qiskit-navbar-height;
 
   nav.menu__navigation-level {
     max-width: initial;
-  }
-
-  li > a {
-    color: $link-color-secondary;
-  }
-  li.entry__active > a {
-    color: $active-color;
-  }
-
-  ul{
-    padding: 0px;
-    padding-right: 30px;
-  }
-  li {
-    display: block;
-    float: right;
-    margin-right: 32px;
-    padding-top: 18px;
-
-    &.left {
-      float: left;
-      font-size: 18px;
-      margin-left: 0px;
-      margin-right: 8px;
-      padding-top: 14px;
-
-      &.navbar__logo {
-        padding-top: 15px;
-        width: 4.2em;
-        margin-left: 10px;
-      }
-    }
-
-    &.qiskit-navbar__icons {
-      display: none;
-      cursor: pointer;
-    }
-  }
-}
-
-@media only screen and (max-width: 1250px) {
-  div.qiskit__navbar li {
-    &.qiskit-navbar__icons {
-      display: block;
-    }
-  }
-}
-@media only screen and (max-width: 525px) {
-  div.qiskit__navbar li {
-    display: none;
-    margin-right: 0px;
-    margin-left: 24px;
-    &.left{
-      display: block;
-    }
   }
 }
