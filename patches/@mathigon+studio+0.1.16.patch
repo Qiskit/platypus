@@ -314,6 +314,19 @@ index a28f2db..d1eb2e7 100755
    });
  
    app.get('/cron/cleanup', async (req, res, next) => {
+diff --git a/node_modules/@mathigon/studio/server/app.ts b/node_modules/@mathigon/studio/server/app.ts
+index 1d91310..05d0ea5 100755
+--- a/node_modules/@mathigon/studio/server/app.ts
++++ b/node_modules/@mathigon/studio/server/app.ts
+@@ -314,6 +314,8 @@ export class MathigonStudioApp {
+ 
+     this.post('/course/:course/:section', async (req, res, next) => {
+       if (!CONFIG.accounts.enabled) return res.status(200).send('ok');
++      // Not store progress if there is no user logged
++      if (!req.user?.id) return res.status(200).send('ok');
+ 
+       const course = getCourse(req.params.course, req.locale.id);
+       const section = course?.sections.find(s => s.id === req.params.section);
 diff --git a/node_modules/@mathigon/studio/server/models/progress.ts b/node_modules/@mathigon/studio/server/models/progress.ts
 index 6c9581e..504d21e 100755
 --- a/node_modules/@mathigon/studio/server/models/progress.ts
