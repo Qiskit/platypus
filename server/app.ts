@@ -70,7 +70,7 @@ const getCourseData = async function (req: Request) {
 }
 
 const getUserProgressData = async (req: Request) => {
-  const userId = req.user?.id || req.tmpUser || null
+  const userId = req.user?.id || null
   if (!userId) {
     return {}
   }
