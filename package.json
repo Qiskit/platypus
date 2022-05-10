@@ -53,7 +53,7 @@
     "@carbon/colors": "^10.36.0",
     "@carbon/icons-vue": "~10.48.0",
     "@carbon/themes": "^11.2.0",
-    "@carbon/vue": "^2.40.0",
+    "@carbon/vue": "^2.43.1",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.0.0",
     "@jupyter-widgets/html-manager": "^0.20.1",
