@@ -1,3 +1,5 @@
+import { IS_PRODUCTION } from '../../configuration'
+
 export interface SerializedException {
   code: number;
   name: string;
@@ -22,7 +24,7 @@ export abstract class ExceptionBase extends Error {
       code: this.code,
       message: this.message,
       // TODO: improve the logic to send the stack only with development
-      stack: (process.env.node_env !== 'production') ? this.stack : undefined,
+      stack: !IS_PRODUCTION ? this.stack : undefined,
       metadata: this.metadata
     }
   }

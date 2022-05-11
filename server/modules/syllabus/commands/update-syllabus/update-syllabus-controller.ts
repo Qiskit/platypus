@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 
 import { ExceptionBase, SerializedException } from '../../../../libs/exceptions/exception-base'
 import { UnauthorizedException } from '../../../../libs/exceptions/unauthorized-exception'
+import { logger } from '../../../../libs/logger/logger'
 
 import { Syllabus } from '../../domain/syllabus'
 import { UpdateSyllabusHttpRequest } from './update-syllabus-dto'
@@ -33,9 +34,7 @@ export const UpdateSyllabusController = async (req: Request, res: Response, next
       res.status(500)
       response = error as any
     }
-    // TODO: implemente new log system
-    // eslint-disable-next-line no-console
-    console.error(response)
+    logger.error(response)
   }
 
   return res.json(response)
