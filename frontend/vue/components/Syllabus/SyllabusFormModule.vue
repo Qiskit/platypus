@@ -29,7 +29,12 @@
         placeholder="Enter content"
         @input="updateFormDescription"
       /> -->
-      <ckeditor class="syllabus-form-course__editor" v-model="editorData" :editor="editor" :config="editorConfig" />
+      <ckeditor
+        v-model="editorData"
+        :editor="editor"
+        :config="editorConfig"
+        @input="updateFormDescription"
+      />
     </div>
     <div class="syllabus-form-course__row">
       <label class="syllabus-form-course__label">
@@ -108,9 +113,11 @@ export default defineComponent({
       },
       syllabusSaved: false,
       editor: ClassicEditor,
-      editorData: '<p>Content of the editor.</p>',
+      editorData: this.course.description,
       editorConfig: {
         // The configuration of the editor.
+        toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList'],
+        placeholder: 'Enter content'
       }
     }
   },
@@ -143,9 +150,11 @@ export default defineComponent({
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
 
+      console.log(this.editorData, "editorData")
+
       const newData = {
         ...this.course,
-        ...{ description: (event.target as BXTextarea).value }
+        ...{ description: this.editorData }
       }
 
       this.$emit('change', newData)
@@ -257,6 +266,11 @@ export default defineComponent({
     &__header {
       @include type-style('productive-heading-01');
     }
+  }
+
+  // CKEditor overrides
+  :deep(.ck.ck-editor) {
+    width: 100%;
   }
 }
 </style>

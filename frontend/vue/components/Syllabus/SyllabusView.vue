@@ -15,9 +15,7 @@
       <div class="syllabus-view__course__title">
         {{ course.title }}
       </div>
-      <p class="syllabus-view__course__description">
-        {{ course.description }}
-      </p>
+      <div class="syllabus-view__course__description" v-html="course.description" />
       <div v-if="course.unitList.length > 0" class="syllabus-view__course__units-title">
         <!-- TODO replace with translation on final design -->
         Chapters
@@ -119,8 +117,10 @@ export default defineComponent({
       margin: $spacing-05 0;
     }
     &__description {
-      @include type-style("body-long-01");
-      margin: $spacing-05 0;
+      :deep(p, a) {
+        @include type-style("body-long-01");
+        margin: $spacing-05 0;
+      }
     }
     &__unit-list {
       &__item {
