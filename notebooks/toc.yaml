@@ -1,5 +1,6 @@
 - title: Prerequisites
   url: /ch-prerequisites
+  type: legacy-chapter
   sections:
     - title: Setting Up Your Environment
       id: environment-setup-guide-to-work-with-qiskit-textbook
@@ -13,6 +14,7 @@
 
 - title: Quantum States and Qubits
   url: /ch-states
+  type: legacy-chapter
   sections:
     - title: Introduction
       id: introduction
@@ -38,6 +40,7 @@
 
 - title: Multiple Qubits and Entanglement
   url: /ch-gates
+  type: legacy-chapter
   sections:
     - title: Introduction
       id: introduction
@@ -67,6 +70,7 @@
 
 - title: Quantum Protocols and Quantum Algorithms
   url: /ch-algorithms
+  type: legacy-chapter
   sections:
     - title: Defining Quantum Circuits
       id: quantum-circuits
@@ -120,6 +124,7 @@
 
 - title: Quantum Algorithms for Applications
   url: /ch-applications
+  type: legacy-chapter
   sections:
     - title: Solving Linear Systems of Equations using HHL
       id: solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation
@@ -153,6 +158,7 @@
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
   url: /quantum-hardware
+  type: legacy-chapter
   sections:
     - title: Introduction to Quantum Error Correction using Repetition Codes
       id: introduction-to-quantum-error-correction-via-the-repetition-code
@@ -207,6 +213,7 @@
 
 - title: Quantum Computing Labs
   url: /ch-labs
+  type: legacy-chapter
   sections:
     - title: Lab 1. Quantum Circuits
       id: lab-1-quantum-circuits
@@ -248,6 +255,7 @@
 
 - title: Appendix
   url: /ch-appendix
+  type: legacy-chapter
   sections:
     - title: Linear Algebra
       id: an-introduction-to-linear-algebra-for-quantum-computing
@@ -261,6 +269,7 @@
 
 - title: Games and Demos
   url: /ch-demos
+  type: legacy-chapter
   sections:
     - title: Hello Qiskit Game
       id: bonus-level-sandbox

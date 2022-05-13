@@ -15,6 +15,7 @@
     "types": [
       "node",
       "webpack-env",
+      "js-yaml",
       "../types"
     ],
     "lib": [

@@ -68,6 +68,7 @@
     "@mathigon/euclid": "^1.0.9",
     "@mathigon/studio": "0.1.16",
     "@qiskit-community/qiskit-vue": "^3.4.0",
+    "@types/js-yaml": "^4.0.5",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "carbon-components": "~10.51.0",
     "carbon-web-components": "^1.21.0",
