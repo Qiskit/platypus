@@ -21,14 +21,15 @@
       />
     </div>
     <div class="syllabus-form-course__row">
-      <bx-textarea
+      <!-- <bx-textarea
         :value="course.description"
         class="syllabus-form-course__textarea"
         name="courseContent"
         color-scheme="light"
         placeholder="Enter content"
         @input="updateFormDescription"
-      />
+      /> -->
+      <ckeditor class="syllabus-form-course__editor" v-model="editorData" :editor="editor" :config="editorConfig" />
     </div>
     <div class="syllabus-form-course__row">
       <label class="syllabus-form-course__label">
@@ -67,23 +68,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import Close16 from '@carbon/icons-vue/es/close/16'
+import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
+import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import CKEditor from '@ckeditor/ckeditor5-vue'
 import { getCourseList, Course } from '../../../ts/courses'
 import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
-import 'carbon-web-components/es/components/textarea/textarea.js'
-import 'carbon-web-components/es/components/checkbox/checkbox.js'
-import { SyllabusCourse, UnitUUID } from '../../../ts/syllabus'
-import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
-import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
+import { SyllabusCourse } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'SyllabusFormModule',
   components: {
     BasicLink,
     ColumnFlowGrid,
-    Close16
+    Close16,
+    ckeditor: CKEditor.component
   },
   props: {
     course: {
@@ -104,7 +106,12 @@ export default defineComponent({
         label: 'Save content',
         url: '#'
       },
-      syllabusSaved: false
+      syllabusSaved: false,
+      editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+        // The configuration of the editor.
+      }
     }
   },
   mounted () {
@@ -113,8 +120,8 @@ export default defineComponent({
     })
   },
   methods: {
-    containsUnitID(uuid: string) {
-      return this.course.unitList.some((unit: UnitUUID) => unit === uuid)
+    containsUnitID (uuid: string) {
+      return this.course.unitList.includes(uuid)
     },
     saveModuleAction () {
       // TODO: Add proper functionality for persisting course data
@@ -207,6 +214,10 @@ export default defineComponent({
   &__textarea {
     width: 100%;
     padding-bottom: $spacing-05;
+  }
+
+  &__editor {
+    width: 100%;
   }
 
   &__label {
