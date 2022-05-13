@@ -11,6 +11,8 @@ import { Progress } from '@mathigon/studio/server/models/progress'
 import { CourseAnalytics } from '@mathigon/studio/server/models/analytics'
 import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 
+import { generateMockData } from './populate-database'
+
 import {
   CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
@@ -24,6 +26,7 @@ import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/
 import { FindSyllabusByCodeController } from './modules/syllabus/commands/find-syllabus-by-code/find-syllabus-by-code-controller'
 import { UpdateSyllabusController } from './modules/syllabus/commands/update-syllabus/update-syllabus-controller'
 
+// Logger
 import { loggerExpress } from './libs/logger/logger-express'
 import { logger } from './libs/logger/logger'
 
@@ -70,7 +73,7 @@ const getCourseData = async function (req: Request) {
 }
 
 const getUserProgressData = async (req: Request) => {
-  const userId = req.user?.id || req.tmpUser || null
+  const userId = req.user?.id || null
   if (!userId) {
     return {}
   }
@@ -308,3 +311,4 @@ const start = () => {
 }
 
 start()
+generateMockData()
