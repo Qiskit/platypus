@@ -17,9 +17,10 @@ If you have an open issue for a language request, **add the issue link to the PR
    
 3. When you conribute to a Qiskit open source project on GitHub with a new pull request, a bot will evaluate whether you have signed the [Qiskit Contribution License Agreement (CLA)](https://qiskit.org/license/qiskit-cla.pdf). If it is your first time contributing to Qiskit, you will be prompted to sign the CLA in your PR. Please make sure to sign the CLA by accepting the agreement.<br/>
 4. Join [GitLocalize](https://gitlocalize.com) using the same GitHub ID you used to open your PR above.  
-5. Once your PR has been accepted and merged, you will receive a notification from GitLocalize with a title: `[GitLocalize] You have been assigned a new role.`<br/>
-6. Join project [Qiskit/platypus] and then visit the language you signed up to contribute to.<br/>
-7. For questions about the project, to connect with other translators, or to receive updates regarding the project, please join #qiskit-localization channel in the [Qiskit workspace](http://ibm.co/joinqiskitslack). <br/>
+5. Leave a comment in your PR stating that you successfully joined GitLocalize.
+6. Once your PR has been accepted and merged, you will receive a notification from GitLocalize with a title: `[GitLocalize] You have been assigned a new role.`<br/>
+7. Join project [Qiskit/platypus] and then visit the language you signed up to contribute to.<br/>
+8. For questions about the project, to connect with other translators, or to receive updates regarding the project, please join #qiskit-localization channel in the [Qiskit workspace](http://ibm.co/joinqiskitslack). <br/>
 
 ## Review the CLA document
 
@@ -49,7 +50,7 @@ However, please note that the above does not guarantee that a language will be o
 If you have further questions, please feel free to contact [Soolu Thomas](mailto:soolu.thomas@ibm.com?subject=[GitHub]%20Qiskit%20Documentation%20Translation) and [Yuri Kobayashi](mailto:yurik@jp.ibm.com?subject=[GitHub]%20Qiskit%20Documentation%20Translation). Thank you.
 
 
-## How to add my name to TEXTBOOK_CONTRIBUTORS list and open a PR in GitHub?
+## How to add my name to LOCALIZATION_CONTRIBUTORS list and open a PR in GitHub?
 
 **Option 1: In Github (Recommended)**
 1. Click on the pen-like button which says "Edit this file" in the [LOCALIZATION_CONTRIBUTORS](https://github.com/Qiskit/platypus/blob/main/LOCALIZATION_CONTRIBUTORS) file.

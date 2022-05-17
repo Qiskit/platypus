@@ -11,7 +11,7 @@ describe('Content', () => {
       cy.visit('/course/ch-prerequisites')
       cy.get(contentParagraphSelector).each(($paragraph) => {
         if ($paragraph.text().trim().length > 0) {
-          cy.get($paragraph).should('be.visible')
+          cy.get($paragraph).scrollIntoView().should('be.visible')
 
           cy.get($paragraph)
             .invoke('css', 'font-size')
