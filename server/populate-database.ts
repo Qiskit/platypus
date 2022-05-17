@@ -15,26 +15,25 @@ interface PopulateConfig extends Config {
   }
 }
 
-const cleanUsers = async () => {
-  await User.deleteMany()
-}
+const createUserIfNotExist = async () => {
+  const email = (CONFIG as PopulateConfig).mockData.email
 
-const createUser = async () => {
-  const newUserDocument = new User({
-    email: (CONFIG as PopulateConfig).mockData.email,
+  const userData = {
+    email,
     firstName: 'John',
     lastName: 'Doe',
     acceptedPolicies: true
-  })
-  return await newUserDocument.save()
+  }
+
+  const userDocument = await User.findOneAndUpdate({ email }, userData, { new: true, upsert: true })
+
+  return userDocument
 }
 
-const cleanSyllabus = async () => {
-  await Syllabus.deleteMany()
-}
+const createSyllabusIfNotExist = async (userId: string) => {
+  const code = 'ABC-DEF'
 
-const createSyllabus = async (userId: string) => {
-  const newSyllabusDocument = new Syllabus({
+  const syllabusData = {
     name: 'PHYS 332: Quantum Mechanics II (Spring, 2022)',
     instructor: 'John Doe',
     location: 'Online via web conference',
@@ -51,26 +50,24 @@ const createSyllabus = async (userId: string) => {
         ]
       }
     ],
-    code: 'ABC-DEF',
+    code,
     ownerList: [userId]
-  })
-  return await newSyllabusDocument.save()
+  }
+
+  const syllabusDocument = await Syllabus.findOneAndUpdate({ code }, syllabusData, { new: true, upsert: true })
+
+  return syllabusDocument
 }
 
-export const clean = async () => {
-  if (IS_PRODUCTION) { return }
-  await cleanUsers()
-  await cleanSyllabus()
+const populate = async () => {
+  const user = await createUserIfNotExist()
+  logger.debug(`Mock user: ${user._id}`)
+
+  const syllabus = await createSyllabusIfNotExist(user._id.toString())
+  logger.debug(`Mock syllabus: ${syllabus._id}`)
 }
 
-export const populate = async () => {
-  if (IS_PRODUCTION) { return }
-  const newUser = await createUser()
-  await createSyllabus(newUser._id.toString())
-}
-
-export const cleanAndPopulate = async () => {
-  // TODO: we should use our logs here once time we have them
+export const generateMockData = async () => {
   if (IS_PRODUCTION) { return }
 
   return await new Promise((resolve) => {
@@ -80,10 +77,9 @@ export const cleanAndPopulate = async () => {
         resolve(true)
         clearInterval(interval)
 
-        logger.info('Initiating clean and populate database process...')
-        await clean()
+        logger.info('Initiating populate database process...')
         await populate()
-        logger.info('Finished with the clean and populate database')
+        logger.info('Finished with the populate database')
       }
     }, 1000)
   })
