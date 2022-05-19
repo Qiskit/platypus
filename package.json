@@ -39,8 +39,8 @@
   "nano-staged": {
     "*.{ts,tsx}": "eslint",
     "*.ipynb": [
-      "python3 ./scripts/content_checks/nb_metadata.py",
-      "python3 ./scripts/content_checks/nb_svg.py"
+      "python3 ./scripts/content_checks/nb_metadata.py --fix",
+      "python3 ./scripts/content_checks/nb_svg.py --fix"
     ]
   },
   "simple-git-hooks": {
