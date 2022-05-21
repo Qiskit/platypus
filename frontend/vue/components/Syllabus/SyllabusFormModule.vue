@@ -274,5 +274,9 @@ export default defineComponent({
   :deep(.ck.ck-editor) {
     width: 100%;
   }
+  :deep(.ck.ck-editor p),
+  :deep(.ck.ck-editor a) {
+    @include type-style('body-long-01');
+  }
 }
 </style>
