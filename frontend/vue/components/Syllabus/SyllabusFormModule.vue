@@ -34,6 +34,7 @@
         :editor="editor"
         :config="editorConfig"
         @input="updateFormDescription"
+        @ready="onEditorReady(course.description)"
       />
     </div>
     <div class="syllabus-form-course__row">
@@ -113,7 +114,7 @@ export default defineComponent({
       },
       syllabusSaved: false,
       editor: ClassicEditor,
-      editorData: this.course.description,
+      editorData: '<p>this is the editor data</p>',
       editorConfig: {
         // The configuration of the editor.
         toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList'],
@@ -150,14 +151,15 @@ export default defineComponent({
       this.saveSyllabusModuleLink.label = 'Save content'
       this.syllabusSaved = false
 
-      console.log(this.editorData, "editorData")
-
       const newData = {
         ...this.course,
         ...{ description: this.editorData }
       }
 
       this.$emit('change', newData)
+    },
+    onEditorReady(event: any) {
+      this.editorData = event
     },
     updateFormModuleUnit (uuid: string, event: Event) {
       if ((event.target as BXCheckbox).checked) {
