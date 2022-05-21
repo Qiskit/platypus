@@ -117,9 +117,32 @@ export default defineComponent({
       margin: $spacing-05 0;
     }
     &__description {
+      margin-bottom: $spacing-07;
+
       :deep(p, a) {
         @include type-style("body-long-01");
-        margin: $spacing-05 0;
+      }
+
+      :deep(ol) {
+        list-style: decimal;
+        margin: 0 0 $spacing-05 $spacing-05;
+        li {
+          @include type-style("body-long-01");
+          margin-bottom: $spacing-03;
+        }
+      }
+
+      :deep(ul) {
+        list-style: disc;
+        margin: 0 0 $spacing-05 $spacing-05;
+        li {
+          @include type-style("body-long-01");
+          margin-bottom: $spacing-03;
+        }
+      }
+
+      :deep(ul li) {
+        list-style-position: outside;
       }
     }
     &__unit-list {

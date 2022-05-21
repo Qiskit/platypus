@@ -273,10 +273,20 @@ export default defineComponent({
   // CKEditor overrides
   :deep(.ck.ck-editor) {
     width: 100%;
-  }
-  :deep(.ck.ck-editor p),
-  :deep(.ck.ck-editor a) {
-    @include type-style('body-long-01');
+
+    p, a, ol, ul {
+      @include type-style('body-long-01');
+    }
+
+    ol {
+      list-style: decimal;
+      margin-left: $spacing-05;
+    }
+
+    ul {
+      list-style: disc;
+      margin-left: $spacing-05;
+    }
   }
 }
 </style>
