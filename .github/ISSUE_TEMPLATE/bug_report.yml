@@ -1,0 +1,64 @@
+name: Bug report
+description: Report a bug which occurs on the Qiskit Textbook
+title: "Bug: "
+labels: ["bug", "needs grooming"]
+assignees:
+  - eddybrando
+  - vabarbosa
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill up this bug report!
+
+        In order to help us debugging, please provide as much information as you can.
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce the problem
+      value: |
+        1. Go to ...
+        2. Click on ...
+        3. Scroll down to ...
+        4. See error ...
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: What is the current behavior?
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: What is the expected behavior?
+      description: A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, please add screenshots or video captures to help explain the problem.
+  - type: input
+    id: device
+    attributes:
+      label: Device
+      placeholder: e.g. Laptop, iPhone 11, Smart fridge
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: e.g. Windows, iOS
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: e.g. Firefox, Chrome, Safari
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: Any other information that could help debug the problem.
