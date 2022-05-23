@@ -1,0 +1,59 @@
+name: User story
+description: Define a new user story
+title: As a ..., I want to ..., so that ...
+labels: ["user story", "needs grooming"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to create this user story!
+
+        In most cases, you should probably open a bug report or feature request, but if you're sure that you need to open a user story, please continue and provide as much information as you can.
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+      description: Set the scene and describe the motivation for the development of this user story.
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: High-level description of what we want to accomplish.
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Checklist to ensure meeting the user story's purpose.
+      placeholder: |
+        e.g.
+        [ ] Clicking on button reproduces desired sound
+        [ ] UI is implemented as designed
+        [ ] Feature is accessible via keyboard navigation
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+      description: Things that are not necessary to consider this user story completed.
+      placeholder: |
+        e.g.
+        - Clicking twice fast reproduces sound only once
+        - Feature is accessible via voice commands
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources
+      description: Links to resources.
+      placeholder: |
+        e.g.
+        - Design: https://example.com/user-story-design
+        - Content copy: https://example.com/user-story-copy
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Break the user story down into specific tasks (issues).
+      placeholder: |
+        e.g.
+        [ ] Implement UI without functionality
+        [ ] Add clicking functionaliy
+        [ ] Implement keyboard navigation support 
