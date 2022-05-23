@@ -1,0 +1,17 @@
+name: Add issues to Qiskit Digital project
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: Add issue to Qiskit Digital project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/Qiskit/projects/2
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: bug
