@@ -1,0 +1,40 @@
+name: Bug report (Content)
+description: Report a content issue with the Qiskit Textbook
+title: "Bug: "
+labels: ["bug", "needs grooming", "content"]
+assignees:
+  - eddybrando
+  - vabarbosa
+  - frankharkins
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill up this bug report!
+
+        In order to help us debugging, please provide as much information as you can.
+  - type: input
+    id: url
+    attributes:
+      label: Where does the issue happen?
+      description: The URL with the content issue.
+      placeholder: https://learn.qiskit.org/course/...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is the content issue?
+      description: A clear and concise description of the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, please add screenshots to help explain the problem.
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      description: Any other information that could be helpful.
