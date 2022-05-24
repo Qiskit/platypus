@@ -60,7 +60,7 @@
     "@jupyter-widgets/jupyterlab-manager": "^3.1.0",
     "@jupyterlab/codemirror": "^3.4.2",
     "@jupyterlab/mathjax2": "^3.4.2",
-    "@jupyterlab/outputarea": "^3.2.8",
+    "@jupyterlab/outputarea": "^3.4.2",
     "@jupyterlab/rendermime": "^3.2.8",
     "@jupyterlab/services": "^6.2.8",
     "@lumino/widgets": "^1.31.1",
