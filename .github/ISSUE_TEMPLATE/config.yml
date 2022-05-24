@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Non-Textbook-related Qiskit.org issues
+    url: https://github.com/Qiskit/qiskit.org/issues/new/choose
+    about: Please open issues related to other parts of the Qiskit.org website here
