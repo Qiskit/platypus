@@ -54,6 +54,8 @@
     "@carbon/icons-vue": "~10.48.0",
     "@carbon/themes": "^11.2.0",
     "@carbon/vue": "^2.43.1",
+    "@ckeditor/ckeditor5-build-classic": "^34.0.0",
+    "@ckeditor/ckeditor5-vue": "^4.0.1",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.0.2",
     "@jupyter-widgets/html-manager": "^0.20.1",
