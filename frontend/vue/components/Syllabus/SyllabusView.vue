@@ -122,6 +122,9 @@ export default defineComponent({
       :deep(p, a) {
         @include type-style("body-long-01");
       }
+      :deep(i) {
+        font-style: italic;
+      }
       :deep(ol) {
         list-style: decimal;
         margin: 0 0 $spacing-05 $spacing-05;

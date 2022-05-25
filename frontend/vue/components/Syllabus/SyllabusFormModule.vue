@@ -109,7 +109,10 @@ export default defineComponent({
       editorData: '<p>this is the editor data</p>',
       editorConfig: {
         toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList'],
-        placeholder: 'Enter content'
+        placeholder: 'Enter content',
+        style: {
+          height: '400px'
+        }
       }
     }
   },
@@ -149,7 +152,7 @@ export default defineComponent({
 
       this.$emit('change', newData)
     },
-    onEditorReady(event: any) {
+    onEditorReady (event: any) {
       this.editorData = event
     },
     updateFormModuleUnit (uuid: string, event: Event) {
@@ -176,6 +179,8 @@ export default defineComponent({
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/mixins/mixins.scss';
 @import '~/../scss/variables/colors.scss';
+
+$min-editor-height: 10rem;
 
 .syllabus-form-course {
   position: relative;
@@ -269,6 +274,10 @@ export default defineComponent({
       @include type-style('body-long-01');
     }
 
+    i {
+      font-style: italic;
+    }
+
     ol {
       list-style: decimal;
       margin-left: $spacing-05;
@@ -278,6 +287,10 @@ export default defineComponent({
       list-style: disc;
       margin-left: $spacing-05;
     }
+  }
+
+  :deep(.ck-editor__editable) {
+    min-height: $min-editor-height;
   }
 }
 </style>
