@@ -33,13 +33,13 @@ export default class UtilityPanelHeader extends Vue.with(Props) {
   selectedPanel: string = 'Scratchpad'
   links = [
     {
+      label: 'Scratchpad'
+    },
+    {
       label: 'Lesson Notes'
     },
     {
       label: 'Glossary'
-    },
-    {
-      label: 'Scratchpad'
     }
   ]
 
