@@ -1,7 +1,11 @@
 <template>
   <div class="scratchpad">
-    <p class="scratchpad__description">This is your python scratchpad. Use this however you like while you work or copy the code over from the chapter.</p>
-    <p class="scratchpad__description"><strong>Note:</strong> Code in the scratchpad will not be saved.</p>
+    <p class="scratchpad__description">
+      {{ $translate('This is your python scratchpad. Use this however you like while you work or copy the code over from the chapter.') }}
+    </p>
+    <p class="scratchpad__description">
+      {{ $translate('<strong>Note:</strong> Code in the scratchpad will not be saved.') }}
+    </p>
   </div>
 </template>
 
