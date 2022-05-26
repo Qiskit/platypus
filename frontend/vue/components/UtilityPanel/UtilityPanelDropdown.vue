@@ -30,13 +30,16 @@ class Props {
 @Options({})
 
 export default class UtilityPanelHeader extends Vue.with(Props) {
-  selectedPanel: string = 'Lesson Notes'
+  selectedPanel: string = 'Scratchpad'
   links = [
     {
       label: 'Lesson Notes'
     },
     {
       label: 'Glossary'
+    },
+    {
+      label: 'Scratchpad'
     }
   ]
 
