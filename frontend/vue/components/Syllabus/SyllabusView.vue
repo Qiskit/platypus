@@ -15,9 +15,8 @@
       <div class="syllabus-view__course__title">
         {{ course.title }}
       </div>
-      <p class="syllabus-view__course__description">
-        {{ course.description }}
-      </p>
+      <!-- eslint-disable-next-line vue/no-v-html -->
+      <div class="syllabus-view__course__description" v-html="course.description" />
       <div v-if="course.unitList.length > 0" class="syllabus-view__course__units-title">
         <!-- TODO replace with translation on final design -->
         Chapters
@@ -119,8 +118,32 @@ export default defineComponent({
       margin: $spacing-05 0;
     }
     &__description {
-      @include type-style("body-long-01");
-      margin: $spacing-05 0;
+      margin-bottom: $spacing-07;
+      :deep(p, a) {
+        @include type-style("body-long-01");
+      }
+      :deep(i) {
+        font-style: italic;
+      }
+      :deep(ol) {
+        list-style: decimal;
+        margin: 0 0 $spacing-05 $spacing-05;
+        li {
+          @include type-style("body-long-01");
+          margin-bottom: $spacing-03;
+        }
+      }
+      :deep(ul) {
+        list-style: disc;
+        margin: 0 0 $spacing-05 $spacing-05;
+        li {
+          @include type-style("body-long-01");
+          margin-bottom: $spacing-03;
+        }
+      }
+      :deep(ul li) {
+        list-style-position: outside;
+      }
     }
     &__unit-list {
       &__item {
