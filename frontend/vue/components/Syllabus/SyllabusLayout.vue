@@ -74,9 +74,9 @@ export default defineComponent({
   }
 
   &__container {
+    @include contained();
     margin-left: 0;
     padding: $spacing-07 $spacing-08;
-    overflow: auto;
   }
 
   &__not-found {
