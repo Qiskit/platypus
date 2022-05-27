@@ -27,7 +27,7 @@
       />
     </div>
     <div class="mini-composer__lesson">
-      <div>\\sqrt[3]{\\frac xy}</div>
+      <SymbolicNotation />
     </div>
   </section>
 </template>
@@ -44,6 +44,7 @@ import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
 import { ComposerGate } from './composerTypes'
 import { GateName } from './Gate.vue'
+import SymbolicNotation from './SymbolicNotation.vue'
 
 class Props {
   goal = prop<String>({ default: 'mini-composer-solved', required: true })
@@ -57,6 +58,7 @@ class Props {
     GatesPool,
     draggable,
     AppCta,
+    SymbolicNotation,
     SolutionStateIndicator
   }
 })
