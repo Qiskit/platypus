@@ -1,8 +1,5 @@
 <template>
   <section class="syllabus-view">
-    <h1 class="syllabus-view__title">
-      {{ syllabus.name }}
-    </h1>
     <h2 class="syllabus-view__section-title">
       General Information
     </h2>
