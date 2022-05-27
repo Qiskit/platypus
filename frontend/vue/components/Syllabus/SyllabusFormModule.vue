@@ -21,13 +21,12 @@
       />
     </div>
     <div class="syllabus-form-course__row">
-      <bx-textarea
-        :value="course.description"
-        class="syllabus-form-course__textarea"
-        name="courseContent"
-        color-scheme="light"
-        placeholder="Enter content"
+      <ckeditor
+        v-model="editorData"
+        :editor="editor"
+        :config="editorConfig"
         @input="updateFormDescription"
+        @ready="onEditorReady(course.description)"
       />
     </div>
     <div class="syllabus-form-course__row">
@@ -67,23 +66,24 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import Close16 from '@carbon/icons-vue/es/close/16'
+import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
+import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import CKEditor from '@ckeditor/ckeditor5-vue'
 import { getCourseList, Course } from '../../../ts/courses'
 import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
-import 'carbon-web-components/es/components/textarea/textarea.js'
-import 'carbon-web-components/es/components/checkbox/checkbox.js'
-import { SyllabusCourse, UnitUUID } from '../../../ts/syllabus'
-import BXTextarea from 'carbon-web-components/es/components/textarea/textarea.js'
-import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js'
+import { SyllabusCourse } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'SyllabusFormModule',
   components: {
     BasicLink,
     ColumnFlowGrid,
-    Close16
+    Close16,
+    ckeditor: CKEditor.component
   },
   props: {
     course: {
@@ -104,7 +104,16 @@ export default defineComponent({
         label: 'Save content',
         url: '#'
       },
-      syllabusSaved: false
+      syllabusSaved: false,
+      editor: ClassicEditor,
+      editorData: '<p>this is the editor data</p>',
+      editorConfig: {
+        toolbar: ['bold', 'italic', 'link', 'undo', 'redo', 'numberedList', 'bulletedList'],
+        placeholder: 'Enter content',
+        style: {
+          height: '400px'
+        }
+      }
     }
   },
   mounted () {
@@ -113,8 +122,8 @@ export default defineComponent({
     })
   },
   methods: {
-    containsUnitID(uuid: string) {
-      return this.course.unitList.some((unit: UnitUUID) => unit === uuid)
+    containsUnitID (uuid: string) {
+      return this.course.unitList.includes(uuid)
     },
     saveModuleAction () {
       // TODO: Add proper functionality for persisting course data
@@ -138,10 +147,13 @@ export default defineComponent({
 
       const newData = {
         ...this.course,
-        ...{ description: (event.target as BXTextarea).value }
+        ...{ description: this.editorData }
       }
 
       this.$emit('change', newData)
+    },
+    onEditorReady (event: any) {
+      this.editorData = event
     },
     updateFormModuleUnit (uuid: string, event: Event) {
       if ((event.target as BXCheckbox).checked) {
@@ -167,6 +179,8 @@ export default defineComponent({
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/mixins/mixins.scss';
 @import '~/../scss/variables/colors.scss';
+
+$min-editor-height: 10rem;
 
 .syllabus-form-course {
   position: relative;
@@ -209,6 +223,10 @@ export default defineComponent({
     padding-bottom: $spacing-05;
   }
 
+  &__editor {
+    width: 100%;
+  }
+
   &__label {
     @include type-style('label-01');
     margin: $spacing-05 0;
@@ -246,6 +264,33 @@ export default defineComponent({
     &__header {
       @include type-style('productive-heading-01');
     }
+  }
+
+  // CKEditor overrides
+  :deep(.ck.ck-editor) {
+    width: 100%;
+
+    p, a, ol, ul {
+      @include type-style('body-long-01');
+    }
+
+    i {
+      font-style: italic;
+    }
+
+    ol {
+      list-style: decimal;
+      margin-left: $spacing-05;
+    }
+
+    ul {
+      list-style: disc;
+      margin-left: $spacing-05;
+    }
+  }
+
+  :deep(.ck-editor__editable) {
+    min-height: $min-editor-height;
   }
 }
 </style>
