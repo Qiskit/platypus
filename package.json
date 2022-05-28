@@ -64,7 +64,7 @@
     "@jupyterlab/mathjax2": "^3.4.2",
     "@jupyterlab/outputarea": "^3.4.2",
     "@jupyterlab/rendermime": "^3.4.2",
-    "@jupyterlab/services": "^6.2.8",
+    "@jupyterlab/services": "^6.4.2",
     "@lumino/widgets": "^1.31.1",
     "@mathigon/boost": "^1.0.14",
     "@mathigon/euclid": "^1.0.9",
