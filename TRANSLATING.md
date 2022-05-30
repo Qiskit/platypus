@@ -1,4 +1,4 @@
-# Qiskit Textbook Localization
+# Qiskit Textbook Localization <a href="https://gitlocalize.com/repo/7494/whole_project?utm_source=badge"> <img src="https://gitlocalize.com/repo/7494/whole_project/badge.svg" /> </a>
 
 First of all, **thank you** for showing interest in translating (localizing) Qiskit Textbook! Your effort helps make the textbook more accessible and available to our global community.
 
