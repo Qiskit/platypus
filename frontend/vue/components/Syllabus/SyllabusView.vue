@@ -1,9 +1,6 @@
 <template>
   <section class="syllabus-view">
-    <h1 class="syllabus-view__title">
-      {{ syllabus.name }}
-    </h1>
-    <h2 class="syllabus-view__section-title">
+    <h2 class="syllabus-view__general-info-title">
       General Information
     </h2>
     <SyllabusGeneralInformation class="syllabus-view__general-information" :syllabus="syllabus" />
@@ -95,8 +92,9 @@ export default defineComponent({
   user-select: text;
   cursor: auto;
 
-  &__title {
-    @include type-style('expressive-heading-04', $fluid: true);
+  &__general-info-title {
+    @include type-style('expressive-heading-03', $fluid: true);
+    margin-bottom: $spacing-05;
   }
 
   &__section-title {
