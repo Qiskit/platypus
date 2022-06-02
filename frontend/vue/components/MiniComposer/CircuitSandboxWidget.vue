@@ -184,6 +184,16 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
     "gates lesson"
     "circuit lesson";
 
+  @include mq ($until: medium) {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-areas:
+      "text"
+      "gates"
+      "circuit"
+      "lesson";
+  }
+
   &__config-container {
     display: none;
   }
