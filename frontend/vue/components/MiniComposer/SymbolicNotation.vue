@@ -2,15 +2,17 @@
   <div
     ref="outputRef"
     class="symbolic-notation"
-  >
-    <!--VueMathjax :formula="'$$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$'" /-->
-  </div>
+  />
 </template>
 
 <script lang="ts">
 import { ref } from '@vue/reactivity'
-import { Vue } from 'vue-class-component'
+import { Vue, prop } from 'vue-class-component'
 import 'mathjax-full/es5/tex-chtml.js'
+
+class Props {
+  tex = prop<String>({ default: '', required: true })
+}
 
 declare global {
   interface Window {
@@ -18,37 +20,45 @@ declare global {
   }
 }
 
-export default class SymbolicNotation extends Vue {
+export default class SymbolicNotation extends Vue.with(Props) {
   outputRef = ref<HTMLDivElement | null>(null)
   get output () { return (this.outputRef as unknown as HTMLDivElement) }
 
   mounted () {
+    this.renderTex()
+    this.$watch('tex', () => this.renderTex())
+  }
+
+  renderTex () {
     const MathJax = window.MathJax
     const output = this.output
 
     MathJax.startup.promise.then(() => {
       MathJax.texReset()
-      const options = MathJax.getMetricsFor(output)
-      options.display = true
+      const options = {
+        ...MathJax.getMetricsFor(output),
+        ...{ display: true }
+      }
       MathJax
-        .tex2chtmlPromise('x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}', options)
-        .then((node: any) => {
-          console.log('NODE: ', node)
-          //
-          //  The promise returns the typeset node, which we add to the output
-          //  Then update the document to include the adjusted CSS for the
-          //    content of the new equation.
-          //
+        .tex2chtmlPromise(this.tex, options)
+        .then((node: HTMLElement) => {
+          output.childNodes.forEach((child) => {
+            child.remove()
+          })
           output.appendChild(node)
           MathJax.startup.document.clear()
           MathJax.startup.document.updateDocument()
         }).catch((err: Error) => {
-          //
-          //  If there was an error, put the message into the output instead
-          //
+          // If there was an error, put the message into the output instead
           output.appendChild(document.createElement('pre')).appendChild(document.createTextNode(err.message))
         })
     })
   }
 }
 </script>
+
+<style scoped lang="scss">
+.symbolic-notation {
+  width: 100%;
+}
+</style>

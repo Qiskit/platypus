@@ -21,9 +21,9 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
-import { GateName } from './Gate.vue'
 import QubitLine from './QubitLine.vue'
 import { ComposerGate } from './composerTypes'
+import { GateName } from './gateUtils'
 
 class Props {
   name = prop<String>({ default: GateName.H, required: true })

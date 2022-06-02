@@ -27,8 +27,9 @@
 import { Options, Vue, prop } from 'vue-class-component'
 import draggable from 'vuedraggable'
 import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
-import Gate, { GateName } from './Gate.vue'
+import Gate from './Gate.vue'
 import { ComposerGate } from './composerTypes'
+import { GateName } from './gateUtils'
 
 class Props {
   name = prop<GateName>({ default: GateName.H, required: true })

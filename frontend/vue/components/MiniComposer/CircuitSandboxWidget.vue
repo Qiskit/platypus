@@ -26,8 +26,25 @@
         :max-lines="circuitState.length"
       />
     </div>
-    <div class="mini-composer__lesson">
-      <SymbolicNotation />
+    <div class="mini-composer__state-views">
+      <section class="mini-composer__state-views__view">
+        <h1 class="mini-composer__state-views__view__title">
+          Matrix
+        </h1>
+        <SymbolicNotation
+          class="mini-composer__state-views__view__area"
+          :tex="matrixTex"
+        />
+      </section>
+      <section class="mini-composer__state-views__view">
+        <h1 class="mini-composer__state-views__view__title">
+          State Vector
+        </h1>
+        <SymbolicNotation
+          class="mini-composer__state-views__view__area"
+          :tex="stateVectorTex"
+        />
+      </section>
     </div>
   </section>
 </template>
@@ -42,8 +59,8 @@ import AppCta from '../common/AppCta.vue'
 import SolutionStateIndicator, { SolutionState } from '../common/SolutionStateIndicator.vue'
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
-import { ComposerGate } from './composerTypes'
-import { GateName } from './Gate.vue'
+import { ComposerGate, gateMatrix } from './composerTypes'
+import { GateName, IdentityState, StateMatrixToTexMatrix, StateMatrixToTexKetNotation } from './gateUtils'
 import SymbolicNotation from './SymbolicNotation.vue'
 
 class Props {
@@ -82,7 +99,21 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
 
   lastGateId = 0
 
-  mathjaxRenderer: any | undefined = undefined
+  get matrixState () {
+    return this.circuitState[0].reduce((prev, current) => {
+      return gateMatrix(current).apply(prev)
+    }, IdentityState())
+  }
+
+  get matrixTex () {
+    return StateMatrixToTexMatrix(this.matrixState)
+  }
+
+  get stateVectorTex () {
+    return StateMatrixToTexKetNotation(this.matrixState)
+  }
+  // stateVectorTex = 'x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}'
+  // stateVectorTex = '({\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4} |0\\rangle) + ({\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4}|1\\rangle)'
 
   mounted () {
     const instructionElement = this.configDiv.querySelector('.instructions')
@@ -146,15 +177,12 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
 
 .mini-composer {
   display: grid;
-  min-height: 36rem;
-  grid-template-columns: 320px 1fr 160px;
-  grid-template-rows: min-content min-content min-content auto min-content;
+  grid-template-columns: 20rem 1fr;
+  grid-template-rows: min-content min-content 1fr;
   grid-template-areas:
-    "text text text"
-    "gates lesson lesson"
-    "circuit lesson lesson"
-    "chart lesson lesson"
-    "footer footer footer";
+    "text text"
+    "gates lesson"
+    "circuit lesson";
 
   &__config-container {
     display: none;
@@ -171,7 +199,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   &__gates {
     grid-area: gates;
     border-bottom: 1px solid $border-color;
-    padding: 0 $spacing-05 $spacing-05 $spacing-05;
+    padding: $spacing-05;
     &__title {
       margin: $spacing-03 0 $spacing-05 0;
       @include type-style('heading-01');
@@ -179,7 +207,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   }
   &__circuit-section {
     grid-area: circuit;
-    padding: 0 $spacing-04;
+    padding: $spacing-05;
     &__title {
       margin-top: $spacing-03;
       @include type-style('heading-01');
@@ -216,16 +244,31 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       }
     }
   }
-  &__probability-chart {
-    grid-area: chart;
-    height: 250px;
-    padding: $spacing-07 $spacing-09 $spacing-07 $spacing-05;
-  }
-  &__lesson {
+  &__state-views {
     grid-area: lesson;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-05;
     border-left: 1px solid $border-color;
-    padding: $spacing-06;
-    margin-bottom: $spacing-10;
+    padding: $spacing-05;
+
+    &__view {
+      &__title {
+        @include type-style('heading-01');
+        margin-top: $spacing-03;
+      }
+      &__area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        height: 9rem;
+        width: 100%;
+        border: 2px solid $border-color;
+        background-color: $background-color-white;
+      }
+    }
   }
 }
 </style>
