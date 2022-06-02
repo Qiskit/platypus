@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/named
-import { multiply, subtract, add } from 'mathjs'
+import { multiply, subtract, add, gcd, flatten, map, round } from 'mathjs'
 
 export enum GateName {
   UNKNOWN = 'UNKNOWN',
@@ -16,8 +16,6 @@ export enum GateName {
   MEASURE_Z = 'Measure'
 }
 
-const mult = multiply
-const sub = subtract
 function neg (m: number[][]) {
   return multiply(m, -1)
 }
@@ -27,6 +25,20 @@ export interface StateMatrix {
   C: number[][]
   D: number[][]
   m: number
+}
+
+function reduce (state: StateMatrix) {
+  const { A, B, C, D, m } = state
+  const matricesValues = flatten([...A, ...B, ...C, ...D]) as unknown as number[]
+  const d = gcd(...matricesValues, Math.pow(2, m))
+
+  return {
+    A: map(A, value => round(value / d)),
+    B: map(B, value => round(value / d)),
+    C: map(C, value => round(value / d)),
+    D: map(D, value => round(value / d)),
+    m: round(m / d)
+  }
 }
 
 export function IdentityState (): StateMatrix {
@@ -45,7 +57,6 @@ export interface QuantumGate {
 
 export const Identity: QuantumGate = {
   apply (state: StateMatrix) {
-    // Integer part
     return state
   }
 }
@@ -54,13 +65,13 @@ export const XGate: QuantumGate = {
   apply (state: StateMatrix) {
     // Integer part
     const K = [[0, 1], [1, 0]]
-    return {
-      A: mult(K, state.A),
-      B: mult(K, state.B),
-      C: mult(K, state.C),
-      D: mult(K, state.D),
+    return reduce({
+      A: multiply(K, state.A),
+      B: multiply(K, state.B),
+      C: multiply(K, state.C),
+      D: multiply(K, state.D),
       m: state.m
-    }
+    })
   }
 }
 
@@ -69,13 +80,13 @@ export const YGate: QuantumGate = {
     // Integer part
     const K = [[0, -1], [1, 0]]
 
-    return {
-      A: neg(mult(K, state.B)),
-      B: mult(K, state.A),
-      C: neg(mult(K, state.D)),
-      D: mult(K, state.C),
+    return reduce({
+      A: neg(multiply(K, state.B)),
+      B: multiply(K, state.A),
+      C: neg(multiply(K, state.D)),
+      D: multiply(K, state.C),
       m: state.m
-    }
+    })
   }
 }
 
@@ -84,13 +95,13 @@ export const ZGate: QuantumGate = {
     // Integer part
     const K = [[1, 0], [0, -1]]
 
-    return {
-      A: mult(K, state.A),
-      B: mult(K, state.B),
-      C: mult(K, state.C),
-      D: mult(K, state.D),
+    return reduce({
+      A: multiply(K, state.A),
+      B: multiply(K, state.B),
+      C: multiply(K, state.C),
+      D: multiply(K, state.D),
       m: state.m
-    }
+    })
   }
 }
 
@@ -99,13 +110,13 @@ export const HGate: QuantumGate = {
     // Integer part
     const K = [[1, 1], [1, -1]]
 
-    return {
-      A: mult(mult(K, state.C), 2),
-      B: mult(mult(K, state.D), 2),
-      C: mult(K, state.A),
-      D: mult(K, state.B),
+    return reduce({
+      A: multiply(multiply(K, state.C), 2),
+      B: multiply(multiply(K, state.D), 2),
+      C: multiply(K, state.A),
+      D: multiply(K, state.B),
       m: state.m + 1
-    }
+    })
   }
 }
 
@@ -115,13 +126,13 @@ export const SGate: QuantumGate = {
     const K1 = [[1, 0], [0, 0]]
     const K2 = [[0, 0], [0, 1]]
 
-    return {
-      A: sub(mult(K1, state.A), mult(K2, state.B)),
-      B: add(mult(K2, state.A), mult(K1, state.B)),
-      C: sub(mult(K1, state.C), mult(K2, state.D)),
-      D: add(mult(K1, state.C), mult(K1, state.D)),
+    return reduce({
+      A: subtract(multiply(K1, state.A), multiply(K2, state.B)),
+      B: add(multiply(K2, state.A), multiply(K1, state.B)),
+      C: subtract(multiply(K1, state.C), multiply(K2, state.D)),
+      D: add(multiply(K1, state.C), multiply(K1, state.D)),
       m: state.m
-    }
+    })
   }
 }
 
@@ -131,24 +142,24 @@ export const TGate: QuantumGate = {
     const K1 = [[2, 0], [0, 0]]
     const K2 = [[0, 0], [0, 1]]
 
-    const K1_A = mult(K1, state.A)
-    const K1_B = mult(K1, state.B)
-    const K1_C = mult(K1, state.C)
-    const K1_D = mult(K1, state.D)
-    const K2_A = mult(K2, state.A)
-    const K2_B = mult(K2, state.B)
-    const K2_C = mult(K2, state.C)
-    const K2_D = mult(K2, state.D)
-    const K2_C_2 = mult(K2_C, 2)
-    const K2_D_2 = mult(K2_D, 2)
+    const K1_A = multiply(K1, state.A)
+    const K1_B = multiply(K1, state.B)
+    const K1_C = multiply(K1, state.C)
+    const K1_D = multiply(K1, state.D)
+    const K2_A = multiply(K2, state.A)
+    const K2_B = multiply(K2, state.B)
+    const K2_C = multiply(K2, state.C)
+    const K2_D = multiply(K2, state.D)
+    const K2_C_2 = multiply(K2_C, 2)
+    const K2_D_2 = multiply(K2_D, 2)
 
-    return {
-      A: sub(add(K1_A, K2_C_2), K2_D_2),
+    return reduce({
+      A: subtract(add(K1_A, K2_C_2), K2_D_2),
       B: add(add(K1_B, K2_C_2), K2_D_2),
-      C: add(sub(K2_A, K2_B), K1_C),
+      C: add(subtract(K2_A, K2_B), K1_C),
       D: add(add(K2_A, K2_B), K1_D),
       m: state.m + 1
-    }
+    })
   }
 }
 
@@ -179,19 +190,13 @@ function signedString (value: number, symbol: string) {
 function StateMatrixElementToTex (state: StateMatrix, coords: { x: number, y: number }) {
   const { x, y } = coords
   const [a, b, c, d] = [state.A[x][y], state.B[x][y], state.C[x][y], state.D[x][y]]
-  const isZero = (Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2) + Math.pow(d, 2)) === 0
+  const isZero = (a * a + b * b + c * c + d * d) === 0
 
   if (isZero) {
     return '0'
   }
 
-  let tex = ''
-
-  if (a !== 0) {
-    tex = `${tex}${a}`
-  }
-
-  tex = `${tex}${signedString(b, 'i')}${signedString(c, '\\sqrt{2}')}${signedString(d, 'i\\sqrt{2}')}`
+  let tex = `${a || ''}${signedString(b, 'i')}${signedString(c, '\\sqrt{2}')}${signedString(d, 'i\\sqrt{2}')}`
 
   if (tex.startsWith('+')) {
     tex = tex.substring(1)
