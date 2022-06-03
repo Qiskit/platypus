@@ -15,6 +15,9 @@
     <div v-if="name === gateName.T" class="gate__symbol gate__symbol_text">
       T
     </div>
+    <div v-if="name === gateName.S" class="gate__symbol gate__symbol_text">
+      S
+    </div>
     <div v-if="isRotationGate()" class="gate__symbol gate__symbol_text">
       {{ name }}
       <div v-if="rotation" class="gate__symbol__rotation">
