@@ -41,6 +41,15 @@ function reduce (state: StateMatrix) {
   }
 }
 
+function reduceSingleElement (numerator: number, denominator: number) {
+  const d = gcd(numerator, denominator)
+
+  return {
+    numerator: round(numerator / d),
+    denominator: round(denominator / d)
+  }
+}
+
 export function IdentityState (): StateMatrix {
   return {
     A: [[1, 0], [0, 1]],
@@ -178,13 +187,27 @@ export const gateMap = {
   [GateName.RZ]: Identity
 }
 
-function signedString (value: number, symbol: string) {
-  if (value === 0) {
+function signedString (n: number, m: number, symbol: string = '') {
+  if (n === 0) {
     return ''
   }
+  const { numerator, denominator } = reduceSingleElement(n, Math.pow(2, m))
 
-  const absValue = Math.abs(value)
-  return `${value > 0 ? '+' : '-'}${absValue > 1 ? absValue : ''}${symbol}`
+  const absNumerator = Math.abs(numerator)
+  const sign = numerator > 0 ? '+' : '-'
+  let numeratorTex = ''
+
+  if (symbol) {
+    numeratorTex = `${absNumerator > 1 ? absNumerator : ''}${symbol}`
+  } else {
+    numeratorTex = `${absNumerator}`
+  }
+
+  if (m > 0) {
+    return `${sign}\\frac{${numeratorTex}}{${denominator}}`
+  } else {
+    return `${sign}${numeratorTex}`
+  }
 }
 
 function StateMatrixElementToTex (state: StateMatrix, coords: { x: number, y: number }) {
@@ -196,14 +219,10 @@ function StateMatrixElementToTex (state: StateMatrix, coords: { x: number, y: nu
     return '0'
   }
 
-  let tex = `${a || ''}${signedString(b, 'i')}${signedString(c, '\\sqrt{2}')}${signedString(d, 'i\\sqrt{2}')}`
+  let tex = `${signedString(a, state.m)}${signedString(b, state.m, 'i')}${signedString(c, state.m, '\\sqrt{2}')}${signedString(d, state.m, 'i\\sqrt{2}')}`
 
   if (tex.startsWith('+')) {
     tex = tex.substring(1)
-  }
-
-  if (state.m > 0) {
-    tex = `\\frac{${tex}}{${Math.pow(2, state.m)}}`
   }
 
   return tex
@@ -227,16 +246,18 @@ export function StateMatrixToTexKetNotation (state: StateMatrix) {
 
   let zeroKetTex = ''
   let oneKetTex = ''
+  const bothKets = zeroKetValue !== '0' && oneKetValue !== '0'
+
   if (zeroKetValue !== '0') {
-    zeroKetTex = `${zeroKetValue === '1' ? '' : zeroKetValue}${ZERO_KET}`
+    zeroKetTex = `${bothKets ? '(' : ''}${zeroKetValue === '1' ? '' : zeroKetValue}${ZERO_KET}${bothKets ? ')' : ''}`
   }
 
   if (oneKetValue !== '0') {
-    oneKetTex = `${oneKetValue === '1' ? '' : oneKetValue}${ONE_KET}`
+    oneKetTex = `${bothKets ? '(' : ''}${oneKetValue === '1' ? '' : oneKetValue}${ONE_KET}${bothKets ? ')' : ''}`
   }
 
   let joinTex = ''
-  if (zeroKetTex && oneKetTex && !oneKetTex.startsWith('-')) {
+  if (bothKets && !oneKetTex.startsWith('-')) {
     joinTex = '+'
   }
 
