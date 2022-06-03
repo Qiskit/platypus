@@ -11,8 +11,9 @@
     <div class="classroom__create-syllabus">
       <AppCta
         class="classroom__create-syllabus__button"
-        :label="$translate('Create a Syllabus')"
-        url="/syllabus/create"
+        :label="createSyllabusCTA.label"
+        :url="createSyllabusCTA.url"
+        :segment="createSyllabusCTA.segment"
       />
       <p class="classroom__create-syllabus__description">
         {{ $translate("Create a curated learning path for your students, using Qiskit Textbook Chapters, Labs, and Summer Schools") }}
@@ -40,9 +41,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import AppCta from '../common/AppCta.vue'
+import { getSyllabi, Syllabus } from '../../../ts/syllabus'
 import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
 import SyllabusCard from './SyllabusCard.vue'
-import { getSyllabi, Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'ClassRoomSection',
@@ -54,10 +55,18 @@ export default defineComponent({
   data () {
     return {
       // TODO: REPLACE MOCK DATA
-      syllabi: ([] as  Syllabus[])
+      syllabi: ([] as Syllabus[]),
+      createSyllabusCTA: {
+        label: this.$translate('Create a Syllabus'),
+        url: '/syllabus/create',
+        segment: {
+          cta: 'syllabus-create',
+          location: 'user-account-classroom'
+        }
+      }
     }
   },
-  mounted() {
+  mounted () {
     getSyllabi().then((syllabi: Syllabus[]) => {
       this.syllabi = syllabi
     })
