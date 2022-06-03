@@ -67,7 +67,7 @@
     "@jupyterlab/services": "^6.4.2",
     "@lumino/widgets": "^1.31.1",
     "@mathigon/boost": "^1.1.1",
-    "@mathigon/euclid": "^1.0.9",
+    "@mathigon/euclid": "^1.1.1",
     "@mathigon/studio": "0.1.16",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
