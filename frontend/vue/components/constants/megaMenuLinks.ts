@@ -191,6 +191,27 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       segment: {
         action: `${actionPrefix} > ${sectionGamesAndDemos} > widgets-demonstration`
       }
+    },
+    {
+      label: 'Quantum Coin Game',
+      url: `${baseUrl}${pathGamesAndDemos}/coin-game`,
+      segment: {
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > coin-game`
+      }
+    },
+    {
+      label: 'Your First Quantum Game',
+      url: `${baseUrl}${pathGamesAndDemos}/first-quantum-game`,
+      segment: {
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > first-quantum-game`
+      }
+    },
+    {
+      label: 'Variational Quantum Regression',
+      url: `${baseUrl}${pathGamesAndDemos}/variational-quantum-regression`,
+      segment: {
+        action: `${actionPrefix} > ${sectionGamesAndDemos} > variational-quantum-regression`
+      }
     }
   ]
 }
@@ -286,6 +307,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > quantum-key-distribution`
+      }
+    },
+    {
+      label: 'The Hidden Shift Problem',
+      url: `${baseUrl}${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
+      segment: {
+        action: `${actionPrefix} > ${sectionProtocolsAndAlgorithms} > hidden-shift-problem`
       }
     }
   ]
@@ -409,6 +437,27 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       segment: {
         action: `${actionPrefix} > ${sectionApps} > flexible-representation-of-quantum-images-frqi`
       }
+    },
+    {
+      label: 'Facial Expression Recognition',
+      url: `${baseUrl}${pathApps}/facial-expression-recognition`,
+      segment: {
+        action: `${actionPrefix} > ${sectionApps} > facial-expression-recognition`
+      }
+    },
+    {
+      label: 'Quantum Edge Detection',
+      url: `${baseUrl}${pathApps}/quantum-edge-detection`,
+      segment: {
+        action: `${actionPrefix} > ${sectionApps} > quantum-edge-detection`
+      }
+    },
+    {
+      label: 'Travelling Salesman Problem',
+      url: `${baseUrl}${pathApps}/tsp`,
+      segment: {
+        action: `${actionPrefix} > ${sectionApps} > tsp`
+      }
     }
   ]
 }
@@ -448,6 +497,13 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
       url: `${baseUrl}${pathHardwareUsingCircuits}/measuring-quantum-volume`,
       segment: {
         action: `${actionPrefix} > ${sectionCircuits} > measuring-quantum-volume`
+      }
+    },
+    {
+      label: 'The Density Matrix and Mixed States',
+      url: `${baseUrl}${pathHardwareUsingCircuits}/density-matrix`,
+      segment: {
+        action: `${actionPrefix} > ${sectionCircuits} > density-matrix`
       }
     }
   ]
