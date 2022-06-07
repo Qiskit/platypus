@@ -116,6 +116,10 @@
       id: quantum-key-distribution
       uuid: fbafa8c6-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-key-distribution
+    - title: The Hidden Shift Problem
+      id: hidden-shift-problem
+      uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002 
+      url: /ch-algorithms/hidden-shift-problem
 
 
 - title: Quantum Algorithms for Applications
@@ -149,6 +153,18 @@
       id: flexible-representation-of-quantum-images-frqi
       uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
       url: /ch-applications/image-processing-frqi-neqr
+    - title: Facial Expression Recognition
+      id: facial-expression-recognition
+      uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002 
+      url: /ch-applications/facial-expression-recognition
+    - title: Quantum Edge Detection
+      id: quantum-edge-detection
+      uuid: 3e202caa-cae9-11ec-9d64-0242ac120002 
+      url: /ch-applications/quantum-edge-detection
+    - title: Travelling Salesman Problem
+      id: tsp
+      uuid: 443c52b2-cae9-11ec-9d64-0242ac120002 
+      url: /ch-paper-implementations/tsp
 
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
@@ -170,6 +186,10 @@
       id: measuring-quantum-volume
       uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/measuring-quantum-volume
+    - title: The Density Matrix and Mixed States
+      id: density-matrix
+      uuid: 498dce44-cae9-11ec-9d64-0242ac120002 
+      url: /quantum-hardware/density-matrix
 
 
 - title: Investigating Quantum Hardware Using Microwave Pulses
@@ -278,6 +298,19 @@
       id: widgets-demonstration
       uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
       url: /ch-demos/widgets-index
+    - title: Quantum Coin Game
+      id: coin-game
+      uuid: 4e72eec6-cae9-11ec-9d64-0242ac120002 
+      url: /ch-demos/coin-game
+    - title: First Quantum Game
+      id: first-quantum-game
+      uuid: 53a49e62-cae9-11ec-9d64-0242ac120002 
+      url: /ch-demos/first-quantum-game
+    - title: Variational Quantum Regression
+      id: variational-quantum-regression
+      uuid: 57d7e37c-cae9-11ec-9d64-0242ac120002 
+      url: /ch-demos/variational-quantum-regression
+
 
 
 - title: Examples
