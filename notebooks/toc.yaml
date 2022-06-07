@@ -9,6 +9,10 @@
       id: multiple-systems
       url: /basics/multiple-systems
 
+    - title: Circuits and protocols
+      id: circuits-and-protocols
+      url: /basics/circuits-and-protocols
+
 
 - title: Prerequisites
   url: /ch-prerequisites
