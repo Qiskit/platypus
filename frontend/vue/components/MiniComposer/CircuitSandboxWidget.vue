@@ -93,7 +93,10 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
 
   autoMeasureGate: boolean = false
 
-  availableGates: ComposerGate[] = []
+  initialAvailableGates: ComposerGate[] = []
+  get availableGates (): ComposerGate[] {
+    return this.initialAvailableGates.map(gate => gate)
+  }
 
   circuitState: ComposerGate[][] = [[]]
 
@@ -132,9 +135,9 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
     this.autoMeasureGate = !!htmlConfigElement.querySelector('.autoMeasureGate')
 
     const availableGatesElement = htmlConfigElement.querySelector('.availableGates') as HTMLElement
-    this.availableGates = []
+    this.initialAvailableGates = []
     if (availableGatesElement && availableGatesElement.textContent) {
-      this.availableGates = this.stringToGateNameArray(availableGatesElement.textContent)
+      this.initialAvailableGates = this.stringToGateNameArray(availableGatesElement.textContent)
     }
 
     const initialCircuitElement = Array.from<HTMLElement>(htmlConfigElement.querySelectorAll('.initialCircuit .qubit'))
