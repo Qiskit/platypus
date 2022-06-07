@@ -230,10 +230,10 @@ function StateMatrixElementToTex (state: StateMatrix, coords: { x: number, y: nu
 
 export function StateMatrixToTexMatrix (state: StateMatrix) {
   return `
-    \\begin{bmatrix}
+    \\begin{pmatrix}
       ${StateMatrixElementToTex(state, { x: 0, y: 0 })} & ${StateMatrixElementToTex(state, { x: 0, y: 1 })}\\\\
       ${StateMatrixElementToTex(state, { x: 1, y: 0 })} & ${StateMatrixElementToTex(state, { x: 1, y: 1 })}
-    \\end{bmatrix}
+    \\end{pmatrix}
   `
 }
 
@@ -249,11 +249,11 @@ export function StateMatrixToTexKetNotation (state: StateMatrix) {
   const bothKets = zeroKetValue !== '0' && oneKetValue !== '0'
 
   if (zeroKetValue !== '0') {
-    zeroKetTex = `${bothKets ? '(' : ''}${zeroKetValue === '1' ? '' : zeroKetValue}${ZERO_KET}${bothKets ? ')' : ''}`
+    zeroKetTex = `${bothKets ? '\\left(' : ''}${zeroKetValue === '1' ? '' : zeroKetValue}${bothKets ? '\\right)' : ''}${ZERO_KET}`
   }
 
   if (oneKetValue !== '0') {
-    oneKetTex = `${bothKets ? '(' : ''}${oneKetValue === '1' ? '' : oneKetValue}${ONE_KET}${bothKets ? ')' : ''}`
+    oneKetTex = `${bothKets ? '\\left(' : ''}${oneKetValue === '1' ? '' : oneKetValue}${bothKets ? '\\right)' : ''}${ONE_KET}`
   }
 
   let joinTex = ''
