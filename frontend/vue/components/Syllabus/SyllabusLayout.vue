@@ -10,10 +10,7 @@
     <div class="syllabus__container">
       <UserAccountSectionHeader>
         <template #title>
-          {{ $translate("Syllabus") }}
-        </template>
-        <template #description>
-          {{ $translate("This is placeholder text for a page where students are viewing a syllabus.") }}
+          {{ syllabus.name }}
         </template>
       </UserAccountSectionHeader>
       <SyllabusView :syllabus="syllabus" />
