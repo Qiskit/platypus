@@ -4,10 +4,10 @@
     <div class="qubit-line__slot-container">
       <draggable
         class="qubit-line__slot"
-        :list="circuitState"
-        :move="onMoveCallback"
-        group="people"
+        :class="{'qubit-line__slot__full': isFull}"
+        group="gates"
         item-key="name"
+        :list="circuitState"
         @change="log"
       >
         <template #item="{ element }">
@@ -35,6 +35,7 @@ class Props {
   name = prop<GateName>({ default: GateName.H, required: true })
   circuitState = prop<ComposerGate[]>({ default: [], required: true })
   autoMeasureGate = prop<boolean>({ default: true, required: true })
+  maxGates = prop<Number>({ default: -1, required: true })
 }
 
 @Options({
@@ -50,6 +51,13 @@ export default class QubitLine extends Vue.with(Props) {
 
   log () {
     this.$emit('onGatesChanged')
+  }
+
+  get isFull () {
+    if (this.maxGates === -1) {
+      return false
+    }
+    return this.circuitState.length >= this.maxGates
   }
 }
 </script>

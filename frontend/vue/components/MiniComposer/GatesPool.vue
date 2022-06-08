@@ -3,7 +3,7 @@
     class="gates-pool"
     :list="availableGates"
     :move="onMoveCallback"
-    group="people"
+    group="gates"
     item-key="name"
     @change="log"
   >
@@ -37,7 +37,13 @@ class Props {
   }
 })
 export default class CircuitLine extends Vue.with(Props) {
-
+  onMoveCallback (evt : any) {
+    const dropTarget: HTMLElement = evt?.to
+    if (!dropTarget) {
+      return true
+    }
+    return !dropTarget.classList.contains('qubit-line__slot__full')
+  }
 }
 </script>
 <style scoped lang="scss">

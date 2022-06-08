@@ -5,6 +5,7 @@
       :key="index"
       :circuit-state="qubitLine"
       :auto-measure-gate="autoMeasureGate"
+      :max-gates="maxGates"
       @onGatesChanged="OnGatesChanged"
     />
     <button
@@ -30,6 +31,7 @@ class Props {
   circuitState = prop<ComposerGate[][]>({ default: [[]], required: true })
   autoMeasureGate = prop<boolean>({ default: true, required: true })
   maxLines = prop<Number>({ default: 1, required: true })
+  maxGates = prop<Number>({ default: -1, required: true })
 }
 
 @Options({

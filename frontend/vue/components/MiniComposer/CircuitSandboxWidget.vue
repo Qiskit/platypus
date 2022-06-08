@@ -24,6 +24,7 @@
         :circuit-state="circuitState"
         :auto-measure-gate="autoMeasureGate"
         :max-lines="circuitState.length"
+        :max-gates="MAX_GATES"
       />
     </div>
     <div class="mini-composer__state-views">
@@ -89,6 +90,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   lessonRef = ref<HTMLDivElement | null>(null)
   get lessonDiv () { return (this.lessonRef as unknown as HTMLDivElement) }
 
+  MAX_GATES = 7
   correctSolution = SolutionState.CORRECT
 
   autoMeasureGate: boolean = false
