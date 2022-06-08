@@ -139,7 +139,7 @@ export const SGate: QuantumGate = {
       A: subtract(multiply(K1, state.A), multiply(K2, state.B)),
       B: add(multiply(K2, state.A), multiply(K1, state.B)),
       C: subtract(multiply(K1, state.C), multiply(K2, state.D)),
-      D: add(multiply(K1, state.C), multiply(K1, state.D)),
+      D: add(multiply(K2, state.C), multiply(K1, state.D)),
       m: state.m
     })
   }
@@ -155,10 +155,12 @@ export const TGate: QuantumGate = {
     const K1_B = multiply(K1, state.B)
     const K1_C = multiply(K1, state.C)
     const K1_D = multiply(K1, state.D)
+
     const K2_A = multiply(K2, state.A)
     const K2_B = multiply(K2, state.B)
     const K2_C = multiply(K2, state.C)
     const K2_D = multiply(K2, state.D)
+
     const K2_C_2 = multiply(K2_C, 2)
     const K2_D_2 = multiply(K2_D, 2)
 
