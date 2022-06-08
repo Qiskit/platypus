@@ -13,7 +13,7 @@
         :value="course.title"
         class="syllabus-form-course__input-field"
         name="courseTitle"
-        placeholder="Enter the course title"
+        placeholder="Enter the section title"
         label-text="Content - Use this section to write in content. You can then add Qiskit chapters that correlate, and add more text below."
         color-scheme="light"
         :required="true"
