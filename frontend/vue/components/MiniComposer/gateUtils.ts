@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/named
-import { multiply, subtract, add, gcd, flatten, map, round } from 'mathjs'
+import { multiply, subtract, add, gcd, round } from 'mathjs'
 
 export enum GateName {
   UNKNOWN = 'UNKNOWN',
@@ -25,20 +25,6 @@ export interface StateMatrix {
   C: number[][]
   D: number[][]
   m: number
-}
-
-function reduce (state: StateMatrix) {
-  const { A, B, C, D, m } = state
-  const matricesValues = flatten([...A, ...B, ...C, ...D]) as unknown as number[]
-  const d = gcd(...matricesValues, Math.pow(2, m))
-
-  return {
-    A: map(A, value => round(value / d)),
-    B: map(B, value => round(value / d)),
-    C: map(C, value => round(value / d)),
-    D: map(D, value => round(value / d)),
-    m: round(m / d)
-  }
 }
 
 function reduceSingleElement (numerator: number, denominator: number) {
@@ -74,13 +60,13 @@ export const XGate: QuantumGate = {
   apply (state: StateMatrix) {
     // Integer part
     const K = [[0, 1], [1, 0]]
-    return reduce({
+    return {
       A: multiply(K, state.A),
       B: multiply(K, state.B),
       C: multiply(K, state.C),
       D: multiply(K, state.D),
       m: state.m
-    })
+    }
   }
 }
 
@@ -89,13 +75,13 @@ export const YGate: QuantumGate = {
     // Integer part
     const K = [[0, -1], [1, 0]]
 
-    return reduce({
+    return {
       A: neg(multiply(K, state.B)),
       B: multiply(K, state.A),
       C: neg(multiply(K, state.D)),
       D: multiply(K, state.C),
       m: state.m
-    })
+    }
   }
 }
 
@@ -104,13 +90,13 @@ export const ZGate: QuantumGate = {
     // Integer part
     const K = [[1, 0], [0, -1]]
 
-    return reduce({
+    return {
       A: multiply(K, state.A),
       B: multiply(K, state.B),
       C: multiply(K, state.C),
       D: multiply(K, state.D),
       m: state.m
-    })
+    }
   }
 }
 
@@ -119,13 +105,13 @@ export const HGate: QuantumGate = {
     // Integer part
     const K = [[1, 1], [1, -1]]
 
-    return reduce({
+    return {
       A: multiply(multiply(K, state.C), 2),
       B: multiply(multiply(K, state.D), 2),
       C: multiply(K, state.A),
       D: multiply(K, state.B),
       m: state.m + 1
-    })
+    }
   }
 }
 
@@ -135,13 +121,13 @@ export const SGate: QuantumGate = {
     const K1 = [[1, 0], [0, 0]]
     const K2 = [[0, 0], [0, 1]]
 
-    return reduce({
+    return {
       A: subtract(multiply(K1, state.A), multiply(K2, state.B)),
       B: add(multiply(K2, state.A), multiply(K1, state.B)),
       C: subtract(multiply(K1, state.C), multiply(K2, state.D)),
       D: add(multiply(K2, state.C), multiply(K1, state.D)),
       m: state.m
-    })
+    }
   }
 }
 
@@ -164,13 +150,13 @@ export const TGate: QuantumGate = {
     const K2_C_2 = multiply(K2_C, 2)
     const K2_D_2 = multiply(K2_D, 2)
 
-    return reduce({
+    return {
       A: subtract(add(K1_A, K2_C_2), K2_D_2),
       B: add(add(K1_B, K2_C_2), K2_D_2),
       C: add(subtract(K2_A, K2_B), K1_C),
       D: add(add(K2_A, K2_B), K1_D),
       m: state.m + 1
-    })
+    }
   }
 }
 
@@ -205,7 +191,7 @@ function signedString (n: number, m: number, symbol: string = '') {
     numeratorTex = `${absNumerator}`
   }
 
-  if (m > 0) {
+  if (denominator !== 1 && m > 0) {
     return `${sign}\\frac{${numeratorTex}}{${denominator}}`
   } else {
     return `${sign}${numeratorTex}`
@@ -221,7 +207,12 @@ function StateMatrixElementToTex (state: StateMatrix, coords: { x: number, y: nu
     return '0'
   }
 
-  let tex = `${signedString(a, state.m)}${signedString(b, state.m, 'i')}${signedString(c, state.m, '\\sqrt{2}')}${signedString(d, state.m, 'i\\sqrt{2}')}`
+  const aTex = signedString(a, state.m)
+  const bTex = signedString(b, state.m, 'i')
+  const cTex = signedString(c, state.m, '\\sqrt{2}')
+  const dTex = signedString(d, state.m, 'i\\sqrt{2}')
+
+  let tex = `${aTex}${bTex}${cTex}${dTex}`
 
   if (tex.startsWith('+')) {
     tex = tex.substring(1)
