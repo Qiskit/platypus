@@ -67,7 +67,7 @@ export default class Gate extends Vue.with(Props) {
 .gate {
   width: 2rem;
   height: 2rem;
-  background-color: $red-50;
+  background-color: $teal-70;
   display: flex;
   align-content: center;
   align-items: center;
@@ -77,9 +77,10 @@ export default class Gate extends Vue.with(Props) {
   font-family: $plex-mono;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1.25rem;
   text-align: center;
+  color: $text-color-white;
 
   &__symbol__rotation {
     font-size: 0.5rem;
@@ -92,17 +93,22 @@ export default class Gate extends Vue.with(Props) {
     }
   }
 
-  &_h {
-    background-color: $red-50;
+  &_h,
+  &_s {
+    background-color: $cyan-50;
+  }
+  &_t {
+    background-color: $purple-70;
   }
   &_z,
+  &_y,
   &_x {
-    background-color: $teal-40;
+    background-color: $teal-70;
   }
   &_rx,
   &_rz,
   &_ry {
-    background-color: $teal-40;
+    background-color: $teal-70;
     font-size: 1rem;
     line-height: 1rem;
   }
