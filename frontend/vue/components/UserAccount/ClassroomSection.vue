@@ -5,7 +5,11 @@
         {{ $translate("Classroom") }}
       </template>
       <template #description>
-        {{ $translate("This page shows your classroom activities in the Qiskit Textbook.") }}
+        {{
+          $translate(
+            "This page shows your classroom activities in the Qiskit Textbook."
+          )
+        }}
       </template>
     </UserAccountSectionHeader>
     <div class="classroom__create-syllabus">
@@ -16,7 +20,11 @@
         :segment="createSyllabusCTA.segment"
       />
       <p class="classroom__create-syllabus__description">
-        {{ $translate("Create a curated learning path for your students, using Qiskit Textbook Chapters, Labs, and Summer Schools") }}
+        {{
+          $translate(
+            "Create a curated learning path for your students, using Qiskit Textbook Chapters, Labs, and Summer Schools"
+          )
+        }}
       </p>
     </div>
     <section class="classroom__content">
@@ -24,7 +32,11 @@
         {{ $translate("Active Syllabi") }}
       </h1>
       <p class="classroom__content__description">
-        {{ $translate("Here are your active syllabi. You can edit, publish, and share them with your students") }}
+        {{
+          $translate(
+            "Here are your active syllabi. You can edit, publish, and share them with your students"
+          )
+        }}
       </p>
       <div class="classroom__content__syllabi-list">
         <SyllabusCard
@@ -39,46 +51,45 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue-demi'
-import AppCta from '../common/AppCta.vue'
-import { getSyllabi, Syllabus } from '../../../ts/syllabus'
-import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
-import SyllabusCard from './SyllabusCard.vue'
+import { defineComponent } from "vue-demi";
+import AppCta from "../common/AppCta.vue";
+import { getSyllabi, Syllabus } from "../../../ts/syllabus";
+import UserAccountSectionHeader from "./UserAccountSectionHeader.vue";
+import SyllabusCard from "./SyllabusCard.vue";
 
 export default defineComponent({
-  name: 'ClassRoomSection',
+  name: "ClassRoomSection",
   components: {
     UserAccountSectionHeader,
     AppCta,
-    SyllabusCard
+    SyllabusCard,
   },
-  data () {
+  data() {
     return {
-      // TODO: REPLACE MOCK DATA
-      syllabi: ([] as Syllabus[]),
+      syllabi: [] as Syllabus[],
       createSyllabusCTA: {
-        label: this.$translate('Create a Syllabus'),
-        url: '/syllabus/create',
+        label: this.$translate("Create a Syllabus"),
+        url: "/syllabus/create",
         segment: {
-          cta: 'syllabus-create',
-          location: 'user-account-classroom'
-        }
-      }
-    }
+          cta: "syllabus-create",
+          location: "user-account-classroom",
+        },
+      },
+    };
   },
-  mounted () {
+  mounted() {
     getSyllabi().then((syllabi: Syllabus[]) => {
-      this.syllabi = syllabi
-    })
-  }
-})
+      this.syllabi = syllabi;
+    });
+  },
+});
 </script>
 
 <style lang="scss" scoped>
-@import 'carbon-components/scss/globals/scss/typography';
-@import '~/../scss/variables/mq.scss';
-@import '~/../scss/variables/colors.scss';
-@import '~/../scss/mixins/mixins.scss';
+@import "carbon-components/scss/globals/scss/typography";
+@import "~/../scss/variables/mq.scss";
+@import "~/../scss/variables/colors.scss";
+@import "~/../scss/mixins/mixins.scss";
 
 .classroom {
   @include contained();
@@ -95,7 +106,7 @@ export default defineComponent({
     }
 
     &__description {
-      @include type-style('body-long-01');
+      @include type-style("body-long-01");
     }
   }
 
@@ -103,12 +114,12 @@ export default defineComponent({
     padding: $spacing-07 0;
 
     &__title {
-      @include type-style('expressive-heading-04', $fluid: true);
+      @include type-style("expressive-heading-04", $fluid: true);
       margin-bottom: $spacing-05;
     }
 
     &__description {
-      @include type-style('body-long-01');
+      @include type-style("body-long-01");
       margin-bottom: $spacing-07;
     }
 
