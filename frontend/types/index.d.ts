@@ -1,5 +1,7 @@
 declare module '@carbon/icons-vue'
 declare module '@carbon/icons-vue/*'
+declare module '@ckeditor/ckeditor5-build-classic'
+declare module '@ckeditor/ckeditor5-vue'
 
 interface XCourse {
   id: string,
