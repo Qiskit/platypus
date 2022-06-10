@@ -6,22 +6,69 @@
     <p class="scratchpad__description">
       <strong>{{ $translate('Note') }}: </strong>{{ $translate('Code in the scratchpad will not be saved.') }}
     </p>
-    <CodeExercise :internal-code="initialCode" />
+    <div class="scratchpad__editor-block">
+      <CodeEditor
+        class="scratchpad__editor-block__editor"
+        :code="code"
+        :notebook-enabled="false"
+        @codeChanged="codeChanged"
+      />
+      <ExerciseActionsBar
+        class="scratchpad__editor-block__actions-bar"
+        :is-running="isKernelBusy"
+        :run-enabled="isKernelReady"
+        :grade-enabled="isKernelReady && isGradingExercise"
+        @run="run"
+      />
+    </div>
+    <CodeOutput
+      ref="output"
+      @running="kernelRunning"
+      @finished="kernelFinished"
+      @kernelReady="kernelReady"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
-import CodeExercise from '../CodeExercise/CodeExercise.vue'
+import CodeEditor from '../CodeExercise/CodeEditor.vue'
+import ExerciseActionsBar from '../CodeExercise/ExerciseActionsBar.vue'
+import CodeOutput from '../CodeExercise/CodeOutput.vue'
 
 @Options({
   components: {
-    CodeExercise
+    CodeEditor, ExerciseActionsBar, CodeOutput
   }
 })
 
 export default class Scratchpad extends Vue {
-  initialCode = 'test test this is initial code'
+  code = '\n \n \n \n \n \n \n \n \n '
+  isKernelBusy = false
+  isKernelReady = false
+  executedOnce = false
+  isGradingExercise = false
+
+  codeChanged (code: string) {
+    this.code = code
+  }
+
+  run () {
+    // TODO
+  }
+
+  kernelRunning () {
+    this.isKernelBusy = true
+    this.executedOnce = true
+  }
+
+  kernelFinished () {
+    this.isKernelBusy = false
+  }
+
+  kernelReady () {
+    this.isKernelReady = true
+  }
 }
 </script>
 
@@ -32,6 +79,10 @@ export default class Scratchpad extends Vue {
   &__description {
     @include type-style('body-short-01');
     margin-bottom: $spacing-05;
+  }
+
+  &__editor-block {
+    position: relative;
   }
 }
 </style>
