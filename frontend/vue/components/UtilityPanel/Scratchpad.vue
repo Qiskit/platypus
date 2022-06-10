@@ -6,15 +6,23 @@
     <p class="scratchpad__description">
       <strong>{{ $translate('Note') }}: </strong>{{ $translate('Code in the scratchpad will not be saved.') }}
     </p>
+    <CodeExercise :internal-code="initialCode" />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
+import CodeExercise from '../CodeExercise/CodeExercise.vue'
 
-@Options({})
+@Options({
+  components: {
+    CodeExercise
+  }
+})
 
-export default class Scratchpad extends Vue {}
+export default class Scratchpad extends Vue {
+  initialCode = 'test test this is initial code'
+}
 </script>
 
 <style scoped lang="scss">
