@@ -230,24 +230,31 @@ export function StateMatrixToTexMatrix (state: StateMatrix) {
   `
 }
 
-const ZERO_KET = '|0\\rangle'
-const ONE_KET = '|1\\rangle'
+function parenthesis (text: string) {
+  return `\\left(${text}\\right)`
+}
+
+function valueKetTex (value: string, ket: 0 | 1) {
+  if (value === '0') {
+    return ''
+  }
+
+  const ketTex = `|${ket}\\rangle`
+  if (value === '1') {
+    return ketTex
+  }
+
+  return `${parenthesis(value)}${ketTex}`
+}
 
 export function StateMatrixToTexKetNotation (state: StateMatrix) {
   const zeroKetValue = StateMatrixElementToTex(state, { x: 0, y: 0 })
   const oneKetValue = StateMatrixElementToTex(state, { x: 1, y: 0 })
 
-  let zeroKetTex = ''
-  let oneKetTex = ''
   const bothKets = zeroKetValue !== '0' && oneKetValue !== '0'
 
-  if (zeroKetValue !== '0') {
-    zeroKetTex = `${bothKets ? '\\left(' : ''}${zeroKetValue === '1' ? '' : zeroKetValue}${bothKets ? '\\right)' : ''}${ZERO_KET}`
-  }
-
-  if (oneKetValue !== '0') {
-    oneKetTex = `${bothKets ? '\\left(' : ''}${oneKetValue === '1' ? '' : oneKetValue}${bothKets ? '\\right)' : ''}${ONE_KET}`
-  }
+  const zeroKetTex = valueKetTex(zeroKetValue, 0)
+  const oneKetTex = valueKetTex(oneKetValue, 1)
 
   let joinTex = ''
   if (bothKets && !oneKetTex.startsWith('-')) {
