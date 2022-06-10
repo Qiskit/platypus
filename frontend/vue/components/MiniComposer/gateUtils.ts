@@ -244,7 +244,10 @@ function valueKetTex (value: string, ket: 0 | 1) {
     return ketTex
   }
 
-  return `${parenthesis(value)}${ketTex}`
+  const isMultiElement = value.includes('+') || value.lastIndexOf('-') > 1
+  const valueTex = isMultiElement ? parenthesis(value) : value
+
+  return `${valueTex}${ketTex}`
 }
 
 export function StateMatrixToTexKetNotation (state: StateMatrix) {
