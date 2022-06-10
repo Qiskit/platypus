@@ -10,7 +10,6 @@
 <script lang="ts">
 import { ref } from '@vue/reactivity'
 import { Vue } from 'vue-class-component'
-import 'mathjax-full/es5/tex-chtml.js'
 
 declare global {
   interface Window {
@@ -23,6 +22,8 @@ export default class SymbolicNotation extends Vue {
   get output () { return (this.outputRef as unknown as HTMLDivElement) }
 
   mounted () {
+    require('mathjax-full/es5/tex-chtml.js')
+
     const MathJax = window.MathJax
     const output = this.output
 
