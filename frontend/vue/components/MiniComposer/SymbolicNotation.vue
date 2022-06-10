@@ -8,7 +8,6 @@
 <script lang="ts">
 import { ref } from '@vue/reactivity'
 import { Vue, prop } from 'vue-class-component'
-import 'mathjax-full/es5/tex-chtml.js'
 
 class Props {
   tex = prop<String>({ default: '', required: true })
@@ -30,6 +29,8 @@ export default class SymbolicNotation extends Vue.with(Props) {
   }
 
   renderTex () {
+    require('mathjax-full/es5/tex-chtml.js')
+
     const MathJax = window.MathJax
     const output = this.output
 
