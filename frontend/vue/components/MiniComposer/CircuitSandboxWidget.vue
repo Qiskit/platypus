@@ -107,6 +107,10 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   lastGateId = 0
 
   get matrixState () {
+    if (this.goal && this.circuitState[0].length > 0) {
+      this.$step?.score(this.goal as string)
+    }
+
     return this.circuitState[0].reduce((prev, current) => {
       return gateMatrix(current).apply(prev)
     }, IdentityState())
@@ -163,7 +167,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   }
 
   onRestartButton () {
-
+    this.circuitState = [[]]
   }
 }
 </script>
