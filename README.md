@@ -1,5 +1,5 @@
 # platypus
-This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/).
+This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/learn/).
 
 The previous version of the Qiskit Textbook textbook can be found [here](https://github.com/qiskit-community/qiskit-textbook).
 

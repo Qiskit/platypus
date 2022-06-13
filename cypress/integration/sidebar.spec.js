@@ -39,7 +39,7 @@ describe('Sidebar', () => {
   it('back to home link links to textbook home', () => {
     const viewports = ['ipad-2', 'macbook-15']
     const linkSelector = '[data-test=back-to-home-link]'
-    const textbookHomeUrl = 'https://qiskit.org/textbook-beta'
+    const textbookHomeUrl = 'https://qiskit.org/learn'
 
     viewports.forEach((viewport) => {
       cy.viewport(viewport)
