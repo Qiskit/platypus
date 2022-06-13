@@ -51,7 +51,7 @@ export default class SymbolicNotation extends Vue.with(Props) {
           MathJax.startup.document.clear()
           MathJax.startup.document.updateDocument()
           if (outputMetrics.containerWidth < node.clientWidth) {
-            node.style.fontSize = `${(outputMetrics.containerWidth / node.clientWidth) * 100}%`
+            node.style.fontSize = `${(outputMetrics.containerWidth / node.clientWidth) * 100 * 1.1}%`
           }
         }).catch((err: Error) => {
           // If there was an error, put the message into the output instead
