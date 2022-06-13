@@ -22,7 +22,7 @@
       </h1>
       <Circuit
         :circuit-state="circuitState"
-        :auto-measure-gate="autoMeasureGate"
+        :auto-measure-gate="false"
         :max-lines="circuitState.length"
         :max-gates="MAX_GATES"
       />
@@ -58,10 +58,7 @@
 import { ref } from '@vue/reactivity'
 import { Options, Vue, prop } from 'vue-class-component'
 import draggable from 'vuedraggable'
-import Carousel from '../Carousel/Carousel.vue'
-import KetCircuitLine from '../Sketch/KetCircuitLine.vue'
-import AppCta from '../common/AppCta.vue'
-import SolutionStateIndicator, { SolutionState } from '../common/SolutionStateIndicator.vue'
+import SolutionStateIndicator from '../common/SolutionStateIndicator.vue'
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
 import { ComposerGate, gateMatrix } from './composerTypes'
@@ -74,12 +71,9 @@ class Props {
 
 @Options({
   components: {
-    Carousel,
-    KetCircuitLine,
     Circuit,
     GatesPool,
     draggable,
-    AppCta,
     SymbolicNotation,
     SolutionStateIndicator
   }
@@ -93,9 +87,6 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   get explanation () { return (this.explanationRef as unknown as HTMLDivElement) }
 
   MAX_GATES = 7
-  correctSolution = SolutionState.CORRECT
-
-  autoMeasureGate: boolean = false
 
   initialAvailableGates: ComposerGate[] = []
   get availableGates (): ComposerGate[] {
@@ -103,8 +94,6 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   }
 
   circuitState: ComposerGate[][] = [[]]
-
-  lastGateId = 0
 
   get matrixState () {
     if (this.goal && this.circuitState[0].length > 0) {
@@ -123,8 +112,6 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   get stateVectorTex () {
     return StateMatrixToTexKetNotation(this.matrixState)
   }
-  // stateVectorTex = 'x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}'
-  // stateVectorTex = '({\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4} |0\\rangle) + ({\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4} + {\\sqrt{1} \\over 4}|1\\rangle)'
 
   mounted () {
     const instructionElement = this.configDiv.querySelector('.instructions')
@@ -153,6 +140,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   }
 
   stringToGateNameArray (text: string) : ComposerGate[] {
+    let lastGateId = 0
     return text.split(' ')
       .filter(text => text !== '')
       .map<ComposerGate>((gateText: string) => {
@@ -160,9 +148,9 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
           const parts = gateText.split('(')
           const gateName = parts[0]
           const rotation = parts[1]?.split(')')[0]
-          return { name: gateName as GateName, id: this.lastGateId++, rotation }
+          return { name: gateName as GateName, id: lastGateId++, rotation }
         }
-        return { name: GateName.UNKNOWN, id: this.lastGateId++ }
+        return { name: GateName.UNKNOWN, id: lastGateId++ }
       })
   }
 
@@ -255,9 +243,6 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
             opacity: 0.5;
           }
         }
-      }
-      &__z-gate {
-        flex: 0 0 auto;
       }
     }
   }
