@@ -36,8 +36,9 @@ export default class SymbolicNotation extends Vue.with(Props) {
 
     MathJax.startup.promise.then(() => {
       MathJax.texReset()
+      const outputMetrics = MathJax.getMetricsFor(output)
       const options = {
-        ...MathJax.getMetricsFor(output),
+        ...outputMetrics,
         ...{ display: true }
       }
       MathJax
@@ -49,6 +50,9 @@ export default class SymbolicNotation extends Vue.with(Props) {
           output.appendChild(node)
           MathJax.startup.document.clear()
           MathJax.startup.document.updateDocument()
+          if (outputMetrics.containerWidth < node.clientWidth) {
+            node.style.fontSize = `${(outputMetrics.containerWidth / node.clientWidth) * 100}%`
+          }
         }).catch((err: Error) => {
           // If there was an error, put the message into the output instead
           output.appendChild(document.createElement('pre')).appendChild(document.createTextNode(err.message))
