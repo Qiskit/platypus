@@ -27,6 +27,10 @@
         :max-gates="MAX_GATES"
       />
     </div>
+    <div
+      ref="explanationRef"
+      class="mini-composer__explanation"
+    />
     <div class="mini-composer__state-views">
       <section class="mini-composer__state-views__view">
         <h1 class="mini-composer__state-views__view__title">
@@ -85,10 +89,8 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   get configDiv () { return (this.configRef as unknown as HTMLDivElement) }
   instructionsRef = ref<HTMLDivElement | null>(null)
   get instructions () { return (this.instructionsRef as unknown as HTMLDivElement) }
-  footerInfoRef = ref<HTMLDivElement | null>(null)
-  get footerInfoDiv () { return (this.footerInfoRef as unknown as HTMLDivElement) }
-  lessonRef = ref<HTMLDivElement | null>(null)
-  get lessonDiv () { return (this.lessonRef as unknown as HTMLDivElement) }
+  explanationRef = ref<HTMLDivElement | null>(null)
+  get explanation () { return (this.explanationRef as unknown as HTMLDivElement) }
 
   MAX_GATES = 7
   correctSolution = SolutionState.CORRECT
@@ -122,28 +124,28 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
 
   mounted () {
     const instructionElement = this.configDiv.querySelector('.instructions')
-    const circuitElement = this.configDiv.querySelector('.circuit')
+    const explanationElement = this.configDiv.querySelector('.explanation')
+    const availableGatesElement = this.configDiv.querySelector('.availableGates')
 
-    this.setCircuitConfig(circuitElement as HTMLElement)
+    this.setCircuitConfig(availableGatesElement as HTMLElement)
 
     if (instructionElement) {
       this.instructions.appendChild(instructionElement)
     } else {
       this.instructions.remove()
     }
+    if (explanationElement) {
+      this.explanation.appendChild(explanationElement)
+    } else {
+      this.explanation.remove()
+    }
   }
 
-  setCircuitConfig (htmlConfigElement: HTMLElement) {
-    this.autoMeasureGate = !!htmlConfigElement.querySelector('.autoMeasureGate')
-
-    const availableGatesElement = htmlConfigElement.querySelector('.availableGates') as HTMLElement
+  setCircuitConfig (availableGatesElement: HTMLElement) {
     this.initialAvailableGates = []
     if (availableGatesElement && availableGatesElement.textContent) {
       this.initialAvailableGates = this.stringToGateNameArray(availableGatesElement.textContent)
     }
-
-    const initialCircuitElement = Array.from<HTMLElement>(htmlConfigElement.querySelectorAll('.initialCircuit .qubit'))
-    this.circuitState = this.htmlElementsToCircuit(initialCircuitElement)
   }
 
   stringToGateNameArray (text: string) : ComposerGate[] {
@@ -160,15 +162,6 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       })
   }
 
-  htmlElementsToCircuit (elements: HTMLElement[]) : ComposerGate[][] {
-    return elements.map((qubitLine: HTMLElement) => {
-      if (qubitLine.textContent === null) {
-        return []
-      }
-      return this.stringToGateNameArray(qubitLine.textContent)
-    })
-  }
-
   onRestartButton () {
 
   }
@@ -183,19 +176,21 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
 .mini-composer {
   display: grid;
   grid-template-columns: 20rem 1fr;
-  grid-template-rows: min-content min-content 1fr;
+  grid-template-rows: min-content min-content 1fr min-content;
   grid-template-areas:
     "text text"
     "gates lesson"
-    "circuit lesson";
+    "circuit lesson"
+    "explanation lesson";
 
   @include mq ($until: medium) {
     grid-template-columns: 1fr;
-    grid-template-rows: min-content min-content min-content min-content;
+    grid-template-rows: repeat(5, min-content);
     grid-template-areas:
       "text"
       "gates"
       "circuit"
+      "explanation"
       "lesson";
   }
 
@@ -204,12 +199,15 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   }
 
   &__exercise-text {
+    @include type-style('body-long-01');
     grid-area: text;
     border-bottom: 1px solid $border-color;
-
-    ::v-deep(.carousel__selector) {
-      margin-top: 0;
-    }
+    padding: $spacing-05;
+  }
+  &__explanation {
+    @include type-style('body-long-01');
+    grid-area: explanation;
+    padding: $spacing-05;
   }
   &__gates {
     grid-area: gates;
