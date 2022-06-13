@@ -27,7 +27,6 @@ import { FindSyllabusByCodeController } from './modules/syllabus/commands/find-s
 import { UpdateSyllabusController } from './modules/syllabus/commands/update-syllabus/update-syllabus-controller'
 
 // Logger
-import { loggerExpress } from './libs/logger/logger-express'
 import { logger } from './libs/logger/logger'
 
 const getCourseData = async function (req: Request) {
@@ -126,9 +125,6 @@ const getAccountData = async (req: Request, res: Response) => {
 
 const start = () => {
   new MathigonStudioApp()
-    // Mathigon has the return types incorrect here
-    // @ts-expect-error(2345)
-    .use(loggerExpress)
     .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
     .secure()
     .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus'] })
