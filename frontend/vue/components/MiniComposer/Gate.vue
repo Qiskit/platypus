@@ -118,5 +118,9 @@ export default class Gate extends Vue.with(Props) {
   &_keep {
     opacity: 0;
   }
+
+  :hover {
+    cursor: grab;
+  }
 }
 </style>
