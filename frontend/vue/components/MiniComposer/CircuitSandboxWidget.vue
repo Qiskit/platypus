@@ -258,6 +258,11 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
     border-left: 1px solid $border-color;
     padding: $spacing-05;
 
+    @include mq ($until: medium) {
+      border-left: none;
+      border-top: 1px solid $border-color;
+    }
+
     &__title {
       @include type-style('heading-01');
       margin-top: $spacing-03;
