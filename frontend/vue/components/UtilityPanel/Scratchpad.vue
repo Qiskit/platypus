@@ -54,7 +54,8 @@ export default class Scratchpad extends Vue {
   }
 
   run () {
-    // TODO
+    const codeOutput: any = this.$refs.output
+    codeOutput.requestExecute(this.code)
   }
 
   kernelRunning () {
