@@ -5,6 +5,7 @@
       :key="index"
       :circuit-state="qubitLine"
       :auto-measure-gate="autoMeasureGate"
+      :max-gates="maxGates"
       @onGatesChanged="OnGatesChanged"
     />
     <button
@@ -21,15 +22,16 @@
 
 <script lang="ts">
 import { Options, Vue, prop } from 'vue-class-component'
-import { GateName } from './Gate.vue'
 import QubitLine from './QubitLine.vue'
 import { ComposerGate } from './composerTypes'
+import { GateName } from './gateUtils'
 
 class Props {
   name = prop<String>({ default: GateName.H, required: true })
   circuitState = prop<ComposerGate[][]>({ default: [[]], required: true })
   autoMeasureGate = prop<boolean>({ default: true, required: true })
   maxLines = prop<Number>({ default: 1, required: true })
+  maxGates = prop<Number>({ default: -1, required: true })
 }
 
 @Options({

@@ -35,11 +35,7 @@
 
 <script lang="ts">
 import { Vue, prop } from 'vue-class-component'
-
-export interface ProbabilityState {
-  key: string
-  value: number
-}
+import { ProbabilityState } from './composerTypes'
 
 class Props {
   probabilities = prop<ProbabilityState[]>({
