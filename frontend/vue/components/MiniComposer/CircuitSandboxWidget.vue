@@ -20,7 +20,14 @@
       <h1 class="mini-composer__circuit-section__title">
         Circuit
       </h1>
+      <button
+        class="mini-composer__circuit-section__reset"
+        @click="onResetButton"
+      >
+        Reset <PlayIcon />
+      </button>
       <Circuit
+        class="mini-composer__circuit-section__circuit-lines"
         :circuit-state="circuitState"
         :auto-measure-gate="false"
         :max-lines="circuitState.length"
@@ -58,6 +65,7 @@
 import { ref } from '@vue/reactivity'
 import { Options, Vue, prop } from 'vue-class-component'
 import draggable from 'vuedraggable'
+import PlayIcon from '@carbon/icons-vue/lib/reset/16'
 import SolutionStateIndicator from '../common/SolutionStateIndicator.vue'
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
@@ -75,7 +83,8 @@ class Props {
     GatesPool,
     draggable,
     SymbolicNotation,
-    SolutionStateIndicator
+    SolutionStateIndicator,
+    PlayIcon
   }
 })
 export default class CircuitSandboxWidget extends Vue.with(Props) {
@@ -154,7 +163,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       })
   }
 
-  onRestartButton () {
+  onResetButton () {
     this.circuitState = [[]]
   }
 }
@@ -213,37 +222,32 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
   &__circuit-section {
     grid-area: circuit;
     padding: $spacing-05;
+    display: grid;
+    grid-template-columns: 1fr 4rem;
+    grid-template-rows: min-content 1fr;
+    grid-template-areas:
+      "title reset"
+      "line line";
+
     &__title {
+      grid-area: title;
       margin-top: $spacing-03;
       @include type-style('heading-01');
     }
-    &__qubit-line {
-      position: relative;
-      &__slot-container {
-        display: flex;
-        flex-flow: row;
+    &__reset {
+      @include type-style('body-short-01');
+      grid-area: reset;
+      display: flex;
+      flex-flow: row;
+      gap: $spacing-03;
+      color: $link-color-tertiary;
 
-        position: absolute;
-        top: 0px;
-        height: 100%;
-        width: 100%;
-        align-items: center;
-        padding: 0 $spacing-07;
+      &:hover {
+        color: $link-hover-color-tertiary;
       }
-      &__slot {
-        display: flex;
-        flex-flow: row;
-        flex: 1 1 auto;
-        max-width: 100%;
-
-        &__gate {
-          margin-right: $spacing-02;
-          &.sortable-ghost {
-            transition: opacity 0.2s ease-out;
-            opacity: 0.5;
-          }
-        }
-      }
+    }
+    &__circuit-lines {
+      grid-area: line;
     }
   }
   &__state-views {
