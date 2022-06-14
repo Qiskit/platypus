@@ -39,21 +39,21 @@
       class="mini-composer__explanation"
     />
     <div class="mini-composer__state-views">
-      <section class="mini-composer__state-views__view">
-        <h1 class="mini-composer__state-views__view__title">
+      <section>
+        <h1 class="mini-composer__state-views__title">
           Matrix
         </h1>
         <SymbolicNotation
-          class="mini-composer__state-views__view__area"
+          class="mini-composer__state-views__area"
           :tex="matrixTex"
         />
       </section>
-      <section class="mini-composer__state-views__view">
-        <h1 class="mini-composer__state-views__view__title">
+      <section>
+        <h1 class="mini-composer__state-views__title">
           State Vector
         </h1>
         <SymbolicNotation
-          class="mini-composer__state-views__view__area"
+          class="mini-composer__state-views__area"
           :tex="stateVectorTex"
         />
       </section>
@@ -258,22 +258,20 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
     border-left: 1px solid $border-color;
     padding: $spacing-05;
 
-    &__view {
-      &__title {
-        @include type-style('heading-01');
-        margin-top: $spacing-03;
-      }
-      &__area {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    &__title {
+      @include type-style('heading-01');
+      margin-top: $spacing-03;
+    }
+    &__area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-        height: 9rem;
-        width: 100%;
-        border: 2px solid $border-color;
-        background-color: $background-color-white;
-      }
+      height: 9rem;
+      width: 100%;
+      border: 2px solid $border-color;
+      background-color: $background-color-white;
     }
   }
 }
