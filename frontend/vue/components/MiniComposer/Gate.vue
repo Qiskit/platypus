@@ -9,6 +9,15 @@
     <div v-if="name === gateName.Z" class="gate__symbol gate__symbol_text">
       Z
     </div>
+    <div v-if="name === gateName.Y" class="gate__symbol gate__symbol_text">
+      Y
+    </div>
+    <div v-if="name === gateName.T" class="gate__symbol gate__symbol_text">
+      T
+    </div>
+    <div v-if="name === gateName.S" class="gate__symbol gate__symbol_text">
+      S
+    </div>
     <div v-if="isRotationGate()" class="gate__symbol gate__symbol_text">
       {{ name }}
       <div v-if="rotation" class="gate__symbol__rotation">
@@ -26,17 +35,7 @@ import { Options, Vue, prop } from 'vue-class-component'
 import MeasureZ from './GatesSVG/MeasureZ.vue'
 import Theta from './GatesSVG/Theta.vue'
 import Phi from './GatesSVG/Phi.vue'
-
-export enum GateName {
-  UNKNOWN = 'UNKNOWN',
-  H = 'H',
-  Z = 'Z',
-  X = 'X',
-  RX = 'RX',
-  RZ = 'RZ',
-  RY = 'RY',
-  MEASURE_Z = 'Measure'
-}
+import { GateName } from './gateUtils'
 
 class Props {
   name = prop<String>({ default: GateName.H, required: true })
@@ -51,7 +50,7 @@ class Props {
   }
 })
 export default class Gate extends Vue.with(Props) {
-  gateName = GateName;
+  gateName = GateName
 
   isRotationGate (): Boolean {
     return this.name === GateName.RY || this.name === GateName.RX || this.name === GateName.RZ
@@ -68,7 +67,7 @@ export default class Gate extends Vue.with(Props) {
 .gate {
   width: 2rem;
   height: 2rem;
-  background-color: $red-50;
+  background-color: $teal-70;
   display: flex;
   align-content: center;
   align-items: center;
@@ -78,9 +77,10 @@ export default class Gate extends Vue.with(Props) {
   font-family: $plex-mono;
   font-style: normal;
   font-weight: normal;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1.25rem;
   text-align: center;
+  color: $text-color-white;
 
   &__symbol__rotation {
     font-size: 0.5rem;
@@ -93,17 +93,22 @@ export default class Gate extends Vue.with(Props) {
     }
   }
 
-  &_h {
-    background-color: $red-50;
+  &_h,
+  &_s {
+    background-color: $cyan-50;
+  }
+  &_t {
+    background-color: $purple-70;
   }
   &_z,
+  &_y,
   &_x {
-    background-color: $teal-40;
+    background-color: $teal-70;
   }
   &_rx,
   &_rz,
   &_ry {
-    background-color: $teal-40;
+    background-color: $teal-70;
     font-size: 1rem;
     line-height: 1rem;
   }
@@ -112,6 +117,10 @@ export default class Gate extends Vue.with(Props) {
   }
   &_keep {
     opacity: 0;
+  }
+
+  :hover {
+    cursor: grab;
   }
 }
 </style>
