@@ -43,10 +43,9 @@ import CodeOutput from '../CodeExercise/CodeOutput.vue'
 })
 
 export default class Scratchpad extends Vue {
-  code = '\n \n \n \n \n \n \n \n \n '
+  code = '\n \n \n'
   isKernelBusy = false
   isKernelReady = false
-  executedOnce = false
   isGradingExercise = false
 
   codeChanged (code: string) {
@@ -60,7 +59,6 @@ export default class Scratchpad extends Vue {
 
   kernelRunning () {
     this.isKernelBusy = true
-    this.executedOnce = true
   }
 
   kernelFinished () {
@@ -84,6 +82,12 @@ export default class Scratchpad extends Vue {
 
   &__editor-block {
     position: relative;
+    &__actions-bar {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+    }
   }
 }
 </style>
