@@ -76,12 +76,12 @@ import AppCta from '../common/AppCta.vue'
 import SolutionStateIndicator, { SolutionState } from '../common/SolutionStateIndicator.vue'
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
-import ProbablityChart, { ProbabilityState } from './ProbablityChart.vue'
-import { ExerciseStep, ComposerGate, emptyExerciseStep } from './composerTypes'
-import { GateName } from './Gate.vue'
+import ProbablityChart from './ProbablityChart.vue'
+import { ExerciseStep, ComposerGate, emptyExerciseStep, ProbabilityState } from './composerTypes'
+import { GateName } from './gateUtils'
 
 class Props {
-  goal = prop<String>({ default: 'mini-composer-solved', required: true });
+  goal = prop<String>({ default: 'mini-composer-solved', required: true })
 }
 
 @Options({
