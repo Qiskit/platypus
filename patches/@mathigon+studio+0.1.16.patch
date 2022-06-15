@@ -1,5 +1,5 @@
 diff --git a/node_modules/@mathigon/studio/build/markdown/mathjax.js b/node_modules/@mathigon/studio/build/markdown/mathjax.js
-index 93eae4d..e8da114 100644
+index 93eae4d..4b9161d 100644
 --- a/node_modules/@mathigon/studio/build/markdown/mathjax.js
 +++ b/node_modules/@mathigon/studio/build/markdown/mathjax.js
 @@ -7,7 +7,7 @@
@@ -37,7 +37,7 @@ index 93eae4d..e8da114 100644
    if (mathJaxStore[id]) return mathJaxStore[id];
  
    if (!promise) {
-@@ -56,10 +62,67 @@ async function texToSvg(code, isInline) {
+@@ -56,10 +62,71 @@ async function texToSvg(code, isInline) {
    return mathJaxStore[id] = output;
  }
  
@@ -68,12 +68,16 @@ index 93eae4d..e8da114 100644
 +        ]);
 +        adaptor.append(math.typesetRoot, text);
 +      },
-+      loader: {load: ['input/tex-full', 'output/chtml']},
++      loader: {load: ['input/tex-full', 'output/chtml', "[tex]/ams"]},
 +      // https://docs.mathjax.org/en/latest/options/output/chtml.html#the-configuration-block
 +      chtml: {
 +        adaptiveCSS: false,
 +        fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3.1.0/es5/output/chtml/fonts/woff-v2'
-+      }
++      },
++      tex: {
++        packages: { "[+]": ["unicode", "ams"] },
++        tags: "ams",
++      },
 +    });
 +  }
 +
