@@ -5,9 +5,9 @@
         class="code-exercise__editor-block__editor"
         :code="code"
         :initial-code="initialCode"
-        :notebook-enabled="true"
+        :scratchpad-enabled="true"
         @codeChanged="codeChanged"
-        @notebookCopyRequest="notebookCopyRequest"
+        @scratchpadCopyRequest="scratchpadCopyRequest"
       />
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
@@ -116,13 +116,13 @@ export default defineComponent({
     codeChanged (code: string) {
       this.code = code
     },
-    notebookCopyRequest (code: string) {
-      const notebookCopyRequestEvent = new CustomEvent('notebookCopyRequest', {
+    scratchpadCopyRequest (code: string) {
+      const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
         bubbles: true,
         detail: { code }
       })
 
-      window.dispatchEvent(notebookCopyRequestEvent)
+      window.dispatchEvent(scratchpadCopyRequestEvent)
     },
     kernelRunning () {
       this.isKernelBusy = true

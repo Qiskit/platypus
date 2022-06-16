@@ -6,9 +6,9 @@
       :copy-text="internalCode"
       :copy-enabled="copyEnabled"
       :reset-enabled="resetEnabled"
-      :notebook-enabled="notebookEnabled"
+      :scratchpad-enabled="scratchpadEnabled"
       @reset="resetRequest"
-      @notebook="notebook"
+      @scratchpad="scratchpad"
     />
     <div
       v-if="resetNotificationOpen"
@@ -64,7 +64,7 @@ export default defineComponent({
       required: false,
       default: true
     },
-    notebookEnabled: {
+    scratchpadEnabled: {
       type: Boolean,
       required: false,
       default: true
@@ -100,8 +100,8 @@ export default defineComponent({
       this.internalCode = code
       this.$emit('codeChanged', this.internalCode)
     },
-    notebook () {
-      this.$emit('notebookCopyRequest', this.internalCode)
+    scratchpad () {
+      this.$emit('scratchpadCopyRequest', this.internalCode)
     }
   }
 })

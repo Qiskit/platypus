@@ -11,13 +11,13 @@
         <ResetIcon class="code-editors-tools__button__icon" />
       </bx-tooltip-icon>
     </div>
-    <div v-if="notebookEnabled" class="code-editors-tools__button">
+    <div v-if="scratchpadEnabled" class="code-editors-tools__button">
       <bx-tooltip-icon
         class="code-editors-tools__button__tooltip"
         aligment="center"
         direction="top"
-        :body-text="$translate('Copy to notebook notes')"
-        @click="notebook"
+        :body-text="$translate('Copy to scratchpad')"
+        @click="scratchpad"
       >
         <NotebookIcon class="code-editors-tools__button__icon" />
       </bx-tooltip-icon>
@@ -56,7 +56,7 @@ export default defineComponent({
       required: false,
       default: true
     },
-    notebookEnabled: {
+    scratchpadEnabled: {
       type: Boolean,
       required: false,
       default: true
@@ -66,8 +66,8 @@ export default defineComponent({
     reset () {
       this.$emit('reset')
     },
-    notebook () {
-      this.$emit('notebook')
+    scratchpad () {
+      this.$emit('scratchpad')
     }
   }
 })
