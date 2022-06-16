@@ -1,8 +1,8 @@
-Advocates: 代弁者
+Advocates: アドボケイト
 Back to course overview: コースの概要に戻る
-Back to textbook home: 教科書ホームに戻るんだ」
-Binary: バイナリ
-Browse all content: コンテンツをすべて参照
+Back to textbook home: テキストブックホームに戻る
+Binary: バイナリー
+Browse all content: すべてのコンテンツを見る
 Circuit: 回路
 Copied!: コピーしました！
 Copy: コピー
@@ -10,32 +10,32 @@ Community: コミュニティー
 Decimal: 10進数
 Description: 解説
 Documentation: ドキュメンテーション
-Drag from here: ここからドラッグ
+Drag from here: ここからドラッグする
 Drop blocks here: ブロックの削除
-Events: 行事
-Eventually, all the vocabulary and mathematics from this section will be shown here. Until then, you can visit the: 最終的に、このセクションのすべての語彙と数学がここに表示されます。 それまでは、
-Gates: ゲイツ
+Events: イベント
+Eventually, all the vocabulary and mathematics from this section will be shown here. Until then, you can visit the: 後ほど、この章のすべての用語と数学がここに表示されるようになります。それまでは以下をご覧ください：
+Gates: ゲート
 Glossary: 用語集
-Hide details: 詳細非表示
+Hide details: 詳細を非表示
 Hide index: インデックスを非表示
 How to read this: これを読む方法
-Keep Going: 立ち止まるな
+Keep Going: 続けます
 Language not yet available: 言語はまだ利用できません
 Learn: 学習
 Lesson Notes: レッスンノート
 Math notations: 数学の表記
-Miss the old version of the textbook? Access it <a href="https://qiskit.org/textbook" onclick="textbook.trackClickEvent('old-textbook-version', 'banner')" target="_blank">here</a>: 古いバージョンの教科書は ? ここで <a href="https://qiskit.org/textbook" onclick="textbook.trackClickEvent('old-textbook-version', 'banner')" target="_blank">ここ</a>にアクセスしてください。
+Miss the old version of the textbook? Access it <a href="https://qiskit.org/textbook" onclick="textbook.trackClickEvent('old-textbook-version', 'banner')" target="_blank">here</a>: 古いバージョンのテキストブックは ? <a href="https://qiskit.org/textbook" onclick="textbook.trackClickEvent('old-textbook-version', 'banner')" target="_blank">ここ</a>にアクセスしてください。
 Next: 次
-Not quite: 完全ではありません
+Not quite: いまいちです
 Notation: 表記
-Nothing here yet: ここには何もない
+Nothing here yet: まだ表示するものがありません
 Overview: 概要
-Run: ラン
+Run: Run
 Show details: 詳細の表示
 Show index: 索引の表示
-That's correct: それは正しいです
+That's correct: 正解です
 Type: タイプ
 Universal frequently used notation: 頻繁に使用される表記法
-universal glossary: ユニバーサル用語集
-Vocabulary: 語彙
+universal glossary: 万能用語集
+Vocabulary: 用語
 What it means: その意味

@@ -3,9 +3,11 @@
   sections:
     - title: Setting Up Your Environment
       id: environment-setup-guide-to-work-with-qiskit-textbook
+      uuid: a5a86ddc-b519-11ec-b909-0242ac120002
       url: /ch-prerequisites/setting-the-environment
     - title: Python and Jupyter Notebooks
       id: introduction-to-python-and-jupyter-notebooks
+      uuid: a9f5ea68-b519-11ec-b909-0242ac120002
       url: /ch-prerequisites/python-and-jupyter-notebooks
 
 
@@ -14,18 +16,23 @@
   sections:
     - title: Introduction
       id: introduction
+      uuid: afcc559e-b519-11ec-b909-0242ac120002
       url: /ch-states/introduction
     - title: The Atoms of Computation
       id: the-atoms-of-computation
+      uuid: b31c20ee-b519-11ec-b909-0242ac120002
       url: /ch-states/atoms-computation
     - title: Representing Qubit States
       id: representing-qubit-states
+      uuid: b81717ca-b519-11ec-b909-0242ac120002
       url: /ch-states/representing-qubit-states
     - title: Single Qubit Gates
       id: single-qubit-gates
+      uuid: bd4334a4-b519-11ec-b909-0242ac120002
       url: /ch-states/single-qubit-gates
     - title: The Case for Quantum
       id: the-case-for-quantum-computers
+      uuid: c0bbff62-b519-11ec-b909-0242ac120002
       url: /ch-states/case-for-quantum
 
 
@@ -34,21 +41,27 @@
   sections:
     - title: Introduction
       id: introduction
+      uuid: c50f4c90-b519-11ec-b909-0242ac120002
       url: /ch-gates/introduction
     - title: Multiple Qubits and Entangled States
       id: multiple-qubits-and-entangled-states
+      uuid: c7cfe502-b519-11ec-b909-0242ac120002
       url: /ch-gates/multiple-qubits-entangled-states
     - title: Phase Kickback
       id: phase-kickback
+      uuid: cb7353ec-b519-11ec-b909-0242ac120002
       url: /algorithms/phase-kickback
     - title: More Circuit Identities
       id: basic-circuit-identities
+      uuid: ce8ce75a-b519-11ec-b909-0242ac120002
       url: /ch-gates/more-circuit-identities
     - title: Proving Universality
       id: proving-universality
+      uuid: d15d3548-b519-11ec-b909-0242ac120002
       url: /ch-gates/proving-universality
     - title: Classical Computation on a Quantum Computer
       id: classical-computation-on-a-quantum-computer
+      uuid: d4f6e424-b519-11ec-b909-0242ac120002
       url: /ch-gates/oracles
 
 
@@ -57,40 +70,56 @@
   sections:
     - title: Defining Quantum Circuits
       id: quantum-circuits
+      uuid: d90cbfb6-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/defining-quantum-circuits
     - title: Deutsch-Jozsa Algorithm
       id: deutsch-jozsa-algorithm
+      uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/deutsch-jozsa
     - title: Bernstein-Vazirani Algorithm
       id: bernstein-vazirani-algorithm
+      uuid: df6e5a40-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/bernstein-vazirani
     - title: Simon's Algorithm
       id: simons-algorithm
+      uuid: e2714126-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/simon
     - title: Quantum Fourier Transform
       id: quantum-fourier-transform
+      uuid: e59ba472-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-fourier-transform
     - title: Quantum Phase Estimation
       id: quantum-phase-estimation
+      uuid: e8ac9ec8-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-phase-estimation
     - title: Shor's Algorithm
       id: shors-algorithm
+      uuid: ec157cd8-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/shor
     - title: Grover's Algorithm
       id: grovers-algorithm
+      uuid: eebb7488-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/grover
     - title: Quantum Counting
       id: quantum-counting
+      uuid: f1a9942c-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-counting
     - title: Quantum Teleportation
       id: quantum-teleportation
+      uuid: f4f4a090-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/teleportation
     - title: Superdense Coding
       id: superdense-coding
+      uuid: f87cbd42-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/superdense-coding
     - title: Quantum Key Distribution
       id: quantum-key-distribution
+      uuid: fbafa8c6-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-key-distribution
+    - title: The Hidden Shift Problem
+      id: hidden-shift-problem
+      uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002 
+      url: /ch-algorithms/hidden-shift-problem
 
 
 - title: Quantum Algorithms for Applications
@@ -98,25 +127,44 @@
   sections:
     - title: Solving Linear Systems of Equations using HHL
       id: solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation
+      uuid: 01484810-b51a-11ec-b909-0242ac120002
       url: /ch-applications/hhl_tutorial
     - title: Simulating Molecules using VQE
       id: simulating-molecules-using-vqe
+      uuid: 041df288-b51a-11ec-b909-0242ac120002
       url: /ch-applications/vqe-molecules
     - title: Solving combinatorial optimization problems using QAOA
       id: solving-combinatorial-optimization-problems-using-qaoa
+      uuid: 06ff7ada-b51a-11ec-b909-0242ac120002
       url: /ch-applications/qaoa
     - title: Solving Satisfiability Problems using Grover's Algorithm
       id: solving-satisfiability-problems-using-grovers-algorithm
+      uuid: 09d1529c-b51a-11ec-b909-0242ac120002
       url: /ch-applications/satisfiability-grover
     - title: Hybrid quantum-classical Neural Networks with PyTorch and Qiskit
       id: hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit
+      uuid: 0cac4d14-b51a-11ec-b909-0242ac120002
       url: /ch-machine-learning/machine-learning-qiskit-pytorch
     - title: Variational Quantum Linear Solver
       id: the-variational-quantum-linear-solver
+      uuid: 1163f456-b51a-11ec-b909-0242ac120002
       url: /ch-paper-implementations/vqls
     - title: Quantum Image Processing - FRQI and NEQR Image Representations
       id: flexible-representation-of-quantum-images-frqi
+      uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
       url: /ch-applications/image-processing-frqi-neqr
+    - title: Facial Expression Recognition
+      id: facial-expression-recognition
+      uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002 
+      url: /ch-applications/facial-expression-recognition
+    - title: Quantum Edge Detection
+      id: quantum-edge-detection
+      uuid: 3e202caa-cae9-11ec-9d64-0242ac120002 
+      url: /ch-applications/quantum-edge-detection
+    - title: Travelling Salesman Problem
+      id: tsp
+      uuid: 443c52b2-cae9-11ec-9d64-0242ac120002 
+      url: /ch-paper-implementations/tsp
 
 
 - title: Investigating Quantum Hardware Using Quantum Circuits
@@ -124,16 +172,24 @@
   sections:
     - title: Introduction to Quantum Error Correction using Repetition Codes
       id: introduction-to-quantum-error-correction-via-the-repetition-code
+      uuid: 197f7f66-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/error-correction-repetition-code
     - title: Measurement Error Mitigation
       id: measurement-error-mitigation
+      uuid: 1c5bd31a-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/measurement-error-mitigation
     - title: Randomized Benchmarking
       id: randomized-benchmarking
+      uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/randomized-benchmarking
     - title: Measuring Quantum Volume
       id: measuring-quantum-volume
+      uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/measuring-quantum-volume
+    - title: The Density Matrix and Mixed States
+      id: density-matrix
+      uuid: 498dce44-cae9-11ec-9d64-0242ac120002 
+      url: /quantum-hardware/density-matrix
 
 
 - title: Investigating Quantum Hardware Using Microwave Pulses
@@ -141,24 +197,31 @@
   sections:
     - title: Calibrating Qubits with Qiskit Pulse
       id: calibrating-qubits-using-qiskit-pulse
+      uuid: 292100ca-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/calibrating-qubits-pulse
     - title: Accessing Higher Energy States
       id: accessing-higher-energy-states-with-qiskit-pulse
+      uuid: 2bf0d316-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/accessing_higher_energy_states
     - title: Introduction to Transmon Physics
       id: introduction-to-transmon-physics
+      uuid: 2e944e0e-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/transmon-physics
     - title: Circuit Quantum Electrodynamics
       id: circuit-quantum-electrodynamics
+      uuid: 31b2ccdc-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/cQED-JC-SW
     - title: Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse
       id: exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse
+      uuid: 346d7eea-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/Jaynes-Cummings-model
     - title: Measuring the Qubit ac-Stark Shift
       id: measuring-the-qubit-ac-stark-shift
+      uuid: 37110d92-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/ac-Stark-shift
     - title: Hamiltonian Tomography
       id: hamiltonian-tomography
+      uuid: 3a440960-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/hamiltonian-tomography
 
 
@@ -167,30 +230,39 @@
   sections:
     - title: Lab 1. Quantum Circuits
       id: lab-1-quantum-circuits
+      uuid: 3ff5a7ec-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab01_QuantumCircuits
     - title: Lab 2. Single Qubit Gates
       id: lab-2-single-qubit-gates
+      uuid: 43418a88-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab02_Single_Qubit_Gates
     - title: Lab 3. Quantum Measurement
       id: lab-3-quantum-measurements
+      uuid: 45aa5412-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab03_QuantumMeasurement
     - title: Lab 4. Bell Circuit & GHZ Circuit
       id: lab-4-bell-ghz-circuit
+      uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab04_Bell_GHZ_Circuit
     - title: Lab 5. Accuracy of Quantum Phase Estimation
       id: lab-5-accuracy-of-quantum-phase-estimation
+      uuid: 4ca77b5a-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab05_AccuracyQPE
     - title: Lab 6. Iterative Quantum Phase Estimation
       id: lab-6-iterative-phase-estimation-algorithm
+      uuid: 502f02fc-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab06_IterativePhaseEstimation
     - title: Lab 7. Scalable Shor’s Algorithm
       id: lab-7-scalable-shors-algorithm
+      uuid: 535b2b18-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab07_Scalable_Shor_Algorithm
     - title: Lab 8. Grover's search with an unknown number of solutions
       id: lab-8-grovers-search-with-an-unknown-number-of-solutions
+      uuid: 571376ac-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab08_Grover_search_with_an_unknown_number_of_solutions
     - title: Lab 9. Quantum Simulation as a Search Algorithm
       id: lab-9-quantum-simulation-as-a-search-algorithm
+      uuid: 59a076f4-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab09_QuantumSimulationSearchAlgorithm
 
 
@@ -199,9 +271,11 @@
   sections:
     - title: Linear Algebra
       id: an-introduction-to-linear-algebra-for-quantum-computing
+      uuid: 5d2bb2ca-b51a-11ec-b909-0242ac120002
       url: /ch-appendix/linear_algebra
     - title: Qiskit
       id: basic-qiskit-syntax
+      uuid: 5fd6b79a-b51a-11ec-b909-0242ac120002
       url: /ch-appendix/qiskit
 
 
@@ -210,16 +284,33 @@
   sections:
     - title: Hello Qiskit Game
       id: bonus-level-sandbox
+      uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
       url: /ch-ex/hello-qiskit
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
       id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+      uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
     - title: Local Reality and the CHSH Inequality
       id: local-reality-and-the-chsh-inequality
+      uuid: 6c507826-b51a-11ec-b909-0242ac120002
       url: /ch-demos/chsh
     - title: Interactivity Index
       id: widgets-demonstration
+      uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
       url: /ch-demos/widgets-index
+    - title: Quantum Coin Game
+      id: coin-game
+      uuid: 4e72eec6-cae9-11ec-9d64-0242ac120002 
+      url: /ch-demos/coin-game
+    - title: First Quantum Game
+      id: first-quantum-game
+      uuid: 53a49e62-cae9-11ec-9d64-0242ac120002 
+      url: /ch-demos/first-quantum-game
+    - title: Variational Quantum Regression
+      id: variational-quantum-regression
+      uuid: 57d7e37c-cae9-11ec-9d64-0242ac120002 
+      url: /ch-demos/variational-quantum-regression
+
 
 
 - title: Examples
@@ -228,15 +319,19 @@
   sections:
     - title: Annotations
       id: annotations
+      uuid: 745440a2-b51a-11ec-b909-0242ac120002
       url: /examples/annotations
     - title: Blocks
       id: blocks
+      uuid: 771a4f16-b51a-11ec-b909-0242ac120002
       url: /examples/blocks
     - title: Widgets
       id: widgets
+      uuid: 79da872a-b51a-11ec-b909-0242ac120002
       url: /examples/widgets
     - title: Locale
       id: locale
+      uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
       url: /examples/locale
 
 - title: Quantum Algorithms
@@ -245,6 +340,7 @@
   sections:
     - title: Phase Kickback
       id: phase-kickback
+      uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
       url: /algorithms/phase-kickback
 
 
@@ -253,28 +349,36 @@
   type: learning-path
   sections:
     - title: Why quantum computing?
+      uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
       id: why-quantum-computing
       url: /intro/why-quantum-computing
     - title: The atoms of computation
       id: the-atoms-of-computation
+      uuid: 37ef477e-ab8d-11ec-b909-0242ac120002
       url: /intro/atoms-of-computation
     - title: What is quantum?
       id: what-is-quantum
+      uuid: 7c765036-aebc-11ec-b909-0242ac120002
       url: /intro/what-is-quantum
     - title: Describing quantum computers
       id: describing-quantum-computers
+      uuid: 9260a554-aebc-11ec-b909-0242ac120002
       url: /intro/describing-quantum-computers
     - title: Entangled states
       id: entangled-states
+      uuid: 98aa9032-aebc-11ec-b909-0242ac120002
       url: /intro/entangled-states
     - title: Visualizing entanglement
       id: visualizing-entanglement
+      uuid: 9e8ceb9e-aebc-11ec-b909-0242ac120002
       url: /intro/visualizing-entanglement
     - title: Grovers algorithm
       id: grovers-search-algorithm
+      uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
       url: /intro/grover-intro
     - title: Project
       id: project
+      uuid: e25c3f90-aebd-11ec-b909-0242ac120002
       url: /intro/project
 
 - title: Summer School 2020
@@ -283,33 +387,43 @@
   sections:
     - title: Qubits and Quantum States, Quantum Circuits, Measurements
       id: qubits-states-circuits-measurements
+      uuid: a45b8936-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-00
     - title: Writing and Running Quantum Programs
       id: writing-running-programs
+      uuid: a7412732-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-01
     - title: Shor's Algorithm I Quantum Fourier Transform, Quantum Phase Estimation
       id: shors-algorithm-i-fourier-transform-phase-estimation
+      uuid: aaedcbb0-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-02
     - title: Shor's Algorithm II From Factoring to Period-Finding, Writing the Quantum Program
       id: shors-algorithm-ii-from-factoring-to-period-finding-writing-program
+      uuid: ada10d7c-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-03
     - title: Quantum Error Correction using Repetition Codes
       id: error-correction-using-repetition-codes
+      uuid: b10b5bf2-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-04
     - title: Superconducting Qubits I Quantizing a Harmonic Oscillator, Josephson Junctions
       id: superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions
+      uuid: b3e1bc18-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-05
     - title: Superconducting Qubits II Circuit Quantum Electrodynamics, Readout and Calibration Methods
       id: superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods
+      uuid: b6bc1442-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-06
     - title: Quantum Chemistry I Obtaining the Qubit Hamiltonian for H2 and LiH
       id: chemistry-i-obtaining-qubit-hamiltonian-h2-lih
+      uuid: b95d099a-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-07
     - title: Quantum Chemistry II Finding the Ground States of H2 and LiH
       id: chemistry-ii-finding-ground-states-h2-lih
+      uuid: bc25a4c0-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-08
     - title: Careers in Quantum Computin
       id: careers-in-computing
+      uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-09
 
 
@@ -319,75 +433,99 @@
   sections:
     - title: Vector Spaces, Tensor Products, and Qubits
       id: lec1-1-vector-spaces-tensor-products-qubits
+      uuid: c2ebedbe-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec1.1
     - title: Introduction to Quantum Circuits
       id: lec1-2-introduction-quantum-circuits
+      uuid: c5fb76be-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec1.2
     - title: Simple Quantum Algorithms I
       id: lec2-1-simple-quantum-algorithms-i
+      uuid: c8a7b51c-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec2.1
     - title: Simple Quantum Algorithms II
       id: lec2-2-simple-quantum-algorithms-ii
+      uuid: cb3c1764-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec2.2
     - title: Noise in Quantum Computers pt 1
       id: lec3-1-noise-quantum-computers-1
+      uuid: cec0e98c-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec3.1
     - title: Noise in Quantum Computers pt 2
       id: lec3-2-noise-quantum-computers-pt-2
+      uuid: d1c81efc-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec3.2
     - title: Lab 1
       id: lab1-quantum-computing-algorithm-operations
+      uuid: d42ae134-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lab1
     - title: Introduction to Classical Machine Learning
       id: lec4-1-introduction-classical-machine-learning
+      uuid: e0df92f8-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec4.1
     - title: Advanced Classical Machine Learning
       id: lec4-2-advanced-classical-machine-learning
+      uuid: e48de1b6-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec4.2
     - title: Building a Quantum Classifier
       id: lec5-1-building-quantum-classifier
+      uuid: e73ed898-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec5.1
     - title: Introduction to the Quantum Approximate Optimization Algorithm and Applications
       id: lec5-2-introduction-quantum-approximate-optimization-algorithm-applications
+      uuid: eb731028-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec5.2
     - title: Lab 2
       id: lab2-variational-algorithms
+      uuid: ee521226-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lab2
     - title: From Variational Classifiers to Linear Classifiers
       id: lec6-1-from-variational-classifiers-linear-classifiers
+      uuid: f1194114-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec6.1
     - title: Quantum Feature Spaces and Kernels
       id: lec6-2-quantum-feature-spaces-kernels
+      uuid: f5365020-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec6.2
     - title: Quantum Kernels in Practice
       id: lec7-1-quantum-kernels-practice
+      uuid: f81eb3cc-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec7.1
     - title: Lab 3
       id: lab3-introduction-quantum-kernels-support-vector-machines
+      uuid: fb8983ca-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lab3
     - title: Introduction and Applications of Quantum Models
       id: lec8-1-introduction-applications-quantum-models
+      uuid: fe54b430-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lec8.1
     - title: Barren Plateaus, Trainability Issues, and How to Avoid Them
       id: lec8-2-barren-plateaus-trainability-issues-how-avoid-them
+      uuid: 025748fe-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec8.2
     - title: Lab 4
       id: lab4-introduction-training-quantum-circuits
+      uuid: 05245a54-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lab4
     - title: Introduction to Quantum Hardware
       id: lec9-1-introduction-quantum-hardware
+      uuid: 07b79f1a-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec9.1
     - title: Hardware Efficient Ansatze for Quantum Machine Learning
       id: lec9-2-hardware-efficient-ansatze-quantum-machine-learning
+      uuid: 0a70ba52-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec9.2
     - title: Lab 5
       id: lab5-introduction-hardware-efficient-ansatze-quantum-machine-learning
+      uuid: 0d5b854e-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lab5
     - title: Advanced QML Algorithms
       id: lec10-1-advanced-qml-algorithms
+      uuid: 100e0ee2-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec10.1
     - title: The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning
       id: lec10-2-the-capacity-power-quantum-machine-learning-models-future-quantum-machine-learning
+      uuid: 12c23f78-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec10.2
 
 - title: Quantum Machine Learning
@@ -396,31 +534,41 @@
   sections:
     - title: Introduction
       id: introduction
+      uuid: 16e935fc-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/introduction
     - title: Parametrized quantum circuits
       id: parameterized-quantum-circuits
+      uuid: 19a9f4de-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/pqc
     - title: Data encoding
       id: data-encoding
+      uuid: 1d09af66-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/encoding
     - title: Training quantum circuits
       id: training-quantum-circuits
+      uuid: 1fb38444-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/training
     - title: Supervised learning
       id: supervised-learning
+      uuid: 22cf51bc-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/supervised
     - title: Variational classification
       id: variational-classification
+      uuid: 26951034-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/vqc
     - title: Quantum feature maps and kernels
       id: quantum-feature-maps-kernels
+      uuid: 29b0fda0-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/kernel
     - title: Unsupervised learning
       id: unsupervised-learning
+      uuid: 2cc6b386-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/unsupervised
     - title: Quantum generative adversarial networks
       id: quantum-generative-adversarial-networks
+      uuid: 2ff2a3e4-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/qgan
     - title: Project
       id: project
+      uuid: 345f0c2e-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/project

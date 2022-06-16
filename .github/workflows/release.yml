@@ -18,6 +18,8 @@ jobs:
     name: Build, Test, and Release
 
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
 
     steps:
       - uses: actions/checkout@v3
@@ -26,6 +28,9 @@ jobs:
         with:
           node-version: "16"
           cache: "npm"
+
+      # overwrite "prepare" script in deployment since git hooks are not needed
+      - run: npm set-script prepare ""
 
       - run: npm ci
 
@@ -69,6 +74,8 @@ jobs:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_ACCOUNT }}
 
       - name: Deploy to App Engine
+        env:
+          CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1000
         uses: google-github-actions/deploy-appengine@v0
         with:
           # The GCLOUD_SERVICE_ACCOUNT secret is defined in the GitHub repo.

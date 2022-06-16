@@ -28,7 +28,7 @@ jobs:
       - name: Diff notebook directories
         id: diff
         shell: bash
-        run: platypus/scripts/nb_check.sh
+        run: platypus/scripts/missing_nb_check.sh
 
       - name: Create issue using REST API
         if: steps.diff.outputs.NUM_NB != '0'

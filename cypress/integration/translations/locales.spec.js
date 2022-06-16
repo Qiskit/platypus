@@ -110,14 +110,5 @@ describe('Language Selector Macbook-15', () => {
     cy.get('[data-test=language-select-ja]')
       .find('[data-test=language-select-tooltip]')
       .should('exist')
-      .find('span')
-      .should('not.be.visible')
-    
-    // check message can be made visible
-    cy.get('[data-test=language-select-ja]')
-      .find('[data-test=language-select-tooltip]')
-      .click()
-      .find('span')
-      .should('be.visible')
   })
 })
