@@ -5,7 +5,7 @@
         class="code-exercise__editor-block__editor"
         :code="code"
         :initial-code="initialCode"
-        :notebook-enabled="false"
+        :notebook-enabled="true"
         @codeChanged="codeChanged"
         @notebookCopyRequest="notebookCopyRequest"
       />
@@ -104,8 +104,12 @@ export default defineComponent({
       this.code = code
     },
     notebookCopyRequest (code: string) {
-      /* TODO */
-      console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
+      const notebookCopyRequestEvent = new CustomEvent('notebookCopyRequest', {
+        bubbles: true,
+        detail: { code }
+      })
+
+      window.dispatchEvent(notebookCopyRequestEvent)
     },
     kernelRunning () {
       this.isKernelBusy = true
