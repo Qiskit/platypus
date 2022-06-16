@@ -10,7 +10,8 @@
       <CodeEditor
         class="scratchpad__editor-block__editor"
         :code="code"
-        :notebook-enabled="false"
+        :initial-code="initialCode"
+        :scratchpad-enabled="false"
         @codeChanged="codeChanged"
       />
       <ExerciseActionsBar
@@ -43,7 +44,7 @@ const INITIAL_CODE = `# This is your python scratchpad.
 
 `
 
-type notebookCopyRequestEvent = Event & { detail: { code: string } }
+type scratchpadCopyRequestEvent = Event & { detail: { code: string } }
 
 @Options({
   components: {
@@ -58,11 +59,15 @@ export default class Scratchpad extends Vue {
   isKernelReady = false
   isGradingExercise = false
 
+  get initialCode () {
+    return INITIAL_CODE
+  }
+
   mounted () {
     window.addEventListener(
-      'notebookCopyRequest',
+      'scratchpadCopyRequest',
       (ev: Event) => {
-        const { detail } = ev as notebookCopyRequestEvent
+        const { detail } = ev as scratchpadCopyRequestEvent
         const newCode = this.code === INITIAL_CODE ? `${detail.code}\n` : `${this.code}\n${detail.code}\n`
         this.codeChanged(newCode)
       }
