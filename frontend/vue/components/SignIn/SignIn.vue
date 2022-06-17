@@ -102,6 +102,7 @@ export default class SignIn extends Vue {
       }
 
       &-title {
+        @include type-style('productive-heading-06', $fluid: true);
         margin-bottom: $spacing-05;
         max-width: 32rem;
       }
