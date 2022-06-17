@@ -47,6 +47,7 @@ export default defineComponent({
   methods: {
     run () {
       if (!this.isRunning) {
+
         this.$emit('run')
       }
     },

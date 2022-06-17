@@ -41,6 +41,9 @@ import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
 
+let lastId = 1
+const windowInstance = (window as any)
+
 export default defineComponent({
   name: 'CodeExercise',
   components: {
@@ -71,7 +74,8 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
-      executedOnce: false
+      executedOnce: false,
+      id: 0
     }
   },
   computed: {
@@ -84,16 +88,19 @@ export default defineComponent({
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
     this.code = initialCodeElement?.textContent?.trim() ?? ''
     this.initialCode = this.code
+    this.id = lastId++
   },
   methods: {
     run () {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
+      windowInstance.textbook.trackClickEvent('Run', `Code cell #${this.id}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
+      windowInstance.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}`)
     },
     gradeSuccess () {
       if (this.goal) {

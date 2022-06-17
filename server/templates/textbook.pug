@@ -84,8 +84,3 @@ html(lang=course.locale dir=dir)
     script(src='/polyfill.js')
     script(src='/content/' + course.id + '/functions.js')
     script(src='/course.js')
-
-    script(defer)
-      | (function () { const run = "#{__('Run')}";
-      include ../includes/code-exercise-tracking.js
-      | })();
