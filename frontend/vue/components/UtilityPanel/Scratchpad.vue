@@ -10,7 +10,8 @@
       <CodeEditor
         class="scratchpad__editor-block__editor"
         :code="code"
-        :notebook-enabled="false"
+        :initial-code="initialCode"
+        :scratchpad-enabled="false"
         @codeChanged="codeChanged"
       />
       <ExerciseActionsBar
@@ -36,17 +37,42 @@ import CodeEditor from '../CodeExercise/CodeEditor.vue'
 import ExerciseActionsBar from '../CodeExercise/ExerciseActionsBar.vue'
 import CodeOutput from '../CodeExercise/CodeOutput.vue'
 
+const INITIAL_CODE = `# This is your python scratchpad.
+# Use this however you like while you work
+# or copy the code over from the chapter
+
+
+`
+
+type scratchpadCopyRequestEvent = Event & { detail: { code: string } }
+
 @Options({
   components: {
-    CodeEditor, ExerciseActionsBar, CodeOutput
+    CodeEditor,
+    ExerciseActionsBar,
+    CodeOutput
   }
 })
-
 export default class Scratchpad extends Vue {
-  code = '\n \n \n'
+  code = INITIAL_CODE
   isKernelBusy = false
   isKernelReady = false
   isGradingExercise = false
+
+  get initialCode () {
+    return INITIAL_CODE
+  }
+
+  mounted () {
+    window.addEventListener(
+      'scratchpadCopyRequest',
+      (ev: Event) => {
+        const { detail } = ev as scratchpadCopyRequestEvent
+        const newCode = this.code === INITIAL_CODE ? `${detail.code}\n` : `${this.code}\n${detail.code}\n`
+        this.codeChanged(newCode)
+      }
+    )
+  }
 
   codeChanged (code: string) {
     this.code = code
