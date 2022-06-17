@@ -23,7 +23,7 @@ import {
 
 import { IS_PRODUCTION } from './configuration'
 
-const TEXTBOOK_HOME = 'https://qiskit.org/textbook-beta'
+const TEXTBOOK_HOME = 'https://qiskit.org/learn'
 
 const DEFAULT_SHARED_FOLDER = path.join(CONTENT_DIR, 'shared')
 
