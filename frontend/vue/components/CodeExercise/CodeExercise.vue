@@ -41,8 +41,15 @@ import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
 
+declare global {
+  interface Window {
+    textbook: any,
+    textbookAnalytics: any
+  }
+}
+
 let lastId = 1
-const windowInstance = (window as any)
+
 
 export default defineComponent({
   name: 'CodeExercise',
@@ -93,14 +100,16 @@ export default defineComponent({
   methods: {
     run () {
       const codeOutput: any = this.$refs.output
+      const pageTitle = document.querySelector('.page-title')?.textContent
+
       codeOutput.requestExecute(this.code)
-      windowInstance.textbook.trackClickEvent('Run', `Code cell #${this.id}`)
+      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageTitle}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
-      windowInstance.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}`)
+      window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}`)
     },
     gradeSuccess () {
       if (this.goal) {
