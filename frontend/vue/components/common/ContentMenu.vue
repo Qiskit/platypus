@@ -1,32 +1,26 @@
 <template>
   <div>
-    <QiskitMegaMenuDropdown
+    <qiskit-mega-menu-dropdown
       class="content-menu__mega-menu-dropdown"
       data-test="content-menu-dropdown"
-      :content="dropdownMenuContent"
-      segment-component-name="Textbook mega menu"
-      :track-performed-search="trackPerformedSearch"
+      :content.prop="dropdownMenuContent"
       :placeholder="$translate('Browse all content')"
+      @performedSearch="trackPerformedSearch"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
-import { QiskitMegaMenuDropdown } from '@qiskit-community/qiskit-vue'
+import { Vue } from 'vue-class-component'
+import '@qiskit/web-components/components/mega-menu-dropdown'
 import { TEXTBOOK_DEMO_MEGA_MENU } from '../constants/megaMenuLinks'
 
-@Options({
-  components: {
-    QiskitMegaMenuDropdown
-  }
-})
 export default class ContentMenu extends Vue {
   dropdownMenuContent = TEXTBOOK_DEMO_MEGA_MENU
 
-  trackPerformedSearch (...params: Array<[string, string]>) {
+  trackPerformedSearch (textOnTheFilter: string) {
     const windowInstance = (window as any)
-    this.trackPerformedSearch = windowInstance.textbook.trackPerformedSearch(...params)
+    windowInstance.textbook.trackPerformedSearch('Textbook mega menu', textOnTheFilter)
   }
 }
 </script>
