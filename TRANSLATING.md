@@ -85,4 +85,4 @@ During the process of translating Qiskit Textbook (beta), you may identify bug o
 
 | **Language** | **Translation Leads** | **Slack ([Qiskit Workspace](http://ibm.co/joinqiskitslack))** |
 | ---     | ---    | --- |
-|  |  |  |
+|  Portuguese (PT_UN)| Omar Costa Hamido | omarcostahamido | 
