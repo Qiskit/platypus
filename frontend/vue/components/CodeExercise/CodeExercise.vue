@@ -48,7 +48,7 @@ declare global {
 }
 
 let lastId = 1
-
+const pageRoute = window.location.pathname
 
 export default defineComponent({
   name: 'CodeExercise',
@@ -99,16 +99,14 @@ export default defineComponent({
   methods: {
     run () {
       const codeOutput: any = this.$refs.output
-      const pageTitle = document.querySelector('.page-title')?.textContent
-
       codeOutput.requestExecute(this.code)
-      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageTitle}`)
+      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
-      window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}`)
+      window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}, ${pageRoute}`)
     },
     gradeSuccess () {
       if (this.goal) {
