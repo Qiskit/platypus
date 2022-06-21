@@ -43,8 +43,7 @@ import CodeOutput from './CodeOutput.vue'
 
 declare global {
   interface Window {
-    textbook: any,
-    textbookAnalytics: any
+    textbook: any
   }
 }
 
