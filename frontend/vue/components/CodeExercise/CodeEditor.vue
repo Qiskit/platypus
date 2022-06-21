@@ -38,7 +38,7 @@ import CodeArea from './CodeArea.vue'
 import 'carbon-web-components/es/components/notification/toast-notification'
 
 export default defineComponent({
-  name: 'CodeExercise',
+  name: 'CodeEditor',
   components: {
     CodeEditorTools,
     CodeArea
