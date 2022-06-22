@@ -157,7 +157,6 @@ export default defineComponent({
   &__editor-block {
     background-color: $background-color-lighter;
     position: relative;
-    height: 13rem;
 
     &__editor {
       height: 100%;
