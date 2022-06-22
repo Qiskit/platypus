@@ -46,6 +46,7 @@ export default defineComponent({
   }
   & :deep(.CodeMirror-scroll) {
     background-color: $background-color-lighter;
+    margin-bottom: -25px;
     &:hover .CodeMirror-gutters {
       background-color: $background-color-light;
     }
