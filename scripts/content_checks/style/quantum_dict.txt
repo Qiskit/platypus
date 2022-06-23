@@ -1,0 +1,6 @@
+satisfiability
+sudoku
+qubit
+qubits
+qiskit
+transpiler
