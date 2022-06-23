@@ -86,3 +86,4 @@ During the process of translating Qiskit Textbook (beta), you may identify bug o
 | **Language** | **Translation Leads** | **Slack ([Qiskit Workspace](http://ibm.co/joinqiskitslack))** |
 | ---     | ---    | --- |
 |  |  |  |
+| Spanish (ES_UN)| Claudia Zendejas-Morales, Rodrigo Rosado Rivial | @clausia @rodrigo rosado |
