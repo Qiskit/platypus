@@ -3,7 +3,7 @@
     <div v-if="resetEnabled" class="code-editors-tools__button">
       <bx-tooltip-icon
         class="code-editors-tools__button__tooltip"
-        aligment="center"
+        alignment="end"
         direction="top"
         :body-text="$translate('Reset cell to initial content')"
         @click="reset"
@@ -14,7 +14,7 @@
     <div v-if="scratchpadEnabled" class="code-editors-tools__button">
       <bx-tooltip-icon
         class="code-editors-tools__button__tooltip"
-        aligment="center"
+        alignment="end"
         direction="top"
         :body-text="$translate('Copy to scratchpad')"
         @click="scratchpad"
