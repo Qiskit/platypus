@@ -1,6 +1,6 @@
 extends: readability
-message: "Grade level (%s) too high!"
-level: warning
+message: "Grade level (%s) is high, consider wordsmithing."
+level: suggestion
 grade: 12
 metrics:
   - Flesch-Kincaid

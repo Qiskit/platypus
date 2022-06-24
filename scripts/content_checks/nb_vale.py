@@ -62,7 +62,7 @@ def extract_markdown(filepath, outdir):
     Path(outdir).mkdir(parents=True, exist_ok=True)
     for idx, cell in enumerate(nb.cells):
         if cell.cell_type == 'markdown':
-            outpath = Path(outdir) / str(idx).rjust(4, '0')
+            outpath = Path(outdir) / (str(idx).rjust(4, '0') + '.md')
             with open(outpath, 'w+') as f:
                 f.write(cell.source)
 
