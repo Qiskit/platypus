@@ -9,6 +9,8 @@ jobs:
     name: Run tests
 
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
 
     steps:
       - uses: actions/checkout@v3
@@ -26,7 +28,7 @@ jobs:
           python-version: 3.8
 
       - name: Load pip cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pip
           key: py-${{ hashFiles('converter/textbook-converter/requirements.txt') }}-${{ hashFiles('converter/textbook-converter/requirements-test.txt') }}
@@ -44,7 +46,7 @@ jobs:
         run: npm run build
 
       - name: Cypress tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v3
         with:
           start: npm start
           wait-on: "http://localhost:8080/health"

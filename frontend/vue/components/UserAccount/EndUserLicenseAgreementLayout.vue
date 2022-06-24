@@ -79,7 +79,10 @@ export default defineComponent({
       ev.preventDefault()
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" }
+        headers: { 
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ _csrf: window.csrfToken })
       }
       fetch("/profile/accept-policies", requestOptions)
         .then(response => {

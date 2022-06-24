@@ -3,6 +3,7 @@ import { getUserData } from './storage'
 interface Section {
   title: string,
   id: string,
+  uuid: string,
   url: string,
   pageUrl: string,
   progress: number
@@ -34,7 +35,7 @@ const assignProgressToCourses = (courses: Course[]) => {
   const userData = getUserData()
   courses.forEach((course) => {
     course.sections.forEach((section) => {
-      section.progress = userData?.[course.id]?.[section.id]?.progress
+      section.progress = (userData?.[course.id]?.[section.id]?.progress || 0) / 100
     })
   })
 }

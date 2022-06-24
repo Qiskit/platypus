@@ -7,7 +7,7 @@ describe('Binary demo', () => {
     cy.visit('/course/introduction/the-atoms-of-computation')
     cy.url().should('include', 'introduction/the-atoms-of-computation')
 
-    cy.get(binaryDemo).should('be.visible')
+    cy.get(binaryDemo).scrollIntoView().should('be.visible')
   })
 
   it('Should render all Binary demo tiles', () => {

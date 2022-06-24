@@ -72,7 +72,7 @@ export default defineComponent({
 
   &__subtitle {
     @include type-style('expressive-heading-04');
-    padding: $spacing-05 0;
+    padding: $spacing-06 0 $spacing-05 0;
 
     &_quantum {
       margin-top: $spacing-08;

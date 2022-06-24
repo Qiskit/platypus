@@ -6,7 +6,6 @@ import { Course, Section } from '@mathigon/studio/server/interfaces'
 import {
   CONFIG as mConfig,
   CONTENT_DIR,
-  PROJECT_DIR,
   getCourse,
   loadYAML,
   loadCombinedYAML
@@ -22,17 +21,21 @@ import {
   TocCourse
 } from './interfaces'
 
-const TEXTBOOK_HOME = 'https://qiskit.org/textbook-beta'
+import { IS_PRODUCTION } from './configuration'
+
+const TEXTBOOK_HOME = 'https://qiskit.org/learn'
+
+const DEFAULT_SHARED_FOLDER = path.join(CONTENT_DIR, 'shared')
 
 const CONFIG: AnalyticsConfig = <AnalyticsConfig>mConfig
 
-const analytics: AnalyticsEntry = process.env.NODE_ENV === 'production'
+const analytics: AnalyticsEntry = IS_PRODUCTION
   ? (<Analytics>CONFIG.analytics).production
   : (<Analytics>CONFIG.analytics).development
 
 CONFIG.analytics = analytics
 
-const TOC: [TocCourse] = (loadYAML(path.join(PROJECT_DIR, 'notebooks/toc.yaml')) || []) as [TocCourse]
+const TOC: [TocCourse] = (loadYAML(path.join(DEFAULT_SHARED_FOLDER, 'toc.yaml')) || []) as [TocCourse]
 
 TOC.forEach((course: TocCourse) => {
   course.id = course.url.startsWith('/') ? course.url.substring(1) : course.url
@@ -68,35 +71,34 @@ const tocFilterByType = function (type: string = '') {
 
 const COURSES = {
   uncategorized: textbookCourses,
-  learningPaths: learningPaths,
+  learningPaths,
   docs: miscCourses
 }
 
 const resolvePath = (directory: string, file: string, locale = 'en') => {
-  if (locale === 'en') return path.join(directory, file);
-  const courseId = path.basename(directory);
-  return path.join(directory, '../../translations', locale, courseId, file);
+  if (locale === 'en') { return path.join(directory, file) }
+  const courseId = path.basename(directory)
+  return path.join(directory, '../../translations', locale, courseId, file)
 }
 
 const NOTATIONS: NotationsLocales = {}
 const GLOSSARY: {[x: string]: any} = {}
 const UNIVERSAL_NOTATIONS: {[x: string]: Array<any>} = {}
 
-CONFIG.locales.forEach(language => {
-  const defaultShared = path.join(CONTENT_DIR, 'shared')
-  NOTATIONS[language] = (loadYAML(resolvePath(defaultShared, 'notations.yaml', language)) || {}) as NotationsMap
-  GLOSSARY[language] = (loadYAML(resolvePath(defaultShared, 'glossary.yaml')) || {}) as object
-  UNIVERSAL_NOTATIONS[language] = Object.values((loadYAML(resolvePath(defaultShared, 'universal.yaml')) || {}) as object)
+CONFIG.locales.forEach((language) => {
+  NOTATIONS[language] = (loadYAML(resolvePath(DEFAULT_SHARED_FOLDER, 'notations.yaml', language)) || {}) as NotationsMap
+  GLOSSARY[language] = (loadYAML(resolvePath(DEFAULT_SHARED_FOLDER, 'glossary.yaml')) || {}) as object
+  UNIVERSAL_NOTATIONS[language] = Object.values((loadYAML(resolvePath(DEFAULT_SHARED_FOLDER, 'universal.yaml')) || {}) as object)
 })
 
-const updateGlossary = function(course: Course): string {
+const updateGlossary = function (course: Course): string {
   let glossJson = course.glossJSON
   if (glossJson) {
     const glossary = JSON.parse(glossJson)
     const languageGloss = GLOSSARY[course.locale || 'en']
     Object.keys(languageGloss).forEach((key: string) => {
       if (glossary[key]) {
-        glossary[key]['sections'] = languageGloss[key]['sections']
+        glossary[key].sections = languageGloss[key].sections
       }
     })
     glossJson = JSON.stringify(glossary)
@@ -104,25 +106,25 @@ const updateGlossary = function(course: Course): string {
   return glossJson
 }
 
-const isLearningPath = function(course: Course) {
+const isLearningPath = function (course: Course) {
   const c = TOC.find((t: { url: string; }) => {
     return t.url === `/${course.id}`
   })
   return c ? c.type === 'learning-path' : false
 }
 
-const findPrevSection = function(course: Course, section: Section) {
+const findPrevSection = function (course: Course, section: Section) {
   const prevSection = course.sections[course.sections.indexOf(section) - 1]
-  if (prevSection) return {section: prevSection}
+  if (prevSection) { return { section: prevSection } }
 }
 
 const findNextSection = function (course: Course, section: Section) {
   const nextSection = course.sections[course.sections.indexOf(section) + 1]
   if (nextSection) {
-    return {section: nextSection}
+    return { section: nextSection }
   } else if (!isLearningPath(course)) {
     const nextCourse = getCourse(course.nextCourse, course.locale)!
-    if (nextCourse) return {course: nextCourse, section: nextCourse.sections[0]}
+    if (nextCourse) { return { course: nextCourse, section: nextCourse.sections[0] } }
   }
 }
 
@@ -141,10 +143,10 @@ const getSectionIndex = function (course: Course, section: Section) {
   return sectionIndexes[loc][sectionId] || []
 }
 
-const TRANSLATIONS: Record<string, Record<string, string>> = {};
+const TRANSLATIONS: Record<string, Record<string, string>> = {}
 for (const locale of AVAILABLE_LOCALES) {
-  if (locale.id === 'en') continue;
-  TRANSLATIONS[locale.id] = loadCombinedYAML(`translations/${locale.id}/strings.yaml`) as Record<string, string>;
+  if (locale.id === 'en') { continue }
+  TRANSLATIONS[locale.id] = loadCombinedYAML(`translations/${locale.id}/strings.yaml`) as Record<string, string>
 }
 
 const loadLocaleRawFile = function (path: string, locale: string): string {

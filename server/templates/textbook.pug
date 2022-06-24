@@ -13,71 +13,57 @@ html(lang=course.locale dir=dir)
     div.qiskit__navbar#qiskit-navbar
       q-the-menu
 
-    .body
-      x-course(id=course.id data-section=section.id data-goals=section.goals data-reveal=(learningPath ? `${config.courses.revealAll}` : 'true') class="qv-layout js-show-sidebar")
+    main.body
+      x-course.c-textbook(id=course.id data-section=section.id data-goals=section.goals data-reveal='true')
         include sidebar
 
-        article(class="c-textbook__page", data-test="textbook-page")
+        article.c-textbook__page(data-test="textbook-page" tabindex="0")
           include banner
+          .reveal-banner
+            | #{__('Reading time')}: ~#{section.duration} min
+            // keep this for mathigon stuff
+            .complete
           div.c-textbook__content#textbook_content
-            div.jupyter-page
-              #page-info
-                #page-title !{section.title}
-              .reveal-banner
-                | #{__('Reading time')}: ~#{section.duration} min
-                .complete
-                  span= __('Reveal all steps')
-                  include ../../frontend/assets/images/arrow--down.svg
-              if section.hero
-                .preface-top
-                  .preface-checker-pattern
-                  .preface-summary
-                    aside.preface-summary-image
-                      img(src=`/content/${course.id}/${section.hero}`)
-              .steps
-                for stepId in section.steps
-                  | !{course.steps[stepId].html}
+            .page-title !{section.title}
+            .steps
+              for stepId in section.steps
+                | !{course.steps[stepId].html}
 
-              footer
-                div.skip-step
-                  | #{__('To reveal more content, you have to complete all the activities and exercises above.')}&nbsp;
-                  br
-                  strong #{__('Are you stuck?')} #[a.skip(tabindex=0) #{__('Skip to the next step')}] #{__('or')} #[a.show-all(tabindex=0) #{__('reveal all steps')}]
-                  svg(width=72 height=10): path(d="M1 1L36 9L71 1" fill="none" stroke="#aaa" stroke-width=2)
+            footer
+              // keep this for mathigon stuff
+              div.skip-step.skip.show-all
+              div.footer-nav
+                div.footer-nav__cta__container
+                  if prevSection
+                    q-app-cta.footer-nav__cta__prev(
+                      label=`${prevSection.section.title}`
+                      url=`${prevSection.section.url}`
+                      is-static=true
+                      target="_self"
+                      kind="secondary"
+                      segment=`${section.id} > ${prevSection.section.id}`
+                      data-test="footer-nav-previous-section"
+                    )
 
-                //- - var next = nextSection
-                //- - var prev = prevSection
-                div.footer-nav
-                  div.footer-nav__cta__container(data-vue-mount)
-                    if prevSection
-                      q-app-cta.footer-nav__cta__prev(
-                        label=`${prevSection.section.title}`
-                        url=`${prevSection.section.url}`
-                        is-static=true
-                        target="_self"
-                        kind="secondary"
-                        segment=`${section.id} > ${prevSection.section.id}`
-                        data-test="footer-nav-previous-section"
-                      )
+                div.footer-nav__cta__container
+                  if nextSection
+                    q-app-cta.footer-nav__cta__next(
+                      label=`${nextSection.section.title}`
+                      url=`${nextSection.section.url}`
+                      is-static=true
+                      target="_self"
+                      segment=`${section.id} > ${nextSection.section.id}`
+                      data-test="footer-nav-next-section"
+                    )
 
-                  div.footer-nav__cta__container(data-vue-mount)
-                    if nextSection
-                      q-app-cta.footer-nav__cta__next(
-                        label=`${nextSection.section.title}`
-                        url=`${nextSection.section.url}`
-                        is-static=true
-                        target="_self"
-                        segment=`${section.id} > ${nextSection.section.id}`
-                        data-test="footer-nav-next-section"
-                      )
-        div(id="utility-panel" class="c-textbook__utility_panel" data-test="utility-panel")
+        div(id="utility-panel" class="c-textbook__utility-panel" data-test="utility-panel")
           q-utility-panel
         x-modal#glossary-modal.light: .modal-body
 
         script(type="application/json")#glossary!= course.glossJSON
         script(type="application/json")#bios!= course.biosJSON
         script(type="application/json")#hints!= course.hintsJSON
-        script(type="application/json")#userdata!= progressJSON
+        script(type="application/json")#userdata!= progressData ? progressData.getJSON(section.id) : '{}'
         script(type="application/json")#notations!= notationsJSON
         script(type="application/json")#universal-notes!= universalJSON
         script(type="application/json")#translations!= translationsJSON

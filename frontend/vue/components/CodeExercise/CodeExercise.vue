@@ -23,6 +23,7 @@
       @running="kernelRunning"
       @finished="kernelFinished"
       @kernelReady="kernelReady"
+      @correctAnswer="gradeSuccess"
     />
     <div
       ref="initialCodeElement"
@@ -40,6 +41,15 @@ import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
 
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
+
+let lastId = 1
+const pageRoute = window.location.pathname
+
 export default defineComponent({
   name: 'CodeExercise',
   components: {
@@ -48,6 +58,11 @@ export default defineComponent({
     CodeOutput
   },
   props: {
+    goal: {
+      type: String,
+      required: false,
+      default: ''
+    },
     graderImport: {
       type: String,
       required: false,
@@ -65,7 +80,8 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
-      executedOnce: false
+      executedOnce: false,
+      id: 0
     }
   },
   computed: {
@@ -78,16 +94,24 @@ export default defineComponent({
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
     this.code = initialCodeElement?.textContent?.trim() ?? ''
     this.initialCode = this.code
+    this.id = lastId++
   },
   methods: {
     run () {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
+      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
+      window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}, ${pageRoute}`)
+    },
+    gradeSuccess () {
+      if (this.goal) {
+        this.$step?.score(this.goal as string)
+      }
     },
     codeChanged (code: string) {
       this.code = code
@@ -133,7 +157,6 @@ export default defineComponent({
   &__editor-block {
     background-color: $background-color-lighter;
     position: relative;
-    height: 13rem;
 
     &__editor {
       height: 100%;
