@@ -91,6 +91,8 @@ def lint_markdown(md_dir, CI=False):
                 fail = True
             cell_msg += style(severity, severity)
             cell_msg += f": {s['Message']}\n"
+            if s['Match'] != '':
+                cell_msg += style('faint', f'"{s["Match"]}…"')
             cell_msg += style('faint', 
                     f"@l{s['Line']};c{s['Span'][0]} ({s['Check']})")
             cell_msg += '\n'
