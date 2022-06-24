@@ -38,7 +38,7 @@ import CodeArea from './CodeArea.vue'
 import 'carbon-web-components/es/components/notification/toast-notification'
 
 export default defineComponent({
-  name: 'CodeExercise',
+  name: 'CodeEditor',
   components: {
     CodeEditorTools,
     CodeArea
@@ -126,6 +126,7 @@ export default defineComponent({
     --cds-inverse-01: #{$text-color-dark};
     --cds-inverse-02: #{$background-color-white};
     width: 22rem;
+    height: 11rem;
 
     &__wrapper {
       position: absolute;
