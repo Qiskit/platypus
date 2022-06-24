@@ -13,10 +13,10 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component'
 import '@qiskit/web-components/components/mega-menu-dropdown'
-import { TEXTBOOK_DEMO_MEGA_MENU } from '../constants/megaMenuLinks'
+import { LEARN_MEGA_MENU } from '../constants/megaMenuLinks'
 
 export default class ContentMenu extends Vue {
-  dropdownMenuContent = TEXTBOOK_DEMO_MEGA_MENU
+  dropdownMenuContent = LEARN_MEGA_MENU
 
   trackPerformedSearch (textOnTheFilter: string) {
     const windowInstance = (window as any)
