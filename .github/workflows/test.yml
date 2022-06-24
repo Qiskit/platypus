@@ -9,6 +9,8 @@ jobs:
     name: Run tests
 
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
 
     steps:
       - uses: actions/checkout@v3
@@ -36,6 +38,9 @@ jobs:
 
       - name: Apply configuration
         run: npm run setup:secrets -- --mongo ${{ secrets.STAGING_MONGODB_URI }}
+
+      - name: Install Vale
+        run: sudo snap install --edge vale
 
       - name: Notebook tests
         run: npm run test:nb
