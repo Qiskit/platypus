@@ -42,8 +42,8 @@ def indent(s):
 
 def lint_notebook(filepath, CI=False):
     """Perform Vale prose linting checks on
-    notebook at `filepath`. If `CI` then return
-    exit early with code 1 on lint error."""
+    notebook at `filepath`. If `CI` then exit
+    early with code 1 on lint error."""
     print(style('bold', filepath))
     outdir = (
         Path(TEMP_DIR)
@@ -62,6 +62,7 @@ def extract_markdown(filepath, outdir):
     Path(outdir).mkdir(parents=True, exist_ok=True)
     for idx, cell in enumerate(nb.cells):
         if cell.cell_type == 'markdown':
+            # outpath e.g.: ./scripts/temp/intro/grover-intro/0002.md
             outpath = Path(outdir) / (str(idx).rjust(4, '0') + '.md')
             with open(outpath, 'w+') as f:
                 f.write(cell.source)
@@ -75,9 +76,9 @@ def lint_markdown(md_dir, CI=False):
     notebook_msg = ''
     path = Path(md_dir)
     vale_result = subprocess.run(
-            ['vale', path, '--output', 'JSON'],
-            capture_output=True
-            )
+        ['vale', path, '--output', 'JSON'],
+        capture_output=True
+        )
     vale_output = json.loads(
         vale_result.stdout
         )
@@ -94,14 +95,13 @@ def lint_markdown(md_dir, CI=False):
             if s['Match'] != '':
                 cell_msg += style('faint', f'"{s["Match"]}…"')
             cell_msg += style('faint', 
-                    f"@l{s['Line']};c{s['Span'][0]} ({s['Check']})")
+                f"@l{s['Line']};c{s['Span'][0]} ({s['Check']})")
             cell_msg += '\n'
         notebook_msg += indent(cell_msg) + '\n'
     print(indent(notebook_msg))
     if fail and CI:
-        print(
-            style('error',
-                'Prose linting error encountered; test failed.')
+        print(style('error',
+            'Prose linting error encountered; test failed.')
             )
         sys.exit(1)
 

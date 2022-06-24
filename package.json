@@ -32,6 +32,7 @@
     "test:debug": "start-server-and-test start :8080/health cy:open",
     "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py && python3 ./scripts/content_checks/nb_svg.py",
     "test:nb:pylint": "./scripts/content_checks/nb_pylint.sh",
+    "test:nb:vale": "python3 ./scripts/content_checks/nb_vale.py",
     "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix && python3 ./scripts/content_checks/nb_svg.py --fix",
     "test:nb": "npm run test:nb:pylint && npm run test:nb:meta",
     "setup:secrets": "mgon-secrets"
