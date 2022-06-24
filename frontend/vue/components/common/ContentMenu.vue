@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="content-menu">
     <qiskit-mega-menu-dropdown
-      class="content-menu__mega-menu-dropdown"
       data-test="content-menu-dropdown"
       :content.prop="dropdownMenuContent"
       :placeholder="$translate('Browse all content')"
@@ -29,12 +28,6 @@ export default class ContentMenu extends Vue {
 @import '~@carbon/colors/scss/colors';
 
 .content-menu {
-  &__mega-menu-dropdown {
-    background: $cool-gray-10;
-  }
-}
-
-:deep(.app-mega-dropdown__filter-wrapper) {
-  padding-left: 24px;
+  --qiskit-color-input-background: $cool-gray-10;
 }
 </style>
