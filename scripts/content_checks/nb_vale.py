@@ -4,11 +4,10 @@ Requires Vale: https://vale.sh/docs/vale-cli/installation/
 """
 import sys
 import os
+import shutil
 import nbformat
 import subprocess
-import zipfile
 import json
-from urllib.request import urlopen
 from pathlib import Path
 
 
@@ -59,7 +58,9 @@ def extract_markdown(filepath, outdir):
     at `filepath` and saves each cell as a separate
     file in the temp folder for Vale to lint."""
     nb = nbformat.read(filepath, as_version=4)
-    Path(outdir).mkdir(parents=True, exist_ok=True)
+    if os.path.exists(outdir):
+        shutil.rmtree(outdir)
+    Path(outdir).mkdir(parents=True)
     for idx, cell in enumerate(nb.cells):
         if cell.cell_type == 'markdown':
             # outpath e.g.: ./scripts/temp/intro/grover-intro/0002.md
@@ -70,19 +71,20 @@ def extract_markdown(filepath, outdir):
 
 def lint_markdown(md_dir, CI=False):
     """Lints the markdown files in `md_dir`
-    using Vale linter. If `CI`, then will raise
-    an error on any Vale error."""
+    using Vale linter. If `CI`, then will exit with
+    code 1 on any Vale error."""
+
+    # Run Vale on folder
     files = os.listdir(md_dir)
-    notebook_msg = ''
     path = Path(md_dir)
     vale_result = subprocess.run(
         ['vale', path, '--output', 'JSON'],
-        capture_output=True
-        )
-    vale_output = json.loads(
-        vale_result.stdout
-        )
+        capture_output=True)
+    vale_output = json.loads(vale_result.stdout)
+
+    # Parse output and print nicely
     fail = False
+    notebook_msg = ''
     for file, suggestions in vale_output.items():
         notebook_msg += f"cell {int(Path(file).stem)}\n"
         cell_msg = ''
@@ -90,19 +92,17 @@ def lint_markdown(md_dir, CI=False):
             severity = s['Severity']
             if severity == 'error':
                 fail = True
-            cell_msg += style(severity, severity)
+            cell_msg += style(severity, severity.capitalize())
             cell_msg += f": {s['Message']}\n"
             if s['Match'] != '':
-                cell_msg += style('faint', f'"{s["Match"]}…"')
+                cell_msg += style('faint', f'"…{s["Match"]}…" ')
             cell_msg += style('faint', 
                 f"@l{s['Line']};c{s['Span'][0]} ({s['Check']})")
             cell_msg += '\n'
         notebook_msg += indent(cell_msg) + '\n'
     print(indent(notebook_msg))
     if fail and CI:
-        print(style('error',
-            'Prose linting error encountered; test failed.')
-            )
+        print(style('error', 'Prose linting error encountered; test failed.'))
         sys.exit(1)
 
 
@@ -129,4 +129,5 @@ if __name__ == '__main__':
             continue
         elif not Path(filename).is_absolute():
             filename = f'{NB_ROOT}/{filename.strip()}.ipynb'
+
         lint_notebook(filename, CI)
