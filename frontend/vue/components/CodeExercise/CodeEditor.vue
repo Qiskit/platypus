@@ -95,6 +95,7 @@ export default defineComponent({
       this.resetNotificationOpen = false
       this.internalCode = this.initialCode
       this.$emit('codeChanged', this.internalCode)
+      this.$emit('resetOutput');
     },
     codeChanged (code: string) {
       this.internalCode = code
