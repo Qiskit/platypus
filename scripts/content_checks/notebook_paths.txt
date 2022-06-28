@@ -1,3 +1,5 @@
+ch-applications/vqe-molecules
+
 quantum-hardware/measuring-quantum-volume
 intro/atoms-of-computation
 intro/entangled-states
