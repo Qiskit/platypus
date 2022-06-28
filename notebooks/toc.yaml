@@ -338,10 +338,10 @@
   url: /algorithms
   type: learning-path
   sections:
-    - title: Phase Kickback
-      id: phase-kickback
+    - title: Deutsch's algorithm
+      id: deutsch
       uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
-      url: /algorithms/phase-kickback
+      url: /algorithms/deutsch
 
 
 - title: Introduction to Quantum Computing
