@@ -2,6 +2,7 @@ nbqa
 pylint
 scour
 qiskit
+qiskit-nature
 matplotlib
 mypy
 pycodestyle
