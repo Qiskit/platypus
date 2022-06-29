@@ -9,7 +9,17 @@ export class UpdateQiskitUserDto implements UpdateQiskitUser {
   @IsOptional()
   readonly apiToken?: string
 
-  constructor ({ apiToken }: UpdateQiskitUser) {
+  @IsString()
+  readonly user: string
+
+  constructor ({ apiToken, user }: UpdateQiskitUser) {
     this.apiToken = apiToken
+    this.user = user
+  }
+}
+
+export class UpdateQiskitUserHttpRequest extends UpdateQiskitUserDto implements UpdateQiskitUser {
+  validate () {
+    return validateOrReject(this)
   }
 }
