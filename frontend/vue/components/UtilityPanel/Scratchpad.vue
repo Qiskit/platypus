@@ -81,7 +81,7 @@ export default class Scratchpad extends Vue {
 
   resetOutput () {
     const codeOutput: any = this.$refs.output
-    codeOutput.requestExecute(this.code)
+    codeOutput.clearOutput()
   }
 
   run () {
