@@ -11,7 +11,9 @@ disable=
     redefined-outer-name
 
 good-names=
-    qc
+    qc,
+    qr,
+    cr
 
 additional-builtins=
     display
