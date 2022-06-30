@@ -13,6 +13,7 @@
         :initial-code="initialCode"
         :scratchpad-enabled="false"
         @codeChanged="codeChanged"
+        @resetOutput="resetOutput"
       />
       <ExerciseActionsBar
         class="scratchpad__editor-block__actions-bar"
@@ -76,6 +77,11 @@ export default class Scratchpad extends Vue {
 
   codeChanged (code: string) {
     this.code = code
+  }
+
+  resetOutput () {
+    const codeOutput: any = this.$refs.output
+    codeOutput.clearOutput()
   }
 
   run () {
