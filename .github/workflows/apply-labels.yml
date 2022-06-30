@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions-ecosystem/action-add-labels@v1
-        if: github.event.pull_request.user.login == 'gitlocalize-app'
+        if: github.event.pull_request.user.login == 'gitlocalize-app[bot]'
         with:
           labels: localization
