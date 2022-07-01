@@ -4,5 +4,3 @@ scour==0.38.2
 qiskit==0.37
 qiskit-nature==0.4.1
 matplotlib==3.5.2
-mypy==0.961
-pycodestyle==2.8.0
