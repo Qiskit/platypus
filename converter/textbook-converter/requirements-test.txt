@@ -3,4 +3,5 @@ pylint==2.14.3
 scour==0.38.2
 qiskit==0.37
 qiskit-nature==0.4.1
+qiskit-ignis==0.7.0
 matplotlib==3.5.2
