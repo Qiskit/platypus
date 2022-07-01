@@ -1,1 +1,3 @@
-export interface QiskitUserQueryParams { }
+export interface QiskitUserQueryParams {
+  user: string
+}

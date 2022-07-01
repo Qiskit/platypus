@@ -28,6 +28,7 @@ import { UpdateSyllabusController } from './modules/syllabus/commands/update-syl
 
 // QiskitUser
 import { UpdateQiskitUserController } from './modules/qiskit-user/commands/update-qiskit-user/update-qiskit-user-controller'
+import { FindQiskitUserController } from './modules/qiskit-user/commands/find-qiskit-user/find-qiskit-user-controller'
 
 // Logger
 import { logger } from './libs/logger/logger'
@@ -304,6 +305,7 @@ const start = () => {
     .post('/syllabus', CreateSyllabusController)
     // Here we use POST instead of PUT because Mathigon doesn't support PUT requests
     .post('/syllabus/:id', UpdateSyllabusController)
+    .get('/qiskit-user', FindQiskitUserController)
     .post('/qiskit-user', UpdateQiskitUserController)
     .course({})
     .errors()
