@@ -44,6 +44,7 @@ const INITIAL_CODE = `# This is your python scratchpad.
 
 
 `
+const pageRoute = window.location.pathname
 
 type scratchpadCopyRequestEvent = Event & { detail: { code: string } }
 
@@ -87,6 +88,7 @@ export default class Scratchpad extends Vue {
   run () {
     const codeOutput: any = this.$refs.output
     codeOutput.requestExecute(this.code)
+    window.textbook.trackClickEvent('Run', `Scratchpad code cell, ${pageRoute}`)
   }
 
   kernelRunning () {
