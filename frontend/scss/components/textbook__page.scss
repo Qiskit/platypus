@@ -110,3 +110,15 @@ main.body {
     }
   }
 }
+
+// Fix text in code output SVGs
+circle,
+g,
+image,
+line,
+path,
+polyline,
+use {
+  transform-box: inherit;
+  transform-origin: revert;
+}
