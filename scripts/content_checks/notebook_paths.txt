@@ -6,7 +6,6 @@ quantum-machine-learning/training
 quantum-machine-learning/qgan
 quantum-machine-learning/unsupervised
 quantum-machine-learning/pqc
-quantum-machine-learning/qbm
 quantum-machine-learning/kernel
 quantum-machine-learning/encoding
 
