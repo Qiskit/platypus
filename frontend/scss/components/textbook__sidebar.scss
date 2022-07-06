@@ -235,6 +235,11 @@
     }
   }
 }
+@include mq($until: medium) {
+  .c-textbook .c-textbook__utility-panel {
+    display: none;
+  }
+}
 
 .c-textbook__sidebar--hidden {
   .c-sidebar {
@@ -289,6 +294,12 @@
           display: block;
         }
       }
+    }
+  }
+  
+  @include mq($until: medium) {
+    .c-textbook__utility-panel {
+      display: flex;
     }
   }
 }
