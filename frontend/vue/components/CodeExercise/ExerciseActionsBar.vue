@@ -1,14 +1,14 @@
 <template>
   <div class="exercise-actions-bar">
     <button
-      v-if="runEnabled && !isRunning"
+      v-if="runEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
       @click="run()"
     >
       {{ $translate('Run') }}
     </button>
     <button
-      v-if="gradeEnabled && !isRunning"
+      v-if="gradeEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button"
       @click="grade()"
     >
@@ -17,6 +17,9 @@
     <div v-if="isRunning" class="exercise-actions-bar__running-indicator">
       <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
       <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
+    </div>
+    <div v-if="isApiTokenNeeded" class="exercise-actions-bar__running-indicator">
+      <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Api token needed') }}</span>
     </div>
   </div>
 </template>
@@ -39,6 +42,11 @@ export default defineComponent({
       default: true
     },
     gradeEnabled: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    isApiTokenNeeded: {
       type: Boolean,
       required: false,
       default: true
