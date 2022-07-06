@@ -1,5 +1,5 @@
 <template>
-  <div ref="codeAreaWrapper" class="code-area" />
+  <div ref="codeAreaWrapper" class="code-area" tabindex="0" />
 </template>
 
 <script lang="ts">
