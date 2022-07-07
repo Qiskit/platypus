@@ -78,8 +78,6 @@ export default class UtilityPanelContent extends Vue.with(Props) {
 .utility-panel-content {
   background-color: $background-color-white;
   padding: $spacing-06 $spacing-05;
-  position: relative;
-  z-index: 0;
 
   bx-table-header-cell {
     color: $text-color-black;
