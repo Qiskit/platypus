@@ -55,9 +55,7 @@ export default defineComponent({
       })
     },
     isBackendExecution (code: string) {
-      return code.includes(".get_provider('ibm-q')") ||
-            code.includes('.get_provider("ibm-q")') ||
-            code.includes('IBMQ')
+      return code.includes('IBMQ.')
     },
     requestExecute (code: string) {
       if (this.isBackendExecution(code)) {
