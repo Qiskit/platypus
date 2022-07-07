@@ -38,9 +38,9 @@ import CodeEditor from '../CodeExercise/CodeEditor.vue'
 import ExerciseActionsBar from '../CodeExercise/ExerciseActionsBar.vue'
 import CodeOutput from '../CodeExercise/CodeOutput.vue'
 
-const INITIAL_CODE = `# This is your python scratchpad.
-# Use this however you like while you work
-# or copy the code over from the chapter
+const INITIAL_CODE = `
+
+
 
 
 `
