@@ -1,8 +1,11 @@
 nbqa
 pylint
 scour
-qiskit
+qiskit==0.36
 qiskit-nature
+qiskit-machine-learning==0.4.0
+qiskit-finance==0.3.2
+tensorflow==2.9.1
 matplotlib
 mypy
 pycodestyle
