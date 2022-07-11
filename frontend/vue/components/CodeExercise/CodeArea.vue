@@ -38,10 +38,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-area {
   & :deep(.CodeMirror) {
+    @include type-style('code-01');
     height: 100%;
   }
   & :deep(.CodeMirror-scroll) {
