@@ -20,6 +20,14 @@ import { OutputArea, IOutputShellFuture, createOutputArea } from './OutputRender
 import { requestBinderKernel, IKernelConnection, IStreamMsg } from './KernelManager'
 import 'carbon-web-components/es/components/loading/loading'
 
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
+
+const pageRoute = window.location.pathname
+
 export default defineComponent({
   name: 'CodeOutput',
   data () {
@@ -74,6 +82,7 @@ export default defineComponent({
       this.outputArea!.future = future
     },
     clearOutput () {
+      window.textbook.trackClickEvent('Reset', `Scratchpad code cell, ${pageRoute}`)
       this.outputArea!.setHidden(true)
     }
   }
