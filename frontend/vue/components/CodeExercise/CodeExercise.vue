@@ -122,6 +122,7 @@ export default defineComponent({
         detail: { code }
       })
 
+      window.textbook.trackClickEvent('Copy to Scratchpad', `Code cell #${this.id}, ${pageRoute}`)
       window.dispatchEvent(scratchpadCopyRequestEvent)
     },
     kernelRunning () {
