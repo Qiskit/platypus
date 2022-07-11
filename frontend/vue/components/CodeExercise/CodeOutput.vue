@@ -67,7 +67,7 @@ export default defineComponent({
           })
           requestFuture.registerMessageHook((msgContainer) => {
             const message = (msgContainer as IStreamMsg)?.content?.text
-            if (message && message.includes("Your answer is correct")) {
+            if (message && message.includes('Your answer is correct')) {
               this.$emit('correctAnswer')
             }
             return true
