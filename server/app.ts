@@ -187,9 +187,10 @@ const start = () => {
 
       res.redirect('/logout')
     })
-    .get('/account', getAccountData)
+    .get('/account', (req, res) => res.redirect('/account/learning'))
+    .get('/account/learning', getAccountData)
     .get('/account/classroom', getAccountData)
-    .get('/account/privacy', getAccountData)
+    .get('/account/admin', getAccountData)
     .get('/eula', (req, res) => {
       if (!req.user) {
         return res.redirect('/signin')
