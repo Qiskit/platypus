@@ -1,7 +1,7 @@
 const ACCOUNT_MENU_LINKS = [
   {
     displayName: 'Learning',
-    url: '/account'
+    url: '/account/learning'
   },
   {
     displayName: 'Classroom',
