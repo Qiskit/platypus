@@ -1,27 +1,27 @@
 <template>
-  <section class="privacy-section">
+  <section class="admin-section">
     <UserAccountSectionHeader>
       <template #title>
-        {{ $translate("Privacy") }}
+        {{ $translate("Account") }}
       </template>
       <template #description>
         {{ $translate("This page contains privacy information, including the IBM privacy statement, the end user license agreement, and the ability to delete your account. If you would like copy of all of your user account data, please email") }}
-        <AppLink class="privacy-section__policy-email" url="mailto:qiskit@us.ibm.com">
+        <AppLink class="admin-section__policy-email" url="mailto:qiskit@us.ibm.com">
           qiskit@us.ibm.com.
         </AppLink>
       </template>
     </UserAccountSectionHeader>
-    <h4 class="privacy-section__subtitle privacy-section__subtitle_general">
+    <h4 class="admin-section__subtitle admin-section__subtitle_general">
       {{ $translate('IBM Privacy Statement') }}
     </h4>
-    <AppLink class="privacy-section__policy-link" url="https://www.ibm.com/privacy">
+    <AppLink class="admin-section__policy-link" url="https://www.ibm.com/privacy">
       https://www.ibm.com/privacy
     </AppLink>
-    <h4 class="privacy-section__subtitle privacy-section__subtitle_quantum">
+    <h4 class="admin-section__subtitle admin-section__subtitle_quantum">
       {{ $translate('IBM Quantum End User Agreement') }}
     </h4>
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <div class="privacy-section__policy-text" v-html="privacyPolicyHTML" />
+    <div class="admin-section__policy-text" v-html="privacyPolicyHTML" />
   </section>
 </template>
 
@@ -29,10 +29,10 @@
 import { defineComponent } from 'vue-demi'
 import MarkdownIt from 'markdown-it'
 import AppLink from '../common/AppLink.vue'
-import UserAccountSectionHeader from '../UserAccount/UserAccountSectionHeader.vue'
+import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
 
 export default defineComponent({
-  name: 'PrivacySection',
+  name: 'AdminSection',
   components: {
     AppLink,
     UserAccountSectionHeader
@@ -64,7 +64,7 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 @import '~/../scss/mixins/mixins.scss';
 
-.privacy-section {
+.admin-section {
   @include contained();
   margin-left: 0;
   padding-top: $spacing-07;
