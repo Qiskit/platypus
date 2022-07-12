@@ -8,8 +8,8 @@ const ACCOUNT_MENU_LINKS = [
     url: '/account/classroom'
   },
   {
-    displayName: 'Privacy',
-    url: '/account/privacy'
+    displayName: 'Account',
+    url: '/account/admin'
   }
 ]
 

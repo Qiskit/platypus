@@ -189,7 +189,7 @@ const start = () => {
     })
     .get('/account', getAccountData)
     .get('/account/classroom', getAccountData)
-    .get('/account/privacy', getAccountData)
+    .get('/account/admin', getAccountData)
     .get('/eula', (req, res) => {
       if (!req.user) {
         return res.redirect('/signin')
