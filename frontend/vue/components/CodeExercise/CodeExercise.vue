@@ -23,7 +23,7 @@
       <WarningIcon />
       <div>
         This code is using an IBMQ provider. If you want to execute it, you need to setup your API-token in
-        <BasicLink url="/account">
+        <BasicLink url="/account/admin">
           your account.
         </BasicLink>
       </div>
