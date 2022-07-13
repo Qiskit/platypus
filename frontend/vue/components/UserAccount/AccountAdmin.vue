@@ -30,17 +30,27 @@
             Link to IQX.
           </BasicLink>
         </p>
-        <div class="account-admin__input-container">
-          <bx-input
-            ref="apiTokenInput"
-            class="account-admin__input-field"
-            name="apiToken"
-            type="password"
-            :value="apiToken"
-            placeholder="paste token here"
-            color-scheme="regular"
-            :required="true"
-          />
+        <div class="account-admin__input-form">
+          <div class="account-admin__input-field__container">
+            <bx-input
+              ref="apiTokenInput"
+              class="account-admin__input-field"
+              name="apiToken"
+              type="password"
+              :value="apiToken"
+              placeholder="Paste token here"
+              :required="true"
+            />
+            <bx-btn
+              v-if="apiToken !== ''"
+              class="account-admin__copy"
+              kind="ghost"
+              size="sm"
+              @click="copyToken()"
+            >
+              <Copy16 class="account-admin__copy-icon" />
+            </bx-btn>
+          </div>
           <BasicLink class="account-admin__input-action" @click="submitForm">
             Save
           </BasicLink>
@@ -65,6 +75,8 @@
 import { defineComponent } from 'vue-demi'
 import MarkdownIt from 'markdown-it'
 import BXInput from 'carbon-web-components/es/components/input/input.js'
+import 'carbon-web-components/es/components/button/index.js'
+import Copy16 from '@carbon/icons-vue/es/copy/16'
 import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
@@ -76,6 +88,7 @@ export default defineComponent({
   components: {
     AppLink,
     BasicLink,
+    Copy16,
     UserAccountSectionHeader
   },
   props: {
@@ -129,6 +142,7 @@ export default defineComponent({
       })
     },
     fetchUserToken () {
+      console.log('fetching user token')
       fetch(fetchUrl, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -140,9 +154,12 @@ export default defineComponent({
           })
         } else {
           // TODO: Manage this error (and improve backend feedback)
-          console.error(res)
+          console.error(res, "error")
         }
       })
+    },
+    copyToken () {
+      console.log('copy token')
     }
   }
 })
@@ -177,14 +194,28 @@ export default defineComponent({
   }
 
   &__input-field {
-    margin-right: $spacing-07;
+    --cds-ui-04: #{$border-color-tertiary};
+    --cds-ui-01: #{$background-color-lighter};
+
+    &__container {
+      position: relative;
+      margin-right: $spacing-07;
+      width: 100%;
+      max-width: 24rem;
+    }
   }
 
-  &__input-container {
+  &__input-form {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 24rem;
+  }
+
+  &__copy {
+    position: absolute;
+    top: 1.25rem;
+    right: 0;
+    background-color: $button-background-color-secondary;
+    height: 2.9rem;
   }
 
   &__input-action {
