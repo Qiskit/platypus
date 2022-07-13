@@ -35,12 +35,15 @@
             ref="apiTokenInput"
             class="account-admin__input-field"
             name="apiToken"
-            type="text"
+            type="password"
+            :value="apiToken"
             placeholder="paste token here"
             color-scheme="regular"
             :required="true"
           />
-          <BasicLink class="account-admin__input-action">Save</BasicLink>
+          <BasicLink class="account-admin__input-action" @click="submitForm">
+            Save
+          </BasicLink>
         </div>
       </div>
     </section>
@@ -66,6 +69,8 @@ import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
 
+const fetchUrl = '/qiskit-user'
+
 export default defineComponent({
   name: 'AccountAdmin',
   components: {
@@ -86,7 +91,8 @@ export default defineComponent({
         breaks: true,
         linkify: true
       },
-      privacyPolicyMd: 'Loading...'
+      privacyPolicyMd: 'Loading...',
+      apiToken: ''
     }
   },
   computed: {
@@ -95,6 +101,49 @@ export default defineComponent({
   },
   mounted () {
     this.privacyPolicyMd = document.getElementById('privacyPolicy')?.textContent || ''
+
+    // fetch user API token
+    this.fetchUserToken()
+  },
+  methods: {
+    submitForm () {
+      const token = (this.$refs.apiTokenInput as BXInput).value
+      const csrfToken = { _csrf: window.csrfToken }
+      this.apiToken = token
+      fetch(fetchUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          apiToken: token,
+          ...csrfToken
+        })
+      }).then((res) => {
+        if (res.status === 200) {
+          res.json().then((jsonResult) => {
+            console.log(jsonResult, 'result')
+          })
+        } else {
+          // TODO: Manage this error (and improve backend feedback)
+          console.error(res)
+        }
+      })
+    },
+    fetchUserToken () {
+      fetch(fetchUrl, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      }).then((res) => {
+        if (res.status === 200) {
+          res.json().then((jsonResult) => {
+            this.apiToken = jsonResult.apiToken
+            console.log(jsonResult, 'result in fetchUserToken')
+          })
+        } else {
+          // TODO: Manage this error (and improve backend feedback)
+          console.error(res)
+        }
+      })
+    }
   }
 })
 </script>
