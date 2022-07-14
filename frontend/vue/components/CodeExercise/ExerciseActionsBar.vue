@@ -3,7 +3,7 @@
     <button
       v-if="runEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
-      @click="run()"
+      @click="run(isApiTokenNeeded)"
     >
       {{ $translate('Run') }}
     </button>
@@ -53,9 +53,9 @@ export default defineComponent({
     }
   },
   methods: {
-    run () {
+    run (onHardware = false) {
       if (!this.isRunning) {
-        this.$emit('run')
+        this.$emit('run', onHardware)
       }
     },
     grade () {

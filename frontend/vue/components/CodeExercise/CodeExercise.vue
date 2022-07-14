@@ -112,10 +112,11 @@ export default defineComponent({
     this.id = lastId++
   },
   methods: {
-    run () {
+    run (onHardware: boolean) {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
-      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageRoute}`)
+      const cta = onHardware ? 'Run (Hardware)' : 'Run'
+      window.textbook.trackClickEvent(cta, `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
