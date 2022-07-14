@@ -58,21 +58,13 @@
               :required="true"
               @input="updateToken()"
             />
-            <bx-btn
-              v-if="apiToken !== ''"
-              class="account-admin__copy"
-              kind="ghost"
-              size="sm"
-              @click="copyToken(apiToken)"
-            >
-              <Copy16 class="account-admin__copy-icon" />
-            </bx-btn>
+            <CodeMirrorClipboardCopy v-if="apiToken !== ''" class="account-admin__copy" :text="apiToken" />
           </div>
           <BasicLink v-if="apiToken === ''" class="account-admin__input-status" @click="submitForm">
             Save
           </BasicLink>
           <span v-else class="account-admin__input-status">
-            {{ tokenStatusLabel }}
+            Saved
           </span>
         </div>
       </div>
@@ -99,6 +91,7 @@ import 'carbon-web-components/es/components/button/index.js'
 import Copy16 from '@carbon/icons-vue/es/copy/16'
 import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
+import CodeMirrorClipboardCopy from '../CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
 import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
 
 const fetchUrl = '/qiskit-user'
@@ -108,6 +101,7 @@ export default defineComponent({
   components: {
     AppLink,
     BasicLink,
+    CodeMirrorClipboardCopy,
     Copy16,
     UserAccountSectionHeader
   },
@@ -125,8 +119,7 @@ export default defineComponent({
         linkify: true
       },
       privacyPolicyMd: 'Loading...',
-      apiToken: '',
-      tokenStatusLabel: 'Saved'
+      apiToken: ''
     }
   },
   computed: {
@@ -136,7 +129,6 @@ export default defineComponent({
   mounted () {
     this.privacyPolicyMd = document.getElementById('privacyPolicy')?.textContent || ''
 
-    // fetch user API token
     this.fetchUserToken()
   },
   methods: {
@@ -163,7 +155,6 @@ export default defineComponent({
       })
     },
     fetchUserToken () {
-      console.log('fetching user token')
       fetch(fetchUrl, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
@@ -171,20 +162,12 @@ export default defineComponent({
         if (res.status === 200) {
           res.json().then((jsonResult) => {
             this.apiToken = jsonResult.apiToken
-            console.log(jsonResult, 'result in fetchUserToken')
           })
         } else {
           // TODO: Manage this error (and improve backend feedback)
           console.error(res, 'error')
         }
       })
-    },
-    copyToken (token: string) {
-      navigator.clipboard.writeText(token)
-      this.tokenStatusLabel = 'Copied!'
-      setTimeout(() => {
-        this.tokenStatusLabel = 'Saved'
-      }, 3000)
     },
     updateToken () {
       this.apiToken = ''
@@ -228,8 +211,6 @@ export default defineComponent({
   }
 
   &__input-field {
-    // --cds-ui-04: #{$border-color-tertiary};
-    // --cds-ui-01: #{$background-color-lighter};
 
     &__container {
       position: relative;
@@ -254,7 +235,16 @@ export default defineComponent({
     top: 1.35rem;
     right: 0.15rem;
     height: 2.75rem;
+    width: 2.75rem;
     background-color: $background-color-lighter;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: $background-color-light;
+      cursor: pointer;
+    }
   }
 
   &__input-status {
