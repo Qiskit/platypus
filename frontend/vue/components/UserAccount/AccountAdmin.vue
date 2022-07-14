@@ -87,8 +87,6 @@
 import { defineComponent } from 'vue-demi'
 import MarkdownIt from 'markdown-it'
 import BXInput from 'carbon-web-components/es/components/input/input.js'
-import 'carbon-web-components/es/components/button/index.js'
-import Copy16 from '@carbon/icons-vue/es/copy/16'
 import AppLink from '../common/AppLink.vue'
 import BasicLink from '../common/BasicLink.vue'
 import CodeMirrorClipboardCopy from '../CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
@@ -102,7 +100,6 @@ export default defineComponent({
     AppLink,
     BasicLink,
     CodeMirrorClipboardCopy,
-    Copy16,
     UserAccountSectionHeader
   },
   props: {
