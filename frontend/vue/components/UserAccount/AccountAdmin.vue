@@ -30,10 +30,10 @@
         </p>
         <ul class="account-admin__info__steps">
           <li>
-            {{ $translate("Create and account in") }}
+            {{ $translate("Create an account in") }}
             <BasicLink url="https://quantum-computing.ibm.com/">
-              IBM Quantum
-            </BasicLink>.
+              IBM Quantum.
+            </BasicLink>
           </li>
           <li>
             {{ $translate("Access your") }}
@@ -63,7 +63,7 @@
               class="account-admin__copy"
               kind="ghost"
               size="sm"
-              @click="copyToken()"
+              @click="copyToken(apiToken)"
             >
               <Copy16 class="account-admin__copy-icon" />
             </bx-btn>
@@ -72,7 +72,7 @@
             Save
           </BasicLink>
           <span v-else class="account-admin__input-status">
-            Saved
+            {{ tokenStatusLabel }}
           </span>
         </div>
       </div>
@@ -125,7 +125,8 @@ export default defineComponent({
         linkify: true
       },
       privacyPolicyMd: 'Loading...',
-      apiToken: ''
+      apiToken: '',
+      tokenStatusLabel: 'Saved'
     }
   },
   computed: {
@@ -178,8 +179,12 @@ export default defineComponent({
         }
       })
     },
-    copyToken () {
-      console.log('copy token')
+    copyToken (token: string) {
+      navigator.clipboard.writeText(token)
+      this.tokenStatusLabel = 'Copied!'
+      setTimeout(() => {
+        this.tokenStatusLabel = 'Saved'
+      }, 3000)
     },
     updateToken () {
       this.apiToken = ''
@@ -223,14 +228,19 @@ export default defineComponent({
   }
 
   &__input-field {
-    --cds-ui-04: #{$border-color-tertiary};
-    --cds-ui-01: #{$background-color-lighter};
+    // --cds-ui-04: #{$border-color-tertiary};
+    // --cds-ui-01: #{$background-color-lighter};
 
     &__container {
       position: relative;
       margin-right: $spacing-07;
       width: 100%;
-      max-width: 24rem;
+      max-width: 22rem;
+
+      bx-input {
+        --cds-ui-04: #{$border-color-tertiary};
+        --cds-field-01: #{$background-color-lighter};
+      }
     }
   }
 
@@ -242,8 +252,9 @@ export default defineComponent({
   &__copy {
     position: absolute;
     top: 1.35rem;
-    right: 0.25rem;
+    right: 0.15rem;
     height: 2.75rem;
+    background-color: $background-color-lighter;
   }
 
   &__input-status {
