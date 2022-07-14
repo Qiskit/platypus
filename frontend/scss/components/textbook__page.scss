@@ -48,6 +48,61 @@ main.body {
     @include mq($until: medium) {
       overflow: hidden;
     }
+
+    &__error {
+      transform: translate(0);
+      top: 0;
+      position: relative;
+      transform: initial;
+      padding-left: 8rem;
+      max-width: initial;
+      padding-top: 4rem;
+      display: flex;
+  
+      @include mq($until: medium) {
+        padding-left: $spacing-05;
+        flex-direction: column;
+      }
+  
+      @include mq($from: medium) {
+        padding-left: 3rem;
+        justify-content: space-between;
+      }
+  
+      @include mq($from: large) {
+        padding-left: 7rem;
+        justify-content: flex-start;
+      }
+  
+      &-container {
+        width: 100%;
+        max-width: $browser-small;
+  
+        @include mq($until: medium) {
+          max-width: 100%;
+        }
+      }
+  
+      &-code {
+        margin-bottom: $spacing-04;
+      }
+  
+      &-message {
+        margin-bottom: $spacing-06;
+      }
+  
+      &-cta .app-cta_ghost[datatest="error-page-cta"]{
+        padding: $spacing-05;
+        justify-content: space-between;
+      }
+  
+      &-cta .app-cta_ghost .app-cta__icon {
+        margin-right: .25rem;
+      }
+      &-img {
+        max-width: 52rem;
+      }
+    }
   }
   
   &__sidebar--hidden .c-textbook__page {
