@@ -26,18 +26,17 @@
       <div class="account-admin__info">
         <span class="account-admin__info__label"><strong>{{ $translate('API Token') }}</strong></span>
         <p class="account-admin__info__introduction">
-          To configure your API Token you can follow the next steps:
+          {{ $translate("To configure your API Token you can follow the next steps") }}:
         </p>
         <ul class="account-admin__info__steps">
           <li>
             {{ $translate("Create and account in") }}
             <BasicLink url="https://quantum-computing.ibm.com/">
               IBM Quantum
-            </BasicLink>
-            .
+            </BasicLink>.
           </li>
           <li>
-            {{ $translate("Access to your") }}
+            {{ $translate("Access your") }}
             <BasicLink url="https://quantum-computing.ibm.com/account">
               {{ $translate("account page") }}
             </BasicLink>
@@ -57,6 +56,7 @@
               :value="apiToken"
               placeholder="Paste token here"
               :required="true"
+              @input="updateToken()"
             />
             <bx-btn
               v-if="apiToken !== ''"
@@ -68,9 +68,12 @@
               <Copy16 class="account-admin__copy-icon" />
             </bx-btn>
           </div>
-          <BasicLink class="account-admin__input-action" @click="submitForm">
+          <BasicLink v-if="apiToken === ''" class="account-admin__input-status" @click="submitForm">
             Save
           </BasicLink>
+          <span v-else class="account-admin__input-status">
+            Saved
+          </span>
         </div>
       </div>
     </section>
@@ -171,12 +174,15 @@ export default defineComponent({
           })
         } else {
           // TODO: Manage this error (and improve backend feedback)
-          console.error(res, "error")
+          console.error(res, 'error')
         }
       })
     },
     copyToken () {
       console.log('copy token')
+    },
+    updateToken () {
+      this.apiToken = ''
     }
   }
 })
@@ -235,13 +241,12 @@ export default defineComponent({
 
   &__copy {
     position: absolute;
-    top: 1.25rem;
-    right: 0;
-    background-color: $button-background-color-secondary;
-    height: 2.9rem;
+    top: 1.35rem;
+    right: 0.25rem;
+    height: 2.75rem;
   }
 
-  &__input-action {
+  &__input-status {
     display: block;
     margin-top: $spacing-04;
   }
