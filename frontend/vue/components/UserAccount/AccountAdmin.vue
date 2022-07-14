@@ -25,11 +25,28 @@
       </div>
       <div class="account-admin__info">
         <span class="account-admin__info__label"><strong>{{ $translate('API Token') }}</strong></span>
-        <p>
-          Good instructions here as to what’s going on.  <BasicLink url="https://link-to-iqx">
-            Link to IQX.
-          </BasicLink>
+        <p class="account-admin__info__introduction">
+          To configure your API Token you can follow the next steps:
         </p>
+        <ul class="account-admin__info__steps">
+          <li>
+            Create and account in
+            <BasicLink url="https://quantum-computing.ibm.com/">
+              IBM Quantum
+            </BasicLink>
+            .
+          </li>
+          <li>
+            Access to your
+            <BasicLink url="https://quantum-computing.ibm.com/account">
+              account page
+            </BasicLink>
+            and copy the value from the API token input.
+          </li>
+          <li>
+            Paste that value in the input below and press "Save".
+          </li>
+        </ul>
         <div class="account-admin__input-form">
           <div class="account-admin__input-field__container">
             <bx-input
@@ -186,10 +203,16 @@ export default defineComponent({
     &:not(:last-child) {
       margin-bottom: $spacing-07;
     }
+
     &__label {
       display: inline-block;
       margin-bottom: $spacing-03;
       padding-right: $spacing-08;
+    }
+
+    &__steps {
+      list-style: decimal;
+      margin: 0 0 0 1.5em;
     }
   }
 
