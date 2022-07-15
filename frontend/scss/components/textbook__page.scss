@@ -50,36 +50,39 @@ main.body {
     }
 
     &__error {
-      transform: translate(0);
-      top: 0;
-      position: relative;
-      transform: initial;
-      padding-left: 8rem;
-      max-width: initial;
-      padding-top: 4rem;
       display: flex;
+      padding: $spacing-10 $spacing-13;
   
+      @include mq($until: x-large) {
+        padding: $spacing-10 $spacing-12;
+      }
+
+      @include mq($until: large) {
+        padding: $spacing-09 $spacing-07;
+      }
+
       @include mq($until: medium) {
+        flex-direction: row;
+        gap: 0;
         padding-left: $spacing-05;
+        padding-right: 0;
+      }
+
+      @include mq($until: small) {
         flex-direction: column;
-      }
-  
-      @include mq($from: medium) {
-        padding-left: 3rem;
-        justify-content: space-between;
-      }
-  
-      @include mq($from: large) {
-        padding-left: 7rem;
-        justify-content: flex-start;
+        padding: $spacing-06 $spacing-05;
       }
   
       &-container {
-        width: 100%;
-        max-width: $browser-small;
-  
+        position: absolute;
+
         @include mq($until: medium) {
-          max-width: 100%;
+          max-width: 18rem;
+          position: relative;
+        }
+
+        @include mq($until: small) {
+          max-width: initial;
         }
       }
   
@@ -97,10 +100,20 @@ main.body {
       }
   
       &-cta .app-cta_ghost .app-cta__icon {
-        margin-right: .25rem;
+        margin-right: $spacing-02;
       }
+
       &-img {
-        max-width: 52rem;
+        align-self: center;
+        max-width: 47rem;
+
+        @include mq($until: medium) {
+          max-width: 50%;
+        }
+
+        @include mq($until: small) {
+          max-width: initial;
+        }
       }
     }
   }
