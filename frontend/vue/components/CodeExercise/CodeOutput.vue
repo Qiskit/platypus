@@ -20,6 +20,14 @@ import { OutputArea, IOutputShellFuture, createOutputArea } from './OutputRender
 import { requestBinderKernel, IKernelConnection, IStreamMsg } from './KernelManager'
 import 'carbon-web-components/es/components/loading/loading'
 
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
+
+const pageRoute = window.location.pathname
+
 export default defineComponent({
   name: 'CodeOutput',
   data () {
@@ -47,27 +55,35 @@ export default defineComponent({
   methods: {
     requestExecute (code: string) {
       this.error = ''
+      this.outputArea!.setHidden(true)
       this.kernelPromise!.then((kernel: IKernelConnection) => {
         this.$emit('running')
         try {
           const requestFuture = kernel.requestExecute({ code })
           this.setOutputFuture(requestFuture)
-          requestFuture.done.then(() => this.$emit('finished'))
+          requestFuture.done.then(() => {
+            this.$emit('finished')
+            this.outputArea!.setHidden(false)
+          })
           requestFuture.registerMessageHook((msgContainer) => {
             const message = (msgContainer as IStreamMsg)?.content?.text
-            if (message && message.includes("Your answer is correct")) {
+            if (message && message.includes('Your answer is correct')) {
               this.$emit('correctAnswer')
             }
             return true
           })
         } catch (error: any) {
           this.error = error as string
-          this.outputArea!.model.clear()
+          this.outputArea!.setHidden(false)
         }
       })
     },
     setOutputFuture (future : IOutputShellFuture) {
       this.outputArea!.future = future
+    },
+    clearOutput () {
+      window.textbook.trackClickEvent('Reset', `Scratchpad code cell, ${pageRoute}`)
+      this.outputArea!.setHidden(true)
     }
   }
 })
