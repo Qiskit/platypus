@@ -73,7 +73,7 @@ main.body {
         padding: $spacing-06 $spacing-05;
       }
   
-      &-container {
+      &__container {
         position: absolute;
 
         @include mq($until: medium) {
@@ -86,24 +86,27 @@ main.body {
         }
       }
   
-      &-code {
+      &__code {
         margin-bottom: $spacing-04;
       }
   
-      &-message {
+      &__message {
         margin-bottom: $spacing-06;
       }
-  
-      &-cta .app-cta_ghost[datatest="error-page-cta"]{
-        padding: $spacing-05;
-        justify-content: space-between;
-      }
-  
-      &-cta .app-cta_ghost .app-cta__icon {
-        margin-right: $spacing-02;
-      }
 
-      &-img {
+      &__cta {
+        .app-cta_ghost[datatest="error-page-cta"]{
+          padding: $spacing-05;
+          justify-content: space-between;
+        }
+    
+        .app-cta_ghost .app-cta__icon {
+          margin-right: $spacing-02;
+        }
+      }
+  
+
+      &__img {
         align-self: center;
         max-width: 47rem;
 
