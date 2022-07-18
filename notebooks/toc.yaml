@@ -14,10 +14,9 @@
 #       id: my-page     # Stem of the url for this page on the website,
 #                       # i.e. this page will have url 'https://learn.qiskit.org/course/my-course/my-page'
 #       uuid: a5a86ddc-b519-11ec-b909-0242ac120002  # Unique ID for
-#                       # website software to identify pages if names change
-#                       # generate new ids with https://www.uuidgenerator.net
+#                       # website software to identify pages if names change.
+#                       # Generate new ids with https://www.uuidgenerator.net
 #       url: /my-course/my-notebook  # Path to source notebook, relative to this file
-
 
 
 - title: Prerequisites
