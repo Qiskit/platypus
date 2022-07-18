@@ -39,6 +39,16 @@ body:
         - Clicking twice fast reproduces sound only once
         - Feature is accessible via voice commands
   - type: textarea
+    id: future-of-feature
+    attributes:
+      label: Future of feature
+      description: After this iteration, how do you see this feature being developed further / integrated across the platform? 
+      placeholder: |
+        e.g.
+        - One-off task
+        - Future development ideas (to be validated)
+        - Integrated with X feature
+  - type: textarea
     id: resources
     attributes:
       label: Resources
