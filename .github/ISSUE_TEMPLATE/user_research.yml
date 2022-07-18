@@ -18,13 +18,12 @@ body:
     id: audience
     attributes:
       label: Audience
-      description: High-level description of the intended audience 
+      description: High-level description of the intended audience
     validations:
       required: true
   - type: textarea
     id: relevant
     attributes:
-      label: Relevant existing research and issues 
-      description: Is 
+      label: Relevant existing research and issues
       placeholder: |
         e.g. Relevant issues, user stories, existing research, etc.
