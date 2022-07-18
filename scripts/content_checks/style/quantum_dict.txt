@@ -10,6 +10,7 @@ Bergholm
 Bertels
 Boeblingen
 Boixo
+Briegel
 Broughton
 Brukner
 Carleo
@@ -19,6 +20,7 @@ Cincio
 Corcoles
 Courville
 Derks
+Dunjko
 Elies
 Faehrmann
 Farhi
@@ -82,6 +84,7 @@ Tapp
 Temme
 Toffoli
 Vadim
+Vedran
 Ville
 Vivek
 Vojtech
@@ -124,6 +127,8 @@ qubit
 qubits
 reuploading
 satisfiability
+subfield
+subfields
 sudoku
 tooltip
 tooltips
