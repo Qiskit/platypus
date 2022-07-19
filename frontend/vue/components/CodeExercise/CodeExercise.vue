@@ -22,10 +22,11 @@
     <div v-if="isApiTokenNeeded" class="code-exercise__api-token-info">
       <WarningIcon />
       <div>
-        This code is using an IBMQ provider. If you want to execute it, you need to setup your API-token in
+        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
         <BasicLink url="/account/admin">
-          your account.
+          your account
         </BasicLink>
+        to execute this code cell.
       </div>
     </div>
     <CodeOutput
@@ -47,7 +48,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
-import WarningIcon from '@carbon/icons-vue/lib/warning--hex/32'
+import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
 import BasicLink from '../common/BasicLink.vue'
 import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
