@@ -18,9 +18,9 @@
       <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
       <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
     </div>
-    <div v-if="isApiTokenNeeded" class="exercise-actions-bar__running-indicator">
-      <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Api token needed') }}</span>
-    </div>
+    <button v-if="isApiTokenNeeded" class="exercise-actions-bar__button exercise-actions-bar__button_disabled" disabled>
+      <span>{{ $translate('Run') }}</span>
+    </button>
   </div>
 </template>
 
@@ -97,6 +97,13 @@ export default defineComponent({
 
     @include bicolor-background($button-background-color-dark, $button-background-color);
     color: $button-text-color;
+
+    &_disabled {
+      background-color: $disabled-background-color;
+      background-image: none;
+      color: $text-color-lighter;
+      cursor: not-allowed;
+    }
 
     &_run {
       @include bicolor-background($button-background-color-quaternary-dark, $button-background-color-quaternary);
