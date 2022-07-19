@@ -86,7 +86,7 @@ to automatically install everything else you'll need.
 The source for each page of the Qiskit Textbook is a [Jupyter Notebook](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html).
 You'll find these files in the `notebooks` directory. To create the final website,
 the building software parses each notebook in the table of contents (`notebooks/toc.yaml`)
-and converts it into an web page. Notebooks not in the table of contents (TOC) are
+and converts it into a web page. Notebooks not in the table of contents (TOC) are
 ignored, so if you add new content you'll need to add it to the TOC.
 
 ### Editing notebooks
