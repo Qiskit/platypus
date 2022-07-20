@@ -114,7 +114,7 @@ export default defineComponent({
         }
       })
     },
-    _setOutputFuture (future : IOutputShellFuture) {
+    setOutputFuture (future : IOutputShellFuture) {
       this.outputArea!.future = future
     },
     clearOutput () {
