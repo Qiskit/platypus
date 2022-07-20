@@ -4,7 +4,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
-import { createEditor, getEditor } from './CodeMirrorEditor'
+import { basicSetup } from 'codemirror'
+import { EditorView, keymap } from '@codemirror/view'
+import { EditorState, StateField } from '@codemirror/state'
+import { defaultKeymap, indentWithTab } from '@codemirror/commands'
+import { python } from '@codemirror/lang-python'
 
 export default defineComponent({
   name: 'CodeArea',
@@ -15,64 +19,101 @@ export default defineComponent({
       default: ''
     }
   },
+  data () {
+    return {
+      editor: undefined as EditorView | undefined
+    }
+  },
   watch: {
-    code (newVal) {
-      const editor: any = getEditor(this)
-      if (editor.getValue() === newVal) {
+    code (newVal: string) {
+      const editor = this.editor! as EditorView
+      const newValAsText = editor.state.toText(newVal)
+      if (editor.state.doc.eq(newValAsText)) {
         return
       }
 
-      editor.setValue(newVal)
+      editor.dispatch({
+        changes: {
+          from: 0,
+          to: editor.state.doc.length,
+          insert: newValAsText
+        }
+      })
     }
   },
   mounted () {
-    const editor: any = createEditor(this, this.$refs.codeAreaWrapper as HTMLDivElement)
-
-    editor.on('change', () => {
-      const newCode = editor.getValue()
-      this.$emit('codeChanged', newCode)
+    const emit = this.$emit
+    const parentHTMLElement = this.$refs.codeAreaWrapper as HTMLDivElement
+    const docChanged = StateField.define({
+      create (state) {
+        return state.sliceDoc()
+      },
+      update (value, tr) {
+        if (tr.docChanged) {
+          const newCode = tr.state.sliceDoc()
+          emit('codeChanged', newCode)
+        }
+      }
+    })
+    const state = EditorState.create({
+      doc: this.code,
+      extensions: [
+        basicSetup,
+        python(),
+        docChanged,
+        keymap.of([
+          ...defaultKeymap,
+          indentWithTab
+        ])
+      ]
+    })
+    this.editor = new EditorView({
+      state,
+      parent: parentHTMLElement
     })
   }
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import 'carbon-components/scss/globals/scss/spacing';
 @import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
-.code-area {
-  & :deep(.CodeMirror) {
-    @include type-style('code-01');
-    height: 100%;
-  }
-  & :deep(.CodeMirror-scroll) {
-    background-color: $background-color-lighter;
-    margin-bottom: -25px;
-    &:hover .CodeMirror-gutters {
-      background-color: $background-color-light;
+.code-area .cm-editor {
+  .cm- {
+    &scroller {
+      background-color: $background-color-lighter;
+      &::-webkit-scrollbar {
+        width: 0.4rem;
+        height: 0.4rem;
+      }
     }
-  }
-  & :deep(.CodeMirror-sizer) {
-    padding-top: $spacing-08;
-  }
-  & :deep(.CodeMirror-line) {
-    padding-left: $spacing-05;
-    &:hover {
+    &content {
+      @include type-style('code-01');
+      padding: $spacing-08 0;
+      min-height: 6rem;
+    }
+    &gutters {
+      @include type-style('code-01');
+      background-color: $background-color-lighter;
+    }
+    &activeLine {
+      background-color: rgba($background-color-light-2, 0.2);
+    }
+    &activeLineGutter {
       background-color: rgba($background-color-light-2, 0.5);
     }
+    &line:hover {
+      background-color: rgba($background-color-light-2, 0.5);
+      cursor: text;
+    }
   }
-  & :deep(.CodeMirror-linenumber) {
-    padding-left: $spacing-04;
-    padding-right: $spacing-04;
-  }
-  & :deep(.CodeMirror-gutters) {
-    background-color: $background-color-lighter;
-    border-right-color: $border-color-light-2;
-  }
-  & :deep(.CodeMirror-hscrollbar) {
-    width: calc(100% - 13rem);
-    height: 0.5rem;
+
+  &:hover .cm- {
+    &gutters {
+      background-color: $background-color-light;
+    }
   }
 }
 </style>

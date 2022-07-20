@@ -5,9 +5,9 @@
         class="code-exercise__editor-block__editor"
         :code="code"
         :initial-code="initialCode"
-        :notebook-enabled="false"
+        :scratchpad-enabled="true"
         @codeChanged="codeChanged"
-        @notebookCopyRequest="notebookCopyRequest"
+        @scratchpadCopyRequest="scratchpadCopyRequest"
       />
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
@@ -137,9 +137,14 @@ export default defineComponent({
         this.isApiTokenNeeded = isNeeded
       })
     },
-    notebookCopyRequest (code: string) {
-      /* TODO */
-      console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
+    scratchpadCopyRequest (code: string) {
+      const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
+        bubbles: true,
+        detail: { code }
+      })
+
+      window.textbook.trackClickEvent('Copy to Scratchpad', `Code cell #${this.id}, ${pageRoute}`)
+      window.dispatchEvent(scratchpadCopyRequestEvent)
     },
     kernelRunning () {
       this.isKernelBusy = true
