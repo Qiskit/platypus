@@ -363,6 +363,8 @@ def handle_code_cell(cell, resources):
         .replace("]]", "] ]")
     )
 
+    formatted_source = re.sub(r'[\^]?\s*# pylint:.*', '', formatted_source)
+
     graderImport = cell.metadata["grader_import"] if "grader_import" in cell.metadata else None
     graderFunction = cell.metadata["grader_function"] if "grader_function" in cell.metadata else None
     goal = cell.metadata["goals"] if "goals" in cell.metadata else None
