@@ -80,16 +80,14 @@ export default defineComponent({
 @import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
-.code-area {
-  & :deep(.CodeMirror) {
-    @include type-style('code-01');
-    height: 100%;
-  }
-  & :deep(.CodeMirror-scroll) {
-    background-color: $background-color-lighter;
-    margin-bottom: -25px;
-    &:hover .CodeMirror-gutters {
-      background-color: $background-color-light;
+.code-area .cm-editor {
+  .cm- {
+    &scroller {
+      background-color: $background-color-lighter;
+      &::-webkit-scrollbar {
+        width: 0.4rem;
+        height: 0.4rem;
+      }
     }
     &content {
       @include type-style('code-01');

@@ -14,7 +14,7 @@
         <ClassroomSection />
       </div>
       <div v-if="activeSection === sectionList[2].url">
-        <AccountAdmin :first-name="firstName" :last-name="lastName" :email="email" />
+        <PrivacySection />
         <DeleteUserDataSection />
       </div>
     </section>
@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { ACCOUNT_MENU_LINKS } from '../constants/accountMenuLinks'
-import AccountAdmin from './AccountAdmin.vue'
+import PrivacySection from './PrivacySection.vue'
 import UserProgress from './UserProgress.vue'
 import DeleteUserDataSection from './DeleteUserDataSection.vue'
 import ClassroomSection from './ClassroomSection.vue'
@@ -33,7 +33,7 @@ import AccountMenu from './AccountMenu.vue'
 export default defineComponent({
   name: 'UserAccountLayout',
   components: {
-    AccountAdmin,
+    PrivacySection,
     UserProgress,
     DeleteUserDataSection,
     ClassroomSection,
@@ -41,8 +41,7 @@ export default defineComponent({
   },
   props: {
     firstName: { type: String, required: false, default: '' },
-    lastName: { type: String, required: false, default: '' },
-    email: { type: String, required: false, default: '' }
+    lastName: { type: String, required: false, default: '' }
   },
   data () {
     return {

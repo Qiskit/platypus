@@ -26,10 +26,6 @@ import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/
 import { FindSyllabusByCodeController } from './modules/syllabus/commands/find-syllabus-by-code/find-syllabus-by-code-controller'
 import { UpdateSyllabusController } from './modules/syllabus/commands/update-syllabus/update-syllabus-controller'
 
-// QiskitUser
-import { UpdateQiskitUserController } from './modules/qiskit-user/commands/update-qiskit-user/update-qiskit-user-controller'
-import { FindQiskitUserController } from './modules/qiskit-user/commands/find-qiskit-user/find-qiskit-user-controller'
-
 // Logger
 import { logger } from './libs/logger/logger'
 
@@ -112,8 +108,7 @@ const getAccountData = async (req: Request, res: Response) => {
 
   const loggedInUser = {
     firstName: req.user.firstName,
-    lastName: req.user.lastName,
-    email: req.user.email
+    lastName: req.user.lastName
   }
 
   const progressData = await getUserProgressData(req)
@@ -132,7 +127,7 @@ const start = () => {
   new MathigonStudioApp()
     .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
     .secure()
-    .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus', '/qiskit-user'] })
+    .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus'] })
     // .redirects({'/login': '/signin'})
     .accounts()
     .redirects({
@@ -188,10 +183,9 @@ const start = () => {
 
       res.redirect('/logout')
     })
-    .get('/account', (req, res) => res.redirect('/account/learning'))
-    .get('/account/learning', getAccountData)
+    .get('/account', getAccountData)
     .get('/account/classroom', getAccountData)
-    .get('/account/admin', getAccountData)
+    .get('/account/privacy', getAccountData)
     .get('/eula', (req, res) => {
       if (!req.user) {
         return res.redirect('/signin')
@@ -307,8 +301,6 @@ const start = () => {
     .post('/syllabus', CreateSyllabusController)
     // Here we use POST instead of PUT because Mathigon doesn't support PUT requests
     .post('/syllabus/:id', UpdateSyllabusController)
-    .get('/qiskit-user', FindQiskitUserController)
-    .post('/qiskit-user', UpdateQiskitUserController)
     .course({})
     .errors()
     .listen()

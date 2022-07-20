@@ -72,7 +72,7 @@ export default defineComponent({
         icon: 'delete-16',
         segment: {
           cta: 'delete-account',
-          location: 'user-account-admin'
+          location: 'user-account-privacy'
         }
       },
       modalSize: 'sm',
