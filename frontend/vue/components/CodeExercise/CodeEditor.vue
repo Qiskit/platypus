@@ -6,9 +6,9 @@
       :copy-text="internalCode"
       :copy-enabled="copyEnabled"
       :reset-enabled="resetEnabled"
-      :notebook-enabled="notebookEnabled"
+      :scratchpad-enabled="scratchpadEnabled"
       @reset="resetRequest"
-      @notebook="notebook"
+      @scratchpad="scratchpad"
     />
     <div
       v-if="resetNotificationOpen"
@@ -38,7 +38,7 @@ import CodeArea from './CodeArea.vue'
 import 'carbon-web-components/es/components/notification/toast-notification'
 
 export default defineComponent({
-  name: 'CodeExercise',
+  name: 'CodeEditor',
   components: {
     CodeEditorTools,
     CodeArea
@@ -64,7 +64,7 @@ export default defineComponent({
       required: false,
       default: true
     },
-    notebookEnabled: {
+    scratchpadEnabled: {
       type: Boolean,
       required: false,
       default: true
@@ -95,13 +95,14 @@ export default defineComponent({
       this.resetNotificationOpen = false
       this.internalCode = this.initialCode
       this.$emit('codeChanged', this.internalCode)
+      this.$emit('resetOutput');
     },
     codeChanged (code: string) {
       this.internalCode = code
       this.$emit('codeChanged', this.internalCode)
     },
-    notebook () {
-      this.$emit('notebookCopyRequest', this.internalCode)
+    scratchpad () {
+      this.$emit('scratchpadCopyRequest', this.internalCode)
     }
   }
 })
@@ -126,6 +127,7 @@ export default defineComponent({
     --cds-inverse-01: #{$text-color-dark};
     --cds-inverse-02: #{$background-color-white};
     width: 22rem;
+    height: 11rem;
 
     &__wrapper {
       position: absolute;

@@ -5,9 +5,9 @@
         class="code-exercise__editor-block__editor"
         :code="code"
         :initial-code="initialCode"
-        :notebook-enabled="false"
+        :scratchpad-enabled="true"
         @codeChanged="codeChanged"
-        @notebookCopyRequest="notebookCopyRequest"
+        @scratchpadCopyRequest="scratchpadCopyRequest"
       />
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
@@ -41,6 +41,15 @@ import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
 
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
+
+let lastId = 1
+const pageRoute = window.location.pathname
+
 export default defineComponent({
   name: 'CodeExercise',
   components: {
@@ -71,7 +80,8 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
-      executedOnce: false
+      executedOnce: false,
+      id: 0
     }
   },
   computed: {
@@ -84,16 +94,19 @@ export default defineComponent({
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
     this.code = initialCodeElement?.textContent?.trim() ?? ''
     this.initialCode = this.code
+    this.id = lastId++
   },
   methods: {
     run () {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
+      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
+      window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}, ${pageRoute}`)
     },
     gradeSuccess () {
       if (this.goal) {
@@ -103,9 +116,14 @@ export default defineComponent({
     codeChanged (code: string) {
       this.code = code
     },
-    notebookCopyRequest (code: string) {
-      /* TODO */
-      console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
+    scratchpadCopyRequest (code: string) {
+      const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
+        bubbles: true,
+        detail: { code }
+      })
+
+      window.textbook.trackClickEvent('Copy to Scratchpad', `Code cell #${this.id}, ${pageRoute}`)
+      window.dispatchEvent(scratchpadCopyRequestEvent)
     },
     kernelRunning () {
       this.isKernelBusy = true
@@ -144,7 +162,6 @@ export default defineComponent({
   &__editor-block {
     background-color: $background-color-lighter;
     position: relative;
-    height: 13rem;
 
     &__editor {
       height: 100%;
