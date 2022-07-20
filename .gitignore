@@ -37,6 +37,7 @@ working
 
 public/
 cypress/screenshots
+scripts/temp
 
 # Environments
 .env
