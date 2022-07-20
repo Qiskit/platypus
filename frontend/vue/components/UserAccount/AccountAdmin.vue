@@ -285,5 +285,4 @@ export default defineComponent({
     color: $link-color-secondary;
   }
 }
-
 </style>
