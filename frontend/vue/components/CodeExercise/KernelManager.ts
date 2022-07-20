@@ -212,6 +212,20 @@ function logBinderMessage (message: string) {
   events.dispatchEvent(new CustomEvent('message', { detail: { message } }))
 }
 
+async function executeInitCode () {
+  const loc = window.location.hostname + window.location.pathname
+  const code = `%set_env QE_CUSTOM_CLIENT_APP_HEADER=${loc}`
+  try {
+    const kernel = await requestBinderKernel()
+    const requestFuture = kernel.requestExecute({ code })
+    requestFuture.done.then(() => {
+      logBinderMessage('init code executed')
+    })
+  } catch (error: any) {
+    logBinderMessage(`failed to execute init code: ${error}`)
+  }
+}
+
 export async function requestBinder () {
   const binderUrl = serverOptions.binderOptions.binderUrl
   const ref = serverOptions.binderOptions.ref
@@ -228,6 +242,7 @@ export async function requestBinder () {
 
   const existingServer = await getExistingServer(savedSession, storageKey)
   if (existingServer) {
+    executeInitCode()
     return existingServer
   }
 
@@ -259,6 +274,7 @@ export async function requestBinder () {
           reject(new Error(msg))
           break
         case 'ready':
+          executeInitCode()
           console.debug('Binder ready, storing server and resolve', msg)
           es.close()
           storeServer(storageKey, msg)
