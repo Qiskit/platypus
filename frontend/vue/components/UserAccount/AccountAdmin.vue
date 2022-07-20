@@ -238,6 +238,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
+
     &:hover {
       background-color: $background-color-light;
       cursor: pointer;
