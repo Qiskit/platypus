@@ -112,7 +112,8 @@ const getAccountData = async (req: Request, res: Response) => {
 
   const loggedInUser = {
     firstName: req.user.firstName,
-    lastName: req.user.lastName
+    lastName: req.user.lastName,
+    email: req.user.email
   }
 
   const progressData = await getUserProgressData(req)
