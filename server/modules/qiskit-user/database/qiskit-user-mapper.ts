@@ -9,6 +9,7 @@ export class QiskitUserMapper implements OrmMapperBase<QiskitUserDocument, Qiski
     const fields = {
       id: data.id,
       apiToken: data.apiToken,
+      quantumUserId: data.quantumUserId,
       user: data.user
     }
     const cleanedFields = pickBy(fields, field => field !== undefined)
@@ -19,6 +20,7 @@ export class QiskitUserMapper implements OrmMapperBase<QiskitUserDocument, Qiski
     return {
       id: document.id,
       apiToken: document.apiToken,
+      quantumUserId: document.quantumUserId,
       user: document.user.toString()
     }
   }
