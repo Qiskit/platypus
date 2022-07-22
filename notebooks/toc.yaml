@@ -335,10 +335,10 @@
 - title: Problem Sets
   url: /problem-sets
   sections:
-    - title: Introduction
-      id: introduction
+    - title: Problem Set 1
+      id: problem_set_1
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
-      url: /problem-sets/introduction
+      url: /problem-sets/problem_set_1
 
 
 - title: Examples

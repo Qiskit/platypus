@@ -695,10 +695,10 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
   },
   content: [
     {
-      label: 'Introduction',
-      url: `${pathProblemSets}/introduction`,
+      label: 'Problem Set 1',
+      url: `${pathProblemSets}/problem_set_1`,
       segment: {
-        cta: 'introduction', location: sectionProblemSets
+        cta: 'problem_set_1', location: sectionProblemSets
       }
     }
   ]
