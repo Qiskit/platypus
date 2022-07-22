@@ -18,6 +18,9 @@ the notebooks that hold the textbook content.
 - `npm run test:nb:pylint`
   This runs _only_ pylint checks.
 
+- `npm run test:nb:vale`
+  Runs _only_ Vale 'prose linter' checks (including spellcheck).
+
 ## Files in this folder
 
 - `notebook_paths.txt`: Notebooks to run tests on.
@@ -56,6 +59,13 @@ the notebooks that hold the textbook content.
   optimized to a single line. This script checks the inline SVGs have been
   optimized, and can optimize any multi-line SVGs when run with the `--fix`
   argument.
+
+- `nb_vale.py`: Run Vale linter checks on notebooks.
+  [Vale](https://vale.sh/) is a 'prose linter', i.e. a program that checks
+  for common problems in writing, including spelling errors, wordiness, and
+  other writing malpractices. Since Vale (or any other prose linter) can't read
+  notebooks, we use this script to pull the markdown from the notebooks to a
+  temp folder, then run Vale on those files.
 
 - `missing_nb_check.sh`: Compares files in old textbook repo to this repo.
   This script checks for notebooks added to `qiskit-community/qiskit
