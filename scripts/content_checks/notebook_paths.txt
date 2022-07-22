@@ -17,10 +17,6 @@ intro/entangled-states
 #intro/visualizing-entanglement
 intro/grover-intro
 
-examples/annotations
-examples/blocks
-examples/widgets
-
 summer-school/2020/lec-00
 summer-school/2020/lec-01
 summer-school/2020/lec-02
