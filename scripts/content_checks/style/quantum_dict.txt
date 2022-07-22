@@ -20,6 +20,7 @@ Cincio
 Corcoles
 Courville
 Derks
+Deutsch
 Dunjko
 Elies
 Faehrmann
@@ -84,6 +85,7 @@ Tapp
 Temme
 Toffoli
 Vadim
+Vazirani
 Vedran
 Ville
 Vivek
@@ -103,10 +105,12 @@ ansatzes
 autoencoder
 autoencoders
 bitstring
+bitwise
 doi
 eigensolver
 eigensolvers
 eigenstate
+eigenstates
 endian
 exponentials
 expressibility
