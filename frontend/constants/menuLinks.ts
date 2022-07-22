@@ -1,5 +1,7 @@
 type SegmentData = {
-  action: string
+  action?: string,
+  cta?: string,
+  location?: string
 }
 
 /**
