@@ -335,10 +335,10 @@
 - title: Problem Sets
   url: /problem-sets
   sections:
-    - title: Problem Set 1
-      id: problem_set_1
+    - title: Single Systems Problem Set
+      id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
-      url: /problem-sets/problem_set_1
+      url: /problem-sets/single_systems_problem_set
 
 
 - title: Examples
