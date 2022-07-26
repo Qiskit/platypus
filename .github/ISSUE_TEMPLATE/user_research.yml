@@ -1,6 +1,6 @@
-name: User Research
+name: User research
 description: Define new user research
-title: User Research for ...
+title: User research for ...
 labels: ["user testing"]
 body:
   - type: markdown
