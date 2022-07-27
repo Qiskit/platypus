@@ -9,6 +9,8 @@ export class UpdateQiskitUserDto implements UpdateQiskitUser {
   @IsOptional()
   readonly apiToken?: string
 
+  quantumUserId?: string // the value is generated in the service
+
   @IsString()
   readonly user: string
 
