@@ -222,7 +222,6 @@ As a part of the development backlog planning, we have internal discussions to d
 
 If you feel that there's a test case that we have not considered, please comment in the original issue for the team to see.
 
-
 ### Pull requests
 
 Pull requests serve a double purpose:
