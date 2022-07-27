@@ -2,24 +2,8 @@ import got from 'got'
 
 import { logger } from '../logger/logger'
 
-import { IS_PRODUCTION } from '../../configuration'
-
-const QC_URL = IS_PRODUCTION ? 'https://auth.quantum-computing.ibm.com/api' : 'https://auth-dev.quantum-computing.ibm.com/api'
-
-interface LoginWithToken {
-  id: string,
-  ttl: number,
-  created: string,
-  userId: string
-}
-
-interface QCHttpError {
-  message: string
-}
-
-const isQCHttpError = (error: any): error is QCHttpError => {
-  return typeof error?.message === 'string'
-}
+import { LoginWithToken } from './quantum-computing-domain'
+import { QC_URL, isQCHttpError } from './quantum-computing-utilities'
 
 export class QuantumComputingRepository {
   static async getUserId (apiToken: string) {
