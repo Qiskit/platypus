@@ -13,6 +13,7 @@ const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
 const sectionTutorials = 'tutorials'
+const sectionProblemSets = 'problem-sets'
 
 const pathIntroductionCourse = '/course/introduction'
 const pathQuantumMachineLearning = '/course/machine-learning'
@@ -25,6 +26,7 @@ const pathPulses = '/course/quantum-hardware-pulses'
 const pathHardwareUsingCircuits = '/course/quantum-hardware'
 const pathApps = '/course/ch-applications'
 const pathLabs = '/course/ch-labs'
+const pathProblemSets = '/course/problem-sets'
 
 const tutorialsBaseUrl = 'https://qiskit.org/documentation/tutorials'
 
@@ -683,6 +685,25 @@ const QUANTUM_COMPUTING_LABS : MegaDropdownMenuGroup = {
   ]
 }
 
+const PROBLEM_SETS : MegaDropdownMenuGroup = {
+  title: {
+    label: 'Problem Sets',
+    url: `${pathProblemSets}`,
+    segment: {
+      cta: wholeSection, location: sectionProblemSets
+    }
+  },
+  content: [
+    {
+      label: 'Single Systems - Problem Set',
+      url: `${pathProblemSets}/single_systems_problem_set`,
+      segment: {
+        cta: 'single_systems_problem_set', location: sectionProblemSets
+      }
+    }
+  ]
+}
+
 const QUANTUM_CIRCUITS: MegaDropdownMenuGroup = {
   title: {
     label: 'Quantum Computing Labs',
@@ -1040,7 +1061,8 @@ const CHAPTERS_SECTION: MegaDropdownMenuSection = {
     QUANTUM_ALGORITHMS_FOR_APPS,
     INVESTIGATING_Q_HW_USING_Q_CIRCUITS,
     QUANTUM_COMPUTING_LABS,
-    GAMES_AND_DEMOS
+    GAMES_AND_DEMOS,
+    PROBLEM_SETS
   ]
 }
 

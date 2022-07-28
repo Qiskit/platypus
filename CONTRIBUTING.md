@@ -21,6 +21,7 @@ contributors and maintainers of this site and so, thank you!
   - [Setup](#setup)
   - [Assigning yourself](#assigning-yourself)
   - [Working on an issue](#working-on-an-issue)
+  - [Adding tests](#adding-tests)
   - [Pull requests](#pull-requests)
   - [Live previews](#live-previews)
   - [Code review](#code-review)
@@ -212,6 +213,14 @@ git pull
 git checkout issue-1234-new-header
 git merge main
 ```
+
+### Adding tests
+
+Our team upholds the philosphy that a healthy codebase will include the proper amount of testing — in this project, we use [Cypress](https://www.cypress.io/) as our UI testing tool of choice. 
+
+As a part of the development backlog planning, we have internal discussions to determine which scenarios should be tested. For code that requires testing, please look for notes in the original issues, as we will do our best to provide ideal, meaningful cases to test.
+
+If you feel that there's a test case that we have not considered, please comment in the original issue for the team to see.
 
 ### Pull requests
 
