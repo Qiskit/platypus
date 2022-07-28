@@ -1,12 +1,21 @@
+quantum-machine-learning/introduction
+quantum-machine-learning/vqc
+quantum-machine-learning/supervised
+quantum-machine-learning/project
+quantum-machine-learning/training
+quantum-machine-learning/qgan
+quantum-machine-learning/unsupervised
+quantum-machine-learning/pqc
+quantum-machine-learning/kernel
+quantum-machine-learning/encoding
+
+ch-applications/vqe-molecules
+
 quantum-hardware/measuring-quantum-volume
 intro/atoms-of-computation
 intro/entangled-states
 #intro/visualizing-entanglement
 intro/grover-intro
-
-examples/annotations
-examples/blocks
-examples/widgets
 
 summer-school/2020/lec-00
 summer-school/2020/lec-01

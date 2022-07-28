@@ -8,7 +8,7 @@ welcomed, useful, respected and valued. If you are thinking to contribute to
 learn.qiskit.org, you agree to abide by our [code of conduct](CODE_OF_CONDUCT.md) which
 we strongly recommend you read before continuing.
 
-Following these guidelines communicates you value the time and effort of the core
+Following these guidelines shows you value the time and effort of the core
 contributors and maintainers of this site and so, thank you!
 
 ## Table of contents
@@ -21,6 +21,7 @@ contributors and maintainers of this site and so, thank you!
   - [Setup](#setup)
   - [Assigning yourself](#assigning-yourself)
   - [Working on an issue](#working-on-an-issue)
+  - [Adding tests](#adding-tests)
   - [Pull requests](#pull-requests)
   - [Live previews](#live-previews)
   - [Code review](#code-review)
@@ -62,6 +63,78 @@ In addition issues can be opened for content-related problems such as typos or r
 
 Core contributors classify the tasks according to its nature and prioritize them
 from sprint to sprint.
+
+## Contributing content
+
+This section is for anyone that wants to improve the content of the Qiskit Textbook.
+If you want to work on the website software, please head to the next section.
+
+If you only want to work on content, you don't need to install everything, you only need:
+- [Git](https://git-scm.com/): Version control that you'll use to copy the textbook
+  repository to your computer, and submit the changes you've made back to GitHub.
+  There's a free book on Git [here](https://git-scm.com/book/en/v2), and a quickstart guide
+  to GitHub [here](https://docs.github.com/en/get-started/quickstart/hello-world).
+- [Python](https://www.python.org/): The program that runs Python code. If you've installed
+  Qiskit you should have this installed already.
+- [Jupyter notebook](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/install.html):
+  This program opens and edits the source files for the textbook.
+- [Node.js](https://nodejs.org/en/): This program runs Javascript code. You'll need this
+  to build the website locally and see how your changes render.
+
+With these installed, please follow the ['Getting Started' section in the README](https://github.com/Qiskit/platypus#getting-started)
+to automatically install everything else you'll need.
+
+The source for each page of the Qiskit Textbook is a [Jupyter Notebook](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html).
+You'll find these files in the `notebooks` directory. To create the final website,
+the building software parses each notebook in the table of contents (`notebooks/toc.yaml`)
+and converts it into a web page. Notebooks not in the table of contents (TOC) are
+ignored, so if you add new content you'll need to add it to the TOC.
+
+### Editing notebooks
+
+Open a terminal and run
+
+```
+jupyter notebook
+```
+
+This should open an application in your browser window. Navigate to the notebook
+you want to change and start editing.
+
+Jupyter notebooks use a combination of Markdown, Python code snippets, and rich
+outputs (e.g. HTML and images). If you're unfamiliar with Jupyter notebooks, check
+out [this page](https://www.earthdatascience.org/courses/intro-to-earth-data-science/file-formats/use-text-files/format-text-with-markdown-jupyter-notebook/)
+for a quick overview. The markdown also supports math via LaTeX (see a guide
+[here](https://jupyterbook.org/en/stable/content/math.html)).
+
+The Qiskit Textbook also supports some extra custom syntax to represent interactive elements. For example, the markdown below will render as an interactive quiz:
+
+```
+    q-quiz(goal="quiz1")
+        .option(x) This is the correct answer
+        .option This is a wrong answer
+        .option This is also a wrong answer
+```
+
+You can find examples of widgets and their syntax in `notebooks/examples`.
+
+### Viewing your changes
+
+To see how your changes render on the website, open a terminal and run:
+
+```
+npm run build && npm start
+```
+
+When you see `Running on port 8080 in development mode.`, you can open a browser
+and navigate to `https://localhost:8080/course/introduction/`, then navigate to
+the page you edited.
+
+### Content checks
+
+As with code, this repo contains a number of checks for the textbook's content.
+You can run a full test using `npm run test:nb`. You can read more about each
+check in `scripts/content_checks/README.md`.
 
 ## Contributing code
 
@@ -140,6 +213,14 @@ git pull
 git checkout issue-1234-new-header
 git merge main
 ```
+
+### Adding tests
+
+Our team upholds the philosphy that a healthy codebase will include the proper amount of testing — in this project, we use [Cypress](https://www.cypress.io/) as our UI testing tool of choice. 
+
+As a part of the development backlog planning, we have internal discussions to determine which scenarios should be tested. For code that requires testing, please look for notes in the original issues, as we will do our best to provide ideal, meaningful cases to test.
+
+If you feel that there's a test case that we have not considered, please comment in the original issue for the team to see.
 
 ### Pull requests
 

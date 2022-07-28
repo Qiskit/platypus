@@ -1,0 +1,29 @@
+name: User research
+description: Define new user research
+title: User research for ...
+labels: ["user testing"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to create this research story!
+
+        In most cases, the Qiskit Textbook maintainers are the only ones creating and performing user research to test new ideas. If you believe you need to create a research task, please continue and provide as much information as you can.
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+      description: Set the scene and describe the motivation to conduct this user research
+  - type: textarea
+    id: audience
+    attributes:
+      label: Audience
+      description: High-level description of the intended audience
+    validations:
+      required: true
+  - type: textarea
+    id: relevant
+    attributes:
+      label: Relevant existing research and issues
+      placeholder: |
+        e.g. Relevant issues, user stories, existing research, etc.
