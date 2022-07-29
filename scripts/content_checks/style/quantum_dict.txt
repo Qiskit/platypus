@@ -27,7 +27,9 @@ Farhi
 Fock
 Francesco
 Gacon
+Garey
 Glick
+Goemans
 Gogolin
 Goodfellow
 Griffiths
@@ -51,6 +53,7 @@ Killoran
 Koen
 Kristan
 Kulchytskyy
+Leib
 Liu
 Lucchi
 Lukasz
@@ -77,12 +80,17 @@ Shadbolt
 Shende
 Smelyanskiy
 Srinivasan
+Streif
 Sukin
 Takita
 Tanvi
 Tapp
+Technol
 Temme
 Toffoli
+Trotterization
+Trotterize
+Trotterizing
 Vadim
 Vedran
 Ville
@@ -130,6 +138,8 @@ satisfiability
 subfield
 subfields
 sudoku
+summand
+summands
 tooltip
 tooltips
 transmon
