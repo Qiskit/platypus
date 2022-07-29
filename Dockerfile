@@ -4,6 +4,8 @@ ARG IBMID_CLIENT_ID
 ARG IBMID_CLIENT_SECRET
 ARG MONGODB_URI
 
+ENV NODE_OPTIONS --max-old-space-size=4096
+
 WORKDIR /usr/app
 
 COPY converter/textbook-converter/requirements.txt converter/textbook-converter/
