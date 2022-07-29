@@ -9,7 +9,9 @@
         <div class="code-output__state-info__warning">
           <WarningIcon />
           <div>
-            The kernel may have died from inactivity. Please <BasicLink class="code-output__state-info__warning-cta" @click="refreshPage"> refresh </BasicLink> the page to run the code.
+            The kernel may have died from inactivity. Please <BasicLink class="code-output__state-info__warning-cta" @click="refreshPage">
+              refresh
+            </BasicLink> the page to run the code.
           </div>
         </div>
       </div>
@@ -85,6 +87,8 @@ export default defineComponent({
         } catch (error: any) {
           this.error = error as string
           this.outputArea!.setHidden(false)
+          // reset button back to 'Run' on inactive kernels
+          setTimeout(() => this.$emit('finished'), 800)
         }
       })
     },
