@@ -10,6 +10,7 @@ quantum-machine-learning/kernel
 quantum-machine-learning/encoding
 
 ch-applications/vqe-molecules
+ch-applications/qaoa
 
 quantum-hardware/measuring-quantum-volume
 intro/atoms-of-computation
