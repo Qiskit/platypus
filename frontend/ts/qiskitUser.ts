@@ -1,4 +1,4 @@
-export interface QiskitUser {
+interface QiskitUser {
   apiToken?: string,
   user: string
 }
