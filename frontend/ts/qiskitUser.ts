@@ -1,4 +1,3 @@
-
 export interface QiskitUser {
   apiToken?: string,
   user: string
