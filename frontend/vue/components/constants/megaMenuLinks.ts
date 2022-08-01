@@ -606,6 +606,13 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
       segment: {
         cta: 'measuring-quantum-volume', location: sectionCircuits
       }
+    },
+    {
+      label: 'The Density Matrix & Mixed States',
+      url: `${pathHardwareUsingCircuits}/density-matrix`,
+      segment: {
+        cta: 'density-matrix', location: sectionCircuits
+      }
     }
   ]
 }
