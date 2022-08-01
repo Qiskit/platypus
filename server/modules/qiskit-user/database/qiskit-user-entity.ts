@@ -5,7 +5,6 @@ import { MongooseDocumentBase } from '../../../libs/database/mongoose-document-b
 export interface QiskitUserBase {
     apiToken: string,
     quantumUserId: string,
-
     user: Types.ObjectId
 }
 
