@@ -2,7 +2,7 @@ import { Model, model, Schema, Types } from 'mongoose'
 
 import { MongooseDocumentBase } from '../../../libs/database/mongoose-document-base'
 
-export interface QiskitUserBase {
+interface QiskitUserBase {
     apiToken: string,
     quantumUserId: string,
     user: Types.ObjectId
