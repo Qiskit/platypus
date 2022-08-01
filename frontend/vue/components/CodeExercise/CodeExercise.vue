@@ -12,11 +12,22 @@
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
         :is-running="isKernelBusy"
+        :is-api-token-needed="isApiTokenNeeded"
         :run-enabled="isKernelReady"
         :grade-enabled="isKernelReady && isGradingExercise"
         @run="run"
         @grade="grade"
       />
+    </div>
+    <div v-if="isApiTokenNeeded" class="code-exercise__api-token-info">
+      <WarningIcon />
+      <div>
+        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+        <BasicLink url="/account/admin">
+          your account
+        </BasicLink>
+        to execute this code cell.
+      </div>
     </div>
     <CodeOutput
       ref="output"
@@ -37,6 +48,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
+import BasicLink from '../common/BasicLink.vue'
 import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
@@ -55,7 +68,9 @@ export default defineComponent({
   components: {
     CodeEditor,
     ExerciseActionsBar,
-    CodeOutput
+    CodeOutput,
+    BasicLink,
+    WarningIcon
   },
   props: {
     goal: {
@@ -81,6 +96,7 @@ export default defineComponent({
       isKernelBusy: false,
       isKernelReady: false,
       executedOnce: false,
+      isApiTokenNeeded: false,
       id: 0
     }
   },
@@ -92,15 +108,16 @@ export default defineComponent({
   mounted () {
     const slotWrapper = (this.$refs.initialCodeElement as HTMLDivElement)
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
-    this.code = initialCodeElement?.textContent?.trim() ?? ''
+    this.codeChanged(initialCodeElement?.textContent?.trim() ?? '')
     this.initialCode = this.code
     this.id = lastId++
   },
   methods: {
-    run () {
+    run (onHardware: boolean) {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
-      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageRoute}`)
+      const cta = onHardware ? 'Run (Hardware)' : 'Run'
+      window.textbook.trackClickEvent(cta, `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
@@ -115,6 +132,10 @@ export default defineComponent({
     },
     codeChanged (code: string) {
       this.code = code
+      const codeOutput: any = this.$refs.output
+      codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
+        this.isApiTokenNeeded = isNeeded
+      })
     },
     scratchpadCopyRequest (code: string) {
       const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
@@ -141,6 +162,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-exercise {
@@ -172,6 +194,14 @@ export default defineComponent({
       bottom: 0;
       z-index: 3;
     }
+  }
+
+  &__api-token-info {
+    @include type-style('body-long-01');
+    display: flex;
+    flex-flow: row;
+    padding: $spacing-05;
+    gap: $spacing-05;
   }
 }
 </style>
