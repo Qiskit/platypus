@@ -15,7 +15,6 @@ interface QiskitUserModel extends Model<QiskitUserDocument> { }
 const QiskitUserSchema = new Schema<QiskitUserDocument, QiskitUserModel>({
   apiToken: { type: String, default: undefined },
   quantumUserId: { type: String, default: undefined },
-
   user: { type: Types.ObjectId, ref: 'User' }
 })
 
