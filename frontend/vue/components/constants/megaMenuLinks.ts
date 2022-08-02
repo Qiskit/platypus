@@ -114,9 +114,9 @@ const QML_COURSE: MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Introduction',
-      url: `${pathQuantumMachineLearning}/machine-learning`,
+      url: `${pathQuantumMachineLearning}/introduction`,
       segment: {
-        cta: 'machine-learning', location: sectionQMLCourse
+        cta: 'introduction', location: sectionQMLCourse
       }
     },
     {
