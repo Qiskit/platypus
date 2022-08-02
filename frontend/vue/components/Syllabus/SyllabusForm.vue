@@ -86,7 +86,7 @@ export default defineComponent({
         url: '#'
       },
       cancelAction: {
-        url: '/account#Classroom',
+        url: '/account/classroom',
         label: this.$translate('Cancel'),
         segment: {
           cta: 'cancel',
