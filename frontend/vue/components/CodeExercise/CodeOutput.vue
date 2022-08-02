@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import { getQiskitUser } from '../../../ts/qiskitUser'
 import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
 import BasicLink from '../common/BasicLink.vue'
 import { OutputArea, IOutputShellFuture, createOutputArea } from './OutputRenderer'
@@ -47,7 +48,8 @@ export default defineComponent({
       kernelPromise: undefined as Promise<IKernelConnection> | undefined,
       kernel: undefined as IKernelConnection | undefined,
       outputArea: undefined as OutputArea | undefined,
-      error: ''
+      error: '',
+      apiTokenPromise: undefined as Promise<string | undefined> | undefined
     }
   },
   mounted () {
@@ -63,9 +65,43 @@ export default defineComponent({
     }, (error: Error) => {
       this.error = error.message
     })
+
+    this.apiTokenPromise = getQiskitUser().then(user => user?.apiToken)
   },
   methods: {
+    needsApiToken (code: string) {
+      return this.apiTokenPromise!.then((apiToken?: string) => {
+        return this.isBackendExecution(code) && !apiToken
+      })
+    },
+    isBackendExecution (code: string) {
+      return code.includes('IBMQ.')
+    },
     requestExecute (code: string) {
+      if (this.isBackendExecution(code)) {
+        this._executeFromBackend(code)
+      } else {
+        this._executeCode(code)
+      }
+    },
+    _executeFromBackend (code: string) {
+      this.error = ''
+      this.apiTokenPromise!.then((apiToken: string | undefined) => {
+        const accountLoadingCode = `
+        from qiskit import IBMQ
+        try:
+          IBMQ.disable_account()
+        except:
+          pass
+
+        IBMQ.enable_account('${apiToken}')
+        `
+        const codeWithAccount = `${accountLoadingCode}${code}`
+
+        this._executeCode(codeWithAccount)
+      })
+    },
+    _executeCode (code: string) {
       this.error = ''
       this.outputArea!.setHidden(true)
       this.kernelPromise!.then((kernel: IKernelConnection) => {
