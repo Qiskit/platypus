@@ -1,14 +1,14 @@
 <template>
   <div class="exercise-actions-bar">
     <button
-      v-if="runEnabled && !isRunning"
+      v-if="runEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
-      @click="run()"
+      @click="run(isApiTokenNeeded)"
     >
       {{ $translate('Run') }}
     </button>
     <button
-      v-if="gradeEnabled && !isRunning"
+      v-if="gradeEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button"
       @click="grade()"
     >
@@ -18,6 +18,9 @@
       <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
       <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
     </div>
+    <button v-if="isApiTokenNeeded" class="exercise-actions-bar__button exercise-actions-bar__button_disabled" disabled>
+      <span>{{ $translate('Run') }}</span>
+    </button>
   </div>
 </template>
 
@@ -42,12 +45,17 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: true
+    },
+    isApiTokenNeeded: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   methods: {
-    run () {
+    run (onHardware = false) {
       if (!this.isRunning) {
-        this.$emit('run')
+        this.$emit('run', onHardware)
       }
     },
     grade () {
@@ -89,6 +97,13 @@ export default defineComponent({
 
     @include bicolor-background($button-background-color-dark, $button-background-color);
     color: $button-text-color;
+
+    &_disabled {
+      background-color: $disabled-background-color;
+      background-image: none;
+      color: $text-color-lighter;
+      cursor: not-allowed;
+    }
 
     &_run {
       @include bicolor-background($button-background-color-quaternary-dark, $button-background-color-quaternary);
