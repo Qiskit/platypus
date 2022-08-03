@@ -6,8 +6,14 @@
         {{ $translate('Connecting to the server') }}
       </div>
       <div v-if="error !== ''" class="code-output__state-info">
-        <p>{{ $translate('Failed to execute. Please refresh the page.') }}</p>
-        {{ error }}
+        <div class="code-output__state-info__warning">
+          <WarningIcon />
+          <div>
+            The kernel may have died from inactivity. Please <BasicLink class="code-output__state-info__warning-cta" @click="refreshPage">
+              refresh
+            </BasicLink> the page to run the code.
+          </div>
+        </div>
       </div>
     </div>
     <div ref="outputDiv" />
@@ -16,6 +22,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import { getQiskitUser } from '../../../ts/qiskitUser'
+import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
+import BasicLink from '../common/BasicLink.vue'
 import { OutputArea, IOutputShellFuture, createOutputArea } from './OutputRenderer'
 import { requestBinderKernel, IKernelConnection, IStreamMsg } from './KernelManager'
 import 'carbon-web-components/es/components/loading/loading'
@@ -30,12 +39,17 @@ const pageRoute = window.location.pathname
 
 export default defineComponent({
   name: 'CodeOutput',
+  components: {
+    BasicLink,
+    WarningIcon
+  },
   data () {
     return {
       kernelPromise: undefined as Promise<IKernelConnection> | undefined,
       kernel: undefined as IKernelConnection | undefined,
       outputArea: undefined as OutputArea | undefined,
-      error: ''
+      error: '',
+      apiTokenPromise: undefined as Promise<string | undefined> | undefined
     }
   },
   mounted () {
@@ -51,9 +65,43 @@ export default defineComponent({
     }, (error: Error) => {
       this.error = error.message
     })
+
+    this.apiTokenPromise = getQiskitUser().then(user => user?.apiToken)
   },
   methods: {
+    needsApiToken (code: string) {
+      return this.apiTokenPromise!.then((apiToken?: string) => {
+        return this.isBackendExecution(code) && !apiToken
+      })
+    },
+    isBackendExecution (code: string) {
+      return code.includes('IBMQ.')
+    },
     requestExecute (code: string) {
+      if (this.isBackendExecution(code)) {
+        this._executeFromBackend(code)
+      } else {
+        this._executeCode(code)
+      }
+    },
+    _executeFromBackend (code: string) {
+      this.error = ''
+      this.apiTokenPromise!.then((apiToken: string | undefined) => {
+        const accountLoadingCode = `
+        from qiskit import IBMQ
+        try:
+          IBMQ.disable_account()
+        except:
+          pass
+
+        IBMQ.enable_account('${apiToken}')
+        `
+        const codeWithAccount = `${accountLoadingCode}${code}`
+
+        this._executeCode(codeWithAccount)
+      })
+    },
+    _executeCode (code: string) {
       this.error = ''
       this.outputArea!.setHidden(true)
       this.kernelPromise!.then((kernel: IKernelConnection) => {
@@ -75,6 +123,8 @@ export default defineComponent({
         } catch (error: any) {
           this.error = error as string
           this.outputArea!.setHidden(false)
+          // reset button back to 'Run' on inactive kernels
+          setTimeout(() => this.$emit('finished'), 800)
         }
       })
     },
@@ -84,6 +134,9 @@ export default defineComponent({
     clearOutput () {
       window.textbook.trackClickEvent('Reset', `Scratchpad code cell, ${pageRoute}`)
       this.outputArea!.setHidden(true)
+    },
+    refreshPage () {
+      window.location.reload()
     }
   }
 })
@@ -92,6 +145,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/spacing';
 @import '~/../scss/variables/colors.scss';
+@import 'carbon-components/scss/globals/scss/typography';
 
 .code-output {
   &__state-info {
@@ -105,6 +159,15 @@ export default defineComponent({
       width: 1.5rem;
       height: 1.5rem;
       --cds-interactive-04: #{$border-color-tertiary};
+    }
+
+    &__warning {
+      @include type-style('body-long-01');
+      display: flex;
+      flex-flow: row;
+      padding: $spacing-05;
+      gap: $spacing-05;
+      align-items: center;
     }
   }
 }

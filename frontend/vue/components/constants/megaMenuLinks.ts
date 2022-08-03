@@ -114,9 +114,9 @@ const QML_COURSE: MegaDropdownMenuGroup = {
   content: [
     {
       label: 'Introduction',
-      url: `${pathQuantumMachineLearning}/machine-learning`,
+      url: `${pathQuantumMachineLearning}/introduction`,
       segment: {
-        cta: 'machine-learning', location: sectionQMLCourse
+        cta: 'introduction', location: sectionQMLCourse
       }
     },
     {
@@ -605,6 +605,13 @@ const INVESTIGATING_Q_HW_USING_Q_CIRCUITS : MegaDropdownMenuGroup = {
       url: `${pathHardwareUsingCircuits}/measuring-quantum-volume`,
       segment: {
         cta: 'measuring-quantum-volume', location: sectionCircuits
+      }
+    },
+    {
+      label: 'The Density Matrix & Mixed States',
+      url: `${pathHardwareUsingCircuits}/density-matrix`,
+      segment: {
+        cta: 'density-matrix', location: sectionCircuits
       }
     }
   ]
