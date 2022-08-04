@@ -24,6 +24,16 @@
         @run="run"
       />
     </div>
+    <div v-if="isApiTokenNeeded" class="scratchpad__api-token-info">
+      <WarningIcon />
+      <div>
+        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+        <BasicLink url="/account/admin">
+          your account
+        </BasicLink>
+        to execute this code cell.
+      </div>
+    </div>
     <CodeOutput
       ref="output"
       @running="kernelRunning"
@@ -35,6 +45,8 @@
 
 <script lang="ts">
 import { Vue, Options } from 'vue-class-component'
+import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
+import BasicLink from '../common/BasicLink.vue'
 import CodeEditor from '../CodeExercise/CodeEditor.vue'
 import ExerciseActionsBar from '../CodeExercise/ExerciseActionsBar.vue'
 import CodeOutput from '../CodeExercise/CodeOutput.vue'
@@ -53,7 +65,9 @@ type scratchpadCopyRequestEvent = Event & { detail: { code: string } }
   components: {
     CodeEditor,
     ExerciseActionsBar,
-    CodeOutput
+    CodeOutput,
+    BasicLink,
+    WarningIcon
   }
 })
 export default class Scratchpad extends Vue {
@@ -80,6 +94,10 @@ export default class Scratchpad extends Vue {
 
   codeChanged (code: string) {
     this.code = code
+    const codeOutput: any = this.$refs.output
+    codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
+      this.isApiTokenNeeded = isNeeded
+    })
   }
 
   resetOutput () {
@@ -124,6 +142,14 @@ export default class Scratchpad extends Vue {
       bottom: 0;
       z-index: 3;
     }
+  }
+
+  &__api-token-info {
+    @include type-style('body-short-01');
+    display: flex;
+    flex-flow: row;
+    padding: $spacing-05;
+    gap: $spacing-05;
   }
 }
 </style>
