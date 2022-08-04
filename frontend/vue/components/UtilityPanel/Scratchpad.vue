@@ -20,6 +20,7 @@
         :is-running="isKernelBusy"
         :run-enabled="isKernelReady"
         :grade-enabled="isKernelReady && isGradingExercise"
+        :is-api-token-needed="isApiTokenNeeded"
         @run="run"
       />
     </div>
@@ -60,6 +61,7 @@ export default class Scratchpad extends Vue {
   isKernelBusy = false
   isKernelReady = false
   isGradingExercise = false
+  isApiTokenNeeded = false
 
   get initialCode () {
     return INITIAL_CODE
