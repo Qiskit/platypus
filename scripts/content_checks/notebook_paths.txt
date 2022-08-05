@@ -9,9 +9,13 @@ quantum-machine-learning/pqc
 quantum-machine-learning/kernel
 quantum-machine-learning/encoding
 
+ch-applications/hhl_tutorial
 ch-applications/vqe-molecules
+ch-applications/qaoa
 
 quantum-hardware/measuring-quantum-volume
+
+intro/why-quantum-computing
 intro/atoms-of-computation
 intro/entangled-states
 #intro/visualizing-entanglement
