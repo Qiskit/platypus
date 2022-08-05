@@ -27,7 +27,7 @@ the notebooks that hold the textbook content.
   At the time of writing, not all notebooks pass the tests, and some will
   need a lot of work to get them to pass. For this reason, we only run
   checks on certain notebooks. If a notebook's path is not in this file,
-  it will be ignored.
+  it will be ignored by `nb_lint` and `nb_vale`.
 
 - `nb_lint.sh`: Runs pylint on notebook code cells.
   The code examples in the textbook should meet the same standards as
@@ -39,10 +39,15 @@ the notebooks that hold the textbook content.
   pylint: disable=...` comment to avoid specific warnings (will be hidden
   on the site), but you should use this sparingly.
 
-- `goals.py`: Check each exercise has a unique goal.
+- `blips.py`: Check for important but easily fixable problems.
   Each exercise should have a unique name, and we sometimes forget to update
   names when copying and pasting quizzes. This check fails if any quizzes
   share names.
+
+  Sometimes maintainers use the internal provider (`ibm-q-internal`) when
+  updating cell outputs. This should be reset to the `ibm-q` provider before
+  pushing. This check fails if it finds `ibm-q-internal` anywhere in the
+  notebooks.
 
 - `nb_metadata.py`: Checks (and resets) notebook metadata.
   The notebook metadata is largely useless and just tells you the
