@@ -15,9 +15,9 @@ html(lang=`${req.locale.id}` dir=dir)
 
     .body
       article.c-textbook__page.c-textbook__page__error
-        div.c-textbook__page__error-container
-          h1(class="c-textbook__page__error-code" data-test="error-page-title") #{code}
-          p(class="c-textbook__page__error-message" data-test="error-page-message" id="message")
+        div.c-textbook__page__error__container
+          h1(class="c-textbook__page__error__code" data-test="error-page-title") #{code}
+          p(class="c-textbook__page__error__message" data-test="error-page-message" id="message")
           q-app-cta(
             label=`Back to Textbook home`
             url=`/`
@@ -28,7 +28,7 @@ html(lang=`${req.locale.id}` dir=dir)
             data-test="error-page-cta"
           )
           q-app-cta(
-            class="c-textbook__page__error-cta"
+            class="c-textbook__page__error__cta"
             label=`Go to Qiskit.org homepage`
             url=`https://qiskit.org`
             is-static=true
@@ -37,7 +37,7 @@ html(lang=`${req.locale.id}` dir=dir)
             segment=`error-page > go to qiskit.org`
             data-test="error-page-cta"
           )
-        div.c-textbook__page__error-img
+        div.c-textbook__page__error__img
           img(
             id="img"
             src="/images/error_page/cat1.png"

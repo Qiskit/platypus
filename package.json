@@ -30,10 +30,11 @@
     "cy:run": "cypress run",
     "test": "start-server-and-test start :8080/health cy:run",
     "test:debug": "start-server-and-test start :8080/health cy:open",
-    "test:nb:meta": "python3 ./scripts/content_checks/goals.py && python3 ./scripts/content_checks/nb_metadata.py && python3 ./scripts/content_checks/nb_svg.py",
+    "test:nb:meta": "python3 ./scripts/content_checks/blips.py && python3 ./scripts/content_checks/nb_metadata.py && python3 ./scripts/content_checks/nb_svg.py",
     "test:nb:pylint": "./scripts/content_checks/nb_pylint.sh",
+    "test:nb:vale": "python3 ./scripts/content_checks/nb_vale.py",
     "test:nb:fix": "python3 ./scripts/content_checks/nb_metadata.py --fix && python3 ./scripts/content_checks/nb_svg.py --fix",
-    "test:nb": "npm run test:nb:pylint && npm run test:nb:meta",
+    "test:nb": "npm run test:nb:pylint && npm run test:nb:meta && python3 ./scripts/content_checks/nb_vale.py --CI",
     "setup:secrets": "mgon-secrets"
   },
   "nano-staged": {
@@ -76,6 +77,7 @@
     "carbon-web-components": "^1.21.0",
     "class-validator": "^0.13.2",
     "codemirror": "^6.0.1",
+    "got": "^11.8.5",
     "lit-element": "^2.5.1",
     "lodash": "^4.17.21",
     "markdown-it": "^12.2.0",
