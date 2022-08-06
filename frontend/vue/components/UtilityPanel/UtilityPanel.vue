@@ -2,11 +2,19 @@
   <section class="utility-panel" :class="{ 'utility-panel_open': isVisible, 'utility-panel_closed': !isVisible }">
     <UtilityPanelHeader
       ref="panelHeader"
+      class="utility-panel__header"
       :label="getLabel()"
       @updatePanelStatus="togglePanel"
       @selectedPanelTitle="getSelectedPanelTitle"
     />
-    <UtilityPanelContent ref="panelContent" :selection="selectedPanelTitle" :notations-data="filteredNotations" :vocabulary-data="filteredVocabulary" @emptyStateRedirect="redirectToPanel" />
+    <UtilityPanelContent
+      ref="panelContent"
+      class="utility-panel__content"
+      :selection="selectedPanelTitle"
+      :notations-data="filteredNotations"
+      :vocabulary-data="filteredVocabulary"
+      @emptyStateRedirect="redirectToPanel"
+    />
   </section>
 </template>
 
@@ -167,22 +175,38 @@ export default class UtilityPanel extends Vue.with(Props) {
     top: 6rem;
   }
 
+  &__header {
+    flex: 0 0 auto;
+  }
+
+  &__content {
+    flex: 1 0 0;
+    overflow: auto;
+    padding-bottom: $spacing-13;
+  }
+
   &_open {
     width: 100%;
     border-left: 1px solid $border-color;
     max-width: $right-sidebar-width-xl;
     min-height: 100vh;
+    flex-direction: column;
+    display: flex;
 
-    @include mq($from: max-size) {
+    @include mq($from: x-large) {
       max-width: $right-sidebar-width-xl;
     }
 
-    @include mq($from: large, $until: max-size) {
+    @include mq($from: large, $until: x-large) {
       max-width: $right-sidebar-width-lg;
     }
 
     @include mq($from: medium, $until: large) {
       max-width: math.div($right-sidebar-width-xl, 1.5);
+    }
+
+    @include mq($from: max-size) {
+      max-width: $right-sidebar-width-max;
     }
 
     @include mq($until: medium) {

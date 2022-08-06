@@ -17,3 +17,6 @@ liveness_check:
 
 readiness_check:
   path: "/health"
+
+env_variables:
+  NODE_ENV: "production"

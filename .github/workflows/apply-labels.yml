@@ -1,0 +1,13 @@
+name: Apply labels
+
+on: pull_request
+
+jobs:
+  apply_localization_label:
+    name: Apply the "localization" label to the PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-add-labels@v1
+        if: github.event.pull_request.user.login == 'gitlocalize-app[bot]'
+        with:
+          labels: localization

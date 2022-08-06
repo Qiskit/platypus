@@ -1,13 +1,11 @@
 # platypus
-
-This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/textbook-beta/).
+This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/learn/).
 
 The previous version of the Qiskit Textbook textbook can be found [here](https://github.com/qiskit-community/qiskit-textbook).
 
 The textbook is intended for use as a university quantum algorithms course supplement as well as a guide for self-learners who are interested in learning quantum programming.
 
 ## Tools & technologies
-
 - [Python](https://www.python.org/doc/) - interpreted, interactive, object-oriented programming language
 - [Jupyter Notebooks](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html) - documents containing interactive code and rich text
 - [Node.js](https://nodejs.org/en/docs/) - JavaScript runtime
@@ -17,11 +15,8 @@ The textbook is intended for use as a university quantum algorithms course suppl
 - [Sass/SCSS](https://sass-lang.com/documentation) - stylesheet language
 - [Cypress](https://docs.cypress.io/) - front end testing tool
 
-
 ## Getting Started
-
 ### Pre-requisites
-
 1. Python (3.6 or later) environment with `textbook_converter` requirements installed
 
     ```
@@ -29,7 +24,7 @@ The textbook is intended for use as a university quantum algorithms course suppl
     $ pip install -r requirements.txt -r requirements-test.txt
     ```
 
-1. Node.js (14.0 or later)
+1. Node.js (14.0 or later) (you could install node.js from [here](https://nodejs.org/en/download/)
 
 ### Setup
 
@@ -48,11 +43,9 @@ In order to test the application locally, you can visit a specific course page, 
 
 > _You can specify the port setting the env variable `PORT`. For instance `PORT=5000 npm start`._
 
-## Contribution
+## Content contributions
 
-If you'd like to contribute to Qiskit Textbook (beta), please take a look at our [contributors guide](CONTRIBUTING.md) and [code of conduct](CODE_OF_CONDUCT.md)
-
-When opening a PR against the `main` branch, a preview build might be generated and deployed. The same redirection logic as the one described in the [Setup](#setup) section will apply, meaning that one would need to visit a specific course page to access the preview build.
+If you want to help improve the textbook's content, check out the [contributors guide](CONTRIBUTING.md), and the [code of conduct](CODE_OF_CONDUCT.md).
 
 ## License
-The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](LICENSE).
+The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](https://github.com/Qiskit/platypus/blob/main/LICENSE).

@@ -1,3 +1,4 @@
 {
-  "extends": "../node_modules/@mathigon/studio/server/tsconfig.json"
+  "extends": "../node_modules/@mathigon/studio/server/tsconfig.json",
+  "include": ["./types"]
 }

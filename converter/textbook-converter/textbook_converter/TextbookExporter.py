@@ -84,6 +84,20 @@ def handle_inline_code(line):
             line = line.replace(f"`{match}`", f"`{{code}} {match}`")
     return line
 
+def handle_inline_latex(line):
+    """Escape \{ and \} in inline equations"""
+    if "$" not in line:
+        return line
+    newline = ""
+    in_latex = False
+    for text in line.split("$"):
+        if in_latex:
+            text = text.replace(r"\{", r"\\{")
+            text = text.replace(r"\}", r"\\}")
+        newline += text + "$"
+        in_latex = not in_latex
+    return newline[:-1]
+
 
 def handle_block_comment(comment_syntax):
     """Convert syntax from:
@@ -299,6 +313,7 @@ def handle_markdown_cell(cell, resources, cell_number):
                 headings.append((id, level, title))
             markdown_lines.append(heading_text)
         else:
+            line = handle_inline_latex(line)
             line = handle_inline_code(line)
             line = handle_inline_images(line)
             markdown_lines.append(
@@ -348,16 +363,23 @@ def handle_code_cell(cell, resources):
         .replace("]]", "] ]")
     )
 
+    formatted_source = re.sub(r'[\^]?\s*# pylint:.*', '', formatted_source)
+
     graderImport = cell.metadata["grader_import"] if "grader_import" in cell.metadata else None
     graderFunction = cell.metadata["grader_function"] if "grader_function" in cell.metadata else None
+    goal = cell.metadata["goals"] if "goals" in cell.metadata else None
 
     graderAttr = ""
 
     if graderImport is not None and graderFunction is not None:
-        graderAttr = f"(grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\")"
+        graderAttr = f"{graderAttr}grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\""
+
+        if goal is not None:
+            graderAttr = f"{graderAttr} goal=\"{goal[0].id}\""
+
 
     code_lines = [
-        f"\n::: q-code-exercise{graderAttr}\n",
+        f"\n::: q-code-exercise({graderAttr})\n",
         "    pre.\n      ",
         formatted_source,
         "\n\n"

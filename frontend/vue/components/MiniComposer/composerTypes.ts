@@ -1,10 +1,14 @@
-import { GateName } from './Gate.vue'
-import { ProbabilityState } from './ProbablityChart.vue'
+import { GateName, QuantumGate, gateMap } from './gateUtils'
 
 export interface ComposerGate {
   name: GateName
   rotation?: string
   id: number
+}
+
+export interface ProbabilityState {
+  key: string
+  value: number
 }
 
 export interface ExerciseStep {
@@ -27,4 +31,8 @@ export function emptyExerciseStep (): ExerciseStep {
     endProbabilities: [],
     isCompleted: false
   }
+}
+
+export function gateMatrix (gate: ComposerGate): QuantumGate {
+  return gateMap[gate.name]
 }

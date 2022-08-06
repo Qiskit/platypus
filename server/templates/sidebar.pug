@@ -1,29 +1,31 @@
-div.sidebar_header_menu
-  a.sidebar_header_menu_toggle#app-panel-header-toggle(href='#' data-test="sidebar-button-toggle-mobile")
-    span.sidebar_header_menu_toggle__label #{__('Show index')}
+div.c-sidebar__mobile-menu
+  a.c-sidebar__mobile-menu__toggle#app-panel-header-toggle(href='#' data-test="sidebar-button-toggle-mobile")
+    span.c-sidebar__header-menu__toggle__label #{__('Show index')}
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
 
 div.c-sidebar(data-test="sidebar")
-  div.c-content-menu
+  div.c-sidebar__content-menu
     q-content-menu
 
-  nav.c-textbook__sidebar#js-sidebar
-    ul.c-sidebar__chapters
+  nav.c-sidebar__chapters-container
+    ul.c-sidebar__chapter-content
       - var c = course
       - var sidebarLocation = "chapter-sidebar-nav"
       li.c-sidebar__chapter
         span.c-sidebar__entry(data-test="sidebar-entry")
           | !{c.title}
 
-      ul.c-sidebar__sections
+      ul.c-sidebar__chapter__section-list
         for s in c.sections
-          li.c-sidebar__section(data-section-id=s.id)
+          - var isActiveSection = section && section.id === s.id
+          - var sectionClass = isActiveSection ? "c-sidebar__chapter__section c-sidebar__chapter__section--active" : "c-sidebar__chapter__section"
+          li(data-section-id=s.id class=sectionClass)
             if course && course.id === c.id
-              if section && section.id === s.id
-                .connection.connection--progress
               .connection
-              - var progclass = section && section.id === s.id ? "progress-wrapper sidebar-row active" : "progress-wrapper"
-              if section && section.id === s.id
+              if isActiveSection
+                .connection.connection--progress
+              - var progclass = isActiveSection ? "progress-wrapper sidebar-row active" : "progress-wrapper"
+              if isActiveSection
                 div(class=progclass, title=s.title)
                   x-progress(r=10 p=(progressData ? progressData.getSectionProgress(s) : 0))
               else
@@ -34,7 +36,7 @@ div.c-sidebar(data-test="sidebar")
                   , title=s.title
                 )
                   x-progress(r=10 p=(progressData ? progressData.getSectionProgress(s) : 0))
-            if section && section.id === s.id
+            if isActiveSection
               span(class="c-sidebar__entry c-sidebar__entry--active")
                 | !{s.title}
               ul.c-sidebar__subsections
@@ -61,35 +63,35 @@ div.c-sidebar(data-test="sidebar")
               )
                 | !{s.title}
 
-  div.sidebar_footer
-    nav.sidebar_footer__menu
-      a.sidebar_footer__menu_item#app-panel-footer-toggle(
+  div.c-sidebar__footer
+    nav.c-sidebar__footer__menu
+      a.c-sidebar__footer__menu__item#app-panel-footer-toggle(
         href='javascript:void(0)'
         onclick=`textbook.trackClickEvent('show-index','${sidebarLocation}')`
         title='Show/hide index'
         data-test='sidebar-button-toggle'
       )
-        span.sidebar_footer__menu_item-label #{__('Hide index')}
+        span.c-sidebar__footer__menu__item-label #{__('Hide index')}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>open-panel--left</title><path d="M28,4H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V6A2,2,0,0,0,28,4ZM4,6h6V26H4ZM28,26H12V6H28Z"/><rect data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="16" height="16"/></svg>
       if learningPath
-        a.sidebar_footer__menu_item#back-home(
+        a.c-sidebar__footer__menu__item#back-home(
           href=`${textbookHome}/course/introduction-course`
           onclick=`textbook.trackClickEvent('course-overview','${sidebarLocation}')`
           title=__('Back to course overview')
         )
-          span.sidebar_footer__menu_item-label #{__('Back to course overview')}
+          span.c-sidebar__footer__menu__item-label #{__('Back to course overview')}
           include ../../frontend/assets/images/home.svg
       else
-        a.sidebar_footer__menu_item#back-home(
+        a.c-sidebar__footer__menu__item#back-home(
           href=textbookHome
           onclick=`textbook.trackClickEvent('textbook-home','${sidebarLocation}')`
           title=__('Back to textbook home')
           data-test="back-to-home-link"
         )
-          span.sidebar_footer__menu_item-label #{__('Back to textbook home')}
+          span.c-sidebar__footer__menu__item-label #{__('Back to textbook home')}
           include ../../frontend/assets/images/home.svg
 
-      a.sidebar_footer__menu_item#app-panel-language-toggle(
+      a.c-sidebar__footer__menu__item#app-panel-language-toggle(
         href='javascript:void(0)'
         onclick=`textbook.trackClickEvent('language-selector','${sidebarLocation}')`
         title='Language selector'

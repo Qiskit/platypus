@@ -10,6 +10,7 @@ import DragAndDropCode from './components/DragAndDropCode/DragAndDropCode.vue'
 import EndUserLicenseAgreementLayout from './components/UserAccount/EndUserLicenseAgreementLayout.vue'
 import Carousel from './components/Carousel/Carousel.vue'
 import MiniComposer from './components/MiniComposer/MiniComposer.vue'
+import CircuitSandboxWidget from './components/MiniComposer/CircuitSandboxWidget.vue'
 import Quiz from './components/Quiz/Quiz.vue'
 import AppCta from './components/common/AppCta.vue'
 import ContentMenu from './components/common/ContentMenu.vue'
@@ -25,6 +26,7 @@ import Binary from './components/Binary/Binary.vue'
 import BinaryTile from './components/Binary/BinaryTile.vue'
 import SignIn from './components/SignIn/SignIn.vue'
 import UserAccountLayout from './components/UserAccount/UserAccountLayout.vue'
+import UserAccountSectionHeader from './components/UserAccount/UserAccountSectionHeader.vue'
 import AmplitudeDisk from './components/AmplitudeDisk/AmplitudeDisk.vue'
 import AmplitudeDiskWithValues from './components/AmplitudeDisk/AmplitudeDiskWithValues.vue'
 import AmplitudeAdditionDisk from './components/AmplitudeDisk/AmplitudeAdditionDisk.vue'
@@ -34,6 +36,8 @@ import StatevectorAmplitudeEncoding from './components/Statevector/StatevectorAm
 import StatevectorBinaryEncoding from './components/Statevector/StatevectorBinaryEncoding.vue'
 import CodeExercise from './components/CodeExercise/CodeExercise.vue'
 import EigenvectorWidget from './components/Eigenvector/EigenvectorWidget.vue'
+import SyllabusLayout from './components/Syllabus/SyllabusLayout.vue'
+import SyllabusCreateLayout from './components/Syllabus/SyllabusCreateLayout.vue'
 
 declare global {
   interface Window {
@@ -71,10 +75,12 @@ const components: any = {
   UniversalGlossary,
   EmptyPanel,
   MiniComposer,
+  CircuitSandboxWidget,
   Binary,
   BinaryTile,
   SignIn,
   UserAccountLayout,
+  UserAccountSectionHeader,
   AmplitudeDisk,
   AmplitudeDiskWithValues,
   AmplitudeAdditionDisk,
@@ -82,8 +88,10 @@ const components: any = {
   AmplitudeAdditionWidget,
   StatevectorAmplitudeEncoding,
   StatevectorBinaryEncoding,
+  SyllabusLayout,
+  SyllabusCreateLayout,
   CodeExercise,
-  EigenvectorWidget,
+  EigenvectorWidget
 }
 
 Object.keys(components).forEach((c) => {

@@ -4,134 +4,185 @@
 @import '../variables/mq.scss';
 @import '../variables/fonts.scss';
 
-.c-textbook {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0 0 0 auto;
-  top: 0;
+body {
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
 }
 
-.c-textbook__utility_panel {
-  position: fixed;
-  top: $qiskit-navbar-height;
-  right: 0;
-  height: auto;
+main.body {
+  padding: 0;
+  margin: 0;
   max-height: 100%;
-  overflow-y: scroll;
+  overflow: hidden;
+}
+
+.c-textbook {
+  display: flex;
+  max-height: 100%;
+  overflow: hidden;
+  position: relative;
+
   @include mq($until: medium) {
-    width: 50%;
-    height: 41px; // account for border bottom
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+      "sidebar-mobile-menu utility-panel"
+      "textbook-content textbook-content";
+    position: relative;
   }
 
-  &-open {
-    z-index: 1;
-
+  &__page {
+    grid-area: textbook-content;
+    max-height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: none;
+    flex: 1;
+    gap: $spacing-05;
+    
     @include mq($until: medium) {
-      width: 100%;
-      z-index: 2;
-      height: 100%;
+      overflow: hidden;
+    }
+
+    &__error {
+      display: flex;
+      padding: $spacing-10 $spacing-13;
+  
+      @include mq($until: x-large) {
+        padding: $spacing-10 $spacing-12;
+      }
+
+      @include mq($until: large) {
+        padding: $spacing-09 $spacing-07;
+      }
+
+      @include mq($until: medium) {
+        flex-direction: row;
+        gap: 0;
+        padding-left: $spacing-05;
+        padding-right: 0;
+      }
+
+      @include mq($until: small) {
+        flex-direction: column;
+        padding: $spacing-06 $spacing-05;
+      }
+  
+      &__container {
+        position: absolute;
+
+        @include mq($until: medium) {
+          max-width: 18rem;
+          position: relative;
+        }
+
+        @include mq($until: small) {
+          max-width: initial;
+        }
+      }
+  
+      &__code {
+        margin-bottom: $spacing-04;
+      }
+  
+      &__message {
+        margin-bottom: $spacing-06;
+      }
+
+      &__cta {
+        .app-cta_ghost[datatest="error-page-cta"]{
+          padding: $spacing-05;
+          justify-content: space-between;
+        }
+    
+        .app-cta_ghost .app-cta__icon {
+          margin-right: $spacing-02;
+        }
+      }
+  
+
+      &__img {
+        align-self: center;
+        max-width: 47rem;
+
+        @include mq($until: medium) {
+          max-width: 50%;
+        }
+
+        @include mq($until: small) {
+          max-width: initial;
+        }
+      }
     }
   }
-}
-
-.c-textbook__page {
-  background-color: $background-color-white;
-  width: $textbook-page-width;
-  transition: transform 250ms ease;
-  left: 0;
-  padding: 0 $spacing-unit $spacing-unit-small $spacing-unit-small;
-  margin: 0;
-  overflow: visible;
-  position: relative;
-  top: 0;
-  z-index: 1;
-
-  @include mq($from: medium, $until: max-size) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$left-sidebar-width} - #{$spacing-05});
-  }
-
-  @include mq($from: medium, $until: large) {
-    max-width: calc(100% - #{$right-sidebar-width-lg} - #{$spacing-10} - #{$spacing-05});
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &__error {
-    transform: translate(0);
-    top: 0;
-    position: relative;
-    transform: initial;
-    padding-left: 8rem;
-    max-width: initial;
-    padding-top: 4rem;
-    display: flex;
-
+  
+  &__sidebar--hidden .c-textbook__page {
     @include mq($until: medium) {
-      padding-left: $spacing-05;
-      flex-direction: column;
+      overflow: auto;
+    }
+  }
+  
+  .reveal-banner {
+    z-index: auto;
+    position: initial;
+    display: inline-block;
+    width: max-content;
+  }
+  
+  .page__banner {
+    height: $textbook-page-banner-height;
+  }
+
+  &__content {
+    max-width: $content-max-width;
+    padding: 0 $spacing-06 $spacing-05 $spacing-05;
+
+    x-step {
+      z-index: auto;
+    }
+  }
+  
+  .page-title {
+    @include type-style('expressive-heading-05', $fluid: true);
+    color: $text-color-dark;
+    margin-top: $spacing-06;
+    margin-bottom: $spacing-06;
+    max-width: 70%;
+  }
+
+  &__utility-panel {
+    grid-area: utility-panel;
+    max-height: 100%;
+    display: flex;
+    
+    q-utility-panel {
+      flex: 1;
     }
 
     @include mq($from: medium) {
-      padding-left: 3rem;
-      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
 
-    @include mq($from: large) {
-      padding-left: 7rem;
-      justify-content: flex-start;
-    }
-
-    &-container {
-      width: 100%;
-      max-width: $browser-small;
-
+    .utility-panel_open {
       @include mq($until: medium) {
-        max-width: 100%;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
       }
     }
-
-    &-code {
-      margin-bottom: $spacing-04;
-    }
-
-    &-message {
-      margin-bottom: $spacing-06;
-    }
-
-    &-cta .app-cta_ghost[datatest="error-page-cta"]{
-      padding: $spacing-05;
-      justify-content: space-between;
-    }
-
-    &-cta .app-cta_ghost .app-cta__icon {
-      margin-right: .25rem;
-    }
-    &-img {
-      max-width: 52rem;
-    }
   }
 }
 
-.js-show-sidebar {
-  .c-textbook__page {
-    transform: translate($left-sidebar-width, 0);
-  }
-}
-
-.c-textbook__content {
-  clear: both;
-  padding-top: calc(#{$qiskit-navbar-height} + #{$textbook-page-banner-height});
-  width: 95%;
-}
-
-.c-textbook__content,
-.c-textbook__footer {
-  max-width: $page-max-width;
-}
-
+// Fix text in code output SVGs
 circle,
 g,
 image,
@@ -141,151 +192,4 @@ polyline,
 use {
   transform-box: inherit;
   transform-origin: revert;
-}
-
-.c-textbook__footer {
-	padding-bottom: $qiskit-navbar-height;
-}
-
-img.textbook_logo {
-  margin-top: 20px;
-  max-height: 100px;
-  margin: 0px auto 20px auto;
-  display: block;
-}
-
-#page-info {
-  margin-bottom:20px;
-  max-width:70%
-}
-
-#page-title {
-  color: $text-color-dark;
-  font-size: 2.7rem;
-  font-family: $plex-sans-light;
-  line-height: 3.15rem;
-}
-
-.qv-layout.js-show-sidebar .c-textbook__page{
-  @include mq($until: large) {
-    width: calc(100% - #{$spacing-10});
-    padding: 0 32px 40px 0;
-    transform: translate($spacing-10, 0);
-  }
-}
-
-.qv-layout.js-show-sidebar .c-textbook__page .jupyter-page{
-  max-width: initial;
-  margin-top: $spacing-05;
-}
-
-// hidden sidenav styles
-.qv-layout__panel--hidden.js-show-sidebar .c-textbook__page{
-  transform: translate($spacing-10, 0);
-  width: 100%;
-  padding: 0 $spacing-07 $spacing-08 0;
-
-  @include mq($until: medium) {
-    transform: translate(0, 0);
-    width: 100%;
-    padding: $spacing-05 $spacing-07 $spacing-09 $spacing-05;
-    z-index: 0;
-    position: relative;
-    overflow: visible;
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: $browser-medium) {
-  .qv-layout:not(.qv-layout__panel--hidden) .footer-nav {
-    flex-direction: column;
-  }
-
-  .qv-layout:not(.qv-layout__panel--hidden) .footer-nav__cta__container {
-    width: 100%;
-  }
-}
-
-@media (max-width: $browser-small) {
-  .qv-layout.js-show-sidebar .c-textbook__page {
-    right: 0;
-    width: 100%;
-    transform: initial;
-    padding: $spacing-unit-small;
-  }
-
-  .c-textbook__content {
-    width: 100%;
-  }
-
-
-  .qv-layout:not(.qv-layout__panel--hidden) .c-sidebar {
-    position: absolute;
-  }
-}
-
-.qv-layout:not(.qv-layout__panel--hidden) .c-sidebar {
-  @include mq($until: large) {
-    z-index: 2;
-    width: 100%;
-    overflow-y: scroll;
-  }
-}
-
-aside.preface-summary-image {
-  width: 50%;
-  float: right;
-}
-
-@media only screen and (max-width: 1350px){
-  aside.preface-summary-image {
-    width: 66%;
-    float: none;
-    margin: auto;
-    margin-bottom: -75px;
-  }
-}
-
-div.preface-summary-text {
-  padding-top: 3em;
-  color: $text-color-light;
-}
-
-div.preface-summary-text ol {
-  margin: 3em;
-}
-div.preface-summary-text ol li{
-  margin-top: 1em;
-}
-
-div.preface-checker-pattern {
-  position: absolute;
-  left: -10px;
-  top: -10px;
-  width: 100%;
-  height: 70%;
-  background-size: $qiskit-navbar-height $qiskit-navbar-height;
-  background-image: linear-gradient(to right, $background-color-light 1px, transparent 1px), linear-gradient(to bottom, $background-color-light 1px, transparent 1px);
-  z-index: -1;
-}
-
-// hero image
-.preface-summary > aside.preface-summary-image {
-  margin: initial;
-  margin-bottom: 25px;
-  float: initial;
-}
-
-// banner
-.page__banner {
-  height: $textbook-page-banner-height;
-  position: absolute;
-  left: 0;
-  right: -#{$spacing-03};
-
-  @include mq($until: medium) {
-    top: 20px;
-    height: initial;
-  }
 }

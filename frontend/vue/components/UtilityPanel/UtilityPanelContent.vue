@@ -1,5 +1,6 @@
 <template>
-  <div class="utility-panel-content" data-test="utility-panel-content">
+  <div class="utility-panel-content" data-test="utility-panel-content" tabindex="0">
+    <Scratchpad v-if="showScratchpad" />
     <LessonNotes
       v-if="showLessonNotes"
       :notations="notationsData"
@@ -20,6 +21,7 @@ import 'carbon-web-components/es/components/data-table/table-row.js'
 import 'carbon-web-components/es/components/data-table/table-header-row'
 import LessonNotes from './LessonNotes.vue'
 import UniversalGlossary from './UniversalGlossary.vue'
+import Scratchpad from './Scratchpad.vue'
 
 class Props {
   selection = prop<any>({})
@@ -28,7 +30,7 @@ class Props {
 }
 
 @Options({
-  components: { LessonNotes, UniversalGlossary },
+  components: { LessonNotes, UniversalGlossary, Scratchpad },
   computed: {
     universalNotations: {
       get () {
@@ -45,11 +47,13 @@ class Props {
 })
 
 export default class UtilityPanelContent extends Vue.with(Props) {
-  showLessonNotes:boolean = false;
-  showUniversalGlossary:boolean = false;
-  fallbackPanelSelection = 'Glossary'
+  showLessonNotes:boolean = false
+  showUniversalGlossary:boolean = false
+  showScratchpad:boolean = false
+  fallbackPanelSelection = 'Scratchpad'
 
   chooseTitle (val: any) {
+    this.showScratchpad = val === 'Scratchpad'
     this.showLessonNotes = val === 'Lesson Notes'
     this.showUniversalGlossary = val === 'Glossary'
   }

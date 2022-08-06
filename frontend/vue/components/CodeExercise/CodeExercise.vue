@@ -5,24 +5,36 @@
         class="code-exercise__editor-block__editor"
         :code="code"
         :initial-code="initialCode"
-        :notebook-enabled="false"
+        :scratchpad-enabled="true"
         @codeChanged="codeChanged"
-        @notebookCopyRequest="notebookCopyRequest"
+        @scratchpadCopyRequest="scratchpadCopyRequest"
       />
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
         :is-running="isKernelBusy"
+        :is-api-token-needed="isApiTokenNeeded"
         :run-enabled="isKernelReady"
         :grade-enabled="isKernelReady && isGradingExercise"
         @run="run"
         @grade="grade"
       />
     </div>
+    <div v-if="isApiTokenNeeded" class="code-exercise__api-token-info">
+      <WarningIcon />
+      <div>
+        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+        <BasicLink url="/account/admin">
+          your account
+        </BasicLink>
+        to execute this code cell.
+      </div>
+    </div>
     <CodeOutput
       ref="output"
       @running="kernelRunning"
       @finished="kernelFinished"
       @kernelReady="kernelReady"
+      @correctAnswer="gradeSuccess"
     />
     <div
       ref="initialCodeElement"
@@ -36,18 +48,36 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
+import BasicLink from '../common/BasicLink.vue'
 import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
+
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
+
+let lastId = 1
+const pageRoute = window.location.pathname
 
 export default defineComponent({
   name: 'CodeExercise',
   components: {
     CodeEditor,
     ExerciseActionsBar,
-    CodeOutput
+    CodeOutput,
+    BasicLink,
+    WarningIcon
   },
   props: {
+    goal: {
+      type: String,
+      required: false,
+      default: ''
+    },
     graderImport: {
       type: String,
       required: false,
@@ -65,7 +95,9 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
-      executedOnce: false
+      executedOnce: false,
+      isApiTokenNeeded: false,
+      id: 0
     }
   },
   computed: {
@@ -76,25 +108,43 @@ export default defineComponent({
   mounted () {
     const slotWrapper = (this.$refs.initialCodeElement as HTMLDivElement)
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
-    this.code = initialCodeElement?.textContent?.trim() ?? ''
+    this.codeChanged(initialCodeElement?.textContent?.trim() ?? '')
     this.initialCode = this.code
+    this.id = lastId++
   },
   methods: {
-    run () {
+    run (onHardware: boolean) {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
+      const cta = onHardware ? 'Run (Hardware)' : 'Run'
+      window.textbook.trackClickEvent(cta, `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
       const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
       codeOutput.requestExecute(wrappedCode)
+      window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}, ${pageRoute}`)
+    },
+    gradeSuccess () {
+      if (this.goal) {
+        this.$step?.score(this.goal as string)
+      }
     },
     codeChanged (code: string) {
       this.code = code
+      const codeOutput: any = this.$refs.output
+      codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
+        this.isApiTokenNeeded = isNeeded
+      })
     },
-    notebookCopyRequest (code: string) {
-      /* TODO */
-      console.log(`NOT IMPLEMENTED: Requested a notebook copy of code: ${code}`)
+    scratchpadCopyRequest (code: string) {
+      const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
+        bubbles: true,
+        detail: { code }
+      })
+
+      window.textbook.trackClickEvent('Copy to Scratchpad', `Code cell #${this.id}, ${pageRoute}`)
+      window.dispatchEvent(scratchpadCopyRequestEvent)
     },
     kernelRunning () {
       this.isKernelBusy = true
@@ -112,6 +162,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-exercise {
@@ -133,7 +184,6 @@ export default defineComponent({
   &__editor-block {
     background-color: $background-color-lighter;
     position: relative;
-    height: 13rem;
 
     &__editor {
       height: 100%;
@@ -144,6 +194,14 @@ export default defineComponent({
       bottom: 0;
       z-index: 3;
     }
+  }
+
+  &__api-token-info {
+    @include type-style('body-long-01');
+    display: flex;
+    flex-flow: row;
+    padding: $spacing-05;
+    gap: $spacing-05;
   }
 }
 </style>
