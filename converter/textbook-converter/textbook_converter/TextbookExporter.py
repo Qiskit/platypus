@@ -349,6 +349,33 @@ def handle_code_cell_output(cell_output):
     return None
 
 
+def handle_grader_metadata(cell_metada):
+    """Parse grader metadata and return code exercise widget syntax
+    """
+    grader_attr = None
+
+    grader_import = cell_metada["grader_import"] if "grader_import" in cell_metada else None
+    grader_function = cell_metada["grader_function"] if "grader_function" in cell_metada else None
+
+    if grader_import and grader_function:
+        grader_attr = f"grader-import=\"{grader_import}\" grader-function=\"{grader_function}\""
+    else:
+        grader_id = cell_metada["grader_id"] if "grader_id" in cell_metada else None
+        grader_ex = cell_metada["grader_ex"] if "grader_ex" in cell_metada else None
+        grader_answer = cell_metada["grader_answer"] if "grader_answer" in cell_metada else None
+
+        if grader_id and grader_ex and grader_answer:
+            grader_attr = f"grader-id=\"{grader_id}\" grader-ex=\"{grader_ex}\" grader-answer=\"{grader_answer}\""
+
+    if grader_attr:
+        goal = cell_metada["goals"] if "goals" in cell_metada else None
+
+        if goal is not None:
+            grader_attr = f"{grader_attr} goal=\"{goal[0].id}\""
+
+    return f"q-code-exercise({grader_attr or ''})"
+
+
 def handle_code_cell(cell, resources):
     """Prepend code with:
 
@@ -362,24 +389,12 @@ def handle_code_cell(cell, resources):
         .replace("[[", "[ [")
         .replace("]]", "] ]")
     )
-
     formatted_source = re.sub(r'[\^]?\s*# pylint:.*', '', formatted_source)
 
-    graderImport = cell.metadata["grader_import"] if "grader_import" in cell.metadata else None
-    graderFunction = cell.metadata["grader_function"] if "grader_function" in cell.metadata else None
-    goal = cell.metadata["goals"] if "goals" in cell.metadata else None
-
-    graderAttr = ""
-
-    if graderImport is not None and graderFunction is not None:
-        graderAttr = f"{graderAttr}grader-import=\"{graderImport}\" grader-function=\"{graderFunction}\""
-
-        if goal is not None:
-            graderAttr = f"{graderAttr} goal=\"{goal[0].id}\""
-
+    grader_widget = handle_grader_metadata(cell.metadata)
 
     code_lines = [
-        f"\n::: q-code-exercise({graderAttr})\n",
+        f"\n::: {grader_widget}\n",
         "    pre.\n      ",
         formatted_source,
         "\n\n"
@@ -560,6 +575,10 @@ class TextbookExporter(Exporter):
                     nb_headings += headings
 
             elif cell.cell_type == "code" and cell.source.strip():
+                goals, resources = handle_cell_goals(id, cell, resources)
+                if goals:
+                    markdown_lines.append(f"\n---\n> id: {id}")
+                    markdown_lines.append(f'\n> goals: {" ".join(goals)}\n\n')
                 code_output, resources = handle_code_cell(cell, resources)
                 markdown_lines.append(code_output)
 

@@ -87,6 +87,21 @@ export default defineComponent({
       type: String,
       required: false,
       default: ''
+    },
+    graderId: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    graderEx: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    graderAnswer: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data () {
@@ -102,7 +117,8 @@ export default defineComponent({
   },
   computed: {
     isGradingExercise (): boolean {
-      return this.graderFunction !== '' && this.graderImport !== ''
+      return (this.graderFunction !== '' && this.graderImport !== '') ||
+        (this.graderId !== '' && this.graderEx !== '' && this.graderAnswer !== '')
     }
   },
   mounted () {
@@ -121,7 +137,14 @@ export default defineComponent({
     },
     grade () {
       const codeOutput: any = this.$refs.output
-      const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
+      let wrappedCode: string = this.code
+      if (this.graderImport && this.graderFunction) {
+        wrappedCode = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
+      } else if (this.graderId && this.graderEx && this.graderAnswer) {
+        wrappedCode = 'from qc_grader.grader.grade import grade\n' +
+          this.code + '\n' +
+          `grade(${this.graderAnswer}, '${this.graderEx}', '${this.graderId}')`
+      }
       codeOutput.requestExecute(wrappedCode)
       window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}, ${pageRoute}`)
     },
