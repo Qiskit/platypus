@@ -66,7 +66,7 @@
     "@jupyterlab/outputarea": "^3.4.4",
     "@jupyterlab/rendermime": "^3.4.4",
     "@jupyterlab/services": "^6.4.4",
-    "@lumino/widgets": "^1.31.1",
+    "@lumino/widgets": "^1.33.0",
     "@mathigon/boost": "^1.1.1",
     "@mathigon/euclid": "^1.1.1",
     "@mathigon/studio": "0.1.16",
