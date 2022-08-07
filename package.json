@@ -57,7 +57,7 @@
     "@carbon/vue": "^2.43.1",
     "@ckeditor/ckeditor5-build-classic": "^34.0.0",
     "@ckeditor/ckeditor5-vue": "^4.0.1",
-    "@codemirror/lang-python": "^6.0.0",
+    "@codemirror/lang-python": "^6.0.1",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.0.2",
     "@jupyter-widgets/html-manager": "^0.20.1",
