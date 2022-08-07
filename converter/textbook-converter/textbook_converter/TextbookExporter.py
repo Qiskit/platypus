@@ -354,18 +354,14 @@ def handle_grader_metadata(cell_metada):
     """
     grader_attr = None
 
-    grader_import = cell_metada["grader_import"] if "grader_import" in cell_metada else None
-    grader_function = cell_metada["grader_function"] if "grader_function" in cell_metada else None
-
-    if grader_import and grader_function:
-        grader_attr = f"grader-import=\"{grader_import}\" grader-function=\"{grader_function}\""
-    else:
-        grader_id = cell_metada["grader_id"] if "grader_id" in cell_metada else None
-        grader_ex = cell_metada["grader_ex"] if "grader_ex" in cell_metada else None
-        grader_answer = cell_metada["grader_answer"] if "grader_answer" in cell_metada else None
-
-        if grader_id and grader_ex and grader_answer:
-            grader_attr = f"grader-id=\"{grader_id}\" grader-ex=\"{grader_ex}\" grader-answer=\"{grader_answer}\""
+    if "grader_import" in cell_metada and "grader_function" in cell_metada:
+        grader_import = cell_metada["grader_import"]
+        grader_function = cell_metada["grader_function"]
+        grader_attr = f'grader-import="{grader_import}" grader-function="{grader_function}"'
+    elif "grader_id" in cell_metada and "grader_answer" in cell_metada:
+        grader_id = cell_metada["grader_id"]
+        grader_answer = cell_metada["grader_answer"]
+        grader_attr = f'grader-id="{grader_id}" grader-answer="{grader_answer}"'
 
     if grader_attr:
         goal = cell_metada["goals"] if "goals" in cell_metada else None
