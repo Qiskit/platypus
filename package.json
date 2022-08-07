@@ -69,7 +69,7 @@
     "@lumino/widgets": "^1.31.1",
     "@mathigon/boost": "^1.1.1",
     "@mathigon/euclid": "^1.1.1",
-    "@mathigon/studio": "0.1.16",
+    "@mathigon/studio": "0.1.24",
     "@qiskit-community/qiskit-vue": "^3.4.0",
     "@qiskit/web-components": "^0.6.0",
     "@webcomponents/webcomponentsjs": "^2.6.0",
