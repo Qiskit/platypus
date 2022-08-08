@@ -38,7 +38,7 @@
     />
     <div
       ref="initialCodeElement"
-      class="code-exercise__initial-code"
+      class="code-exercise__initial-code jp-OutputArea"
       :class="{'code-exercise__initial-code__hidden-output': executedOnce}"
     >
       <slot />
