@@ -6,40 +6,42 @@
     <p class="scratchpad__description">
       <strong>{{ $translate('Note') }}: </strong>{{ $translate('Code in the scratchpad will not be saved.') }}
     </p>
-    <div class="scratchpad__editor-block">
-      <CodeEditor
-        class="scratchpad__editor-block__editor"
-        :code="code"
-        :initial-code="initialCode"
-        :scratchpad-enabled="false"
-        @codeChanged="codeChanged"
-        @resetOutput="resetOutput"
-      />
-      <ExerciseActionsBar
-        class="scratchpad__editor-block__actions-bar"
-        :is-running="isKernelBusy"
-        :run-enabled="isKernelReady"
-        :grade-enabled="isKernelReady && isGradingExercise"
-        :is-api-token-needed="isApiTokenNeeded"
-        @run="run"
-      />
-    </div>
-    <div v-if="isApiTokenNeeded" class="scratchpad__api-token-info">
-      <WarningIcon />
-      <div>
-        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
-        <BasicLink url="/account/admin">
-          your account
-        </BasicLink>
-        to execute this code cell.
+    <div class="code-exercise">
+      <div class="scratchpad__editor-block">
+        <CodeEditor
+          class="scratchpad__editor-block__editor"
+          :code="code"
+          :initial-code="initialCode"
+          :scratchpad-enabled="false"
+          @codeChanged="codeChanged"
+          @resetOutput="resetOutput"
+        />
+        <ExerciseActionsBar
+          class="scratchpad__editor-block__actions-bar"
+          :is-running="isKernelBusy"
+          :run-enabled="isKernelReady"
+          :grade-enabled="isKernelReady && isGradingExercise"
+          :is-api-token-needed="isApiTokenNeeded"
+          @run="run"
+        />
       </div>
+      <div v-if="isApiTokenNeeded" class="scratchpad__api-token-info">
+        <WarningIcon />
+        <div>
+          This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+          <BasicLink url="/account/admin">
+            your account
+          </BasicLink>
+          to execute this code cell.
+        </div>
+      </div>
+      <CodeOutput
+        ref="output"
+        @running="kernelRunning"
+        @finished="kernelFinished"
+        @kernelReady="kernelReady"
+      />
     </div>
-    <CodeOutput
-      ref="output"
-      @running="kernelRunning"
-      @finished="kernelFinished"
-      @kernelReady="kernelReady"
-    />
   </div>
 </template>
 
