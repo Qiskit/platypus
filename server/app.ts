@@ -209,6 +209,24 @@ const start = () => {
         translationsJSON
       })
     })
+    .get('/exams/:section', async (req, res, next) => {
+      // example URL: /exams/intro-practice-exam
+      // :section - refers to the exam id
+
+      req.params.course = 'exams'
+      const courseData = await getCourseData(req)
+
+      courseData?.course.sections.forEach((section: any) => {
+        // Mathigon by default sets url as 'course/'
+        section.url = section.url.replace('course/exams/', 'exams/')
+      })
+
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
     .get('/summer-school/:course', (req, res, next) => {
       // redirect to first lecture when no lecture specified
       const course = getCourse(req.params.course, req.locale.id)
