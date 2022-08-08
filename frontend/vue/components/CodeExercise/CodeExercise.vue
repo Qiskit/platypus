@@ -38,8 +38,8 @@
     />
     <div
       ref="initialCodeElement"
-      class="code-exercise__initial-code"
-      :class="{'code-exercise__initial-code__hidden-output': executedOnce}"
+      class="code-exercise__initial-code jp-OutputArea"
+      :class="{'code-exercise__initial-code__hidden-output': hideInitialOutput}"
     >
       <slot />
     </div>
@@ -105,7 +105,7 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
-      executedOnce: false,
+      hideInitialOutput: false,
       isApiTokenNeeded: false,
       id: 0
     }
@@ -119,9 +119,13 @@ export default defineComponent({
   mounted () {
     const slotWrapper = (this.$refs.initialCodeElement as HTMLDivElement)
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
+    const initialOutput = slotWrapper.getElementsByTagName('output')
     this.codeChanged(initialCodeElement?.textContent?.trim() ?? '')
     this.initialCode = this.code
     this.id = lastId++
+    if (initialOutput.length === 0) {
+      this.hideInitialOutput = true
+    }
   },
   methods: {
     run (onHardware: boolean) {
@@ -167,7 +171,7 @@ export default defineComponent({
     },
     kernelRunning () {
       this.isKernelBusy = true
-      this.executedOnce = true
+      this.hideInitialOutput = true
     },
     kernelFinished () {
       this.isKernelBusy = false
