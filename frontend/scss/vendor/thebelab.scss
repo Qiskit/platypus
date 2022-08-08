@@ -114,29 +114,42 @@ div.jb_input div.input {
 
 .CodeMirror {
   font-family: $plex-mono;
-  font-size: 0.9em;
 }
 
 x-step, .code-output {
-  .jp-OutputArea-output {
     pre {
       font-family: $plex-mono;
       margin: 0;
       white-space: pre-wrap;
       word-wrap: break-word;
     }
-  }
 }
 
-div.jp-OutputArea-output {
+.code-exercise__editor-block, .scratchpad__editor-block{
+    border-bottom: 1px solid $border-color;
+    margin-bottom: -1px;  // To avoid double border when cell is running
+}
+
+.code-exercise {
+  border: 1px solid $border-color;
+  margin: $spacing-07 0;
+}
+
+.jp-OutputArea, .code-exercise__initial-code {
   padding: 18px;
+  padding-top: 19px;  // To account for negative margin in editor block
+  font-size: 12px;
 }
 
-div.jp-OutputArea > :first-child {
-  border-top: 1px solid $border-color !important;
+.code-exercise__initial-code__hidden-output, .jp-OutputArea:empty {
+  display: none;
 }
 
 .jp-OutputArea-child {
   background-color: $background-color-white;
-  padding: 18px;
+}
+
+.jp-OutputArea-prompt {
+  // Contains the cell execution no. (e.g. `[3]`)
+  display: none;
 }
