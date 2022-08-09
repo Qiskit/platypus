@@ -16,7 +16,8 @@
     </button>
     <div v-if="isRunning" class="exercise-actions-bar__running-indicator">
       <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
-      <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
+      <span v-if="isGrading" class="exercise-actions-bar__running-indicator__label">{{ $translate('Grading') }}</span>
+      <span v-else class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
     </div>
     <button v-if="isApiTokenNeeded" class="exercise-actions-bar__button exercise-actions-bar__button_disabled" disabled>
       <span>{{ $translate('Run') }}</span>
@@ -52,14 +53,21 @@ export default defineComponent({
       default: true
     }
   },
+  data () {
+    return {
+      isGrading: false
+    }
+  },
   methods: {
     run (onHardware = false) {
       if (!this.isRunning) {
+        this.isGrading = false
         this.$emit('run', onHardware)
       }
     },
     grade () {
       if (!this.isRunning) {
+        this.isGrading = true
         this.$emit('grade')
       }
     }
