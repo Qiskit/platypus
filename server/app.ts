@@ -246,7 +246,7 @@ const start = () => {
       if (!courseData) {
         return next()
       } else {
-        // prevent showing navigation but to next/prev course
+        // prevent showing navigation to next/prev course
         delete courseData.nextSection
         delete courseData.prevSection
 
