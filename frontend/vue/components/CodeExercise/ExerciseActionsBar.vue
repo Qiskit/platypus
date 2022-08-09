@@ -14,10 +14,10 @@
     >
       {{ $translate('Grade') }}
     </button>
-    <div v-if="isRunning" class="exercise-actions-bar__running-indicator">
-      <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
-      <span v-if="isGrading" class="exercise-actions-bar__running-indicator__label">{{ $translate('Grading') }}</span>
-      <span v-else class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
+    <div v-if="isRunning" class="exercise-actions-bar__indicator" :class="{ 'exercise-actions-bar__indicator__grading': isGrading }">
+      <bx-loading class="exercise-actions-bar__indicator__icon" assistive-text="Running" type="small" />
+      <span v-if="isGrading" class="exercise-actions-bar__indicator__label">{{ $translate('Grading') }}</span>
+      <span v-else class="exercise-actions-bar__indicator__label">{{ $translate('Running') }}</span>
     </div>
     <button v-if="isApiTokenNeeded" class="exercise-actions-bar__button exercise-actions-bar__button_disabled" disabled>
       <span>{{ $translate('Run') }}</span>
@@ -118,7 +118,7 @@ export default defineComponent({
     }
   }
 
-  &__running-indicator {
+  &__indicator {
     display: flex;
     height: 2.25rem;
     background-color: $button-background-color-quaternary;
@@ -135,6 +135,10 @@ export default defineComponent({
     }
     &__label {
       color: $button-text-color;
+    }
+
+    &__grading {
+      background-color: $button-background-color;
     }
   }
 }
