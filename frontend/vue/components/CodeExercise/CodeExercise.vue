@@ -12,11 +12,22 @@
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
         :is-running="isKernelBusy"
+        :is-api-token-needed="isApiTokenNeeded"
         :run-enabled="isKernelReady"
         :grade-enabled="isKernelReady && isGradingExercise"
         @run="run"
         @grade="grade"
       />
+    </div>
+    <div v-if="isApiTokenNeeded" class="code-exercise__api-token-info">
+      <WarningIcon />
+      <div>
+        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+        <BasicLink url="/account/admin">
+          your account
+        </BasicLink>
+        to execute this code cell.
+      </div>
     </div>
     <CodeOutput
       ref="output"
@@ -27,8 +38,8 @@
     />
     <div
       ref="initialCodeElement"
-      class="code-exercise__initial-code"
-      :class="{'code-exercise__initial-code__hidden-output': executedOnce}"
+      class="code-exercise__initial-code jp-OutputArea"
+      :class="{'code-exercise__initial-code__hidden-output': hideInitialOutput}"
     >
       <slot />
     </div>
@@ -37,6 +48,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import WarningIcon from '@carbon/icons-vue/lib/warning--alt/32'
+import BasicLink from '../common/BasicLink.vue'
 import CodeEditor from './CodeEditor.vue'
 import ExerciseActionsBar from './ExerciseActionsBar.vue'
 import CodeOutput from './CodeOutput.vue'
@@ -55,7 +68,9 @@ export default defineComponent({
   components: {
     CodeEditor,
     ExerciseActionsBar,
-    CodeOutput
+    CodeOutput,
+    BasicLink,
+    WarningIcon
   },
   props: {
     goal: {
@@ -72,6 +87,16 @@ export default defineComponent({
       type: String,
       required: false,
       default: ''
+    },
+    graderId: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    graderAnswer: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data () {
@@ -80,31 +105,46 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
-      executedOnce: false,
+      hideInitialOutput: false,
+      isApiTokenNeeded: false,
       id: 0
     }
   },
   computed: {
     isGradingExercise (): boolean {
-      return this.graderFunction !== '' && this.graderImport !== ''
+      return (this.graderFunction !== '' && this.graderImport !== '') ||
+        (this.graderId !== '' && this.graderAnswer !== '')
     }
   },
   mounted () {
     const slotWrapper = (this.$refs.initialCodeElement as HTMLDivElement)
     const initialCodeElement = slotWrapper.getElementsByTagName('pre')[0]
-    this.code = initialCodeElement?.textContent?.trim() ?? ''
+    const initialOutput = slotWrapper.getElementsByTagName('output')
+    this.codeChanged(initialCodeElement?.textContent?.trim() ?? '')
     this.initialCode = this.code
     this.id = lastId++
+    if (initialOutput.length === 0) {
+      this.hideInitialOutput = true
+    }
   },
   methods: {
-    run () {
+    run (onHardware: boolean) {
       const codeOutput: any = this.$refs.output
       codeOutput.requestExecute(this.code)
-      window.textbook.trackClickEvent('Run', `Code cell #${this.id}, ${pageRoute}`)
+      const cta = onHardware ? 'Run (Hardware)' : 'Run'
+      window.textbook.trackClickEvent(cta, `Code cell #${this.id}, ${pageRoute}`)
     },
     grade () {
       const codeOutput: any = this.$refs.output
-      const wrappedCode: string = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
+      let wrappedCode: string = this.code
+      if (this.graderImport && this.graderFunction) {
+        wrappedCode = this.graderImport + '\n' + this.code + '\n' + this.graderFunction
+      } else if (this.graderAnswer && this.graderId.includes('/')) {
+        const [challengeId, exerciseId] = this.graderId.split('/')
+        wrappedCode = 'from qc_grader.grader.grade import grade\n' +
+          this.code + '\n' +
+          `grade(${this.graderAnswer}, '${exerciseId}', '${challengeId}')`
+      }
       codeOutput.requestExecute(wrappedCode)
       window.textbook.trackClickEvent('Grade', `Code cell #${this.id}, ${this.goal}, ${pageRoute}`)
     },
@@ -115,6 +155,10 @@ export default defineComponent({
     },
     codeChanged (code: string) {
       this.code = code
+      const codeOutput: any = this.$refs.output
+      codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
+        this.isApiTokenNeeded = isNeeded
+      })
     },
     scratchpadCopyRequest (code: string) {
       const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
@@ -127,7 +171,7 @@ export default defineComponent({
     },
     kernelRunning () {
       this.isKernelBusy = true
-      this.executedOnce = true
+      this.hideInitialOutput = true
     },
     kernelFinished () {
       this.isKernelBusy = false
@@ -141,6 +185,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/colors.scss';
 
 .code-exercise {
@@ -172,6 +217,14 @@ export default defineComponent({
       bottom: 0;
       z-index: 3;
     }
+  }
+
+  &__api-token-info {
+    @include type-style('body-long-01');
+    display: flex;
+    flex-flow: row;
+    padding: $spacing-05;
+    gap: $spacing-05;
   }
 }
 </style>
