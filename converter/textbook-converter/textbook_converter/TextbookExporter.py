@@ -336,7 +336,7 @@ def handle_code_cell_output(cell_output):
         if "text/html" in cell_output["data"]:
             return "".join(cell_output["data"]["text/html"])
         if "text/latex" in cell_output["data"]:
-            return "".join(cell_output["data"]["text/latex"])
+            return "".join(cell_output["data"]["text/latex"]).strip().replace("$$", "")
         elif "text/plain" in cell_output["data"]:
             return f"pre \n{INDENT}| " + "".join(
                 cell_output["data"]["text/plain"]
@@ -408,9 +408,15 @@ def handle_code_cell(cell, resources):
     if include_output is not False and len(cell.outputs):
         code_lines.append(f'\n    output\n')
         for cell_output in cell.outputs:
+            is_latex = "data" in cell_output and "text/latex" in cell_output["data"]
             output = handle_code_cell_output(cell_output) or ""
             if output.startswith("pre"):
                 output = f"{INDENT * 2}" + output.replace("\n", f"\n{INDENT * 2}")
+                code_lines.append(f"{output}\n\n")
+            elif is_latex:
+                output = f"{INDENT * 2}div.md.\n{INDENT * 3}```latex\n{INDENT * 3}" + output.replace(
+                    "\n", f"\n{INDENT * 3}"
+                ).strip() + f"\n{INDENT * 3}```"
                 code_lines.append(f"{output}\n\n")
             elif len(output):
                 output = f"{INDENT * 2}div.\n{INDENT * 3}" + output.replace(
