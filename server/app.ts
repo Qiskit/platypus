@@ -253,6 +253,28 @@ const start = () => {
         res.render('textbook', courseData)
       }
     })
+    .get('/problem-sets/:section', async (req, res, next) => {
+      // example URL: /problem-sets/single_systems_problem_set
+      // :section - refers to the problem-set id
+
+      req.params.course = 'problem-sets'
+      const courseData = await getCourseData(req)
+
+      courseData?.course.sections.forEach((section: any) => {
+        // Mathigon by default sets url as 'course/'
+        section.url = section.url.replace('course/problem-sets/', 'problem-sets/')
+      })
+
+      if (!courseData) {
+        return next()
+      } else {
+        // prevent showing navigation to next/prev course
+        delete courseData.nextSection
+        delete courseData.prevSection
+
+        res.render('textbook', courseData)
+      }
+    })
     .get('/course/:course/:section', async (req, res, next) => {
       const courseData = await getCourseData(req)
 
