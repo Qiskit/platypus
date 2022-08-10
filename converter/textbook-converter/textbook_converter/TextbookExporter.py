@@ -247,7 +247,7 @@ def handle_markdown_cell(cell, resources, cell_number):
 
     for count, line in enumerate(lines):
         if latex:
-            if line.rstrip().endswith("$$"):
+            if line.rstrip(" .").endswith("$$"):
                 l = line.replace("$$", "")
                 markdown_lines.append(f"{l}\n" if len(l) else l)
                 markdown_lines.append("```\n")
@@ -260,7 +260,7 @@ def handle_markdown_cell(cell, resources, cell_number):
         elif line.lstrip().startswith("$$"):
             markdown_lines.append("```latex\n")
             l = line.replace("$$", "", 1)
-            if l.rstrip().endswith("$$"):
+            if l.rstrip(" .").endswith("$$"):
                 l = l.replace("$$", "")
                 markdown_lines.append(f"{l}\n" if len(l) else l)
                 markdown_lines.append("```\n")
