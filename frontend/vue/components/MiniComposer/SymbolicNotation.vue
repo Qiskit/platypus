@@ -29,7 +29,7 @@ export default class SymbolicNotation extends Vue.with(Props) {
   }
 
   renderTex () {
-    require('mathjax-full/es5/tex-chtml.js')
+    require('mathjax-full/es5/tex-chtml-full.js')
 
     const MathJax = window.MathJax
     const output = this.output
