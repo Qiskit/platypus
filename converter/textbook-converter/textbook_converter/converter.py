@@ -22,7 +22,9 @@ def get_notebook_node(nb_file_path):
     return None
 
 
-def convert_notebook_node(nb_node, file_name, output_dir, section_id=''):
+def convert_notebook_node(
+    nb_node, file_name, output_dir, section_id='', is_problem_set=False
+):
     """Convert notebook node
     """
     try:
@@ -30,7 +32,8 @@ def convert_notebook_node(nb_node, file_name, output_dir, section_id=''):
         resources = {
             'textbook': {
                 'id': file_name,
-                'section': section_id
+                'section': section_id,
+                'is_problem_set': is_problem_set
             }
         }
 
@@ -128,7 +131,9 @@ def append_to_index(resources, output_path):
             index_file.write(f'{yaml.dump(content)}')
 
 
-def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None, section_id=None):
+def convert_notebook_file(
+    nb_file_path, output_dir=None, shared_dir=None, section_id=None, is_problem_set=False
+):
     """Convert notebook file to Mathigon markdown format
     """
     nb_path = Path(nb_file_path).resolve()
@@ -157,7 +162,8 @@ def convert_notebook_file(nb_file_path, output_dir=None, shared_dir=None, sectio
             nb_node,
             file_name,
             output_path,
-            section_id
+            section_id,
+            is_problem_set=is_problem_set
         )
 
         if body:
@@ -240,6 +246,27 @@ def get_order_from_toc(toc_file_path, md_dir_path):
     return chapter['title'], list(map(get_sections, chapter['sections']))
 
 
+def standalone(md_dir, section):
+    """Turn section into a standalone course
+    """
+    md_dir_path = Path(md_dir).resolve()
+
+    if not md_dir_path.exists():
+        print(f'{md_dir_path} not found')
+        return None
+
+    if not md_dir_path.is_dir():
+        print(f'{md_dir_path} is not a directory')
+        return None
+
+    # section md file name
+    md_file_name = section['url'].split('/')[-1] + '.md'
+    # rename md file to required name: `content.md`
+    Path(md_dir_path / Path(md_file_name)).rename(Path(md_dir_path / Path('content.md')))
+    # move section files into own directory
+    md_dir_path.rename(Path(md_dir_path.parent / Path(section['id'])))
+
+
 def merge(md_dir, toc_file_path, output_dir=None):
     """Merge markdown files in directory into single file
     """
@@ -283,7 +310,8 @@ def convert(
     nb_file_or_dir_path,
     output_dir='',
     shared_dir='shared',
-    section_id=None
+    section_id=None,
+    is_problem_set=False
 ):
     """Convert notebook file or files in directory to Mathigon markdown
     """
@@ -298,7 +326,8 @@ def convert(
             nb_file_or_dir_path,
             output_dir=output_dir,
             shared_dir=shared_dir,
-            section_id=section_id
+            section_id=section_id,
+            is_problem_set=is_problem_set
         )
     else:
         convert_notebook_directory(
