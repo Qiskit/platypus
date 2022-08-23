@@ -18,17 +18,34 @@ describe('All pages', () => {
     cy.request('courseList/').then((response) => {
       const courseList = response.body
       const courseUrls = []
-      courseList.forEach(({ sections }) => {
-        sections.forEach(({ pageUrl }) => {
-          courseUrls.push(pageUrl)
-        })
+      const courseProblemSets = []
+      const sitemapUrls = []
+
+      // loop through courseList splitting problem-sets from courses
+      courseList.forEach(({ url, sections }) => {
+        if (url.startsWith('/problem-sets')) {
+          sections.forEach(({ id }) => {
+            courseProblemSets.push(id)
+          })
+        } else {
+          sections.forEach(({ pageUrl }) => {
+            courseUrls.push(pageUrl)
+          })
+        }
       })
       const urlsFromCourseList = [...new Set(courseUrls)]
 
-      // make sure course list from sitemap matches course list from API
+      // loop through sitemap skipping problem-sets
+      urlsFromSitemap.forEach((url) => {
+        if (courseProblemSets.indexOf(url.split('/')[2]) == -1) {
+          sitemapUrls.push(url)
+        }
+      })
+
+      // make sure course list from sitemap matches course list from API (minus problem-sets)
       urlsFromCourseList.sort()
-      urlsFromSitemap.sort()
-      expect(urlsFromCourseList).to.deep.eq(urlsFromSitemap)
+      sitemapUrls.sort()
+      expect(urlsFromCourseList).to.deep.eq(sitemapUrls)
     })
   })
 
