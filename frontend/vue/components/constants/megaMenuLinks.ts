@@ -26,7 +26,7 @@ const pathPulses = '/course/quantum-hardware-pulses'
 const pathHardwareUsingCircuits = '/course/quantum-hardware'
 const pathApps = '/course/ch-applications'
 const pathLabs = '/course/ch-labs'
-const pathProblemSets = '/course/problem-sets'
+const pathProblemSets = '/problem-sets'
 
 const tutorialsBaseUrl = 'https://qiskit.org/documentation/tutorials'
 
