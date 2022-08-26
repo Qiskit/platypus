@@ -26,6 +26,10 @@ import { FindSyllabiController } from './modules/syllabus/commands/find-syllabi/
 import { FindSyllabusByCodeController } from './modules/syllabus/commands/find-syllabus-by-code/find-syllabus-by-code-controller'
 import { UpdateSyllabusController } from './modules/syllabus/commands/update-syllabus/update-syllabus-controller'
 
+// QiskitUser
+import { UpdateQiskitUserController } from './modules/qiskit-user/commands/update-qiskit-user/update-qiskit-user-controller'
+import { FindQiskitUserController } from './modules/qiskit-user/commands/find-qiskit-user/find-qiskit-user-controller'
+
 // Logger
 import { logger } from './libs/logger/logger'
 
@@ -108,7 +112,8 @@ const getAccountData = async (req: Request, res: Response) => {
 
   const loggedInUser = {
     firstName: req.user.firstName,
-    lastName: req.user.lastName
+    lastName: req.user.lastName,
+    email: req.user.email
   }
 
   const progressData = await getUserProgressData(req)
@@ -127,7 +132,7 @@ const start = () => {
   new MathigonStudioApp()
     .get('/health', (req, res) => res.status(200).send('ok')) // Server Health Checks
     .secure()
-    .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus'] })
+    .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus', '/qiskit-user'] })
     // .redirects({'/login': '/signin'})
     .accounts()
     .redirects({
@@ -183,9 +188,10 @@ const start = () => {
 
       res.redirect('/logout')
     })
-    .get('/account', getAccountData)
+    .get('/account', (req, res) => res.redirect('/account/learning'))
+    .get('/account/learning', getAccountData)
     .get('/account/classroom', getAccountData)
-    .get('/account/privacy', getAccountData)
+    .get('/account/admin', getAccountData)
     .get('/eula', (req, res) => {
       if (!req.user) {
         return res.redirect('/signin')
@@ -217,6 +223,28 @@ const start = () => {
       courseData?.course.sections.forEach((section: any) => {
         // Mathigon by default set url as 'course/'
         section.url = section.url.replace('course/', 'summer-school/')
+      })
+
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
+    .get('/problem-sets/:course', (req, res, next) => {
+      // redirect to first question if none is specified
+      const course = getCourse(req.params.course, req.locale.id)
+      return course ? res.redirect(`/problem-sets/${course.id}/${course.sections[0].id}`) : next()
+    })
+    .get('/problem-sets/:course/:section', async (req, res, next) => {
+      // :course - refers to the problem-set id
+      // :section - refers to the question id
+      // example URL: /problem-sets/single_systems_problem_set/problem-1
+      const courseData = await getCourseData(req)
+
+      courseData?.course.sections.forEach((section: any) => {
+        // Mathigon by default sets url as 'course/'
+        section.url = section.url.replace('course/', 'problem-sets/')
       })
 
       if (!courseData) {
@@ -301,6 +329,8 @@ const start = () => {
     .post('/syllabus', CreateSyllabusController)
     // Here we use POST instead of PUT because Mathigon doesn't support PUT requests
     .post('/syllabus/:id', UpdateSyllabusController)
+    .get('/qiskit-user', FindQiskitUserController)
+    .post('/qiskit-user', UpdateQiskitUserController)
     .course({})
     .errors()
     .listen()

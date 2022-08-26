@@ -1,23 +1,27 @@
 <template>
   <div class="exercise-actions-bar">
     <button
-      v-if="runEnabled && !isRunning"
+      v-if="runEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
-      @click="run()"
+      @click="run(isApiTokenNeeded)"
     >
       {{ $translate('Run') }}
     </button>
     <button
-      v-if="gradeEnabled && !isRunning"
+      v-if="gradeEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button"
       @click="grade()"
     >
       {{ $translate('Grade') }}
     </button>
-    <div v-if="isRunning" class="exercise-actions-bar__running-indicator">
-      <bx-loading class="exercise-actions-bar__running-indicator__icon" assistive-text="Running" type="small" />
-      <span class="exercise-actions-bar__running-indicator__label">{{ $translate('Running') }}</span>
+    <div v-if="isRunning" class="exercise-actions-bar__indicator" :class="{ 'exercise-actions-bar__indicator__grading': isGrading }">
+      <bx-loading class="exercise-actions-bar__indicator__icon" assistive-text="Running" type="small" />
+      <span v-if="isGrading" class="exercise-actions-bar__indicator__label">{{ $translate('Grading') }}</span>
+      <span v-else class="exercise-actions-bar__indicator__label">{{ $translate('Running') }}</span>
     </div>
+    <button v-if="isApiTokenNeeded" class="exercise-actions-bar__button exercise-actions-bar__button_disabled" disabled>
+      <span>{{ $translate('Run') }}</span>
+    </button>
   </div>
 </template>
 
@@ -42,16 +46,28 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: true
+    },
+    isApiTokenNeeded: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+  data () {
+    return {
+      isGrading: false
     }
   },
   methods: {
-    run () {
+    run (onHardware = false) {
       if (!this.isRunning) {
-        this.$emit('run')
+        this.isGrading = false
+        this.$emit('run', onHardware)
       }
     },
     grade () {
       if (!this.isRunning) {
+        this.isGrading = true
         this.$emit('grade')
       }
     }
@@ -90,12 +106,19 @@ export default defineComponent({
     @include bicolor-background($button-background-color-dark, $button-background-color);
     color: $button-text-color;
 
+    &_disabled {
+      background-color: $disabled-background-color;
+      background-image: none;
+      color: $text-color-lighter;
+      cursor: not-allowed;
+    }
+
     &_run {
       @include bicolor-background($button-background-color-quaternary-dark, $button-background-color-quaternary);
     }
   }
 
-  &__running-indicator {
+  &__indicator {
     display: flex;
     height: 2.25rem;
     background-color: $button-background-color-quaternary;
@@ -112,6 +135,10 @@ export default defineComponent({
     }
     &__label {
       color: $button-text-color;
+    }
+
+    &__grading {
+      background-color: $button-background-color;
     }
   }
 }
