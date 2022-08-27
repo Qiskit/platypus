@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@carbon/colors": "^10.36.0",
-    "@carbon/icons-vue": "~10.48.0",
+    "@carbon/icons-vue": "~10.49.1",
     "@carbon/themes": "^11.2.0",
     "@carbon/vue": "^2.43.1",
     "@ckeditor/ckeditor5-build-classic": "^34.0.0",
