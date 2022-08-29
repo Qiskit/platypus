@@ -128,7 +128,7 @@ tokens:
   - is applicable to
   - is authorized to
   - is responsible for
-  - it is
+  - it is(?=\s?[A-z])
   - it is essential
   - it seems that
   - it was
