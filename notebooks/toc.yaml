@@ -340,6 +340,10 @@
       id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/single_systems_problem_set
+    - title: Introduction Problem Set
+      id: introduction_problem_set
+      uuid: 1d11f87b-66d9-4197-bec8-c50e65b4bf84
+      url: /problem-sets/introduction_problem_set
 
 
 - title: Examples
