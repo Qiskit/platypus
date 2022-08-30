@@ -76,3 +76,6 @@ the notebooks that hold the textbook content.
   This script checks for notebooks added to `qiskit-community/qiskit
   textbook` that are not in `Qiskit/platypus` and makes a GitHub issue
   for it.
+
+- `tools.py`: Shared logic (e.g. argument parsing) used by scripts in this
+  folder.

@@ -9,9 +9,9 @@ import nbformat
 import subprocess
 import json
 from pathlib import Path
+from tools import parse_args
 
 
-NB_ROOT = './notebooks'
 NB_PATHS = './scripts/content_checks/notebook_paths.txt'
 TEMP_DIR = './scripts/temp/md'
 STYLE_DIR = './scripts/content_checks/style'
@@ -108,26 +108,9 @@ def lint_markdown(md_dir, CI=False):
 
 if __name__ == '__main__':
     # usage: python3 nb_vale.py --CI notebook1.ipynb path/to/notebook2.ipynb
-    file_names = sys.argv[1:] if len(sys.argv) > 1 else []
+    switches, filepaths = parse_args(sys.argv)
 
-    CI = False
-    if '--CI' in file_names:
-        CI = True
-        file_names.remove('--CI')
+    CI = '--CI' in switches
 
-    if len(file_names) == 0:
-        # no files were passed- read from text file
-        with open(NB_PATHS, encoding='utf-8') as f:
-            file_names = f.readlines()
-
-    for filename in file_names:
-        if not filename.strip():
-            # blank line
-            continue
-        if filename.startswith('#'):
-            print(f'Skipping: {filename}')
-            continue
-        elif not Path(filename).is_absolute():
-            filename = f'{NB_ROOT}/{filename.strip()}.ipynb'
-
-        lint_notebook(filename, CI)
+    for path in filepaths:
+        lint_notebook(path, CI)
