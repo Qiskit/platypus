@@ -24,7 +24,8 @@
         class="mini-composer__circuit-section__reset"
         @click="onResetButton"
       >
-        Reset <PlayIcon />
+
+      Reset <ResetIcon class="mini-composer__circuit-section__reset__icon" />
       </button>
       <Circuit
         class="mini-composer__circuit-section__circuit-lines"
@@ -51,7 +52,7 @@
       <section>
         <h1 class="mini-composer__state-views__title">
           State Vector
-        </h1>
+        </h1>rm 
         <SymbolicNotation
           class="mini-composer__state-views__area"
           :tex="stateVectorTex"
@@ -65,7 +66,7 @@
 import { ref } from '@vue/reactivity'
 import { Options, Vue, prop } from 'vue-class-component'
 import draggable from 'vuedraggable'
-import PlayIcon from '@carbon/icons-vue/lib/reset/16'
+import ResetIcon from '@carbon/icons-vue/lib/reset/16'
 import SolutionStateIndicator from '../common/SolutionStateIndicator.vue'
 import GatesPool from './GatesPool.vue'
 import Circuit from './Circuit.vue'
@@ -84,7 +85,7 @@ class Props {
     draggable,
     SymbolicNotation,
     SolutionStateIndicator,
-    PlayIcon
+    ResetIcon
   }
 })
 export default class CircuitSandboxWidget extends Vue.with(Props) {
@@ -241,7 +242,9 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       flex-flow: row;
       gap: $spacing-03;
       color: $link-color-tertiary;
-
+      &__icon{
+        height: 16px;
+      }
       &:hover {
         color: $link-hover-color-tertiary;
       }
@@ -273,8 +276,8 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       align-items: center;
       justify-content: center;
 
-      height: 9rem;
-      width: 100%;
+      height: 16px;
+      width: 16px;
       border: 2px solid $border-color;
       background-color: $background-color-white;
     }
