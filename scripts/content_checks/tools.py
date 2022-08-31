@@ -47,3 +47,26 @@ def parse_args(argv):
         filepaths[idx] = path
 
     return switches, filepaths
+
+
+TSTYLE = {  # Terminal styling codes
+    'bold': '\033[1m',
+    'faint': '\033[30m',
+    'suggestion': '\033[94m',
+    'warning': '\033[93m',
+    'error': '\033[91m',
+    'success': '\033[32m',
+    'end': '\033[0m'
+}
+
+
+def style(style, text):
+    """Style string using terminal escape codes"""
+    return  f"{TSTYLE[style]}{text}{TSTYLE['end']}"
+
+
+def indent(s):
+    """Indent text block with vertical line margins"""
+    s = s.replace('\n', '\n' + style('faint', '│ '))
+    s = s[::-1].replace('│', '╵', 1)[::-1]
+    return style('faint', '╷ ') + s

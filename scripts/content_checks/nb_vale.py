@@ -9,34 +9,12 @@ import nbformat
 import subprocess
 import json
 from pathlib import Path
-from tools import parse_args
+from tools import parse_args, style, indent
 
 
 NB_PATHS = './scripts/content_checks/notebook_paths.txt'
 TEMP_DIR = './scripts/temp/md'
 STYLE_DIR = './scripts/content_checks/style'
-
-
-TSTYLE = {  # Terminal styling codes
-    'bold': '\033[1m',
-    'faint': '\033[30m',
-    'suggestion': '\033[94m',
-    'warning': '\033[93m',
-    'error': '\033[91m',
-    'end': '\033[0m'
-}
-
-
-def style(style, text):
-    """Style string using terminal escape codes"""
-    return  f"{TSTYLE[style]}{text}{TSTYLE['end']}"
-
-
-def indent(s):
-    """Indent text block with vertical line margins"""
-    s = s.replace('\n', '\n' + style('faint', '│ '))
-    s = s[::-1].replace('│', '╵', 1)[::-1]
-    return style('faint', '╷ ') + s
 
 
 def lint_notebook(filepath, CI=False):
