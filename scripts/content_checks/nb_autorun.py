@@ -4,9 +4,18 @@ import time
 import nbformat
 import requests
 import json
-from nbconvert.preprocessors import ExecutePreprocessor
+import nbconvert
 from datetime import datetime
 from tools import parse_args, style, indent
+
+
+class ExecutePreprocessor(nbconvert.preprocessors.ExecutePreprocessor):
+    def preprocess_cell(self, cell, resources, cell_index):
+        if hasattr(cell.metadata, 'tags'):
+            if 'uses-hardware' in cell.metadata.tags:
+                # Skip execution
+                return cell, resources
+        return super().preprocess_cell(cell, resources, cell_index)
 
 
 def timestr():
