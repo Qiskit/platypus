@@ -80,7 +80,7 @@ def run_notebook(filepath, write=True):
         return True, messages
 
     # Execute notebook
-    processor = ExecutePreprocessor(timeout=None, kernel_name='python3')
+    processor = ExecutePreprocessor(timeout=None)
     try:
         processor.preprocess(notebook,
                              {'metadata': {'path': filepath.parents[0]}})
@@ -97,21 +97,33 @@ def run_notebook(filepath, write=True):
     # Search output for warning messages (can't work out how to get the kernel
     # to report these)
     for cell in notebook.cells:
+        if cell.cell_type != 'code':
+            continue
+
+        ignore_warning, contains_warning = False, False
         if hasattr(cell.metadata, 'tags'):
-            if 'ignore-warning' in cell.metadata.tags:
-                continue
-        if cell.cell_type == 'code':
-            for output in cell.outputs:
-                if hasattr(output, 'name') and output.name == 'stderr':
-                    warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
-                                             output.text)[0]
-                    messages.append(
-                        {'name': warning_name,
-                         'severity': 'warning',
-                         'description': re.split(warning_name,
-                                                output.text,
-                                                maxsplit=1)[1].strip(' :'),
-                         'full_output': output.text})
+            ignore_warning = ('ignore-warning' in cell.metadata.tags)
+
+        for output in cell.outputs:
+            if hasattr(output, 'name') and output.name == 'stderr':
+                contains_warning = True
+                if ignore_warning:
+                    continue
+
+                warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
+                                         output.text)[0]
+                messages.append(
+                    {'name': warning_name,
+                     'severity': 'warning',
+                     'description': re.split(warning_name,
+                                            output.text,
+                                            maxsplit=1)[1].strip(' :'),
+                     'full_output': output.text})
+
+        if ignore_warning and not contains_warning:
+            # Clean up unused tags if warning disappears
+            print(cell.metadata.tags)
+            cell.metadata.tags.remove('ignore-warning')
 
     if execution_success and write:
         with open(filepath, 'w', encoding='utf-8') as f:
