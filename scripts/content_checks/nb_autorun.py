@@ -1,4 +1,3 @@
-import os
 import re
 import sys
 import time
@@ -6,6 +5,7 @@ import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 from datetime import datetime
 from tools import parse_args, style, indent
+
 
 def timestr():
     """For reporting in terminal"""
@@ -58,10 +58,13 @@ def run_notebook(filepath, write=True):
     # Search output for warning messages (can't work out how to get the kernel
     # to report these)
     for cell in notebook.cells:
+        if hasattr(cell.metadata, 'tags'):
+            if 'ignore-warning' in cell.metadata.tags:
+                continue
         if cell.cell_type == 'code':
             for output in cell.outputs:
                 if hasattr(output, 'name') and output.name == 'stderr':
-                    warning_name = re.search(r'\s([A-Z][a-z0-9]+)+(?=:)',
+                    warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
                                              output.text)[0]
                     messages.append(
                         {'name': warning_name,
