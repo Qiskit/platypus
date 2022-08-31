@@ -2,6 +2,8 @@ import re
 import sys
 import time
 import nbformat
+import requests
+import json
 from nbconvert.preprocessors import ExecutePreprocessor
 from datetime import datetime
 from tools import parse_args, style, indent
@@ -20,7 +22,7 @@ def contains_code_cells(notebook):
     return False
 
 
-def format_message(msg):
+def format_message_terminal(msg):
     """Formats error messages nicely for the terminal"""
     outstr = style(msg['severity'], msg['name'])
     outstr += f": {msg['description']}"
@@ -28,6 +30,42 @@ def format_message(msg):
         outstr += "\nError occurred as result of the following code:\n"
         outstr += indent(msg['code'])
     return outstr
+
+
+def make_gh_issue(filepath, messages, token, repo):
+    is_err, is_warn = False, False
+    body = (f"### Where does the issue happen?\n\n"
+            f"https://github.com/{repo}/tree/main/{filepath}\n\n"
+             "### What is the content issue?\n\n"
+            f"Found {len(messages)} problem{'s'*(len(messages)>1)} while running"
+             " the notebook. See full error output below.\n\n")
+    for m in messages:
+        if m['severity'] == 'error': is_err = True
+        if m['severity'] == 'warning': is_warn = True
+        body += f"---\n```\n{m['full_output']}```\n"
+
+    body += ("### Additional information\n\n"
+             "This issue was generated automatically by a script")
+
+    title  = ("Found "
+            + "error "*is_err
+            + "and "*(is_err and is_warn)
+            + "warning "*(is_warn)
+            + f"in '{filepath.parts[-2]}/{filepath.stem}' notebook")
+
+    issue_data = json.dumps({
+                 'title': title,
+                 'labels': ['bug', 'content'],
+                 'assignees': ['frankharkins'],
+                 'body': body
+            })
+
+    requests.post(
+            url = f'https://api.github.com/repos/{repo}/issues',
+            headers = {'Authorization': f'token {token}'},
+            data = issue_data
+            )
+
 
 
 def run_notebook(filepath, write=True):
@@ -50,7 +88,8 @@ def run_notebook(filepath, write=True):
         err_msg = {'name': err.ename,
                    'severity': 'error',
                    'description': err.evalue,
-                   'code': err.traceback.split('------------------')[1]
+                   'code': err.traceback.split('------------------')[1],
+                   'full_output': err.traceback
                    }
         messages.append(err_msg)
         execution_success = False
@@ -71,7 +110,8 @@ def run_notebook(filepath, write=True):
                          'severity': 'warning',
                          'description': re.split(warning_name,
                                                 output.text,
-                                                maxsplit=1)[1].strip(' :')})
+                                                maxsplit=1)[1].strip(' :'),
+                         'full_output': output.text})
 
     if execution_success and write:
         with open(filepath, 'w', encoding='utf-8') as f:
@@ -84,7 +124,17 @@ if __name__ == '__main__':
     # usage: python nb_metadata.py --fix notebook1.ipynb path/to/notebook2.ipynb
     switches, filepaths = parse_args(sys.argv)
 
-    write = '--write' in switches
+    write, token, repo = False, None, None
+    for switch in switches:
+        if switch.startswith('--token'):
+            token = switch.split('=')[1]
+        if switch.startswith('--repo'):
+            repo = switch.split('=')[1]
+        if switch == '--write':
+            write = True
+    if bool(token) != bool(repo):
+        print("Must specify both repo and token, or neither.")
+        sys.exit(1)
 
     log = {'t0': time.time(),
             'total_time': 0,
@@ -106,8 +156,12 @@ if __name__ == '__main__':
             print("\r" + style('error', '✖'))
 
         if messages:
-            messages = [format_message(m) for m in messages]
-            print(indent('\n'.join(messages)))
+            message_strings = [format_message_terminal(m) for m in messages]
+            print(indent('\n'.join(message_strings)))
+
+        if messages and token:
+            # Make github issue
+            make_gh_issue(path, messages, token, repo)
     print('\033[?25h', end='')  # un-hide cursor
 
     # Display output and exit

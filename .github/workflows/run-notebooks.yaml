@@ -1,0 +1,39 @@
+name: Run notebooks and report errors
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  # run Mondays at 04:00am UTC (on the default or base branch)
+  # https://crontab.guru/#0_4_*_*_1
+  schedule:
+    - cron: "0 4 * * 1"
+
+jobs:
+  run-notebooks:
+    # Run only from the original repository
+    if: github.repository == 'Qiskit/platypus'
+
+    name: Run notebooks
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Load pip cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: py-${{ hashFiles('converter/textbook-converter/requirements.txt') }}-${{ hashFiles('converter/textbook-converter/requirements-test.txt') }}
+
+      - name: Install Python dependencies
+        run: pip install -r converter/textbook-converter/requirements.txt -r converter/textbook-converter/requirements-test.txt
+
+      - name: Run notebooks
+        run: python3 ./scripts/content_checks/nb_autorun.py --repo=${{ github.repository }} --token=${{ secrets.GITHUB_TOKEN }}
