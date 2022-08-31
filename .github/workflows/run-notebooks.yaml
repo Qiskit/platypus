@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-  # run Mondays at 04:00am UTC (on the default or base branch)
+  # run on 1st and 15th of month at 04:00am UTC (on the default or base branch)
   # https://crontab.guru/#0_4_*_*_1
   schedule:
-    - cron: "0 4 * * 1"
+    - cron: "0 4 1,15 * *"
 
 jobs:
   run-notebooks:
