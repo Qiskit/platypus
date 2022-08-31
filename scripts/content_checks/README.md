@@ -77,5 +77,8 @@ the notebooks that hold the textbook content.
   textbook` that are not in `Qiskit/platypus` and makes a GitHub issue
   for it.
 
+- `nb_autorun.py`: Script to run all the notebooks. Will report any errors, and
+  will replace outputs if you pass `--write` option.
+
 - `tools.py`: Shared logic (e.g. argument parsing) used by scripts in this
   folder.

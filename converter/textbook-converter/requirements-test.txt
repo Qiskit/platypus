@@ -9,3 +9,5 @@ qiskit-ignis==0.7.0
 tensorflow==2.9.1
 matplotlib==3.5.2
 pyscf==2.0.1
+pylatexenc==2.10
+ipywidgets==8.0.1
