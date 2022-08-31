@@ -9,6 +9,10 @@ on:
   schedule:
     - cron: "0 4 1,15 * *"
 
+env:
+  # Disable Tensorflow information messages
+  TF_CPP_MIN_LOG_LEVEL: 1
+
 jobs:
   run-notebooks:
     # Run only from the original repository
