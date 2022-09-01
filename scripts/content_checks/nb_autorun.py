@@ -76,7 +76,6 @@ def make_gh_issue(filepath, messages, token, repo):
             )
 
 
-
 def run_notebook(filepath, write=True):
     execution_success = True
     messages = []  # To collect error / warning messages
@@ -119,14 +118,20 @@ def run_notebook(filepath, write=True):
                 if ignore_warning:
                     continue
 
-                warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
-                                         output.text)[0]
+                try:  # Try to identify warning type
+                    warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
+                                             output.text)[0]
+                    description = re.split(warning_name,
+                                            output.text,
+                                            maxsplit=1)[1].strip(' :')
+                except TypeError:
+                    warning_name = 'Warning'
+                    description = output.text
+
                 messages.append(
                     {'name': warning_name,
                      'severity': 'warning',
-                     'description': re.split(warning_name,
-                                            output.text,
-                                            maxsplit=1)[1].strip(' :'),
+                     'description': description,
                      'full_output': output.text})
 
         if ignore_warning and not contains_warning:
