@@ -156,6 +156,10 @@ def run_notebook(filepath, write=True):
             # Clean up unused tags if warning disappears
             cell.metadata.tags.remove('ignore-warning')
 
+    for cell in notebook.cells:
+        if 'execution' in cell.metadata:
+            del cell.metadata['execution']
+
     if execution_success and write:
         with open(filepath, 'w', encoding='utf-8') as f:
             nbformat.write(notebook, f)
