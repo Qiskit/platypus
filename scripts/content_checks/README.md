@@ -78,7 +78,9 @@ the notebooks that hold the textbook content.
   for it.
 
 - `nb_autorun.py`: Script to run all the notebooks. Will report any errors, and
-  will replace outputs if you pass `--write` option.
+  will replace outputs if you pass `--write` option. This script can also
+  automatically create GitHub issues for any errors it finds if you pass
+  `--repo=Qiskit/platypus`, and `--token=<your GitHub access token>`.
 
 - `tools.py`: Shared logic (e.g. argument parsing) used by scripts in this
   folder.
