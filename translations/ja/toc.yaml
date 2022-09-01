@@ -38,6 +38,9 @@
     - id: multiple-qubits-and-entangled-states
       uuid: c7cfe502-b519-11ec-b909-0242ac120002
       url: /ch-gates/multiple-qubits-entangled-states
+    - id: phase-kickback
+      uuid: cb7353ec-b519-11ec-b909-0242ac120002
+      url: /algorithms/phase-kickback
     - id: basic-circuit-identities
       uuid: ce8ce75a-b519-11ec-b909-0242ac120002
       url: /ch-gates/more-circuit-identities
@@ -176,3 +179,48 @@
     - id: locale
       uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
       url: /examples/locale
+
+- title: 量子アルゴリズム
+  url: /algorithms
+  type: learning-path
+  sections:
+    - id: phase-kickback
+      uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
+      url: /algorithms/phase-kickback
+      
+- title: 夏の学校 2020
+  url: /2020
+  type: learning-path
+  sections:
+    - id: qubits-states-circuits-measurements
+      uuid: a45b8936-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-00
+    - id: writing-running-programs
+      uuid: a7412732-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-01
+    - id: shors-algorithm-i-fourier-transform-phase-estimation
+      uuid: aaedcbb0-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-02
+    - id: shors-algorithm-ii-from-factoring-to-period-finding-writing-program
+      uuid: ada10d7c-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-03
+    - id: error-correction-using-repetition-codes
+      uuid: b10b5bf2-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-04
+    - id: careers-in-computing
+      uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-09
+      
+- title: Quantum Machine Learning
+  url: /machine-learning
+  type: learning-path
+  sections:
+    - id: introduction
+      uuid: 16e935fc-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/introduction
+    - id: supervised-learning
+      uuid: 22cf51bc-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/supervised
+    - id: unsupervised-learning
+      uuid: 2cc6b386-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/unsupervised
