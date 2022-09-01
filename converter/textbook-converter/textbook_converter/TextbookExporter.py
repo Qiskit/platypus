@@ -201,10 +201,11 @@ def handle_hero_image(hero_image_syntax):
         return hero_image_syntax
 
 
-def handle_heading(heading_syntax, in_block, suffix, section):
+def handle_heading(heading_syntax, in_block, suffix, section, is_problem_set=False):
     """Increase header level and compute level, title, and id"""
     header, title = heading_syntax.split(" ", 1)
     level = header.count("#")
+    is_problem_set = is_problem_set
     if in_block:
         return None, None, title, f"#{heading_syntax}\n"
     else:
@@ -214,10 +215,13 @@ def handle_heading(heading_syntax, in_block, suffix, section):
             id = re.sub(r"[^\w-]", "", id)
             if level == 1:
                 # Mathigon requires all sections to start with `##`
-                text = f"#{heading_syntax}\n"
+                text = heading_syntax if is_problem_set else f"#{heading_syntax}\n"
             elif "-0-0" in suffix:
                 # Mathigon requires all sections to start with `##`
                 text = f'## {heading_syntax.split(" ", 1)[-1]}\n'
+            elif level == 2 and is_problem_set:
+                id = re.sub(r"\s", "-", heading_syntax.split(" ", 1)[-1].strip().lower())
+                text = f'\n---\n\n> section: {id}\n\n## {heading_syntax.split(" ", 1)[-1]}\n'
             else:
                 id = id.split("-", 1)[0][:25] + suffix
                 text = f'<h{level}>{title} <a id="{id}"></a>\n</h{level}>\n'
@@ -236,7 +240,7 @@ def handle_heading(heading_syntax, in_block, suffix, section):
             return id, level, title, text
 
 
-def handle_markdown_cell(cell, resources, cell_number):
+def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
     """Reformat code markdown"""
     markdown_lines = []
     lines = cell.source.splitlines()
@@ -247,7 +251,7 @@ def handle_markdown_cell(cell, resources, cell_number):
 
     for count, line in enumerate(lines):
         if latex:
-            if line.rstrip().endswith("$$"):
+            if line.rstrip(" .").endswith("$$"):
                 l = line.replace("$$", "")
                 markdown_lines.append(f"{l}\n" if len(l) else l)
                 markdown_lines.append("```\n")
@@ -260,7 +264,7 @@ def handle_markdown_cell(cell, resources, cell_number):
         elif line.lstrip().startswith("$$"):
             markdown_lines.append("```latex\n")
             l = line.replace("$$", "", 1)
-            if l.rstrip().endswith("$$"):
+            if l.rstrip(" .").endswith("$$"):
                 l = l.replace("$$", "")
                 markdown_lines.append(f"{l}\n" if len(l) else l)
                 markdown_lines.append("```\n")
@@ -307,7 +311,7 @@ def handle_markdown_cell(cell, resources, cell_number):
                 else None
             )
             id, level, title, heading_text = handle_heading(
-                line, in_block, f"-{cell_number}-{count}", section
+                line, in_block, f"-{cell_number}-{count}", section, is_problem_set
             )
             if not in_block:
                 headings.append((id, level, title))
@@ -543,12 +547,15 @@ class TextbookExporter(Exporter):
 
         markdown_lines = []
         prefix = ""
+        is_problem_set = False
 
         if "textbook" not in resources:
             resources["textbook"] = {}
         if "id" in resources["textbook"]:
             id = resources["textbook"]["id"]
             prefix = re.compile("[^a-zA-Z]").sub("", id).lower()
+        if "is_problem_set" in resources["textbook"]:
+            is_problem_set = resources["textbook"]["is_problem_set"] 
 
         nb_headings = []
         for count, cell in enumerate(nb_copy.cells):
@@ -567,7 +574,7 @@ class TextbookExporter(Exporter):
                     markdown_lines.append(f"\n---\n> id: {id}\n\n")
 
                 markdown_output, resources, headings = handle_markdown_cell(
-                    cell, resources, count
+                    cell, resources, count, is_problem_set=is_problem_set
                 )
                 markdown_lines.append(markdown_output)
 
@@ -589,4 +596,7 @@ class TextbookExporter(Exporter):
 
         markdown_lines.append("\n")
 
-        return ("".join(markdown_lines), resources)
+        full_text = "".join(markdown_lines)
+        if is_problem_set:
+            full_text = full_text.replace("\n---\n\n>", "\n\n>", 1)
+        return (full_text, resources)
