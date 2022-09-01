@@ -100,6 +100,15 @@ def get_warnings(cell):
 
 
 def run_notebook(filepath, write=True):
+    """Attempts to run a notebook and return any error / warning messages.
+    Args:
+        filepath (Path): Path to the notebook
+        write (bool): Whether to write the updated outputs to the file.
+    Returns:
+        bool: True if notebook executed without error, False otherwise.
+              (Note: will not write if there are any errors during execution.)
+        list: List of dicts containing error / warning message information.
+    """
     execution_success = True
     messages = []  # To collect error / warning messages
 
@@ -131,16 +140,14 @@ def run_notebook(filepath, write=True):
         if cell.cell_type != 'code':
             continue
 
-        ignore_warning = False
-        if hasattr(cell.metadata, 'tags'):
-            ignore_warning = ('ignore-warning' in cell.metadata.tags)
+        ignore_warning = (hasattr(cell.metadata, 'tags')
+                     and 'ignore-warning' in cell.metadata.tags)
 
         warning_messages = get_warnings(cell)
-
         if not ignore_warning:
             messages += warning_messages
 
-        if ignore_warning and warning_messages == []:
+        if ignore_warning and (warning_messages == []):
             # Clean up unused tags if warning disappears
             cell.metadata.tags.remove('ignore-warning')
 
@@ -163,6 +170,7 @@ if __name__ == '__main__':
             repo = switch.split('=')[1]
         if switch == '--write':
             write = True
+
     if bool(token) != bool(repo):
         print("Must specify both repo and token, or neither.")
         sys.exit(1)
@@ -193,6 +201,7 @@ if __name__ == '__main__':
         if messages and token:
             # Make github issue
             make_gh_issue(path, messages, token, repo)
+
     print('\033[?25h', end='')  # un-hide cursor
 
     # Display output and exit
@@ -201,3 +210,5 @@ if __name__ == '__main__':
     if log['broken_files'] > 0:
         print(f"Found errors in {log['broken_files']}/{log['total_files']} "
                "notebooks, see output above for more info.\n")
+        sys.exit(1)
+    sys.exit(0)
