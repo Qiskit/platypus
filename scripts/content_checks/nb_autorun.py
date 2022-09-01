@@ -75,6 +75,29 @@ def make_gh_issue(filepath, messages, token, repo):
             data = issue_data
             )
 
+def get_warnings(cell):
+    """Returns any warning messages from a cell's output"""
+    warning_messages = []
+
+    for output in cell.outputs:
+        if hasattr(output, 'name') and output.name == 'stderr':
+            try:  # Try to identify warning type
+                warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
+                                         output.text)[0]
+                description = re.split(warning_name,
+                                        output.text,
+                                        maxsplit=1)[1].strip(' :')
+            except TypeError:
+                warning_name = 'Warning'
+                description = output.text
+
+            warning_messages.append({'name': warning_name,
+                                     'severity': 'warning',
+                                     'description': description,
+                                     'full_output': output.text})
+    return warning_messages
+
+
 
 def run_notebook(filepath, write=True):
     execution_success = True
@@ -108,35 +131,17 @@ def run_notebook(filepath, write=True):
         if cell.cell_type != 'code':
             continue
 
-        ignore_warning, contains_warning = False, False
+        ignore_warning = False
         if hasattr(cell.metadata, 'tags'):
             ignore_warning = ('ignore-warning' in cell.metadata.tags)
 
-        for output in cell.outputs:
-            if hasattr(output, 'name') and output.name == 'stderr':
-                contains_warning = True
-                if ignore_warning:
-                    continue
+        warning_messages = get_warnings(cell)
 
-                try:  # Try to identify warning type
-                    warning_name = re.search(r'(?<=\s)([A-Z][a-z0-9]+)+(?=:)',
-                                             output.text)[0]
-                    description = re.split(warning_name,
-                                            output.text,
-                                            maxsplit=1)[1].strip(' :')
-                except TypeError:
-                    warning_name = 'Warning'
-                    description = output.text
+        if not ignore_warning:
+            messages += warning_messages
 
-                messages.append(
-                    {'name': warning_name,
-                     'severity': 'warning',
-                     'description': description,
-                     'full_output': output.text})
-
-        if ignore_warning and not contains_warning:
+        if ignore_warning and warning_messages == []:
             # Clean up unused tags if warning disappears
-            print(cell.metadata.tags)
             cell.metadata.tags.remove('ignore-warning')
 
     if execution_success and write:
