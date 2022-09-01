@@ -119,6 +119,11 @@ def run_notebook(filepath, write=True):
         # Avoid creating new kernel for no reason
         return True, messages
 
+    # Clear outputs
+    processor =  nbconvert.preprocessors.ClearOutputPreprocessor()
+    processor.preprocess(notebook,
+                         {'metadata': {'path': filepath.parents[0]}})
+
     # Execute notebook
     processor = ExecutePreprocessor(timeout=None)
     try:
