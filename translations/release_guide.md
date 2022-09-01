@@ -36,7 +36,7 @@ Please see [toc.yaml for Japanese](https://github.com/Qiskit/platypus/blob/main/
 When the new translated files are merged, update toc.yaml file as follows.
 1. Copy the lines about new translated and merged files of [toc.yaml](https://github.com/Qiskit/platypus/blob/main/notebooks/toc.yaml) file under `./notebooks/`.
 2. Paste it in the correct position of your toc.yaml file under your language folder `./translations/xx/`.
-3. Translated the titles of the folders if you need.
+3. Translate the titles of the folders if you need.
 4. Remove the title lines of the file if it exists.
 5. Add `-` in front of `id`.
 6. Example: If the file `/ch-states/case-for-quantum` was newly merged, then `toc.yaml` should be changed like
