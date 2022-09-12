@@ -78,8 +78,10 @@ def lint_markdown(md_dir, CI=False):
                 f"@l{s['Line']};c{s['Span'][0]} ({s['Check']})")
             cell_msg += '\n'
         notebook_msg += indent(cell_msg) + '\n'
-    print(indent(notebook_msg))
+    if not CI and (notebook_msg!=''):
+        print(indent(notebook_msg))
     if fail and CI:
+        print(indent(notebook_msg))
         print(style('error', 'Prose linting error encountered; test failed.'))
         sys.exit(1)
 
