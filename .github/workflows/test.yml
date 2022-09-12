@@ -54,10 +54,15 @@ jobs:
 
       - name: Notebook tests
         run: |
+          echo "::group::Linting"
           npm run test:nb
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          echo "::endgroup::"
+          echo "::group::Run changed notebooks"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}
+          do
             python3 ./scripts/content_checks/nb_autorun.py $file --fail-on-warning
           done
+          echo "::endgroup::"
 
       - name: Build
         run: npm run build
