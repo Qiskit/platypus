@@ -50,7 +50,7 @@ jobs:
         id: changed-notebooks
         uses: tj-actions/changed-files@v29.0.4
         with:
-          files: notebooks/**.ipynb
+          files: './notebooks/**.ipynb'
 
       - name: Notebook tests
         run: |
