@@ -46,17 +46,11 @@ jobs:
       - name: Install Vale
         run: sudo snap install --edge vale
 
-      - name: Get list of changed notebooks
-        id: changed-notebooks
-        uses: tj-actions/changed-files@v29.0.4
-        with:
-          files: '**.ipynb'
-
       - name: Notebook tests
         run: |
           npm run test:nb
-          echo ${{ steps.changed-notebooks.outputs.all_changed_files }}
-          python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-notebooks.outputs.all_changed_files }} --fail-on-warning
+          NOTEBOOKS=$(git diff origin/main --name-only | grep 'notebooks[^\.]*\.ipynb')
+          python3 ./scripts/content_checks/nb_autorun.py $NOTEBOOKS --fail-on-warning
 
       - name: Build
         run: npm run build
