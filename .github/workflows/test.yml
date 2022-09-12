@@ -58,9 +58,8 @@ jobs:
           npm run test:nb
           echo "::endgroup::"
           echo "::group::Run changed notebooks"
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}
-          do
-            echo $file
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file"
           done
           echo "::endgroup::"
 
