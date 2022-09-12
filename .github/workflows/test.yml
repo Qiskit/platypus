@@ -60,7 +60,7 @@ jobs:
           echo "::group::Run changed notebooks"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}
           do
-            python3 ./scripts/content_checks/nb_autorun.py $file --fail-on-warning
+            echo $file
           done
           echo "::endgroup::"
 
