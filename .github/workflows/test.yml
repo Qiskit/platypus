@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   pull_request:
 
+env:
+  # Disable Tensorflow information messages
+  TF_CPP_MIN_LOG_LEVEL: 1
+
 jobs:
   test-run:
     name: Run tests
@@ -42,8 +46,16 @@ jobs:
       - name: Install Vale
         run: sudo snap install --edge vale
 
+      - name: Get list of changed notebooks
+        id: changed-notebooks
+        uses: tj-actions/changed-files@v29.0.4
+        with:
+          files: notebooks/**.ipynb
+
       - name: Notebook tests
-        run: npm run test:nb
+        run: |
+          npm run test:nb
+          python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-notebooks.outputs.all_changed_files }} --fail-on-warning
 
       - name: Build
         run: npm run build
