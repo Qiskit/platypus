@@ -49,6 +49,7 @@ jobs:
       - name: Notebook tests
         run: |
           npm run test:nb
+          git fetch origin/main
           NOTEBOOKS=$(git diff origin/main --name-only | grep 'notebooks[^\.]*\.ipynb')
           python3 ./scripts/content_checks/nb_autorun.py $NOTEBOOKS --fail-on-warning
 
