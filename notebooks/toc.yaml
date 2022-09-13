@@ -340,6 +340,10 @@
       id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/single_systems_problem_set
+    - title: Quantum State and Operations Problem Set
+      id: quantum_states_and_operations
+      uuid: e4f72580-1e8e-47id-8690-345000b58jef
+      url: /problem-sets/quantum_states_and_operations
 
 
 - title: Examples
