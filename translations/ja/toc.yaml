@@ -119,9 +119,15 @@
 - title: 量子回路による量子ハードウェアの探究
   url: /quantum-hardware
   sections:
-    - id: measuring-quantum-volume
-      uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
-      url: /ch-quantum-hardware/measuring-quantum-volume
+    - id: introduction-to-quantum-error-correction-via-the-repetition-code
+      uuid: 197f7f66-b51a-11ec-b909-0242ac120002
+      url: /quantum-hardware/error-correction-repetition-code
+    - id: measurement-error-mitigation
+      uuid: 1c5bd31a-b51a-11ec-b909-0242ac120002
+      url: /quantum-hardware/measurement-error-mitigation
+    - id: randomized-benchmarking
+      uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
+      url: /quantum-hardware/randomized-benchmarking
 
 
 - title: マイクロ波パルスによる量子ハードウェアの探究
@@ -141,6 +147,20 @@
       url: /ch-quantum-hardware/cQED-JC-SW
 
 
+- title: 量子コンピューティング・ラボ
+  url: /ch-labs
+  sections:
+    - id: lab-1-quantum-circuits
+      uuid: 3ff5a7ec-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab01_QuantumCircuits
+    - id: lab-2-single-qubit-gates
+      uuid: 43418a88-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab02_Single_Qubit_Gates
+    - id: lab-4-bell-ghz-circuit
+      uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab04_Bell_GHZ_Circuit
+    
+    
 - title: Appendix(付録)
   url: /ch-appendix
   sections:
@@ -180,6 +200,7 @@
       uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
       url: /examples/locale
 
+
 - title: 量子アルゴリズム
   url: /algorithms
   type: learning-path
@@ -188,6 +209,28 @@
       uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
       url: /algorithms/phase-kickback
       
+      
+- title: 量子コンピューター入門
+  url: /introduction
+  type: learning-path
+  sections:
+    - uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
+      id: why-quantum-computing
+      url: /intro/why-quantum-computing
+    - id: what-is-quantum
+      uuid: 7c765036-aebc-11ec-b909-0242ac120002
+      url: /intro/what-is-quantum
+    - id: describing-quantum-computers
+      uuid: 9260a554-aebc-11ec-b909-0242ac120002
+      url: /intro/describing-quantum-computers
+    - id: grovers-search-algorithm
+      uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
+      url: /intro/grover-intro
+    - id: project
+      uuid: e25c3f90-aebd-11ec-b909-0242ac120002
+      url: /intro/project
+
+
 - title: 夏の学校 2020
   url: /2020
   type: learning-path
@@ -207,9 +250,22 @@
     - id: error-correction-using-repetition-codes
       uuid: b10b5bf2-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-04
+    - id: superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions
+      uuid: b3e1bc18-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-05
+    - id: superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods
+      uuid: b6bc1442-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-06
+    - id: chemistry-i-obtaining-qubit-hamiltonian-h2-lih
+      uuid: b95d099a-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-07
+    - id: chemistry-ii-finding-ground-states-h2-lih
+      uuid: bc25a4c0-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2020/lec-08
     - id: careers-in-computing
       uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-09
+      
       
 - title: 量子機械学習
   url: /machine-learning
@@ -218,9 +274,30 @@
     - id: introduction
       uuid: 16e935fc-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/introduction
+    - id: parameterized-quantum-circuits
+      uuid: 19a9f4de-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/pqc
+    - id: data-encoding
+      uuid: 1d09af66-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/encoding
+    - id: training-quantum-circuits
+      uuid: 1fb38444-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/training
     - id: supervised-learning
       uuid: 22cf51bc-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/supervised
+    - id: variational-classification
+      uuid: 26951034-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/vqc
+    - id: quantum-feature-maps-kernels
+      uuid: 29b0fda0-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/kernel
     - id: unsupervised-learning
       uuid: 2cc6b386-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/unsupervised
+    - id: quantum-generative-adversarial-networks
+      uuid: 2ff2a3e4-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/qgan
+    - id: project
+      uuid: 345f0c2e-b51b-11ec-b909-0242ac120002
+      url: /quantum-machine-learning/project
