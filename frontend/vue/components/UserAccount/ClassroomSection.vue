@@ -27,18 +27,18 @@
         }}
       </p>
     </div>
-    <section class="classroom__content">
-      <h1 class="classroom__content__title">
+    <section class="classroom__section">
+      <h1 class="classroom__section__title">
         {{ $translate("My Syllabi") }}
       </h1>
-      <p class="classroom__content__description">
+      <p class="classroom__section__description">
         {{
           $translate(
             "The syllabi below are ones that have been published and shared."
           )
         }}
       </p>
-      <div class="classroom__content__syllabi-list">
+      <div class="classroom__section__syllabi-list">
         <SyllabusCard
           v-for="syllabus in syllabi"
           :key="syllabus.id"
@@ -47,11 +47,11 @@
         />
       </div>
     </section>
-    <section class="classroom__content">
-      <h1 class="classroom__content__title">
+    <section class="classroom__section">
+      <h1 class="classroom__section__title">
         {{ $translate("Community Syllabi") }}
       </h1>
-      <p class="classroom__content__description">
+      <p class="classroom__section__description">
         {{
           $translate(
             "You can add these curated syllabi to your personal classroom in order to edit and customize them."
@@ -127,7 +127,7 @@ export default defineComponent({
     }
   }
 
-  &__content {
+  &__section {
     padding: $spacing-07 0;
     &:not(:last-child) {
       border-bottom: 2px solid $border-color-light-2;
