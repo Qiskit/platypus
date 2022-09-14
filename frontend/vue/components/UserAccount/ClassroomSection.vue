@@ -27,18 +27,18 @@
         }}
       </p>
     </div>
-    <section class="classroom__content">
-      <h1 class="classroom__content__title">
-        {{ $translate("Active Syllabi") }}
+    <section class="classroom__section">
+      <h1 class="classroom__section__title">
+        {{ $translate("My Syllabi") }}
       </h1>
-      <p class="classroom__content__description">
+      <p class="classroom__section__description">
         {{
           $translate(
-            "Here are your active syllabi. You can edit, publish, and share them with your students"
+            "The syllabi below are ones that have been published and shared."
           )
         }}
       </p>
-      <div class="classroom__content__syllabi-list">
+      <div class="classroom__section__syllabi-list">
         <SyllabusCard
           v-for="syllabus in syllabi"
           :key="syllabus.id"
@@ -46,6 +46,18 @@
           :syllabus="syllabus"
         />
       </div>
+    </section>
+    <section class="classroom__section">
+      <h1 class="classroom__section__title">
+        {{ $translate("Community Syllabi") }}
+      </h1>
+      <p class="classroom__section__description">
+        {{
+          $translate(
+            "You can add these curated syllabi to your personal classroom in order to edit and customize them."
+          )
+        }}
+      </p>
     </section>
   </section>
 </template>
@@ -93,9 +105,14 @@ export default defineComponent({
 
 .classroom {
   @include contained();
+  max-width: initial;
   margin-left: 0;
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
+
+  @include mq($from: max-size) {
+    padding: $spacing-07;
+  }
 
   &__create-syllabus {
     padding: $spacing-07 0;
@@ -110,8 +127,11 @@ export default defineComponent({
     }
   }
 
-  &__content {
+  &__section {
     padding: $spacing-07 0;
+    &:not(:last-child) {
+      border-bottom: 2px solid $border-color-light-2;
+    }
 
     &__title {
       @include type-style("expressive-heading-04", $fluid: true);
