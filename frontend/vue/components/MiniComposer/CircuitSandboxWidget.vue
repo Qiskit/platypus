@@ -52,7 +52,7 @@
       <section>
         <h1 class="mini-composer__state-views__title">
           State Vector
-        </h1>rm 
+        </h1>
         <SymbolicNotation
           class="mini-composer__state-views__area"
           :tex="stateVectorTex"
