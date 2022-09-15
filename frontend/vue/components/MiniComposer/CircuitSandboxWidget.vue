@@ -24,8 +24,7 @@
         class="mini-composer__circuit-section__reset"
         @click="onResetButton"
       >
-
-      Reset <ResetIcon class="mini-composer__circuit-section__reset__icon" />
+        Reset <ResetIcon class="mini-composer__circuit-section__reset__icon" />
       </button>
       <Circuit
         class="mini-composer__circuit-section__circuit-lines"
