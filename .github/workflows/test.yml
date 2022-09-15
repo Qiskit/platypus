@@ -6,7 +6,7 @@ on:
 
 env:
   # Disable Tensorflow information messages
-  TF_CPP_MIN_LOG_LEVEL: 1
+  TF_CPP_MIN_LOG_LEVEL: 3
 
 jobs:
   test-run:
