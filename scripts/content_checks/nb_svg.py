@@ -1,7 +1,7 @@
 import sys
 import nbformat
 from scour import scour
-from pathlib import Path
+from tools import parse_args
 
 
 class ScourOptions:
@@ -9,8 +9,6 @@ class ScourOptions:
         self.__dict__.update(entries)
 
 
-NB_ROOT = './notebooks'
-NB_PATHS = './scripts/content_checks/notebook_paths.txt'
 SCOUR_OPTIONS = ScourOptions(
     **{
         'simple_colors': False,
@@ -36,6 +34,7 @@ SCOUR_OPTIONS = ScourOptions(
 
 
 def scour_svgs(filepath, fix=False):
+    """Search through notebook and find/replace un-minimized SVGs"""
     notebook = nbformat.read(filepath, 4)
     needs_write = False
     for cell in notebook.cells:
@@ -59,25 +58,9 @@ def scour_svgs(filepath, fix=False):
 
 if __name__ == '__main__':
     # usage: python nb_svg.py --fix notebook1.ipynb path/to/notebook2.ipynb
-    file_names = sys.argv[1:] if len(sys.argv) > 1 else []
+    switches, filepaths = parse_args(sys.argv)
 
-    fix = False
-    if '--fix' in file_names:
-        fix = True
-        file_names.remove('--fix')
+    fix = '--fix' in switches
 
-    if len(file_names) == 0:
-        # no files were passed read from text file
-        with open(NB_PATHS, encoding='utf-8') as f:
-            file_names = f.readlines()
-
-    for filename in file_names:
-        if not filename.strip():
-            # blank line
-            continue
-        if filename.startswith('#'):
-            print(f'Skipping: {filename}')
-        elif Path(filename).is_absolute():
-            scour_svgs(filename, fix)
-        else:
-            scour_svgs(f'{NB_ROOT}/{filename.strip()}.ipynb', fix)
+    for path in filepaths:
+        scour_svgs(path, fix)
