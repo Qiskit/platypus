@@ -39,6 +39,7 @@ describe('Accessibility', () => {
         null,
         {
           rules: {
+            'landmark-contentinfo-is-top-level': { enabled: false }, // TODO: https://github.com/Qiskit/web-components/issues/155
             'aria-input-field-name': { enabled: false }, // TODO: https://github.com/Qiskit/qiskit.org/issues/2064
             'aria-required-children': { enabled: false }, // TODO: https://github.com/Qiskit/qiskit.org/issues/2065
             'html-has-lang': { enabled: false }, // TODO: https://github.com/Qiskit/qiskit.org/issues/2066
