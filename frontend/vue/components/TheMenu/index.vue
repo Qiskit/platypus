@@ -9,7 +9,7 @@ import '@qiskit/web-components/components/ui-shell'
 export default class TheMenu extends Vue {
   onClick (e: CustomEvent) {
     const windowInstance = (window as any)
-    windowInstance.textbook.trackClickEvent(`${e.detail.label} | ${e.detail.url}`, 'navbar')
+    windowInstance.textbook.trackClickEvent(`${e.detail.label?.toLowerCase()}`, 'menu')
   }
 }
 </script>
