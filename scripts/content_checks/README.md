@@ -76,3 +76,11 @@ the notebooks that hold the textbook content.
   This script checks for notebooks added to `qiskit-community/qiskit
   textbook` that are not in `Qiskit/platypus` and makes a GitHub issue
   for it.
+
+- `nb_autorun.py`: Script to run all the notebooks. Will report any errors, and
+  will replace outputs if you pass `--write` option. This script can also
+  optionally fail on warnings if passed `--fail-on-warning`. On PRs, this
+  script runs on any changed notebooks.
+
+- `tools.py`: Shared logic (e.g. argument parsing) used by scripts in this
+  folder.
