@@ -702,13 +702,6 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
   },
   content: [
     {
-      label: 'Introduction - Problem Set',
-      url: `${pathProblemSets}/introduction_problem_set`,
-      segment: {
-        cta: 'introduction_problem_set', location: sectionProblemSets
-      }
-    },
-    {
       label: 'Single Systems - Problem Set',
       url: `${pathProblemSets}/single_systems_problem_set`,
       segment: {
