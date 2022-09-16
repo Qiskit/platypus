@@ -702,6 +702,13 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
   },
   content: [
     {
+      label: 'Introduction - Problem Set',
+      url: `${pathProblemSets}/introduction_problem_set`,
+      segment: {
+        cta: 'introduction_problem_set', location: sectionProblemSets
+      }
+    },
+    {
       label: 'Single Systems - Problem Set',
       url: `${pathProblemSets}/single_systems_problem_set`,
       segment: {
@@ -713,6 +720,13 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       url: `${pathProblemSets}/quantum_states_and_operations`,
       segment: {
         cta: 'quantum_states_and_operations', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 001 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_problem_set`,
+      segment: {
+        cta: 'quantum_enigma_problem_set', location: sectionProblemSets
       }
     }
   ]
