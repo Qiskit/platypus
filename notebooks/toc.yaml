@@ -31,6 +31,9 @@
     - title: Circuits and protocols
       id: circuits-and-protocols
       url: /basics/circuits-and-protocols
+    - title: State vectors lab
+      id: state-vector-lab
+      url: /basics/state-vector-lab
 
 
 - title: Prerequisites
