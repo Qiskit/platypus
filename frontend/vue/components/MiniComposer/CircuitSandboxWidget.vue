@@ -22,6 +22,7 @@
       </h1>
       <button
         class="mini-composer__circuit-section__reset"
+        align-items:center
         @click="onResetButton"
       >
         Reset <ResetIcon class="mini-composer__circuit-section__reset__icon" />
