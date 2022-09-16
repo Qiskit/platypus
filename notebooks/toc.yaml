@@ -340,6 +340,10 @@
       id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/single_systems_problem_set
+    - title: Quantum Enigma Problem Set
+      id: quantum_enigma_problem_set
+      uuid: e4f72595-1e9e-47fd-8780-345360b53fef
+      url: /problem-sets/quantum_enigma_problem_set
 
 
 - title: Examples
