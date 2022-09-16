@@ -78,6 +78,7 @@ export default defineComponent({
       return code.includes('IBMQ.')
     },
     requestExecute (code: string) {
+
       if (this.isBackendExecution(code)) {
         this._executeFromBackend(code)
       } else {
@@ -102,6 +103,7 @@ export default defineComponent({
       })
     },
     _executeCode (code: string) {
+
       this.error = ''
       this.outputArea!.setHidden(true)
       this.kernelPromise!.then((kernel: IKernelConnection) => {

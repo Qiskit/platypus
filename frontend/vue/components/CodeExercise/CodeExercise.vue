@@ -7,6 +7,7 @@
         :initial-code="initialCode"
         :scratchpad-enabled="true"
         @codeChanged="codeChanged"
+        @keyboardRun="keyboardRun"
         @scratchpadCopyRequest="scratchpadCopyRequest"
       />
       <ExerciseActionsBar
@@ -97,7 +98,7 @@ export default defineComponent({
       isKernelReady: false,
       hideInitialOutput: false,
       isApiTokenNeeded: false,
-      id: 0
+      id: 0,
     }
   },
   computed: {
@@ -112,6 +113,7 @@ export default defineComponent({
     this.codeChanged(initialCodeElement?.textContent?.trim() ?? '')
     this.initialCode = this.code
     this.id = lastId++
+
     if (initialOutput.length === 0) {
       this.hideInitialOutput = true
     }
@@ -141,6 +143,10 @@ export default defineComponent({
         this.isApiTokenNeeded = isNeeded
       })
     },
+    keyboardRun () {
+      this.run(this.isApiTokenNeeded)
+    },
+
     scratchpadCopyRequest (code: string) {
       const scratchpadCopyRequestEvent = new CustomEvent('scratchpadCopyRequest', {
         bubbles: true,

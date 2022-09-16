@@ -5,10 +5,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { basicSetup } from 'codemirror'
-import { EditorView, keymap } from '@codemirror/view'
+import { EditorView, KeyBinding, keymap } from '@codemirror/view'
 import { EditorState, StateField } from '@codemirror/state'
 import { defaultKeymap, indentWithTab } from '@codemirror/commands'
 import { python } from '@codemirror/lang-python'
+import { View } from 'backbone'
 
 export default defineComponent({
   name: 'CodeArea',
@@ -55,6 +56,11 @@ export default defineComponent({
         }
       }
     })
+    const test = (view: EditorView): boolean => {
+      emit('keyboardRun', true)
+      return true
+    }
+
     const state = EditorState.create({
       doc: this.code,
       extensions: [
@@ -63,14 +69,19 @@ export default defineComponent({
         docChanged,
         keymap.of([
           ...defaultKeymap,
-          indentWithTab
+          indentWithTab,
+          {
+            key: 'Shift-Enter',
+            preventDefault: true,
+            run: test,
+          },
         ])
       ]
     })
     this.editor = new EditorView({
       state,
       parent: parentHTMLElement
-    })
+    });
   }
 })
 </script>
