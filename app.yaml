@@ -17,6 +17,7 @@ liveness_check:
 
 readiness_check:
   path: "/health"
+  app_start_timeout_sec: 600
 
 env_variables:
   NODE_ENV: "production"

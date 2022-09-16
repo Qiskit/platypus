@@ -26,7 +26,7 @@ const pathPulses = '/course/quantum-hardware-pulses'
 const pathHardwareUsingCircuits = '/course/quantum-hardware'
 const pathApps = '/course/ch-applications'
 const pathLabs = '/course/ch-labs'
-const pathProblemSets = '/course/problem-sets'
+const pathProblemSets = '/problem-sets'
 
 const tutorialsBaseUrl = 'https://qiskit.org/documentation/tutorials'
 
@@ -706,6 +706,13 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       url: `${pathProblemSets}/single_systems_problem_set`,
       segment: {
         cta: 'single_systems_problem_set', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 001 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_problem_set`,
+      segment: {
+        cta: 'quantum_enigma_problem_set', location: sectionProblemSets
       }
     }
   ]
