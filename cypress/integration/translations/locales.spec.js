@@ -97,8 +97,8 @@ describe('Language Selector Macbook-15', () => {
 
   it('Should show the unavailable language indicator', () => {
     // navigate to page w/o translations
-    cy.visit('/course/ch-labs')
-    cy.url().should('include', '/course/ch-labs')
+    cy.visit('/problem-sets/single_systems_problem_set')
+    cy.url().should('include', '/problem-sets/single_systems_problem_set')
 
     // click on the language selector drop down
     cy.get('[data-test=language-selector]')
