@@ -98,7 +98,7 @@ export default defineComponent({
       isKernelReady: false,
       hideInitialOutput: false,
       isApiTokenNeeded: false,
-      id: 0,
+      id: 0
     }
   },
   computed: {

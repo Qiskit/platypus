@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import { basicSetup } from 'codemirror'
-import { EditorView, KeyBinding, keymap } from '@codemirror/view'
+import { EditorView, keymap } from '@codemirror/view'
 import { EditorState, StateField } from '@codemirror/state'
 import { defaultKeymap, indentWithTab } from '@codemirror/commands'
 import { python } from '@codemirror/lang-python'
@@ -56,7 +56,7 @@ export default defineComponent({
         }
       }
     })
-    const test = (view: EditorView): boolean => {
+    const keyboardRun = (view: EditorView): boolean => {
       emit('keyboardRun', true)
       return true
     }
@@ -73,7 +73,7 @@ export default defineComponent({
           {
             key: 'Shift-Enter',
             preventDefault: true,
-            run: test,
+            run: keyboardRun,
           },
         ])
       ]
@@ -81,7 +81,7 @@ export default defineComponent({
     this.editor = new EditorView({
       state,
       parent: parentHTMLElement
-    });
+    })
   }
 })
 </script>
