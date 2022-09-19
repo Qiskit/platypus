@@ -231,6 +231,28 @@ const start = () => {
         res.render('textbook', courseData)
       }
     })
+    .get('/problem-sets/:course', (req, res, next) => {
+      // redirect to first question if none is specified
+      const course = getCourse(req.params.course, req.locale.id)
+      return course ? res.redirect(`/problem-sets/${course.id}/${course.sections[0].id}`) : next()
+    })
+    .get('/problem-sets/:course/:section', async (req, res, next) => {
+      // :course - refers to the problem-set id
+      // :section - refers to the question id
+      // example URL: /problem-sets/single_systems_problem_set/problem-1
+      const courseData = await getCourseData(req)
+
+      courseData?.course.sections.forEach((section: any) => {
+        // Mathigon by default sets url as 'course/'
+        section.url = section.url.replace('course/', 'problem-sets/')
+      })
+
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
     .get('/course/:course/:section', async (req, res, next) => {
       const courseData = await getCourseData(req)
 

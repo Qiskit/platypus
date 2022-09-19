@@ -332,6 +332,7 @@
       uuid: 57d7e37c-cae9-11ec-9d64-0242ac120002
       url: /ch-demos/variational-quantum-regression
 
+
 - title: Problem Sets
   url: /problem-sets
   sections:
@@ -339,6 +340,10 @@
       id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/single_systems_problem_set
+    - title: Quantum Enigma Problem Set
+      id: quantum_enigma_problem_set
+      uuid: e4f72595-1e9e-47fd-8780-345360b53fef
+      url: /problem-sets/quantum_enigma_problem_set
 
 
 - title: Examples
@@ -357,10 +362,15 @@
       id: widgets
       uuid: 79da872a-b51a-11ec-b909-0242ac120002
       url: /examples/widgets
+    - title: Grader
+      id: grader
+      uuid: 5e7e52f6-437d-4edf-be7b-89d38f96007d
+      url: /examples/grader
     - title: Locale
       id: locale
       uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
       url: /examples/locale
+
 
 - title: Quantum Algorithms
   url: /algorithms
@@ -408,6 +418,7 @@
       id: project
       uuid: e25c3f90-aebd-11ec-b909-0242ac120002
       url: /intro/project
+
 
 - title: Summer School 2020
   url: /2020
@@ -555,6 +566,7 @@
       id: lec10-2-the-capacity-power-quantum-machine-learning-models-future-quantum-machine-learning
       uuid: 12c23f78-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec10.2
+
 
 - title: Quantum Machine Learning
   url: /machine-learning
