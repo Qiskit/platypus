@@ -22,7 +22,6 @@
       </h1>
       <button
         class="mini-composer__circuit-section__reset"
-        align-items:center
         @click="onResetButton"
       >
         Reset <ResetIcon class="mini-composer__circuit-section__reset__icon" />
@@ -242,6 +241,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       flex-flow: row;
       gap: $spacing-03;
       color: $link-color-tertiary;
+      align-items: center;
       &__icon{
         height: 16px;
       }
