@@ -9,7 +9,6 @@ import { EditorView, keymap } from '@codemirror/view'
 import { EditorState, StateField } from '@codemirror/state'
 import { defaultKeymap, indentWithTab } from '@codemirror/commands'
 import { python } from '@codemirror/lang-python'
-import { View } from 'backbone'
 
 export default defineComponent({
   name: 'CodeArea',
