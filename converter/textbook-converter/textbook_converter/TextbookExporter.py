@@ -585,7 +585,7 @@ class TextbookExporter(Exporter):
                 continue
 
             if cell.cell_type == "code" and cell.source.strip():
-                if 'sanity-check' in cell.metadata['tags']:
+                if 'tags' in cell.metadata and 'sanity-check' in cell.metadata['tags']:
                     # Ignore cell
                     continue
                 goals, resources = handle_cell_goals(id, cell, resources)
