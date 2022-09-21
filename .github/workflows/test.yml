@@ -58,6 +58,7 @@ jobs:
           npm run test:nb
           echo "::endgroup::"
           echo "::group::Run changed notebooks"
+          echo "${{ steps.changed-notebooks.outputs.all_changed_files }}"
           python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-notebooks.outputs.all_changed_files }} --fail-on-warning
           echo "::endgroup::"
 
