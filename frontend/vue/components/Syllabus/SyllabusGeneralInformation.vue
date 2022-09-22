@@ -83,7 +83,7 @@ export default defineComponent({
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  gap: $spacing-06;
+  gap: $spacing-05;
 
   @include mq($until: medium) {
     grid-template-columns: auto;

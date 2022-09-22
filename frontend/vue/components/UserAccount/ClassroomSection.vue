@@ -145,8 +145,11 @@ export default defineComponent({
 
     &__syllabi-list {
       display: flex;
-      flex-direction: column;
       gap: $spacing-08;
+
+      @include mq($until: large) {
+        flex-direction: column;
+      }
     }
   }
 }
