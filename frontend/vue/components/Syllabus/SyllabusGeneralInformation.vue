@@ -80,16 +80,9 @@ export default defineComponent({
 
 .syllabus-general-information {
   @include type-style('body-long-01');
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-  gap: $spacing-05;
-
-  @include mq($until: medium) {
-    grid-template-columns: auto;
-  }
 
   &__item {
+    margin-bottom: $spacing-03;
     &__heading {
       @include type-style('productive-heading-01');
     }

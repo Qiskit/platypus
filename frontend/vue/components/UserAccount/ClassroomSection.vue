@@ -42,7 +42,6 @@
         <SyllabusCard
           v-for="syllabus in syllabi"
           :key="syllabus.id"
-          image="/images/header.png"
           :syllabus="syllabus"
         />
       </div>
