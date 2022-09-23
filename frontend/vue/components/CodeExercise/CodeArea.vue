@@ -55,6 +55,11 @@ export default defineComponent({
         }
       }
     })
+    const keyboardRun = (view: EditorView): boolean => {
+      emit('keyboardRun', true)
+      return true
+    }
+
     const state = EditorState.create({
       doc: this.code,
       extensions: [
@@ -63,7 +68,12 @@ export default defineComponent({
         docChanged,
         keymap.of([
           ...defaultKeymap,
-          indentWithTab
+          indentWithTab,
+          {
+            key: 'Shift-Enter',
+            preventDefault: true,
+            run: keyboardRun,
+          },
         ])
       ]
     })
