@@ -50,16 +50,6 @@
         </ColumnFlowGrid>
       </div>
     </div>
-    <div class="syllabus-form-course__row syllabus-form-course__row__save">
-      <BasicLink
-        class="syllabus-form-course__link"
-        :class="{'syllabus-form-course__link__disabled': syllabusSaved}"
-        v-bind="saveSyllabusModuleLink"
-        @click="saveModuleAction"
-      >
-        {{ $translate(saveSyllabusModuleLink.label) }}
-      </BasicLink>
-    </div>
   </section>
 </template>
 
@@ -71,7 +61,6 @@ import BXCheckbox from 'carbon-web-components/es/components/checkbox/checkbox.js
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import { getCourseList, Course } from '../../../ts/courses'
-import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import 'carbon-web-components/es/components/button/button.js'
 import 'carbon-web-components/es/components/input/input.js'
@@ -80,7 +69,6 @@ import { SyllabusCourse } from '../../../ts/syllabus'
 export default defineComponent({
   name: 'SyllabusFormModule',
   components: {
-    BasicLink,
     ColumnFlowGrid,
     Close16,
     ckeditor: CKEditor.component
@@ -100,11 +88,6 @@ export default defineComponent({
   data () {
     return {
       courseList: [] as Course[],
-      saveSyllabusModuleLink: {
-        label: 'Save content',
-        url: '#'
-      },
-      syllabusSaved: false,
       editor: ClassicEditor,
       editorData: '<p>this is the editor data</p>',
       editorConfig: {
@@ -125,15 +108,7 @@ export default defineComponent({
     containsUnitID (uuid: string) {
       return this.course.unitList.includes(uuid)
     },
-    saveModuleAction () {
-      // TODO: Add proper functionality for persisting course data
-      this.saveSyllabusModuleLink.label = 'Saved'
-      this.syllabusSaved = true
-    },
     updateFormTitle (event: InputEvent) {
-      this.saveSyllabusModuleLink.label = 'Save content'
-      this.syllabusSaved = false
-
       const newData = {
         ...this.course,
         ...{ title: (event.target as BXTextarea).value }
@@ -142,9 +117,6 @@ export default defineComponent({
       this.$emit('change', newData)
     },
     updateFormDescription (event: InputEvent) {
-      this.saveSyllabusModuleLink.label = 'Save content'
-      this.syllabusSaved = false
-
       const newData = {
         ...this.course,
         ...{ description: this.editorData }
@@ -205,13 +177,6 @@ $min-editor-height: 10rem;
     @include mq($until: medium) {
       flex-direction: column;
     }
-
-    &__save {
-      justify-content: flex-end;
-      @include mq($until: medium) {
-        flex-direction: row;
-      }
-    }
   }
 
   &__input-field {
@@ -230,18 +195,6 @@ $min-editor-height: 10rem;
   &__label {
     @include type-style('label-01');
     margin: $spacing-05 0;
-  }
-
-  &__link {
-    color: $text-active-color;
-    @include type-style('body-long-01');
-    &__disabled {
-      color: $text-color-dark;
-      pointer-events: none;
-      &:hover {
-        text-decoration: none;
-      }
-    }
   }
 
   &__units {
