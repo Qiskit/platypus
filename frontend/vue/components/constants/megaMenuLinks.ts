@@ -714,6 +714,13 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       segment: {
         cta: 'quantum_states_and_operations', location: sectionProblemSets
       }
+    },
+    {
+      label: 'Quantum Enigma 001 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_problem_set`,
+      segment: {
+        cta: 'quantum_enigma_problem_set', location: sectionProblemSets
+      }
     }
   ]
 }
