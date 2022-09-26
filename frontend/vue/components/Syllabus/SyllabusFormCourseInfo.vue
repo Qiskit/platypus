@@ -86,32 +86,16 @@
         @input="updateFormInfo"
       />
     </div>
-    <div class="syllabus-form-course-info__row syllabus-form-course-info__row__save">
-      <BasicLink
-        class="syllabus-form-course-info__link"
-        :class="{'syllabus-form-course-info__link__disabled': syllabusSaved}"
-        v-bind="saveSyllabusInfoLink"
-        @click="saveInfoAction"
-      >
-        {{ $translate(saveSyllabusInfoLink.label) }}
-      </BasicLink>
-    </div>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
-import 'carbon-web-components/es/components/tabs/tabs.js'
-import 'carbon-web-components/es/components/tabs/tab.js'
 import BXInput from 'carbon-web-components/es/components/input/input.js'
-import BasicLink from '../common/BasicLink.vue'
 import { Syllabus } from '../../../ts/syllabus'
 
 export default defineComponent({
   name: 'SyllabusFormCourseInfo',
-  components: {
-    BasicLink
-  },
   props: {
     syllabus: {
       type: Object,
@@ -126,7 +110,6 @@ export default defineComponent({
         label: 'Save to syllabus',
         url: '#'
       },
-      syllabusSaved: false,
       nameInputIsPristine: true,
       instructorIsPristine: true
     }
@@ -155,16 +138,7 @@ export default defineComponent({
 
       return hasName && hasInstructor
     },
-    saveInfoAction () {
-      if (this.isValid(true)) {
-        this.saveSyllabusInfoLink.label = 'Saved'
-        this.syllabusSaved = true
-      }
-    },
     updateFormInfo () {
-      this.saveSyllabusInfoLink.label = 'Save to syllabus'
-      this.syllabusSaved = false
-
       this.isValid()
 
       const updatedData = {
@@ -214,13 +188,6 @@ export default defineComponent({
     @include mq($until: medium) {
       flex-direction: column;
     }
-
-    &__save {
-      justify-content: flex-end;
-      @include mq($until: medium) {
-        flex-direction: row;
-      }
-    }
   }
 
   &__input-field {
@@ -231,19 +198,6 @@ export default defineComponent({
 
       @include mq($until: medium) {
         padding-right: initial;
-      }
-    }
-  }
-
-  &__link {
-    color: $text-active-color;
-    @include type-style('body-long-01');
-
-    &__disabled {
-      color: $text-color-dark;
-      pointer-events: none;
-      &:hover {
-        text-decoration: none;
       }
     }
   }

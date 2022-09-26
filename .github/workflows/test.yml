@@ -50,7 +50,7 @@ jobs:
         id: changed-notebooks
         uses: tj-actions/changed-files@v29.0.4
         with:
-          files: '**.ipynb'
+          files: notebooks/**/*.ipynb
 
       - name: Notebook tests
         run: |
@@ -58,7 +58,11 @@ jobs:
           npm run test:nb
           echo "::endgroup::"
           echo "::group::Run changed notebooks"
-          python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-files.outputs.all_changed_files }} --fail-on-warning
+          # Copy Qiskit settings
+          curl --create-dirs https://raw.githubusercontent.com/Qiskit/platypus-binder/main/.qiskit/settings.conf --output ~/.qiskit/settings.conf
+          curl --create-dirs https://raw.githubusercontent.com/Qiskit/platypus-binder/main/.qiskit/styles/textbook.json --output ~/.qiskit/styles/textbook.json
+          # Run notebooks tests
+          python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-notebooks.outputs.all_changed_files }} --fail-on-warning
           echo "::endgroup::"
 
       - name: Build
