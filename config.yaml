@@ -5,7 +5,7 @@ domain: learn.qiskit.org
 # privacyURL: /policies
 # googleAnalytics: UA-XXX-XXX
 # banner: (c) Mathigon Ltd
-locales: [en, ja]
+locales: [en, ja, es, ko, pt]
 
 search:
   enabled: false
