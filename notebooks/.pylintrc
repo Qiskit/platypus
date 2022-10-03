@@ -17,6 +17,8 @@ good-names=
     cr
 
 additional-builtins=
+    _,
+    Out,
     display
 
 [FORMAT]
