@@ -156,9 +156,9 @@ const QML_COURSE: MegaDropdownMenuGroup = {
     },
     {
       label: 'Quantum feature maps and kernels',
-      url: `${pathQuantumMachineLearning}/quantum-feature-maps-and-kernels`,
+      url: `${pathQuantumMachineLearning}/quantum-feature-maps-kernels`,
       segment: {
-        cta: 'quantum-feature-maps-and-kernels', location: sectionQMLCourse
+        cta: 'quantum-feature-maps-kernels', location: sectionQMLCourse
       }
     },
     {
