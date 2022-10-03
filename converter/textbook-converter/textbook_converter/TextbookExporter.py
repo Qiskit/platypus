@@ -582,8 +582,12 @@ class TextbookExporter(Exporter):
                     markdown_lines.append(f"\n\n---\n")
                 if headings:
                     nb_headings += headings
+                continue
 
-            elif cell.cell_type == "code" and cell.source.strip():
+            if cell.cell_type == "code" and cell.source.strip():
+                if 'tags' in cell.metadata and 'sanity-check' in cell.metadata['tags']:
+                    # Ignore cell
+                    continue
                 goals, resources = handle_cell_goals(id, cell, resources)
                 if goals:
                     markdown_lines.append(f"\n---\n> id: {id}")

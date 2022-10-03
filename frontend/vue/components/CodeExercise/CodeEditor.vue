@@ -1,6 +1,6 @@
 <template>
   <div class="code-editor">
-    <CodeArea class="code-editor__text-area" :code="internalCode" @codeChanged="codeChanged" />
+    <CodeArea class="code-editor__text-area" :code="internalCode" @codeChanged="codeChanged" @keyboardRun="keyboardRun" />
     <CodeEditorTools
       class="code-editor__tools"
       :copy-text="internalCode"
@@ -100,6 +100,9 @@ export default defineComponent({
     codeChanged (code: string) {
       this.internalCode = code
       this.$emit('codeChanged', this.internalCode)
+    },
+    keyboardRun () {
+      this.$emit('keyboardRun')
     },
     scratchpad () {
       this.$emit('scratchpadCopyRequest', this.internalCode)
