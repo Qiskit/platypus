@@ -48,7 +48,7 @@ jobs:
 
       - name: Get changed notebooks
         id: changed-notebooks
-        uses: tj-actions/changed-files@v29.0.4
+        uses: tj-actions/changed-files@v29.0.9
         with:
           files: notebooks/**/*.ipynb
 
