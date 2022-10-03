@@ -67,6 +67,9 @@ If you have further questions, please feel free to contact [Soolu Thomas](mailto
 5. Now, in the terminal run `git add LOCALIZATION_CONTRIBUTORS`, `git commit -m "Added name under LANGUAGE-NAME"`, `git push origin BRANCH-NAME`. 
 6. Follow the link in the terminal to open a pull request.
 
+## When will my translation get published?
+
+Please refer to the [Release Guide](https://github.com/Qiskit/platypus/blob/main/translations/release_guide.md) for more information on how translated textbooks get published.
 
 ## When you find an issue in the textbook
 
