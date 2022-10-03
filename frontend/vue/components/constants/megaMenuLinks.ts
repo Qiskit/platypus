@@ -156,9 +156,9 @@ const QML_COURSE: MegaDropdownMenuGroup = {
     },
     {
       label: 'Quantum feature maps and kernels',
-      url: `${pathQuantumMachineLearning}/quantum-feature-maps-and-kernels`,
+      url: `${pathQuantumMachineLearning}/quantum-feature-maps-kernels`,
       segment: {
-        cta: 'quantum-feature-maps-and-kernels', location: sectionQMLCourse
+        cta: 'quantum-feature-maps-kernels', location: sectionQMLCourse
       }
     },
     {
@@ -706,6 +706,13 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       url: `${pathProblemSets}/single_systems_problem_set`,
       segment: {
         cta: 'single_systems_problem_set', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 001 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_problem_set`,
+      segment: {
+        cta: 'quantum_enigma_problem_set', location: sectionProblemSets
       }
     }
   ]

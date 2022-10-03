@@ -264,7 +264,13 @@ def standalone(md_dir, section):
     # rename md file to required name: `content.md`
     Path(md_dir_path / Path(md_file_name)).rename(Path(md_dir_path / Path('content.md')))
     # move section files into own directory
-    md_dir_path.rename(Path(md_dir_path.parent / Path(section['id'])))
+    _ = os.listdir(md_dir_path)
+    shutil.copytree(md_dir_path, Path(md_dir_path.parent / Path(section['id'])))
+
+    # clean up
+    Path(md_dir_path / Path('content.md')).unlink()
+    Path(md_dir_path / Path('index.yaml')).unlink()
+    Path(md_dir_path / Path('functions.ts')).unlink()
 
 
 def merge(md_dir, toc_file_path, output_dir=None):

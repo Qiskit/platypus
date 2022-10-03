@@ -3,7 +3,6 @@ import wrapper from './wc-wrapper/platypusWrapper'
 
 import CodeMirrorClipboardCopy from './components/CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
 import TheMenu from './components/TheMenu/index.vue'
-import MobileMenu from './components/TheMenu/MobileMenu.vue'
 import WhatIsQuantumVolume from './components/WhatIsQuantumVolume/WhatIsQuantumVolume.vue'
 import LayersCircuit from './components/WhatIsQuantumVolume/LayersCircuit.vue'
 import DragAndDropCode from './components/DragAndDropCode/DragAndDropCode.vue'
@@ -60,7 +59,6 @@ const components: any = {
   ContentMenu,
   LanguageSelector,
   TheMenu,
-  MobileMenu,
   LayersCircuit,
   WhatIsQuantumVolume,
   DragAndDropCode,
