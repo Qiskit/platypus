@@ -53,7 +53,7 @@
   "dependencies": {
     "@carbon/colors": "^10.36.0",
     "@carbon/icons-vue": "~10.48.0",
-    "@carbon/themes": "^11.8.0",
+    "@carbon/themes": "^11.10.0",
     "@carbon/vue": "^2.44.1",
     "@ckeditor/ckeditor5-build-classic": "^34.2.0",
     "@ckeditor/ckeditor5-vue": "^4.0.1",
@@ -104,7 +104,7 @@
     "@types/express-flash": "0.0.2",
     "@types/fs-extra": "^9.0.13",
     "@types/jsdom": "^16.2.15",
-    "@types/lodash": "^4.14.185",
+    "@types/lodash": "^4.14.186",
     "@types/markdown-it": "^12.2.1",
     "@types/node-fetch": "^2.6.2",
     "@types/pug": "2.0.6",
