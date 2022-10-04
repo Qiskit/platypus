@@ -144,7 +144,7 @@ export default defineComponent({
 
     &__syllabi-list {
       display: grid;
-      grid-template-columns: 48% 48%;
+      grid-template-columns: 1fr 1fr;
       gap: $spacing-07;
 
       @include mq($until: large) {
