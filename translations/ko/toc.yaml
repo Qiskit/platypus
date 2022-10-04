@@ -1,0 +1,64 @@
+- title: 양자 상태 및 큐비트
+  url: /ch-states
+  sections:
+    - id: introduction
+      uuid: afcc559e-b519-11ec-b909-0242ac120002
+      url: /ch-states/introduction
+    - id: the-atoms-of-computation
+      uuid: b31c20ee-b519-11ec-b909-0242ac120002
+      url: /ch-states/atoms-computation
+    - id: representing-qubit-states
+      uuid: b81717ca-b519-11ec-b909-0242ac120002
+      url: /ch-states/representing-qubit-states
+    - id: the-case-for-quantum-computers
+      uuid: c0bbff62-b519-11ec-b909-0242ac120002
+      url: /ch-states/case-for-quantum
+
+
+- title: 다중 큐비트 및 얽힘
+  url: /ch-gates
+  sections:
+    - id: multiple-qubits-and-entangled-states
+      uuid: c7cfe502-b519-11ec-b909-0242ac120002
+      url: /ch-gates/multiple-qubits-entangled-states
+    - id: basic-circuit-identities
+      uuid: ce8ce75a-b519-11ec-b909-0242ac120002
+      url: /ch-gates/more-circuit-identities
+
+
+- title: 양자 프로토콜 및 양자 알고리즘
+  url: /ch-algorithms
+  sections:
+    - id: bernstein-vazirani-algorithm
+      uuid: df6e5a40-b519-11ec-b909-0242ac120002
+      url: /ch-algorithms/bernstein-vazirani
+
+
+- title: 양자 알고리즘
+  url: /algorithms
+  type: learning-path
+  sections:
+    - id: phase-kickback
+      uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
+      url: /algorithms/phase-kickback
+
+
+- title: 양자 컴퓨팅 소개
+  url: /introduction
+  type: learning-path
+  sections:
+    - uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
+      id: why-quantum-computing
+      url: /intro/why-quantum-computing
+    - id: what-is-quantum
+      uuid: 7c765036-aebc-11ec-b909-0242ac120002
+      url: /intro/what-is-quantum
+    - id: describing-quantum-computers
+      uuid: 9260a554-aebc-11ec-b909-0242ac120002
+      url: /intro/describing-quantum-computers
+    - id: grovers-search-algorithm
+      uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
+      url: /intro/grover-intro
+    - id: project
+      uuid: e25c3f90-aebd-11ec-b909-0242ac120002
+      url: /intro/project
