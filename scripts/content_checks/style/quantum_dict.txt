@@ -150,8 +150,10 @@ fermionic
 fidelities
 hyperparameter
 hyperparameters
+ket
 minimax
 misclassifying
+nucleobase
 parameterization
 polynomially
 preprint
