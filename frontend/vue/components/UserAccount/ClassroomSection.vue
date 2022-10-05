@@ -143,11 +143,12 @@ export default defineComponent({
     }
 
     &__syllabi-list {
-      display: flex;
-      gap: $spacing-08;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-07;
 
       @include mq($until: large) {
-        flex-direction: column;
+        grid-template-columns: initial;
       }
     }
   }
