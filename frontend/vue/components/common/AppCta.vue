@@ -8,9 +8,7 @@
     ]"
     v-bind="$attrs"
   >
-    <span class="app-cta__content">
-      {{ label }}
-    </span>
+    <span class="app-cta__content" v-html="label"></span>
     <component
       :is="iconPerLinkType"
       class="app-cta__icon"

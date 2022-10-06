@@ -17,7 +17,7 @@ The textbook is intended for use as a university quantum algorithms course suppl
 
 ## Getting Started
 ### Pre-requisites
-1. Python (3.6 or later) environment with `textbook_converter` requirements installed
+1. Python 3.8 environment with `textbook_converter` requirements installed
 
     ```
     $ cd platypus/converter/textbook-converter

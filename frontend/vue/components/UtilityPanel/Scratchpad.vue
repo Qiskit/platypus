@@ -15,6 +15,7 @@
           :scratchpad-enabled="false"
           @codeChanged="codeChanged"
           @resetOutput="resetOutput"
+          @keyboardRun="keyboardRun"
         />
         <ExerciseActionsBar
           class="scratchpad__editor-block__actions-bar"
@@ -111,6 +112,10 @@ export default class Scratchpad extends Vue {
     const codeOutput: any = this.$refs.output
     codeOutput.requestExecute(this.code)
     window.textbook.trackClickEvent('Run', `Scratchpad code cell, ${pageRoute}`)
+  }
+
+  keyboardRun () {
+    this.run()
   }
 
   kernelRunning () {

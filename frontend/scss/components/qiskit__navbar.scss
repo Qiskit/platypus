@@ -1,13 +1,6 @@
-@import '../variables/colors.scss';
 @import '../variables/settings.scss';
 
 /* height keeps the space and prevent loading jumps */
 .qiskit__navbar {
-  border-bottom: 1px solid $border-color;
-  background-color: $background-color-white;
   height: $qiskit-navbar-height;
-
-  nav.menu__navigation-level {
-    max-width: initial;
-  }
 }
