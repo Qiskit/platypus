@@ -18,7 +18,6 @@ Broughton
 Brukner
 Bucher
 Carleo
-Carleo
 Carrera
 Cerezo
 Cincio
@@ -54,14 +53,11 @@ Hoyer
 Hubregtsen
 Ijaz
 Iten
-Iten
-Izaac
 Izaac
 Jakob
 Jurcevic
 Kandala
 Keras
-Killoran
 Killoran
 Koen
 Kohli
@@ -103,7 +99,6 @@ Shewchuk
 Smelyanskiy
 Srinivasan
 Stamatopoulos
-Steenken
 Steenken
 Streif
 Sukin
@@ -151,6 +146,7 @@ fidelities
 hyperparameter
 hyperparameters
 ket
+kets
 minimax
 misclassifying
 nucleobase

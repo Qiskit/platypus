@@ -204,8 +204,8 @@ def handle_hero_image(hero_image_syntax):
 def handle_heading(heading_syntax, in_block, suffix, section, is_problem_set=False):
     """Increase header level and compute level, title, and id"""
     header, title = heading_syntax.split(" ", 1)
+    title = handle_inline_code(title)
     level = header.count("#")
-    is_problem_set = is_problem_set
     if in_block:
         return None, None, title, f"#{heading_syntax}\n"
     else:
@@ -582,8 +582,12 @@ class TextbookExporter(Exporter):
                     markdown_lines.append(f"\n\n---\n")
                 if headings:
                     nb_headings += headings
+                continue
 
-            elif cell.cell_type == "code" and cell.source.strip():
+            if cell.cell_type == "code" and cell.source.strip():
+                if 'tags' in cell.metadata and 'sanity-check' in cell.metadata['tags']:
+                    # Ignore cell
+                    continue
                 goals, resources = handle_cell_goals(id, cell, resources)
                 if goals:
                     markdown_lines.append(f"\n---\n> id: {id}")
