@@ -276,8 +276,8 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       align-items: center;
       justify-content: center;
 
-      height: 16px;
-      width: 16px;
+      height: 9rem;
+      width: 100%;
       border: 2px solid $border-color;
       background-color: $background-color-white;
     }
