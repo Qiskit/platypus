@@ -30,7 +30,7 @@
       </bx-modal-heading>
     </bx-modal-header>
     <bx-modal-body class="delete_section__modal__body">
-      <p>{{ $translate('Deleting your account is a perminent action that cannot be undone. Please type “delete” to continue.') }}</p>
+      <p>{{ $translate('Deleting your account is a permanent action that cannot be undone. Please type “delete” to continue.') }}</p>
       <bx-input
         :value="modalInputValue"
         color-scheme="light"
