@@ -243,7 +243,7 @@ export default class CircuitSandboxWidget extends Vue.with(Props) {
       color: $link-color-tertiary;
       align-items: center;
       &__icon{
-        height: 16px;
+        height: 1rem;
       }
       &:hover {
         color: $link-hover-color-tertiary;
