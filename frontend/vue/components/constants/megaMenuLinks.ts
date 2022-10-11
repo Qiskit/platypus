@@ -13,6 +13,7 @@ const sectionApps = 'apps'
 const sectionCircuits = 'circuits'
 const sectionLabs = 'labs'
 const sectionTutorials = 'tutorials'
+const sectionSummerSchool = 'summer-schools'
 const sectionProblemSets = 'problem-sets'
 
 const pathIntroductionCourse = '/course/introduction'
@@ -27,6 +28,7 @@ const pathHardwareUsingCircuits = '/course/quantum-hardware'
 const pathApps = '/course/ch-applications'
 const pathLabs = '/course/ch-labs'
 const pathProblemSets = '/problem-sets'
+const pathSummerSchool = '/summer-school'
 
 const tutorialsBaseUrl = 'https://qiskit.org/documentation/tutorials'
 
@@ -156,9 +158,9 @@ const QML_COURSE: MegaDropdownMenuGroup = {
     },
     {
       label: 'Quantum feature maps and kernels',
-      url: `${pathQuantumMachineLearning}/quantum-feature-maps-and-kernels`,
+      url: `${pathQuantumMachineLearning}/quantum-feature-maps-kernels`,
       segment: {
-        cta: 'quantum-feature-maps-and-kernels', location: sectionQMLCourse
+        cta: 'quantum-feature-maps-kernels', location: sectionQMLCourse
       }
     },
     {
@@ -1056,6 +1058,371 @@ const SAMPLE_ALGORITHMS_IN_QISKIT: MegaDropdownMenuGroup = {
   ]
 }
 
+const SUMMER_SCHOOL_2020: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Summer school 2020',
+    url: 'https://learn.qiskit.org/summer-school/2020',
+    segment: {
+      cta: wholeSection, location: sectionSummerSchool
+    }
+  },
+  content: [
+    {
+      label: 'Qubits and Quantum States, Quantum Circuits, Measurements',
+      url: `${pathSummerSchool}/2020/qubits-states-circuits-measurements`,
+      segment: {
+        cta: 'qubits-states-circuits-measurements', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Writing and Running Quantum Programs',
+      url: `${pathSummerSchool}/2020/writing-running-programs`,
+      segment: {
+        cta: 'writing-running-programs', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Shor\'s Algorithm I Quantum Fourier Transform, Quantum Phase Estimation',
+      url: `${pathSummerSchool}/2020/shors-algorithm-i-fourier-transform-phase-estimation`,
+      segment: {
+        cta: 'shors-algorithm-i-fourier-transform-phase-estimation', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Shor\'s Algorithm II From Factoring to Period-Finding, Writing the Quantum Program',
+      url: `${pathSummerSchool}/2020/shors-algorithm-ii-from-factoring-to-period-finding-writing-program`,
+      segment: {
+        cta: 'shors-algorithm-ii-from-factoring-to-period-finding-writing-program', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Error Correction using Repetition Codes',
+      url: `${pathSummerSchool}/2020/error-correction-using-repetition-codes`,
+      segment: {
+        cta: 'error-correction-using-repetition-codes', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Superconducting Qubits I Quantizing a Harmonic Oscillator, Josephson Junctions',
+      url: `${pathSummerSchool}/2020/superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions`,
+      segment: {
+        cta: 'superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Superconducting Qubits II Circuit Quantum Electrodynamics, Readout and Calibration Methods',
+      url: `${pathSummerSchool}/2020/superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods`,
+      segment: {
+        cta: 'superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Chemistry I Obtaining the Qubit Hamiltonian for H2 and LiH',
+      url: `${pathSummerSchool}/2020/chemistry-i-obtaining-qubit-hamiltonian-h2-lih`,
+      segment: {
+        cta: 'chemistry-i-obtaining-qubit-hamiltonian-h2-lih', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Chemistry II Finding the Ground States of H2 and LiH',
+      url: `${pathSummerSchool}/2020/chemistry-ii-finding-ground-states-h2-lih`,
+      segment: {
+        cta: 'chemistry-ii-finding-ground-states-h2-lih', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Careers in Quantum Computing',
+      url: `${pathSummerSchool}/2020/careers-in-computing`,
+      segment: {
+        cta: 'careers-in-computing', location: sectionSummerSchool
+      }
+    }
+  ]
+}
+
+const SUMMER_SCHOOL_2021: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Summer school 2021',
+    url: 'https://learn.qiskit.org/summer-school/2021',
+    segment: {
+      cta: wholeSection, location: sectionSummerSchool
+    }
+  },
+  content: [
+    {
+      label: 'Vector Spaces, Tensor Products, and Qubits',
+      url: `${pathSummerSchool}/2021/lec1-1-vector-spaces-tensor-products-qubits`,
+      segment: {
+        cta: 'lec1-1-vector-spaces-tensor-products-qubits', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Introduction to Quantum Circuits',
+      url: `${pathSummerSchool}/2021/lec1-2-introduction-quantum-circuits`,
+      segment: {
+        cta: 'lec1-2-introduction-quantum-circuits', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Simple Quantum Algorithms I',
+      url: `${pathSummerSchool}/2021/lec2-1-simple-quantum-algorithms-i`,
+      segment: {
+        cta: 'lec2-1-simple-quantum-algorithms-i', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Simple Quantum Algorithms II',
+      url: `${pathSummerSchool}/2021/lec2-2-simple-quantum-algorithms-ii`,
+      segment: {
+        cta: 'lec2-2-simple-quantum-algorithms-ii', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Noise in Quantum Computers pt 1',
+      url: `${pathSummerSchool}/2021/lec3-1-noise-quantum-computers-1`,
+      segment: {
+        cta: 'lec3-1-noise-quantum-computers-1', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Noise in Quantum Computers pt 2',
+      url: `${pathSummerSchool}/2021/lec3-2-noise-quantum-computers-pt-2`,
+      segment: {
+        cta: 'lec3-2-noise-quantum-computers-pt-2', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 1',
+      url: `${pathSummerSchool}/2021/lab1-quantum-computing-algorithm-operations`,
+      segment: {
+        cta: 'lab1-quantum-computing-algorithm-operations', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Introduction to Classical Machine Learning',
+      url: `${pathSummerSchool}/2021/lec4-1-introduction-classical-machine-learning`,
+      segment: {
+        cta: 'lec4-1-introduction-classical-machine-learning', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Advanced Classical Machine Learning',
+      url: `${pathSummerSchool}/2021/lec4-2-advanced-classical-machine-learning`,
+      segment: {
+        cta: 'lec4-2-advanced-classical-machine-learning', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Building a Quantum Classifier',
+      url: `${pathSummerSchool}/2021/lec5-1-building-quantum-classifier`,
+      segment: {
+        cta: 'lec5-1-building-quantum-classifier', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Introduction to the Quantum Approximate Optimization Algorithm and Applications',
+      url: `${pathSummerSchool}/2021/lec5-2-introduction-quantum-approximate-optimization-algorithm-applications`,
+      segment: {
+        cta: 'lec5-2-introduction-quantum-approximate-optimization-algorithm-applications', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 2',
+      url: `${pathSummerSchool}/2021/lab2-variational-algorithms`,
+      segment: {
+        cta: 'lab2-variational-algorithms', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'From Variational Classifiers to Linear Classifiers',
+      url: `${pathSummerSchool}/2021/lec6-1-from-variational-classifiers-linear-classifiers`,
+      segment: {
+        cta: 'lec6-1-from-variational-classifiers-linear-classifiers', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Feature Spaces and Kernels',
+      url: `${pathSummerSchool}/2021/lec6-2-quantum-feature-spaces-kernels`,
+      segment: {
+        cta: 'lec6-2-quantum-feature-spaces-kernels', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Kernels in Practice',
+      url: `${pathSummerSchool}/2021/lec7-1-quantum-kernels-practice`,
+      segment: {
+        cta: 'lec7-1-quantum-kernels-practice', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 3',
+      url: `${pathSummerSchool}/2021/lab3-introduction-quantum-kernels-support-vector-machines`,
+      segment: {
+        cta: 'lab3-introduction-quantum-kernels-support-vector-machines', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Introduction and Applications of Quantum Models',
+      url: `${pathSummerSchool}/2021/lec8-1-introduction-applications-quantum-models`,
+      segment: {
+        cta: 'lec8-1-introduction-applications-quantum-models', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Barren Plateaus, Trainability Issues, and How to Avoid Them',
+      url: `${pathSummerSchool}/2021/lec8-2-barren-plateaus-trainability-issues-how-avoid-them`,
+      segment: {
+        cta: 'lec8-2-barren-plateaus-trainability-issues-how-avoid-them', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 4',
+      url: `${pathSummerSchool}/2021/lab4-introduction-training-quantum-circuits`,
+      segment: {
+        cta: 'lab4-introduction-training-quantum-circuits', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Introduction to Quantum Hardware',
+      url: `${pathSummerSchool}/2021/lec9-1-introduction-quantum-hardware`,
+      segment: {
+        cta: 'lec9-1-introduction-quantum-hardware', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Hardware Efficient Ansatze for Quantum Machine Learning',
+      url: `${pathSummerSchool}/2021/lec9-2-hardware-efficient-ansatze-quantum-machine-learning`,
+      segment: {
+        cta: 'lec9-2-hardware-efficient-ansatze-quantum-machine-learning', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 5',
+      url: `${pathSummerSchool}/2021/lab5-introduction-hardware-efficient-ansatze-quantum-machine-learning`,
+      segment: {
+        cta: 'lab5-introduction-hardware-efficient-ansatze-quantum-machine-learning', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Advanced QML Algorithms',
+      url: `${pathSummerSchool}/2021/lec10-1-advanced-qml-algorithms`,
+      segment: {
+        cta: 'lec10-1-advanced-qml-algorithms', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'The Capacity and Power of Quantum Machine Learning Models & the Future of Quantum Machine Learning',
+      url: `${pathSummerSchool}/2021/lec10-2-the-capacity-power-quantum-machine-learning-models-future-quantum-machine-learning`,
+      segment: {
+        cta: 'lec10-2-the-capacity-power-quantum-machine-learning-models-future-quantum-machine-learning', location: sectionSummerSchool
+      }
+    }
+  ]
+}
+
+const SUMMER_SCHOOL_2022: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Summer school 2022',
+    url: 'https://learn.qiskit.org/summer-school/2022',
+    segment: {
+      cta: wholeSection, location: sectionSummerSchool
+    }
+  },
+  content: [
+    {
+      label: 'History of Quantum Computing and Motivation for Quantum Simulation',
+      url: `${pathSummerSchool}/2022/history-quantum-computing-motivation-quantum-simulation`,
+      segment: {
+        cta: 'history-quantum-computing-motivation-quantum-simulation', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Introduction to Linear Algebra, Prerequisite Mathematics, and Circuit Composition',
+      url: `${pathSummerSchool}/2022/introduction-linear-algebra-prerequisite-mathematics-circuit-composition`,
+      segment: {
+        cta: 'introduction-linear-algebra-prerequisite-mathematics-circuit-composition', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 1',
+      url: `${pathSummerSchool}/2022/lab-1`,
+      segment: {
+        cta: 'lab-1', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Hamiltonian Time Evolution',
+      url: `${pathSummerSchool}/2022/hamiltonian-time-evolution`,
+      segment: {
+        cta: 'hamiltonian-time-evolution', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Simulation Problems',
+      url: `${pathSummerSchool}/2022/simulation-problems`,
+      segment: {
+        cta: 'simulation-problems', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 2',
+      url: `${pathSummerSchool}/2022/lab-2`,
+      segment: {
+        cta: 'lab-2', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Noisy Real Hardware, Noise in Quantum Computers',
+      url: `${pathSummerSchool}/2022/noisy-real-hardware-noise-quantum-computers`,
+      segment: {
+        cta: 'noisy-real-hardware-noise-quantum-computers', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Broad Overview of Quantum Chemistry Simulation and Why it is a Challenge',
+      url: `${pathSummerSchool}/2022/broad-overview-quantum-chemistry-simulation-why-is-challenge`,
+      segment: {
+        cta: 'broad-overview-quantum-chemistry-simulation-why-is-challenge', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 3',
+      url: `${pathSummerSchool}/2022/lab-3`,
+      segment: {
+        cta: 'lab-3', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Methods for Quantum Simulation',
+      url: `${pathSummerSchool}/2022/methods-quantum-simulation`,
+      segment: {
+        cta: 'methods-quantum-simulation', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Static Simulation',
+      url: `${pathSummerSchool}/2022/quantum-static-simulation`,
+      segment: {
+        cta: 'quantum-static-simulation', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Lab 4',
+      url: `${pathSummerSchool}/2022/lab-4`,
+      segment: {
+        cta: 'lab-4', location: sectionSummerSchool
+      }
+    },
+    {
+      label: 'Quantum Dynamics',
+      url: `${pathSummerSchool}/2022/quantum-dynamics`,
+      segment: {
+        cta: 'quantum-dynamics', location: sectionSummerSchool
+      }
+    }
+  ]
+}
+
 type MegaDropdownMenuSection = {
   title: string,
   content: MegaDropdownMenuGroup[]
@@ -1099,10 +1466,20 @@ const TUTORIALS_SECTION: MegaDropdownMenuSection = {
   ]
 }
 
+const SUMMER_SCHOOL_SECTION: MegaDropdownMenuSection = {
+  title: 'Summer schools',
+  content: [
+    SUMMER_SCHOOL_2020,
+    SUMMER_SCHOOL_2021,
+    SUMMER_SCHOOL_2022
+  ]
+}
+
 const LEARN_MEGA_MENU: MegaDropdownMenuContent = [
   COURSES_SECTION,
   CHAPTERS_SECTION,
-  TUTORIALS_SECTION
+  TUTORIALS_SECTION,
+  SUMMER_SCHOOL_SECTION
 ]
 
 export {
