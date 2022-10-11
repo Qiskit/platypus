@@ -76,3 +76,27 @@ the notebooks that hold the textbook content.
   This script checks for notebooks added to `qiskit-community/qiskit
   textbook` that are not in `Qiskit/platypus` and makes a GitHub issue
   for it.
+
+- `nb_autorun.py`: Script to run all the notebooks. Will report any errors, and
+  will replace outputs if you pass `--write` option. This script can also
+  optionally fail on warnings if passed `--fail-on-warning`. On PRs, this
+  script runs on any changed notebooks.
+
+  Notebooks can include sanity checks on cell outputs; tagging these cells with
+  `sanity-check` stops them appearing on the website. These cells should
+  contain some kind of simple `assert` statement that checks the output of
+  recent cells matches what's written in the text. This helps us catch
+  unexpected code changes (e.g. from package updates, bugfixes in other parts
+  of the notebook, or unlikely random samples). When adding a sanity check
+  cell, you should include the quote from the main text that you're checking
+  against. For example:
+  ```
+  # "...the output of the last cell is 0."
+  assert _ == 0
+  ```
+  In Jupyter notebooks, `_` stores the last cell output. You can also use
+  `Out[x]` to refer to specific cell outputs (assume all notebooks are run from
+  top to bottom).
+
+- `tools.py`: Shared logic (e.g. argument parsing) used by scripts in this
+  folder.
