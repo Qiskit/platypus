@@ -344,6 +344,10 @@
       id: quantum_enigma_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/quantum_enigma_problem_set
+    - title: Classical Information Problem Set
+      id: classical_information
+      uuid: 7342a6e3-d36a-4ffa-8323-620a67f2de8c
+      url: /problem-sets/classical_information
 
 
 - title: Examples
