@@ -19,6 +19,14 @@
 #       url: /my-course/my-notebook  # Path to source notebook, relative to this file
 
 
+- title: Basics of quantum information
+  url: /basics
+  sections:
+    - title: Single systems
+      id: single-systems
+      url: /basics/single-systems
+
+
 - title: Prerequisites
   url: /ch-prerequisites
   sections:
