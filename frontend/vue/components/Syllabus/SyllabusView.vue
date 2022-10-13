@@ -112,7 +112,6 @@ export default defineComponent({
       const duplicatedSyllabus = this.syllabus
       duplicatedSyllabus.id = ''
       duplicatedSyllabus.code = ''
-      // duplicatedSyllabus.ownerList = []
       duplicatedSyllabus.name = `Copy of ${this.syllabus.name}`
 
       window.textbook.trackClickEvent('syllabus', `Duplicate syllabus: ${this.syllabus.name}`)
