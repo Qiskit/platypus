@@ -2,11 +2,20 @@
   <section class="syllabus-view">
     <bx-btn
       class="syllabus-view__duplicate"
+      :disabled="!userIsLoggedIn"
       kind="ghost"
-      @click="duplicateAction"
+      @click="copySyllabus"
     >
       <span class="syllabus-view__duplicate__label">Duplicate syllabus</span>
-      <Download16 class="syllabus-view__duplicate__icon" />
+      <bx-tooltip-icon
+        v-if="!userIsLoggedIn"
+        alignment="end"
+        direction="bottom"
+        body-text="Please log in to duplicate this syllabus"
+      >
+        <Download16 />
+      </bx-tooltip-icon>
+      <Download16 v-else class="syllabus-view__duplicate__icon" />
     </bx-btn>
     <h2 class="syllabus-view__general-info-title">
       General Information
@@ -46,11 +55,18 @@
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
 import Download16 from '@carbon/icons-vue/es/download/16'
+import 'carbon-web-components/es/components/tooltip/tooltip-icon'
 import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
 import { Syllabus } from '../../../ts/syllabus'
 import { getCourseList, Section, Course } from '../../../ts/courses'
 import SyllabusGeneralInformation from './SyllabusGeneralInformation.vue'
+
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
 
 export default defineComponent({
   name: 'SyllabusView',
@@ -64,6 +80,11 @@ export default defineComponent({
     syllabus: {
       type: Object,
       default: () => ({} as Syllabus),
+      required: true
+    },
+    userIsLoggedIn: {
+      type: Boolean,
+      default: false,
       required: true
     }
   },
@@ -87,8 +108,32 @@ export default defineComponent({
     getNameById (id: string) {
       return this.sectionList.find((section: Section) => section.uuid === id)?.title
     },
-    duplicateAction () {
-      console.log('duplicate')
+    copySyllabus () {
+      const duplicatedSyllabus = this.syllabus
+      duplicatedSyllabus.id = ''
+      duplicatedSyllabus.code = ''
+      // duplicatedSyllabus.ownerList = []
+      duplicatedSyllabus.name = `Copy of ${this.syllabus.name}`
+
+      window.textbook.trackClickEvent('syllabus', `Duplicate syllabus: ${this.syllabus.name}`)
+
+      const url = '/syllabus'
+      const csrfToken = { _csrf: window.csrfToken }
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...csrfToken,
+          ...this.syllabus
+        })
+      }).then((res) => {
+        if (res.status === 200) {
+          window.location.href = '/account/classroom'
+        } else {
+          // TODO: Manage this error (and improve backend feedback)
+          console.error(res)
+        }
+      })
     }
   }
 })

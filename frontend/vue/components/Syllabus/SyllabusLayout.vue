@@ -13,7 +13,7 @@
           {{ syllabus.name }}
         </template>
       </UserAccountSectionHeader>
-      <SyllabusView :syllabus="syllabus" />
+      <SyllabusView :syllabus="syllabus" :user-is-logged-in="userIsLoggedIn" />
     </div>
   </div>
 </template>
@@ -40,9 +40,17 @@ export default defineComponent({
   data () {
     return {
       syllabus: undefined as Syllabus | undefined,
-      userIsLoggedIn: false,
+      // userIsLoggedIn: false,
       sectionList: ACCOUNT_MENU_LINKS,
       syllabusParentPath: '/account/classroom'
+    }
+  },
+  computed: {
+    userIsLoggedIn () {
+      if (this.firstName !== '' || this.lastName !== '') {
+        return true
+      }
+      return false
     }
   },
   mounted () {
