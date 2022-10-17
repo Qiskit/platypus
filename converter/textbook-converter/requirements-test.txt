@@ -15,4 +15,6 @@ pylatexenc==2.10
 ipywidgets==8.0.1
 qiskit-machine-learning[sparse]
 qiskit-experiments==0.4.0
+git+https://github.com/qiskit-community/qiskit-textbook.git#subdirectory=qiskit-textbook-src
 git+https://github.com/anedumla/quantum_linear_solvers
+git+https://github.com/NCCR-SPIN/topological_codes.git
