@@ -1,6 +1,6 @@
 # See https://cloud.google.com/appengine/docs/flexible/nodejs/reference/app-yaml
 
-runtime: nodejs16
+runtime: nodejs
 env: flex
 
 handlers:
