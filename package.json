@@ -67,7 +67,7 @@
     "@jupyterlab/rendermime": "^3.4.8",
     "@jupyterlab/services": "^6.4.8",
     "@lumino/widgets": "^1.34.1",
-    "@mathigon/boost": "^1.1.1",
+    "@mathigon/boost": "^1.2.3",
     "@mathigon/euclid": "^1.1.1",
     "@mathigon/studio": "0.1.16",
     "@qiskit-community/qiskit-vue": "^3.4.0",
