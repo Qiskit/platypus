@@ -92,17 +92,17 @@ const getUserProgressData = async (req: Request) => {
 }
 
 const getAccountData = async (req: Request, res: Response) => {
-  if (req.session.redirectTo) {
-    const syllabusRedirectUrl = req.session.redirectTo
-    delete req.session.redirectTo
-    return res.redirect(syllabusRedirectUrl)
-  }
-
   if (!req.user) {
     return res.redirect('/signin')
   }
   if (!req.user.acceptedPolicies) {
     return res.redirect('/eula')
+  }
+
+  if (req.cookies.redirectTo) {
+    const syllabusRedirectUrl = req.cookies.redirectTo
+    res.clearCookie('redirectTo')
+    return res.redirect(syllabusRedirectUrl)
   }
 
   const lang = req.locale.id || 'en'
@@ -178,7 +178,7 @@ const start = () => {
         `qiskit:${randomString}`
       ]
 
-      delete req.session.redirectTo
+      res.clearCookie('redirectTo')
 
       try {
         await req.user.save()
@@ -265,7 +265,7 @@ const start = () => {
     .get('/signin', (req, res) => {
       const syllabusRedirect = req.query.returnTo
       if (syllabusRedirect) {
-        req.session.redirectTo = String(syllabusRedirect)
+        res.cookie('redirectTo', String(syllabusRedirect))
       }
 
       if (req.user && req.user.acceptedPolicies) {
@@ -313,6 +313,9 @@ const start = () => {
       }
 
       if (req.user) {
+        if (!req.user.acceptedPolicies) {
+          return res.redirect('/eula')
+        }
         loggedInUser.firstName = req.user.firstName
         loggedInUser.lastName = req.user.lastName
       }

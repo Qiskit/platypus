@@ -40,7 +40,6 @@ export default defineComponent({
   data () {
     return {
       syllabus: undefined as Syllabus | undefined,
-      // userIsLoggedIn: false,
       sectionList: ACCOUNT_MENU_LINKS,
       syllabusParentPath: '/account/classroom'
     }
