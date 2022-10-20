@@ -224,6 +224,7 @@ export default defineComponent({
   }
 
   &__input-field {
+    --cds-focus: #{$border-color-secondary};
     padding-bottom: $spacing-05;
 
     &:not(:last-child) {
