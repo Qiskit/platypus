@@ -123,7 +123,7 @@ export default defineComponent({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...csrfToken,
-          ...this.syllabus
+          ...duplicatedSyllabus
         })
       }).then((res) => {
         if (res.status === 200) {
