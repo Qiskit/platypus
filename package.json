@@ -48,7 +48,7 @@
     "pre-commit": "./node_modules/.bin/nano-staged"
   },
   "engines": {
-    "node": ">=14 <16.18.0"
+    "node": ">=14 <16.18.1"
   },
   "dependencies": {
     "@carbon/colors": "^10.36.0",
