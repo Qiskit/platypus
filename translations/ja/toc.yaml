@@ -114,7 +114,9 @@
     - id: the-variational-quantum-linear-solver
       uuid: 1163f456-b51a-11ec-b909-0242ac120002
       url: /ch-paper-implementations/vqls
-
+    - id: facial-expression-recognition
+      uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002
+      url: /ch-applications/facial-expression-recognition
 
 - title: 量子回路による量子ハードウェアの探究
   url: /quantum-hardware
