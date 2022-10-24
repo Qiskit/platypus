@@ -9,6 +9,7 @@
         placeholder="Please enter the syllabus name"
         label-text="Syllabus name *"
         color-scheme="light"
+        autofocus
         :required="true"
         @input="updateFormInfo"
       />
