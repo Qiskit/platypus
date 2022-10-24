@@ -181,6 +181,9 @@
     - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
+    - id: local-reality-and-the-chsh-inequality
+      uuid: 6c507826-b51a-11ec-b909-0242ac120002
+      url: /ch-demos/chsh
 
 
 - title: 例
