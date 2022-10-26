@@ -68,8 +68,8 @@ accounts:
   enabled: true
   oAuth:
     google:
-      clientId: ''
-      clientSecret: ''
+      clientId: '392476715588-75228pel4f1k60aj36vs5seo3n0goktr.apps.googleusercontent.com'
+      clientSecret: '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'
     ibm:
       clientId: ''
       clientSecret: ''
