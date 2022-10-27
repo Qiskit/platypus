@@ -43,6 +43,7 @@
           v-for="syllabus in syllabi"
           :key="syllabus.id"
           :syllabus="syllabus"
+          :is-editable="userIsOwner"
         />
       </div>
     </section>
@@ -60,8 +61,9 @@
       <div class="classroom__section__syllabi-list">
         <SyllabusCard
           v-for="syllabus in communitySyllabi"
-          :key="syllabus.id"
+          :key="syllabus.code"
           :syllabus="syllabus"
+          :is-editable="userIsOwner"
         />
       </div>
     </section>
@@ -81,6 +83,13 @@ export default defineComponent({
     UserAccountSectionHeader,
     AppCta,
     SyllabusCard
+  },
+  props: {
+    userId: {
+      type: String,
+      required: true,
+      default: ''
+    }
   },
   data () {
     return {
@@ -115,7 +124,12 @@ export default defineComponent({
       ]
     }
   },
-
+  computed: {
+    userIsOwner () {
+      // todo create logic
+      return true
+    }
+  },
   mounted () {
     getSyllabi().then((syllabi: Syllabus[]) => {
       this.syllabi = syllabi
