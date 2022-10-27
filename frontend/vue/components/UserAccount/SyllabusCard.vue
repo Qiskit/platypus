@@ -6,7 +6,7 @@
     </div>
     <div class="syllabus-card__footer">
       <AppCta
-        v-if="!readOnly"
+        v-if="isEditable"
         class="syllabus-card__footer__cta syllabus-card__footer__cta-edit"
         :url="`/syllabus/edit/${syllabus.code}`"
         label="Edit Syllabus"
@@ -38,7 +38,7 @@ export default defineComponent({
       required: false,
       default: ''
     },
-    readOnly: {
+    isEditable: {
       type: Boolean,
       required: false,
       default: false

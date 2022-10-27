@@ -43,6 +43,7 @@
           v-for="syllabus in syllabi"
           :key="syllabus.id"
           :syllabus="syllabus"
+          :is-editable="userIsOwner"
         />
       </div>
     </section>
@@ -62,38 +63,51 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue-demi";
-import AppCta from "../common/AppCta.vue";
-import { getSyllabi, Syllabus } from "../../../ts/syllabus";
-import UserAccountSectionHeader from "./UserAccountSectionHeader.vue";
-import SyllabusCard from "./SyllabusCard.vue";
+import { defineComponent } from 'vue-demi'
+import AppCta from '../common/AppCta.vue'
+import { getSyllabi, Syllabus } from '../../../ts/syllabus'
+import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
+import SyllabusCard from './SyllabusCard.vue'
 
 export default defineComponent({
-  name: "ClassRoomSection",
+  name: 'ClassRoomSection',
   components: {
     UserAccountSectionHeader,
     AppCta,
-    SyllabusCard,
+    SyllabusCard
   },
-  data() {
+  props: {
+    userId: {
+      type: String,
+      required: true,
+      default: ''
+    }
+  },
+  data () {
     return {
       syllabi: [] as Syllabus[],
       createSyllabusCTA: {
-        label: this.$translate("Create a Syllabus"),
-        url: "/syllabus/create",
+        label: this.$translate('Create a Syllabus'),
+        url: '/syllabus/create',
         segment: {
-          cta: "syllabus-create",
-          location: "user-account-classroom",
-        },
-      },
-    };
+          cta: 'syllabus-create',
+          location: 'user-account-classroom'
+        }
+      }
+    }
   },
-  mounted() {
+  computed: {
+    userIsOwner (): boolean {
+      console.log(this.userId, 'userId')
+      return true
+    }
+  },
+  mounted () {
     getSyllabi().then((syllabi: Syllabus[]) => {
-      this.syllabi = syllabi;
-    });
-  },
-});
+      this.syllabi = syllabi
+    })
+  }
+})
 </script>
 
 <style lang="scss" scoped>
