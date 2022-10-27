@@ -57,43 +57,71 @@
           )
         }}
       </p>
+      <div class="classroom__section__syllabi-list">
+        <SyllabusCard
+          v-for="syllabus in communitySyllabi"
+          :key="syllabus.id"
+          :syllabus="syllabus"
+        />
+      </div>
     </section>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue-demi";
-import AppCta from "../common/AppCta.vue";
-import { getSyllabi, Syllabus } from "../../../ts/syllabus";
-import UserAccountSectionHeader from "./UserAccountSectionHeader.vue";
-import SyllabusCard from "./SyllabusCard.vue";
+import { defineComponent } from 'vue-demi'
+import AppCta from '../common/AppCta.vue'
+import { getSyllabi, Syllabus } from '../../../ts/syllabus'
+import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
+import SyllabusCard from './SyllabusCard.vue'
 
 export default defineComponent({
-  name: "ClassRoomSection",
+  name: 'ClassRoomSection',
   components: {
     UserAccountSectionHeader,
     AppCta,
-    SyllabusCard,
+    SyllabusCard
   },
-  data() {
+  data () {
     return {
       syllabi: [] as Syllabus[],
       createSyllabusCTA: {
-        label: this.$translate("Create a Syllabus"),
-        url: "/syllabus/create",
+        label: this.$translate('Create a Syllabus'),
+        url: '/syllabus/create',
         segment: {
-          cta: "syllabus-create",
-          location: "user-account-classroom",
-        },
+          cta: 'syllabus-create',
+          location: 'user-account-classroom'
+        }
       },
-    };
+      communitySyllabi: [
+        {
+          name: 'Quantum Computing with Superconducting Qubits',
+          instructor: 'Jay Gambetta',
+          institution: 'IBM Quantum',
+          code: 'TRY-SW8'
+        },
+        {
+          name: 'Introduction to Quantum Algorithms',
+          instructor: 'Peter Shor',
+          institution: 'Masachussetts Institute of Technology',
+          code: 'CFH-KBT'
+        },
+        {
+          name: 'Preparing for the Qiskit developer certification exam',
+          instructor: 'James L. Weaver',
+          institution: 'IBM Quantum',
+          code: 'S9P-7GP'
+        }
+      ]
+    }
   },
-  mounted() {
+
+  mounted () {
     getSyllabi().then((syllabi: Syllabus[]) => {
-      this.syllabi = syllabi;
-    });
-  },
-});
+      this.syllabi = syllabi
+    })
+  }
+})
 </script>
 
 <style lang="scss" scoped>
