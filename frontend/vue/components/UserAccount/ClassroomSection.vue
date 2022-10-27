@@ -98,6 +98,7 @@ export default defineComponent({
           name: 'Quantum Computing with Superconducting Qubits',
           instructor: 'Jay Gambetta',
           institution: 'IBM Quantum',
+          code: 'TRY-SW8'
         },
         {
           name: 'Introduction to Quantum Algorithms',
