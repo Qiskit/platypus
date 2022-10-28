@@ -43,6 +43,7 @@
           v-for="syllabus in syllabi"
           :key="syllabus.id"
           :syllabus="syllabus"
+          :user-id="userId"
         />
       </div>
     </section>
@@ -60,8 +61,9 @@
       <div class="classroom__section__syllabi-list">
         <SyllabusCard
           v-for="syllabus in communitySyllabi"
-          :key="syllabus.id"
+          :key="syllabus.code"
           :syllabus="syllabus"
+          :user-id="userId"
         />
       </div>
     </section>
@@ -82,6 +84,13 @@ export default defineComponent({
     AppCta,
     SyllabusCard
   },
+  props: {
+    userId: {
+      type: String,
+      required: true,
+      default: ''
+    }
+  },
   data () {
     return {
       syllabi: [] as Syllabus[],
@@ -98,19 +107,22 @@ export default defineComponent({
           name: 'Quantum Computing with Superconducting Qubits',
           instructor: 'Jay Gambetta',
           institution: 'IBM Quantum',
-          code: 'TRY-SW8'
+          code: 'TRY-SW8',
+          ownerList: ['community']
         },
         {
           name: 'Introduction to Quantum Algorithms',
           instructor: 'Peter Shor',
           institution: 'Masachussetts Institute of Technology',
-          code: 'CFH-KBT'
+          code: 'CFH-KBT',
+          ownerList: ['community']
         },
         {
           name: 'Preparing for the Qiskit developer certification exam',
           instructor: 'James L. Weaver',
           institution: 'IBM Quantum',
-          code: 'S9P-7GP'
+          code: 'S9P-7GP',
+          ownerList: ['community']
         }
       ]
     }

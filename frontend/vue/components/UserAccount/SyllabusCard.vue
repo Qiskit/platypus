@@ -1,11 +1,14 @@
 <template>
   <div class="syllabus-card">
     <div class="syllabus-card__body">
-      <h4 class="syllabus-card__title">{{ syllabus.name }}</h4>
+      <h4 class="syllabus-card__title">
+        {{ syllabus.name }}
+      </h4>
       <SyllabusGeneralInformation class="syllabus-card__data" :syllabus="syllabus" />
     </div>
     <div class="syllabus-card__footer">
       <AppCta
+        v-if="userIsOwner"
         class="syllabus-card__footer__cta syllabus-card__footer__cta-edit"
         :url="`/syllabus/edit/${syllabus.code}`"
         label="Edit Syllabus"
@@ -35,7 +38,22 @@ export default defineComponent({
     syllabus: {
       type: Object,
       required: false,
+      default: () => { }
+    },
+    userId: {
+      type: String,
+      required: true,
       default: ''
+    }
+  },
+  computed: {
+    userIsOwner () {
+      const currentSyllabus = JSON.parse(JSON.stringify(this.syllabus))
+
+      if (currentSyllabus?.ownerList.includes(this.userId)) {
+        return true
+      }
+      return false
     }
   }
 })
