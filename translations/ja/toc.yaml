@@ -114,7 +114,9 @@
     - id: the-variational-quantum-linear-solver
       uuid: 1163f456-b51a-11ec-b909-0242ac120002
       url: /ch-paper-implementations/vqls
-
+    - id: facial-expression-recognition
+      uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002
+      url: /ch-applications/facial-expression-recognition
 
 - title: 量子回路による量子ハードウェアの探究
   url: /quantum-hardware
@@ -181,6 +183,9 @@
     - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
+    - id: local-reality-and-the-chsh-inequality
+      uuid: 6c507826-b51a-11ec-b909-0242ac120002
+      url: /ch-demos/chsh
 
 
 - title: 例
