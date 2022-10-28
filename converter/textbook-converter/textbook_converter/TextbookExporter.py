@@ -204,8 +204,8 @@ def handle_hero_image(hero_image_syntax):
 def handle_heading(heading_syntax, in_block, suffix, section, is_problem_set=False):
     """Increase header level and compute level, title, and id"""
     header, title = heading_syntax.split(" ", 1)
+    title = handle_inline_code(title)
     level = header.count("#")
-    is_problem_set = is_problem_set
     if in_block:
         return None, None, title, f"#{heading_syntax}\n"
     else:
@@ -244,34 +244,35 @@ def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
     """Reformat code markdown"""
     markdown_lines = []
     lines = cell.source.splitlines()
-    latex = False
+    in_latex = False
     in_block = False
     in_code = False
     headings = []
 
     for count, line in enumerate(lines):
-        if latex:
+        if in_latex:
             if line.rstrip(" .").endswith("$$"):
                 l = line.replace("$$", "")
                 markdown_lines.append(f"{l}\n" if len(l) else l)
-                markdown_lines.append("```\n")
-                latex = False
+                markdown_lines.append(f"{indent}```\n")
+                in_latex = False
             else:
                 markdown_lines.append(line)
                 markdown_lines.append("\n")
-                latex = True
+                in_latex = True
             continue
-        elif line.lstrip().startswith("$$"):
-            markdown_lines.append("```latex\n")
-            l = line.replace("$$", "", 1)
+        if line.lstrip().startswith("$$"):
+            indent, l = line.split("$$", 1)
+            assert not indent or indent.isspace()
+            markdown_lines.append(f"{indent}```latex\n")
             if l.rstrip(" .").endswith("$$"):
                 l = l.replace("$$", "")
-                markdown_lines.append(f"{l}\n" if len(l) else l)
-                markdown_lines.append("```\n")
-                latex = False
+                markdown_lines.append(f"{indent}{l}\n" if len(l) else l)
+                markdown_lines.append(f"{indent}```\n")
+                in_latex = False
             else:
-                markdown_lines.append(f"{l}\n" if len(l) else l)
-                latex = True
+                markdown_lines.append(f"{indent}{l}\n" if len(l) else l)
+                in_latex = True
             continue
 
         if in_code:
