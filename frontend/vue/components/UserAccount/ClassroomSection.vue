@@ -87,7 +87,7 @@ export default defineComponent({
   props: {
     userId: {
       type: String,
-      required: true,
+      required: false,
       default: ''
     }
   },

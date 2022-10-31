@@ -42,15 +42,16 @@ export default defineComponent({
     },
     userId: {
       type: String,
-      required: true,
+      required: false,
       default: ''
     }
   },
   computed: {
-    userIsOwner () {
+    userIsOwner ():boolean {
       const currentSyllabus = JSON.parse(JSON.stringify(this.syllabus))
 
       return currentSyllabus?.ownerList.includes(this.userId)
+    }
   }
 })
 </script>
