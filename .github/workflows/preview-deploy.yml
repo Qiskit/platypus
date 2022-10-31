@@ -1,15 +1,16 @@
-name: Preview (deploy)
+name: Preview
 
 on:
   pull_request:
+    types: [opened, reopened, synchronize, closed]
 
 jobs:
   setup:
-    # Run only from the original repository
-    # Because this job requires secrets, which cannot be shared with forks
+    # this job requires secrets, which cannot be shared with forks
+    # so run only from the original repository
     if: |
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      github.event.pull_request.user.login != 'gitlocalize-app[bot]'
+      (github.event.action == 'opened' || github.event.action == 'reopened' || github.event.action == 'synchronize') &&
+      github.event.pull_request.head.repo.full_name == github.repository
     uses: Qiskit/gh-actions/.github/workflows/code-engine-preview.yml@main
     with:
       code_engine_project: platypus-preview
@@ -20,3 +21,17 @@ jobs:
       ibmid_client_id: ${{ secrets.STAGING_IBMID_CLIENT_ID }}
       ibmid_client_secret: ${{ secrets.STAGING_IBMID_CLIENT_SECRET }}
       mongodb_uri: ${{ secrets.STAGING_MONGODB_URI }}
+
+  teardown:
+    # this job requires secrets, which cannot be shared with forks
+    # so run only from the original repository
+    if: |
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    uses: Qiskit/gh-actions/.github/workflows/code-engine-cleanup.yml@main
+    with:
+      code_engine_project: platypus-preview
+      docker_image_name: platypus
+    secrets:
+      ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
+      ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
