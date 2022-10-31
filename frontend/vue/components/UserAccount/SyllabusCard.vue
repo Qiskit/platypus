@@ -50,11 +50,7 @@ export default defineComponent({
     userIsOwner () {
       const currentSyllabus = JSON.parse(JSON.stringify(this.syllabus))
 
-      if (currentSyllabus?.ownerList.includes(this.userId)) {
-        return true
-      }
-      return false
-    }
+      return currentSyllabus?.ownerList.includes(this.userId)
   }
 })
 </script>
