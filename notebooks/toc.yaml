@@ -19,6 +19,23 @@
 #       url: /my-course/my-notebook  # Path to source notebook, relative to this file
 
 
+- title: Basics of quantum information
+  url: /basics
+  sections:
+    - title: Single systems
+      id: single-systems
+      uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+      url: /basics/single-systems
+    - title: Multiple systems
+      id: multiple-systems
+      uuid: 327b128f-4fec-410a-a3f9-079939002bf2
+      url: basics/multiple-systems
+    - title: Circuits, protocols, and games
+      id: circuits-protocols-games
+      uuid: 57d5452e-85cd-40f8-a290-11466213c1a6
+      url: basics/circuits-and-protocols
+
+
 - title: Prerequisites
   url: /ch-prerequisites
   sections:
@@ -566,6 +583,63 @@
       id: lec10-2-the-capacity-power-quantum-machine-learning-models-future-quantum-machine-learning
       uuid: 12c23f78-b51b-11ec-b909-0242ac120002
       url: /summer-school/2021/lec10.2
+
+- title: Summer School 2022
+  url: /2022
+  type: learning-path
+  sections:
+    - title: History of Quantum Computing and Motivation for Quantum Simulation
+      id: history-quantum-computing-motivation-quantum-simulation
+      uuid: 820caba4-2784-419f-badb-038632a8d4bd
+      url: /summer-school/2022/lec-1
+    - title: Introduction to Linear Algebra, Prerequisite Mathematics, and Circuit Composition
+      id: introduction-linear-algebra-prerequisite-mathematics-circuit-composition
+      uuid: 6e908f0d-f6c3-4a96-8b6e-d0c355aa0fd0
+      url: /summer-school/2022/lec-2
+    - title: Lab 1
+      id: lab-1
+      uuid: 6b9733a9-c37d-416a-a21d-79666f6c6e4f
+      url: /summer-school/2022/lab-1
+    - title: Hamiltonian Time Evolution
+      id: hamiltonian-time-evolution
+      uuid: 40898326-7668-4076-b671-01d76c914f2d
+      url: /summer-school/2022/lec-3
+    - title: Simulation Problems
+      id: simulation-problems
+      uuid: 3f1b1d6a-1d9f-48dc-b202-f9f027ad9f94
+      url: /summer-school/2022/lec-4
+    - title: Lab 2
+      id: lab-2
+      uuid: 12c18054-d8f9-4347-bb82-3f8887f9a89b
+      url: /summer-school/2022/lab-2
+    - title: Noisy Real Hardware, Noise in Quantum Computers
+      id: noisy-real-hardware-noise-quantum-computers
+      uuid: ada6cc30-bfdf-4fcf-95c3-3377647ca6c1
+      url: /summer-school/2022/lec-5
+    - title: Broad Overview of Quantum Chemistry Simulation and Why it is a Challenge
+      id: broad-overview-quantum-chemistry-simulation-why-is-challenge
+      uuid: 0eb99b15-a8e2-4472-8dfe-44d3172d7819
+      url: /summer-school/2022/lec-6
+    - title: Lab 3
+      id: lab-3
+      uuid: f310e2c1-6216-40c7-92c5-f6e86a665130
+      url: /summer-school/2022/lab-3
+    - title: Methods for Quantum Simulation
+      id: methods-quantum-simulation
+      uuid: 945603e2-5538-451a-89f5-e5fd273c80d1
+      url: /summer-school/2022/lec-7
+    - title: Quantum Static Simulation
+      id: quantum-static-simulation
+      uuid: a058a165-6716-4f75-b228-9ed003bba2a7
+      url: /summer-school/2022/lec-8
+    - title: Lab 4
+      id: lab-4
+      uuid: 21bee5f4-f7ee-49cb-99b7-4eb950dedf38
+      url: /summer-school/2022/lab-4
+    - title: Quantum Dynamics
+      id: quantum-dynamics
+      uuid: 19bc4a81-07e8-4397-befd-76aa973d2c8c
+      url: /summer-school/2022/lec-9
 
 
 - title: Quantum Machine Learning
