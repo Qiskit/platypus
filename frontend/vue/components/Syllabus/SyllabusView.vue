@@ -1,5 +1,22 @@
 <template>
   <section class="syllabus-view">
+    <bx-btn
+      class="syllabus-view__duplicate"
+      :disabled="!userIsLoggedIn"
+      kind="ghost"
+      @click="copySyllabus"
+    >
+      <span class="syllabus-view__duplicate__label">Duplicate syllabus</span>
+      <bx-tooltip-icon
+        v-if="!userIsLoggedIn"
+        alignment="end"
+        direction="bottom"
+        body-text="Please log in to duplicate this syllabus"
+      >
+        <Download16 />
+      </bx-tooltip-icon>
+      <Download16 v-else class="syllabus-view__duplicate__icon" />
+    </bx-btn>
     <h2 class="syllabus-view__general-info-title">
       General Information
     </h2>
@@ -37,37 +54,51 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue-demi'
+import Download16 from '@carbon/icons-vue/es/download/16'
+import 'carbon-web-components/es/components/tooltip/tooltip-icon'
 import BasicLink from '../common/BasicLink.vue'
 import ColumnFlowGrid from '../common/ColumnFlowGrid.vue'
-import SyllabusGeneralInformation from './SyllabusGeneralInformation.vue'
 import { Syllabus } from '../../../ts/syllabus'
 import { getCourseList, Section, Course } from '../../../ts/courses'
+import SyllabusGeneralInformation from './SyllabusGeneralInformation.vue'
+
+declare global {
+  interface Window {
+    textbook: any
+  }
+}
 
 export default defineComponent({
   name: 'SyllabusView',
   components: {
     SyllabusGeneralInformation,
     BasicLink,
-    ColumnFlowGrid
+    ColumnFlowGrid,
+    Download16
   },
   props: {
     syllabus: {
       type: Object,
       default: () => ({} as Syllabus),
       required: true
+    },
+    userIsLoggedIn: {
+      type: Boolean,
+      default: false,
+      required: true
     }
   },
   data () {
     return {
-      sectionList: [] as Section[],
+      sectionList: [] as Section[]
     }
   },
   mounted () {
     getCourseList().then((courses) => {
       const availableCourses = courses.filter(course => course.type !== 'docs')
       this.sectionList = availableCourses.reduce((sectionList: Section[], course: Course) => {
-          return sectionList.concat(course.sections)
-        }, [] as Section[])
+        return sectionList.concat(course.sections)
+      }, [] as Section[])
     })
   },
   methods: {
@@ -76,6 +107,32 @@ export default defineComponent({
     },
     getNameById (id: string) {
       return this.sectionList.find((section: Section) => section.uuid === id)?.title
+    },
+    copySyllabus () {
+      const duplicatedSyllabus = this.syllabus
+      duplicatedSyllabus.id = ''
+      duplicatedSyllabus.code = ''
+      duplicatedSyllabus.name = `Copy of ${this.syllabus.name}`
+
+      window.textbook.trackClickEvent('syllabus', `Duplicate syllabus: ${this.syllabus.name}`)
+
+      const url = '/syllabus'
+      const csrfToken = { _csrf: window.csrfToken }
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...csrfToken,
+          ...duplicatedSyllabus
+        })
+      }).then((res) => {
+        if (res.status === 200) {
+          window.location.href = '/account/classroom'
+        } else {
+          // TODO: Manage this error (and improve backend feedback)
+          console.error(res)
+        }
+      })
     }
   }
 })
@@ -87,10 +144,39 @@ export default defineComponent({
 @import '~/../scss/variables/colors.scss';
 
 .syllabus-view {
+  position: relative;
   background-color: $background-color-lighter;
-  padding: $spacing-06 $spacing-05;
+  padding: $spacing-05;
   user-select: text;
   cursor: auto;
+  @include mq($until: medium) {
+    padding: $spacing-10 $spacing-05 $spacing-06 $spacing-05;
+  }
+
+  &__duplicate {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @include mq($until: medium) {
+      right: initial;
+      left: 0;
+    }
+
+    &::part(button) {
+      --cds-link-01: #{$purple-70};
+      --cds-hover-primary-text: #{$purple-70};
+      &:focus,
+      &:hover {
+        background-color: $cool-gray-20;
+      }
+    }
+
+    &__label {
+      display: block;
+      padding-right: $spacing-05;
+    }
+  }
 
   &__general-info-title {
     @include type-style('expressive-heading-03', $fluid: true);
