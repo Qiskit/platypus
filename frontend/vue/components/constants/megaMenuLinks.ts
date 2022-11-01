@@ -753,6 +753,13 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       }
     },
     {
+      label: 'Multi-qubit states - Problem Set',
+      url: `${pathProblemSets}/multi-qubit_states`,
+      segment: {
+        cta: 'multi-qubit_states', location: sectionProblemSets
+      }
+    },
+    {
       label: 'Quantum Enigma 001 - Problem Set',
       url: `${pathProblemSets}/quantum_enigma_problem_set`,
       segment: {
