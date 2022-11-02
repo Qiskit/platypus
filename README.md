@@ -20,6 +20,7 @@ The textbook is intended for use as a university quantum algorithms course suppl
 1. Python 3.8 environment with `textbook_converter` requirements installed
 
     ```
+    git submodule update --init
     $ cd platypus/converter/textbook-converter
     $ pip install -r requirements.txt -r requirements-test.txt
     ```
