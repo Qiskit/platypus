@@ -1,0 +1,4 @@
+[submodule "notebooks/textbook"]
+	path = notebooks/textbook
+	url = https://github.com/Qiskit/textbook.git
+    branch = stable/v2
