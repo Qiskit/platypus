@@ -357,10 +357,22 @@
       id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/single_systems_problem_set
-    - title: Quantum Enigma Problem Set
+    - title: Quantum Enigma 001 Problem Set
       id: quantum_enigma_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/quantum_enigma_problem_set
+    - title: Quantum Enigma 002 Problem Set
+      id: quantum_enigma_002
+      uuid: cdd94010-34a4-4b87-bd0e-dc18b8d4f600
+      url: /problem-sets/quantum_enigma_002
+    - title: Quantum Enigma 003 Problem Set
+      id: quantum_enigma_003
+      uuid: db5aa523-e7af-4cf9-8426-2df102900871
+      url: /problem-sets/quantum_enigma_003
+    - title: Quantum Enigma 004 Problem Set
+      id: quantum_enigma_004
+      uuid: 808903bd-a1d0-4619-a81b-0ebea5e03b32
+      url: /problem-sets/quantum_enigma_004
 
 
 - title: Examples
