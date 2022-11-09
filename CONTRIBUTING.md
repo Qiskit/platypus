@@ -130,12 +130,6 @@ When you see `Running on port 8080 in development mode.`, you can open a browser
 and navigate to `https://localhost:8080/course/introduction/`, then navigate to
 the page you edited.
 
-### Content checks
-
-As with code, this repo contains a number of checks for the textbook's content.
-You can run a full test using `npm run test:nb`. You can read more about each
-check in `scripts/content_checks/README.md`.
-
 ## Contributing code
 
 ### Deciding what to work on

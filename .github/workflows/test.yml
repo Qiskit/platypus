@@ -4,10 +4,6 @@ on:
   workflow_dispatch:
   pull_request:
 
-env:
-  # Disable Tensorflow information messages
-  TF_CPP_MIN_LOG_LEVEL: 3
-
 jobs:
   test-run:
     name: Run tests
@@ -42,28 +38,6 @@ jobs:
 
       - name: Apply configuration
         run: npm run setup:secrets -- --mongo ${{ secrets.STAGING_MONGODB_URI }}
-
-      - name: Install Vale
-        run: sudo snap install --edge vale
-
-      - name: Get changed notebooks
-        id: changed-notebooks
-        uses: tj-actions/changed-files@v29.0.9
-        with:
-          files: notebooks/**/*.ipynb
-
-      - name: Notebook tests
-        run: |
-          echo "::group::Linting"
-          npm run test:nb
-          echo "::endgroup::"
-          echo "::group::Run changed notebooks"
-          # Copy Qiskit settings
-          curl --create-dirs https://raw.githubusercontent.com/Qiskit/platypus-binder/main/.qiskit/settings.conf --output ~/.qiskit/settings.conf
-          curl --create-dirs https://raw.githubusercontent.com/Qiskit/platypus-binder/main/.qiskit/styles/textbook.json --output ~/.qiskit/styles/textbook.json
-          # Run notebooks tests
-          python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-notebooks.outputs.all_changed_files }} --fail-on-warning
-          echo "::endgroup::"
 
       - name: Build
         run: npm run build
