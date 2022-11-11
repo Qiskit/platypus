@@ -51,6 +51,7 @@ jobs:
         uses: tj-actions/changed-files@v29.0.9
         with:
           files: notebooks/**/*.ipynb
+          files_ignore: notebooks/problem-sets/*.ipynb
 
       - name: Notebook tests
         run: |
