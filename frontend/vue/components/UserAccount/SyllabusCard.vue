@@ -1,23 +1,23 @@
 <template>
   <div class="syllabus-card">
-    <div class="syllabus-card__image" :style="`background-image: url('${image}')`" />
-    <div class="syllabus-card__name">
-      {{ syllabus.name }}
+    <div class="syllabus-card__body">
+      <h4 class="syllabus-card__title">
+        {{ syllabus.name }}
+      </h4>
+      <SyllabusGeneralInformation class="syllabus-card__data" :syllabus="syllabus" />
     </div>
-    <SyllabusGeneralInformation class="syllabus-card__data" :syllabus="syllabus" />
-    <div class="syllabus-card__actions">
+    <div class="syllabus-card__footer">
       <AppCta
-        class="syllabus-card__actions__enter"
-        :url="`/syllabus/${syllabus.code}`"
-        kind="ghost"
-        label="Go to this learning course"
-      />
-      <!-- TODO: Edit url not created yet -->
-      <AppCta
-        class="syllabus-card__actions__edit"
+        v-if="userIsOwner"
+        class="syllabus-card__footer__cta syllabus-card__footer__cta-edit"
         :url="`/syllabus/edit/${syllabus.code}`"
-        kind="ghost"
         label="Edit Syllabus"
+        kind="secondary"
+      />
+      <AppCta
+        class="syllabus-card__footer__cta"
+        :url="`/syllabus/${syllabus.code}`"
+        label="View Syllabus"
       />
     </div>
   </div>
@@ -38,12 +38,19 @@ export default defineComponent({
     syllabus: {
       type: Object,
       required: false,
-      default: ''
+      default: () => { }
     },
-    image: {
+    userId: {
       type: String,
       required: false,
       default: ''
+    }
+  },
+  computed: {
+    userIsOwner ():boolean {
+      const currentSyllabus = JSON.parse(JSON.stringify(this.syllabus))
+
+      return currentSyllabus?.ownerList.includes(this.userId)
     }
   }
 })
@@ -54,56 +61,45 @@ export default defineComponent({
 @import '~/../scss/variables/mq.scss';
 @import '~/../scss/variables/colors.scss';
 
+@mixin bicolor-background($colorLeft, $colorRight) {
+  background-image: linear-gradient(90deg, $colorLeft 0%, $colorLeft 50%, $colorRight 50%, $colorRight 100%);
+}
+
 .syllabus-card {
-  display: grid;
-  grid-template-columns: 10rem 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-    "image name"
-    "image data"
-    "image actions";
-  padding: $spacing-06 $spacing-06 $spacing-03 $spacing-06;
-  gap: $spacing-07;
+  width: 100%;
   background-color: $background-color-lighter;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
-  @include mq($until: medium) {
-    grid-template-columns: auto;
-    grid-template-rows: min(60vw, 15rem) repeat(3, auto);
-    grid-template-areas:
-      "image"
-      "name"
-      "data"
-      "actions";
+  &__body {
+    padding: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
   }
 
-  &__name {
-    @include type-style('productive-heading-01', $fluid: true);
-    grid-area: name;
+  &__title {
+    @include type-style('productive-heading-01');
+    margin-bottom: $spacing-06;
   }
 
-  &__image {
-    grid-area: image;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
 
-  &__data {
-    grid-area: data;
-  }
+    &__cta {
+      width: 100%;
+      max-width: 50%;
 
-  &__actions {
-    grid-area: actions;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    gap: $spacing-06;
+      &-edit {
+        @include bicolor-background($background-color-light-2, $background-color-light);
+        color: $text-color-black;
 
-    @include mq($until: large) {
-      grid-template-columns: auto;
-      gap: $spacing-02;
+        &:hover,
+        &:focus,
+        &:active {
+          color: $text-color-black;
+        }
+      }
     }
   }
 }
-
 </style>
