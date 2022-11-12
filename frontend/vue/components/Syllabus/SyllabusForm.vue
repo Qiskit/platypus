@@ -109,11 +109,6 @@ export default defineComponent({
     if (activeSyllabus) {
       this.syllabus = activeSyllabus
       this.editMode = true
-
-      if (activeSyllabus.name.startsWith('Copy of')) {
-        this.syllabus.name = ''
-        this.syllabus.instructor = ''
-      }
     }
     this.syllabusInfoChanged(this.syllabus)
   },
