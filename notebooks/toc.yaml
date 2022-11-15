@@ -361,7 +361,10 @@
       id: quantum_enigma_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/quantum_enigma_problem_set
-
+    - title: IIT Madras Pre-Test
+      id: iit_madras_pretest
+      uuid: 2892385a-2497-426c-be21-75ea635caa4e
+      url: /problem-sets/iit_madras_pretest
 
 - title: Examples
   url: /examples
