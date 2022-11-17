@@ -34,12 +34,14 @@ Faehrmann
 Farhi
 Fock
 Francesco
+Fredkin
 Gacon
 Garey
 Glick
 Goemans
 Gogolin
 Goodfellow
+Greenberger
 Griffiths
 Gutmann
 Hadamard
@@ -109,6 +111,7 @@ Technol
 Temme
 Toeplitz
 Toffoli
+Tommaso
 Trotterization
 Trotterize
 Trotterizing
@@ -125,6 +128,7 @@ Woerner
 Youngseok
 Yunchao
 Yung
+Zeilinger
 Zhou
 Zoufal
 anharmonic
@@ -132,6 +136,7 @@ ansatz
 ansatzes
 autoencoder
 autoencoders
+bilinearity
 bitstring
 doi
 eigenbasis
@@ -149,6 +154,7 @@ ket
 kets
 minimax
 misclassifying
+multilinear
 nucleobase
 parameterization
 polynomially
@@ -159,11 +165,14 @@ qiskit
 quantizing
 qubit
 qubits
+qudit
+qutrits
 recalibrated
 reuploading
 satisfiability
 subfield
 subfields
+subscripting
 sudoku
 summand
 summands
@@ -174,4 +183,5 @@ transpile
 transpiled
 transpiler
 tridiagonal
+trits
 unitaries
