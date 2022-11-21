@@ -175,3 +175,13 @@ transpiled
 transpiler
 tridiagonal
 unitaries
+trits
+qutrits
+qudit
+Fredkin
+Tommaso
+Greenberger
+Zeilinger
+bilinearity
+multilinear
+subscripting
