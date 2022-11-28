@@ -127,7 +127,9 @@ export default defineComponent({
         })
       }).then((res) => {
         if (res.status === 200) {
-          window.location.href = '/account/classroom'
+          res.json().then((jsonResult: Syllabus) => {
+            window.location.href = `/syllabus/edit/${jsonResult.code}`
+          })
         } else {
           // TODO: Manage this error (and improve backend feedback)
           console.error(res)
