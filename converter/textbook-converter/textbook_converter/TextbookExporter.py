@@ -245,6 +245,7 @@ def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
     markdown_lines = []
     lines = cell.source.splitlines()
     in_latex = False
+    in_blockquote = False
     in_block = False
     in_code = False
     headings = []
@@ -289,6 +290,16 @@ def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
             else:
                 markdown_lines.append(line + "\n")
             continue
+
+        if in_blockquote:
+            if not line.startswith(">"):
+                in_blockquote = False
+                markdown_lines.append("</blockquote>\n")
+        if line.startswith(">"):
+            line = line.strip(">")
+            if not in_blockquote:
+                in_blockquote = True
+                markdown_lines.append("<blockquote>\n")
 
         line = handle_attachments(line, cell)
 
