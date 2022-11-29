@@ -38,6 +38,12 @@ button span.rangle {
   margin-left: 2em;
 }
 
+blockquote {
+  font-size: 0.875rem;
+  padding-left: $spacing-unit;
+  border-left: 4px solid $cool-gray-20;
+}
+
 /* Make youtube full width */
 .youtube-wrapper {
   position: relative;
