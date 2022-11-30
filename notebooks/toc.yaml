@@ -365,6 +365,11 @@
       id: iit_madras_pretest
       uuid: 2892385a-2497-426c-be21-75ea635caa4e
       url: /problem-sets/iit_madras_pretest
+    - title: Qiskit Beginner Problem Set
+      id: qiskit_beginner_proficiency
+      uuid: 687732ae-70a8-11ed-a1eb-0242ac120002
+      url: /problem-sets/qiskit_beginner_problem_set
+
 
 - title: Examples
   url: /examples
