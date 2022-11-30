@@ -30,10 +30,14 @@
       id: multiple-systems
       uuid: 327b128f-4fec-410a-a3f9-079939002bf2
       url: basics/multiple-systems
-    - title: Circuits, protocols, and games
-      id: circuits-protocols-games
+    - title: Quantum circuits
+      id: quantum-circuits
       uuid: 57d5452e-85cd-40f8-a290-11466213c1a6
-      url: basics/circuits-and-protocols
+      url: basics/quantum-circuits
+    - title: Quantum protocols and games
+      id: protocols-games
+      uuid: 366f7150-4c04-4763-8269-ae6180812b73
+      url: basics/protocols-games
 
 
 - title: Prerequisites
