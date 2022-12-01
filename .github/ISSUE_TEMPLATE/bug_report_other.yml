@@ -1,10 +1,7 @@
 name: Bug report (Other)
 description: Report a non-content-related issue which occurs on the Qiskit Textbook
 title: "Bug: "
-labels: ["bug", "needs grooming"]
-assignees:
-  - eddybrando
-  - vabarbosa
+labels: ["bug"]
 body:
   - type: markdown
     attributes:
