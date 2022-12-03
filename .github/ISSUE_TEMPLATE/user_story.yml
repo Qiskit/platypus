@@ -1,7 +1,7 @@
 name: User story
 description: Define a new user story
 title: As a ..., I want to ..., so that ...
-labels: ["user story", "needs grooming"]
+labels: ["user story"]
 body:
   - type: markdown
     attributes:

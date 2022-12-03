@@ -1,6 +1,7 @@
 basics/single-systems
 basics/multiple-systems
-basics/circuits-and-protocols
+basics/quantum-circuits
+basics/protocols-games
 
 quantum-machine-learning/introduction
 quantum-machine-learning/vqc
