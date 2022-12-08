@@ -14,6 +14,8 @@ quantum-machine-learning/pqc
 quantum-machine-learning/kernel
 quantum-machine-learning/encoding
 
+ch-algorithms/shor
+
 ch-applications/hhl_tutorial
 ch-applications/vqe-molecules
 ch-applications/qaoa
