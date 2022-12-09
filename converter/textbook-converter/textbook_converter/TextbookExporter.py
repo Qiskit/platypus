@@ -384,7 +384,7 @@ def handle_code_cell_metadata(cell_metada):
         goal = cell_metada["goals"] if "goals" in cell_metada else None
 
         if goal is not None:
-            attr = f"{attr} goal=\"{goal[0].id}\""
+            attr += f" goal=\"{goal[0].id}\""
 
     if 'tags' in cell_metada and 'uses-hardware' in cell_metada['tags']:
         attr += ' uses-hardware="true" '
