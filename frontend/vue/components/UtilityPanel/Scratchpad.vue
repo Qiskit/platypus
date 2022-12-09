@@ -29,11 +29,11 @@
       <div v-if="isApiTokenNeeded" class="scratchpad__api-token-info">
         <WarningIcon />
         <div>
-          This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+          This code looks like it connects to IBM Quantum. Add your API-token to
           <BasicLink url="/account/admin">
             your account
           </BasicLink>
-          to execute this code cell.
+          to run this cell.
         </div>
       </div>
       <CodeOutput
