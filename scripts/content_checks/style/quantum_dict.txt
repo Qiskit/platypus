@@ -20,6 +20,7 @@ Bucher
 Carleo
 Carrera
 Cerezo
+Chuang
 Cincio
 Colbeck
 Corcoles
@@ -102,6 +103,7 @@ Smelyanskiy
 Srinivasan
 Stamatopoulos
 Steenken
+Stephane
 Streif
 Sukin
 Takita
@@ -138,11 +140,13 @@ autoencoder
 autoencoders
 bilinearity
 bitstring
+coprime
 doi
 eigenbasis
 eigensolver
 eigensolvers
 eigenstate
+eigenstates
 endian
 exponentials
 expressibility
