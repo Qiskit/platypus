@@ -158,6 +158,9 @@
     - id: lab-2-single-qubit-gates
       uuid: 43418a88-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab02_Single_Qubit_Gates
+    - id: lab-3-quantum-measurements
+      uuid: 45aa5412-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab03_QuantumMeasurement
     - id: lab-4-bell-ghz-circuit
       uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab04_Bell_GHZ_Circuit
@@ -186,6 +189,9 @@
     - id: local-reality-and-the-chsh-inequality
       uuid: 6c507826-b51a-11ec-b909-0242ac120002
       url: /ch-demos/chsh
+    - id: widgets-demonstration
+      uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
+      url: /ch-demos/widgets-index
 
 
 - title: 例
@@ -270,7 +276,14 @@
     - id: careers-in-computing
       uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-09
-      
+
+- title: 夏の学校 2021
+  url: /2021
+  type: learning-path
+  sections:
+    - id: lab1-quantum-computing-algorithm-operations
+      uuid: d42ae134-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lab1      
       
 - title: 量子機械学習
   url: /machine-learning
