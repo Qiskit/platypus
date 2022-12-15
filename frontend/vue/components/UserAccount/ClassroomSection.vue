@@ -27,23 +27,43 @@
         }}
       </p>
     </div>
-    <section class="classroom__content">
-      <h1 class="classroom__content__title">
-        {{ $translate("Active Syllabi") }}
+    <section class="classroom__section">
+      <h1 class="classroom__section__title">
+        {{ $translate("My Syllabi") }}
       </h1>
-      <p class="classroom__content__description">
+      <p class="classroom__section__description">
         {{
           $translate(
-            "Here are your active syllabi. You can edit, publish, and share them with your students"
+            "The syllabi below are ones that have been published and shared."
           )
         }}
       </p>
-      <div class="classroom__content__syllabi-list">
+      <div class="classroom__section__syllabi-list">
         <SyllabusCard
           v-for="syllabus in syllabi"
           :key="syllabus.id"
-          image="/images/header.png"
           :syllabus="syllabus"
+          :user-id="userId"
+        />
+      </div>
+    </section>
+    <section class="classroom__section">
+      <h1 class="classroom__section__title">
+        {{ $translate("Community Syllabi") }}
+      </h1>
+      <p class="classroom__section__description">
+        {{
+          $translate(
+            "You can add these curated syllabi to your personal classroom in order to edit and customize them."
+          )
+        }}
+      </p>
+      <div class="classroom__section__syllabi-list">
+        <SyllabusCard
+          v-for="syllabus in communitySyllabi"
+          :key="syllabus.code"
+          :syllabus="syllabus"
+          :user-id="userId"
         />
       </div>
     </section>
@@ -51,38 +71,69 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue-demi";
-import AppCta from "../common/AppCta.vue";
-import { getSyllabi, Syllabus } from "../../../ts/syllabus";
-import UserAccountSectionHeader from "./UserAccountSectionHeader.vue";
-import SyllabusCard from "./SyllabusCard.vue";
+import { defineComponent } from 'vue-demi'
+import AppCta from '../common/AppCta.vue'
+import { getSyllabi, Syllabus } from '../../../ts/syllabus'
+import UserAccountSectionHeader from './UserAccountSectionHeader.vue'
+import SyllabusCard from './SyllabusCard.vue'
 
 export default defineComponent({
-  name: "ClassRoomSection",
+  name: 'ClassRoomSection',
   components: {
     UserAccountSectionHeader,
     AppCta,
-    SyllabusCard,
+    SyllabusCard
   },
-  data() {
+  props: {
+    userId: {
+      type: String,
+      required: false,
+      default: ''
+    }
+  },
+  data () {
     return {
       syllabi: [] as Syllabus[],
       createSyllabusCTA: {
-        label: this.$translate("Create a Syllabus"),
-        url: "/syllabus/create",
+        label: this.$translate('Create a Syllabus'),
+        url: '/syllabus/create',
         segment: {
-          cta: "syllabus-create",
-          location: "user-account-classroom",
-        },
+          cta: 'syllabus-create',
+          location: 'user-account-classroom'
+        }
       },
-    };
+      communitySyllabi: [
+        {
+          name: 'Quantum Computing with Superconducting Qubits',
+          instructor: 'Jay Gambetta',
+          institution: 'IBM Quantum',
+          code: 'TRY-SW8',
+          ownerList: ['community']
+        },
+        {
+          name: 'Introduction to Quantum Algorithms',
+          instructor: 'Peter Shor',
+          institution: 'Masachussetts Institute of Technology',
+          code: 'CFH-KBT',
+          ownerList: ['community']
+        },
+        {
+          name: 'Preparing for the Qiskit developer certification exam',
+          instructor: 'James L. Weaver',
+          institution: 'IBM Quantum',
+          code: 'S9P-7GP',
+          ownerList: ['community']
+        }
+      ]
+    }
   },
-  mounted() {
+
+  mounted () {
     getSyllabi().then((syllabi: Syllabus[]) => {
-      this.syllabi = syllabi;
-    });
-  },
-});
+      this.syllabi = syllabi
+    })
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -93,9 +144,14 @@ export default defineComponent({
 
 .classroom {
   @include contained();
+  max-width: initial;
   margin-left: 0;
   padding-top: $spacing-07;
   padding-bottom: $spacing-07;
+
+  @include mq($from: max-size) {
+    padding: $spacing-07;
+  }
 
   &__create-syllabus {
     padding: $spacing-07 0;
@@ -110,8 +166,11 @@ export default defineComponent({
     }
   }
 
-  &__content {
+  &__section {
     padding: $spacing-07 0;
+    &:not(:last-child) {
+      border-bottom: 2px solid $border-color-light-2;
+    }
 
     &__title {
       @include type-style("expressive-heading-04", $fluid: true);
@@ -124,9 +183,13 @@ export default defineComponent({
     }
 
     &__syllabi-list {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-08;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-07;
+
+      @include mq($until: large) {
+        grid-template-columns: initial;
+      }
     }
   }
 }

@@ -1,0 +1,100 @@
+---
+ket_psi:
+  notation: "$| \\psi \\rangle$"
+  description: Ini adalah istilah umum untuk keadaan kuantum tertentu, ini banyak
+    digunakan dalam komputasi kuantum untuk mewakili keadaan kuantum yang dibuat oleh
+    manipulasi qubit dalam suatu rangkaian.
+ket:
+  notation: "$| a \\rangle$"
+  description: "| and ⟩ sebenarnya dapat memiliki nilai apa pun di antara keduanya
+    ( di atas adalah yang paling umum). | and ⟩ dalam urutan ini dikenal sebagai 'Ket'
+    dalam Notasi Dirac. Ini dapat ditulis sebagai vektor kolom."
+bra:
+  notation: "$\\langle a |$"
+  description: "⟨ and | dalam urutan ini dikenal sebagai 'Bra' dalam Notasi Dirac.
+    | sama dengan transpos konjugat kompleks dari |\U0001D44E⟩, juga dilambangkan
+    sebagai \U0001D44E† (bila \U0001D44E adalah vektor). Bra mengacu pada vektor dengan
+    setiap komponen digantikan oleh konjugat kompleksnya dan kemudian ditransposisikan
+    (yaitu dikonversi dari vektor kolom ke vektor baris)."
+inner_product:
+  notation: "$\\langle a |  b \\rangle$"
+  description: "'Perkalian dalam' dari vektor |\U0001D44E⟩ dan |\U0001D44F⟩. Atau
+    dikenal sebagai 'produk titik' atau 'produk skalar'. Lihat bagian Notasi Dirac
+    untuk detailnya."
+outer_product:
+  notation: "$| a \\rangle \\langle b |$"
+  description: "Dalam Notasi Dirac, ini mewakili 'perkalian luar' dari vektor |\U0001D44E⟩ dan |\U0001D44F⟩.
+    Lihat sumber bonus untuk lebih jelasnya."
+probability_amplitude:
+  notation: "$| x | \\psi \\rangle | ^2 $"
+  description: "Garis vertikal yang mengelilingi Bra-Ket menunjukkan mengkuadratkan
+    vektor. Ini sama dengan menulis (⟨\U0001D44E|\U0001D44F⟩)^2 tapi ini lebih sulit
+    dibaca jadi kami menggunakan garis vertikal sebagai gantinya. Ini dikenal sebagai
+    'amplitudo probabilitas' dalam komputasi kuantum karena dapat digunakan untuk
+    menghitung probabilitas pengukuran hasil tertentu."
+dagger:
+  notation: "$ \\dagger $"
+  description: Notasi 'dagger' ini digunakan dengan operator dan status kuantum. Ini
+    mewakili 'transpos konjugasi' dari sebuah vektor. Lihat sumber bonus untuk lebih
+    jelasnya.
+tensor_product:
+  notation: "$ ⊗ $"
+  description: produk tensor. Anda dapat menganggap ini sebagai mengalikan setiap
+    komponen dari satu vektor dengan setiap komponen lainnya.
+dot_product:
+  notation: "$ · $"
+  description: Hasil kali titik (disebut juga hasil kali dalam atau hasil kali skalar).
+    Vektor memiliki besar dan arah; Anda dapat menganggap produk titik sebagai mengalikan
+    bagian arah dari setiap vektor bersama-sama.
+hilbert_space:
+  notation: "$ \\mathcal{H} $"
+  description: Ini adalah simbol untuk 'Ruang Hilbert', yang merupakan ruang vektor
+    kompleks di mana semua vektor qubit menyatakan 'hidup', setiap vektor yang mungkin
+    dalam ruang Hilbert dapat direpresentasikan menggunakan kombinasi |0⟩ dan |1⟩.
+set_membership:
+  notation: "&isin;"
+  description: Ini adalah simbol 'mengatur keanggotaan'. Ini berarti bahwa apa pun
+    di sebelah kiri simbol 'adalah elemen dari' apa pun yang ada di sebelah kanan.
+subset:
+  notation: "$ \\subset $"
+  description: Ini berarti 'adalah bagian yang tepat dari'. Jadi jika A⊂B, semua anggota
+    A harus menjadi anggota B, tetapi B mungkin juga memiliki anggota yang tidak ada
+    di A.
+real_number:
+  notation: "&Ropf;"
+  description: Bilangan real (berlawanan dengan bilangan imajiner)"
+complex_number:
+  notation: "&Copf;"
+  description: Bilangan kompleks (yaitu bilangan yang terdiri dari bagian real dan
+    imajiner, sering direpresentasikan sebagai a + b i).
+for_all:
+  notation: "$ \\forall $"
+  description: Ini dibaca sebagai 'untuk semua'.
+sum:
+  notation: "$ \\sum $"
+  description: Ini dibaca sebagai 'jumlah', nilai apa pun yang berasa di atas simbol
+    mewakili nilai maksimum dan nilai apa pun di bagian bawah mewakili nilai minimum.
+pauli_x:
+  notation: "$ X $ or $ \\sigma x $"
+  description: "Operasi Pauli-X mewakili rotasi sebesar \U0001D70B radian di sekitar
+    sumbu X pada Bloch Sphere."
+pauli_y:
+  notation: "$ Y $ or $ \\sigma y $"
+  description: "Operasi Pauli-Y merepresentasikan rotasi sebesar \U0001D70B radian
+    di sekitar sumbu Y pada Bloch Sphere."
+pauli_z:
+  notation: "$ Z $ or $ \\sigma z $"
+  description: "Operasi Pauli-Z mewakili rotasi sebesar \U0001D70B radian di sekitar
+    sumbu Z pada Bloch Sphere."
+identity_matrix:
+  notation: "$ I $ or $ ∥ $"
+  description: Bergantung pada ukuran vektor (yaitu jumlah qubit yang terlibat), matriks
+    identitas dengan ukuran yang sesuai dapat digunakan.
+hadamard_gate:
+  notation: "$ H $"
+  description: Simbol ini paling sering mengacu pada gerbang Hadamard, untuk menempatkan
+    kondisi qubit ke dalam superposisi.
+unitary_matrix:
+  notation: "$ U $"
+  description: Matriks kesatuan adalah semua matriks yang jika dikalikan dengan transpos
+    konjugasinya akan menghasilkan matriks Identitas.
