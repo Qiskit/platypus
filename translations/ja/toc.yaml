@@ -114,6 +114,9 @@
     - id: the-variational-quantum-linear-solver
       uuid: 1163f456-b51a-11ec-b909-0242ac120002
       url: /ch-paper-implementations/vqls
+    - id: flexible-representation-of-quantum-images-frqi
+      uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
+      url: /ch-applications/image-processing-frqi-neqr
     - id: facial-expression-recognition
       uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002
       url: /ch-applications/facial-expression-recognition
@@ -147,6 +150,9 @@
     - id: circuit-quantum-electrodynamics
       uuid: 31b2ccdc-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/cQED-JC-SW
+    - id: exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse
+      uuid: 346d7eea-b51a-11ec-b909-0242ac120002
+      url: /ch-quantum-hardware/Jaynes-Cummings-model
 
 
 - title: 量子コンピューティング・ラボ
@@ -164,6 +170,9 @@
     - id: lab-4-bell-ghz-circuit
       uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab04_Bell_GHZ_Circuit
+    - id: lab-9-quantum-simulation-as-a-search-algorithm
+      uuid: 59a076f4-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab09_QuantumSimulationSearchAlgorithm
     
     
 - title: Appendix(付録)
@@ -192,6 +201,9 @@
     - id: widgets-demonstration
       uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
       url: /ch-demos/widgets-index
+    - id: first-quantum-game
+      uuid: 53a49e62-cae9-11ec-9d64-0242ac120002
+      url: /ch-demos/first-quantum-game
 
 
 - title: 例
@@ -281,6 +293,15 @@
   url: /2021
   type: learning-path
   sections:
+    - id: lec1-1-vector-spaces-tensor-products-qubits
+      uuid: c2ebedbe-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lec1.1
+    - id: lec1-2-introduction-quantum-circuits
+      uuid: c5fb76be-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lec1.2
+    - id: lec3-1-noise-quantum-computers-1
+      uuid: cec0e98c-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lec3.1
     - id: lab1-quantum-computing-algorithm-operations
       uuid: d42ae134-b51a-11ec-b909-0242ac120002
       url: /summer-school/2021/lab1      
