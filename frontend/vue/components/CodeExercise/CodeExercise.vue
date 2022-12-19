@@ -23,11 +23,11 @@
     <div v-if="isApiTokenNeeded" class="code-exercise__api-token-info">
       <WarningIcon />
       <div>
-        This code is executed on real hardware using an IBM Quantum provider. Setup your API-token in
+        This code connects to, or relies on results from IBM Quantum. Add your API-token to
         <BasicLink url="/account/admin">
           your account
         </BasicLink>
-        to execute this code cell.
+        to run this cell.
       </div>
     </div>
     <CodeOutput
@@ -98,6 +98,11 @@ export default defineComponent({
       type: String,
       required: false,
       default: ''
+    },
+    usesHardware: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
@@ -107,7 +112,7 @@ export default defineComponent({
       isKernelBusy: false,
       isKernelReady: false,
       hideInitialOutput: false,
-      isApiTokenNeeded: false,
+      isApiTokenNeeded: this.usesHardware,
       id: 0
     }
   },
@@ -159,7 +164,7 @@ export default defineComponent({
       this.code = code
       const codeOutput: any = this.$refs.output
       codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
-        this.isApiTokenNeeded = isNeeded
+        this.isApiTokenNeeded = isNeeded || this.usesHardware
       })
     },
     keyboardRun () {
