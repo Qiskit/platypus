@@ -365,27 +365,31 @@ def handle_code_cell_output(cell_output):
     return None
 
 
-def handle_grader_metadata(cell_metada):
-    """Parse grader metadata and return code exercise widget syntax
+def handle_code_cell_metadata(cell_metada):
+    """Parse code cell metadata (including grader information) and return code
+    exercise widget syntax
     """
-    grader_attr = None
+    attr = ''
 
     if "grader_import" in cell_metada and "grader_function" in cell_metada:
         grader_import = cell_metada["grader_import"]
         grader_function = cell_metada["grader_function"]
-        grader_attr = f'grader-import="{grader_import}" grader-function="{grader_function}"'
+        attr = f'grader-import="{grader_import}" grader-function="{grader_function}"'
     elif "grader_id" in cell_metada and "grader_answer" in cell_metada:
         grader_id = cell_metada["grader_id"]
         grader_answer = cell_metada["grader_answer"]
-        grader_attr = f'grader-id="{grader_id}" grader-answer="{grader_answer}"'
+        attr = f'grader-id="{grader_id}" grader-answer="{grader_answer}"'
 
-    if grader_attr:
+    if attr:
         goal = cell_metada["goals"] if "goals" in cell_metada else None
 
         if goal is not None:
-            grader_attr = f"{grader_attr} goal=\"{goal[0].id}\""
+            attr += f" goal=\"{goal[0].id}\""
 
-    return f"q-code-exercise({grader_attr or ''})"
+    if 'tags' in cell_metada and 'uses-hardware' in cell_metada['tags']:
+        attr += ' uses-hardware="true" '
+
+    return f"q-code-exercise({attr})"
 
 
 def handle_code_cell(cell, resources):
@@ -403,11 +407,11 @@ def handle_code_cell(cell, resources):
     )
     formatted_source = re.sub(r'[\^]?\s*# pylint:.*', '', formatted_source)
 
-    grader_widget = handle_grader_metadata(cell.metadata)
+    widget_string = handle_code_cell_metadata(cell.metadata)
 
     code_lines = [
-        f"\n::: {grader_widget}\n",
-        "    pre.\n      ",
+        f"\n::: {widget_string}\n",
+        f"    pre.\n      ",
         formatted_source,
         "\n\n"
     ]
