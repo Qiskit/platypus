@@ -1,6 +1,7 @@
 basics/single-systems
 basics/multiple-systems
-basics/circuits-and-protocols
+basics/quantum-circuits
+basics/protocols-games
 
 quantum-machine-learning/introduction
 quantum-machine-learning/vqc
@@ -12,6 +13,8 @@ quantum-machine-learning/unsupervised
 quantum-machine-learning/pqc
 quantum-machine-learning/kernel
 quantum-machine-learning/encoding
+
+ch-algorithms/shor
 
 ch-applications/hhl_tutorial
 ch-applications/vqe-molecules

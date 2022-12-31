@@ -39,7 +39,7 @@ $ npm start
 
 After the application has started, the site will be available at http://localhost:8080/, but the index route will redirect to an external landing page.
 
-In order to test the application locally, you can visit a specific course page, like https://localhost:8080/course/ch-prerequisites/.
+In order to test the application locally, you can visit a specific course page, like http://localhost:8080/course/ch-prerequisites/.
 
 > _You can specify the port setting the env variable `PORT`. For instance `PORT=5000 npm start`._
 

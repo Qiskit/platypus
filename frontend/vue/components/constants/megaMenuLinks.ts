@@ -63,10 +63,17 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Circuits, protocols, and games',
-      url: `${pathBasicsCourse}/circuits-protocols-games`,
+      label: 'Quantum circuits',
+      url: `${pathBasicsCourse}/quantum-circuits`,
       segment: {
-        cta: 'circuits_protocols_and_games', location: sectionBasicsCourse
+        cta: 'quantum-circuits', location: sectionBasicsCourse
+      }
+    },
+    {
+      label: 'Quantum protocols and games',
+      url: `${pathBasicsCourse}/protocols-games`,
+      segment: {
+        cta: 'protocols-games', location: sectionBasicsCourse
       }
     }
   ]
