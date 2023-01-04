@@ -369,6 +369,10 @@
       id: classical_information
       uuid: 7342a6e3-d36a-4ffa-8323-620a67f2de8c
       url: /problem-sets/classical_information
+    - title: Quantum Information Problem Set
+      id: quantum_information
+      uuid: 7d4f016b-9161-4fd4-a4e8-3d920f6f63b7
+      url: /problem-sets/quantum_information
     - title: IIT Madras Pre-Test
       id: iit_madras_pretest
       uuid: 2892385a-2497-426c-be21-75ea635caa4e
