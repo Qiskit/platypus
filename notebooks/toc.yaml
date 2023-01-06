@@ -28,9 +28,9 @@
     - title: Multiple systems
       id: multiple-systems
       url: /basics/multiple-systems
-    - title: Circuits and protocols
-      id: circuits-and-protocols
-      url: /basics/circuits-and-protocols
+    - title: Quantum circuits
+      id: quantum-circuits
+      url: /basics/quantum-circuits
     - title: State vectors lab
       id: state-vector-lab
       url: /basics/state-vector-lab
