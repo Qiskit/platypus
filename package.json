@@ -100,7 +100,7 @@
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
     "@types/bcryptjs": "2.4.2",
-    "@types/codemirror": "^5.60.5",
+    "@types/codemirror": "^5.60.6",
     "@types/express-flash": "0.0.2",
     "@types/fs-extra": "^9.0.13",
     "@types/jsdom": "^16.2.15",
