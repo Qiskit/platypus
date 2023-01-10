@@ -24,7 +24,7 @@ The textbook is intended for use as a university quantum algorithms course suppl
     $ pip install -r requirements.txt -r requirements-test.txt
     ```
 
-1. Node.js (14.0 or later) (you could install node.js from [here](https://nodejs.org/en/download/)
+1. Node.js (Using any version from 14.0 to 16.19.0) (you could install node.js from [here](https://nodejs.org/en/download/))
 
 ### Setup
 
