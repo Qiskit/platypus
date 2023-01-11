@@ -329,7 +329,7 @@
       uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
       url: /ch-ex/hello-qiskit
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
-      id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+      id: estimating-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
     - title: Local Reality and the CHSH Inequality
