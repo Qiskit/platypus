@@ -75,7 +75,7 @@
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "carbon-components": "~10.58.3",
     "carbon-web-components": "^1.21.0",
-    "class-validator": "^0.13.2",
+    "class-validator": "^0.14.0",
     "codemirror": "^6.0.1",
     "got": "^11.8.6",
     "lit-element": "^2.5.1",
