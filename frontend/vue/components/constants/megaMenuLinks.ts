@@ -374,9 +374,9 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     },
     {
       label: 'Estimating Pi Using Quantum Phase Estimation Algorithm',
-      url: `${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
+      url: `${pathGamesAndDemos}/estimating-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
-        cta: 'estimating-pi-pi-using-quantum-phase-estimation-algorithm', location: sectionGamesAndDemos
+        cta: 'estimating-pi-using-quantum-phase-estimation-algorithm', location: sectionGamesAndDemos
       }
     },
     {
