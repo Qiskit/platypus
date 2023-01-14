@@ -24,7 +24,7 @@ The textbook is intended for use as a university quantum algorithms course suppl
     $ pip install -r requirements.txt -r requirements-test.txt
     ```
 
-1. Node.js (14.0 or later) (you could install node.js from [here](https://nodejs.org/en/download/)
+1. Node.js (Using any version from 14.0 to 16.19.0) (you could install node.js from [here](https://nodejs.org/en/download/))
 
 ### Setup
 
@@ -39,7 +39,7 @@ $ npm start
 
 After the application has started, the site will be available at http://localhost:8080/, but the index route will redirect to an external landing page.
 
-In order to test the application locally, you can visit a specific course page, like https://localhost:8080/course/ch-prerequisites/.
+In order to test the application locally, you can visit a specific course page, like http://localhost:8080/course/ch-prerequisites/.
 
 > _You can specify the port setting the env variable `PORT`. For instance `PORT=5000 npm start`._
 
