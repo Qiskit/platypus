@@ -74,7 +74,7 @@
 - title: Juegos y demostraciones
   url: /ch-demos
   sections:
-    - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+    - id: estimating-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
 
