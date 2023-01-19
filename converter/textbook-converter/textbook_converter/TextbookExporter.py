@@ -262,8 +262,9 @@ def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
                 markdown_lines.append("\n")
                 in_latex = True
             continue
-        if line.lstrip().startswith("$$"):
+        if line.lstrip(' >').startswith("$$"):
             indent, l = line.split("$$", 1)
+            indent = indent.replace('>', '')
             assert not indent or indent.isspace()
             markdown_lines.append(f"{indent}```latex\n")
             if l.rstrip(" .").endswith("$$"):
@@ -292,7 +293,7 @@ def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
             continue
 
         if in_blockquote:
-            if not line.startswith(">"):
+            if not line.startswith(">") and not in_latex:
                 in_blockquote = False
                 markdown_lines.append("</blockquote>\n")
         if line.startswith(">"):
