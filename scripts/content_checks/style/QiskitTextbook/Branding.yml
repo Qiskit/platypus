@@ -1,0 +1,10 @@
+# To ensure consistency of IBM Quantum brands
+extends: substitution
+message: "Use '%s' instead of '%s'"
+ignorecase: false
+level: error
+action:
+  name: replace
+swap:
+  IBM[\s]?Q[^A-z]: IBM Quantum
+  qiskit: Qiskit
