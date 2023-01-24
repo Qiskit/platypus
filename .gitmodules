@@ -1,0 +1,6 @@
+[submodule "notebooks/v1"]
+	path = notebooks/v1
+	url = https://github.com/Qiskit/textbook.git
+[submodule "notebooks/v2"]
+	path = notebooks/v2
+	url = https://github.com/Qiskit/textbook.git
