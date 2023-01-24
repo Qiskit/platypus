@@ -51,7 +51,7 @@
     "node": ">=14 <16.19.1"
   },
   "dependencies": {
-    "@carbon/colors": "^10.36.0",
+    "@carbon/colors": "^10.37.1",
     "@carbon/icons-vue": "~10.48.0",
     "@carbon/themes": "^11.15.0",
     "@carbon/vue": "^2.45.0",
