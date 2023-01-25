@@ -71,9 +71,9 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
     },
     {
       label: 'Entanglement in action',
-      url: `${pathBasicsCourse}/entanglement-action`,
+      url: `${pathBasicsCourse}/entanglement-in-action`,
       segment: {
-        cta: 'entanglement-action', location: sectionBasicsCourse
+        cta: 'entanglement-in-action', location: sectionBasicsCourse
       }
     }
   ]
