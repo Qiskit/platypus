@@ -381,6 +381,14 @@
       id: qiskit_beginner_proficiency
       uuid: 687732ae-70a8-11ed-a1eb-0242ac120002
       url: /problem-sets/qiskit_beginner_problem_set
+    - title: Multiple Systems Problem Set
+      id: multiple_systems_problem_set
+      uuid: ab7f2e9d-e1f4-4095-b07d-721e2271780e
+      url: /problem-sets/multiple_systems
+    - title: Quantum Circuits Problem Set
+      id: quantum_circuits_problem_set
+      uuid: 7423741d-48af-476a-8765-2390a44a8755
+      url: /problem-sets/quantum_circuits_problem_set
 
 
 - title: Examples
