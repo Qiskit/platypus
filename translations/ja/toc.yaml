@@ -262,6 +262,9 @@
     - id: describing-quantum-computers
       uuid: 9260a554-aebc-11ec-b909-0242ac120002
       url: /intro/describing-quantum-computers
+    - id: entangled-states
+      uuid: 98aa9032-aebc-11ec-b909-0242ac120002
+      url: /intro/entangled-states
     - id: grovers-search-algorithm
       uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
       url: /intro/grover-intro
