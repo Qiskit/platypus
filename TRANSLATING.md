@@ -90,4 +90,4 @@ During the process of translating Qiskit Textbook (beta), you may identify bug o
 | ---     | ---    | --- |
 |  Portuguese (PT_UN)| Omar Costa Hamido | omarcostahamido | 
 | Spanish (ES_UN)| Claudia Zendejas-Morales, Rodrigo Rosado Rivial | @clausia @rodrigo rosado |
-| Korean (KR_UN)| Woohyun Ahn | @Woohyun Ahn |
+| Korean (KR_UN)| Woohyun Ahn, Soyoung Shin | @Woohyun Ahn, @sophy |
