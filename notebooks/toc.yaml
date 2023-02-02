@@ -138,6 +138,10 @@
       id: shors-algorithm
       uuid: ec157cd8-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/shor
+    - title: The Hidden Shift Problem
+      id: hidden-shift-problem
+      uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002
+      url: /ch-algorithms/hidden-shift-problem
     - title: Grover's Algorithm
       id: grovers-algorithm
       uuid: eebb7488-b519-11ec-b909-0242ac120002
@@ -158,10 +162,10 @@
       id: quantum-key-distribution
       uuid: fbafa8c6-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-key-distribution
-    - title: The Hidden Shift Problem
-      id: hidden-shift-problem
-      uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002
-      url: /ch-algorithms/hidden-shift-problem
+    - title: Quantum Walk Search Algorithm
+      id: quantum-walk-search-algorithm
+      uuid: 5083763f-3db8-461f-8e7d-675533924165
+      url: /ch-algorithms/quantum-walk-search-algorithm
 
 
 - title: Quantum Algorithms for Applications
