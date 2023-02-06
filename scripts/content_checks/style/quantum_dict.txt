@@ -1,3 +1,5 @@
+Deutsch
+Jozsa
 Abhinav
 Aer
 Akira
@@ -20,6 +22,7 @@ Bucher
 Carleo
 Carrera
 Cerezo
+Chuang
 Cincio
 Colbeck
 Corcoles
@@ -93,6 +96,7 @@ Revview
 Rolfe
 Schmitt
 Schroeter
+Schwarz
 Schuld
 Shadbolt
 Shen
@@ -102,6 +106,7 @@ Smelyanskiy
 Srinivasan
 Stamatopoulos
 Steenken
+Stephane
 Streif
 Sukin
 Takita
@@ -138,14 +143,18 @@ autoencoder
 autoencoders
 bilinearity
 bitstring
+coprime
 doi
+ebit
 eigenbasis
 eigensolver
 eigensolvers
 eigenstate
+eigenstates
 endian
 exponentials
 expressibility
+fanout
 fermionic
 fidelities
 hyperparameter
@@ -156,6 +165,8 @@ minimax
 misclassifying
 multilinear
 nucleobase
+orthogonalization
+orthonormality
 parameterization
 polynomially
 preprint
