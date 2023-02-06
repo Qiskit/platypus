@@ -1,6 +1,9 @@
 - title: 量子情報の基礎
   url: /basics
   sections:
+    - id: single-systems
+      uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+      url: /basics/single-systems
     - id: entanglement-action
       uuid: 366f7150-4c04-4763-8269-ae6180812b73
       url: basics/entanglement-in-action
