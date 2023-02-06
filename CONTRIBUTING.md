@@ -43,7 +43,7 @@ a patch. In any case, read the contribution guidelines for opening new issues an
 submitting pull requests.
 
 Please, don't use this repository for asking questions about Qiskit: there are
-better ways to do it. Refer to our public [Slack](https://ibm.co/joinqiskitslack)
+better ways to do it. Refer to our public [Slack](https://qisk.it/join-slack)
 or post a question in [stack overflow](https://stackoverflow.com/questions/tagged/qiskit).
 
 ## Before you start
