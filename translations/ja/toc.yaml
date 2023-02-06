@@ -1,3 +1,13 @@
+- title: 量子情報の基礎
+  url: /basics
+  sections:
+    - id: single-systems
+      uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+      url: /basics/single-systems
+    - id: entanglement-action
+      uuid: 366f7150-4c04-4763-8269-ae6180812b73
+      url: basics/entanglement-in-action
+
 - title: 前提条件
   url: /ch-prerequisites
   sections:
@@ -133,6 +143,12 @@
     - id: randomized-benchmarking
       uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/randomized-benchmarking
+    - id: measuring-quantum-volume
+      uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
+      url: /quantum-hardware/measuring-quantum-volume
+    - id: density-matrix
+      uuid: 498dce44-cae9-11ec-9d64-0242ac120002
+      url: /quantum-hardware/density-matrix
 
 
 - title: マイクロ波パルスによる量子ハードウェアの探究
@@ -192,7 +208,7 @@
     - id: bonus-level-sandbox
       uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
       url: /ch-ex/hello-qiskit
-    - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+    - id: estimating-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
     - id: local-reality-and-the-chsh-inequality
@@ -237,15 +253,21 @@
   url: /introduction
   type: learning-path
   sections:
-    - uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
-      id: why-quantum-computing
+    - id: why-quantum-computing
+      uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
       url: /intro/why-quantum-computing
+    - id: the-atoms-of-computation
+      uuid: 37ef477e-ab8d-11ec-b909-0242ac120002
+      url: /intro/atoms-of-computation
     - id: what-is-quantum
       uuid: 7c765036-aebc-11ec-b909-0242ac120002
       url: /intro/what-is-quantum
     - id: describing-quantum-computers
       uuid: 9260a554-aebc-11ec-b909-0242ac120002
       url: /intro/describing-quantum-computers
+    - id: entangled-states
+      uuid: 98aa9032-aebc-11ec-b909-0242ac120002
+      url: /intro/entangled-states
     - id: grovers-search-algorithm
       uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
       url: /intro/grover-intro

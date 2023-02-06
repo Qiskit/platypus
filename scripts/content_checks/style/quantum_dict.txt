@@ -1,3 +1,5 @@
+Deutsch
+Jozsa
 Abhinav
 Aer
 Akira
@@ -94,6 +96,7 @@ Revview
 Rolfe
 Schmitt
 Schroeter
+Schwarz
 Schuld
 Shadbolt
 Shen
@@ -142,6 +145,7 @@ bilinearity
 bitstring
 coprime
 doi
+ebit
 eigenbasis
 eigensolver
 eigensolvers
@@ -150,6 +154,7 @@ eigenstates
 endian
 exponentials
 expressibility
+fanout
 fermionic
 fidelities
 hyperparameter
@@ -160,6 +165,8 @@ minimax
 misclassifying
 multilinear
 nucleobase
+orthogonalization
+orthonormality
 parameterization
 polynomially
 preprint
