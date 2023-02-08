@@ -741,51 +741,6 @@
     title: The density matrix and mixed states
     url: v1/notebooks/ch-quantum-hardware/density-matrix
     uuid: 9f785388-6fab-4c13-b323-4d98cf215c03
-  title: Investigating quantum hardware using quantum circuits
-  type: chapter
-  url: /v1_ch-quantum-hardware
-- id: ch-quantum-hardware
-  overviewInfo:
-    description:
-      long: 'The Qiskit Textbook mostly assumes we have a quantum computer that can
-
-        carry out quantum operations, and doesn''t worry about how the devices
-
-        actually work. These pages go a step deeper, exploring the physics of
-
-        superconducting qubits, and using Qiskit to program operations on these
-
-        devices at the level of microwave pulses.
-
-        '
-      short: 'In this chapter, we get a level closer to the real quantum machines.
-
-        Learn about the physics of these devices, and how to program them at
-
-        the level of microwave pulses.
-
-        '
-    prerequisites:
-    - description: 'With the basics down, this chapter explores the consequences of
-        these
-
-        new quantum effects, and sets us up with tools to understand quantum
-
-        algorithms.
-
-        '
-      link: https://learn.qiskit.org/course/ch-gates/introduction
-      title: Multiple Qubits and Entanglement
-    - description: 'Python is a programming language where you don''t need to compile.
-        You
-
-        can just run it line by line...
-
-        '
-      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
-      title: Python and Jupyter Notebooks
-    thumbnailUrl: /ch-quantum-hardware/overview/header-pulses.png
-  sections:
   - id: calibrating-qubits-pulse
     previewImgUrl: /ch-quantum-hardware/overview/calibrating-qubits-pulse.png
     title: Calibrating qubits with Qiskit Pulse
@@ -1000,6 +955,8 @@
   title: Games and demos
   type: chapter
   url: /v1_ch-demos
+
+
 
 
 #---- Below was added by machine ---
