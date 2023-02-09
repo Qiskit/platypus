@@ -176,10 +176,11 @@ def handle_images(line, cell):
         figure: x-img(src="path/image")
 
     """
+    indent = line.split('!')[0]
     match = markdown_img_regex.search(line.lstrip())
     if match is not None:
         return f"""
-    figure: x-img(src="{get_attachment_data(match.group(1), cell)}")
+    {indent}figure: x-img(src="{get_attachment_data(match.group(1), cell)}")
         """
     else:
         return line
