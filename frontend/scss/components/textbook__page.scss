@@ -135,8 +135,18 @@ main.body {
     width: max-content;
   }
   
-  .page__banner {
-    height: $textbook-page-banner-height;
+  .page__banner, .qiskit-banner.page__banner {
+   height: $textbook-page-banner-height;
+
+   &--quiet {
+     color: $text-color-dark;
+     background: $background-color-lighter;
+     border-bottom: 1px solid $border-color;
+
+     a, a:visited {
+       color: $link-color-tertiary;
+     }
+   }
   }
 
   &__content {
