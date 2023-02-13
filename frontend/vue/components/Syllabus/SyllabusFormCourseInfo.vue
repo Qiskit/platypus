@@ -9,6 +9,7 @@
         placeholder="Please enter the syllabus name"
         label-text="Syllabus name *"
         color-scheme="light"
+        autofocus
         :required="true"
         @input="updateFormInfo"
       />
@@ -191,6 +192,7 @@ export default defineComponent({
   }
 
   &__input-field {
+    --cds-focus: #{$border-color-secondary};
     padding-bottom: $spacing-05;
 
     &:not(:last-child) {

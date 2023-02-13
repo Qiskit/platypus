@@ -20,7 +20,7 @@ If you have an open issue for a language request, **add the issue link to the PR
 5. Leave a comment in your PR stating that you successfully joined GitLocalize.
 6. Once your PR has been accepted and merged, you will receive a notification from GitLocalize with a title: `[GitLocalize] You have been assigned a new role.`<br/>
 7. Join project [Qiskit/platypus] and then visit the language you signed up to contribute to.<br/>
-8. For questions about the project, to connect with other translators, or to receive updates regarding the project, please join #qiskit-localization channel in the [Qiskit workspace](http://ibm.co/joinqiskitslack). <br/>
+8. For questions about the project, to connect with other translators, or to receive updates regarding the project, please join #qiskit-localization channel in the [Qiskit workspace](https://qisk.it/join-slack). <br/>
 
 ## Review the CLA document
 
@@ -67,6 +67,9 @@ If you have further questions, please feel free to contact [Soolu Thomas](mailto
 5. Now, in the terminal run `git add LOCALIZATION_CONTRIBUTORS`, `git commit -m "Added name under LANGUAGE-NAME"`, `git push origin BRANCH-NAME`. 
 6. Follow the link in the terminal to open a pull request.
 
+## When will my translation get published?
+
+Please refer to the [Release Guide](https://github.com/Qiskit/platypus/blob/main/translations/release_guide.md) for more information on how translated textbooks get published.
 
 ## When you find an issue in the textbook
 
@@ -74,7 +77,7 @@ During the process of translating Qiskit Textbook (beta), you may identify bug o
 
 ## Project Leads
 
-| Name | Slack ([Qiskit Workspace](http://ibm.co/joinqiskitslack)) |
+| Name | Slack ([Qiskit Workspace](https://qisk.it/join-slack)) |
 | ---    | --- |
 | Yuri Kobayashi | @Yuri Kobayashi |
 | Soolu Thomas | @Soolu |
@@ -83,7 +86,8 @@ During the process of translating Qiskit Textbook (beta), you may identify bug o
 
 ## Translation Leads (as of April 2022)
 
-| **Language** | **Translation Leads** | **Slack ([Qiskit Workspace](http://ibm.co/joinqiskitslack))** |
+| **Language** | **Translation Leads** | **Slack ([Qiskit Workspace](https://qisk.it/join-slack))** |
 | ---     | ---    | --- |
 |  Portuguese (PT_UN)| Omar Costa Hamido | omarcostahamido | 
 | Spanish (ES_UN)| Claudia Zendejas-Morales, Rodrigo Rosado Rivial | @clausia @rodrigo rosado |
+| Korean (KR_UN)| Woohyun Ahn, Soyoung Shin | @Woohyun Ahn, @sophy |

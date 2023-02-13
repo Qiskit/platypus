@@ -19,6 +19,27 @@
 #       url: /my-course/my-notebook  # Path to source notebook, relative to this file
 
 
+- title: Basics of quantum information
+  url: /basics
+  sections:
+    - title: Single systems
+      id: single-systems
+      uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+      url: /basics/single-systems
+    - title: Multiple systems
+      id: multiple-systems
+      uuid: 327b128f-4fec-410a-a3f9-079939002bf2
+      url: basics/multiple-systems
+    - title: Quantum circuits
+      id: quantum-circuits
+      uuid: 57d5452e-85cd-40f8-a290-11466213c1a6
+      url: basics/quantum-circuits
+    - title: Entanglement in action
+      id: entanglement-in-action
+      uuid: 366f7150-4c04-4763-8269-ae6180812b73
+      url: basics/entanglement-in-action
+
+
 - title: Prerequisites
   url: /ch-prerequisites
   sections:
@@ -308,7 +329,7 @@
       uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
       url: /ch-ex/hello-qiskit
     - title: Estimating Pi Using Quantum Phase Estimation Algorithm
-      id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+      id: estimating-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
     - title: Local Reality and the CHSH Inequality
@@ -344,6 +365,14 @@
       id: quantum_enigma_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/quantum_enigma_problem_set
+    - title: IIT Madras Pre-Test
+      id: iit_madras_pretest
+      uuid: 2892385a-2497-426c-be21-75ea635caa4e
+      url: /problem-sets/iit_madras_pretest
+    - title: Qiskit Beginner Problem Set
+      id: qiskit_beginner_proficiency
+      uuid: 687732ae-70a8-11ed-a1eb-0242ac120002
+      url: /problem-sets/qiskit_beginner_problem_set
 
 
 - title: Examples

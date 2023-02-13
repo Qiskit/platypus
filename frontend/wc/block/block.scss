@@ -77,6 +77,27 @@ q-block {
     }
   }
 
+  &.note {
+    .qb-body {
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 3px solid $block-border-color;
+    }
+
+    &.warning-note {
+      .qb-body {
+        border-left-color: $block-border-color-warning;
+      }
+    }
+
+    &.info {
+      .qb-body {
+        border-left-color: $block-border-color-info;
+      }
+    }
+  }
+
   &.exercise {
     .qb-title {
       > * {

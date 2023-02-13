@@ -1,3 +1,5 @@
+Deutsch
+Jozsa
 Abhinav
 Aer
 Akira
@@ -20,6 +22,7 @@ Bucher
 Carleo
 Carrera
 Cerezo
+Chuang
 Cincio
 Colbeck
 Corcoles
@@ -34,12 +37,14 @@ Faehrmann
 Farhi
 Fock
 Francesco
+Fredkin
 Gacon
 Garey
 Glick
 Goemans
 Gogolin
 Goodfellow
+Greenberger
 Griffiths
 Gutmann
 Hadamard
@@ -91,6 +96,7 @@ Revview
 Rolfe
 Schmitt
 Schroeter
+Schwarz
 Schuld
 Shadbolt
 Shen
@@ -100,6 +106,7 @@ Smelyanskiy
 Srinivasan
 Stamatopoulos
 Steenken
+Stephane
 Streif
 Sukin
 Takita
@@ -109,6 +116,7 @@ Technol
 Temme
 Toeplitz
 Toffoli
+Tommaso
 Trotterization
 Trotterize
 Trotterizing
@@ -125,6 +133,7 @@ Woerner
 Youngseok
 Yunchao
 Yung
+Zeilinger
 Zhou
 Zoufal
 anharmonic
@@ -132,15 +141,20 @@ ansatz
 ansatzes
 autoencoder
 autoencoders
+bilinearity
 bitstring
+coprime
 doi
+ebit
 eigenbasis
 eigensolver
 eigensolvers
 eigenstate
+eigenstates
 endian
 exponentials
 expressibility
+fanout
 fermionic
 fidelities
 hyperparameter
@@ -149,7 +163,10 @@ ket
 kets
 minimax
 misclassifying
+multilinear
 nucleobase
+orthogonalization
+orthonormality
 parameterization
 polynomially
 preprint
@@ -159,11 +176,14 @@ qiskit
 quantizing
 qubit
 qubits
+qudit
+qutrits
 recalibrated
 reuploading
 satisfiability
 subfield
 subfields
+subscripting
 sudoku
 summand
 summands
@@ -174,4 +194,5 @@ transpile
 transpiled
 transpiler
 tridiagonal
+trits
 unitaries

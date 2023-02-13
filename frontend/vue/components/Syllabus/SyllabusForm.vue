@@ -57,13 +57,13 @@ import 'carbon-web-components/es/components/tabs/tabs.js'
 import 'carbon-web-components/es/components/tabs/tab.js'
 import AppCta from '../common/AppCta.vue'
 import BasicLink from '../common/BasicLink.vue'
+import { Syllabus, SyllabusCourse, emptySyllabus, getActiveSyllabus } from '../../../ts/syllabus'
 import SyllabusFormCourseInfo from './SyllabusFormCourseInfo.vue'
 import SyllabusFormModule from './SyllabusFormModule.vue'
 import SyllabusInlineNotification from './SyllabusInlineNotification.vue'
-import { Syllabus, SyllabusCourse, emptySyllabus, getActiveSyllabus } from '../../../ts/syllabus'
 
 interface DeletedCourse {
-  index: number, 
+  index: number,
   course: SyllabusCourse
 }
 
@@ -104,7 +104,7 @@ export default defineComponent({
       syllabus: emptySyllabus()
     }
   },
-  mounted() {
+  mounted () {
     const activeSyllabus = getActiveSyllabus()
     if (activeSyllabus) {
       this.syllabus = activeSyllabus
@@ -123,7 +123,7 @@ export default defineComponent({
     removeContentBlock (course: SyllabusCourse) {
       const index = this.syllabus.courseList.indexOf(course)
       this.lastDeletedCourse = { index, course }
-      this.syllabus.courseList.splice(index, 1);
+      this.syllabus.courseList.splice(index, 1)
     },
     closeNotification () {
       this.lastDeletedCourse = undefined
@@ -133,8 +133,8 @@ export default defineComponent({
       const csrfToken = { _csrf: window.csrfToken }
       fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           ...csrfToken,
           ...this.syllabus
         })
@@ -155,7 +155,7 @@ export default defineComponent({
       }
 
       const index = this.lastDeletedCourse.index
-      this.syllabus.courseList.splice(index, 0, this.lastDeletedCourse.course);
+      this.syllabus.courseList.splice(index, 0, this.lastDeletedCourse.course)
       this.lastDeletedCourse = undefined
     },
     syllabusInfoChanged (data: Syllabus) {

@@ -1,3 +1,13 @@
+- title: 量子情報の基礎
+  url: /basics
+  sections:
+    - id: single-systems
+      uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+      url: /basics/single-systems
+    - id: entanglement-action
+      uuid: 366f7150-4c04-4763-8269-ae6180812b73
+      url: basics/entanglement-in-action
+
 - title: 前提条件
   url: /ch-prerequisites
   sections:
@@ -114,7 +124,12 @@
     - id: the-variational-quantum-linear-solver
       uuid: 1163f456-b51a-11ec-b909-0242ac120002
       url: /ch-paper-implementations/vqls
-
+    - id: flexible-representation-of-quantum-images-frqi
+      uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
+      url: /ch-applications/image-processing-frqi-neqr
+    - id: facial-expression-recognition
+      uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002
+      url: /ch-applications/facial-expression-recognition
 
 - title: 量子回路による量子ハードウェアの探究
   url: /quantum-hardware
@@ -128,6 +143,12 @@
     - id: randomized-benchmarking
       uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
       url: /quantum-hardware/randomized-benchmarking
+    - id: measuring-quantum-volume
+      uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
+      url: /quantum-hardware/measuring-quantum-volume
+    - id: density-matrix
+      uuid: 498dce44-cae9-11ec-9d64-0242ac120002
+      url: /quantum-hardware/density-matrix
 
 
 - title: マイクロ波パルスによる量子ハードウェアの探究
@@ -145,6 +166,9 @@
     - id: circuit-quantum-electrodynamics
       uuid: 31b2ccdc-b51a-11ec-b909-0242ac120002
       url: /ch-quantum-hardware/cQED-JC-SW
+    - id: exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse
+      uuid: 346d7eea-b51a-11ec-b909-0242ac120002
+      url: /ch-quantum-hardware/Jaynes-Cummings-model
 
 
 - title: 量子コンピューティング・ラボ
@@ -156,9 +180,15 @@
     - id: lab-2-single-qubit-gates
       uuid: 43418a88-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab02_Single_Qubit_Gates
+    - id: lab-3-quantum-measurements
+      uuid: 45aa5412-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab03_QuantumMeasurement
     - id: lab-4-bell-ghz-circuit
       uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
       url: /ch-labs/Lab04_Bell_GHZ_Circuit
+    - id: lab-9-quantum-simulation-as-a-search-algorithm
+      uuid: 59a076f4-b51a-11ec-b909-0242ac120002
+      url: /ch-labs/Lab09_QuantumSimulationSearchAlgorithm
     
     
 - title: Appendix(付録)
@@ -178,9 +208,18 @@
     - id: bonus-level-sandbox
       uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
       url: /ch-ex/hello-qiskit
-    - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+    - id: estimating-pi-using-quantum-phase-estimation-algorithm
       uuid: 69b9707c-b51a-11ec-b909-0242ac120002
       url: /ch-demos/piday-code
+    - id: local-reality-and-the-chsh-inequality
+      uuid: 6c507826-b51a-11ec-b909-0242ac120002
+      url: /ch-demos/chsh
+    - id: widgets-demonstration
+      uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
+      url: /ch-demos/widgets-index
+    - id: first-quantum-game
+      uuid: 53a49e62-cae9-11ec-9d64-0242ac120002
+      url: /ch-demos/first-quantum-game
 
 
 - title: 例
@@ -214,15 +253,21 @@
   url: /introduction
   type: learning-path
   sections:
-    - uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
-      id: why-quantum-computing
+    - id: why-quantum-computing
+      uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
       url: /intro/why-quantum-computing
+    - id: the-atoms-of-computation
+      uuid: 37ef477e-ab8d-11ec-b909-0242ac120002
+      url: /intro/atoms-of-computation
     - id: what-is-quantum
       uuid: 7c765036-aebc-11ec-b909-0242ac120002
       url: /intro/what-is-quantum
     - id: describing-quantum-computers
       uuid: 9260a554-aebc-11ec-b909-0242ac120002
       url: /intro/describing-quantum-computers
+    - id: entangled-states
+      uuid: 98aa9032-aebc-11ec-b909-0242ac120002
+      url: /intro/entangled-states
     - id: grovers-search-algorithm
       uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
       url: /intro/grover-intro
@@ -265,7 +310,23 @@
     - id: careers-in-computing
       uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
       url: /summer-school/2020/lec-09
-      
+
+- title: 夏の学校 2021
+  url: /2021
+  type: learning-path
+  sections:
+    - id: lec1-1-vector-spaces-tensor-products-qubits
+      uuid: c2ebedbe-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lec1.1
+    - id: lec1-2-introduction-quantum-circuits
+      uuid: c5fb76be-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lec1.2
+    - id: lec3-1-noise-quantum-computers-1
+      uuid: cec0e98c-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lec3.1
+    - id: lab1-quantum-computing-algorithm-operations
+      uuid: d42ae134-b51a-11ec-b909-0242ac120002
+      url: /summer-school/2021/lab1      
       
 - title: 量子機械学習
   url: /machine-learning

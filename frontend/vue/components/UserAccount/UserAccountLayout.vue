@@ -11,7 +11,7 @@
         <UserProgress />
       </div>
       <div v-else-if="activeSection === sectionList[1].url">
-        <ClassroomSection />
+        <ClassroomSection :user-id="userId" />
       </div>
       <div v-if="activeSection === sectionList[2].url">
         <AccountAdmin :first-name="firstName" :last-name="lastName" :email="email" />
@@ -42,7 +42,8 @@ export default defineComponent({
   props: {
     firstName: { type: String, required: false, default: '' },
     lastName: { type: String, required: false, default: '' },
-    email: { type: String, required: false, default: '' }
+    email: { type: String, required: false, default: '' },
+    userId: { type: String, required: true, default: '' }
   },
   data () {
     return {
