@@ -55,7 +55,7 @@
     "@carbon/icons-vue": "~10.48.0",
     "@carbon/themes": "^11.15.0",
     "@carbon/vue": "^2.45.1",
-    "@ckeditor/ckeditor5-build-classic": "^34.2.0",
+    "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "@ckeditor/ckeditor5-vue": "^4.0.1",
     "@codemirror/lang-python": "^6.1.1",
     "@github/clipboard-copy-element": "^1.1.2",
