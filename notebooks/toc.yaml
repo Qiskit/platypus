@@ -138,6 +138,10 @@
       id: shors-algorithm
       uuid: ec157cd8-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/shor
+    - title: The Hidden Shift Problem
+      id: hidden-shift-problem
+      uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002
+      url: /ch-algorithms/hidden-shift-problem
     - title: Grover's Algorithm
       id: grovers-algorithm
       uuid: eebb7488-b519-11ec-b909-0242ac120002
@@ -158,10 +162,10 @@
       id: quantum-key-distribution
       uuid: fbafa8c6-b519-11ec-b909-0242ac120002
       url: /ch-algorithms/quantum-key-distribution
-    - title: The Hidden Shift Problem
-      id: hidden-shift-problem
-      uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002
-      url: /ch-algorithms/hidden-shift-problem
+    - title: Quantum Walk Search Algorithm
+      id: quantum-walk-search-algorithm
+      uuid: 5083763f-3db8-461f-8e7d-675533924165
+      url: /ch-algorithms/quantum-walk-search-algorithm
 
 
 - title: Quantum Algorithms for Applications
@@ -361,10 +365,22 @@
       id: single_systems_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/single_systems_problem_set
-    - title: Quantum Enigma Problem Set
+    - title: Quantum Enigma 001 Problem Set
       id: quantum_enigma_problem_set
       uuid: e4f72595-1e9e-47fd-8780-345360b53fef
       url: /problem-sets/quantum_enigma_problem_set
+    - title: Quantum Enigma 002 Problem Set
+      id: quantum_enigma_002
+      uuid: cdd94010-34a4-4b87-bd0e-dc18b8d4f600
+      url: /problem-sets/quantum_enigma_002
+    - title: Quantum Enigma 003 Problem Set
+      id: quantum_enigma_003
+      uuid: db5aa523-e7af-4cf9-8426-2df102900871
+      url: /problem-sets/quantum_enigma_003
+    - title: Quantum Enigma 004 Problem Set
+      id: quantum_enigma_004
+      uuid: 808903bd-a1d0-4619-a81b-0ebea5e03b32
+      url: /problem-sets/quantum_enigma_004
     - title: IIT Madras Pre-Test
       id: iit_madras_pretest
       uuid: 2892385a-2497-426c-be21-75ea635caa4e
