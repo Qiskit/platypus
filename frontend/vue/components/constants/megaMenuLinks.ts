@@ -455,6 +455,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
+      label: 'Hidden Shift Problem',
+      url: `${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
+      segment: {
+        cta: 'hidden-shift-problem', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
       label: 'Grover\'s Algorithm',
       url: `${pathProtocolsAndAlgorithms}/grovers-algorithm`,
       segment: {
@@ -487,6 +494,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         cta: 'quantum-key-distribution', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
+      label: 'Quantum Walk Search Algorithm',
+      url: `${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
+      segment: {
+        cta: 'quantum-walk-search-algorithm', location: sectionProtocolsAndAlgorithms
       }
     }
   ]
