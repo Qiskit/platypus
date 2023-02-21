@@ -19,6 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Clone Qiskit/textbook repo
+        run: |
+          eval `ssh-agent -s`
+          ssh-add - <<< "${{ secrets.TEXTBOOK_REPO_CLONE_KEY }}"
+          git config --global url."git@github.com:".insteadOf "https://github.com"
+          git submodule update --init --recursive
+          git config --global --remove-section url."git@github.com:"
+
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
@@ -42,28 +50,6 @@ jobs:
 
       - name: Apply configuration
         run: npm run setup:secrets -- --mongo ${{ secrets.STAGING_MONGODB_URI }}
-
-      - name: Install Vale
-        run: sudo snap install --edge vale
-
-      - name: Get changed notebooks
-        id: changed-notebooks
-        uses: tj-actions/changed-files@v29.0.9
-        with:
-          files: notebooks/**/*.ipynb
-
-      - name: Notebook tests
-        run: |
-          echo "::group::Linting"
-          npm run test:nb
-          echo "::endgroup::"
-          echo "::group::Run changed notebooks"
-          # Copy Qiskit settings
-          curl --create-dirs https://raw.githubusercontent.com/Qiskit/platypus-binder/main/.qiskit/settings.conf --output ~/.qiskit/settings.conf
-          curl --create-dirs https://raw.githubusercontent.com/Qiskit/platypus-binder/main/.qiskit/styles/textbook.json --output ~/.qiskit/styles/textbook.json
-          # Run notebooks tests
-          python3 ./scripts/content_checks/nb_autorun.py ${{ steps.changed-notebooks.outputs.all_changed_files }} --fail-on-warning
-          echo "::endgroup::"
 
       - name: Build
         run: npm run build
