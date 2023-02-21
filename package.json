@@ -60,8 +60,8 @@
     "@codemirror/lang-python": "^6.1.1",
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.1.1",
-    "@jupyter-widgets/html-manager": "^0.20.2",
-    "@jupyter-widgets/jupyterlab-manager": "^3.1.0",
+    "@jupyter-widgets/html-manager": "^0.20.3",
+    "@jupyter-widgets/jupyterlab-manager": "^3.1.2",
     "@jupyterlab/mathjax2": "^3.5.2",
     "@jupyterlab/outputarea": "^3.5.2",
     "@jupyterlab/rendermime": "^3.5.2",
@@ -108,7 +108,7 @@
     "@types/markdown-it": "^12.2.1",
     "@types/node-fetch": "^2.6.2",
     "@types/pug": "2.0.6",
-    "@types/validator": "13.7.11",
+    "@types/validator": "13.7.12",
     "@vue/cli-plugin-typescript": "4.5.19",
     "@vue/cli-service": "4.5.19",
     "@vue/compiler-sfc": "~3.1.5",
@@ -130,7 +130,7 @@
     "sass-mq": "^6.0.0",
     "simple-git-hooks": "^2.8.1",
     "start-server-and-test": "^1.14.0",
-    "tslib": "^2.4.1",
+    "tslib": "^2.5.0",
     "vue-demi": "^0.12.1"
   }
 }
