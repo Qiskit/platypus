@@ -1,2 +1,7 @@
-- var msg = `This is an old version of the textbook, <a href="/course/${course.id.split(/_(.*)/)[1]}" onclick="textbook.trackClickEvent('old-textbook-version', 'banner')">click here for the latest version</a>.`
-q-qiskit-banner.page__banner(data-test="qiskit-banner-new-textbook-version") !{msg}
+
+q-qiskit-banner.page__banner(data-test="qiskit-banner-new-textbook-version")
+  include ../../frontend/assets/images/warning.svg
+  | This is an old version of the textbook,
+  | <a href="/course/#{course.id.split(/_(.*)/)[1]}"
+  |    onclick="textbook.trackClickEvent('old-textbook-version', 'banner')"
+  | >click here for the latest version</a>.
