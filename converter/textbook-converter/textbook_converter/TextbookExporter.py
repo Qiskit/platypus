@@ -252,6 +252,8 @@ def handle_markdown_cell(cell, resources, cell_number, is_problem_set=False):
     headings = []
 
     for count, line in enumerate(lines):
+        if '</summary>' in line:
+            line += '\n'
         if in_latex:
             if line.rstrip(" .").endswith("$$"):
                 l = line.replace("$$", "")
