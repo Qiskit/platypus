@@ -91,13 +91,6 @@ const ALGORITHM_DESIGN: MegaDropdownMenuGroup = {
   },
   content: [
     {
-      label: 'Overview',
-      url: `${pathAlgorithmDesign}/overview`,
-      segment: {
-        cta: 'overview', location: sectionAlgorithmDesign
-      }
-    },
-    {
       label: 'Concepts',
       url: `${pathAlgorithmDesign}/concepts`,
       segment: {
