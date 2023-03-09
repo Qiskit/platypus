@@ -69,9 +69,9 @@ export default defineComponent({
     this.apiTokenPromise = getQiskitUser().then(user => user?.apiToken)
   },
   methods: {
-    needsApiToken (code: string) {
+    needsApiToken (code: string, usesHardware: boolean = false) {
       return this.apiTokenPromise!.then((apiToken?: string) => {
-        return this.isBackendExecution(code) && !apiToken
+        return (usesHardware || this.isBackendExecution(code)) && !apiToken
       })
     },
     isBackendExecution (code: string) {
