@@ -163,8 +163,8 @@ export default defineComponent({
     codeChanged (code: string) {
       this.code = code
       const codeOutput: any = this.$refs.output
-      codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
-        this.isApiTokenNeeded = isNeeded || this.usesHardware
+      codeOutput.needsApiToken(this.code, this.usesHardware).then((isNeeded: boolean) => {
+        this.isApiTokenNeeded = isNeeded
       })
     },
     keyboardRun () {
