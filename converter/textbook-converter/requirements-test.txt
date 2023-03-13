@@ -5,7 +5,7 @@ pylint==2.14.3
 scour==0.38.2
 qiskit==0.41.1
 tweedledum==1.1.1
-qiskit-nature==0.4.1
+qiskit-nature==0.5.2
 qiskit-machine-learning==0.4.0
 qiskit-finance==0.3.2
 qiskit-ibm-runtime==0.9.1
