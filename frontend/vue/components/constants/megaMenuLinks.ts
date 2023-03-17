@@ -70,10 +70,10 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Quantum protocols and games',
-      url: `${pathBasicsCourse}/protocols-games`,
+      label: 'Entanglement in action',
+      url: `${pathBasicsCourse}/entanglement-in-action`,
       segment: {
-        cta: 'protocols-games', location: sectionBasicsCourse
+        cta: 'entanglement-in-action', location: sectionBasicsCourse
       }
     }
   ]
@@ -374,9 +374,9 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
     },
     {
       label: 'Estimating Pi Using Quantum Phase Estimation Algorithm',
-      url: `${pathGamesAndDemos}/estimating-pi-pi-using-quantum-phase-estimation-algorithm`,
+      url: `${pathGamesAndDemos}/estimating-pi-using-quantum-phase-estimation-algorithm`,
       segment: {
-        cta: 'estimating-pi-pi-using-quantum-phase-estimation-algorithm', location: sectionGamesAndDemos
+        cta: 'estimating-pi-using-quantum-phase-estimation-algorithm', location: sectionGamesAndDemos
       }
     },
     {
@@ -455,6 +455,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
+      label: 'Hidden Shift Problem',
+      url: `${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
+      segment: {
+        cta: 'hidden-shift-problem', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
       label: 'Grover\'s Algorithm',
       url: `${pathProtocolsAndAlgorithms}/grovers-algorithm`,
       segment: {
@@ -487,6 +494,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         cta: 'quantum-key-distribution', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
+      label: 'Quantum Walk Search Algorithm',
+      url: `${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
+      segment: {
+        cta: 'quantum-walk-search-algorithm', location: sectionProtocolsAndAlgorithms
       }
     }
   ]
@@ -757,6 +771,27 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       url: `${pathProblemSets}/quantum_enigma_problem_set`,
       segment: {
         cta: 'quantum_enigma_problem_set', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 002 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_002`,
+      segment: {
+        cta: 'quantum_enigma_002', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 003 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_003`,
+      segment: {
+        cta: 'quantum_enigma_003', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 004 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_004`,
+      segment: {
+        cta: 'quantum_enigma_004', location: sectionProblemSets
       }
     }
   ]
