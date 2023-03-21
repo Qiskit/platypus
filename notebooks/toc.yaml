@@ -389,6 +389,10 @@
       id: qiskit_beginner_proficiency
       uuid: 687732ae-70a8-11ed-a1eb-0242ac120002
       url: /problem-sets/qiskit_beginner_problem_set
+    - title: Qiskit Programming Challenge - Australia
+      id: qiskit_programming_australia
+      uuid: 38c0c49c-6921-4cb5-bdf9-75d592edc3fc
+      url: /problem-sets/qiskit_programming_australia
 
 
 - title: Examples
