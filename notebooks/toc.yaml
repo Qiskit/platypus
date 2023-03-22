@@ -389,6 +389,18 @@
       id: qiskit_beginner_proficiency
       uuid: 687732ae-70a8-11ed-a1eb-0242ac120002
       url: /problem-sets/qiskit_beginner_problem_set
+    - title: Qiskit Programming Challenge - Australia
+      id: qiskit_programming_australia
+      uuid: 38c0c49c-6921-4cb5-bdf9-75d592edc3fc
+      url: /problem-sets/qiskit_programming_australia
+    - title: Algo Queen 2023 - Hello World
+      id: algo_queen_2023_hello_world
+      uuid: 34b52f70-c6f2-11ed-afa1-0242ac120002
+      url: /problem-sets/algo_queen_2023/aq-hello-world-notepad
+    - title: Algo Queen 2023
+      id: algo_queen_2023
+      uuid: ed8eb7d5-6297-457b-a663-547d34c0ecd4
+      url: /problem-sets/algo_queen_2023/aq-notepad-final-challenge
 
 
 - title: Examples
