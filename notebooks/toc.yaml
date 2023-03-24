@@ -1298,3 +1298,735 @@
   title: ch-appendix
   type: chapter
   url: /v2_ch-appendix
+
+
+#---- Below was added by machine ---
+
+- id: ch-prerequisites
+  overviewInfo:
+    description:
+      long: 'This is a comprehensive guide for setting up your environment on your
+
+        personal computer for working with Qiskit Textbook. This will help you
+
+        reproduce the results as you see them on the textbook website. The
+
+        Qiskit Textbook is written in Jupyter Notebooks.
+
+        '
+      short: 'Learn about the software used to write the Qiskit textbook (Python and
+
+        Jupyter Notebooks), and set up your environment to reproduce the
+
+        experiments.
+
+        '
+    externalRecommendedReadings:
+    - author: Gilbert Strang
+      link: https://math.mit.edu/~gs/linearalgebra/
+      title: Introduction to Linear Algebra
+    - author: Jason Brownlee
+      link: https://machinelearningmastery.com/gentle-introduction-linear-algebra/
+      title: A Gentle Introduction to Linear Algebra
+    thumbnailUrl: /ch-prerequisites/overview/header.png
+  sections:
+  - id: setting-the-environment
+    previewImgUrl: /ch-prerequisites/overview/python-jupyter-notebooks.png
+    title: Setting up your environment
+    url: v1/ch-prerequisites/setting-the-environment
+    uuid: 2dda94b9-1242-4e87-8286-43be1a66abf9
+  - id: python-and-jupyter-notebooks
+    previewImgUrl: /ch-prerequisites/overview/environment-setup.png
+    title: Python and Jupyter notebooks
+    url: v1/ch-prerequisites/python-and-jupyter-notebooks
+    uuid: 868eed7e-d397-40b8-a37f-554b33a39cf6
+  subtitle: ''
+  title: Prerequisites
+  type: chapter
+  url: /v1_ch-prerequisites
+- id: ch-states
+  overviewInfo:
+    description:
+      long: "If you think quantum mechanics sounds challenging, you\u2019re not alone.\n\
+        Our intuitions come from day-to-day experiences, and so are better at\nunderstanding\
+        \ the behavior of balls and bananas than atoms or\nelectrons. Though quantum\
+        \ objects can seem random and chaotic at first,\nthey just follow a different\
+        \ set of rules. Once we know what those\nrules are, we can use them to create\
+        \ new and powerful technology.\nQuantum computing will be the most revolutionary\
+        \ example of this.\n"
+      short: 'This chapter introduces the computing concepts that we''ll explore in
+
+        later chapters, then introduces basic quantum concepts.
+
+        '
+    externalRecommendedReadings:
+    - author: Michael Nielsen, et al.
+      link: http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf
+      title: Quantum Computation and Quantum Information (Chapter 1)
+    - author: Phillip Kaye, et al.
+      link: http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf
+      title: An Introduction to Quantum Computing (Chapters 1-3)
+    - author: Ronald de Wolf
+      link: https://arxiv.org/abs/1907.09415
+      title: 'Quantum Computing: Lecture Notes (Chapters 1 and 2)'
+    - author: Richard Cleve
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710Primer.pdf
+      title: "Quantum Information Processing \u2014 A Primer for Beginners"
+    prerequisites:
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-states/overview/header.png
+  sections:
+  - id: introduction
+    previewImgUrl: /ch-states/overview/introduction.png
+    title: Introduction
+    url: v1/ch-states/introduction
+    uuid: b522c847-4d55-49fa-a5e7-0426f3b15913
+  - id: atoms-computation
+    previewImgUrl: /ch-states/overview/atoms-computation.png
+    title: The atoms of computation
+    url: v1/ch-states/atoms-computation
+    uuid: ba98df68-abda-4232-bc43-e74ccd2c02ea
+  - id: representing-qubit-states
+    previewImgUrl: /ch-states/overview/representing-qubit-states.png
+    title: Representing qubit states
+    url: v1/ch-states/representing-qubit-states
+    uuid: 9e23d10e-2eb0-4cb9-9d27-b1c71528b53b
+  - id: single-qubit-gates
+    previewImgUrl: /ch-states/overview/single-qubit-gates.png
+    title: Single qubit gates
+    url: v1/ch-states/single-qubit-gates
+    uuid: 18aabc7f-143f-4d06-a93b-940d16528324
+  - id: case-for-quantum
+    previewImgUrl: /ch-states/overview/case-for-quantum.png
+    title: The case for quantum
+    url: v1/ch-states/case-for-quantum
+    uuid: 9550cc75-b7f6-4fcc-a550-df23158bf020
+  title: Quantum states and qubits
+  type: chapter
+  url: /v1_ch-states
+- id: ch-gates
+  overviewInfo:
+    description:
+      long: 'We''ve seen some interesting effects with isolated qubits and single
+
+        qubit gates, but the true power of quantum computing comes from
+
+        interactions between qubits. In this section we will introduce multiple
+
+        qubit gates and explore the interesting behaviours of multi-qubit
+
+        systems.
+
+        '
+      short: 'With the basics down, this chapter explores the consequences of these
+
+        new quantum effects, and sets us up with tools to understand quantum
+
+        algorithms.
+
+        '
+    externalRecommendedReadings:
+    - author: Michael Nielsen, et al.
+      link: http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf
+      title: Quantum Computation and Quantum Information (Chapter 1)
+    - author: Phillip Kaye, et al.
+      link: http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf
+      title: An Introduction to Quantum Computing (Chapters 1-3)
+    - author: Ronald de Wolf
+      link: https://homepages.cwi.nl/~rdewolf/qcnotes.pdf
+      title: 'Quantum Computing: Lecture Notes (Chapters 1 and 2)'
+    - author: Richard Cleve
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710Primer.pdf
+      title: "Quantum Information Processing \u2014 A Primer for Beginners"
+    prerequisites:
+    - description: This chapter introduces the computing concepts that we'll explore
+        in later chapters, then introduces basic quantum concepts.
+      link: https://learn.qiskit.org/course/ch-states/introduction
+      title: Quantum States and Qubits
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-gates/overview/header.png
+  sections:
+  - id: introduction
+    previewImgUrl: /ch-gates/overview/introduction.png
+    title: Introduction
+    url: v1/ch-gates/introduction
+    uuid: 005697f2-6d59-47b2-8324-887ecebee4f8
+  - id: multiple-qubits-entangled-states
+    previewImgUrl: /ch-gates/overview/multiple-qubits-entangled-states.png
+    title: Multiple qubits and entangled states
+    url: v1/ch-gates/multiple-qubits-entangled-states
+    uuid: 0bebb2ee-2e32-439b-a382-2cafa55485d2
+  - id: phase-kickback
+    previewImgUrl: /ch-gates/overview/phase-kickback.png
+    title: Phase kickback
+    url: v1/ch-gates/phase-kickback
+    uuid: 5ae8a039-c6b8-457b-b715-45b982da9066
+  - id: more-circuit-identities
+    previewImgUrl: /ch-gates/overview/more-circuit-identities.png
+    title: More circuit identities
+    url: v1/ch-gates/more-circuit-identities
+    uuid: ec0ec04b-8e3f-42ec-8c4d-2ce272da0f5c
+  - id: proving-universality
+    previewImgUrl: /ch-gates/overview/proving-universality.png
+    title: Proving universality
+    url: v1/ch-gates/proving-universality
+    uuid: 6fb03c93-ec1f-4673-ae2f-7f76523d1ecc
+  - id: oracles
+    previewImgUrl: /ch-gates/overview/oracles.png
+    title: Classical computation on a quantum computer
+    url: v1/ch-gates/oracles
+    uuid: bb65f75f-6cd3-4bad-a33c-3d4d52eed33a
+  title: Multiple qubits and entanglement
+  type: chapter
+  url: /v1_ch-gates
+- id: ch-algorithms
+  overviewInfo:
+    description:
+      long: 'So far, we''ve seen various quantum gates and operations, and we''ve
+
+        explored some interesting properties of these gates. Each of these
+
+        pages shows how we can combine quantum operations into a quantum
+
+        algorithm that outperforms their classical counterpart. As a bonus,
+
+        some of these algorithms are actually useful too!
+
+        '
+      short: 'In this chapter, we use quantum effects to build powerful algorithms,
+
+        starting from simple proof-of-concept algorithms, through to Shor''s
+
+        famous factoring algorithm (and beyond).
+
+        '
+    externalRecommendedReadings:
+    - author: Michael Nielsen, et al.
+      link: http://mmrc.amss.cas.cn/tlb/201702/W020170224608149940643.pdf
+      title: Quantum Computation and Quantum Information (Chapters 4-6)
+    - author: Phillip Kaye, et al.
+      link: http://mmrc.amss.cas.cn/tlb/201702/W020170224608149125645.pdf
+      title: An Introduction to Quantum Computing (Chapters 5-8)
+    - author: Richard Cleve
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart1.pdf
+      title: "Quantum Information Processing \u2014 Quantum Algorithms I"
+    - author: Richard Cleve
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart2.pdf
+      title: "Quantum Information Processing \u2014 Quantum Algorithms II"
+    - author: Richard Cleve
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart3.pdf
+      title: "Quantum Information Processing \u2014 Quantum Algorithms III"
+    prerequisites:
+    - description: 'With the basics down, this chapter explores the consequences of
+        these
+
+        new quantum effects, and sets us up with tools to understand quantum
+
+        algorithms.
+
+        '
+      link: https://learn.qiskit.org/course/ch-gates/introduction
+      title: Multiple Qubits and Entanglement
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-algorithms/overview/header.png
+  sections:
+  - id: defining-quantum-circuits
+    previewImgUrl: /ch-algorithms/overview/defining-quantum-circuits.png
+    title: Defining quantum circuits
+    url: v1/ch-algorithms/defining-quantum-circuits
+    uuid: d82b1481-395a-4d12-aa4c-aca113fdead2
+  - id: deutsch-jozsa
+    previewImgUrl: /ch-algorithms/overview/deutsch-jozsa.png
+    title: Deutsch-Jozsa algorithm
+    url: v1/ch-algorithms/deutsch-jozsa
+    uuid: 0a75bcd7-a363-4908-89cc-3aa360cb59c0
+  - id: bernstein-vazirani
+    previewImgUrl: /ch-algorithms/overview/bernstein-vazirani.png
+    title: Bernstein-Vazirani algorithm
+    url: v1/ch-algorithms/bernstein-vazirani
+    uuid: e473061e-9ba3-4f36-93be-2b6a7129a7e4
+  - id: simon
+    previewImgUrl: /ch-algorithms/overview/simon.png
+    title: Simon's algorithm
+    url: v1/ch-algorithms/simon
+    uuid: 52e29c1f-b234-4b57-b23b-2f58d39f0d3a
+  - id: quantum-fourier-transform
+    previewImgUrl: /ch-algorithms/overview/quantum-fourier-transform.png
+    title: Quantum Fourier transform
+    url: v1/ch-algorithms/quantum-fourier-transform
+    uuid: 15946030-3bc3-4454-8e30-7130d46571f0
+  - id: quantum-phase-estimation
+    previewImgUrl: /ch-algorithms/overview/quantum-phase-estimation.png
+    title: Quantum phase estimation
+    url: v1/ch-algorithms/quantum-phase-estimation
+    uuid: 1c85e539-caa1-48fb-a8a0-087f26390dde
+  - id: shor
+    previewImgUrl: /ch-algorithms/overview/shor.png
+    title: Shor's algorithm
+    url: v1/ch-algorithms/shor
+    uuid: 8fefe2ae-acbb-4169-a10f-2812dc133a0a
+  - id: grover
+    previewImgUrl: /ch-algorithms/overview/grover.png
+    title: Grover's algorithm
+    url: v1/ch-algorithms/grover
+    uuid: 07306770-39db-422e-9342-0eb11ff134a1
+  - id: quantum-counting
+    previewImgUrl: /ch-algorithms/overview/quantum-counting.png
+    title: Quantum counting
+    url: v1/ch-algorithms/quantum-counting
+    uuid: a9e2fab0-3dae-4c57-8e69-b03d14417350
+  - id: quantum-walk-search-algorithm
+    previewImgUrl: /ch-algorithms/overview/quantum-walk-search-algorithm.png
+    title: Quantum walk search algorithm
+    url: v1/ch-algorithms/quantum-walk-search-algorithm
+    uuid: b2ef52cf-0ce4-494a-8142-fd00e0e8330d
+  - id: hidden-shift-problem
+    previewImgUrl: /ch-algorithms/overview/hidden-shift-problem.png
+    title: Hidden shift problem
+    url: v1/ch-algorithms/hidden-shift-problem
+    uuid: b56db435-4041-400d-88c8-433ae9c323ed
+  - id: quantum-key-distribution
+    previewImgUrl: /ch-algorithms/overview/quantum-key-distribution.png
+    title: Quantum key distribution
+    url: v1/ch-algorithms/quantum-key-distribution
+    uuid: ff984a87-a478-4075-acf3-f908a18caaa1
+  - id: superdense-coding
+    previewImgUrl: /ch-algorithms/overview/superdense-coding.png
+    title: Superdense coding
+    url: v1/ch-algorithms/superdense-coding
+    uuid: 48fcfc77-d1a2-48cb-a05b-6fc307576545
+  - id: teleportation
+    previewImgUrl: /ch-algorithms/overview/teleportation.png
+    title: Quantum teleportation
+    url: v1/ch-algorithms/teleportation
+    uuid: b7a244c0-865a-44b5-9fc4-f5931bf6e7ca
+  title: Quantum protocols and quantum algorithms
+  type: chapter
+  url: /v1_ch-algorithms
+- id: ch-applications
+  overviewInfo:
+    description:
+      long: 'The useful algorithms in the quantum algorithms pages solve very
+
+        general problems. These pages apply quantum algorithms to specific,
+
+        real-world cases.
+
+        '
+      short: 'If algorithms are the solution, then what is the problem? In this
+
+        chapter, we look at how we can take general algorithms and apply them
+
+        to more specific situations.
+
+        '
+    prerequisites:
+    - description: 'In this chapter, we use quantum effects to build powerful algorithms,
+
+        starting from simple proof-of-concept algorithms, through to Shor''s
+
+        famous factoring algorithm (and beyond).
+
+        '
+      link: https://learn.qiskit.org/course/ch-algorithms/quantum-circuits
+      title: Quantum Protocols and Quantum Algorithms
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-applications/overview/header.png
+  sections:
+  - id: hhl_tutorial
+    previewImgUrl: /ch-applications/overview/hhl.png
+    title: Solving linear systems of equations using HHL
+    url: v1/ch-applications/hhl_tutorial
+    uuid: 327e69ea-036a-4d08-b6d1-fac9696ff137
+  - id: vqe-molecules
+    previewImgUrl: /ch-applications/overview/vqe-molecules.png
+    title: Simulating molecules using VQE
+    url: v1/ch-applications/vqe-molecules
+    uuid: c06c6ef1-a143-4d02-a70f-f83e63209c2a
+  - id: qaoa
+    previewImgUrl: /ch-applications/overview/qaoa.png
+    title: Solving combinatorial optimization problems using QAOA
+    url: v1/ch-applications/qaoa
+    uuid: ba878944-1cb7-4e0f-ad84-1de52f51ce34
+  - id: satisfiability-grover
+    previewImgUrl: /ch-applications/overview/satisfiability-grover.png
+    title: Solving satisfiability problems using Grover's algorithm
+    url: v1/ch-applications/satisfiability-grover
+    uuid: c8a491c9-5acf-4b0c-b102-75b7a7a31bc6
+  - id: machine-learning-qiskit-pytorch
+    previewImgUrl: /ch-applications/overview/machine-learning-qiskit-pytorch.png
+    title: Hybrid quantum-classical neural networks with PyTorch and Qiskit
+    url: v1/ch-machine-learning/machine-learning-qiskit-pytorch
+    uuid: 6cf9c3ca-c443-49bb-be9f-5dc552e55a0c
+  - id: image-processing-frqi-neqr
+    previewImgUrl: /ch-applications/overview/image-processing-frqi-neqr.png
+    title: Quantum image processing - FRQI and NEQR image representations
+    url: v1/ch-applications/image-processing-frqi-neqr
+    uuid: e99a0035-2e34-44f7-8591-505c213fa65f
+  - id: facial-expression-recognition
+    previewImgUrl: /ch-applications/overview/facial-expression-recognition.png
+    title: Facial expression recognition
+    url: v1/ch-applications/facial-expression-recognition
+    uuid: 6fe61bd6-eb8f-49bf-bf77-cb6519393867
+  - id: quantum-edge-detection
+    previewImgUrl: /ch-applications/overview/quantum-edge-detection.png
+    title: Quantum edge detection
+    url: v1/ch-applications/quantum-edge-detection
+    uuid: d7098e25-fc03-46f1-a25d-df98c9ea6b3f
+  - id: tsp
+    previewImgUrl: /ch-applications/overview/tsp.png
+    title: Solving the travelling salesman problem using phase estimation
+    url: v1/ch-paper-implementations/tsp
+    uuid: 795671b7-b6c4-4eb2-b599-67249f510021
+  - id: vqls
+    previewImgUrl: /ch-applications/overview/vqls.png
+    title: Variational quantum linear solver
+    url: v1/ch-paper-implementations/vqls
+    uuid: dd36ee62-5b3d-4f01-9684-702859702f25
+  title: Applied quantum algorithms
+  type: chapter
+  url: /v1_ch-applications
+- id: ch-quantum-hardware
+  overviewInfo:
+    description:
+      long: 'Most gate-based quantum computers share similar challenges with noise
+
+        and errors. These pages explore how errors affect quantum circuits, and
+
+        how we can mitigate them, without worrying about the physics of the
+
+        device itself.
+
+        '
+      short: 'All circuit-based quantum devices share some similar characteristics
+
+        and challenges. In this chapter, we explore how quantum circuits
+
+        perform on modern quantum computers, and ways to improve performance.
+
+        '
+    prerequisites:
+    - description: 'With the basics down, this chapter explores the consequences of
+        these
+
+        new quantum effects, and sets us up with tools to understand quantum
+
+        algorithms.
+
+        '
+      link: https://learn.qiskit.org/course/ch-gates/introduction
+      title: Multiple Qubits and Entanglement
+    thumbnailUrl: /ch-quantum-hardware/overview/header-circuits.png
+  sections:
+  - id: error-correction-repetition-code
+    previewImgUrl: /ch-quantum-hardware/overview/error-correction-repetition-code.png
+    title: Introduction to quantum error correction using repetition codes
+    url: v1/ch-quantum-hardware/error-correction-repetition-code
+    uuid: 20e45231-2ac8-4e3c-b695-af8121ff84bf
+  - id: measurement-error-mitigation
+    previewImgUrl: /ch-quantum-hardware/overview/measurement-error-mitigation.png
+    title: Measurement error mitigation
+    url: v1/ch-quantum-hardware/measurement-error-mitigation
+    uuid: ebce5629-1f24-49ec-85dd-75a8946ee867
+  - id: randomized-benchmarking
+    previewImgUrl: /ch-quantum-hardware/overview/randomized-benchmarking.png
+    title: Randomized benchmarking
+    url: v1/ch-quantum-hardware/randomized-benchmarking
+    uuid: f55fa9e5-76a2-4404-a7cf-2bed19296e8d
+  - id: measuring-quantum-volume
+    previewImgUrl: /ch-quantum-hardware/overview/measuring-quantum-volume.png
+    title: Measuring quantum volume
+    url: v1/ch-quantum-hardware/measuring-quantum-volume
+    uuid: 4464a972-1a00-4837-93fb-6dad869915bb
+  - id: density-matrix
+    previewImgUrl: /ch-quantum-hardware/overview/density-matrix.png
+    title: The density matrix and mixed states
+    url: v1/ch-quantum-hardware/density-matrix
+    uuid: 9f785388-6fab-4c13-b323-4d98cf215c03
+  title: Investigating quantum hardware using quantum circuits
+  type: chapter
+  url: /v1_ch-quantum-hardware
+- id: ch-quantum-hardware
+  overviewInfo:
+    description:
+      long: 'The Qiskit Textbook mostly assumes we have a quantum computer that can
+
+        carry out quantum operations, and doesn''t worry about how the devices
+
+        actually work. These pages go a step deeper, exploring the physics of
+
+        superconducting qubits, and using Qiskit to program operations on these
+
+        devices at the level of microwave pulses.
+
+        '
+      short: 'In this chapter, we get a level closer to the real quantum machines.
+
+        Learn about the physics of these devices, and how to program them at
+
+        the level of microwave pulses.
+
+        '
+    prerequisites:
+    - description: 'With the basics down, this chapter explores the consequences of
+        these
+
+        new quantum effects, and sets us up with tools to understand quantum
+
+        algorithms.
+
+        '
+      link: https://learn.qiskit.org/course/ch-gates/introduction
+      title: Multiple Qubits and Entanglement
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-quantum-hardware/overview/header-pulses.png
+  sections:
+  - id: calibrating-qubits-pulse
+    previewImgUrl: /ch-quantum-hardware/overview/calibrating-qubits-pulse.png
+    title: Calibrating qubits with Qiskit Pulse
+    url: v1/ch-quantum-hardware/calibrating-qubits-pulse
+    uuid: d5d46aab-e7b6-4fe0-9014-d367c0f84a0b
+  - id: accessing_higher_energy_states
+    previewImgUrl: /ch-quantum-hardware/overview/accessing_higher_energy_states.png
+    title: Accessing higher energy states
+    url: v1/ch-quantum-hardware/accessing_higher_energy_states
+    uuid: 582f497c-a85d-473b-8647-b013dd46570d
+  - id: transmon-physics
+    previewImgUrl: /ch-quantum-hardware/overview/transmon-physics.png
+    title: Introduction to transmon physics
+    url: v1/ch-quantum-hardware/transmon-physics
+    uuid: 4ab2e5de-4d37-4229-afac-422cacca6b9b
+  - id: cQED-JC-SW
+    previewImgUrl: /ch-quantum-hardware/overview/cQED-JC-SW.png
+    title: Circuit quantum electrodynamics
+    url: v1/ch-quantum-hardware/cQED-JC-SW
+    uuid: d828436b-8b34-481b-99a8-aea23481a6ec
+  - id: Jaynes-Cummings-model
+    previewImgUrl: /ch-quantum-hardware/overview/Jaynes-Cummings-model.png
+    title: Exploring the Jaynes-Cummings Hamiltonian with Qiskit Pulse
+    url: v1/ch-quantum-hardware/Jaynes-Cummings-model
+    uuid: ffd8ae11-df73-4710-bdbf-02190b80fa17
+  - id: ac-Stark-shift
+    previewImgUrl: /ch-quantum-hardware/overview/ac-Stark-shift.png
+    title: Measuring the qubit ac-Stark shift
+    url: v1/ch-quantum-hardware/ac-Stark-shift
+    uuid: 8f35b9fd-f144-4f38-8ce7-c7013844b09e
+  - id: hamiltonian-tomography
+    previewImgUrl: /ch-quantum-hardware/overview/hamiltonian-tomography.png
+    title: Hamiltonian tomography
+    url: v1/ch-quantum-hardware/hamiltonian-tomography
+    uuid: 37cc881f-a795-43b1-85b6-cb94f9cda622
+  title: Investigating quantum hardware using microwave pulses
+  type: chapter
+  url: /v1_ch-quantum-hardware
+- id: ch-labs
+  overviewInfo:
+    description:
+      long: 'These pages are hands-on exercises that interact with IBM Quantum''s
+
+        real quantum systems. Aimed at late-undergraduate / early-graduate
+
+        courses, these lab modules start cover basic quantum circuits, to
+
+        exploring core algorithms such as Grover search and Shor''s algorithm.
+
+        These pages tackle the limitations of today''s quantum computers, and
+
+        ways to account for them.
+
+        '
+      short: 'This set of labs provides 7 different exercises you (or your students)
+
+        can use to investigate the behaviour of current quantum computers and
+
+        practice your Qiskit coding skills.
+
+        '
+    prerequisites:
+    - description: 'In this chapter, we use quantum effects to build powerful algorithms,
+
+        starting from simple proof-of-concept algorithms, through to Shor''s
+
+        famous factoring algorithm (and beyond).
+
+        '
+      link: https://learn.qiskit.org/course/ch-algorithms/quantum-circuits
+      title: Quantum Protocols and Quantum Algorithms
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-labs/overview/header.png
+  sections:
+  - id: Lab01_QuantumCircuits
+    previewImgUrl: /ch-labs/overview/lab1.png
+    title: Lab 1. Quantum circuits
+    url: v1/ch-labs/Lab01_QuantumCircuits
+    uuid: 06b6328e-69e8-4c4b-8607-dc7548409f2a
+  - id: Lab02_QuantumMeasurement
+    previewImgUrl: /ch-labs/overview/lab2.png
+    title: Lab 2. Quantum measurement
+    url: v1/ch-labs/Lab02_QuantumMeasurement
+    uuid: f66f5085-cfad-4b0e-afad-4c2c834facc9
+  - id: Lab03_AccuracyQPE
+    previewImgUrl: /ch-labs/overview/lab3.png
+    title: Lab 3. Accuracy of quantum phase estimation
+    url: v1/ch-labs/Lab03_AccuracyQPE
+    uuid: a7eb5082-30f7-40cd-ae87-be4f2bd7ac1b
+  - id: Lab04_IterativePhaseEstimation
+    previewImgUrl: /ch-labs/overview/lab4.png
+    title: Lab 4. Iterative quantum phase estimation
+    url: v1/ch-labs/Lab04_IterativePhaseEstimation
+    uuid: 4a5ad6f0-2c46-469a-a39a-aed5c81a073a
+  - id: Lab05_Scalable_Shor_Algorithm
+    previewImgUrl: /ch-labs/overview/lab5.png
+    title: "Lab 5. Scalable Shor\u2019s algorithm"
+    url: v1/ch-labs/Lab05_Scalable_Shor_Algorithm
+    uuid: d6c005d0-5475-43f6-99bc-fe8e6bfd0e80
+  - id: Lab06_Grover_search_with_an_unknown_number_of_solutions
+    previewImgUrl: /ch-labs/overview/lab6.png
+    title: Lab 6. Grover's search with an unknown number of solutions
+    url: v1/ch-labs/Lab06_Grover_search_with_an_unknown_number_of_solutions
+    uuid: fe800bb9-2f76-492f-96c9-7004804314dd
+  - id: Lab07_QuantumSimulationSearchAlgorithm
+    previewImgUrl: /ch-labs/overview/lab7.png
+    title: Lab 7. Quantum simulation as a search algorithm
+    url: v1/ch-labs/Lab07_QuantumSimulationSearchAlgorithm
+    uuid: 49a957f3-8978-4cfd-86bf-a0da9fdac53f
+  - id: Lab08_QEC
+    previewImgUrl: /ch-labs/overview/lab8.png
+    title: Lab 8. Quantum error correction
+    url: v1/ch-labs/Lab08_QEC
+    uuid: e70e6931-5e03-40ac-bd58-46eed306e599
+  title: Quantum computing labs
+  type: chapter
+  url: /v1_ch-labs
+- id: ch-appendix
+  overviewInfo:
+    description:
+      long: 'These pages are not part of any chapter.
+
+        '
+      short: 'These pages are not part of any chapter.
+
+        '
+    thumbnailUrl: /ch-appendix/overview/header.png
+  sections:
+  - id: qiskit
+    previewImgUrl: /ch-appendix/overview/qiskit.png
+    title: Qiskit
+    url: v1/ch-appendix/qiskit
+    uuid: b19f5173-5650-4a99-9ccd-076f561c4f24
+  - id: linear_algebra
+    previewImgUrl: /ch-appendix/overview/linear_algebra.png
+    title: Linear algebra
+    url: v1/ch-appendix/linear_algebra
+    uuid: cb5d33e0-d7cd-41ae-8981-999632fba5e3
+  title: ch-appendix
+  type: chapter
+  url: /v1_ch-appendix
+- id: ch-demos
+  overviewInfo:
+    description:
+      long: 'Qiskit, and the Qiskit Textbook website, are interactive learning
+
+        environments. Unlike with traditional, ink-and-paper textbooks, you can
+
+        mess around with quantum effects to strengthen your knowledge. These
+
+        pages contain cool experiments with Qiskit that don''t belong in a
+
+        course.
+
+        '
+      short: 'Check out games and demonstrations created in this textbook''s
+
+        environment; great for teaching, or just for fun!
+
+        '
+    prerequisites:
+    - description: 'This is a comprehensive guide for setting up your environment
+        on your
+
+        personal computer for working with Qiskit Textbook.
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/environment-setup-guide-to-work-with-qiskit-textbook
+      title: Setting Up Your Environment
+    - description: 'Python is a programming language where you don''t need to compile.
+        You
+
+        can just run it line by line...
+
+        '
+      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
+      title: Python and Jupyter Notebooks
+    thumbnailUrl: /ch-demos/overview/header.png
+  sections:
+  - id: hello-qiskit
+    previewImgUrl: /ch-demos/overview/hello-qiskit.png
+    title: Hello Qiskit game
+    url: v1/ch-ex/hello-qiskit
+    uuid: 9bee7d3f-c43e-4088-8e30-44154724f2e6
+  - id: piday-code
+    previewImgUrl: /ch-demos/overview/piday-code.png
+    title: Estimating pi using the quantum phase estimation algorithm
+    url: v1/ch-demos/piday-code
+    uuid: 51b92f05-2034-4336-98ab-08f4a73714f5
+  - id: chsh
+    previewImgUrl: /ch-demos/overview/chsh.png
+    title: Local reality and the CHSH inequality
+    url: v1/ch-demos/chsh
+    uuid: ff94d476-be0a-43bc-8bc0-bd73d88bf361
+  - id: coin-game
+    previewImgUrl: /ch-demos/overview/coin-game.png
+    title: Quantum coin game
+    url: v1/ch-demos/coin-game
+    uuid: eef3c646-10ba-406b-ba5a-a75e39301e88
+  - id: variational-quantum-regression
+    previewImgUrl: /ch-demos/overview/variational-quantum-regression.png
+    title: Variational quantum regression
+    url: v1/ch-demos/variational-quantum-regression
+    uuid: 0406614c-ca6f-4d79-9b49-129827391ccf
+  title: Games and demos
+  type: chapter
+  url: /v1_ch-demos
