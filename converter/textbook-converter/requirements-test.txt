@@ -10,7 +10,7 @@ qiskit-machine-learning==0.4.0
 qiskit-finance==0.3.2
 qiskit-ibm-runtime==0.9.1
 scikit-learn==1.0.1
-tensorflow==2.9.3
+tensorflow==2.11.1
 matplotlib==3.5.2
 bokeh==3.0.2
 pyscf==2.0.1
