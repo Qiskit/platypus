@@ -1,11 +1,11 @@
-"""This script updates notebooks/toc.yaml to point to new versions of the
-textbook
+"""This script automates adding new textbook versions by copying notebooks to
+the correct places, and updating the toc.yaml files.
 
 Usage:
-    python3 scrips/make_toc.py <submodule name>
+    python3 scrips/register_new_version.py <version-string>
 
     E.g. if you copied a new version to notebooks/v3, run:
-         python3 scripts/make_toc.py v3
+         python3 scripts/register_new_version.py v3
 """
 import yaml
 import sys
