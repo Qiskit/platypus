@@ -73,20 +73,14 @@ the website software, please head to the next section.
 
 > :warning: This section is for maintainers
 
-To add a new version to the textbook, add the Qiskit/textbook repo as a
-submodule under `./notebooks` using
-
-```bash
-cd notebooks git submodule add https://github.com/Qiskit/textbook.git <version-name>
-```
-
-Replacing `<version-name>` with a string beginning with `v` and followed only
-by digits and periods (e.g. `v3.4`)
+To add a new version to the textbook, add a release of the Qiskit/textbook repo
+under `./notebooks`. Rename the Qiskit/textbook folder to a string beginning
+with `v` and followed only by digits and periods (e.g. `v3.4`)
 
 Next, update the table of contents file by running:
 
 ```bash
-python3 scripts/make_toc.py <version-name>
+python3 scripts/register_new_version.py <version-name>
 ```
 
 If the version you've added is the new latest version (and should be the
