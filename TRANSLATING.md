@@ -13,7 +13,7 @@ If you are interested in contributing to translating the Qiskit Textbook, please
 Each contributor must create their own PR and sign the Contributors License Agreement (CLA). (see #3 below).
 If you have an open issue for a language request, **add the issue link to the PR**.
 
-   _(Not sure how to open a PR? Checkout [this section](#how-to-add-my-name-to-textbook_contributors-list-and-open-a-pr-in-github))_
+   _(Not sure how to open a PR? Checkout [this section](#how-to-add-my-name-to-localization_contributors-list-and-open-a-pr-in-github))_
    
 3. When you conribute to a Qiskit open source project on GitHub with a new pull request, a bot will evaluate whether you have signed the [Qiskit Contribution License Agreement (CLA)](https://qiskit.org/license/qiskit-cla.pdf). If it is your first time contributing to Qiskit, you will be prompted to sign the CLA in your PR. Please make sure to sign the CLA by accepting the agreement.<br/>
 4. Join [GitLocalize](https://gitlocalize.com) using the same GitHub ID you used to open your PR above.  
