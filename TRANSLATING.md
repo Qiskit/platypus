@@ -36,7 +36,7 @@ Gitlocalize is under active development, so you may encounter issues during tran
 
 ## How to add a new language?
 
-If you want to add a new language and become a translation lead, you can open a [GitHub issue](https://github.com/Qiskit/platypus/issues/new/choose) to start a discussion with the Qiskit team and recruit translation project members. Please refer to the [criteria](#what-is-the-criteria-for-adding-a-new-language?) below to receive official support from the administrators for new languages.
+If you want to add a new language and become a translation lead, you can open a [GitHub issue](https://github.com/Qiskit/platypus/issues/new/choose) to start a discussion with the Qiskit team and recruit translation project members. Please refer to the [criteria](#what-is-the-criteria-for-adding-a-new-language) below to receive official support from the administrators for new languages.
 
 
 ## What is the criteria for adding a new language?
