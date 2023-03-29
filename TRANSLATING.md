@@ -13,7 +13,7 @@ If you are interested in contributing to translating the Qiskit Textbook, please
 Each contributor must create their own PR and sign the Contributors License Agreement (CLA). (see #3 below).
 If you have an open issue for a language request, **add the issue link to the PR**.
 
-   _(Not sure how to open a PR? Checkout [this section](#how-to-add-my-name-to-textbook_contributors-list-and-open-a-pr-in-github))_
+   _(Not sure how to open a PR? Checkout [this section](#how-to-add-my-name-to-localization_contributors-list-and-open-a-pr-in-github))_
    
 3. When you conribute to a Qiskit open source project on GitHub with a new pull request, a bot will evaluate whether you have signed the [Qiskit Contribution License Agreement (CLA)](https://qiskit.org/license/qiskit-cla.pdf). If it is your first time contributing to Qiskit, you will be prompted to sign the CLA in your PR. Please make sure to sign the CLA by accepting the agreement.<br/>
 4. Join [GitLocalize](https://gitlocalize.com) using the same GitHub ID you used to open your PR above.  
@@ -36,7 +36,7 @@ Gitlocalize is under active development, so you may encounter issues during tran
 
 ## How to add a new language?
 
-If you want to add a new language and become a translation lead, you can open a [GitHub issue](https://github.com/Qiskit/platypus/issues/new/choose) to start a discussion with the Qiskit team and recruit translation project members. Please refer to the [criteria](#what-is-the-criteria-for-adding-a-new-language?) below to receive official support from the administrators for new languages.
+If you want to add a new language and become a translation lead, you can open a [GitHub issue](https://github.com/Qiskit/platypus/issues/new/choose) to start a discussion with the Qiskit team and recruit translation project members. Please refer to the [criteria](#what-is-the-criteria-for-adding-a-new-language) below to receive official support from the administrators for new languages.
 
 
 ## What is the criteria for adding a new language?
@@ -57,7 +57,7 @@ If you have further questions, please feel free to contact [Soolu Thomas](mailto
 2. Add your name under the language you'd like to contribute to.
 3. Once your name is added, scroll down and find a green button which says "Propose changes".
 4. The page now reloads automatically and find and click on another green button - "Create pull request".
-5. This should create the pull request and once that's done, follow the [instructions](https://github.com/Qiskit/platypus/blob/main/TRANSLATIONS.md#steps-to-participate-in-qiskit-textbook-translations) (steps 3, 4, 5, 6).
+5. This should create the pull request and once that's done, follow the [instructions](#steps-to-participate-in-qiskit-textbook-translations) (steps 3, 4, 5, 6).
 
 **Option 2: Creating a local clone of the repository and pushing from local**
 1. Clone this repository by following [this guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository).
