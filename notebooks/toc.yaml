@@ -409,6 +409,14 @@
       id: utokyo_02
       uuid: fc5bf28c-cd11-11ed-afa1-0242ac120002
       url: /problem-sets/utokyo_02
+    - title: The University of Tokyo Quiz 03
+      id: utokyo_03
+      uuid: ce84fc32-cdd4-11ed-afa1-0242ac120002
+      url: /problem-sets/utokyo_03
+    - title: The University of Tokyo Quiz 04
+      id: utokyo_04
+      uuid: 88c62314-cdee-11ed-afa1-0242ac120002
+      url: /problem-sets/utokyo_04
 
 - title: Examples
   url: /examples
