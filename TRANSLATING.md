@@ -57,7 +57,7 @@ If you have further questions, please feel free to contact [Soolu Thomas](mailto
 2. Add your name under the language you'd like to contribute to.
 3. Once your name is added, scroll down and find a green button which says "Propose changes".
 4. The page now reloads automatically and find and click on another green button - "Create pull request".
-5. This should create the pull request and once that's done, follow the [instructions](https://github.com/Qiskit/platypus/blob/main/TRANSLATIONS.md#steps-to-participate-in-qiskit-textbook-translations) (steps 3, 4, 5, 6).
+5. This should create the pull request and once that's done, follow the [instructions](#steps-to-participate-in-qiskit-textbook-translations) (steps 3, 4, 5, 6).
 
 **Option 2: Creating a local clone of the repository and pushing from local**
 1. Clone this repository by following [this guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository).
