@@ -401,7 +401,14 @@
       id: algo_queen_2023_qchallenge_notepad
       uuid: ed8eb7d5-6297-457b-a663-547d34c0ecd4
       url: /problem-sets/algo_queen_2023/aq-notepad-final-challenge
-
+    - title: The University of Tokyo Quiz 01
+      id: utokyo_01
+      uuid: 3b4f6430-cca2-11ed-afa1-0242ac120002
+      url: /problem-sets/utokyo_01
+    - title: The University of Tokyo Quiz 02
+      id: utokyo_02
+      uuid: fc5bf28c-cd11-11ed-afa1-0242ac120002
+      url: /problem-sets/utokyo_02
 
 - title: Examples
   url: /examples
