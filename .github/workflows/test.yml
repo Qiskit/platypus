@@ -54,6 +54,7 @@ jobs:
           files_ignore: notebooks/problem-sets/*.ipynb
 
       - name: Notebook tests
+        if: steps.changed-notebooks.outputs.all_changed_files != ''
         run: |
           echo "::group::Linting"
           npm run test:nb
