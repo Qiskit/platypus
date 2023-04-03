@@ -392,6 +392,27 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       segment: {
         cta: 'widgets-demonstration', location: sectionGamesAndDemos
       }
+    },
+    {
+      label: 'Quantum Coin Game',
+      url: `${pathGamesAndDemos}/coin-game`,
+      segment: {
+        cta: 'coin-game', location: sectionGamesAndDemos
+      }
+    },
+    {
+      label: 'First Quantum Game',
+      url: `${pathGamesAndDemos}/first-quantum-game`,
+      segment: {
+        cta: 'first-quantum-game', location: sectionGamesAndDemos
+      }
+    },
+    {
+      label: 'Variational Quantum Regression',
+      url: `${pathGamesAndDemos}/variational-quantum-regression`,
+      segment: {
+        cta: 'variational-quantum-regression', location: sectionGamesAndDemos
+      }
     }
   ]
 }
@@ -623,6 +644,20 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       url: `${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         cta: 'flexible-representation-of-quantum-images-frqi', location: sectionApps
+      }
+    },
+    {
+      label: 'Quantum Edge Detection',
+      url: `${pathApps}/quantum-edge-detection`,
+      segment: {
+        cta: 'quantum-edge-detection', location: sectionApps
+      }
+    },
+    {
+      label: 'Travelling Salesman Problem',
+      url: `${pathApps}/tsp`,
+      segment: {
+        cta: 'tsp', location: sectionApps
       }
     }
   ]
