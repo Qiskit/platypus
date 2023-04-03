@@ -392,6 +392,27 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       segment: {
         cta: 'widgets-demonstration', location: sectionGamesAndDemos
       }
+    },
+    {
+      label: 'Quantum Coin Game',
+      url: `${pathGamesAndDemos}/coin-game`,
+      segment: {
+        cta: 'coin-game', location: sectionGamesAndDemos
+      }
+    },
+    {
+      label: 'First Quantum Game',
+      url: `${pathGamesAndDemos}/first-quantum-game`,
+      segment: {
+        cta: 'first-quantum-game', location: sectionGamesAndDemos
+      }
+    },
+    {
+      label: 'Variational Quantum Regression',
+      url: `${pathGamesAndDemos}/variational-quantum-regression`,
+      segment: {
+        cta: 'variational-quantum-regression', location: sectionGamesAndDemos
+      }
     }
   ]
 }
@@ -455,6 +476,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
+      label: 'Hidden Shift Problem',
+      url: `${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
+      segment: {
+        cta: 'hidden-shift-problem', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
       label: 'Grover\'s Algorithm',
       url: `${pathProtocolsAndAlgorithms}/grovers-algorithm`,
       segment: {
@@ -487,6 +515,13 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         cta: 'quantum-key-distribution', location: sectionProtocolsAndAlgorithms
+      }
+    },
+    {
+      label: 'Quantum Walk Search Algorithm',
+      url: `${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
+      segment: {
+        cta: 'quantum-walk-search-algorithm', location: sectionProtocolsAndAlgorithms
       }
     }
   ]
@@ -609,6 +644,20 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       url: `${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         cta: 'flexible-representation-of-quantum-images-frqi', location: sectionApps
+      }
+    },
+    {
+      label: 'Quantum Edge Detection',
+      url: `${pathApps}/quantum-edge-detection`,
+      segment: {
+        cta: 'quantum-edge-detection', location: sectionApps
+      }
+    },
+    {
+      label: 'Travelling Salesman Problem',
+      url: `${pathApps}/tsp`,
+      segment: {
+        cta: 'tsp', location: sectionApps
       }
     }
   ]
@@ -757,6 +806,27 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       url: `${pathProblemSets}/quantum_enigma_problem_set`,
       segment: {
         cta: 'quantum_enigma_problem_set', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 002 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_002`,
+      segment: {
+        cta: 'quantum_enigma_002', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 003 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_003`,
+      segment: {
+        cta: 'quantum_enigma_003', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 004 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_004`,
+      segment: {
+        cta: 'quantum_enigma_004', location: sectionProblemSets
       }
     }
   ]
