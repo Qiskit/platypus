@@ -741,32 +741,32 @@
     - title: Concepts
       id: concepts
       uuid: dffeb76a-ba77-4afc-a527-9371890b0723
-      url: /algorithm-design/concepts
+      url: /algorithm-design/concepts/concepts
     - title: Variational Algorithms
       id: variational
       uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
-      url: /algorithm-design/variational
+      url: /algorithm-design/variational/variational
     - title: Reference States
       id: reference
       uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
-      url: /algorithm-design/reference
+      url: /algorithm-design/reference/reference
     - title: Ansatze and Variational Forms
       id: ansatz
       uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
-      url: /algorithm-design/ansatz
+      url: /algorithm-design/ansatz/ansatz
     - title: Optimization Loop
       id: optimization
       uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
-      url: /algorithm-design/optimization
+      url: /algorithm-design/optimization/optimization
     - title: Instances and Extensions
       id: instances
       uuid: 46d1906c-c131-4fbb-8557-c0197b5b8b97
-      url: /algorithm-design/instances
+      url: /algorithm-design/instances/instances
     - title: Applications
       id: applications
       uuid: 19e65025-7663-4067-833b-32422f75d428
-      url: /algorithm-design/applications
+      url: /algorithm-design/applications/applications
     - title: Earn your badge
       id: badge
       uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
-      url: /algorithm-design/badge
+      url: /algorithm-design/badge/badge
