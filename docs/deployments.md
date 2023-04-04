@@ -1,10 +1,10 @@
-# Deploying Textbook Beta
+# Deploying Textbook
 
 Core contributors from qiskit.org, along with other core developers, are responsible for the codebases's health. Here you will find the specifics our continuous integration process.
 
 ### Deployment
 
-The Textbook beta application uses [GitHub Actions](https://docs.github.com/en/actions) to automate releases. This enables us to establish a Workflow and specify various steps that we need to include in our build process.
+The Textbook application uses [GitHub Actions](https://docs.github.com/en/actions) to automate releases. This enables us to establish a Workflow and specify various steps that we need to include in our build process.
 
 In the current configuration, the `Build and Release` Workflow is initiated by the following events:
 
@@ -22,7 +22,7 @@ This `Build and Release` process includes the following steps:
 - generates the build
 - deploys to AppEngine
 
-Details for the `Deploy to AppEngine` step can be found by visiting the GitHub Action page [here](https://github.com/google-github-actions/deploy-appengine). (This AppEngine instance belongs to Mathigon). Additionally, `secrets` used for deploying are maintained through a joint effort between the Qiskit Textbook Beta and Mathigon.
+Details for the `Deploy to AppEngine` step can be found by visiting the GitHub Action page [here](https://github.com/google-github-actions/deploy-appengine). (This AppEngine instance belongs to Mathigon). Additionally, `secrets` used for deploying are maintained through a joint effort between the Qiskit Textbook and Mathigon.
 
 
 ### Live branch previews

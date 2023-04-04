@@ -32,7 +32,7 @@ contributors and maintainers of this site and so, thank you!
 
 ## Start contributing
 
-This repository is for developing and maintaining the Qiskit Textbook (beta) platform.
+This repository is for developing and maintaining the Qiskit Textbook platform.
 If you want to contribute to Qiskit, the open-source Python library, you should go
 visit the [Qiskit repository](https://github.com/Qiskit/qiskit) instead.
 Or if you want to contribute to the [qiskit.org website](https://qiskit.org), you should go
