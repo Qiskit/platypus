@@ -758,6 +758,10 @@
       id: ansatz
       uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
       url: /algorithm-design/ansatz/ansatz
+    - title: Cost Functions
+      id: cost_function
+      uuid: affdafb6-5b20-4113-b6da-dd758a4bae2a
+      url: /algorithm-design/cost_function/cost_function
     - title: Optimization Loop
       id: optimization
       uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
