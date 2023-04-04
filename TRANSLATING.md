@@ -73,7 +73,7 @@ Please refer to the [Release Guide](https://github.com/Qiskit/platypus/blob/main
 
 ## When you find an issue in the textbook
 
-During the process of translating Qiskit Textbook (beta), you may identify bug or errors regarding the original textbook content. Please feel free to suggest corrections by opening an [issue](https://github.com/Qiskit/platypus/issues/new/choose).
+During the process of translating Qiskit Textbook, you may identify bug or errors regarding the original textbook content. Please feel free to suggest corrections by opening an [issue](https://github.com/Qiskit/platypus/issues/new/choose).
 
 ## Project Leads
 
