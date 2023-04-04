@@ -746,10 +746,6 @@
   url: /algorithm-design
   type: learning-path
   sections:
-    - title: Concepts
-      id: concepts
-      uuid: dffeb76a-ba77-4afc-a527-9371890b0723
-      url: /algorithm-design/concepts/concepts
     - title: Variational Algorithms
       id: variational
       uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
@@ -778,3 +774,7 @@
       id: badge
       uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
       url: /algorithm-design/badge/badge
+    - title: REMOVE Concepts
+      id: concepts
+      uuid: dffeb76a-ba77-4afc-a527-9371890b0723
+      url: /algorithm-design/concepts/concepts
