@@ -742,7 +742,7 @@
       uuid: 345f0c2e-b51b-11ec-b909-0242ac120002
       url: /quantum-machine-learning/project
 
-- title: Algorithm Design
+- title: Near-Term Algorithm Design
   url: /algorithm-design
   type: learning-path
   sections:
