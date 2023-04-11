@@ -744,7 +744,7 @@
   title: Investigating quantum hardware using quantum circuits
   type: chapter
   url: /v1_quantum-hardware
-- id: ch-quantum-hardware
+- id: quantum-hardware-pulses
   overviewInfo:
     description:
       long: 'The Qiskit Textbook mostly assumes we have a quantum computer that can
@@ -823,7 +823,7 @@
     uuid: 37cc881f-a795-43b1-85b6-cb94f9cda622
   title: Investigating quantum hardware using microwave pulses
   type: chapter
-  url: /v1_ch-quantum-hardware
+  url: /v1_quantum-hardware-pulses
 - id: ch-labs
   overviewInfo:
     description:
@@ -1378,7 +1378,7 @@
     title: Introduction
     url: v2/ch-states/introduction
     uuid: afcc559e-b519-11ec-b909-0242ac120002
-  - id: atoms-computation
+  - id: the-atoms-of-computation
     previewImgUrl: /ch-states/overview/atoms-computation.png
     title: The atoms of computation
     url: v2/ch-states/atoms-computation
@@ -1983,7 +1983,7 @@
     title: Hello Qiskit game
     url: v2/ch-ex/hello-qiskit
     uuid: 9bee7d3f-c43e-4088-8e30-44154724f2e6
-  - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
+  - id: estimating-pi-using-quantum-phase-estimation-algorithm
     previewImgUrl: /ch-demos/overview/piday-code.png
     title: Estimating pi using the quantum phase estimation algorithm
     url: v2/ch-demos/piday-code
@@ -2017,12 +2017,12 @@
         '
     thumbnailUrl: /ch-appendix/overview/header.png
   sections:
-  - id: qiskit
+  - id: basic-qiskit-syntax
     previewImgUrl: /ch-appendix/overview/qiskit.png
     title: Qiskit
     url: v2/ch-appendix/qiskit
     uuid: b19f5173-5650-4a99-9ccd-076f561c4f24
-  - id: linear_algebra
+  - id: an-introduction-to-linear-algebra-for-quantum-computing
     previewImgUrl: /ch-appendix/overview/linear_algebra.png
     title: Linear algebra
     url: v2/ch-appendix/linear_algebra
