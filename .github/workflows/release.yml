@@ -19,10 +19,18 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      NODE_OPTIONS: --max-old-space-size=4096
+      NODE_OPTIONS: --max-old-space-size=8192
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Clone Qiskit/textbook repo
+        run: |
+          eval `ssh-agent -s`
+          ssh-add - <<< "${{ secrets.TEXTBOOK_REPO_CLONE_KEY }}"
+          git config --global url."git@github.com:".insteadOf "https://github.com"
+          git submodule update --init --recursive
+          git config --global url."git@github.com:".insteadOf "https://github.com"
 
       - uses: actions/setup-node@v3
         with:
@@ -48,14 +56,8 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r converter/textbook-converter/requirements.txt -r converter/textbook-converter/requirements-test.txt
 
-      - name: Install Vale
-        run: sudo snap install --edge vale
-
       - name: Secrets
         run: npm run setup:secrets -- --mongo "${{ secrets.PRODUCTION_MONGODB_URI }}" --ibmClientId "${{ secrets.PRODUCTION_IBMID_CLIENT_ID }}" --ibmClientSecret "${{ secrets.PRODUCTION_IBMID_CLIENT_SECRET }}" --googleClientId "${{ secrets.PRODUCTION_GOOGLE_CLIENT_ID }}" --googleClientSecret "${{ secrets.PRODUCTION_GOOGLE_CLIENT_SECRET }}"
-
-      - name: Notebook tests
-        run: npm run test:nb
 
       - name: Build
         run: npm run build

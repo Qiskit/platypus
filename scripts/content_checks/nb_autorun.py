@@ -154,10 +154,6 @@ if __name__ == '__main__':
     # Start executing notebooks
     print('\n\033[?25l', end="")  # hide cursor
     for path in filepaths:
-        if 'problem-sets' in path.parts:
-            # Don't want to run these notebooks
-            print(f'- Skipping {path}')
-            continue
         log['total_files'] += 1
         print('-', timestr(), path, end=' ', flush=True)
 
