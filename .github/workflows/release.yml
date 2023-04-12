@@ -30,7 +30,7 @@ jobs:
           ssh-add - <<< "${{ secrets.TEXTBOOK_REPO_CLONE_KEY }}"
           git config --global url."git@github.com:".insteadOf "https://github.com"
           git submodule update --init --recursive
-          git config --global url."git@github.com:".insteadOf "https://github.com"
+          git config --global url."https://github.com".insteadOf 'git@github.com:'
 
       - uses: actions/setup-node@v3
         with:
