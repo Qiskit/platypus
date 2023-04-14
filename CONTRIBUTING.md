@@ -16,6 +16,7 @@ contributors and maintainers of this site and so, thank you!
 - [Start contributing](#start-contributing)
 - [Before you start](#before-you-start)
 - [Opening issues](#opening-issues)
+- [Contributing content](#contributing-content)
 - [Contributing code](#contributing-code)
   - [Deciding what to work on](#deciding-what-to-work-on)
   - [Setup](#setup)
@@ -31,7 +32,7 @@ contributors and maintainers of this site and so, thank you!
 
 ## Start contributing
 
-This repository is for developing and maintaining the Qiskit Textbook (beta) platform.
+This repository is for developing and maintaining the Qiskit Textbook platform.
 If you want to contribute to Qiskit, the open-source Python library, you should go
 visit the [Qiskit repository](https://github.com/Qiskit/qiskit) instead.
 Or if you want to contribute to the [qiskit.org website](https://qiskit.org), you should go
@@ -43,7 +44,7 @@ a patch. In any case, read the contribution guidelines for opening new issues an
 submitting pull requests.
 
 Please, don't use this repository for asking questions about Qiskit: there are
-better ways to do it. Refer to our public [Slack](https://qisk.it/join-slack)
+better ways to do it. Refer to our public [Slack](https://ibm.co/joinqiskitslack)
 or post a question in [stack overflow](https://stackoverflow.com/questions/tagged/qiskit).
 
 ## Before you start
@@ -59,82 +60,34 @@ There are tons of useful resources about Git [out there](https://try.github.io/)
 
 You can issues at https://github.com/Qiskit/platypus/issues/new for reporting a misfunction. Please do provide steps to reproduce and expected behaviour.
 
-In addition issues can be opened for content-related problems such as typos or rewordings.
-
 Core contributors classify the tasks according to its nature and prioritize them
 from sprint to sprint.
 
 ## Contributing content
 
-This section is for anyone that wants to improve the content of the Qiskit Textbook.
-If you want to work on the website software, please head to the next section.
+For anyone that wants to improve the content of the Qiskit Textbook, go to
+[Qiskit/textbook](https://github.com/Qiskit/textbook). If you want to work on
+the website software, please head to the next section.
 
-If you only want to work on content, you don't need to install everything, you only need:
-- [Git](https://git-scm.com/): Version control that you'll use to copy the textbook
-  repository to your computer, and submit the changes you've made back to GitHub.
-  There's a free book on Git [here](https://git-scm.com/book/en/v2), and a quickstart guide
-  to GitHub [here](https://docs.github.com/en/get-started/quickstart/hello-world).
-- [Python](https://www.python.org/): The program that runs Python code. If you've installed
-  Qiskit you should have this installed already.
-- [Jupyter notebook](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/install.html):
-  This program opens and edits the source files for the textbook.
-- [Node.js](https://nodejs.org/en/): This program runs Javascript code. You'll need this
-  to build the website locally and see how your changes render.
+### Adding new textbook versions
 
-With these installed, please follow the ['Getting Started' section in the README](https://github.com/Qiskit/platypus#getting-started)
-to automatically install everything else you'll need.
+> :warning: This section is for maintainers
 
-The source for each page of the Qiskit Textbook is a [Jupyter Notebook](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html).
-You'll find these files in the `notebooks` directory. To create the final website,
-the building software parses each notebook in the table of contents (`notebooks/toc.yaml`)
-and converts it into a web page. Notebooks not in the table of contents (TOC) are
-ignored, so if you add new content you'll need to add it to the TOC.
+To add a new version to the textbook, add a release of the Qiskit/textbook repo
+under `./notebooks`. Rename the Qiskit/textbook folder to a string beginning
+with `v` and followed only by digits and periods (e.g. `v3.4`)
 
-### Editing notebooks
+Next, update the table of contents file by running:
 
-Open a terminal and run
-
-```
-jupyter notebook
+```bash
+python3 scripts/register_new_version.py <version-name>
 ```
 
-This should open an application in your browser window. Navigate to the notebook
-you want to change and start editing.
+If the version you've added is the new latest version (and should be the
+default content displayed) update `LATEST_TEXTBOOK_VERSION` in
+`server/utilities.ts` to your `<version-name>` string.
 
-Jupyter notebooks use a combination of Markdown, Python code snippets, and rich
-outputs (e.g. HTML and images). If you're unfamiliar with Jupyter notebooks, check
-out [this page](https://www.earthdatascience.org/courses/intro-to-earth-data-science/file-formats/use-text-files/format-text-with-markdown-jupyter-notebook/)
-for a quick overview. The markdown also supports math via LaTeX (see a guide
-[here](https://jupyterbook.org/en/stable/content/math.html)).
-
-The Qiskit Textbook also supports some extra custom syntax to represent interactive elements. For example, the markdown below will render as an interactive quiz:
-
-```
-    q-quiz(goal="quiz1")
-        .option(x) This is the correct answer
-        .option This is a wrong answer
-        .option This is also a wrong answer
-```
-
-You can find examples of widgets and their syntax in `notebooks/examples`.
-
-### Viewing your changes
-
-To see how your changes render on the website, open a terminal and run:
-
-```
-npm run build && npm start
-```
-
-When you see `Running on port 8080 in development mode.`, you can open a browser
-and navigate to `https://localhost:8080/course/introduction/`, then navigate to
-the page you edited.
-
-### Content checks
-
-As with code, this repo contains a number of checks for the textbook's content.
-You can run a full test using `npm run test:nb`. You can read more about each
-check in `scripts/content_checks/README.md`.
+You should now be good to go.
 
 ## Contributing code
 
