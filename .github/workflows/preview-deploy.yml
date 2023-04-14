@@ -16,12 +16,14 @@ jobs:
     with:
       code_engine_project: platypus-preview
       docker_image_name: platypus
+      clone_textbook_repo: true
     secrets:
       ibmcloud_account: ${{ secrets.IBMCLOUD_ACCOUNT }}
       ibmcloud_api_key: ${{ secrets.IBMCLOUD_API_KEY }}
       ibmid_client_id: ${{ secrets.STAGING_IBMID_CLIENT_ID }}
       ibmid_client_secret: ${{ secrets.STAGING_IBMID_CLIENT_SECRET }}
       mongodb_uri: ${{ secrets.STAGING_MONGODB_URI }}
+      textbook_repo_clone_key: ${{ secrets.TEXTBOOK_REPO_CLONE_KEY }}
 
   teardown:
     # this job requires secrets, which cannot be shared with forks

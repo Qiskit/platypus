@@ -1,5 +1,5 @@
 # platypus
-This repository is home of the new [Qiskit Textbook (beta)](https://qiskit.org/learn/).
+This repository is home of the new [Qiskit Textbook](https://qiskit.org/learn/).
 
 The previous version of the Qiskit Textbook textbook can be found [here](https://github.com/qiskit-community/qiskit-textbook).
 
@@ -24,12 +24,13 @@ The textbook is intended for use as a university quantum algorithms course suppl
     $ pip install -r requirements.txt -r requirements-test.txt
     ```
 
-1. Node.js (Using any version from 14.0 to 16.19.0) (you could install node.js from [here](https://nodejs.org/en/download/))
+2. Node.js (Using any version from 14.0 to 16.19.0) (you could install node.js from [here](https://nodejs.org/en/download/))
 
 ### Setup
 
 ```
 $ cd platypus
+$ git submodule update --init --recursive
 $ npm install
 $ npm run build
 $ npm start
