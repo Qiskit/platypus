@@ -42,6 +42,10 @@
       id: quantum_enigma_004
       uuid: 808903bd-a1d0-4619-a81b-0ebea5e03b32
       url: /problem-sets/quantum_enigma_004
+    - title: Quantum Enigma 005 Problem Set
+      id: quantum_enigma_005
+      uuid: 84cdb103-65a5-42b6-9ae8-c6caca846292
+      url: /problem-sets/quantum_enigma_005
     - title: IIT Madras Pre-Test
       id: iit_madras_pretest
       uuid: 2892385a-2497-426c-be21-75ea635caa4e
