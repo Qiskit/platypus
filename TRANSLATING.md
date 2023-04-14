@@ -88,5 +88,5 @@ During the process of translating Qiskit Textbook, you may identify bug or error
 
 | **Language** | **Translation Leads** | **Slack ([Qiskit Workspace](http://ibm.co/joinqiskitslack))** |
 | ---     | ---    | --- |
-|  Portuguese (PT_UN)| Omar Costa Hamido | @OCH | 
+| Portuguese (PT_UN)| Omar Costa Hamido | @OCH | 
 | Spanish (ES_UN)| Claudia Zendejas-Morales, Rodrigo Rosado Rivial | @clausia @rodrigo rosado |
