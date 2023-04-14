@@ -19,14 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Clone Qiskit/textbook repo
-        run: |
-          eval `ssh-agent -s`
-          ssh-add - <<< "${{ secrets.TEXTBOOK_REPO_CLONE_KEY }}"
-          git config --global url."git@github.com:".insteadOf "https://github.com"
-          git submodule update --init --recursive
-          git config --global --remove-section url."git@github.com:"
-
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
