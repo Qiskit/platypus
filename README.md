@@ -46,7 +46,7 @@ In order to test the application locally, you can visit a specific course page, 
 
 ## Content contributions
 
-If you want to help improve the textbook's content, check out the [contributors guide](CONTRIBUTING.md), and the [code of conduct](CODE_OF_CONDUCT.md).
+If you want to help improve the textbook's content, check out the [contributors guide](CONTRIBUTING.md), and the [code of conduct](CODE_OF_CONDUCT.md). If you would like to help us make the textbook accessible in different languages please see the [localization guide](TRANSLATING.md).
 
 ## License
 The materials and associated source code of this open-source textbook are licensed under [Apache License 2.0](https://github.com/Qiskit/platypus/blob/main/LICENSE).
