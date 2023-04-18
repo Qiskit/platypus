@@ -2057,6 +2057,19 @@
         '
     thumbnailUrl: /ch-appendix/overview/header.png
   sections:
+  - id: basic-qiskit-syntax
+    previewImgUrl: /ch-appendix/overview/qiskit.png
+    title: Qiskit
+    url: v2/ch-appendix/qiskit
+    uuid: b19f5173-5650-4a99-9ccd-076f561c4f24
+  - id: an-introduction-to-linear-algebra-for-quantum-computing
+    previewImgUrl: /ch-appendix/overview/linear_algebra.png
+    title: Linear algebra
+    url: v2/ch-appendix/linear_algebra
+    uuid: cb5d33e0-d7cd-41ae-8981-999632fba5e3
+  title: ch-appendix
+  type: chapter
+  url: /v2_ch-appendix
 
 - title: Variational Algorithm Design
   url: /algorithm-design
@@ -2094,18 +2107,3 @@
       id: badge
       uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
       url: /algorithm-design/badge
-
-  - id: basic-qiskit-syntax
-    previewImgUrl: /ch-appendix/overview/qiskit.png
-    title: Qiskit
-    url: v2/ch-appendix/qiskit
-    uuid: b19f5173-5650-4a99-9ccd-076f561c4f24
-  - id: an-introduction-to-linear-algebra-for-quantum-computing
-    previewImgUrl: /ch-appendix/overview/linear_algebra.png
-    title: Linear algebra
-    url: v2/ch-appendix/linear_algebra
-    uuid: cb5d33e0-d7cd-41ae-8981-999632fba5e3
-  title: ch-appendix
-  type: chapter
-  url: /v2_ch-appendix
-
