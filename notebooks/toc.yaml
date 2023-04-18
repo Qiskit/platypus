@@ -2087,7 +2087,7 @@
       id: ansatz
       uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
       url: /algorithm-design/ansatz
-    - title: Cost Functions
+    - title: Cost functions
       id: cost_function
       uuid: affdafb6-5b20-4113-b6da-dd758a4bae2a
       url: /algorithm-design/cost_function
