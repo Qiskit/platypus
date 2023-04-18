@@ -1,417 +1,593 @@
-- title: 量子情報の基礎
-  url: /basics
-  sections:
-    - id: single-systems
-      uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
-      url: /basics/single-systems
-    - id: multiple-systems
-      uuid: 327b128f-4fec-410a-a3f9-079939002bf2
-      url: basics/multiple-systems
-    - id: quantum-circuits
-      uuid: 57d5452e-85cd-40f8-a290-11466213c1a6
-      url: basics/quantum-circuits
-    - id: entanglement-in-action
-      uuid: 366f7150-4c04-4763-8269-ae6180812b73
-      url: basics/entanglement-in-action
-
-- title: 前提条件
-  url: /ch-prerequisites
-  sections:
-    - id: environment-setup-guide-to-work-with-qiskit-textbook
-      uuid: a5a86ddc-b519-11ec-b909-0242ac120002
-      url: /ch-prerequisites/setting-the-environment
-    - id: introduction-to-python-and-jupyter-notebooks
-      uuid: a9f5ea68-b519-11ec-b909-0242ac120002
-      url: /ch-prerequisites/python-and-jupyter-notebooks
-
-
-- title: 量子状態と量子ビット
-  url: /ch-states
-  sections:
-    - id: introduction
-      uuid: afcc559e-b519-11ec-b909-0242ac120002
-      url: /ch-states/introduction
-    - id: the-atoms-of-computation
-      uuid: b31c20ee-b519-11ec-b909-0242ac120002
-      url: /ch-states/atoms-computation
-    - id: representing-qubit-states
-      uuid: b81717ca-b519-11ec-b909-0242ac120002
-      url: /ch-states/representing-qubit-states
-    - id: single-qubit-gates
-      uuid: bd4334a4-b519-11ec-b909-0242ac120002
-      url: /ch-states/single-qubit-gates
-    - id: the-case-for-quantum-computers
-      uuid: c0bbff62-b519-11ec-b909-0242ac120002
-      url: /ch-states/case-for-quantum
-
-
-- title: 複数量子ビットともつれ状態
-  url: /ch-gates
-  sections:
-    - id: introduction
-      uuid: c50f4c90-b519-11ec-b909-0242ac120002
-      url: /ch-gates/introduction
-    - id: multiple-qubits-and-entangled-states
-      uuid: c7cfe502-b519-11ec-b909-0242ac120002
-      url: /ch-gates/multiple-qubits-entangled-states
-    - id: phase-kickback
-      uuid: cb7353ec-b519-11ec-b909-0242ac120002
-      url: /algorithms/phase-kickback
-    - id: basic-circuit-identities
-      uuid: ce8ce75a-b519-11ec-b909-0242ac120002
-      url: /ch-gates/more-circuit-identities
-    - id: proving-universality
-      uuid: d15d3548-b519-11ec-b909-0242ac120002
-      url: /ch-gates/proving-universality
-    - id: classical-computation-on-a-quantum-computer
-      uuid: d4f6e424-b519-11ec-b909-0242ac120002
-      url: /ch-gates/oracles
-
-
-- title: 量子プロトコルと量子アルゴリズム
-  url: /ch-algorithms
-  sections:
-    - id: quantum-circuits
-      uuid: d90cbfb6-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/defining-quantum-circuits
-    - id: deutsch-jozsa-algorithm
-      uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/deutsch-jozsa
-    - id: bernstein-vazirani-algorithm
-      uuid: df6e5a40-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/bernstein-vazirani
-    - id: simons-algorithm
-      uuid: e2714126-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/simon
-    - id: quantum-fourier-transform
-      uuid: e59ba472-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/quantum-fourier-transform
-    - id: quantum-phase-estimation
-      uuid: e8ac9ec8-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/quantum-phase-estimation
-    - id: shors-algorithm
-      uuid: ec157cd8-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/shor
-    - id: grovers-algorithm
-      uuid: eebb7488-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/grover
-    - id: quantum-counting
-      uuid: f1a9942c-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/quantum-counting
-    - id: quantum-teleportation
-      uuid: f4f4a090-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/teleportation
-    - id: superdense-coding
-      uuid: f87cbd42-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/superdense-coding
-    - id: quantum-key-distribution
-      uuid: fbafa8c6-b519-11ec-b909-0242ac120002
-      url: /ch-algorithms/quantum-key-distribution
-
-
-- title: 量子アプリケーションのアルゴリズム
-  url: /ch-applications
-  sections:
-    - id: solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation
-      uuid: 01484810-b51a-11ec-b909-0242ac120002
-      url: /ch-applications/hhl_tutorial
-    - id: simulating-molecules-using-vqe
-      uuid: 041df288-b51a-11ec-b909-0242ac120002
-      url: /ch-applications/vqe-molecules
-    - id: solving-combinatorial-optimization-problems-using-qaoa
-      uuid: 06ff7ada-b51a-11ec-b909-0242ac120002
-      url: /ch-applications/qaoa
-    - id: solving-satisfiability-problems-using-grovers-algorithm
-      uuid: 09d1529c-b51a-11ec-b909-0242ac120002
-      url: /ch-applications/satisfiability-grover
-    - id: hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit
-      uuid: 0cac4d14-b51a-11ec-b909-0242ac120002
-      url: /ch-machine-learning/machine-learning-qiskit-pytorch
-    - id: the-variational-quantum-linear-solver
-      uuid: 1163f456-b51a-11ec-b909-0242ac120002
-      url: /ch-paper-implementations/vqls
-    - id: flexible-representation-of-quantum-images-frqi
-      uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
-      url: /ch-applications/image-processing-frqi-neqr
-    - id: facial-expression-recognition
-      uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002
-      url: /ch-applications/facial-expression-recognition
-
-- title: 量子回路による量子ハードウェアの探究
-  url: /quantum-hardware
-  sections:
-    - id: introduction-to-quantum-error-correction-via-the-repetition-code
-      uuid: 197f7f66-b51a-11ec-b909-0242ac120002
-      url: /quantum-hardware/error-correction-repetition-code
-    - id: measurement-error-mitigation
-      uuid: 1c5bd31a-b51a-11ec-b909-0242ac120002
-      url: /quantum-hardware/measurement-error-mitigation
-    - id: randomized-benchmarking
-      uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
-      url: /quantum-hardware/randomized-benchmarking
-    - id: measuring-quantum-volume
-      uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
-      url: /quantum-hardware/measuring-quantum-volume
-    - id: density-matrix
-      uuid: 498dce44-cae9-11ec-9d64-0242ac120002
-      url: /quantum-hardware/density-matrix
-
-
-- title: マイクロ波パルスによる量子ハードウェアの探究
-  url: /quantum-hardware-pulses
-  sections:
-    - id: calibrating-qubits-using-qiskit-pulse
-      uuid: 292100ca-b51a-11ec-b909-0242ac120002
-      url: /ch-quantum-hardware/calibrating-qubits-pulse
-    - id: accessing-higher-energy-states-with-qiskit-pulse
-      uuid: 2bf0d316-b51a-11ec-b909-0242ac120002
-      url: /ch-quantum-hardware/accessing_higher_energy_states
-    - id: introduction-to-transmon-physics
-      uuid: 2e944e0e-b51a-11ec-b909-0242ac120002
-      url: /ch-quantum-hardware/transmon-physics
-    - id: circuit-quantum-electrodynamics
-      uuid: 31b2ccdc-b51a-11ec-b909-0242ac120002
-      url: /ch-quantum-hardware/cQED-JC-SW
-    - id: exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse
-      uuid: 346d7eea-b51a-11ec-b909-0242ac120002
-      url: /ch-quantum-hardware/Jaynes-Cummings-model
-
-
-- title: 量子コンピューティング・ラボ
-  url: /ch-labs
-  sections:
-    - id: lab-1-quantum-circuits
-      uuid: 3ff5a7ec-b51a-11ec-b909-0242ac120002
-      url: /ch-labs/Lab01_QuantumCircuits
-    - id: lab-2-single-qubit-gates
-      uuid: 43418a88-b51a-11ec-b909-0242ac120002
-      url: /ch-labs/Lab02_Single_Qubit_Gates
-    - id: lab-3-quantum-measurements
-      uuid: 45aa5412-b51a-11ec-b909-0242ac120002
-      url: /ch-labs/Lab03_QuantumMeasurement
-    - id: lab-4-bell-ghz-circuit
-      uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
-      url: /ch-labs/Lab04_Bell_GHZ_Circuit
-    - id: lab-9-quantum-simulation-as-a-search-algorithm
-      uuid: 59a076f4-b51a-11ec-b909-0242ac120002
-      url: /ch-labs/Lab09_QuantumSimulationSearchAlgorithm
-    
-    
-- title: Appendix(付録)
-  url: /ch-appendix
-  sections:
-    - id: an-introduction-to-linear-algebra-for-quantum-computing
-      uuid: 5d2bb2ca-b51a-11ec-b909-0242ac120002
-      url: /ch-appendix/linear_algebra
-    - id: basic-qiskit-syntax
-      uuid: 5fd6b79a-b51a-11ec-b909-0242ac120002
-      url: /ch-appendix/qiskit
-
-
-- title: ゲームとデモ
-  url: /ch-demos
-  sections:
-    - id: bonus-level-sandbox
-      uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
-      url: /ch-ex/hello-qiskit
-    - id: estimating-pi-using-quantum-phase-estimation-algorithm
-      uuid: 69b9707c-b51a-11ec-b909-0242ac120002
-      url: /ch-demos/piday-code
-    - id: local-reality-and-the-chsh-inequality
-      uuid: 6c507826-b51a-11ec-b909-0242ac120002
-      url: /ch-demos/chsh
-    - id: widgets-demonstration
-      uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
-      url: /ch-demos/widgets-index
-    - id: first-quantum-game
-      uuid: 53a49e62-cae9-11ec-9d64-0242ac120002
-      url: /ch-demos/first-quantum-game
-
-
-- title: 例
-  url: /examples
+- sections:
+  - id: annotations
+    url: examples/annotations
+    uuid: 745440a2-b51a-11ec-b909-0242ac120002
+  - id: blocks
+    url: examples/blocks
+    uuid: 771a4f16-b51a-11ec-b909-0242ac120002
+  - id: widgets
+    url: examples/widgets
+    uuid: 79da872a-b51a-11ec-b909-0242ac120002
+  - id: locale
+    url: examples/locale
+    uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
+  title: "\u4F8B"
   type: docs
-  sections:
-    - id: annotations
-      uuid: 745440a2-b51a-11ec-b909-0242ac120002
-      url: /examples/annotations
-    - id: blocks
-      uuid: 771a4f16-b51a-11ec-b909-0242ac120002
-      url: /examples/blocks
-    - id: widgets
-      uuid: 79da872a-b51a-11ec-b909-0242ac120002
-      url: /examples/widgets
-    - id: locale
-      uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
-      url: /examples/locale
+  url: /examples
 
-
-- title: 量子アルゴリズム
-  url: /algorithms
+- sections:
+  - id: qubits-states-circuits-measurements
+    url: summer-school/2020/lec-00
+    uuid: a45b8936-b51a-11ec-b909-0242ac120002
+  - id: writing-running-programs
+    url: summer-school/2020/lec-01
+    uuid: a7412732-b51a-11ec-b909-0242ac120002
+  - id: shors-algorithm-i-fourier-transform-phase-estimation
+    url: summer-school/2020/lec-02
+    uuid: aaedcbb0-b51a-11ec-b909-0242ac120002
+  - id: shors-algorithm-ii-from-factoring-to-period-finding-writing-program
+    url: summer-school/2020/lec-03
+    uuid: ada10d7c-b51a-11ec-b909-0242ac120002
+  - id: error-correction-using-repetition-codes
+    url: summer-school/2020/lec-04
+    uuid: b10b5bf2-b51a-11ec-b909-0242ac120002
+  - id: superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions
+    url: summer-school/2020/lec-05
+    uuid: b3e1bc18-b51a-11ec-b909-0242ac120002
+  - id: superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods
+    url: summer-school/2020/lec-06
+    uuid: b6bc1442-b51a-11ec-b909-0242ac120002
+  - id: chemistry-i-obtaining-qubit-hamiltonian-h2-lih
+    url: summer-school/2020/lec-07
+    uuid: b95d099a-b51a-11ec-b909-0242ac120002
+  - id: chemistry-ii-finding-ground-states-h2-lih
+    url: summer-school/2020/lec-08
+    uuid: bc25a4c0-b51a-11ec-b909-0242ac120002
+  - id: careers-in-computing
+    url: summer-school/2020/lec-09
+    uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
+  title: "\u590F\u306E\u5B66\u6821 2020"
   type: learning-path
-  sections:
-    - id: phase-kickback
-      uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
-      url: /algorithms/phase-kickback
-      
-      
-- title: 量子コンピューター入門
-  url: /introduction
-  type: learning-path
-  sections:
-    - id: why-quantum-computing
-      uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
-      url: /intro/why-quantum-computing
-    - id: the-atoms-of-computation
-      uuid: 37ef477e-ab8d-11ec-b909-0242ac120002
-      url: /intro/atoms-of-computation
-    - id: what-is-quantum
-      uuid: 7c765036-aebc-11ec-b909-0242ac120002
-      url: /intro/what-is-quantum
-    - id: describing-quantum-computers
-      uuid: 9260a554-aebc-11ec-b909-0242ac120002
-      url: /intro/describing-quantum-computers
-    - id: entangled-states
-      uuid: 98aa9032-aebc-11ec-b909-0242ac120002
-      url: /intro/entangled-states
-    - id: visualizing-entanglement
-      uuid: 9e8ceb9e-aebc-11ec-b909-0242ac120002
-      url: /intro/visualizing-entanglement
-    - id: grovers-search-algorithm
-      uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
-      url: /intro/grover-intro
-    - id: project
-      uuid: e25c3f90-aebd-11ec-b909-0242ac120002
-      url: /intro/project
-
-
-- title: 夏の学校 2020
   url: /2020
+- sections:
+  - id: lec1-1-vector-spaces-tensor-products-qubits
+    url: summer-school/2021/lec1.1
+    uuid: c2ebedbe-b51a-11ec-b909-0242ac120002
+  - id: lec1-2-introduction-quantum-circuits
+    url: summer-school/2021/lec1.2
+    uuid: c5fb76be-b51a-11ec-b909-0242ac120002
+  - id: lec3-1-noise-quantum-computers-1
+    url: summer-school/2021/lec3.1
+    uuid: cec0e98c-b51a-11ec-b909-0242ac120002
+  - id: lab1-quantum-computing-algorithm-operations
+    url: summer-school/2021/lab1
+    uuid: d42ae134-b51a-11ec-b909-0242ac120002
+  title: "\u590F\u306E\u5B66\u6821 2021"
   type: learning-path
-  sections:
-    - id: qubits-states-circuits-measurements
-      uuid: a45b8936-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-00
-    - id: writing-running-programs
-      uuid: a7412732-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-01
-    - id: shors-algorithm-i-fourier-transform-phase-estimation
-      uuid: aaedcbb0-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-02
-    - id: shors-algorithm-ii-from-factoring-to-period-finding-writing-program
-      uuid: ada10d7c-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-03
-    - id: error-correction-using-repetition-codes
-      uuid: b10b5bf2-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-04
-    - id: superconducting-qubits-i-quantizingharmonic-oscillator-josephson-junctions
-      uuid: b3e1bc18-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-05
-    - id: superconducting-qubits-ii-circuit-electrodynamics-readout-calibration-methods
-      uuid: b6bc1442-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-06
-    - id: chemistry-i-obtaining-qubit-hamiltonian-h2-lih
-      uuid: b95d099a-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-07
-    - id: chemistry-ii-finding-ground-states-h2-lih
-      uuid: bc25a4c0-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-08
-    - id: careers-in-computing
-      uuid: bf1b8a5a-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2020/lec-09
-
-- title: 夏の学校 2021
   url: /2021
+- sections:
+  - id: history-quantum-computing-motivation-quantum-simulation
+    url: summer-school/2022/lec-1
+    uuid: 820caba4-2784-419f-badb-038632a8d4bd
+  - id: introduction-linear-algebra-prerequisite-mathematics-circuit-composition
+    url: summer-school/2022/lec-2
+    uuid: 6e908f0d-f6c3-4a96-8b6e-d0c355aa0fd0
+  - id: lab-1
+    url: summer-school/2022/lab-1
+    uuid: 6b9733a9-c37d-416a-a21d-79666f6c6e4f
+  - id: hamiltonian-time-evolution
+    url: summer-school/2022/lec-3
+    uuid: 40898326-7668-4076-b671-01d76c914f2d
+  - id: simulation-problems
+    url: summer-school/2022/lec-4
+    uuid: 3f1b1d6a-1d9f-48dc-b202-f9f027ad9f94
+  - id: lab-2
+    url: summer-school/2022/lab-2
+    uuid: 12c18054-d8f9-4347-bb82-3f8887f9a89b
+  - id: noisy-real-hardware-noise-quantum-computers
+    url: summer-school/2022/lec-5
+    uuid: ada6cc30-bfdf-4fcf-95c3-3377647ca6c1
+  - id: broad-overview-quantum-chemistry-simulation-why-is-challenge
+    url: summer-school/2022/lec-6
+    uuid: 0eb99b15-a8e2-4472-8dfe-44d3172d7819
+  - id: lab-3
+    url: summer-school/2022/lab-3
+    uuid: f310e2c1-6216-40c7-92c5-f6e86a665130
+  - id: methods-quantum-simulation
+    url: summer-school/2022/lec-7
+    uuid: 945603e2-5538-451a-89f5-e5fd273c80d1
+  - id: quantum-static-simulation
+    url: summer-school/2022/lec-8
+    uuid: a058a165-6716-4f75-b228-9ed003bba2a7
+  - id: lab-4
+    url: summer-school/2022/lab-4
+    uuid: 21bee5f4-f7ee-49cb-99b7-4eb950dedf38
+  - id: quantum-dynamics
+    url: summer-school/2022/lec-9
+    uuid: 19bc4a81-07e8-4397-befd-76aa973d2c8c
+  title: "\u590F\u306E\u5B66\u6821 2022"
   type: learning-path
-  sections:
-    - id: lec1-1-vector-spaces-tensor-products-qubits
-      uuid: c2ebedbe-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2021/lec1.1
-    - id: lec1-2-introduction-quantum-circuits
-      uuid: c5fb76be-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2021/lec1.2
-    - id: lec3-1-noise-quantum-computers-1
-      uuid: cec0e98c-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2021/lec3.1
-    - id: lab1-quantum-computing-algorithm-operations
-      uuid: d42ae134-b51a-11ec-b909-0242ac120002
-      url: /summer-school/2021/lab1 
-
-- title: 夏の学校 2022
   url: /2022
-  type: learning-path
-  sections:
-    - id: history-quantum-computing-motivation-quantum-simulation
-      uuid: 820caba4-2784-419f-badb-038632a8d4bd
-      url: /summer-school/2022/lec-1
-    - id: introduction-linear-algebra-prerequisite-mathematics-circuit-composition
-      uuid: 6e908f0d-f6c3-4a96-8b6e-d0c355aa0fd0
-      url: /summer-school/2022/lec-2
-    - id: lab-1
-      uuid: 6b9733a9-c37d-416a-a21d-79666f6c6e4f
-      url: /summer-school/2022/lab-1
-    - id: hamiltonian-time-evolution
-      uuid: 40898326-7668-4076-b671-01d76c914f2d
-      url: /summer-school/2022/lec-3
-    - id: simulation-problems
-      uuid: 3f1b1d6a-1d9f-48dc-b202-f9f027ad9f94
-      url: /summer-school/2022/lec-4
-    - id: lab-2
-      uuid: 12c18054-d8f9-4347-bb82-3f8887f9a89b
-      url: /summer-school/2022/lab-2
-    - id: noisy-real-hardware-noise-quantum-computers
-      uuid: ada6cc30-bfdf-4fcf-95c3-3377647ca6c1
-      url: /summer-school/2022/lec-5
-    - id: broad-overview-quantum-chemistry-simulation-why-is-challenge
-      uuid: 0eb99b15-a8e2-4472-8dfe-44d3172d7819
-      url: /summer-school/2022/lec-6
-    - id: lab-3
-      uuid: f310e2c1-6216-40c7-92c5-f6e86a665130
-      url: /summer-school/2022/lab-3
-    - id: methods-quantum-simulation
-      uuid: 945603e2-5538-451a-89f5-e5fd273c80d1
-      url: /summer-school/2022/lec-7
-    - id: quantum-static-simulation
-      uuid: a058a165-6716-4f75-b228-9ed003bba2a7
-      url: /summer-school/2022/lec-8
-    - id: lab-4
-      uuid: 21bee5f4-f7ee-49cb-99b7-4eb950dedf38
-      url: /summer-school/2022/lab-4
-    - id: quantum-dynamics
-      uuid: 19bc4a81-07e8-4397-befd-76aa973d2c8c
-      url: /summer-school/2022/lec-9
 
-- title: 量子機械学習
-  url: /machine-learning
+
+#---- Below was added by machine ---
+
+- sections:
+  - id: environment-setup-guide-to-work-with-qiskit-textbook
+    url: v1/ch-prerequisites/setting-the-environment
+    uuid: a5a86ddc-b519-11ec-b909-0242ac120002
+  - id: introduction-to-python-and-jupyter-notebooks
+    url: v1/ch-prerequisites/python-and-jupyter-notebooks
+    uuid: a9f5ea68-b519-11ec-b909-0242ac120002
+  title: "\u524D\u63D0\u6761\u4EF6"
+  url: /v1_ch-prerequisites
+- sections:
+  - id: introduction
+    url: v1/ch-states/introduction
+    uuid: afcc559e-b519-11ec-b909-0242ac120002
+  - id: the-atoms-of-computation
+    url: v1/ch-states/atoms-computation
+    uuid: b31c20ee-b519-11ec-b909-0242ac120002
+  - id: representing-qubit-states
+    url: v1/ch-states/representing-qubit-states
+    uuid: b81717ca-b519-11ec-b909-0242ac120002
+  - id: single-qubit-gates
+    url: v1/ch-states/single-qubit-gates
+    uuid: bd4334a4-b519-11ec-b909-0242ac120002
+  - id: the-case-for-quantum-computers
+    url: v1/ch-states/case-for-quantum
+    uuid: c0bbff62-b519-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u72B6\u614B\u3068\u91CF\u5B50\u30D3\u30C3\u30C8"
+  url: /v1_ch-states
+- sections:
+  - id: introduction
+    url: v1/ch-gates/introduction
+    uuid: c50f4c90-b519-11ec-b909-0242ac120002
+  - id: multiple-qubits-and-entangled-states
+    url: v1/ch-gates/multiple-qubits-entangled-states
+    uuid: c7cfe502-b519-11ec-b909-0242ac120002
+  - id: phase-kickback
+    url: v1/ch-gates/phase-kickback
+    uuid: cb7353ec-b519-11ec-b909-0242ac120002
+  - id: basic-circuit-identities
+    url: v1/ch-gates/more-circuit-identities
+    uuid: ce8ce75a-b519-11ec-b909-0242ac120002
+  - id: proving-universality
+    url: v1/ch-gates/proving-universality
+    uuid: d15d3548-b519-11ec-b909-0242ac120002
+  - id: classical-computation-on-a-quantum-computer
+    url: v1/ch-gates/oracles
+    uuid: d4f6e424-b519-11ec-b909-0242ac120002
+  title: "\u8907\u6570\u91CF\u5B50\u30D3\u30C3\u30C8\u3068\u3082\u3064\u308C\u72B6\
+    \u614B"
+  url: /v1_ch-gates
+- sections:
+  - id: quantum-circuits
+    url: v1/ch-algorithms/defining-quantum-circuits
+    uuid: d90cbfb6-b519-11ec-b909-0242ac120002
+  - id: deutsch-jozsa-algorithm
+    url: v1/ch-algorithms/deutsch-jozsa
+    uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
+  - id: bernstein-vazirani-algorithm
+    url: v1/ch-algorithms/bernstein-vazirani
+    uuid: df6e5a40-b519-11ec-b909-0242ac120002
+  - id: simons-algorithm
+    url: v1/ch-algorithms/simon
+    uuid: e2714126-b519-11ec-b909-0242ac120002
+  - id: quantum-fourier-transform
+    url: v1/ch-algorithms/quantum-fourier-transform
+    uuid: e59ba472-b519-11ec-b909-0242ac120002
+  - id: quantum-phase-estimation
+    url: v1/ch-algorithms/quantum-phase-estimation
+    uuid: e8ac9ec8-b519-11ec-b909-0242ac120002
+  - id: shors-algorithm
+    url: v1/ch-algorithms/shor
+    uuid: ec157cd8-b519-11ec-b909-0242ac120002
+  - id: grovers-algorithm
+    url: v1/ch-algorithms/grover
+    uuid: eebb7488-b519-11ec-b909-0242ac120002
+  - id: quantum-counting
+    url: v1/ch-algorithms/quantum-counting
+    uuid: f1a9942c-b519-11ec-b909-0242ac120002
+  - id: quantum-teleportation
+    url: v1/ch-algorithms/teleportation
+    uuid: f4f4a090-b519-11ec-b909-0242ac120002
+  - id: superdense-coding
+    url: v1/ch-algorithms/superdense-coding
+    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+  - id: quantum-key-distribution
+    url: v1/ch-algorithms/quantum-key-distribution
+    uuid: fbafa8c6-b519-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u30D7\u30ED\u30C8\u30B3\u30EB\u3068\u91CF\u5B50\u30A2\u30EB\
+    \u30B4\u30EA\u30BA\u30E0"
+  url: /v1_ch-algorithms
+- sections:
+  - id: solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation
+    url: v1/ch-applications/hhl_tutorial
+    uuid: 01484810-b51a-11ec-b909-0242ac120002
+  - id: simulating-molecules-using-vqe
+    url: v1/ch-applications/vqe-molecules
+    uuid: 041df288-b51a-11ec-b909-0242ac120002
+  - id: solving-combinatorial-optimization-problems-using-qaoa
+    url: v1/ch-applications/qaoa
+    uuid: 06ff7ada-b51a-11ec-b909-0242ac120002
+  - id: solving-satisfiability-problems-using-grovers-algorithm
+    url: v1/ch-applications/satisfiability-grover
+    uuid: 09d1529c-b51a-11ec-b909-0242ac120002
+  - id: hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit
+    url: v1/ch-machine-learning/machine-learning-qiskit-pytorch
+    uuid: 0cac4d14-b51a-11ec-b909-0242ac120002
+  - id: the-variational-quantum-linear-solver
+    url: v1/ch-paper-implementations/vqls
+    uuid: 1163f456-b51a-11ec-b909-0242ac120002
+  - id: flexible-representation-of-quantum-images-frqi
+    url: v1/ch-applications/image-processing-frqi-neqr
+    uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u30A2\u30D7\u30EA\u30B1\u30FC\u30B7\u30E7\u30F3\u306E\u30A2\
+    \u30EB\u30B4\u30EA\u30BA\u30E0"
+  url: /v1_ch-applications
+- sections:
+  - id: introduction-to-quantum-error-correction-via-the-repetition-code
+    url: v1/ch-quantum-hardware/error-correction-repetition-code
+    uuid: 197f7f66-b51a-11ec-b909-0242ac120002
+  - id: measurement-error-mitigation
+    url: v1/ch-quantum-hardware/measurement-error-mitigation
+    uuid: 1c5bd31a-b51a-11ec-b909-0242ac120002
+  - id: randomized-benchmarking
+    url: v1/ch-quantum-hardware/randomized-benchmarking
+    uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
+  - id: measuring-quantum-volume
+    url: v1/ch-quantum-hardware/measuring-quantum-volume
+    uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u56DE\u8DEF\u306B\u3088\u308B\u91CF\u5B50\u30CF\u30FC\u30C9\
+    \u30A6\u30A7\u30A2\u306E\u63A2\u7A76"
+  url: /v1_quantum-hardware
+- sections:
+  - id: calibrating-qubits-using-qiskit-pulse
+    url: v1/ch-quantum-hardware/calibrating-qubits-pulse
+    uuid: 292100ca-b51a-11ec-b909-0242ac120002
+  - id: accessing-higher-energy-states-with-qiskit-pulse
+    url: v1/ch-quantum-hardware/accessing_higher_energy_states
+    uuid: 2bf0d316-b51a-11ec-b909-0242ac120002
+  - id: introduction-to-transmon-physics
+    url: v1/ch-quantum-hardware/transmon-physics
+    uuid: 2e944e0e-b51a-11ec-b909-0242ac120002
+  - id: circuit-quantum-electrodynamics
+    url: v1/ch-quantum-hardware/cQED-JC-SW
+    uuid: 31b2ccdc-b51a-11ec-b909-0242ac120002
+  title: "\u30DE\u30A4\u30AF\u30ED\u6CE2\u30D1\u30EB\u30B9\u306B\u3088\u308B\u91CF\
+    \u5B50\u30CF\u30FC\u30C9\u30A6\u30A7\u30A2\u306E\u63A2\u7A76"
+  url: /v1_quantum-hardware-pulses
+- sections:
+  - id: lab-1-quantum-circuits
+    url: v1/ch-labs/Lab01_QuantumCircuits
+    uuid: 3ff5a7ec-b51a-11ec-b909-0242ac120002
+  - id: lab-2-quantum-measurement
+    url: v1/ch-labs/Lab02_QuantumMeasurement
+    uuid: 82eb9557-1420-487b-a3a5-72fdf38878e8
+  title: "\u91CF\u5B50\u30B3\u30F3\u30D4\u30E5\u30FC\u30C6\u30A3\u30F3\u30B0\u30FB\
+    \u30E9\u30DC"
+  url: /v1_ch-labs
+- sections:
+  - id: an-introduction-to-linear-algebra-for-quantum-computing
+    url: v1/ch-appendix/linear_algebra
+    uuid: 5d2bb2ca-b51a-11ec-b909-0242ac120002
+  - id: basic-qiskit-syntax
+    url: v1/ch-appendix/qiskit
+    uuid: 5fd6b79a-b51a-11ec-b909-0242ac120002
+  title: "Appendix(\u4ED8\u9332)"
+  url: /v1_ch-appendix
+- sections:
+  - id: bonus-level-sandbox
+    url: v1/ch-ex/hello-qiskit
+    uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
+  - id: estimating-pi-using-quantum-phase-estimation-algorithm
+    url: v1/ch-demos/piday-code
+    uuid: 69b9707c-b51a-11ec-b909-0242ac120002
+  title: "\u30B2\u30FC\u30E0\u3068\u30C7\u30E2"
+  url: /v1_ch-demos
+
+
+#---- Below was added by machine ---
+
+- sections:
+  - id: single-systems
+    url: v2/basics/single-systems
+    uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+  - id: multiple-systems
+    url: v2/basics/multiple-systems
+    uuid: 327b128f-4fec-410a-a3f9-079939002bf2
+  - id: quantum-circuits
+    url: v2/basics/quantum-circuits
+    uuid: 57d5452e-85cd-40f8-a290-11466213c1a6
+  - id: entanglement-action
+    url: v2/basics/entanglement-in-action
+    uuid: 366f7150-4c04-4763-8269-ae6180812b73
+  title: "\u91CF\u5B50\u60C5\u5831\u306E\u57FA\u790E"
+  url: /v2_basics
+- sections:
+  - id: environment-setup-guide-to-work-with-qiskit-textbook
+    url: v2/ch-prerequisites/setting-the-environment
+    uuid: a5a86ddc-b519-11ec-b909-0242ac120002
+  - id: introduction-to-python-and-jupyter-notebooks
+    url: v2/ch-prerequisites/python-and-jupyter-notebooks
+    uuid: a9f5ea68-b519-11ec-b909-0242ac120002
+  title: "\u524D\u63D0\u6761\u4EF6"
+  url: /v2_ch-prerequisites
+- sections:
+  - id: introduction
+    url: v2/ch-states/introduction
+    uuid: afcc559e-b519-11ec-b909-0242ac120002
+  - id: the-atoms-of-computation
+    url: v2/ch-states/atoms-computation
+    uuid: b31c20ee-b519-11ec-b909-0242ac120002
+  - id: representing-qubit-states
+    url: v2/ch-states/representing-qubit-states
+    uuid: b81717ca-b519-11ec-b909-0242ac120002
+  - id: single-qubit-gates
+    url: v2/ch-states/single-qubit-gates
+    uuid: bd4334a4-b519-11ec-b909-0242ac120002
+  - id: the-case-for-quantum-computers
+    url: v2/ch-states/case-for-quantum
+    uuid: c0bbff62-b519-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u72B6\u614B\u3068\u91CF\u5B50\u30D3\u30C3\u30C8"
+  url: /v2_ch-states
+- sections:
+  - id: introduction
+    url: v2/ch-gates/introduction
+    uuid: c50f4c90-b519-11ec-b909-0242ac120002
+  - id: multiple-qubits-and-entangled-states
+    url: v2/ch-gates/multiple-qubits-entangled-states
+    uuid: c7cfe502-b519-11ec-b909-0242ac120002
+  - id: phase-kickback
+    url: v2/algorithms/phase-kickback
+    uuid: cb7353ec-b519-11ec-b909-0242ac120002
+  - id: basic-circuit-identities
+    url: v2/ch-gates/more-circuit-identities
+    uuid: ce8ce75a-b519-11ec-b909-0242ac120002
+  - id: proving-universality
+    url: v2/ch-gates/proving-universality
+    uuid: d15d3548-b519-11ec-b909-0242ac120002
+  - id: classical-computation-on-a-quantum-computer
+    url: v2/ch-gates/oracles
+    uuid: d4f6e424-b519-11ec-b909-0242ac120002
+  title: "\u8907\u6570\u91CF\u5B50\u30D3\u30C3\u30C8\u3068\u3082\u3064\u308C\u72B6\
+    \u614B"
+  url: /v2_ch-gates
+- sections:
+  - id: quantum-circuits
+    url: v2/ch-algorithms/defining-quantum-circuits
+    uuid: d90cbfb6-b519-11ec-b909-0242ac120002
+  - id: deutsch-jozsa-algorithm
+    url: v2/ch-algorithms/deutsch-jozsa
+    uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
+  - id: bernstein-vazirani-algorithm
+    url: v2/ch-algorithms/bernstein-vazirani
+    uuid: df6e5a40-b519-11ec-b909-0242ac120002
+  - id: simons-algorithm
+    url: v2/ch-algorithms/simon
+    uuid: e2714126-b519-11ec-b909-0242ac120002
+  - id: quantum-fourier-transform
+    url: v2/ch-algorithms/quantum-fourier-transform
+    uuid: e59ba472-b519-11ec-b909-0242ac120002
+  - id: quantum-phase-estimation
+    url: v2/ch-algorithms/quantum-phase-estimation
+    uuid: e8ac9ec8-b519-11ec-b909-0242ac120002
+  - id: shors-algorithm
+    url: v2/ch-algorithms/shor
+    uuid: ec157cd8-b519-11ec-b909-0242ac120002
+  - id: grovers-algorithm
+    url: v2/ch-algorithms/grover
+    uuid: eebb7488-b519-11ec-b909-0242ac120002
+  - id: quantum-counting
+    url: v2/ch-algorithms/quantum-counting
+    uuid: f1a9942c-b519-11ec-b909-0242ac120002
+  - id: quantum-teleportation
+    url: v2/ch-algorithms/teleportation
+    uuid: f4f4a090-b519-11ec-b909-0242ac120002
+  - id: superdense-coding
+    url: v2/ch-algorithms/superdense-coding
+    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+  - id: quantum-key-distribution
+    url: v2/ch-algorithms/quantum-key-distribution
+    uuid: fbafa8c6-b519-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u30D7\u30ED\u30C8\u30B3\u30EB\u3068\u91CF\u5B50\u30A2\u30EB\
+    \u30B4\u30EA\u30BA\u30E0"
+  url: /v2_ch-algorithms
+- sections:
+  - id: solving-linear-systems-of-equations-using-hhl-and-its-qiskit-implementation
+    url: v2/ch-applications/hhl_tutorial
+    uuid: 01484810-b51a-11ec-b909-0242ac120002
+  - id: simulating-molecules-using-vqe
+    url: v2/ch-applications/vqe-molecules
+    uuid: 041df288-b51a-11ec-b909-0242ac120002
+  - id: solving-combinatorial-optimization-problems-using-qaoa
+    url: v2/ch-applications/qaoa
+    uuid: 06ff7ada-b51a-11ec-b909-0242ac120002
+  - id: solving-satisfiability-problems-using-grovers-algorithm
+    url: v2/ch-applications/satisfiability-grover
+    uuid: 09d1529c-b51a-11ec-b909-0242ac120002
+  - id: hybrid-quantum-classical-neural-networks-with-pytorch-and-qiskit
+    url: v2/ch-machine-learning/machine-learning-qiskit-pytorch
+    uuid: 0cac4d14-b51a-11ec-b909-0242ac120002
+  - id: the-variational-quantum-linear-solver
+    url: v2/ch-paper-implementations/vqls
+    uuid: 1163f456-b51a-11ec-b909-0242ac120002
+  - id: flexible-representation-of-quantum-images-frqi
+    url: v2/ch-applications/image-processing-frqi-neqr
+    uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
+  - id: facial-expression-recognition
+    url: v2/ch-applications/facial-expression-recognition
+    uuid: 22cb8bf2-cae9-11ec-9d64-0242ac120002
+  title: "\u91CF\u5B50\u30A2\u30D7\u30EA\u30B1\u30FC\u30B7\u30E7\u30F3\u306E\u30A2\
+    \u30EB\u30B4\u30EA\u30BA\u30E0"
+  url: /v2_ch-applications
+- sections:
+  - id: introduction-to-quantum-error-correction-via-the-repetition-code
+    url: v2/quantum-hardware/error-correction-repetition-code
+    uuid: 197f7f66-b51a-11ec-b909-0242ac120002
+  - id: measurement-error-mitigation
+    url: v2/quantum-hardware/measurement-error-mitigation
+    uuid: 1c5bd31a-b51a-11ec-b909-0242ac120002
+  - id: randomized-benchmarking
+    url: v2/quantum-hardware/randomized-benchmarking
+    uuid: 1fa1d22c-b51a-11ec-b909-0242ac120002
+  - id: measuring-quantum-volume
+    url: v2/quantum-hardware/measuring-quantum-volume
+    uuid: 22ab0bd2-b51a-11ec-b909-0242ac120002
+  - id: density-matrix
+    url: v2/quantum-hardware/density-matrix
+    uuid: 498dce44-cae9-11ec-9d64-0242ac120002
+  title: "\u91CF\u5B50\u56DE\u8DEF\u306B\u3088\u308B\u91CF\u5B50\u30CF\u30FC\u30C9\
+    \u30A6\u30A7\u30A2\u306E\u63A2\u7A76"
+  url: /v2_quantum-hardware
+- sections:
+  - id: calibrating-qubits-using-qiskit-pulse
+    url: v2/ch-quantum-hardware/calibrating-qubits-pulse
+    uuid: 292100ca-b51a-11ec-b909-0242ac120002
+  - id: accessing-higher-energy-states-with-qiskit-pulse
+    url: v2/ch-quantum-hardware/accessing_higher_energy_states
+    uuid: 2bf0d316-b51a-11ec-b909-0242ac120002
+  - id: introduction-to-transmon-physics
+    url: v2/ch-quantum-hardware/transmon-physics
+    uuid: 2e944e0e-b51a-11ec-b909-0242ac120002
+  - id: circuit-quantum-electrodynamics
+    url: v2/ch-quantum-hardware/cQED-JC-SW
+    uuid: 31b2ccdc-b51a-11ec-b909-0242ac120002
+  - id: exploring-the-jaynes-cummings-hamiltonian-with-qiskit-pulse
+    url: v2/ch-quantum-hardware/Jaynes-Cummings-model
+    uuid: 346d7eea-b51a-11ec-b909-0242ac120002
+  title: "\u30DE\u30A4\u30AF\u30ED\u6CE2\u30D1\u30EB\u30B9\u306B\u3088\u308B\u91CF\
+    \u5B50\u30CF\u30FC\u30C9\u30A6\u30A7\u30A2\u306E\u63A2\u7A76"
+  url: /v2_quantum-hardware-pulses
+- sections:
+  - id: lab-1-quantum-circuits
+    url: v2/ch-labs/Lab01_QuantumCircuits
+    uuid: 3ff5a7ec-b51a-11ec-b909-0242ac120002
+  - id: lab-2-single-qubit-gates
+    url: v2/ch-labs/Lab02_Single_Qubit_Gates
+    uuid: 43418a88-b51a-11ec-b909-0242ac120002
+  - id: lab-3-quantum-measurements
+    url: v2/ch-labs/Lab03_QuantumMeasurement
+    uuid: 45aa5412-b51a-11ec-b909-0242ac120002
+  - id: lab-4-bell-ghz-circuit
+    url: v2/ch-labs/Lab04_Bell_GHZ_Circuit
+    uuid: 4a04a0f8-b51a-11ec-b909-0242ac120002
+  - id: lab-9-quantum-simulation-as-a-search-algorithm
+    url: v2/ch-labs/Lab09_QuantumSimulationSearchAlgorithm
+    uuid: 59a076f4-b51a-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u30B3\u30F3\u30D4\u30E5\u30FC\u30C6\u30A3\u30F3\u30B0\u30FB\
+    \u30E9\u30DC"
+  url: /v2_ch-labs
+- sections:
+  - id: an-introduction-to-linear-algebra-for-quantum-computing
+    url: v2/ch-appendix/linear_algebra
+    uuid: 5d2bb2ca-b51a-11ec-b909-0242ac120002
+  - id: basic-qiskit-syntax
+    url: v2/ch-appendix/qiskit
+    uuid: 5fd6b79a-b51a-11ec-b909-0242ac120002
+  title: "Appendix(\u4ED8\u9332)"
+  url: /v2_ch-appendix
+- sections:
+  - id: bonus-level-sandbox
+    url: v2/ch-ex/hello-qiskit
+    uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
+  - id: estimating-pi-using-quantum-phase-estimation-algorithm
+    url: v2/ch-demos/piday-code
+    uuid: 69b9707c-b51a-11ec-b909-0242ac120002
+  - id: local-reality-and-the-chsh-inequality
+    url: v2/ch-demos/chsh
+    uuid: 6c507826-b51a-11ec-b909-0242ac120002
+  - id: widgets-demonstration
+    url: v2/ch-demos/widgets-index
+    uuid: 6f1f26ce-b51a-11ec-b909-0242ac120002
+  - id: first-quantum-game
+    url: v2/ch-demos/first-quantum-game
+    uuid: 53a49e62-cae9-11ec-9d64-0242ac120002
+  title: "\u30B2\u30FC\u30E0\u3068\u30C7\u30E2"
+  url: /v2_ch-demos
+- sections:
+  - id: annotations
+    url: v2/examples/annotations
+    uuid: 745440a2-b51a-11ec-b909-0242ac120002
+  - id: blocks
+    url: v2/examples/blocks
+    uuid: 771a4f16-b51a-11ec-b909-0242ac120002
+  - id: widgets
+    url: v2/examples/widgets
+    uuid: 79da872a-b51a-11ec-b909-0242ac120002
+  - id: locale
+    url: v2/examples/locale
+    uuid: 7cbf7978-b51a-11ec-b909-0242ac120002
+  title: "\u4F8B"
+  type: docs
+  url: /v2_examples
+- sections:
+  - id: phase-kickback
+    url: v2/algorithms/phase-kickback
+    uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
+  title: "\u91CF\u5B50\u30A2\u30EB\u30B4\u30EA\u30BA\u30E0"
   type: learning-path
-  sections:
-    - id: introduction
-      uuid: 16e935fc-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/introduction
-    - id: parameterized-quantum-circuits
-      uuid: 19a9f4de-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/pqc
-    - id: data-encoding
-      uuid: 1d09af66-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/encoding
-    - id: training-quantum-circuits
-      uuid: 1fb38444-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/training
-    - id: supervised-learning
-      uuid: 22cf51bc-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/supervised
-    - id: variational-classification
-      uuid: 26951034-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/vqc
-    - id: quantum-feature-maps-kernels
-      uuid: 29b0fda0-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/kernel
-    - id: unsupervised-learning
-      uuid: 2cc6b386-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/unsupervised
-    - id: quantum-generative-adversarial-networks
-      uuid: 2ff2a3e4-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/qgan
-    - id: project
-      uuid: 345f0c2e-b51b-11ec-b909-0242ac120002
-      url: /quantum-machine-learning/project
+  url: /v2_algorithms
+- sections:
+  - id: why-quantum-computing
+    url: v2/intro/why-quantum-computing
+    uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
+  - id: the-atoms-of-computation
+    url: v2/intro/atoms-of-computation
+    uuid: 37ef477e-ab8d-11ec-b909-0242ac120002
+  - id: what-is-quantum
+    url: v2/intro/what-is-quantum
+    uuid: 7c765036-aebc-11ec-b909-0242ac120002
+  - id: describing-quantum-computers
+    url: v2/intro/describing-quantum-computers
+    uuid: 9260a554-aebc-11ec-b909-0242ac120002
+  - id: entangled-states
+    url: v2/intro/entangled-states
+    uuid: 98aa9032-aebc-11ec-b909-0242ac120002
+  - id: visualizing-entanglement
+    url: v2/intro/visualizing-entanglement
+    uuid: 9e8ceb9e-aebc-11ec-b909-0242ac120002
+  - id: grovers-search-algorithm
+    url: v2/intro/grover-intro
+    uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
+  - id: project
+    url: v2/intro/project
+    uuid: e25c3f90-aebd-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u5165\u9580"
+  type: learning-path
+  url: /v2_introduction
+- sections:
+  - id: introduction
+    url: v2/quantum-machine-learning/introduction
+    uuid: 16e935fc-b51b-11ec-b909-0242ac120002
+  - id: parameterized-quantum-circuits
+    url: v2/quantum-machine-learning/pqc
+    uuid: 19a9f4de-b51b-11ec-b909-0242ac120002
+  - id: data-encoding
+    url: v2/quantum-machine-learning/encoding
+    uuid: 1d09af66-b51b-11ec-b909-0242ac120002
+  - id: training-quantum-circuits
+    url: v2/quantum-machine-learning/training
+    uuid: 1fb38444-b51b-11ec-b909-0242ac120002
+  - id: supervised-learning
+    url: v2/quantum-machine-learning/supervised
+    uuid: 22cf51bc-b51b-11ec-b909-0242ac120002
+  - id: variational-classification
+    url: v2/quantum-machine-learning/vqc
+    uuid: 26951034-b51b-11ec-b909-0242ac120002
+  - id: quantum-feature-maps-kernels
+    url: v2/quantum-machine-learning/kernel
+    uuid: 29b0fda0-b51b-11ec-b909-0242ac120002
+  - id: unsupervised-learning
+    url: v2/quantum-machine-learning/unsupervised
+    uuid: 2cc6b386-b51b-11ec-b909-0242ac120002
+  - id: quantum-generative-adversarial-networks
+    url: v2/quantum-machine-learning/qgan
+    uuid: 2ff2a3e4-b51b-11ec-b909-0242ac120002
+  - id: project
+    url: v2/quantum-machine-learning/project
+    uuid: 345f0c2e-b51b-11ec-b909-0242ac120002
+  title: "\u91CF\u5B50\u6A5F\u68B0\u5B66\u7FD2"
+  type: learning-path
+  url: /v2_machine-learning

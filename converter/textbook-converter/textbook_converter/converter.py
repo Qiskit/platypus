@@ -308,7 +308,7 @@ def merge(md_dir, toc_file_path, output_dir=None):
             with open(md_path, encoding='utf-8') as in_file:
                 for line in in_file:
                     if sections:
-                        line = update_image_path(line, sections[count][1].split('/')[0])
+                        line = update_image_path(line, sections[count][1].rsplit('/', 1)[0])
                     out_file.write(line)
 
 
