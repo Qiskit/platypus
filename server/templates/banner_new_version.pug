@@ -1,0 +1,5 @@
+- var courseName = course.id.split(/_(.*)/)[1]
+q-qiskit-banner.page__banner.page__banner--quiet(data-test="qiskit-banner-new-textbook-version")
+  | Looking for the old version?
+  | Go to <a href="/v1/course/#{courseName}" onclick="textbook.trackClickEvent('old-textbook-version', 'banner')">
+  | /v1/course/#{courseName}</a>.

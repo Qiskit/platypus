@@ -135,8 +135,26 @@ main.body {
     width: max-content;
   }
   
-  .page__banner {
-    height: $textbook-page-banner-height;
+  .page__banner, .qiskit-banner.page__banner {
+   height: $textbook-page-banner-height;
+   color: $text-color-dark;
+   background: $background-color-lighter;
+   // border-bottom: 1px solid $border-color;
+   border-left: 1px solid $border-color;
+
+   a, a:visited {
+     color: $link-color-tertiary;
+   }
+
+   svg {
+     display: inline;
+     height: 1.2rem;
+     vertical-align: text-bottom;
+   }
+  }
+
+  .page__banner.qiskit-banner {
+    padding-left: 1rem;
   }
 
   &__content {

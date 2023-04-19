@@ -25,6 +25,8 @@ import { IS_PRODUCTION } from './configuration'
 
 const TEXTBOOK_HOME = 'https://qiskit.org/learn'
 
+const LATEST_TEXTBOOK_VERSION = 'v2'
+
 const DEFAULT_SHARED_FOLDER = path.join(CONTENT_DIR, 'shared')
 
 const CONFIG: AnalyticsConfig = <AnalyticsConfig>mConfig
@@ -163,12 +165,19 @@ const loadLocaleRawFile = function (path: string, locale: string): string {
   return content
 }
 
+const removeVersionPrefix = function (courseId: string) {
+  // Removes prefixes of the form v2.0_
+  // E.g. `v2_introduction` --> `introduction`
+  return courseId.replace(/v[\d.]+_/, '')
+}
+
 export {
   CONFIG,
   COURSES,
   NOTATIONS,
   GLOSSARY,
   TEXTBOOK_HOME,
+  LATEST_TEXTBOOK_VERSION,
   TRANSLATIONS,
   UNIVERSAL_NOTATIONS,
   TOC,
@@ -178,5 +187,6 @@ export {
   isLearningPath,
   updateGlossary,
   loadLocaleRawFile,
-  tocFilterByType
+  tocFilterByType,
+  removeVersionPrefix
 }
