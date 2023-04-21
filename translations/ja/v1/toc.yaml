@@ -15,7 +15,7 @@
     - id: introduction
       uuid: afcc559e-b519-11ec-b909-0242ac120002
       url: /ch-states/introduction
-    - id: the-atoms-of-computation
+    - id: atoms-computation
       uuid: b31c20ee-b519-11ec-b909-0242ac120002
       url: /ch-states/atoms-computation
     - id: representing-qubit-states
