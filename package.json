@@ -56,7 +56,7 @@
     "@github/clipboard-copy-element": "^1.1.2",
     "@ibm/plex": "^6.1.1",
     "@jupyter-widgets/html-manager": "^0.20.1",
-    "@jupyter-widgets/jupyterlab-manager": "^3.1.0",
+    "@jupyter-widgets/jupyterlab-manager": "^3.1.4",
     "@jupyterlab/mathjax2": "^3.5.2",
     "@jupyterlab/outputarea": "^3.5.2",
     "@jupyterlab/rendermime": "^3.5.2",
