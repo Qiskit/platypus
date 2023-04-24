@@ -220,7 +220,10 @@ const start = () => {
       // displays content from /course/v1_introduction/why-quantum-computing
       // :version - refers to the textbook version
       req.params.course = `${req.params.version}_${req.params.course}`
-      const courseData = await getCourseData(req)
+      const cachedCourseData = await getCourseData(req)
+
+      // make a copy of course data before editing
+      const courseData = JSON.parse(JSON.stringify(cachedCourseData))
 
       courseData?.course.sections.forEach((section: any) => {
         // change to form /v1/course/introduction/...
