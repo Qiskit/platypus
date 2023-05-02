@@ -125,7 +125,7 @@
   - id: introduction
     url: v1/ch-states/introduction
     uuid: afcc559e-b519-11ec-b909-0242ac120002
-  - id: the-atoms-of-computation
+  - id: atoms-computation
     url: v1/ch-states/atoms-computation
     uuid: b31c20ee-b519-11ec-b909-0242ac120002
   - id: representing-qubit-states
@@ -294,10 +294,13 @@
   - id: single-systems
     url: v2/basics/single-systems
     uuid: dd5680be-7490-401e-9e68-c1ec7d0f5d61
+  - id: multiple-systems
+    url: v2/basics/multiple-systems
+    uuid: 327b128f-4fec-410a-a3f9-079939002bf2
   - id: quantum-circuits
     url: v2/basics/quantum-circuits
     uuid: 57d5452e-85cd-40f8-a290-11466213c1a6
-  - id: entanglement-action
+  - id: entanglement-in-action
     url: v2/basics/entanglement-in-action
     uuid: 366f7150-4c04-4763-8269-ae6180812b73
   title: "\u91CF\u5B50\u60C5\u5831\u306E\u57FA\u790E"

@@ -15,7 +15,7 @@ export class QBlock extends CustomElementView {
     this.$title = this.$('.qb-title')
     this.$body = this.$('.qb-body')
 
-    if (this.$body.children.length) {
+    if (this.$body.children.length && !this.hasClass('note')) {
       const t = this.$body.children.shift()
       this.$title.append(t)
     }
