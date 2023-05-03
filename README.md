@@ -1,5 +1,10 @@
 # platypus
-This repository is home of the new [Qiskit Textbook](https://qiskit.org/learn/).
+
+> :warning: This repository is for pages at [Qiskit Textbook v1](https://qiskit.org/learn/course/legacy-content/). This is an old version of the textbook as in April 2023. If your issue is about the current version of the textbook (i.e. any page on the current [Qiskit Textbook](https://qiskit.org/learn/)), please make your issue / PR at https://github.com/Qiskit/textbook.
+
+---
+
+This repository is home of the [Qiskit Textbook v1 (legacy)](https://qiskit.org/learn/course/legacy-content/).
 
 The previous version of the Qiskit Textbook textbook can be found [here](https://github.com/qiskit-community/qiskit-textbook).
 
