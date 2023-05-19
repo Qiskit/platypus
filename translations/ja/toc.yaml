@@ -591,3 +591,14 @@
   title: "\u91CF\u5B50\u6A5F\u68B0\u5B66\u7FD2"
   type: learning-path
   url: /v2_machine-learning
+
+- title: Variational Algorithm Design
+  url: /algorithm-design
+  type: learning-path
+  sections:
+    - id: variational
+      uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
+      url: /algorithm-design/variational/variational
+    - id: badge
+      uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
+      url: /algorithm-design/badge/badge
