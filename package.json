@@ -101,7 +101,7 @@
     "@types/jsdom": "^16.2.15",
     "@types/lodash": "^4.14.194",
     "@types/markdown-it": "^12.2.3",
-    "@types/node-fetch": "^2.6.3",
+    "@types/node-fetch": "^2.6.4",
     "@types/pug": "2.0.6",
     "@types/validator": "13.7.15",
     "@vue/cli-plugin-typescript": "4.5.19",
