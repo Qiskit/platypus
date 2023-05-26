@@ -83,7 +83,7 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
 
 const ALGORITHM_DESIGN: MegaDropdownMenuGroup = {
   title: {
-    label: 'Algorithm Design Learning Path',
+    label: 'Variational algorithm design',
     url: `${pathAlgorithmDesign}`,
     segment: {
       cta: wholeSection, location: sectionAlgorithmDesign
