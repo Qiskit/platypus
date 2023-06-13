@@ -85,3 +85,90 @@
   title: "Introducci\xF3n a la Computaci\xF3n Cu\xE1ntica"
   type: learning-path
   url: /v2_introduction
+
+
+#---- Below was added by machine ---
+
+- sections:
+  - id: introduction
+    url: v2/ch-states/introduction
+    uuid: afcc559e-b519-11ec-b909-0242ac120002
+  - id: the-atoms-of-computation
+    url: v2/ch-states/atoms-computation
+    uuid: b31c20ee-b519-11ec-b909-0242ac120002
+  - id: representing-qubit-states
+    url: v2/ch-states/representing-qubit-states
+    uuid: b81717ca-b519-11ec-b909-0242ac120002
+  - id: single-qubit-gates
+    url: v2/ch-states/single-qubit-gates
+    uuid: bd4334a4-b519-11ec-b909-0242ac120002
+  - id: the-case-for-quantum-computers
+    url: v2/ch-states/case-for-quantum
+    uuid: c0bbff62-b519-11ec-b909-0242ac120002
+  title: "Estados cu\xE1nticos y Qubits"
+  url: /v2_ch-states
+- sections:
+  - id: introduction
+    url: v2/ch-gates/introduction
+    uuid: c50f4c90-b519-11ec-b909-0242ac120002
+  - id: multiple-qubits-and-entangled-states
+    url: v2/ch-gates/multiple-qubits-entangled-states
+    uuid: c7cfe502-b519-11ec-b909-0242ac120002
+  - id: basic-circuit-identities
+    url: v2/ch-gates/more-circuit-identities
+    uuid: ce8ce75a-b519-11ec-b909-0242ac120002
+  - id: proving-universality
+    url: v2/ch-gates/proving-universality
+    uuid: d15d3548-b519-11ec-b909-0242ac120002
+  - id: classical-computation-on-a-quantum-computer
+    url: v2/ch-gates/oracles
+    uuid: d4f6e424-b519-11ec-b909-0242ac120002
+  title: "M\xFAltiples Qubits y entrelazamiento"
+  url: /v2_ch-gates
+- sections:
+  - id: quantum-circuits
+    url: v2/ch-algorithms/defining-quantum-circuits
+    uuid: d90cbfb6-b519-11ec-b909-0242ac120002
+  - id: deutsch-jozsa-algorithm
+    url: v2/ch-algorithms/deutsch-jozsa
+    uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
+  - id: bernstein-vazirani-algorithm
+    url: v2/ch-algorithms/bernstein-vazirani
+    uuid: df6e5a40-b519-11ec-b909-0242ac120002
+  title: "Protocolos cu\xE1nticos y algoritmos cu\xE1nticos"
+  url: /v2_ch-algorithms
+- sections:
+  - id: simulating-molecules-using-vqe
+    url: v2/ch-applications/vqe-molecules
+    uuid: 041df288-b51a-11ec-b909-0242ac120002
+  - id: solving-combinatorial-optimization-problems-using-qaoa
+    url: v2/ch-applications/qaoa
+    uuid: 06ff7ada-b51a-11ec-b909-0242ac120002
+  title: "Algoritmos cu\xE1nticos para aplicaciones"
+  url: /v2_ch-applications
+- sections:
+  - id: lab-9-quantum-simulation-as-a-search-algorithm
+    url: v2/ch-labs/Lab09_QuantumSimulationSearchAlgorithm
+    uuid: 59a076f4-b51a-11ec-b909-0242ac120002
+  title: "Laboratorios de computaci\xF3n cu\xE1ntica"
+  url: /v2_ch-labs
+- sections:
+  - id: estimating-pi-using-quantum-phase-estimation-algorithm
+    url: v2/ch-demos/piday-code
+    uuid: 69b9707c-b51a-11ec-b909-0242ac120002
+  title: Juegos y demostraciones
+  url: /v2_ch-demos
+- sections:
+  - id: phase-kickback
+    url: v2/algorithms/phase-kickback
+    uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
+  title: "Algoritmos cu\xE1nticos"
+  type: learning-path
+  url: /v2_algorithms
+- sections:
+  - id: why-quantum-computing
+    url: v2/intro/why-quantum-computing
+    uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
+  title: "Introducci\xF3n a la Computaci\xF3n Cu\xE1ntica"
+  type: learning-path
+  url: /v2_introduction
