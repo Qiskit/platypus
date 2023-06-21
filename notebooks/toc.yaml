@@ -18,6 +18,42 @@
 #                       # Generate new ids with https://www.uuidgenerator.net
 #       url: /my-course/my-notebook  # Path to source notebook, relative to this file
 
+- title: Variational Algorithm Design
+  url: /algorithm-design
+  type: learning-path
+  sections:
+    - title: Variational Algorithms
+      id: variational
+      uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
+      url: /algorithm-design/variational/variational
+    - title: Reference States
+      id: reference
+      uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
+      url: /algorithm-design/reference/reference
+    - title: Ansatze and Variational Forms
+      id: ansatz
+      uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
+      url: /algorithm-design/ansatz/ansatz
+    - title: Cost functions
+      id: cost_function
+      uuid: affdafb6-5b20-4113-b6da-dd758a4bae2a
+      url: /algorithm-design/cost_function/cost_function
+    - title: Optimization Loop
+      id: optimization
+      uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
+      url: /algorithm-design/optimization/optimization
+    - title: Instances and Extensions
+      id: instances
+      uuid: 46d1906c-c131-4fbb-8557-c0197b5b8b97
+      url: /algorithm-design/instances/instances
+    - title: Applications
+      id: applications
+      uuid: 19e65025-7663-4067-833b-32422f75d428
+      url: /algorithm-design/applications/applications
+    - title: Earn your badge
+      id: badge
+      uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
+      url: /algorithm-design/badge/badge
 
 - title: Problem Sets
   url: /problem-sets
@@ -1042,6 +1078,7 @@
   url: /v1_ch-demos
 
 
+
 #---- Below was added by machine ---
 
 - id: basics-quantum-information
@@ -1155,6 +1192,71 @@
   title: Basics of quantum information
   type: course
   url: /v2_basics
+- id: fundamentals-quantum-algorithms
+  overviewInfo:
+    description:
+      long: 'This is the second unit of the "Understanding quantum information and
+
+        computation" series, which explains quantum information and computation at
+        a
+
+        detailed mathematical level.
+
+        This unit, "Fundamentals of quantum algorithms", explores computational
+
+        advantages of quantum information, including what we can do with quantum
+
+        computers and their advantages over classical computers. The unit begins
+
+        with quantum query algorithms, which offer simple proof of concept
+
+        demonstrations for quantum algorithms, and then moves on to quantum
+
+        algorithms for problems including integer factorization and searching, which
+
+        are more representative of the types of computational problems that might
+        be
+
+        encountered in real-world scenarios.
+
+        '
+      short: 'Discover how we can use quantum systems to solve problems more
+
+        efficiently, including problems with real-world applications such as
+
+        searching and factoring.
+
+        '
+    externalRecommendedReadings:
+    - author: Michael Nielsen, Isaac Chuang,
+      link: https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE#overview
+      title: Quantum Computation and Quantum Information (Chapters 4-6)
+    - author: Phillip Kaye, Raymond Laflamme, Michele Mosca,
+      link: https://global.oup.com/academic/product/an-introduction-to-quantum-computing-9780198570493?cc=gb&lang=en&
+      title: An Introduction to Quantum Computing (Chapters 5-8)
+    - author: Richard Cleve,
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart1.pdf
+      title: "Quantum Information Processing \u2014 Quantum Algorithms I"
+    - author: Richard Cleve,
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart2.pdf
+      title: "Quantum Information Processing \u2014 Quantum Algorithms II"
+    - author: Richard Cleve,
+      link: http://cleve.iqc.uwaterloo.ca/resources/QIC-710-F21/Qic710QuantumAlgorithmsPart3.pdf
+      title: "Quantum Information Processing \u2014 Quantum Algorithms III"
+    externalRecommendedReadingsPreamble: 'Alongside this course, you may find these
+      resources helpful or interesting.
+
+      '
+    thumbnailUrl: /algorithms/overview/hero.png
+  sections:
+  - id: query-algorithms
+    title: Quantum query algorithms
+    url: v2/algorithms/quantum-query-algorithms
+    uuid: f236ed68-91f2-470a-8152-29f09e60a30c
+  subtitle: 'Unit 2: Fundamentals of quantum algorithms'
+  title: Fundamentals of quantum algorithms
+  type: course
+  url: /v2_algorithms
 - id: introduction-course
   overviewInfo:
     description:
@@ -1418,7 +1520,7 @@
     title: Introduction
     url: v2/ch-states/introduction
     uuid: afcc559e-b519-11ec-b909-0242ac120002
-  - id: the-atoms-of-computation
+  - id: atoms-computation
     previewImgUrl: /ch-states/overview/atoms-computation.png
     title: The atoms of computation
     url: v2/ch-states/atoms-computation
@@ -2023,7 +2125,7 @@
     title: Hello Qiskit game
     url: v2/ch-ex/hello-qiskit
     uuid: 9bee7d3f-c43e-4088-8e30-44154724f2e6
-  - id: estimating-pi-using-quantum-phase-estimation-algorithm
+  - id: estimating-pi-pi-using-quantum-phase-estimation-algorithm
     previewImgUrl: /ch-demos/overview/piday-code.png
     title: Estimating pi using the quantum phase estimation algorithm
     url: v2/ch-demos/piday-code
@@ -2057,12 +2159,12 @@
         '
     thumbnailUrl: /ch-appendix/overview/header.png
   sections:
-  - id: basic-qiskit-syntax
+  - id: qiskit
     previewImgUrl: /ch-appendix/overview/qiskit.png
     title: Qiskit
     url: v2/ch-appendix/qiskit
     uuid: b19f5173-5650-4a99-9ccd-076f561c4f24
-  - id: an-introduction-to-linear-algebra-for-quantum-computing
+  - id: linear_algebra
     previewImgUrl: /ch-appendix/overview/linear_algebra.png
     title: Linear algebra
     url: v2/ch-appendix/linear_algebra

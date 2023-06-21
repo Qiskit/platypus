@@ -1,7 +1,7 @@
 <template>
   <div ref="outputDiv" class="code-output">
     <div>
-      <div v-if="!kernel && !error" class="code-output__state-info">
+      <div v-if="kernelLoading && !error" class="code-output__state-info">
         <bx-loading class="code-output__state-info__icon" assistive-text="Connecting to the server" type="small" />
         {{ $translate('Connecting to the server') }}
       </div>
@@ -45,6 +45,7 @@ export default defineComponent({
   },
   data () {
     return {
+      kernelLoading: false,
       kernelPromise: undefined as Promise<IKernelConnection> | undefined,
       kernel: undefined as IKernelConnection | undefined,
       outputArea: undefined as OutputArea | undefined,
@@ -53,25 +54,12 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.$emit('loadingKernel')
-    const outputDivRef = (this.$refs.outputDiv as HTMLDivElement)
-
-    this.kernelPromise = requestBinderKernel()
-
-    this.kernelPromise.then((kernel: IKernelConnection) => {
-      this.kernel = kernel
-      this.$emit('kernelReady')
-      this.outputArea = createOutputArea(outputDivRef)
-    }, (error: Error) => {
-      this.error = error.message
-    })
-
     this.apiTokenPromise = getQiskitUser().then(user => user?.apiToken)
   },
   methods: {
-    needsApiToken (code: string) {
+    needsApiToken (code: string, usesHardware: boolean = false) {
       return this.apiTokenPromise!.then((apiToken?: string) => {
-        return this.isBackendExecution(code) && !apiToken
+        return (usesHardware || this.isBackendExecution(code)) && !apiToken
       })
     },
     isBackendExecution (code: string) {
@@ -103,9 +91,9 @@ export default defineComponent({
     },
     _executeCode (code: string) {
       this.error = ''
-      this.outputArea!.setHidden(true)
-      this.kernelPromise!.then((kernel: IKernelConnection) => {
+      this._initKernel()!.then((kernel: IKernelConnection) => {
         this.$emit('running')
+        this.outputArea!.setHidden(true)
         try {
           const requestFuture = kernel.requestExecute({ code })
           this.setOutputFuture(requestFuture)
@@ -127,6 +115,26 @@ export default defineComponent({
           setTimeout(() => this.$emit('finished'), 800)
         }
       })
+    },
+    _initKernel (): Promise<IKernelConnection> {
+      if (this.kernelPromise) {
+        return this.kernelPromise
+      }
+
+      this.$emit('kernelLoading')
+      this.kernelLoading = true
+      const outputDivRef = (this.$refs.outputDiv as HTMLDivElement)
+
+      this.kernelPromise = requestBinderKernel()
+
+      return this.kernelPromise.then((kernel: IKernelConnection) => {
+        this.kernelLoading = false
+        this.$emit('kernelReady')
+        this.outputArea = createOutputArea(outputDivRef)
+        return kernel
+      }, (error: Error) => {
+        this.error = error.message
+      }) as Promise<IKernelConnection>
     },
     setOutputFuture (future : IOutputShellFuture) {
       this.outputArea!.future = future

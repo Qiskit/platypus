@@ -13,6 +13,7 @@
       <ExerciseActionsBar
         class="code-exercise__editor-block__actions-bar"
         :is-running="isKernelBusy"
+        :is-loading="isKernelLoading"
         :is-api-token-needed="isApiTokenNeeded"
         :run-enabled="isKernelReady"
         :grade-enabled="isKernelReady && isGradingExercise"
@@ -35,6 +36,7 @@
       @running="kernelRunning"
       @finished="kernelFinished"
       @kernelReady="kernelReady"
+      @kernelLoading="kernelLoading"
       @correctAnswer="gradeSuccess"
     />
     <div
@@ -111,6 +113,7 @@ export default defineComponent({
       initialCode: '',
       isKernelBusy: false,
       isKernelReady: false,
+      isKernelLoading: false,
       hideInitialOutput: false,
       isApiTokenNeeded: this.usesHardware,
       id: 0
@@ -163,8 +166,8 @@ export default defineComponent({
     codeChanged (code: string) {
       this.code = code
       const codeOutput: any = this.$refs.output
-      codeOutput.needsApiToken(this.code).then((isNeeded: boolean) => {
-        this.isApiTokenNeeded = isNeeded || this.usesHardware
+      codeOutput.needsApiToken(this.code, this.usesHardware).then((isNeeded: boolean) => {
+        this.isApiTokenNeeded = isNeeded
       })
     },
     keyboardRun () {
@@ -183,12 +186,17 @@ export default defineComponent({
     kernelRunning () {
       this.isKernelBusy = true
       this.hideInitialOutput = true
+      this.isKernelLoading = false
     },
     kernelFinished () {
       this.isKernelBusy = false
     },
     kernelReady () {
       this.isKernelReady = true
+      this.isKernelLoading = false
+    },
+    kernelLoading () {
+      this.isKernelLoading = true
     }
   }
 })

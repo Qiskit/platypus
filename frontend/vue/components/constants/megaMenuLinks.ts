@@ -2,6 +2,7 @@ import { NavLink } from './../../../constants/menuLinks'
 
 const wholeSection = 'whole-section'
 const sectionBasicsCourse = 'basics-course'
+const sectionAlgorithmDesign = 'algorithm-design'
 const sectionIntroductionCourse = 'introduction-course'
 const sectionQMLCourse = 'quantum-machine-learning'
 const sectionPrerequisites = 'prerequisites'
@@ -18,6 +19,7 @@ const sectionSummerSchool = 'summer-schools'
 const sectionProblemSets = 'problem-sets'
 
 const pathBasicsCourse = '/course/basics'
+const pathAlgorithmDesign = '/course/algorithm-design'
 const pathIntroductionCourse = '/course/introduction'
 const pathQuantumMachineLearning = '/course/machine-learning'
 const pathPrerequisites = '/course/ch-prerequisites'
@@ -70,10 +72,71 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Quantum protocols and games',
-      url: `${pathBasicsCourse}/protocols-games`,
+      label: 'Entanglement in action',
+      url: `${pathBasicsCourse}/entanglement-in-action`,
       segment: {
-        cta: 'protocols-games', location: sectionBasicsCourse
+        cta: 'entanglement-in-action', location: sectionBasicsCourse
+      }
+    }
+  ]
+}
+
+const ALGORITHM_DESIGN: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Variational algorithm design',
+    url: `${pathAlgorithmDesign}`,
+    segment: {
+      cta: wholeSection, location: sectionAlgorithmDesign
+    }
+  },
+  content: [
+    {
+      label: 'Variational Algorithms',
+      url: `${pathAlgorithmDesign}/variational`,
+      segment: {
+        cta: 'variational', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Reference States',
+      url: `${pathAlgorithmDesign}/reference`,
+      segment: {
+        cta: 'reference', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Ansatze and Variational Forms',
+      url: `${pathAlgorithmDesign}/ansatz`,
+      segment: {
+        cta: 'reference', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Optimization Loop',
+      url: `${pathAlgorithmDesign}/optimization`,
+      segment: {
+        cta: 'optimization', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Instances and Extensions',
+      url: `${pathAlgorithmDesign}/instances`,
+      segment: {
+        cta: 'instances', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Applications',
+      url: `${pathAlgorithmDesign}/applications`,
+      segment: {
+        cta: 'applications', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Earn your badge',
+      url: `${pathAlgorithmDesign}/badge`,
+      segment: {
+        cta: 'badge', location: sectionAlgorithmDesign
       }
     }
   ]
@@ -757,6 +820,27 @@ const PROBLEM_SETS : MegaDropdownMenuGroup = {
       url: `${pathProblemSets}/quantum_enigma_problem_set`,
       segment: {
         cta: 'quantum_enigma_problem_set', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 002 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_002`,
+      segment: {
+        cta: 'quantum_enigma_002', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 003 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_003`,
+      segment: {
+        cta: 'quantum_enigma_003', location: sectionProblemSets
+      }
+    },
+    {
+      label: 'Quantum Enigma 004 - Problem Set',
+      url: `${pathProblemSets}/quantum_enigma_004`,
+      segment: {
+        cta: 'quantum_enigma_004', location: sectionProblemSets
       }
     }
   ]
@@ -1469,6 +1553,7 @@ const COURSES_SECTION: MegaDropdownMenuSection = {
   title: 'Courses',
   content: [
     BASICS_COURSE,
+    ALGORITHM_DESIGN,
     INTRODUCTION_COURSE,
     QML_COURSE
   ]
