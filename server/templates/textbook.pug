@@ -18,11 +18,18 @@ html(lang=course.locale dir=dir)
         include sidebar
 
         article.c-textbook__page(data-test="textbook-page" tabindex="0")
-          include banner
+          //- version info banner (skip pages that don't have v1 equivalents)
+          if !(['v2_basics', 'v2_algorithms', 'v2_introduction', 'v2_machine-learning'].includes(course.id))
+            if (course.id.split('_')[0] === 'v2')
+              include banner_new_version
+            else if (/^v[\d.]+_/.test(course.id))
+              include banner_old_version
+
           .reveal-banner
             | #{__('Reading time')}: ~#{section.duration} min
             // keep this for mathigon stuff
             .complete
+
           div.c-textbook__content#textbook_content
             .page-title !{section.title}
             .steps

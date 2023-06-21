@@ -14,9 +14,9 @@ import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 import { generateMockData } from './populate-database'
 
 import {
-  CONFIG, NOTATIONS, TEXTBOOK_HOME, TRANSLATIONS, UNIVERSAL_NOTATIONS,
+  CONFIG, NOTATIONS, TEXTBOOK_HOME, LATEST_TEXTBOOK_VERSION, TRANSLATIONS, UNIVERSAL_NOTATIONS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
-  updateGlossary, loadLocaleRawFile, tocFilterByType
+  updateGlossary, loadLocaleRawFile, tocFilterByType, removeVersionPrefix
 } from './utilities'
 import { TocCourse } from './interfaces'
 
@@ -209,6 +209,55 @@ const start = () => {
         privacyPolicyMD,
         translationsJSON
       })
+    })
+    .get('/:version/course/:course', (req, res, next) => {
+      // redirect to first page when no page specified
+      const course = getCourse(`${req.params.version}_${req.params.course}`, req.locale.id)
+      return course ? res.redirect(`/${req.params.version}/course/${removeVersionPrefix(course.id)}/${course.sections[0].id}`) : next()
+    })
+    .get('/:version/course/:course/:section', async (req, res, next) => {
+      // example URL: /v1/course/introduction/why-quantum-computing
+      // displays content from /course/v1_introduction/why-quantum-computing
+      // :version - refers to the textbook version
+      req.params.course = `${req.params.version}_${req.params.course}`
+      const cachedCourseData = await getCourseData(req)
+
+      // make a copy of course data before editing
+      const courseData = JSON.parse(JSON.stringify(cachedCourseData))
+
+      courseData?.course.sections.forEach((section: any) => {
+        // change to form /v1/course/introduction/...
+        section.url = section.url.replace('course/', `${req.params.version}/course/`)
+        section.url = section.url.replace(req.params.course, removeVersionPrefix(req.params.course))
+      })
+
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
+    })
+    .get('/course/:course', (req, res, next) => {
+      // redirect to first page when no page specified
+      const course = getCourse(`${LATEST_TEXTBOOK_VERSION}_${req.params.course}`, req.locale.id)
+      return course ? res.redirect(`/course/${removeVersionPrefix(course.id)}/${course.sections[0].id}`) : next()
+    })
+    .get('/course/:course/:section', async (req, res, next) => {
+      // example URL: /course/introduction/why-quantum-computing
+      // gets content from latest version (e.g. /course/v2_introduction/why-quantum-computing)
+      req.params.course = `${LATEST_TEXTBOOK_VERSION}_${req.params.course}`
+      const courseData = await getCourseData(req)
+
+      courseData?.course.sections.forEach((section: any) => {
+        // change /course/v2_introduction/page --> /course/introduction/page
+        section.url = section.url.replace(req.params.course, removeVersionPrefix(req.params.course))
+      })
+
+      if (!courseData) {
+        return next()
+      } else {
+        res.render('textbook', courseData)
+      }
     })
     .get('/summer-school/:course', (req, res, next) => {
       // redirect to first lecture when no lecture specified

@@ -2,6 +2,7 @@ import { NavLink } from './../../../constants/menuLinks'
 
 const wholeSection = 'whole-section'
 const sectionBasicsCourse = 'basics-course'
+const sectionAlgorithmDesign = 'algorithm-design'
 const sectionIntroductionCourse = 'introduction-course'
 const sectionQMLCourse = 'quantum-machine-learning'
 const sectionPrerequisites = 'prerequisites'
@@ -18,6 +19,7 @@ const sectionSummerSchool = 'summer-schools'
 const sectionProblemSets = 'problem-sets'
 
 const pathBasicsCourse = '/course/basics'
+const pathAlgorithmDesign = '/course/algorithm-design'
 const pathIntroductionCourse = '/course/introduction'
 const pathQuantumMachineLearning = '/course/machine-learning'
 const pathPrerequisites = '/course/ch-prerequisites'
@@ -74,6 +76,67 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       url: `${pathBasicsCourse}/entanglement-in-action`,
       segment: {
         cta: 'entanglement-in-action', location: sectionBasicsCourse
+      }
+    }
+  ]
+}
+
+const ALGORITHM_DESIGN: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Variational algorithm design',
+    url: `${pathAlgorithmDesign}`,
+    segment: {
+      cta: wholeSection, location: sectionAlgorithmDesign
+    }
+  },
+  content: [
+    {
+      label: 'Variational Algorithms',
+      url: `${pathAlgorithmDesign}/variational`,
+      segment: {
+        cta: 'variational', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Reference States',
+      url: `${pathAlgorithmDesign}/reference`,
+      segment: {
+        cta: 'reference', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Ansatze and Variational Forms',
+      url: `${pathAlgorithmDesign}/ansatz`,
+      segment: {
+        cta: 'reference', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Optimization Loop',
+      url: `${pathAlgorithmDesign}/optimization`,
+      segment: {
+        cta: 'optimization', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Instances and Extensions',
+      url: `${pathAlgorithmDesign}/instances`,
+      segment: {
+        cta: 'instances', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Applications',
+      url: `${pathAlgorithmDesign}/applications`,
+      segment: {
+        cta: 'applications', location: sectionAlgorithmDesign
+      }
+    },
+    {
+      label: 'Earn your badge',
+      url: `${pathAlgorithmDesign}/badge`,
+      segment: {
+        cta: 'badge', location: sectionAlgorithmDesign
       }
     }
   ]
@@ -392,27 +455,6 @@ const GAMES_AND_DEMOS: MegaDropdownMenuGroup = {
       segment: {
         cta: 'widgets-demonstration', location: sectionGamesAndDemos
       }
-    },
-    {
-      label: 'Quantum Coin Game',
-      url: `${pathGamesAndDemos}/coin-game`,
-      segment: {
-        cta: 'coin-game', location: sectionGamesAndDemos
-      }
-    },
-    {
-      label: 'First Quantum Game',
-      url: `${pathGamesAndDemos}/first-quantum-game`,
-      segment: {
-        cta: 'first-quantum-game', location: sectionGamesAndDemos
-      }
-    },
-    {
-      label: 'Variational Quantum Regression',
-      url: `${pathGamesAndDemos}/variational-quantum-regression`,
-      segment: {
-        cta: 'variational-quantum-regression', location: sectionGamesAndDemos
-      }
     }
   ]
 }
@@ -476,13 +518,6 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       }
     },
     {
-      label: 'Hidden Shift Problem',
-      url: `${pathProtocolsAndAlgorithms}/hidden-shift-problem`,
-      segment: {
-        cta: 'hidden-shift-problem', location: sectionProtocolsAndAlgorithms
-      }
-    },
-    {
       label: 'Grover\'s Algorithm',
       url: `${pathProtocolsAndAlgorithms}/grovers-algorithm`,
       segment: {
@@ -515,13 +550,6 @@ const QUANTUM_PROTOCOLS_AND_ALGORITHMS: MegaDropdownMenuGroup = {
       url: `${pathProtocolsAndAlgorithms}/quantum-key-distribution`,
       segment: {
         cta: 'quantum-key-distribution', location: sectionProtocolsAndAlgorithms
-      }
-    },
-    {
-      label: 'Quantum Walk Search Algorithm',
-      url: `${pathProtocolsAndAlgorithms}/quantum-walk-search-algorithm`,
-      segment: {
-        cta: 'quantum-walk-search-algorithm', location: sectionProtocolsAndAlgorithms
       }
     }
   ]
@@ -644,20 +672,6 @@ const QUANTUM_ALGORITHMS_FOR_APPS : MegaDropdownMenuGroup = {
       url: `${pathApps}/flexible-representation-of-quantum-images-frqi`,
       segment: {
         cta: 'flexible-representation-of-quantum-images-frqi', location: sectionApps
-      }
-    },
-    {
-      label: 'Quantum Edge Detection',
-      url: `${pathApps}/quantum-edge-detection`,
-      segment: {
-        cta: 'quantum-edge-detection', location: sectionApps
-      }
-    },
-    {
-      label: 'Travelling Salesman Problem',
-      url: `${pathApps}/tsp`,
-      segment: {
-        cta: 'tsp', location: sectionApps
       }
     }
   ]
@@ -1539,6 +1553,7 @@ const COURSES_SECTION: MegaDropdownMenuSection = {
   title: 'Courses',
   content: [
     BASICS_COURSE,
+    ALGORITHM_DESIGN,
     INTRODUCTION_COURSE,
     QML_COURSE
   ]
