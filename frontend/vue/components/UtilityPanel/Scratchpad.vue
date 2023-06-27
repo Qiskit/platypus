@@ -20,6 +20,7 @@
         <ExerciseActionsBar
           class="scratchpad__editor-block__actions-bar"
           :is-running="isKernelBusy"
+          :is-loading="isKernelLoading"
           :run-enabled="isKernelReady"
           :grade-enabled="isKernelReady && isGradingExercise"
           :is-api-token-needed="isApiTokenNeeded"
@@ -41,6 +42,7 @@
         @running="kernelRunning"
         @finished="kernelFinished"
         @kernelReady="kernelReady"
+        @kernelLoading="kernelLoading"
       />
     </div>
   </div>
@@ -75,6 +77,7 @@ type scratchpadCopyRequestEvent = Event & { detail: { code: string } }
 })
 export default class Scratchpad extends Vue {
   code = INITIAL_CODE
+  isKernelLoading = false
   isKernelBusy = false
   isKernelReady = false
   isGradingExercise = false
@@ -120,6 +123,7 @@ export default class Scratchpad extends Vue {
 
   kernelRunning () {
     this.isKernelBusy = true
+    this.isKernelLoading = true
   }
 
   kernelFinished () {
@@ -128,6 +132,11 @@ export default class Scratchpad extends Vue {
 
   kernelReady () {
     this.isKernelReady = true
+    this.isKernelLoading = true
+  }
+
+  kernelLoading () {
+    this.isKernelLoading = true
   }
 }
 </script>

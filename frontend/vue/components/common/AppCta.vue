@@ -84,7 +84,7 @@ export default class AppCta extends Vue.with(Props) {
   align-items: center;
 
   padding: $spacing-05;
-  width: 4 * $column-size-large;
+  width: 4 * $column-size-small;
   max-width: 100%;
 
   @include mq($from: medium, $until: large) {
