@@ -4,6 +4,10 @@ First of all, **thank you** for showing interest in translating (localizing) Qis
 
 **Please note that you must sign up separately if you want to join the localization project for [Qiskit Documentation](https://qiskit.org/documentation/). For signing up to join the Qiskit Documentation Localization project, please refer the steps outlined [here](https://github.com/qiskit-community/qiskit-translations/blob/master/README.md).**
 
+$$\color{#D22222}\textsf{\Large\&#x26A0;\kern{0.2cm}\Large No new joining requests will be accepted in GitLocalize.}$$
+
+$$\color{#D22222}\textsf{\qquad\kern{0.2cm}\Large This is due the upcoming changes on Qiskit Textbook.}$$
+
 If you are interested in contributing to translating the Qiskit Textbook, please follow the instructions below.</br>
 
 ## Steps to participate in Qiskit textbook translations:
