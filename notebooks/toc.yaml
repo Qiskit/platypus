@@ -110,6 +110,10 @@
       id: utokyo_04
       uuid: 88c62314-cdee-11ed-afa1-0242ac120002
       url: /problem-sets/utokyo_04
+    - title: Quantum Kittens Notepad
+      id: quantumkittens
+      uuid: 949b1ba2-166b-11ee-be56-0242ac120002
+      url: /problem-sets/quantum_kittens_notepad
 
 
 - title: Examples
