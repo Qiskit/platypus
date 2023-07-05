@@ -599,6 +599,12 @@
     - id: variational
       uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
       url: /algorithm-design/variational/variational
+    - id: reference
+      uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
+      url: /algorithm-design/reference/reference
+    - id: optimization
+      uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
+      url: /algorithm-design/optimization/optimization
     - id: badge
       uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
       url: /algorithm-design/badge/badge
