@@ -382,15 +382,18 @@
   - id: quantum-counting
     url: v2/ch-algorithms/quantum-counting
     uuid: f1a9942c-b519-11ec-b909-0242ac120002
-  - id: quantum-teleportation
-    url: v2/ch-algorithms/teleportation
-    uuid: f4f4a090-b519-11ec-b909-0242ac120002
-  - id: superdense-coding
-    url: v2/ch-algorithms/superdense-coding
-    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+  - id: quantum-walk-search-algorithm
+    url: v2/ch-algorithms/quantum-walk-search-algorithm
+    uuid: b2ef52cf-0ce4-494a-8142-fd00e0e8330d
   - id: quantum-key-distribution
     url: v2/ch-algorithms/quantum-key-distribution
     uuid: fbafa8c6-b519-11ec-b909-0242ac120002
+  - id: superdense-coding
+    url: v2/ch-algorithms/superdense-coding
+    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+  - id: quantum-teleportation
+    url: v2/ch-algorithms/teleportation
+    uuid: f4f4a090-b519-11ec-b909-0242ac120002
   title: "\u91CF\u5B50\u30D7\u30ED\u30C8\u30B3\u30EB\u3068\u91CF\u5B50\u30A2\u30EB\
     \u30B4\u30EA\u30BA\u30E0"
   url: /v2_ch-algorithms
@@ -599,6 +602,12 @@
     - id: variational
       uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
       url: /algorithm-design/variational/variational
+    - id: reference
+      uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
+      url: /algorithm-design/reference/reference
+    - id: optimization
+      uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
+      url: /algorithm-design/optimization/optimization
     - id: badge
       uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
       url: /algorithm-design/badge/badge
