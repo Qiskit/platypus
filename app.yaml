@@ -4,10 +4,10 @@ runtime: nodejs
 env: flex
 
 handlers:
-  # Images used in the QPE tutorial notebook in Challenges portal for QAL
-  - url: /content/ch-algorithms/images/(.*\.(gif|png|jpg|svg))$
-    static_files: content/v2/ch-algorithms/images/\1
-    upload: content/v2/ch-algorithms/images/.*\.(gif|png|jpg|svg)$
+  # Image used in the QPE tutorial notebook in Challenges portal for QAL
+  - url: /content/ch-algorithms/images/qpe_tex_qz.png
+    static_files: content/v2/ch-algorithms/images/qpe_tex_qz.png
+    upload: content/v2/ch-algorithms/images/qpe_tex_qz.png
     redirect_http_response_code: 301
 
   - url: /.*
