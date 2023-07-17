@@ -2,4 +2,4 @@ ipython>=6
 nbformat>=4
 nbconvert>=5
 requests
-pyyaml==5.3.1
+pyyaml==5.4
