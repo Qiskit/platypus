@@ -1,3 +1,4 @@
+Cython<3.0
 ipython>=6
 nbformat>=4
 nbconvert>=5
