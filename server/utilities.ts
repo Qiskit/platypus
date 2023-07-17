@@ -25,6 +25,7 @@ import { IS_PRODUCTION } from './configuration'
 
 const TEXTBOOK_HOME = 'https://qiskit.org/learn'
 
+// NOTE: if changing this also update the same variable in 'converter/common.ts'
 const LATEST_TEXTBOOK_VERSION = 'v2'
 
 const DEFAULT_SHARED_FOLDER = path.join(CONTENT_DIR, 'shared')
