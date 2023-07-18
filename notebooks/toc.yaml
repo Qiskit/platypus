@@ -1079,6 +1079,7 @@
 
 
 
+
 #---- Below was added by machine ---
 
 - id: basics-quantum-information
@@ -1251,8 +1252,16 @@
   sections:
   - id: query-algorithms
     title: Quantum query algorithms
-    url: v2/algorithms/quantum-query-algorithms
+    url: v2/algorithms/01.query-algorithms/quantum-query-algorithms
     uuid: f236ed68-91f2-470a-8152-29f09e60a30c
+  - id: algorithmic-foundations
+    title: Algorithmic foundations
+    url: v2/algorithms/02.algorithmic-foundations/algorithmic-foundations
+    uuid: 00b26932-7d64-436c-86a9-56091c0419ac
+  - id: phase-estimation
+    title: Phase estimation
+    url: v2/algorithms/03.phase-estimation/phase-estimation-and-factoring
+    uuid: b49f2ca0-240d-417a-8f51-a6288d504ca3
   subtitle: 'Unit 2: Fundamentals of quantum algorithms'
   title: Fundamentals of quantum algorithms
   type: course
