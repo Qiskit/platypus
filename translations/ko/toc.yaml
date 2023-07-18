@@ -250,3 +250,129 @@
   title: "\uC591\uC790 \uCEF4\uD4E8\uD305 \uC18C\uAC1C"
   type: learning-path
   url: /v2_introduction
+
+
+#---- Below was added by machine ---
+
+- sections:
+  - id: introduction
+    title: Introduction
+    url: v2/ch-states/introduction
+    uuid: afcc559e-b519-11ec-b909-0242ac120002
+  - id: the-atoms-of-computation
+    title: The Atoms of Computation
+    url: v2/ch-states/atoms-computation
+    uuid: b31c20ee-b519-11ec-b909-0242ac120002
+  - id: representing-qubit-states
+    title: Representing Qubit States
+    url: v2/ch-states/representing-qubit-states
+    uuid: b81717ca-b519-11ec-b909-0242ac120002
+  - id: single-qubit-gates
+    title: Single Qubit Gates
+    url: v2/ch-states/single-qubit-gates
+    uuid: bd4334a4-b519-11ec-b909-0242ac120002
+  - id: the-case-for-quantum-computers
+    title: The Case for Quantum
+    url: v2/ch-states/case-for-quantum
+    uuid: c0bbff62-b519-11ec-b909-0242ac120002
+  title: "\uC591\uC790 \uC0C1\uD0DC\uC640 \uD050\uBE44\uD2B8"
+  url: /v2_ch-states
+- sections:
+  - id: multiple-qubits-and-entangled-states
+    title: Multiple Qubits and Entangled States
+    url: v2/ch-gates/multiple-qubits-entangled-states
+    uuid: c7cfe502-b519-11ec-b909-0242ac120002
+  - id: basic-circuit-identities
+    title: More Circuit Identities
+    url: v2/ch-gates/more-circuit-identities
+    uuid: ce8ce75a-b519-11ec-b909-0242ac120002
+  title: "\uB2E4\uC911 \uD050\uBE44\uD2B8\uC640 \uC5BD\uD798"
+  url: /v2_ch-gates
+- sections:
+  - id: quantum-circuits
+    title: Defining Quantum Circuits
+    url: v2/ch-algorithms/defining-quantum-circuits
+    uuid: d90cbfb6-b519-11ec-b909-0242ac120002
+  - id: deutsch-jozsa-algorithm
+    title: Deutsch-Jozsa Algorithm
+    url: v2/ch-algorithms/deutsch-jozsa
+    uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
+  - id: bernstein-vazirani-algorithm
+    title: Bernstein-Vazirani Algorithm
+    url: v2/ch-algorithms/bernstein-vazirani
+    uuid: df6e5a40-b519-11ec-b909-0242ac120002
+  - id: quantum-fourier-transform
+    title: Quantum Fourier Transform
+    url: v2/ch-algorithms/quantum-fourier-transform
+    uuid: e59ba472-b519-11ec-b909-0242ac120002
+  - id: quantum-phase-estimation
+    title: Quantum Phase Estimation
+    url: v2/ch-algorithms/quantum-phase-estimation
+    uuid: e8ac9ec8-b519-11ec-b909-0242ac120002
+  - id: shors-algorithm
+    title: Shor's Algorithm
+    url: v2/ch-algorithms/shor
+    uuid: ec157cd8-b519-11ec-b909-0242ac120002
+  - id: hidden-shift-problem
+    title: The Hidden Shift Problem
+    url: v2/ch-algorithms/hidden-shift-problem
+    uuid: 56d13a0c-cae7-11ec-9d64-0242ac120002
+  - id: quantum-counting
+    title: Quantum Counting
+    url: v2/ch-algorithms/quantum-counting
+    uuid: f1a9942c-b519-11ec-b909-0242ac120002
+  - id: quantum-teleportation
+    title: Quantum Teleportation
+    url: v2/ch-algorithms/teleportation
+    uuid: f4f4a090-b519-11ec-b909-0242ac120002
+  - id: superdense-coding
+    title: Superdense Coding
+    url: v2/ch-algorithms/superdense-coding
+    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+  - id: quantum-key-distribution
+    title: Quantum Key Distribution
+    url: v2/ch-algorithms/quantum-key-distribution
+    uuid: fbafa8c6-b519-11ec-b909-0242ac120002
+  - id: quantum-walk-search-algorithm
+    title: Quantum Walk Search Algorithm
+    url: v2/ch-algorithms/quantum-walk-search-algorithm
+    uuid: 5083763f-3db8-461f-8e7d-675533924165
+  title: "\uC591\uC790 \uD504\uB85C\uD1A0\uCF5C\uB4E4\uACFC \uC54C\uACE0\uB9AC\uB4EC\
+    \uB4E4"
+  url: /v2_ch-algorithms
+- sections:
+  - id: phase-kickback
+    title: Phase Kickback
+    url: v2/algorithms/phase-kickback
+    uuid: 976e9da6-6c33-4e2f-b7eb-f9588f700f07
+  title: "\uC591\uC790 \uC54C\uACE0\uB9AC\uB4EC"
+  type: learning-path
+  url: /v2_algorithms
+- sections:
+  - id: why-quantum-computing
+    title: Why quantum computing?
+    url: v2/intro/why-quantum-computing
+    uuid: bdb1d662-e0f6-428a-8830-befe6b47f320
+  - id: what-is-quantum
+    title: What is quantum?
+    url: v2/intro/what-is-quantum
+    uuid: 7c765036-aebc-11ec-b909-0242ac120002
+  - id: describing-quantum-computers
+    title: Describing quantum computers
+    url: v2/intro/describing-quantum-computers
+    uuid: 9260a554-aebc-11ec-b909-0242ac120002
+  - id: entangled-states
+    title: Entangled states
+    url: v2/intro/entangled-states
+    uuid: 98aa9032-aebc-11ec-b909-0242ac120002
+  - id: grovers-search-algorithm
+    title: Grovers algorithm
+    url: v2/intro/grover-intro
+    uuid: a2e6f7a2-aebc-11ec-b909-0242ac120002
+  - id: project
+    title: Project
+    url: v2/intro/project
+    uuid: e25c3f90-aebd-11ec-b909-0242ac120002
+  title: "\uC591\uC790 \uCEF4\uD4E8\uD305 \uC18C\uAC1C"
+  type: learning-path
+  url: /v2_introduction
