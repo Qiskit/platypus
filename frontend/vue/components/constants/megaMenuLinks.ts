@@ -2,6 +2,7 @@ import { NavLink } from './../../../constants/menuLinks'
 
 const wholeSection = 'whole-section'
 const sectionBasicsCourse = 'basics-course'
+const sectionAlgorithmFundamentals = 'algorithm-fundamentals'
 const sectionAlgorithmDesign = 'algorithm-design'
 const sectionIntroductionCourse = 'introduction-course'
 const sectionQMLCourse = 'quantum-machine-learning'
@@ -19,6 +20,7 @@ const sectionSummerSchool = 'summer-schools'
 const sectionProblemSets = 'problem-sets'
 
 const pathBasicsCourse = '/course/basics'
+const pathAlgorithmFundamentals = '/course/algorithms'
 const pathAlgorithmDesign = '/course/algorithm-design'
 const pathIntroductionCourse = '/course/introduction'
 const pathQuantumMachineLearning = '/course/machine-learning'
@@ -76,6 +78,39 @@ const BASICS_COURSE: MegaDropdownMenuGroup = {
       url: `${pathBasicsCourse}/entanglement-in-action`,
       segment: {
         cta: 'entanglement-in-action', location: sectionBasicsCourse
+      }
+    }
+  ]
+}
+
+const ALGORITHM_FUNDAMENTALS: MegaDropdownMenuGroup = {
+  title: {
+    label: 'Fundamentals of quantum algorithms',
+    url: `${pathAlgorithmFundamentals}`,
+    segment: {
+      cta: wholeSection, location: sectionAlgorithmFundamentals
+    }
+  },
+  content: [
+    {
+      label: 'Quantum query algorithms',
+      url: `${pathAlgorithmFundamentals}/query-algorithms`,
+      segment: {
+        cta: 'query_algorithms', location: sectionAlgorithmFundamentals
+      }
+    },
+    {
+      label: 'Algorithmic foundations',
+      url: `${pathAlgorithmFundamentals}/algorithmic-foundations`,
+      segment: {
+        cta: 'algorithmic_foundations', location: sectionAlgorithmFundamentals
+      }
+    },
+    {
+      label: 'Phase estimation and factoring',
+      url: `${pathAlgorithmFundamentals}/phase-estimation`,
+      segment: {
+        cta: 'phase_estimation', location: sectionAlgorithmFundamentals
       }
     }
   ]
@@ -1553,6 +1588,7 @@ const COURSES_SECTION: MegaDropdownMenuSection = {
   title: 'Courses',
   content: [
     BASICS_COURSE,
+    ALGORITHM_FUNDAMENTALS,
     ALGORITHM_DESIGN,
     INTRODUCTION_COURSE,
     QML_COURSE
