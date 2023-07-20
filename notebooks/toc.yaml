@@ -760,7 +760,7 @@
   title: Applied quantum algorithms
   type: chapter
   url: /v1_ch-applications
-- id: quantum-hardware
+- id: ch-quantum-hardware
   overviewInfo:
     description:
       long: 'Most gate-based quantum computers share similar challenges with noise
@@ -819,8 +819,8 @@
     uuid: 9f785388-6fab-4c13-b323-4d98cf215c03
   title: Investigating quantum hardware using quantum circuits
   type: chapter
-  url: /v1_quantum-hardware
-- id: quantum-hardware-pulses
+  url: /v1_ch-quantum-hardware
+- id: ch-quantum-hardware
   overviewInfo:
     description:
       long: 'The Qiskit Textbook mostly assumes we have a quantum computer that can
@@ -899,7 +899,7 @@
     uuid: 37cc881f-a795-43b1-85b6-cb94f9cda622
   title: Investigating quantum hardware using microwave pulses
   type: chapter
-  url: /v1_quantum-hardware-pulses
+  url: /v1_ch-quantum-hardware
 - id: ch-labs
   overviewInfo:
     description:
@@ -1076,8 +1076,6 @@
   title: Games and demos
   type: chapter
   url: /v1_ch-demos
-
-
 
 
 #---- Below was added by machine ---
