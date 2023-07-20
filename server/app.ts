@@ -11,6 +11,7 @@ import { Progress } from '@mathigon/studio/server/models/progress'
 import { CourseAnalytics } from '@mathigon/studio/server/models/analytics'
 import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 
+import { redirectMappings } from '../server/redirects'
 import { generateMockData } from './populate-database'
 
 import {
@@ -136,10 +137,7 @@ const start = () => {
     .setup({ sessionSecret: 'project-platypus-beta', csrfBlocklist: ['/profile/accept-policies', '/syllabus', '/qiskit-user'] })
     // .redirects({'/login': '/signin'})
     .accounts()
-    .redirects({
-      '/': TEXTBOOK_HOME,
-      '/textbook': TEXTBOOK_HOME
-    })
+    .redirects(redirectMappings)
     .get('/locales/:locale', (req, res) => {
       const translations = TRANSLATIONS[req.params.locale || 'en'] || {}
       res.json(translations)
