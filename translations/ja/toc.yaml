@@ -1,4 +1,30 @@
 - sections:
+  - id: variational
+    uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
+    url: /algorithm-design/variational/variational
+  - id: reference
+    uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
+    url: /algorithm-design/reference/reference
+  - id: ansatz
+    uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
+    url: /algorithm-design/ansatz/ansatz
+  - id: cost_function
+    uuid: affdafb6-5b20-4113-b6da-dd758a4bae2a
+    url: /algorithm-design/cost_function/cost_function
+  - id: optimization
+    uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
+    url: /algorithm-design/optimization/optimization
+  - id: applications
+    uuid: 19e65025-7663-4067-833b-32422f75d428
+    url: /algorithm-design/applications/applications
+  - id: badge
+    uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
+    url: /algorithm-design/badge/badge
+
+
+
+
+- sections:
   - id: annotations
     url: examples/annotations
     uuid: 745440a2-b51a-11ec-b909-0242ac120002
@@ -164,16 +190,16 @@
 - sections:
   - id: defining-quantum-circuits
     url: v1/ch-algorithms/defining-quantum-circuits
-    uuid: d82b1481-395a-4d12-aa4c-aca113fdead2
+    uuid: d90cbfb6-b519-11ec-b909-0242ac120002
   - id: deutsch-jozsa
     url: v1/ch-algorithms/deutsch-jozsa
-    uuid: 0a75bcd7-a363-4908-89cc-3aa360cb59c0
+    uuid: dc9d3aa2-b519-11ec-b909-0242ac120002
   - id: bernstein-vazirani
     url: v1/ch-algorithms/bernstein-vazirani
-    uuid: e473061e-9ba3-4f36-93be-2b6a7129a7e4
+    uuid: df6e5a40-b519-11ec-b909-0242ac120002
   - id: simon
     url: v1/ch-algorithms/simon
-    uuid: 52e29c1f-b234-4b57-b23b-2f58d39f0d3a
+    uuid: e2714126-b519-11ec-b909-0242ac120002
   - id: quantum-fourier-transform
     url: v1/ch-algorithms/quantum-fourier-transform
     uuid: e59ba472-b519-11ec-b909-0242ac120002
@@ -191,16 +217,16 @@
     uuid: f1a9942c-b519-11ec-b909-0242ac120002
   - id: quantum-walk-search-algorithm
     url: v1/ch-algorithms/quantum-walk-search-algorithm
-    uuid: b2ef52cf-0ce4-494a-8142-fd00e0e8330d
-  - id: quantum-key-distribution
-    url: v1/ch-algorithms/quantum-key-distribution
-    uuid: fbafa8c6-b519-11ec-b909-0242ac120002
-  - id: superdense-coding
-    url: v1/ch-algorithms/superdense-coding
-    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+    uuid: 9a061c81-d490-4fff-bb71-727408234082
   - id: teleportation
     url: v1/ch-algorithms/teleportation
     uuid: f4f4a090-b519-11ec-b909-0242ac120002
+  - id: superdense-coding
+    url: v1/ch-algorithms/superdense-coding
+    uuid: f87cbd42-b519-11ec-b909-0242ac120002
+  - id: quantum-key-distribution
+    url: v1/ch-algorithms/quantum-key-distribution
+    uuid: fbafa8c6-b519-11ec-b909-0242ac120002
   title: "\u91CF\u5B50\u30D7\u30ED\u30C8\u30B3\u30EB\u3068\u91CF\u5B50\u30A2\u30EB\
     \u30B4\u30EA\u30BA\u30E0"
   url: /v1_ch-algorithms
@@ -220,12 +246,12 @@
   - id: machine-learning-qiskit-pytorch
     url: v1/ch-machine-learning/machine-learning-qiskit-pytorch
     uuid: 0cac4d14-b51a-11ec-b909-0242ac120002
-  - id: image-processing-frqi-neqr
-    url: v1/ch-applications/image-processing-frqi-neqr
-    uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
   - id: vqls
     url: v1/ch-paper-implementations/vqls
     uuid: 1163f456-b51a-11ec-b909-0242ac120002
+  - id: image-processing-frqi-neqr
+    url: v1/ch-applications/image-processing-frqi-neqr
+    uuid: 14acf6a8-b51a-11ec-b909-0242ac120002
   title: "\u91CF\u5B50\u30A2\u30D7\u30EA\u30B1\u30FC\u30B7\u30E7\u30F3\u306E\u30A2\
     \u30EB\u30B4\u30EA\u30BA\u30E0"
   url: /v1_ch-applications
@@ -495,7 +521,7 @@
   title: "Appendix(\u4ED8\u9332)"
   url: /v2_ch-appendix
 - sections:
-  - id: bonus-level-sandbox
+  - id: hello-qiskit
     url: v2/ch-ex/hello-qiskit
     uuid: 63a85f0e-b51a-11ec-b909-0242ac120002
   - id: estimating-pi-using-quantum-phase-estimation-algorithm
@@ -597,30 +623,3 @@
   title: "\u91CF\u5B50\u6A5F\u68B0\u5B66\u7FD2"
   type: learning-path
   url: /v2_machine-learning
-
-- title: Variational Algorithm Design
-  url: /algorithm-design
-  type: learning-path
-  sections:
-    - id: variational
-      uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
-      url: /algorithm-design/variational/variational
-    - id: reference
-      uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
-      url: /algorithm-design/reference/reference
-    - id: ansatz
-      uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
-      url: /algorithm-design/ansatz/ansatz
-    - id: cost_function
-      uuid: affdafb6-5b20-4113-b6da-dd758a4bae2a
-      url: /algorithm-design/cost_function/cost_function
-    - id: optimization
-      uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
-      url: /algorithm-design/optimization/optimization
-    - id: applications
-      uuid: 19e65025-7663-4067-833b-32422f75d428
-      url: /algorithm-design/applications/applications
-    - id: badge
-      uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
-      url: /algorithm-design/badge/badge
-
