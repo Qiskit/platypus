@@ -1,4 +1,30 @@
 - sections:
+  - id: variational
+    uuid: 4fbef8a1-f8c0-4f08-af4f-5b8d723bd274
+    url: /algorithm-design/variational/variational
+  - id: reference
+    uuid: df36d22f-7743-42eb-84a3-9e30befd1a5e
+    url: /algorithm-design/reference/reference
+  - id: ansatz
+    uuid: ae790c44-dd2a-4784-9eae-e4d3cc4600d7
+    url: /algorithm-design/ansatz/ansatz
+  - id: cost_function
+    uuid: affdafb6-5b20-4113-b6da-dd758a4bae2a
+    url: /algorithm-design/cost_function/cost_function
+  - id: optimization
+    uuid: 1462d345-986b-41fe-b9ee-05f82a371b5a
+    url: /algorithm-design/optimization/optimization
+  - id: applications
+    uuid: 19e65025-7663-4067-833b-32422f75d428
+    url: /algorithm-design/applications/applications
+  - id: badge
+    uuid: c6038861-dcf9-4089-bf6f-03843ed52cb2
+    url: /algorithm-design/badge/badge
+
+
+
+
+- sections:
   - id: annotations
     url: examples/annotations
     uuid: 745440a2-b51a-11ec-b909-0242ac120002
