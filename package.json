@@ -99,7 +99,7 @@
     "@types/express-flash": "0.0.2",
     "@types/fs-extra": "^9.0.13",
     "@types/jsdom": "^16.2.15",
-    "@types/lodash": "^4.14.195",
+    "@types/lodash": "^4.14.196",
     "@types/markdown-it": "^12.2.3",
     "@types/node-fetch": "^2.6.4",
     "@types/pug": "2.0.6",
