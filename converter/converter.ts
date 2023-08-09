@@ -6,7 +6,8 @@ import * as fs from 'fs-extra'
 import {
   translationsLanguages,
   workingContentPath,
-  workingTranslationsPath
+  workingTranslationsPath,
+  LATEST_TEXTBOOK_VERSION
 } from './common'
 
 const CWD = process.cwd()
@@ -92,9 +93,15 @@ const prepare = function (language: string) {
   copyNotebookAssets(notebooks, working, (src: string, dest: string) => {
     return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
   })
+  copyNotebookAssets(`${notebooks}${path.sep}${LATEST_TEXTBOOK_VERSION}`, working, (src: string, dest: string) => {
+    return path.dirname(src).split(path.sep).indexOf(nbImagesDirName) > -1
+  })
 
   // copy over notebook `resources/`
   copyNotebookAssets(notebooks, working, (src: string, dest: string) => {
+    return path.dirname(src).split(path.sep).indexOf(nbResourcesDirName) > -1
+  })
+  copyNotebookAssets(`${notebooks}${path.sep}${LATEST_TEXTBOOK_VERSION}`, working, (src: string, dest: string) => {
     return path.dirname(src).split(path.sep).indexOf(nbResourcesDirName) > -1
   })
 }
