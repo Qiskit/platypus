@@ -45,7 +45,8 @@ export default class OneXPBanner extends Vue {
   @include type-style("body-long-01");
 
   background-image: linear-gradient(to right, $purple-10, #fff);
-  padding: $spacing-05;
+  border-bottom: 1px solid $border-color;
+  padding: $spacing-05 $spacing-06;
 
   &__container {
     display: inline-flex;
