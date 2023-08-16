@@ -14,7 +14,7 @@
         target="_blank"
         @click="onClick"
       >
-        <span class="one-xp-banner__cta__label" v-text="`Check it out!`" />
+        <span class="one-xp-banner__cta__label" v-text="`Check it out`" />
         <LaunchIcon class="one-xp-banner__cta__icon" />
       </a>
     </div>
