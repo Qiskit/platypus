@@ -4,6 +4,9 @@
 @import '../variables/mq.scss';
 @import '../variables/fonts.scss';
 
+$one-xp-banner-height-desktop: 3.25rem;
+$one-xp-banner-height-mobile: 5rem;
+
 body {
   max-height: 100vh;
   display: grid;
@@ -20,10 +23,13 @@ main.body {
 
 .c-textbook {
   display: flex;
-  max-height: 100%;
-  min-height: calc(100vh - $qiskit-navbar-height);
+  height: calc(100vh - $qiskit-navbar-height - $one-xp-banner-height-desktop);
   overflow: hidden;
   position: relative;
+
+  @include mq($until: large) {
+    height: calc(100vh - $qiskit-navbar-height - $one-xp-banner-height-mobile);
+  }
 
   @include mq($until: medium) {
     display: grid;
