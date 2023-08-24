@@ -10,7 +10,7 @@
       <a
         class="one-xp-banner__cta"
         href="https://learning.quantum-computing.ibm.com"
-        rel="noopener noreferrer"
+        rel="noopener"
         target="_blank"
         @click="onClick"
       >
