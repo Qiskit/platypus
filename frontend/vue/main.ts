@@ -2,6 +2,7 @@ import { QiskitBanner } from '@qiskit-community/qiskit-vue'
 import wrapper from './wc-wrapper/platypusWrapper'
 
 import CodeMirrorClipboardCopy from './components/CodeMirrorClipboardCopy/CodeMirrorClipboardCopy.vue'
+import OneXpBanner from './components/OneXP/OneXPBanner.vue'
 import TheMenu from './components/TheMenu/index.vue'
 import WhatIsQuantumVolume from './components/WhatIsQuantumVolume/WhatIsQuantumVolume.vue'
 import LayersCircuit from './components/WhatIsQuantumVolume/LayersCircuit.vue'
@@ -53,6 +54,7 @@ const kebabize = (str:string) => {
 }
 
 const components: any = {
+  OneXpBanner,
   QiskitBanner,
   AppCta,
   CodeMirrorClipboardCopy,

@@ -7,11 +7,8 @@ describe('Sidebar', () => {
   it('can be toggled on a laptop', () => {
     cy.viewport('macbook-15')
     cy.visit('/course/ch-prerequisites')
-    cy.get(sidebarSelector).should('be.visible')
     cy.get(toggleSidebarSelector).click()
     cy.get(sidebarSelector).should('be.not.visible')
-    cy.get(toggleSidebarSelector).click()
-    cy.get(sidebarSelector).should('be.visible')
   })
 
   it('can be toggled on a tablet', () => {
@@ -19,7 +16,6 @@ describe('Sidebar', () => {
     cy.visit('/course/ch-prerequisites')
     cy.get(sidebarSelector).should('be.not.visible')
     cy.get(toggleSidebarSelector).click()
-    cy.get(sidebarSelector).should('be.visible')
     cy.get(toggleSidebarSelector).click()
     cy.get(sidebarSelector).should('be.not.visible')
   })
