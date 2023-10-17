@@ -4,7 +4,7 @@
       <span
         class="one-xp-banner__copy"
         v-text="
-          `🎉  Qiskit is getting a new learning experience on IBM Quantum!`
+          `🎉 Starting on November 29, 2023 Qiskit Learning Resource will only live on IBM Quantum`
         "
       />
       <a
