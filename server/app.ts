@@ -14,7 +14,7 @@ import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 import { generateMockData } from './populate-database'
 
 import {
-  CONFIG, NOTATIONS, TEXTBOOK_HOME, LATEST_TEXTBOOK_VERSION, TRANSLATIONS, UNIVERSAL_NOTATIONS,
+  CONFIG, NOTATIONS, TEXTBOOK_HOME, LATEST_TEXTBOOK_VERSION, TRANSLATIONS, UNIVERSAL_NOTATIONS, LEARNING_REDIRECTS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
   updateGlossary, loadLocaleRawFile, tocFilterByType, removeVersionPrefix
 } from './utilities'
@@ -138,7 +138,8 @@ const start = () => {
     .accounts()
     .redirects({
       '/': TEXTBOOK_HOME,
-      '/textbook': TEXTBOOK_HOME
+      '/textbook': TEXTBOOK_HOME,
+      ...LEARNING_REDIRECTS
     })
     .get('/locales/:locale', (req, res) => {
       const translations = TRANSLATIONS[req.params.locale || 'en'] || {}

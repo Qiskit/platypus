@@ -24,6 +24,16 @@ import {
 import { IS_PRODUCTION } from './configuration'
 
 const TEXTBOOK_HOME = 'https://qiskit.org/learn'
+const LEARNING_HOME = 'https://learning.quantum-computing.ibm.com'
+
+const LEARNING_REDIRECTS = {
+  '/course/algorithm-design': `${LEARNING_HOME}/course/variational-algorithm-design`,
+  '/course/algorithm-design/*': `${LEARNING_HOME}/course/variational-algorithm-design`,
+  '/course/basics': `${LEARNING_HOME}/course/basics-of-quantum-information`,
+  '/course/basics/*': `${LEARNING_HOME}/course/basics-of-quantum-information`,
+  '/course/algorithms': `${LEARNING_HOME}/course/fundamentals-of-quantum-algorithms`,
+  '/course/algorithms/*': `${LEARNING_HOME}/course/fundamentals-of-quantum-algorithms`
+}
 
 // NOTE: if changing this also update the same variable in 'converter/common.ts'
 const LATEST_TEXTBOOK_VERSION = 'v2'
@@ -182,6 +192,7 @@ export {
   TRANSLATIONS,
   UNIVERSAL_NOTATIONS,
   TOC,
+  LEARNING_REDIRECTS,
   findNextSection,
   findPrevSection,
   getSectionIndex,
