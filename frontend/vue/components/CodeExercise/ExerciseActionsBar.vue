@@ -1,6 +1,15 @@
 <template>
   <div class="exercise-actions-bar">
     <button
+      v-if="!runEnabled && !isRunning && !isApiTokenNeeded"
+      class="exercise-actions-bar__button exercise-actions-bar__button_kernel"
+      @click="run(isApiTokenNeeded)"
+      :class="{'exercise-actions-bar__button exercise-actions-bar__button_disabled': isLoading}"
+      :disabled="isLoading"
+    >
+      {{ $translate('Start kernel and run') }}
+    </button>
+    <button
       v-if="runEnabled && !isRunning && !isApiTokenNeeded"
       class="exercise-actions-bar__button exercise-actions-bar__button_run"
       @click="run(isApiTokenNeeded)"
@@ -32,6 +41,11 @@ import 'carbon-web-components/es/components/loading/loading'
 export default defineComponent({
   name: 'ExerciseActionsBar',
   props: {
+    isLoading: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
     isRunning: {
       type: Boolean,
       required: false,
@@ -91,7 +105,7 @@ export default defineComponent({
 
   &__button {
     padding: $spacing-03;
-    width: $column-size-large;
+    width: $column-size-small;
     max-width: 100%;
 
     background-size: 200% 100%;
@@ -113,8 +127,13 @@ export default defineComponent({
       cursor: not-allowed;
     }
 
-    &_run {
+    &_run,
+    &_kernel {
       @include bicolor-background($button-background-color-quaternary-dark, $button-background-color-quaternary);
+    }
+
+    &_kernel {
+      width: 2 * $column-size-medium;
     }
   }
 

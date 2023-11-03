@@ -63,19 +63,25 @@ export default class SignIn extends Vue {
 <style lang="scss" scoped>
 @import 'carbon-components/scss/globals/scss/typography';
 @import '~/../scss/variables/mq.scss';
+@import '~/../scss/variables/settings.scss';
 @import '~/../scss/mixins/mixins.scss';
 @import '~/../scss/variables/colors.scss';
 
 .sign-in {
   position: fixed;
-  top: 3.5rem;
+  top: calc($qiskit-navbar-height + $one-xp-banner-height-desktop + 1px);
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 3;
-  max-height: calc(100vh - 3.5rem);
+  max-height: calc(100vh - ($qiskit-navbar-height + $one-xp-banner-height-desktop + 1px));
   overflow: hidden;
   display: flex;
+
+  @include mq($from: medium, $until: large) {
+    top: calc($qiskit-navbar-height + $one-xp-banner-height-mobile + 1px);
+    max-height: calc(100vh - ($qiskit-navbar-height + $one-xp-banner-height-mobile + 1px));
+  }
 
   @include mq($until: medium) {
     flex-direction: column;

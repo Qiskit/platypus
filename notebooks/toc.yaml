@@ -82,10 +82,6 @@
       id: iit_madras_pretest
       uuid: 2892385a-2497-426c-be21-75ea635caa4e
       url: /problem-sets/iit_madras_pretest
-    - title: Qiskit Beginner Problem Set
-      id: qiskit_beginner_proficiency
-      uuid: 687732ae-70a8-11ed-a1eb-0242ac120002
-      url: /problem-sets/qiskit_beginner_problem_set
     - title: Qiskit Programming Challenge - Australia
       id: qiskit_programming_australia
       uuid: 38c0c49c-6921-4cb5-bdf9-75d592edc3fc
@@ -114,6 +110,10 @@
       id: utokyo_04
       uuid: 88c62314-cdee-11ed-afa1-0242ac120002
       url: /problem-sets/utokyo_04
+    - title: Quantum Kittens Notepad
+      id: quantumkittens
+      uuid: 949b1ba2-166b-11ee-be56-0242ac120002
+      url: /problem-sets/quantum_kittens_notepad
 
 
 - title: Examples
@@ -760,7 +760,7 @@
   title: Applied quantum algorithms
   type: chapter
   url: /v1_ch-applications
-- id: quantum-hardware
+- id: ch-quantum-hardware
   overviewInfo:
     description:
       long: 'Most gate-based quantum computers share similar challenges with noise
@@ -817,51 +817,6 @@
     title: The density matrix and mixed states
     url: v1/ch-quantum-hardware/density-matrix
     uuid: 9f785388-6fab-4c13-b323-4d98cf215c03
-  title: Investigating quantum hardware using quantum circuits
-  type: chapter
-  url: /v1_quantum-hardware
-- id: quantum-hardware-pulses
-  overviewInfo:
-    description:
-      long: 'The Qiskit Textbook mostly assumes we have a quantum computer that can
-
-        carry out quantum operations, and doesn''t worry about how the devices
-
-        actually work. These pages go a step deeper, exploring the physics of
-
-        superconducting qubits, and using Qiskit to program operations on these
-
-        devices at the level of microwave pulses.
-
-        '
-      short: 'In this chapter, we get a level closer to the real quantum machines.
-
-        Learn about the physics of these devices, and how to program them at
-
-        the level of microwave pulses.
-
-        '
-    prerequisites:
-    - description: 'With the basics down, this chapter explores the consequences of
-        these
-
-        new quantum effects, and sets us up with tools to understand quantum
-
-        algorithms.
-
-        '
-      link: https://learn.qiskit.org/course/ch-gates/introduction
-      title: Multiple Qubits and Entanglement
-    - description: 'Python is a programming language where you don''t need to compile.
-        You
-
-        can just run it line by line...
-
-        '
-      link: https://learn.qiskit.org/course/ch-prerequisites/introduction-to-python-and-jupyter-notebooks
-      title: Python and Jupyter Notebooks
-    thumbnailUrl: /ch-quantum-hardware/overview/header-pulses.png
-  sections:
   - id: calibrating-qubits-pulse
     previewImgUrl: /ch-quantum-hardware/overview/calibrating-qubits-pulse.png
     title: Calibrating qubits with Qiskit Pulse
@@ -897,9 +852,9 @@
     title: Hamiltonian tomography
     url: v1/ch-quantum-hardware/hamiltonian-tomography
     uuid: 37cc881f-a795-43b1-85b6-cb94f9cda622
-  title: Investigating quantum hardware using microwave pulses
+  title: Investigating quantum hardware
   type: chapter
-  url: /v1_quantum-hardware-pulses
+  url: /v1_ch-quantum-hardware
 - id: ch-labs
   overviewInfo:
     description:
@@ -1078,7 +1033,6 @@
   url: /v1_ch-demos
 
 
-
 #---- Below was added by machine ---
 
 - id: basics-quantum-information
@@ -1251,8 +1205,16 @@
   sections:
   - id: query-algorithms
     title: Quantum query algorithms
-    url: v2/algorithms/quantum-query-algorithms
+    url: v2/algorithms/01.query-algorithms/quantum-query-algorithms
     uuid: f236ed68-91f2-470a-8152-29f09e60a30c
+  - id: algorithmic-foundations
+    title: Algorithmic foundations
+    url: v2/algorithms/02.algorithmic-foundations/algorithmic-foundations
+    uuid: 00b26932-7d64-436c-86a9-56091c0419ac
+  - id: phase-estimation
+    title: Phase estimation
+    url: v2/algorithms/03.phase-estimation/phase-estimation-and-factoring
+    uuid: b49f2ca0-240d-417a-8f51-a6288d504ca3
   subtitle: 'Unit 2: Fundamentals of quantum algorithms'
   title: Fundamentals of quantum algorithms
   type: course
