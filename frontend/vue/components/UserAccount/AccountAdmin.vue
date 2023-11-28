@@ -31,13 +31,13 @@
         <ul class="account-admin__info__steps">
           <li>
             {{ $translate("Create an account in") }}
-            <BasicLink url="https://quantum-computing.ibm.com/">
+            <BasicLink url="https://quantum.ibm.com/">
               IBM Quantum.
             </BasicLink>
           </li>
           <li>
             {{ $translate("Access your") }}
-            <BasicLink url="https://quantum-computing.ibm.com/account">
+            <BasicLink url="https://quantum.ibm.com/account">
               {{ $translate("account page") }}
             </BasicLink>
             {{ $translate("and copy the value from the API token input.") }}

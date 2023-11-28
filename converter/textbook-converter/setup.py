@@ -31,7 +31,7 @@ setup(
   install_requires=requirements,
   packages=find_packages(include=['textbook_converter']),
   url='https://github.com/Qiskit/platypus/tree/main/converter/textbook-converter',
-  python_requires='>=3.6',
+  python_requires='>=3.10',
   entry_points={
     'nbconvert.exporters': [
       'textbook = textbook_converter:TextbookExporter',
