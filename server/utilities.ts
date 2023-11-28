@@ -24,7 +24,7 @@ import {
 import { IS_PRODUCTION } from './configuration'
 
 const TEXTBOOK_HOME = 'https://qiskit.org/learn'
-const LEARNING_HOME = 'https://learning.quantum-computing.ibm.com'
+const LEARNING_HOME = 'https://learning.quantum.ibm.com'
 
 const LEARNING_REDIRECTS = {
   '/course/algorithm-design': `${LEARNING_HOME}/course/variational-algorithm-design`,
@@ -188,6 +188,7 @@ export {
   NOTATIONS,
   GLOSSARY,
   TEXTBOOK_HOME,
+  LEARNING_HOME,
   LATEST_TEXTBOOK_VERSION,
   TRANSLATIONS,
   UNIVERSAL_NOTATIONS,

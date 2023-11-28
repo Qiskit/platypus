@@ -9,7 +9,7 @@
       />
       <a
         class="one-xp-banner__cta"
-        href="https://learning.quantum-computing.ibm.com"
+        href="https://learning.quantum.ibm.com"
         rel="noopener"
         target="_blank"
         @click="onClick"
