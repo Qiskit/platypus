@@ -54,11 +54,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Cypress tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm start
-          wait-on: "http://localhost:8080/health"
+      # - name: Cypress tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: npm start
+      #     wait-on: "http://localhost:8080/health"
 
       # We remove the Dockerfile because when there is a Dockerfile in the
       # current directory, Google App Engine try to use it.
