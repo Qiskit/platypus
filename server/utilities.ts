@@ -25,6 +25,7 @@ import { IS_PRODUCTION } from './configuration'
 
 const TEXTBOOK_HOME = 'https://qiskit.org/learn'
 const LEARNING_HOME = 'https://learning.quantum.ibm.com'
+const TEXTBOOK_GITHUB = 'https://github.com/Qiskit/textbook/tree/main/notebooks'
 
 const LEARNING_REDIRECTS = {
   '/course/algorithm-design': `${LEARNING_HOME}/course/variational-algorithm-design`,
@@ -33,6 +34,34 @@ const LEARNING_REDIRECTS = {
   '/course/basics/*': `${LEARNING_HOME}/course/basics-of-quantum-information`,
   '/course/algorithms': `${LEARNING_HOME}/course/fundamentals-of-quantum-algorithms`,
   '/course/algorithms/*': `${LEARNING_HOME}/course/fundamentals-of-quantum-algorithms`
+}
+
+const GITHUB_REDIRECTS = {
+  '/v1/*': 'https://github.com/Qiskit/textbook/tree/maintenance/v1.x',
+  '/course/introduction': `${TEXTBOOK_GITHUB}/intro`,
+  '/course/introduction/*': `${TEXTBOOK_GITHUB}/intro`,
+  '/course/machine-learning': `${TEXTBOOK_GITHUB}/quantum-machine-learning`,
+  '/course/machine-learning/*': `${TEXTBOOK_GITHUB}/quantum-machine-learning`,
+  '/course/ch-prerequisites': `${TEXTBOOK_GITHUB}/ch-prerequisites`,
+  '/course/ch-prerequisites/*': `${TEXTBOOK_GITHUB}/ch-prerequisites`,
+  '/course/ch-states': `${TEXTBOOK_GITHUB}/ch-states`,
+  '/course/ch-states/*': `${TEXTBOOK_GITHUB}/ch-states`,
+  '/course/ch-gates': `${TEXTBOOK_GITHUB}/ch-gates`,
+  '/course/ch-gates/*': `${TEXTBOOK_GITHUB}/ch-gates`,
+  '/course/ch-algorithms': `${TEXTBOOK_GITHUB}/ch-algorithms`,
+  '/course/ch-algorithms/*': `${TEXTBOOK_GITHUB}/ch-algorithms`,
+  '/course/quantum-hardware-pulses': `${TEXTBOOK_GITHUB}/quantum-hardware-pulses`,
+  '/course/quantum-hardware-pulses/*': `${TEXTBOOK_GITHUB}/quantum-hardware-pulses`,
+  '/course/quantum-hardware': `${TEXTBOOK_GITHUB}/quantum-hardware`,
+  '/course/quantum-hardware/*': `${TEXTBOOK_GITHUB}/quantum-hardware`,
+  '/course/ch-applications': `${TEXTBOOK_GITHUB}/ch-applications`,
+  '/course/ch-applications/*': `${TEXTBOOK_GITHUB}/ch-applications`,
+  '/course/ch-labs': `${TEXTBOOK_GITHUB}/ch-labs`,
+  '/course/ch-labs/*': `${TEXTBOOK_GITHUB}/ch-labs`,
+  '/course/ch-demos': `${TEXTBOOK_GITHUB}/ch-demos`,
+  '/course/ch-demos/*': `${TEXTBOOK_GITHUB}/ch-demos`,
+  '/course/ch-appendix': `${TEXTBOOK_GITHUB}/ch-appendix`,
+  '/course/ch-appendix/*': `${TEXTBOOK_GITHUB}/ch-appendix`
 }
 
 // NOTE: if changing this also update the same variable in 'converter/common.ts'
@@ -194,6 +223,7 @@ export {
   UNIVERSAL_NOTATIONS,
   TOC,
   LEARNING_REDIRECTS,
+  GITHUB_REDIRECTS,
   findNextSection,
   findPrevSection,
   getSectionIndex,
