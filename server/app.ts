@@ -14,7 +14,7 @@ import { LOCALES, translate } from '@mathigon/studio/server/utilities/i18n'
 import { generateMockData } from './populate-database'
 
 import {
-  CONFIG, NOTATIONS, TEXTBOOK_HOME, LEARNING_HOME, LATEST_TEXTBOOK_VERSION, TRANSLATIONS, UNIVERSAL_NOTATIONS, LEARNING_REDIRECTS, GITHUB_REDIRECTS,
+  CONFIG, NOTATIONS, TEXTBOOK_HOME, LEARNING_HOME, LATEST_TEXTBOOK_VERSION, TRANSLATIONS, UNIVERSAL_NOTATIONS, LEARNING_REDIRECTS, GITHUB_REDIRECTS, SYLLABI_REDIRECTS,
   findNextSection, findPrevSection, getSectionIndex, isLearningPath,
   updateGlossary, loadLocaleRawFile, tocFilterByType, removeVersionPrefix
 } from './utilities'
@@ -140,7 +140,8 @@ const start = () => {
       '/': LEARNING_HOME,
       '/textbook': LEARNING_HOME,
       ...LEARNING_REDIRECTS,
-      ...GITHUB_REDIRECTS
+      ...GITHUB_REDIRECTS,
+      ...SYLLABI_REDIRECTS
     })
     .get('/locales/:locale', (req, res) => {
       const translations = TRANSLATIONS[req.params.locale || 'en'] || {}

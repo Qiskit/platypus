@@ -26,6 +26,7 @@ import { IS_PRODUCTION } from './configuration'
 const TEXTBOOK_HOME = 'https://qiskit.org/learn'
 const LEARNING_HOME = 'https://learning.quantum.ibm.com'
 const TEXTBOOK_GITHUB = 'https://github.com/Qiskit/textbook/tree/main/notebooks'
+const BOX_URL = 'https://ibm.box.com/'
 
 const LEARNING_REDIRECTS = {
   '/course/algorithm-design': `${LEARNING_HOME}/course/variational-algorithm-design`,
@@ -62,6 +63,22 @@ const GITHUB_REDIRECTS = {
   '/course/ch-demos/*': `${TEXTBOOK_GITHUB}/ch-demos`,
   '/course/ch-appendix': `${TEXTBOOK_GITHUB}/ch-appendix`,
   '/course/ch-appendix/*': `${TEXTBOOK_GITHUB}/ch-appendix`
+}
+
+const SYLLABI_REDIRECTS = {
+  '/syllabus/7E7-8CC': `${BOX_URL}v/qcprereqmath`,
+  '/syllabus/SFH-RXE': `${BOX_URL}v/qe23-captain-82`,
+  '/syllabus/BMK-Q8E': `${BOX_URL}v/qe23-navigator-56`,
+  '/syllabus/W7V-S2R': `${BOX_URL}v/qe23-traveler-48`,
+  '/syllabus/AFC-XW1': `${BOX_URL}v/qe23-combatant-23`,
+  '/syllabus/8N1-ZGF': `${BOX_URL}s/0yenwa0ihnj62au3glzjxralrd3mogtd`,
+  '/syllabus/TVP-NSE': `${BOX_URL}s/3wkgjcbf4w6zgxq8el52g8q21y4jgpej`,
+  '/syllabus/47X-43S': `${BOX_URL}s/0g893xv62s36rb9i92amccmxx8ps8mzy`,
+  '/syllabus/WUB-DCY': `${BOX_URL}s/nhzysimhfpv20l3hwgcyro08d7rhrioj`,
+  '/syllabus/ESZ-6NJ': `${BOX_URL}s/2s8wu5nvgydhf1eyp5hu06r5p1ogom9j`,
+  '/syllabus/8XH-8Q9': `${BOX_URL}s/v4v4qeth0vaj05toeqqss6itbiki9wn6`,
+  '/syllabus/P6J-QPD': `${BOX_URL}s/4dscrgx5hjn55mq861euq3026kl3em8x`,
+  '/syllabus/LDZ-XN1': `${BOX_URL}s/16i3xaqt4a0cgruib9fd16wmrgv56llh`
 }
 
 // NOTE: if changing this also update the same variable in 'converter/common.ts'
@@ -224,6 +241,7 @@ export {
   TOC,
   LEARNING_REDIRECTS,
   GITHUB_REDIRECTS,
+  SYLLABI_REDIRECTS,
   findNextSection,
   findPrevSection,
   getSectionIndex,
