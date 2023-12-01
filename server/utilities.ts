@@ -78,7 +78,7 @@ const SYLLABI_REDIRECTS = {
   '/syllabus/ESZ-6NJ': `${BOX_URL}s/2s8wu5nvgydhf1eyp5hu06r5p1ogom9j`,
   '/syllabus/8XH-8Q9': `${BOX_URL}s/v4v4qeth0vaj05toeqqss6itbiki9wn6`,
   '/syllabus/P6J-QPD': `${BOX_URL}s/4dscrgx5hjn55mq861euq3026kl3em8x`,
-  '/syllabus/LDZ-XN1': `${BOX_URL}s/16i3xaqt4a0cgruib9fd16wmrgv56llh`
+  '/syllabus/LDZ-XN1': `${BOX_URL}s/26v8fkcc7wn9wkyatkfsje7yvj7nochv`
 }
 
 // NOTE: if changing this also update the same variable in 'converter/common.ts'
