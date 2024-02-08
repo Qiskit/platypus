@@ -1,3 +1,9 @@
+> [!IMPORTANT]
+> This repository and its content has been superseded by [IBM Quantum
+> Learning](https://learning.quantum.ibm.com). These source files are
+> no longer maintained and may contain errors. We are not accepting any
+> contributions.
+
 # platypus
 This repository is home of the new [Qiskit Textbook](https://qiskit.org/learn/).
 
